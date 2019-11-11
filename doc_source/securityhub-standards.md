@@ -16,7 +16,7 @@ After the CIS AWS Foundations standard is enabled in Security Hub in a particula
 
 **Important**  
 Cross\-Region processing isn't supported for the CIS AWS Foundations standard in Security Hub\. In other words, if you enable Security Hub \(and consequently this standard in Security Hub\) in one Region and a resource that it checks is located in another Region, the return value for such check is Failed\. For example, if you're storing your AWS CloudTrail logs in an Amazon S3 bucket in the us\-east\-2 Region and the CIS AWS Foundations standard is running in Security Hub enabled in us\-west\-2, checks 2\.3 \(Ensure the S3 bucket CloudTrail logs to is not publicly accessible\) and 2\.6 \(Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket\) are returned as Failed\.  
-You must enable Security Hub is all Regions to be fully compliant with CIS AWS Foundations Benchmark checks\.
+You must enable Security Hub in all Regions to be fully compliant with CIS AWS Foundations Benchmark checks\.
 
 ## How the CIS AWS Foundations Standard in Security Hub Uses AWS Config<a name="securityhub-standards-config"></a>
 
