@@ -1,5 +1,3 @@
 # Supported Regions<a name="securityhub-regions"></a>
 
-AWS Security Hub is supported in the following AWS Regions and endpoints\.
-
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-regions.html)
+To view the Regions that AWS Security Hub is available in, see [Security Hub Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#sechub_region)\.

@@ -30,8 +30,6 @@ Use the following procedures to add an account, invite an account, or accept an 
 1. Under **Enter accounts**, enter the **Account ID** and the **Email address** of the account to add, then choose **Add**\.
 
    To add more accounts, enter the account ID and email address for an account and then choose **Add** for each account\.
-**Important**  
-The email address that you enter *must* exactly match the email address associated with the account to add\.
 
    You can add multiple accounts at the same time by using a comma\-separated values \(CSV\) file\. Add the account ID and email for each account to add, and then choose **Upload list \(\.csv\)** to bulk\-add accounts\.
 **Important**  

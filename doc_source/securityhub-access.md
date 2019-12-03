@@ -25,9 +25,9 @@ The following resource types are defined by this service and can be used in the 
 
 | Resource Types | ARN | 
 | --- | --- | 
-| <a name="actiontarget"></a>action\-target | arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:action/custom/$\{Id\} | 
+| <a name="actiontarget"></a>action\-target |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:action/custom/$\{Id\} | 
 |   hub  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:hub/default  | 
-|   insight  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:insight/$\{CompanyId\}/$\{ProductId\}/$\{UniqueId\}  | 
+|   insight  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:insight/$\{Company\}/$\{ProductId\}/$\{UniqueId\}  | 
 |   standard  |  arn:$\{Partition\}:securityhub:::ruleset/$\{StandardsName\}/v/$\{StandardsVersion\}  | 
 |   standards\-subscription  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:subscription/$\{StandardsName\}/v/$\{StandardsVersion\}  | 
 |   product\-subscription  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:product\-subscription/$\{Company\}/$\{ProductId\}  | 

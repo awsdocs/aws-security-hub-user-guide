@@ -62,11 +62,6 @@ To see a list of Security Hub condition keys, see [Condition Keys for AWS Securi
 ## Security Hub Resource\-Based Policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
 Resource\-based policies are JSON policy documents that specify what actions a specified principal can perform on the Security Hub resource and under what conditions\. Security Hub supports resource\-based permissions policies for Security Hub the following resources:
-+ Insight
-+ Standard
-+ Standards\-subscription
-+ Product\-subscription
-+ Product
 + Hub
 
 Resource\-based policies let you grant usage permission to other accounts on a per\-resource basis\.

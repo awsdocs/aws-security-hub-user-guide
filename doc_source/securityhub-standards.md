@@ -1,8 +1,8 @@
-# Standards Supported in AWS Security Hub: CIS AWS Foundations<a name="securityhub-standards"></a>
+# Compliance Standards: CIS AWS Foundations<a name="securityhub-standards"></a>
 
 AWS Security Hub consumes, aggregates, and analyzes security findings from various supported AWS and third\-party products\. Security Hub also generates its own findings as the result of running automated and continuous checks against the compliance rules in the supported security standards\. These checks provide a compliance score and identify specific accounts and resources that require attention\.
 
-In this release, Security Hub supports the CIS AWS Foundations standard\. For more information, see [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/) on the CIS website\.
+Security Hub supports the CIS AWS Foundations standard\. For more information, see [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/) on the CIS website\.
 
 AWS Security Hub has satisfied the requirements of CIS Security Software Certification and is hereby awarded CIS Security Software Certification for the following CIS Benchmarks:
 + CIS Benchmark for CIS Amazon Web Services Foundations Benchmark, v1\.2\.0, Level 1
@@ -39,13 +39,14 @@ For more information, see [Getting Started with AWS Config](https://docs.aws.ama
 **Important**  
 If you enable AWS Config in your Security Hub master account, this doesn't automatically enable AWS Config in the Security Hub member accounts for this master account\. If you want Security Hub to generate findings against the compliance rules in the CIS AWS Foundations standard for the resources in a Security Hub member account, you must enable AWS Config in that member account\.
 
-After the CIS AWS Foundations standard is enabled, Security Hub automatically creates the requisite infrastructure of AWS Config rules that it needs to run the standard's compliance checks\. For every check that uses a specific AWS Config managed rule or rules, Security Hub creates an instance of that rule or rules specific to Security Hub \(even if another instance of this rule already exists\) in your AWS environment\. For information about which specific AWS Config managed rules the CIS AWS Foundations standard in Security Hub uses, see [CIS AWS Foundations Standard Checks Supported in Security Hub](#securityhub-standards-checks)\.
+After the CIS AWS Foundations standard is enabled, Security Hub automatically creates the requisite infrastructure of AWS Config rules that it needs to run the standard's compliance checks\. For every check that uses a specific AWS Config managed rule or rules, Security Hub creates an instance of that rule or rules specific to Security Hub \(even if another instance of this rule already exists\) in your AWS environment\. For information about which specific AWS Config managed rules the CIS AWS Foundations standard in Security Hub uses, see [CIS AWS Foundations Controls](#securityhub-standards-checks)\.
 
-The limit for the AWS Config managed rules is 150 rules per account per Region\. If you have already reached this limit, you can still enable the CIS AWS Foundations standard in Security Hub\. This in turn automatically creates the requisite infrastructure of AWS Config rules that this standard needs to be functional\. If you're below the maximum allowed limit of AWS Config rules and you enable the CIS AWS Foundations standard in Security Hub, the rules that are automatically created for this standard do count toward the maximum allowed limit of AWS Config rules\. After you reach this limit, you can't manually create any more rules in AWS Config\.
+**Note**  
+The limit for the AWS Config managed rules is 150 rules per account per Region\. However, when you enable the CIS AWS Foundations standard in Security Hub, the service\-linked AWS Config rules that are automatically created do not count towards the 150 rule limit\. You can enable these compliance checks even if you already have 150 AWS Config rules in your account\.
 
 ### AWS Config Resources Required for CIS Checks<a name="securityhub-config-resources"></a>
 
-If you don't enable all resources in AWS Config, a finding is generated for the check [2\.5 – Ensure AWS Config is enabled in all Regions](#securityhub-standards-checks-2.5)\. For other checks, you must enable the following resources in AWS Config for Security Hub to accurately report findings based on the CIS AWS Foundation standard checks:
+If you don't enable all resources in AWS Config, a finding is generated for the check [2\.5 – Ensure AWS Config is enabled](#securityhub-standards-checks-2.5)\. For other checks, you must enable the following resources in AWS Config for Security Hub to accurately report findings based on the CIS AWS Foundation standard checks:
 + AwsEc2Instance
 + AwsS3Bucket
 + Container
@@ -70,9 +71,9 @@ Security Hub starts running the standards checks within 2 hours after the CIS AW
 
 Security Hub supports both periodic and change\-triggered compliance checks\. Periodic checks are automatically run again within 12 hours after the latest run\. Change\-triggered checks are run when the resource associated with the check has any state changes\. For any Security Hub compliance check based on a managed AWS Config rule, you can click through to that rule to see whether it is change triggered or periodic\. In general, Security Hub leverages change triggered rules whenever possible, but there must be Config Configuration Item support for the resource to use a change triggered rule\. Security Hub's compliance checks that leverage Security Hub's own custom lambda functions are always periodic\. Periodicity cannot currently be changed\.
 
-## CIS AWS Foundations Standard Checks Supported in Security Hub<a name="securityhub-standards-checks"></a>
+## CIS AWS Foundations Controls<a name="securityhub-standards-checks"></a>
 
-The following are the CIS AWS Foundations standard's compliance checks that are supported in this release of Security Hub\.
+Security Hub supports the following controls in the CIS AWS Foundations Benchmark\.
 
 **Important**  
 You can disable the entire CIS AWS Foundations standard and thus stop Security Hub from running checks against its rules and generating findings based on those checks\. You *can't* disable individual rules in the CIS AWS Foundations standard\.
@@ -81,11 +82,61 @@ You can disable the entire CIS AWS Foundations standard and thus stop Security H
 
 The root account has unrestricted access to all resources in the AWS account\. We highly recommend that you avoid using this account\. The root account is the most privileged account\. Minimizing the use of this account and adopting the principle of least privilege for access management reduces the risk of accidental changes and unintended disclosure of highly privileged credentials\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+As a best practice, use your root credentials only when required to [ perform account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\. Apply IAM policies directly to groups and roles but not users\. For a tutorial on how to set up an administrator for daily use, see [ Creating Your First IAM Admin User and Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*
+
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.3 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
 ### Remediation<a name="1.1-remediation"></a>
 
-Use the root credentials for your AWS account only to create the first IAM user and add the user to a group\. Then use the IAM user account to perform common admin tasks\. Store your root credentials in a secure location that only authorized users can access\. Use your root credentials only when required to [ perform account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\. As a best practice, apply IAM policies directly to groups and roles but not users\. For a tutorial on how to set up an administrator for daily use, see [ Creating Your First IAM Admin User and Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\. These are the same steps to remediate findings for [3\.3 – Ensure a log metric filter and alarm exist for usage of "root" account ](#securityhub-standards-checks-3.3)\.
+
+**To create an Amazon SNS topic**
+
+1. Open the Amazon SNS console at [https://console\.aws\.amazon\.com/sns/v3/home](https://console.aws.amazon.com/sns/v3/home)\.
+
+1. Create an Amazon SNS topic that receives all CIS alarms\.
+
+   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+
+1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-standards-checks-2.1)\.
+
+   Make a note of the associated log group name\.
+
+**To create a metric filter and alarm**
+
+1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+
+1. Choose **Logs**\.
+
+1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+
+1. Choose **Add Metric Filter**\.
+
+1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+
+   ```
+   {$.userIdentity.type="Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !="AwsServiceEvent"}
+   ```
+
+1. Choose **Assign Metric**\.
+
+1. \(Optional\) Update the filter name to a name of your choice\.
+
+1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+
+   This ensures that all CIS Benchmark metrics are grouped together\.
+
+1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+
+   The filter is created, and its details appear\.
+
+1. Choose **Create Alarm**\.
+
+1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-1\.1\-RootAccountUsage**\.
+
+1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+
+1. Choose **Create Alarm**\.
 
 ## 1\.2 – Ensure multi\-factor authentication \(MFA\) is enabled for all IAM users that have a console password<a name="securityhub-standards-checks-1.2"></a>
 
@@ -511,9 +562,9 @@ To run this check, Security Hub uses the [cloud\-trail\-log\-file\-validation\-e
 CloudTrail logs a record of every API call made in your account\. These log files are stored in an S3 bucket\. We recommend that the bucket policy, or access control list \(ACL\), applied to the S3 bucket that CloudTrail logs to prevents public access to the CloudTrail logs\. Allowing public access to CloudTrail log content might aid an adversary in identifying weaknesses in the affected account's use or configuration\.
 
 **Important**  
-Cross\-Region processing isn't supported for the CIS AWS Foundations standard in Security Hub\. In other words, if you enable this standard in Security Hub in one Region and a resource that it checks is located in another Region, the return value for such check is Failed\. For example, if you're storing your CloudTrail logs in an S3 bucket in the us\-east\-2 Region and the CIS AWS Foundations standard is running in Security Hub enabled in us\-west\-2, this check returns as Failed\.
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you are using Security Hub in the US East \(N\. Virginia\) Region, and you are storing AWS CloudTrail logs in a bucket in the US West \(N\. California\) Region, Security Hub cannot find the bucket in a the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource cannot be located\. Similarly, if you are aggregating logs from multiple accounts into a single bucket, the CIS check returns a warning finding for all accounts except the account that owns the bucket\. Failed findings are returned when the bucket is located in the account and region where the check is being performed and that bucket is publicly accessible\.
 
-To run this check, Security Hub uses the [s3\-bucket\-public\-read\-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html) and [s3\-bucket\-public\-write\-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html) AWS Config managed rules\. After the CIS AWS Foundations standard is enabled, an instance of each of these rules, specific to Security Hub, is created in your AWS environment\.
+To run this check, Security Hub first uses custom logic to look for the bucket where your CloudTrail logs are stored\. It then uses the [s3\-bucket\-public\-read\-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html) and [s3\-bucket\-public\-write\-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html) AWS Config managed rules to check that bucket is publicly accessible\. If Security Hub cannot discover the bucket because it is in a different account or region, a warning finding is generated\. If the bucket is discovered and is publicly accessible, the check generates a failed finding\. After you enable the CIS AWS Foundations standard, an instance of each of these rules, specific to Security Hub, is created in your AWS environment\.
 
 ### Remediation<a name="2.3-remediation"></a>
 
@@ -573,11 +624,14 @@ To run this check, Security Hub uses the [cloud\-trail\-cloud\-watch\-logs\-enab
 
 For more information, see [Configuring CloudWatch Logs Monitoring with the Console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/send-cloudtrail-events-to-cloudwatch-logs.html#send-cloudtrail-events-to-cloudwatch-logs-console) in the *AWS CloudTrail User Guide*\.
 
-## 2\.5 – Ensure AWS Config is enabled in all Regions<a name="securityhub-standards-checks-2.5"></a>
+## 2\.5 – Ensure AWS Config is enabled<a name="securityhub-standards-checks-2.5"></a>
 
 AWS Config is a web service that performs configuration management of supported AWS resources in your account and delivers log files to you\. The recorded information includes the configuration item \(AWS resource\), relationships between configuration items \(AWS resources\), and any configuration changes between resources\. We recommend that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+**Note**  
+CIS 2\.5 requires that AWS Config is enabled in all regions in which you are using Security Hub\. Because Security Hub is a regional service, the check performed for this control checks only the current region for the account\. It does not check all regions\.
+
+To run this check, Security Hub performs custom logic to perform the audit steps prescribed for it in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. One difference is that Security Hub also requires that global resources are recorded in each region, since Security Hub is a regional service and performs its compliance checks on a region\-by\-region basis\. No AWS Config managed rules are created in your AWS environment for this check\.
 
 ### Remediation<a name="2.5-remediation"></a>
 
@@ -609,12 +663,12 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 Amazon S3 bucket access logging generates a log that contains access records for each request made to your S3 bucket\. An access log record contains details about the request, such as the request type, the resources specified in the request worked, and the time and date the request was processed\. We recommend that you enable bucket access logging on the CloudTrail S3 bucket\.
 
- By enabling S3 bucket logging on target S3 buckets, you can capture all events that might affect objects in a target bucket\. Configuring logs to be placed in a separate bucket enables access to log information, which can be useful in security and incident response workflows\.
+By enabling S3 bucket logging on target S3 buckets, you can capture all events that might affect objects in a target bucket\. Configuring logs to be placed in a separate bucket enables access to log information, which can be useful in security and incident response workflows\.
 
 **Important**  
-Cross\-Region processing isn't supported for the CIS AWS Foundations standard in Security Hub\. In other words, if you enable this standard in Security Hub in one Region and a resource that it checks is located in another Region, the return value for such check is Failed\. For example, if you're storing your CloudTrail logs in an S3 bucket in the us\-east\-2 Region and the CIS AWS Foundations standard is running in Security Hub enabled in us\-west\-2, this check returns as Failed\.
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you are using Security Hub in the US East \(N\. Virginia\) Region, and you are storing AWS CloudTrail logs in a bucket in the US West \(N\. California\) Region, Security Hub cannot find the bucket in a the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource cannot be located\. Similarly, if you are aggregating logs from multiple accounts into a single bucket, the CIS check returns a warning finding for all accounts except the account that owns the bucket\. Failed findings are returned when the bucket is located in the account and region where the check is being performed and that bucket is publicly accessible\.
 
-To run this check, Security Hub uses the [s3\-bucket\-logging\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html) AWS Config managed rule\. After the CIS AWS Foundations standard is enabled, an instance of this rule, specific to Security Hub, is created in your AWS environment\.
+To run this check, Security Hub first uses custom logic to look for the bucket where your CloudTrail logs are stored and then uses the [s3\-bucket\-logging\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html) AWS Config managed rule to check if logging is enabled\. If the bucket cannot be discovered because it is in a different account or region, a warning finding is generated\. If the bucket is discovered and is publicly accessible, the check generates a failed finding\. After the CIS AWS Foundations standard is enabled, an instance of this rule, specific to Security Hub, is created in your AWS environment\.
 
 ### Remediation<a name="2.6-remediation"></a>
 
@@ -664,7 +718,7 @@ The AWS KMS key and S3 bucket must be in the same Region\.
 
 You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail Log Files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
 
-## 2\.8 – Ensure rotation for customer created CMKs is enabled<a name="securityhub-standards-checks-2.8"></a>
+## 2\.8 – Ensure rotation for customer\-created CMKs is enabled<a name="securityhub-standards-checks-2.8"></a>
 
 AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the CMK\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\. We recommend that you enable CMK key rotation\. Rotating encryption keys helps reduce the potential impact of a compromised key because data encrypted with a new key can't be accessed with a previous key that might have been exposed\.
 
@@ -718,7 +772,10 @@ To run this check, Security Hub uses the [vpc\-flow\-logs\-enabled](https://docs
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm unauthorized API calls\. Monitoring unauthorized API calls helps reveal application errors and might reduce time to detect malicious activity\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.1 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.1-remediation"></a>
 
@@ -776,7 +833,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm console logins that aren't protected by MFA\. Monitoring for single\-factor console logins increases visibility into accounts that aren't protected by MFA\. 
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.2 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.2-remediation"></a>
 
@@ -832,9 +892,12 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.3 – Ensure a log metric filter and alarm exist for usage of "root" account<a name="securityhub-standards-checks-3.3"></a>
 
-You can do real\-time monitoring of API calls directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm root login attempts\. Monitoring for root account logins provides visibility into the use of a fully privileged account and an opportunity to reduce the use of it\.
+You can do real\-time monitoring of API calls directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm for root login attempts\. Monitoring for root account logins provides visibility into the use of a fully privileged account and an opportunity to reduce the use of it\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.3 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.3-remediation"></a>
 
@@ -892,7 +955,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm for changes made to IAM policies\. Monitoring these changes helps ensure that authentication and authorization controls remain intact\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.4 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.4-remediation"></a>
 
@@ -950,7 +1016,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm for changes to CloudTrail configuration settings\. Monitoring these changes helps ensure sustained visibility to activities in the account\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.5 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.5-remediation"></a>
 
@@ -1008,7 +1077,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm for failed console authentication attempts\. Monitoring failed console logins might decrease lead time to detect an attempt to brute\-force a credential, which might provide an indicator, such as source IP, that you can use in other event correlations\. 
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.6 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.6-remediation"></a>
 
@@ -1066,7 +1138,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm for customer\-created CMKs that have changed state to disabled or scheduled deletion\. Data encrypted with disabled or deleted keys is no longer accessible\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.7 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.7-remediation"></a>
 
@@ -1124,7 +1199,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm for changes to S3 bucket policies\. Monitoring these changes might reduce time to detect and correct permissive policies on sensitive S3 buckets\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.8 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.8-remediation"></a>
 
@@ -1182,7 +1260,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. We recommend that you create a metric filter and alarm for changes to AWS Config configuration settings\. Monitoring these changes helps ensure sustained visibility of configuration items in the account\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.9 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.9-remediation"></a>
 
@@ -1240,7 +1321,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Security groups are a stateful packet filter that controls ingress and egress traffic in a VPC\. We recommend that you create a metric filter and alarm for changes to security groups\. Monitoring these changes helps ensure that resources and services aren't unintentionally exposed\. 
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.10 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.10-remediation"></a>
 
@@ -1298,7 +1382,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. NACLs are used as a stateless packet filter to control ingress and egress traffic for subnets in a VPC\. We recommend that you create a metric filter and alarm for changes to NACLs\. Monitoring these changes helps ensure that AWS resources and services aren't unintentionally exposed\. 
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.11 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.11-remediation"></a>
 
@@ -1356,7 +1443,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Network gateways are required to send and receive traffic to a destination outside a VPC\. We recommend that you create a metric filter and alarm for changes to network gateways\. Monitoring these changes helps ensure that all ingress and egress traffic traverses the VPC border via a controlled path\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.12 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.12-remediation"></a>
 
@@ -1414,7 +1504,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Routing tables route network traffic between subnets and to network gateways\. We recommend that you create a metric filter and alarm for changes to route tables\. Monitoring these changes helps ensure that all VPC traffic flows through an expected path\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.13 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.13-remediation"></a>
 
@@ -1472,7 +1565,10 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. You can have more than one VPC in an account, and you can create a peer connection between two VPCs, enabling network traffic to route between VPCs\. We recommend that you create a metric filter and alarm for changes to VPCs\. Monitoring these changes helps ensure that authentication and authorization controls remain intact\.
 
-To run this check, Security Hub runs through the exact audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.14 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. No AWS Config managed rules are created in your AWS environment for this check\.
+
+**Important**  
+Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\. For example, if you enable Security Hub the US East \(N\. Virginia\) Region, but you create CloudWatch alarms in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
 
 ### Remediation<a name="3.14-remediation"></a>
 
@@ -1609,7 +1705,7 @@ For more information, see [Working with Security Groups](https://docs.aws.amazon
 
 ## CIS AWS Foundations Standard Checks That Aren't Supported in Security Hub<a name="securityhub-standards-checks-not-supported"></a>
 
-The following are the compliance rules that are *not* supported in the CIS AWS Foundations standard in Security Hub:
+The following are the compliance rules that are *not* supported in the CIS AWS Foundations standard in Security Hub because they cannot be evaluated in an automated way\. Security Hub focuses on automated compliance checks:
 + 1\.15 – Ensure security questions are registered in the AWS account 
 + 1\.17 – Maintain current contact details 
 + 1\.18 – Ensure security contact information is registered 

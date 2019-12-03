@@ -37,7 +37,7 @@ Amazon's trademarks and trade dress may not be used in
    + [AWS Product Integrations](securityhub-internal-providers.md)
    + [Third-Party Partner Product Integrations](securityhub-partner-providers.md)
    + [Custom Product Integrations](securityhub-custom-providers.md)
-+ [Standards Supported in AWS Security Hub: CIS AWS Foundations](securityhub-standards.md)
++ [Compliance Standards: CIS AWS Foundations](securityhub-standards.md)
 + [Logging AWS Security Hub API Calls with AWS CloudTrail](securityhub-ct.md)
 + [Automating AWS Security Hub with CloudWatch Events](securityhub-cloudwatch-events.md)
 + [Disabling AWS Security Hub](securityhub-disable.md)

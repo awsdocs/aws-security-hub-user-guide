@@ -15,6 +15,9 @@ Second, Security Hub also sends findings associated with custom actions to Cloud
 
 Third, you can also use custom actions to send a set of insight results to CloudWatch Events\. For example, if you see a particular insight result of interest that you want to share with a colleague, you can send that insight result to the colleague via a chat or ticketing system using custom actions\.
 
+**Note**  
+As a best practice, make sure that the permissions granted to your users to access CloudWatch Events use least\-privilege IAM policies, and that only the required permissions are granted\. For more information, see [Authentication and Access Control for Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/auth-and-access-control-cwe.html)\. 
+
 For examples of how to send Security Hub findings to CloudWatch Events for further processing, see [How to Integrate AWS Security Hub Custom Actions with PagerDuty](http://aws.amazon.com/blogs/apn/how-to-integrate-aws-security-hub-custom-actions-with-pagerduty/) and [How to Enable Custom Actions in AWS Security Hub](http://aws.amazon.com/blogs/apn/how-to-enable-custom-actions-in-aws-security-hub/) on the AWS Partner Network \(APN\) Blog\.
 
 ## Configuring a CloudWatch Events Rule for Security Hub Findings That Are Automatically Sent to CloudWatch Events<a name="securityhub-cwe-all-findings"></a>
@@ -210,6 +213,8 @@ The CloudWatch Events event for Security Hub insights results has the following 
 ## Use Custom Actions to Send Security Hub Findings to CloudWatch Events<a name="securityhub-cwe-send"></a>
 
 After you've created one or more Security Hub custom actions and CloudWatch Events rules, you can send findings and insight results to CloudWatch Events for further management and processing\.
+
+Events are sent to CloudWatch Events only in the account in which they are viewed\. If you are viewing a finding using a master account, the event is sent to CloudWatch Events in the master account\. Implementations of target code needs to switch roles into member accounts for AWS API calls to be effective\. This also means that the role you need to switch in to needs to be deployed to each member where action is needed\.
 
 **To send findings to CloudWatch Events**
 
