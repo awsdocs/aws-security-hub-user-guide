@@ -4,7 +4,7 @@ Before you use IAM to manage access to Security Hub, you should understand what 
 
 **Topics**
 + [Security Hub Identity\-Based Policies](#security_iam_service-with-iam-id-based-policies)
-+ [Security Hub Resource\-Based Policies](#security_iam_service-with-iam-resource-based-policies)
++ [Security Hub Resource\-Based Policies \(Not Supported\)](#security_iam_service-with-iam-resource-based-policies)
 + [Authorization Based on Security Hub Tags](#security_iam_service-with-iam-tags)
 + [Security Hub IAM Roles](#security_iam_service-with-iam-roles)
 + [Service\-Linked Roles](#security_iam_service-with-iam-roles-service-linked)
@@ -59,14 +59,9 @@ Security Hub actions support the `securityhub:TargetAccount` condition key\.
 
 To see a list of Security Hub condition keys, see [Condition Keys for AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-policy-keys) in the *IAM User Guide*\. To learn with which actions and resources you can use a condition key, see [Actions Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-actions-as-permissions)\.
 
-## Security Hub Resource\-Based Policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
+## Security Hub Resource\-Based Policies \(Not Supported\)<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
-Resource\-based policies are JSON policy documents that specify what actions a specified principal can perform on the Security Hub resource and under what conditions\. Security Hub supports resource\-based permissions policies for Security Hub the following resources:
-+ Hub
-
-Resource\-based policies let you grant usage permission to other accounts on a per\-resource basis\.
-
-To enable cross\-account access, you can specify an entire account or IAM entities in another account as the [principal in a resource\-based policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)\. Adding a cross\-account principal to a resource\-based policy is only half of establishing the trust relationship\. When the principal and the resource are in different AWS accounts, you must also grant the principal entity permission to access the resource\. Grant permission by attaching an identity\-based policy to the entity\. However, if a resource\-based policy grants access to a principal in the same account, no additional identity\-based policy is required\. For more information, see [How IAM Roles Differ from Resource\-based Policies ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html)in the *IAM User Guide*\.
+Security Hub does not support resource\-based policies\.
 
 ## Authorization Based on Security Hub Tags<a name="security_iam_service-with-iam-tags"></a>
 

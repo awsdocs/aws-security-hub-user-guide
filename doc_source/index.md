@@ -1,7 +1,7 @@
 # AWS Security Hub User Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -16,7 +16,7 @@ Amazon's trademarks and trade dress may not be used in
 ## Contents
 + [What Is AWS Security Hub?](what-is-securityhub.md)
 + [Terminology and Concepts](securityhub-concepts.md)
-+ [Limits](securityhub_limits.md)
++ [Quotas](securityhub_limits.md)
 + [Supported Regions](securityhub-regions.md)
 + [Setting Up AWS Security Hub](securityhub-settingup.md)
 + [Security in AWS Security Hub](security.md)
@@ -26,12 +26,14 @@ Amazon's trademarks and trade dress may not be used in
    + [Compliance Validation for AWS Security Hub](SERVICENAME-compliance.md)
    + [Infrastructure Security in AWS Security Hub](infrastructure-security.md)
 + [Managing Access to Security Hub](securityhub-access.md)
+   + [Using IAM Policies to Delegate Security Hub Access to IAM Identities](securityhub-user-access.md)
    + [Using Service-Linked Roles for AWS Security Hub](using-service-linked-roles.md)
 + [Master and Member Accounts in AWS Security Hub](securityhub-accounts.md)
 + [Insights in AWS Security Hub](securityhub-insights.md)
    + [Custom Insights](securityhub-custom-insights.md)
    + [Managed Insights](securityhub-managed-insights.md)
 + [Findings in AWS Security Hub](securityhub-findings.md)
+   + [Working with Findings in Security Hub](securityhub-managing-findings.md)
    + [AWS Security Finding Format](securityhub-findings-format.md)
 + [Product Integrations in AWS Security Hub](securityhub-findings-providers.md)
    + [AWS Product Integrations](securityhub-internal-providers.md)

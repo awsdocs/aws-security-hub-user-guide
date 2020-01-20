@@ -8,16 +8,16 @@ An account can't be both a Security Hub master account and a member account at t
 For more information, see [Master and Member Accounts in AWS Security Hub](securityhub-accounts.md)\.
 
 **Archived finding**  
-A finding that has a RecordState set to ARCHIVED\. When you archive a finding in Security Hub it is excluded from the default view of the **Findings** page in the console\. When you receive a finding for an issue or failed compliance check, you can archive it so that you see only active findings that you want to further investigate or take remediation steps for\. Archived findings aren't deleted\. You can modify the filter applied to the **Findings** page to display only the findings that you want to see\. To view only archived findings, update or repalce the filter applied to the page to RecordState EQUALS ARCHIVED\.  
+A finding that has a RecordState set to ARCHIVED\. When you archive a finding in Security Hub it is excluded from the default view of the **Findings** page in the console\. When you receive a finding for an issue or failed compliance check, you can archive it so that you see only active findings that you want to further investigate or take remediation steps for\. Archived findings aren't deleted\. You can modify the filter applied to the **Findings** page to display only the findings that you want to see\. To view only archived findings, update or replace the filter applied to the page to RecordState EQUALS ARCHIVED\.  
 When you use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html) operation of the Security Hub API, all findings are returned, both active and archived\. Use filters in your request to return findings that match specific criteria\. For example, to retrieve archived findings:   
 
 ```
 "RecordState": [ 
-         { 
-            "Comparison": "EQUALS",
-            "Value": "ARCHIVED"
-         }
-      ],
+    { 
+        "Comparison": "EQUALS",
+        "Value": "ARCHIVED"
+    }
+],
 ```
 
 **AWS Security Finding Format**  
