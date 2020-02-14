@@ -33,7 +33,8 @@ The role permissions policy allows Security Hub to complete the following action
 And:
 + Action: `config:PutConfigRule`
 + Action: `config:DeleteConfigRule`
-+ Action: `GetComplianceDetailsByConfigRule`
++ Action: `config:GetComplianceDetailsByConfigRule`
++ Action: `config:DescribeConfigRuleEvaluationStatus`
 + Resources: `arn:aws:config:*:*:config-rule/aws-service-rule/*securityhub*`
 
 You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\. For the `AWSServiceRoleForSecurityHub` service\-linked role to be successfully created, the IAM identity that you use Security Hub with must have the required permissions\. To grant the required permissions, attach the following policy to this IAM user, group, or role\.

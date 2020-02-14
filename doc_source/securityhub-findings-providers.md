@@ -9,6 +9,6 @@ Security Hub detects and consolidates only those security findings from the supp
 It does not retroactively detect and consolidate security findings that were generated before you enabled Security Hub\.
 
 **Topics**
-+ [AWS Product Integrations](securityhub-internal-providers.md)
++ [AWS Service Integrations](securityhub-internal-providers.md)
 + [Third\-Party Partner Product Integrations](securityhub-partner-providers.md)
 + [Custom Product Integrations](securityhub-custom-providers.md)

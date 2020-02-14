@@ -6,6 +6,7 @@ Amazon CloudWatch Events enables you to automate your AWS services and respond a
 + Relaying the event to Amazon Kinesis Data Streams
 + Activating an AWS Step Functions state machine
 + Notifying an Amazon SNS topic or an AWS SMS queue
++ Sending a finding to a third\-party ticketing, chat, SIEM, or incident response and management tool
 
 For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)\.
 
@@ -15,26 +16,47 @@ For more information, see [Authentication and Access Control for Amazon CloudWat
 
 ## Types of Security Hub Integration with CloudWatch Events<a name="securityhub-cwe-integration-types"></a>
 
-Security Hub supports the following types of integration with CloudWatch Events:
-+ **All findings \-** Security Hub automatically sends all findings to CloudWatch Events as events\.
+Security Hub supports the following types of integration with CloudWatch Events, using the following CloudWatch event types\.
 
-  You can define rules in CloudWatch Events that automatically route generated findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\.
+On the CloudWatch Events dashboard for Security Hub, **All Events** includes all of these event types\.
 
-  Use this method to automatically send all findings, or all findings with specific characteristics, to a response or remediation workflow\.
-+ **Findings for custom actions \- **Security Hub also sends findings associated with custom actions to CloudWatch Events\. This is useful for analysts working with the Security Hub console who want to send a specific finding, or a small set of findings, to a response or remediation workflow\.
+### All Findings \(Security Hub Findings \- Imported\)<a name="securityhub-cwe-integration-types-all-findings"></a>
 
-  When you create a custom action, you specify a custom action ID for the custom action\. You can use the custom action ID to create a rule in CloudWatch Events that defines a specific action to take when a finding is received that is associated with the custom action ID\.
+ Security Hub automatically sends all findings to CloudWatch Events as **Security Hub Findings \- Imported** events\.
 
-  For example, you can create a custom action in Security Hub that sends findings to a ticketing system with a custom action ID set to "send\_to\_ticketing"\. Then in CloudWatch Events, create a rule that is triggered for any finding received that includes a custom action ID of "send\_to\_ticketing"\. The rule in CloudWatch Events includes logic to send the finding to your ticketing system\. You can then also select findings within Security Hub and use the custom action in Security Hub to manually send findings to your ticketing system\.
-+ **Insight results \-** You can also use custom actions to send a set of insight results to CloudWatch Events\.
+You can define rules in CloudWatch Events that automatically route generated findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\.
 
-  For example, if you see a particular insight result of interest that you want to share with a colleague, you can use custom actions to send that insight result to the colleague via a chat or ticketing system\.
+Use this method to automatically send all findings, or all findings with specific characteristics, to a response or remediation workflow\.
+
+See [Configuring a CloudWatch Events Rule for Security Hub Findings That Are Automatically Sent to CloudWatch Events](#securityhub-cwe-all-findings)\.
+
+### Findings for Custom Actions \(Security Hub Findings \- Custom Action\)<a name="securityhub-cwe-integration-types-finding-custom-action"></a>
+
+Security Hub also sends findings associated with custom actions to CloudWatch Events as **Security Hub Findings \- Custom Action** events\.
+
+This is useful for analysts working with the Security Hub console who want to send a specific finding, or a small set of findings, to a response or remediation workflow\. You can select a custom action for up to 20 findings at a time\. The set of findings is sent to CloudWatch as a single CloudWatch event\.
+
+When you create a custom action, you specify a custom action ID for the custom action\. You can use the custom action ID to create a rule in CloudWatch Events that defines a specific action to take when a finding is received that is associated with the custom action ID\.
+
+See [Creating a Custom Action and Associating It with a CloudWatch Events Rule](#securityhub-cwe-configure)\.
+
+For example, you can create a custom action in Security Hub called `send_to_ticketing`\. Then in CloudWatch Events, you create a rule that is triggered when CloudWatch Events receives a finding that includes the `send_to_ticketing` custom action ID\. The rule includes logic to send the finding to your ticketing system\. You can then select findings within Security Hub and use the custom action in Security Hub to manually send findings to your ticketing system\.
 
 For examples of how to send Security Hub findings to CloudWatch Events for further processing, see [How to Integrate AWS Security Hub Custom Actions with PagerDuty](http://aws.amazon.com/blogs/apn/how-to-integrate-aws-security-hub-custom-actions-with-pagerduty/) and [How to Enable Custom Actions in AWS Security Hub](http://aws.amazon.com/blogs/apn/how-to-enable-custom-actions-in-aws-security-hub/) on the AWS Partner Network \(APN\) Blog\.
 
+### Insight Results for Custom Actions \(Security Hub Insight Results\)<a name="securityhub-cwe-integration-types-insight-custom-action"></a>
+
+You can also use custom actions to send a set of insight results to CloudWatch Events as **Security Hub Insight Results** events\. Insight results are the set of resources associated with an insight\. Note that when you send insight results to CloudWatch Events, you are not sending the findings to CloudWatch Events\. You are only sending the resource identifiers associated with the insight results\. You can send up to 100 resource identifiers at a time\.
+
+Similar to custom actions for findings, you first create the custom action in Security Hub, then create a rule in CloudWatch Events\.
+
+See [Creating a Custom Action and Associating It with a CloudWatch Events Rule](#securityhub-cwe-configure)\.
+
+For example, if you see a particular insight result of interest that you want to share with a colleague, you can use custom actions to send that insight result to the colleague via a chat or ticketing system\.
+
 ## Configuring a CloudWatch Events Rule for Security Hub Findings That Are Automatically Sent to CloudWatch Events<a name="securityhub-cwe-all-findings"></a>
 
-You can create a rule in CloudWatch Events that defines an action to take when an event is received, such as a finding from Security Hub\.
+You can create a rule in CloudWatch Events that defines an action to take when a **Security Hub Findings \- Imported** event is received\.
 
 **To create a CloudWatch Events rule for a Security Hub finding**
 
@@ -69,7 +91,9 @@ You can create a rule in CloudWatch Events that defines an action to take when a
 
 ## Creating a Custom Action and Associating It with a CloudWatch Events Rule<a name="securityhub-cwe-configure"></a>
 
-To configure Security Hub and CloudWatch Events to send Security Hub findings that are associated with custom actions to CloudWatch Events, complete the following procedures\.
+To use Security Hub custom actions to send findings or insight results to CloudWatch Events, you first create the custom action in Security Hub, then define the rule in CloudWatch Events\.
+
+The rule in CloudWatch Events uses the ARN from the custom action\.
 
 **To create a custom action in Security Hub**
 
@@ -81,11 +105,13 @@ To configure Security Hub and CloudWatch Events to send Security Hub findings th
 
 1. Provide a **Name**, **Description**, and **Custom action ID** for the action\.
 
-   The **Name** must be fewer than 20 characters\. The **Custom action ID** must be unique per AWS account\.
+   The **Name** must be fewer than 20 characters\.
+
+   The **Custom action ID** must be unique per AWS account\.
 
 1. Choose **Create custom action**\.
 
-1. Make a note of the **Custom action ARN** because you need to use the ARN when you create a rule to associate with this action in CloudWatch Events\.
+1. Make a note of the **Custom action ARN**\. You need to use the ARN when you create a rule to associate with this action in CloudWatch Events\.
 
 **To define a rule in CloudWatch Events**
 
@@ -99,7 +125,9 @@ To configure Security Hub and CloudWatch Events to send Security Hub findings th
 
 1. Choose **Edit** for **Event Pattern Preview**\.
 
-1. Copy the following example pattern, and paste it into the preview window\. Be sure to replace the existing brackets\.
+1. Copy one of the following example patterns, and paste it into the preview window\. Be sure to replace the existing brackets\.
+
+   For an event associated with a finding custom action \(**Security Hub Findings \- Custom Action** event type\), use the following format\. Replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
 
    ```
    {
@@ -115,7 +143,21 @@ To configure Security Hub and CloudWatch Events to send Security Hub findings th
    }
    ```
 
-1. Replace the ARN listed in the `resources` section with the **Custom Action ARN** for the custom action you created\. This value is displayed on the **Custom actions** page\.
+   For an event associated with an insight custom action \(**Security Hub Insight Results** event type\), use the following format\. Replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
+
+   ```
+   {
+     "source": [
+       "aws.securityhub"
+     ],
+     "detail-type": [
+       "Security Hub Insight Results"
+     ],
+     "resources": [
+       "arn:aws:securityhub:us-west-2:123456789012:action/custom/test-action1"
+     ]
+   }
+   ```
 
 1. Choose **Save** to close the window\.
 
@@ -129,33 +171,15 @@ To configure Security Hub and CloudWatch Events to send Security Hub findings th
 
 1. Choose **Create rule**\.
 
-After this rule is created in CloudWatch Events, when you perform a custom action on findings in your account, events are generated in CloudWatch Events\.
+After this rule is created in CloudWatch Events, when you perform a custom action on finding or insight results in your account, events are generated in CloudWatch Events\.
 
-The format of the example pattern for associating custom actions with findings generated by insights is:
+## CloudWatch Events Formats for Security Hub<a name="securityhub-cwe-event-formats"></a>
 
-```
-{
-  "source": [
-    "aws.securityhub"
-  ],
-  "detail-type": [
-    "Security Hub Insight Results"
-  ],
-  "resources": [
-    "arn:aws:securityhub:us-west-2:123456789012:action/custom/test-action1"
-  ]
-}
-```
+The CloudWatch events for the **Security Hub Findings \- Imported**, **Security Findings \- Custom Action**, and **Security Hub Insight Results** event types use the following formats\.
 
-## CloudWatch Events Formats for Security Hub<a name="securityhub-cwe-configure"></a>
+### Security Hub Findings \- Imported<a name="securityhub-cwe-event-formats-findings-imported"></a>
 
-Security Hub aggregates findings from enabled AWS services \(Amazon GuardDuty, Amazon Inspector, and Amazon Macie\) and from supported AWS partner products\.
-
-Security Hub also consolidates findings into insights that identify security areas that require attention or intervention\.
-
-Security Hub also conducts automated and continuous compliance checks using CloudWatch Events best practices and supported industry standards \(such as CIS Foundations Benchmarks\)\.
-
-The CloudWatch event for Security Hub findings is in the following format\.
+The CloudWatch event for the **Security Hub Findings \- Imported** event type is in the following format\.
 
 ```
 {
@@ -175,7 +199,11 @@ The CloudWatch event for Security Hub findings is in the following format\.
 }
 ```
 
-The CloudWatch event for Security Hub aggregated findings with a custom action is in the following format\.
+For a complete list of parameters included in `AMAZON_FINDING_JSON`, see [AWS Security Finding Format](securityhub-findings-format.md)\.
+
+### Security Hub Findings \- Custom Action<a name="securityhub-cwe-event-formats-findings-custom-action"></a>
+
+The CloudWatch event for the **Security Hub Findings \- Custom Action** event type is in the following format\.
 
 ```
 {
@@ -199,7 +227,9 @@ The CloudWatch event for Security Hub aggregated findings with a custom action i
 
 For a complete list of parameters included in `AMAZON_FINDING_JSON`, see [AWS Security Finding Format](securityhub-findings-format.md)\.
 
-The CloudWatch Events event for Security Hub insights results has the following format\.
+### Security Hub Insight Results<a name="securityhub-cwe-event-formats-insight-results"></a>
+
+The CloudWatch Events event for the **Security Hub Insight Results** event type has the following format\.
 
 ```
 { 
