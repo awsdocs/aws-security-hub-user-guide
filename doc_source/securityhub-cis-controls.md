@@ -4,6 +4,8 @@ For the CIS AWS Foundations standard, Security Hub supports the following contro
 
 ## 1\.1 – Avoid the use of the "root" account<a name="securityhub-standards-cis-controls-1.1"></a>
 
+**Severity:** Critical
+
 **AWS Config** rule: None
 
 The root account has unrestricted access to all resources in the AWS account\. We highly recommend that you avoid using this account\. The root account is the most privileged account\. Minimizing the use of this account and adopting the principle of least privilege for access management reduces the risk of accidental changes and unintended disclosure of highly privileged credentials\.
@@ -66,6 +68,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 1\.2 – Ensure multi\-factor authentication \(MFA\) is enabled for all IAM users that have a console password<a name="securityhub-cis-controls-1.2"></a>
 
+**Severity:** Medium
+
 **AWS Config rule: **[mfa\-enabled\-for\-iam\-console\-access](https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html)
 
 Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password as well as for an authentication code from their AWS MFA device\.
@@ -73,7 +77,7 @@ Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of
 We recommend enabling MFA for all accounts that have a console password\. Enabling MFA provides increased security for console access because it requires the authenticating principal to possess a device that emits a time\-sensitive key and have knowledge of a credential\.
 
 **Important**  
-The AWS Config rule used for this check may take up to 4 hours to accurately report results for MFA\. Any findings that are generated within the first 4 hours after enabling CIS Standards checks may not be accurate\. It may also take up to 4 hours after remediating this issue for the check to report compliance\.
+The AWS Config rule used for this check may take up to 4 hours to accurately report results for MFA\. Any findings that are generated within the first 4 hours after enabling the CIS security checks may not be accurate\. It may also take up to 4 hours after remediating this issue for the check to report compliance\.
 
 ### Remediation<a name="cis-1.2-remediation"></a>
 
@@ -92,6 +96,8 @@ The AWS Config rule used for this check may take up to 4 hours to accurately rep
 To learn how to delegate MFA setup to users, see [How to Delegate Management of Multi\-Factor Authentication to AWS IAM Users](http://aws.amazon.com/blogs/security/how-to-delegate-management-of-multi-factor-authentication-to-aws-iam-users/) on the AWS Security Blog\.
 
 ## 1\.3 – Ensure credentials unused for 90 days or greater are disabled<a name="securityhub-cis-controls-1.3"></a>
+
+**Severity:** Medium
 
 **AWS Config rule:** [iam\-user\-unused\-credentials\-check](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
 
@@ -116,6 +122,8 @@ After you identify the inactive accounts or unused credentials, use the followin
 1. Choose **Security credentials** and then choose **Make inactive** for all sign\-in credentials and access keys that haven't been used in 90 days or more\.
 
 ## 1\.4 – Ensure access keys are rotated every 90 days or less<a name="securityhub-cis-controls-1.4"></a>
+
+**Severity:** Medium
 
 **AWS Config managed rule:** [access\-keys\-rotated](https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html)
 
@@ -157,6 +165,8 @@ We recommend that you regularly rotate all access keys\. Rotating access keys re
 
 ## 1\.5 – Ensure IAM password policy requires at least one uppercase letter<a name="securityhub-cis-controls-1.5"></a>
 
+**Severity:** Medium
+
 **AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
@@ -175,6 +185,8 @@ We recommend that the password policy require at least one uppercase letter\. Se
 
 ## 1\.6 – Ensure IAM password policy requires at least one lowercase letter<a name="securityhub-cis-controls-1.6"></a>
 
+**Severity:** Medium
+
 **AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\. We recommend that the password policy require at least one lowercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
@@ -190,6 +202,8 @@ Password policies, in part, enforce password complexity requirements\. Use IAM p
 1. Select **Requires at least one lowercase letter** and then choose **Apply password policy**\.
 
 ## 1\.7 – Ensure IAM password policy requires at least one symbol<a name="securityhub-cis-controls-1.7"></a>
+
+**Severity:** Medium
 
 **AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
@@ -209,6 +223,8 @@ We recommend that the password policy require at least one symbol\. Setting a pa
 
 ## 1\.8 – Ensure IAM password policy requires at least one number<a name="securityhub-cis-controls-1.8"></a>
 
+**Severity:** Medium
+
 **AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
@@ -227,6 +243,8 @@ We recommend that the password policy require at least one number\. Setting a pa
 
 ## 1\.9 – Ensure IAM password policy requires a minimum length of 14 or greater<a name="securityhub-cis-controls-1.9"></a>
 
+**Severity:** Medium
+
 **AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords are at least a given length\.
@@ -244,6 +262,8 @@ We recommend that the password policy require a minimum password length of 14 ch
 1. In the **Minimum password length** field, enter **14**, then choose **Apply password policy**\.
 
 ## 1\.10 – Ensure IAM password policy prevents password reuse<a name="securityhub-cis-controls-1.10"></a>
+
+**Severity:** Low
 
 **AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
@@ -264,6 +284,8 @@ We recommend that the password policy prevent the reuse of passwords\. Preventin
 1. Choose **Apply password policy**\.
 
 ## 1\.11 – Ensure IAM password policy expires passwords within 90 days or less<a name="securityhub-cis-controls-1.11"></a>
+
+**Severity:** Low
 
 **AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
@@ -289,6 +311,8 @@ We recommend that the password policy expire passwords after 90 days or less\. R
 
 ## 1\.12 – Ensure no root account access key exists<a name="securityhub-cis-controls-1.12"></a>
 
+**Severity:** Critical
+
 **AWS Config rule:** [iam\-root\-access\-key\-check](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
 
 The root account is the most privileged user in an AWS account\. AWS Access Keys provide programmatic access to a given account\.
@@ -312,6 +336,8 @@ We recommend that all access keys be associated with the root account be removed
    + Choose **Delete** and then choose **Yes** to permanently delete the key\. You can't recover deleted keys\.
 
 ## 1\.13 – Ensure MFA is enabled for the "root" account<a name="securityhub-cis-controls-1.13"></a>
+
+**Severity:** Critical
 
 **AWS Config rule:** [root\-account\-mfa\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html)
 
@@ -341,6 +367,8 @@ When you use virtual MFA for root accounts, we recommend that the device used is
 
 ## 1\.14 – Ensure hardware MFA is enabled for the "root" account<a name="securityhub-cis-controls-1.14"></a>
 
+**Severity:** Critical
+
 **AWS Config rule:** [root\-account\-hardware\-mfa\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
 The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
@@ -369,6 +397,8 @@ Using hardware MFA for many, many accounts might create a logistical device mana
 1. Complete the steps to configure the device type appropriate to your selection\.
 
 ## 1\.16 – Ensure IAM policies are attached only to groups or roles<a name="securityhub-cis-controls-1.16"></a>
+
+**Severity:** Low
 
 **AWS Config rule:** [iam\-user\-no\-policies\-check](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
 
@@ -420,7 +450,59 @@ For more information about adding users to groups, see [Adding and Removing User
 
 1. Confirm that the user can still use AWS services as expected\.
 
+## 1\.20 \- Ensure a support role has been created to manage incidents with AWS Support<a name="securityhub-cis-controls-1.20"></a>
+
+**Severity:** Low
+
+**AWS Config rule:** [iam\-role\-managed\-policy\-check](https://docs.aws.amazon.com/config/latest/developerguide/iam-role-managed-policy-check.html)
+
+AWS provides a support center that can be used for incident notification and response, as well as technical support and customer services\.
+
+Create an IAM role to allow authorized users to manage incidents with AWS Support\. By implementing least privilege for access control, an IAM role will require an appropriate IAM policy to allow support center access in order to manage incidents with AWS Support\.
+
+### Remediation<a name="cis-1.20-remediation"></a>
+
+To remediate this issue, create a role to allow authorized users to manage AWS Support incidents\.
+
+**To create the role to use for AWS Support access**
+
+1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+
+1. In the IAM navigation pane, choose **Roles**, then choose **Create role**\.
+
+1. For **Role type**, choose the **Another AWS account**\.
+
+1. For **Account ID**, enter the AWS account ID of the AWS account to which you want to grant access to your resources\.
+
+   If the users or groups that will assume this role are in the same account, then enter the local account number\.
+**Note**  
+The administrator of the specified account can grant permission to assume this role to any IAM user in that account\. To do this, the administrator attaches a policy to the user or a group that grants permission for the` sts:AssumeRole` action\. In that policy, the resource must be the role ARN\.
+
+1. Choose **Next: Permissions**\.
+
+1. Search for the managed policy `AWSSupportAccess`\.
+
+1. Select the check box for the `AWSSupportAccess` managed policy\.
+
+1. Choose **Next: Tags**\.
+
+1. \(Optional\) To add metadata to the role, attach tags as key–value pairs\.
+
+   For more information about using tags in IAM, see [Tagging IAM Users and Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the *IAM User Guide*\.
+
+1. Choose **Next: Review**\.
+
+1. For **Role name**, enter a name for your role\.
+
+   Role names must be unique within your AWS account\. They are not case sensitive\.
+
+1. \(Optional\) For **Role description**, enter a description for the new role\.
+
+1. Review the role, then choose **Create role**\.
+
 ## 1\.22 – Ensure IAM policies that allow full "\*:\*" administrative privileges are not created<a name="securityhub-cis-controls-1.22"></a>
+
+**Severity:** Critical
 
 **AWS Config rule:** [iam\-policy\-no\-statements\-with\-admin\-access](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
 
@@ -447,6 +529,8 @@ You should remove IAM policies that have a statement with "Effect": "Allow" with
 Confirm that the user that you detached the policy from can still access AWS services and resources as expected\.
 
 ## 2\.1 – Ensure CloudTrail is enabled in all Regions<a name="securityhub-cis-controls-2.1"></a>
+
+**Severity:** Critical
 
 **AWS Config rule:** [multi\-region\-cloud\-trail\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html)
 
@@ -501,6 +585,8 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 
 ## 2\.2\. – Ensure CloudTrail log file validation is enabled<a name="securityhub-cis-controls-2.2"></a>
 
+**Severity:** Low
+
 **AWS Config rule:** [cloud\-trail\-log\-file\-validation\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html)
 
 CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to S3\. You can use these digest files to determine whether a log file was changed, deleted, or unchanged after CloudTrail delivered the log\.
@@ -522,6 +608,8 @@ We recommend that you enable file validation on all trails\. Enabling log file v
 1. For **Enable log file validation**, choose **Yes** and then choose **Save**\.
 
 ## 2\.3 – Ensure the S3 bucket CloudTrail logs to is not publicly accessible<a name="securityhub-cis-controls-2.3"></a>
+
+**Severity:** Critical
 
 **AWS Config rules:** [s3\-bucket\-public\-read\-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html), [s3\-bucket\-public\-write\-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
 
@@ -553,6 +641,8 @@ If the bucket is discovered and is publicly accessible, the check generates a fa
 1. If prompted, enter **confirm** and then choose **Confirm**\.
 
 ## 2\.4 – Ensure CloudTrail trails are integrated with Amazon CloudWatch Logs<a name="securityhub-cis-controls-2.4"></a>
+
+**Severity:** Low
 
 **AWS Config rule: **[cloud\-trail\-cloud\-watch\-logs\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html)
 
@@ -604,6 +694,8 @@ For more information, see [Configuring CloudWatch Logs Monitoring with the Conso
 
 ## 2\.5 – Ensure AWS Config is enabled<a name="securityhub-cis-controls-2.5"></a>
 
+**Severity:** Medium
+
 **AWS Config** rule: None
 
 AWS Config is a web service that performs configuration management of supported AWS resources in your account and delivers log files to you\. The recorded information includes the configuration item \(AWS resource\), relationships between configuration items \(AWS resources\), and any configuration changes between resources\.
@@ -645,6 +737,8 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 ## 2\.6 – Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket<a name="securityhub-cis-controls-2.6"></a>
 
+**Severity:** Low
+
 **AWS Config rule:** [s3\-bucket\-logging\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html)
 
 Amazon S3 bucket access logging generates a log that contains access records for each request made to your S3 bucket\. An access log record contains details about the request, such as the request type, the resources specified in the request worked, and the time and date the request was processed\.
@@ -680,6 +774,8 @@ If the bucket cannot be discovered because it is in a different account or regio
 1. Choose **Save**\.
 
 ## 2\.7 – Ensure CloudTrail logs are encrypted at rest using AWS KMS CMKs<a name="securityhub-cis-controls-2.7"></a>
+
+**Severity:** Medium
 
 **AWS Config rule:** [cloud\-trail\-encryption\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
 
@@ -717,6 +813,8 @@ You might need to modify the policy for CloudTrail to successfully interact with
 
 ## 2\.8 – Ensure rotation for customer\-created CMKs is enabled<a name="securityhub-cis-controls-2.8"></a>
 
+**Severity:** High
+
 **AWS Config rule: **[cmk\-backing\-key\-rotation\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
 AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the CMK\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\.
@@ -740,6 +838,8 @@ We recommend that you enable CMK key rotation\. Rotating encryption keys helps r
 1. Select **Automatically rotate this CMK every year** and then choose **Save**\.
 
 ## 2\.9 – Ensure VPC flow logging is enabled in all VPCs<a name="securityhub-cis-controls-2.9"></a>
+
+**Severity:** Medium
 
 **AWS Config rule:** [vpc\-flow\-logs\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
 
@@ -770,6 +870,8 @@ We recommend that you enable flow logging for packet rejects for VPCs\. Flow log
 1. Choose **Create**\.
 
 ## 3\.1 – Ensure a log metric filter and alarm exist for unauthorized API calls<a name="securityhub-cis-controls-3.1"></a>
+
+**Severity:** Medium
 
 **AWS Config** rule: None
 
@@ -838,6 +940,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.2 – Ensure a log metric filter and alarm exist for AWS Management Console sign\-in without MFA<a name="securityhub-cis-controls-3.2"></a>
 
+**Severity:** Medium
+
 **AWS Config** rule: None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
@@ -904,6 +1008,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 1. Choose **Create Alarm**\.
 
 ## 3\.3 – Ensure a log metric filter and alarm exist for usage of "root" account<a name="securityhub-cis-controls-3.3"></a>
+
+**Severity:** Medium
 
 **AWS Config** rule: None
 
@@ -972,6 +1078,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.4 – Ensure a log metric filter and alarm exist for IAM policy changes<a name="securityhub-cis-controls-3.4"></a>
 
+**Severity:** Medium
+
 **AWS Config** rule: None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
@@ -1038,6 +1146,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 1. Choose **Create Alarm**\.
 
 ## 3\.5 – Ensure a log metric filter and alarm exist for CloudTrail configuration changes<a name="securityhub-cis-controls-3.5"></a>
+
+**Severity:** Medium
 
 **AWS Config** rule: None
 
@@ -1106,6 +1216,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.6 – Ensure a log metric filter and alarm exist for AWS Management Console authentication failures<a name="securityhub-cis-controls-3.6"></a>
 
+**Severity:** Medium
+
 **AWS Config** rule: None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
@@ -1172,6 +1284,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 1. Choose **Create Alarm**\.
 
 ## 3\.7 – Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs<a name="securityhub-cis-controls-3.7"></a>
+
+**Severity:** Medium
 
 **AWS Config** rule: None
 
@@ -1240,6 +1354,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.8 – Ensure a log metric filter and alarm exist for S3 bucket policy changes<a name="securityhub-cis-controls-3.8"></a>
 
+**Severity:** Medium
+
 **AWS Config** rule: None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
@@ -1306,6 +1422,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 1. Choose **Create Alarm**\.
 
 ## 3\.9 – Ensure a log metric filter and alarm exist for AWS Config configuration changes<a name="securityhub-cis-controls-3.9"></a>
+
+**Severity:** Medium
 
 **AWS Config** rule: None
 
@@ -1374,6 +1492,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.10 – Ensure a log metric filter and alarm exist for security group changes<a name="securityhub-cis-controls-3.10"></a>
 
+**Severity:** Medium
+
 **AWS Config** rule: None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Security groups are a stateful packet filter that controls ingress and egress traffic in a VPC\.
@@ -1440,6 +1560,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 1. Choose **Create Alarm**\.
 
 ## 3\.11 – Ensure a log metric filter and alarm exist for changes to Network Access Control Lists \(NACL\)<a name="securityhub-cis-controls-3.11"></a>
+
+**Severity:** Medium
 
 **AWS Config** rule: None
 
@@ -1508,6 +1630,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.12 – Ensure a log metric filter and alarm exist for changes to network gateways<a name="securityhub-cis-controls-3.12"></a>
 
+**Severity:** Medium
+
 **AWS Config** rule: None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Network gateways are required to send and receive traffic to a destination outside a VPC\.
@@ -1574,6 +1698,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 1. Choose **Create Alarm**\.
 
 ## 3\.13 – Ensure a log metric filter and alarm exist for route table changes<a name="securityhub-cis-controls-3.13"></a>
+
+**Severity:** Medium
 
 **AWS Config** rule: None
 
@@ -1642,6 +1768,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.14 – Ensure a log metric filter and alarm exist for VPC changes<a name="securityhub-cis-controls-3.14"></a>
 
+**Severity:** Medium
+
 **AWS Config** rule: None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. You can have more than one VPC in an account, and you can create a peer connection between two VPCs, enabling network traffic to route between VPCs\.
@@ -1709,6 +1837,8 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 4\.1 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22<a name="securityhub-cis-controls-4.1"></a>
 
+**Severity:** High
+
 **AWS Config rule:** [restricted\-ssh](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html)
 
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
@@ -1735,6 +1865,8 @@ Perform the following steps for each security group associated with a VPC\.
 
 ## 4\.2 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389<a name="securityhub-cis-controls-4.2"></a>
 
+**Severity:** High
+
 **AWS Config rule:** [restricted\-common\-ports](https://docs.aws.amazon.com/config/latest/developerguide/restricted-common-ports.html)
 
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
@@ -1760,6 +1892,8 @@ Perform the following steps for each security group associated with a VPC\.
 1. Choose **Save rules**\.
 
 ## 4\.3 – Ensure the default security group of every VPC restricts all traffic<a name="securityhub-cis-controls-4.3"></a>
+
+**Severity:** Low
 
 **AWS Config rule:** [vpc\-default\-security\-group\-closed](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
 

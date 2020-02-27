@@ -1,4 +1,4 @@
-# Schedule for Running Security Standards Checks<a name="securityhub-standards-schedule"></a>
+# Schedule for Running Security Checks<a name="securityhub-standards-schedule"></a>
 
 After you enable a security standard, AWS Security Hub begins to run the checks within 2 hours\.
 

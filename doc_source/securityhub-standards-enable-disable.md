@@ -35,7 +35,7 @@ On the **Security standards** page, each disabled standard includes an option to
 
 **To enable a security standard**
 
-1. Make sure that you have enabled AWS Config in the master account and all of the member accounts\. See [AWS Config Requirements for Running Security Standards Checks](securityhub-standards-awsconfigrules.md)\.
+1. Make sure that you have enabled AWS Config in the master account and all of the member accounts\. See [AWS Config Requirements for Running Security Checks](securityhub-standards-awsconfigrules.md)\.
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 

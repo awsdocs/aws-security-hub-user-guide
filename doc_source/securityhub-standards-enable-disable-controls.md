@@ -7,7 +7,7 @@ When you disable a control, the following occurs\.
 + No additional findings are generated for that control\.
 + The related AWS Config rules that Security Hub created are removed\.
 
-It can be useful to turn off standards checks for controls that are not relevant to your environment\. For example, if you use a single S3 bucket to log your CloudTrail logs, you can turn off controls related to CloudTrail logging in all accounts and Regions except for the account and Region where the centralized S3 bucket is located\. Disabling irrelevant controls reduces the number of irrelevant findings\. It also removes the failed check from the readiness score for the associated standard\.
+It can be useful to turn off security checks for controls that are not relevant to your environment\. For example, if you use a single S3 bucket to log your CloudTrail logs, you can turn off controls related to CloudTrail logging in all accounts and Regions except for the account and Region where the centralized S3 bucket is located\. Disabling irrelevant controls reduces the number of irrelevant findings\. It also removes the failed check from the readiness score for the associated standard\.
 
 Remember that Security Hub is regional\. When you disable or enable a control, it is disabled only in the current Region, or in the Region that you specify in an API request\.
 

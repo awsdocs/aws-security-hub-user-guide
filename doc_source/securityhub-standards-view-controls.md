@@ -41,4 +41,16 @@ To display the details for a control, choose the control name\.
 
 At the top of the details page is an overview of the control and its current status\.
 
-At the bottom of the details page is the list of findings for the control\. You can then filter the list and take action on selected findings\.
+At the bottom of the details page is the list of findings for the control\. To view the details for a finding, choose the finding title\.
+
+You can also archive findings or send them to a custom action\.
+
+The custom action must be associated with a CloudWatch rule for the `Security Hub Findings - Custom Action` event type\. See [Automating AWS Security Hub with CloudWatch Events](securityhub-cloudwatch-events.md)\.
+
+**To take action on findings**
+
+1. Select the check box for each finding to take action on\.
+
+1. To archive the findings, from the **Actions** menu, choose **Archive**\.
+
+1. To send the findings to a custom action, from the **Actions** menu, choose the custom action\.

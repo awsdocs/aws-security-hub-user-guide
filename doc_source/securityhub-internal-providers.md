@@ -1,4 +1,4 @@
-# AWS Service Integrations<a name="securityhub-internal-providers"></a>
+# Available AWS Service Integrations<a name="securityhub-internal-providers"></a>
 
 Security Hub supports integrations with several AWS services\.
 
@@ -11,18 +11,7 @@ For these services, the integration allows the service to send findings to Secur
 
 Security Hub also supports an integration with [Amazon Detective](#integration-amazon-detective)\. That integration allows you to pivot from Security Hub to Detective to investigate a GuardDuty finding\.
 
-## Enabling Other AWS Services To Send Findings to Security Hub<a name="securityhub-internal-providers-managing"></a>
-
-To integrate these services with Security Hub, you must enable them in your account on the console for each service\. A resource\-level permission that allows Security Hub to get findings from these services is automatically created and applied\. You do not need to configure any settings to start receiving findings from them\.
-
-After you enable them, Security Hub starts collecting new findings in that account from these services\.
-
-**Important**  
-From the integrated services, Security Hub only receives new findings that were generated after you enabled Security Hub\. It does not receive findings that were generated before you enabled Security Hub\.
-
-If you did not enable the supported AWS product, or you did not enable the integration in Security Hub, then no findings are sent to Security Hub\. To verify whether a product integration is enabled, check the **Integrations** page of the Security Hub console\.
-
-## Details About Each Integration<a name="securityhub-internal-providers-details"></a>
+Here are the details about each AWS service integration\.
 
 **AWS Firewall Manager**  <a name="integration-aws-firewall-manager"></a>
 Firewall Manager sends findings to Security Hub when a WAF policy for resources or a Web ACL rule is not in compliance\. Firewall Manager also sends findings when Shield Advanced is not protecting resources, or when an attack is identified\.  

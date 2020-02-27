@@ -1,15 +1,11 @@
-# Third\-Party Partner Product Integrations<a name="securityhub-partner-providers"></a>
+# Available Third\-Party Partner Product Integrations<a name="securityhub-partner-providers"></a>
 
-After you enable Security Hub, you can configure it to import \(via automatic or manual importing\) findings from the available third\-party product integrations\.
-
-## Available Third\-Party Partner Products<a name="securityhub-partner-providers-list"></a>
-
-Security Hub is integrated with the following third\-party products\. For each provider, the list indicates whether the product sends findings to Security Hub, receives findings from Security Hub, or both\.
+AWS Security Hub is integrated with the following third\-party products\. For each provider, the list indicates whether the product sends findings to Security Hub, receives findings from Security Hub, or both\.
 
 If applicable, the list also specifies the product ARN\. Integrations that send findings to Security Hub always have an ARN\.
 
 
-|  Company name  |  Product name  |  Integration type  |  Product ARN  |  Product description  | 
+|  Company name  |  Product name  |  Integration types  |  Product ARN  |  Product description  | 
 | --- | --- | --- | --- | --- | 
 |  Alert Logic  |  SIEMless ThreatManagement  |  Send  |  arn:aws:securityhub:<REGION>:733251395267:product/alertlogic/althreatmanagement  |  Get the right level of coverage: vulnerability and asset visibility, threat detection and incident management, WAF, and assigned SOC analyst options\.  | 
 |  Aqua Security  |  Aqua Cloud Native Security Platform  |  Send  |  arn:aws:securityhub:<REGION>::product/aquasecurity/aquasecurity  |  Aqua Cloud Native Security Platform \(CSP\) provides full lifecycle security for container\-based and serverless applications, from your CI/CD pipeline to runtime production environments\.  | 
@@ -22,10 +18,15 @@ If applicable, the list also specifies the product ARN\. Integrations that send 
 |  Caveonix  |  Caveonix RiskForesight\.io  |  Send and Receive  |  arn:aws:securityhub:<REGION>::product/caveonix/riskforesight\-io  |  A SaaS risk mitigation platform that delivers automated compliance and hybrid\-cloud security posture management for comprehensive workload protection\.  | 
 |  Checkpoint  |  CloudGuard IaaS  |  Send  |  arn:aws:securityhub:<REGION>:758245563457:product/checkpoint/cloudguard\-iaas  |  Check Point CloudGuard easily extends comprehensive threat prevention security to AWS while protecting assets in the cloud\.  | 
 |  Checkpoint  |  Dome9 Arc  |  Send  |  arn:aws:securityhub:<REGION>:634729597623:product/checkpoint/dome9\-arc  |  A SaaS platform that delivers verifiable cloud network security, advanced IAM protection, and comprehensive compliance and governance\.  | 
+|  Cloud Custodian  |  Cloud Custodian  |  Send and Receive  |  arn:aws:securityhub:<REGION>::product/cloud\-custodian/cloud\-custodian  |  Cloud Custodian enables users to be well managed in the cloud\. The simple YAML DSL allows easily define rules to enable a well\-managed cloud infrastructure, that's both secure and cost optimized\.  | 
 |  CrowdStrike  |  CrowdStrike Falcon  |  Send  |  arn:aws:securityhub:<REGION>:517716713836:product/crowdstrike/crowdstrike\-falcon  |  CrowdStrike Falcon's single lightweight sensor unifies next\-generation antivirus, endpoint detection and response, and 24/7 managed hunting via the cloud\.  | 
 | CyberArk | Privileged Threat Analytics |  Send  | arn:aws:securityhub:<REGION>:749430749651:product/cyberark/cyberark\-pta  | Privileged Threat Analytics collect, detect, alert, and respond to high\-risk activity and behavior of privileged accounts to contain in\-progress attacks\. | 
 |  DisruptOps, Inc\.  |  DisruptOPS  |  Send and Receive  |  arn:aws:securityhub:<REGION>::product/disruptops\-inc/disruptops  |  DisruptOps’ Security Operations Platform helps organizations maintain best security practices in your cloud through the use of automated guardrails\.  | 
 |  F5 Networks  |  Advanced WAF  |  Send  |  arn:aws:securityhub:<REGION>:250871914685:product/f5networks/f5\-advanced\-waf  |  Advanced WAF provides malicious bot protection, L7 DoS mitigation, API inspection, behavior analytics, and more to defend against web app attacks\.  | 
+|  FireEye  |  FireEye Helix  |  Receive  |   |  FireEye Helix is a cloud\-hosted security operations platform that allows organizations to take control of any incident from alert to fix\.  | 
+|  Forcepoint  |  Forcepoint CASB  |  Send  |  arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint\-casb  |  Forcepoint CASB allows you to discover cloud application use, analyze risk, and enforce appropriate controls for SaaS and custom applications\.  | 
+|  Forcepoint  |  Forcepoint DLP  |  Send  |  arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint\-dlp  |  Forcepoint DLP addresses human\-centric risk with visibility and control everywhere your people work and everywhere your data resides\.  | 
+|  Forcepoint  |  Forcepoint NGFW  |  Send  |  arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint\-ngfw  |  Forcepoint NGFW lets you connect your AWS environment into your enterprise network with the scalability, protection, and insights needed to manage your network and respond to threats\.  | 
 |  GuardiCore  |  Centra 4\.0  |  Send  |  arn:aws:securityhub:<REGION>:324264561773:product/guardicore/guardicore  |  GuardiCore Centra provides flow visualization, micro\-segmentation, and breach detection for workloads in modern data centers and clouds\.  | 
 |  GuardiCore  |  Infection Monkey  |  Send  |  arn:aws:securityhub:<REGION>:324264561773:product/guardicore/aws\-infection\-monkey  |  Infection Monkey is an attack simulation tool designed to test networks against attackers\.  | 
 |  IBM  |  QRadar  |  Send and Receive  |  arn:aws:securityhub:<REGION>:949680696695:product/ibm/qradar\-siem  |  IBM QRadar SIEM provides security teams with the ability to quickly and accurately detect, prioritize, investigate and respond to threats\.  | 
@@ -35,6 +36,7 @@ If applicable, the list also specifies the product ARN\. Integrations that send 
 |  Palo Alto Networks  |  Demisto Enterprise AMI  |  Receive  |   |  Demisto is a Security Orchestration, Automation, and Response \(SOAR\) platform that integrates with your entire security product stack to accelerate incident response and security operations\.  | 
 |  Palo Alto Networks  |  Redlock  |  Send  |  arn:aws:securityhub:<REGION>:188619942792:product/paloaltonetworks/redlock  |  Protects your AWS deployment with cloud security analytics, advanced threat detection, and compliance monitoring\.  | 
 |  Qualys  |  Vulnerability Management  |  Send  |  arn:aws:securityhub:<REGION>:805950163170:product/qualys/qualys\-vm  |  Qualys Vulnerability Management \(VM\) continuously scans and identifies vulnerabilities, protecting your assets\.  | 
+|  Rackspace  |  Cloud Native Security  |  Receive  |   |  Managed security services on top of native AWS security products for 24x7x365 monitoring by Rackspace SOC, advanced analysis, and threat remediation\.  | 
 |  Rapid7  |  InsightConnect  |  Receive  |   |  Rapid7’s InsightConnect is a security orchestration and automation solution that enables your team to optimize SOC operations with little to no code\.  | 
 |  Rapid7  |  InsightVM  |  Send  |  arn:aws:securityhub:<REGION>:336818582268:product/rapid7/insightvm  |  Rapid7 InsightVM provides vulnerability management for modern environments, allowing you to efficiently find, prioritize, and remediate vulnerabilities\.  | 
 |  ServiceNow  |  ITSM  |  Receive  |   |  The ServiceNow Security Hub integration allows security findings from Security Hub to be viewed within ServiceNow ITSM\.  | 
@@ -48,38 +50,4 @@ If applicable, the list also specifies the product ARN\. Integrations that send 
 |  Tenable  |  Tenable\.io  |  Send  |  arn:aws:securityhub:<REGION>:422820575223:product/tenable/tenable\-io  |  Accurately identify, investigate, and prioritize vulnerabilities\. Managed in the Cloud\.  | 
 |  Turbot  |  Turbot  |  Receive  |   |  Turbot ensures that your cloud infrastructure is secure, compliant, scalable, and cost optimized\.  | 
 |  Twistlock  |  Enterprise Edition  |  Send  |  arn:aws:securityhub:<REGION>:496947949261:product/twistlock/twistlock\-enterprise  |  Twistlock is a cloud native cybersecurity platform that protects VMs, containers, and serverless platforms\.  | 
-
-## Subscribing to a Partner Product<a name="securityhub-partner-providers-subscribe"></a>
-
-To use a third\-party partner product integration, you must first subscribe to the partner product\.
-
-**To subscribe to a partner product**
-
-1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
-
-1. Choose **Integrations** and then locate the product to integrate with Security Hub\.
-
-1. Choose **Purchase** to open AWS Marketplace\. In AWS Marketplace, choose **Continue to Subscribe**\.
-**Note**  
-If more than one version of a product is available in AWS Marketplace, select the version to subscribe to and then choose **Continue to Subscribe**\.  
-For example, some products offer a standard version and an AWS GovCloud \(US\) version\.
-
-1. Choose **Subscribe**\.
-
-## Enabling the Integration with Security Hub<a name="securityhub-partner-providers-enable"></a>
-
-After you subscribe to a product, you need to enable the integration with Security Hub\.
-
-When you enable a product integration, a resource policy is automatically attached to that product subscription\. This resource policy defines the permissions that Security Hub needs to import findings from that product\.
-
-**To enable Security Hub integration with the partner product**
-
-1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
-
-1. Locate the product to enable and then choose **Enable**\.
-
-   You must have a subscription to the product to successfully integrate it with Security Hub\.
-
-1. To review the configuration information from the company that creates the product, choose **Configuration instructions**\.
-
-1. Review the policy that is assigned to the product subscription and then choose **Enable**\.
+|  Vectra AI  |  Cognito Detect  |  Send  |  arn:aws:securityhub:<REGION>::product/vectra\-ai/cognito\-detect  |  Vectra is transforming cybersecurity by applying advanced AI to detect and respond to hidden cyberattackers before they can steal or cause damage\.  | 

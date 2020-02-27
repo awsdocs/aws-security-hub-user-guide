@@ -1326,8 +1326,6 @@ Enabling virtual MFA is a method used to incorporate multi\-factor authenticatio
 
 1. Choose the type of device to use for MFA and then choose **Continue**\. 
 
-   For best results in passing the check [1\.14 – Ensure hardware MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.14), choose a hardware\-based authentication mechanism\.
-
 1. Complete the steps to configure the device type appropriate to your selection\.
 
 ## \[PCI\.IAM\.6\] MFA should be enabled for all IAM users<a name="pcidss-iam-6"></a>
