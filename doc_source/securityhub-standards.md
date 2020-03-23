@@ -13,7 +13,7 @@ Security Hub provides controls for the following standards\.
 + [Schedule for Running Security Checks](securityhub-standards-schedule.md)
 + [Results of Security Checks](securityhub-standards-results.md)
 + [Disabling or Enabling a Security Standard](securityhub-standards-enable-disable.md)
-+ [Viewing Details for Security Standard Controls](securityhub-standards-view-controls.md)
++ [Viewing Details for Controls](securityhub-standards-view-controls.md)
 + [Disabling and Enabling Individual Controls](securityhub-standards-enable-disable-controls.md)
 + [CIS AWS Foundations Standard](securityhub-standards-cis.md)
 + [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)

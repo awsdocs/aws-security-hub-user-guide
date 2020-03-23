@@ -366,8 +366,27 @@ The following is the syntax of the complete finding JSON in the AWS Security Fin
                         ]
                     },
                     "AwsS3Bucket": { 
+                        "CreatedAt": "string",
                         "OwnerId": "string",
                         "OwnerName": "string"
+                        "ServerSideEncryptionConfiguration": {
+                            "Rules": [
+                                {
+                                    "ApplyServerSideEncryptionByDefault": {
+                                        "KMSMasterKeyID": "string",
+                                        "SSEAlgorithm": "string"
+                                     }
+                                }
+                            ]
+                        }
+                    },
+                    "AwsS3Object": {
+                        "ContentType": "string",
+                        "ETag": "string",
+                        "LastModified": "string",
+                        "ServerSideEncryption": "string",
+                        "SSEKMSKeyId": "string",
+                        "VersionId": "string"
                     },
                     "AwsSnsTopic": {
                         "KmsMasterKeyId": "string",
@@ -428,6 +447,7 @@ The following is the syntax of the complete finding JSON in the AWS Security Fin
         ],
         "SchemaVersion": "string",
         "Severity": { 
+                "Label": "string",
                 "Normalized": number,
                 "Product": number
         },
@@ -449,6 +469,9 @@ The following is the syntax of the complete finding JSON in the AWS Security Fin
             "string" : "string" 
 		},
         "VerificationState": "string",
+        "Workflow": {
+            "Status": "string"
+        },
         "WorkflowState": "string"
     }
 ]
@@ -462,7 +485,7 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
 |  `AwsAccountId`  |  Yes  | The AWS account ID where a finding is generated\. Type: string \(12 digits max\) Example: <pre>"AwsAccountId": "111111111111"</pre>  | 
-|  [`Compliance`](#asff-compliance)  |  No  | Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard \(for example, CIS AWS Foundations\)\. Contains compliance\-related finding details\. Type: object Example: <pre>"Compliance": {<br />    "Status": "PASSED",<br />    "RelatedRequirements": ["Req1", "Req2"]<br />}</pre>  | 
+|  [`Compliance`](#asff-compliance)  |  No  | Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard \(for example, CIS AWS Foundations\)\. Contains standards\-related finding details\. Type: object Example: <pre>"Compliance": {<br />    "Status": "PASSED",<br />    "RelatedRequirements": ["Req1", "Req2"]<br />}</pre>  | 
 |  `Confidence`  |  No  |  A finding's confidence\. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify\. Confidence is scored on a 0–100 basis using a ratio scale, where 0 means zero\-percent confidence and 100 means 100\-percent confidence\. However, a data exfiltration detection based on a statistical deviation of network traffic has a much lower confidence because an actual exfiltration hasn't been verified\. Type: integer \(range 0–100\) Example: <pre>"Confidence": 42</pre>  | 
 |  `CreatedAt`  |  Yes  |  An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the potential security issue captured by a finding was created\. Because the `CreatedAt` timestamp reflects the time when the finding record was created, it can differ from the `FirstObservedAt` timestamp, which reflects the time when the event or vulnerability was first observed\. This timestamp *must* be provided on the first generation of the finding and *can't* be changed upon subsequent updates to the finding\. Type: timestamp Example: <pre>"CreatedAt": "2017-03-22T13:22:13.933Z"</pre>  Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\.  | 
 |  `Criticality`  |  No  | The level of importance that is assigned to the resources associated with the finding\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\.  Type: integer \(range 0–100\) Criticality is scored on a 0–100 basis, using a ratio scale that supports only full integers\. This means that you should assess not only which findings impact resources that are more critical than others but also how much more critical those resources are compared to other resources\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\. When assessing criticality of a finding, consider the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) You can use the following guidelines: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Criticality": 99</pre>  | 
@@ -482,7 +505,7 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
 |  [`Remediation`](#asff-remediation)  |  No  | The remediation options for a finding\. Type: object Example: <pre>"Remediation": {<br />    "Recommendation": {<br />        "Text": "Run sudo yum update and cross your fingers and toes.",<br />        "Url": "http://myfp.com/recommendations/dangerous_things_and_how_to_fix_them.html"<br />    }<br />}</pre>  | 
 |  [`Resources`](#asff-resources)  |  Yes  | A set of resource data types that describe the resources that the finding refers to\. Type: array of up to 32 resource objects Example: <pre>"Resources": [<br />  {<br />    "Type": "AwsEc2Instance",<br />    "Id": "i-cafebabe",<br />    "Partition": "aws",<br />    "Region": "us-west-2",<br />    "Tags": {<br />      "billingCode": "Lotus-1-2-3",<br />      "needsPatching": "true"<br />    },<br />    "Details": {<br />      "AwsEc2Instance": {<br />        "Type": "i3.xlarge",<br />        "ImageId": "ami-abcd1234",<br />        "IpV4Addresses": [ "54.194.252.215", "192.168.1.88" ],<br />        "IpV6Addresses": [ "2001:db8:1234:1a2b::123" ],<br />        "KeyName": "my_keypair",<br />        "IamInstanceProfileArn": "arn:aws:iam::111111111111:instance-profile/AdminRole",<br />        "VpcId": "vpc-11112222",<br />        "SubnetId": "subnet-56f5f633",<br />        "LaunchedAt": "2018-05-08T16:46:19.000Z"<br />      }  <br />    }<br />  }<br />]</pre>  | 
 |  `SchemaVersion`  |  Yes  | The schema version that a finding is formatted for\. The value of this field must be one of the officially published versions identified by AWS\. In the current release, the AWS Security Finding Format schema version is `2018-10-08`\.  Type: string \(10 characters max, conforms to `YYYY-MM-DD`\) Example: <pre>"SchemaVersion": "2018-10-08"</pre>  | 
-|  [`Severity`](#asff-severity)  |  Yes  | A finding's severity\.Type: object Example: <pre>"Severity": {<br />    "Product": 8.3,<br />    "Normalized": 25<br />}</pre>  | 
+|  [`Severity`](#asff-severity)  |  Yes  | A finding's severity\.Type: object Example: <pre>"Severity": {<br />    "Label": "CRITICAL",<br />    "Product": 8.3<br />}</pre>  | 
 |  `SourceUrl`  |  No  | A URL that links to a page about the current finding in the finding product\. Type: URL | 
 |  [`ThreatIntelIndicators`](#asff-threatintelindicators)  |  No  | Threat intelligence details that are related to a finding\. Type: array of up to five threat intelligence indicator objects Example: <pre>"ThreatIntelIndicators": [<br />  {<br />    "Type": "IPV4_ADDRESS",<br />    "Value": "8.8.8.8",<br />    "Category": "BACKDOOR",<br />    "LastObservedAt": "2018-09-27T23:37:31Z",<br />    "Source": "Threat Intel Weekly",<br />    "SourceUrl": "http://threatintelweekly.org/backdoors/8888"<br />  }<br />]</pre>  | 
 |  `Title`  |  Yes  | A finding's title\. This field can contain nonspecific boilerplate text or details that are specific to this instance of the finding\.Type: string \(256 characters max\) | 
@@ -490,7 +513,8 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
 |  `UpdatedAt`  |  Yes  | An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the findings product last updated the finding record\. Because this timestamp reflects the time when the finding record was last or most recently updated, it can differ from the `LastObservedAt` timestamp, which reflects when the event or vulnerability was last or most recently observed\. When you update the finding record, you must update this timestamp to the current timestamp\. Upon creation of a finding record, the `CreatedAt` and `UpdatedAt` timestamps must be the same timestamp\. After an update to the finding record, the value of this field must be greater than all of the previous values that it contained\.Type: timestamp Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\.  | 
 |  `UserDefinedFields`  |  No  | A list of name/value string pairs that are associated with the finding\. These are custom, user\-defined fields that are added to a finding\. These fields can be generated automatically via your specific configuration\. Findings products must *not* use this field for data that the product generates\. Instead, findings products can use the `ProductFields` field for data that doesn't map to any standard AWS Security Finding Format field\.Type: map of up to 50 key/value pairs Example: <pre>"UserDefinedFields": {<br />    "reviewedByCio": "true",<br />    "comeBackToLater": "Check this again on Monday"<br />}</pre>  | 
 |  `VerificationState`  |  No  | The veracity of a finding\. Findings products can provide the value of `UNKNOWN` for this field\. A findings product should provide this value if there is a meaningful analog in the findings product's system\. This field is typically populated by a user determination or action after they have investigated a finding\.Type: enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
-|  `WorkflowState`  |  No  | The workflow state of a finding\. Findings products can provide the value of `NEW` for this field\. A findings product can provide a value for this field if there is a meaningful analog in the findings product's system\. Type: enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"WorkflowState": "NEW"</pre>  | 
+|  [`Workflow`](#asff-workflow)  |  No  |  Provides information about the status of the investigation into a finding\. Type: object Example: <pre>Workflow: {<br />    "Status": "NEW"<br />}</pre>  | 
+|  `WorkflowState` \(deprecated\)  |  No  |  This field is being deprecated in favor of the `Status` field of the `Workflow` object\.The workflow state of a finding\. Findings products can provide the value of `NEW` for this field\. A findings product can provide a value for this field if there is a meaningful analog in the findings product's system\. Type: enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"WorkflowState": "NEW"</pre>  | 
 
 **Contents**
 + [Compliance](#asff-compliance)
@@ -540,6 +564,8 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
     + [Endpoint](#asff-resourcedetails-awsrdsdbinstance-endpoint)
     + [VpcSecurityGroups](#asff-resourcedetails-awsrdsdbinstance-vpcsecuritygroups)
   + [AwsS3Bucket](#asff-resourcedetails-awss3bucket)
+    + [ApplyServerSideEncryptionByDefault](#asff-resourcedetails-awss3bucket-applyserversideencryptionbydefault)
+  + [AwsS3Object](#asff-resourcedetails-awss3object)
   + [AwsSnsTopic](#asff-resourcedetails-awssnstopic)
     + [Subscription](#asff-resourcedetails-awssnstopic-subscription)
   + [AwsSqsQueue](#asff-resourcedetails-awssqsqueue)
@@ -548,11 +574,13 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
   + [Container](#asff-resourcedetails-container)
   + [Other](#asff-resourcedetails-other)
 + [Severity](#asff-severity)
+  + [Guidance for Assigning the Normalized Severity \(AWS Services and Partners\)](#asff-severity-normalized-guidance)
 + [ThreatIntelIndicators](#asff-threatintelindicators)
++ [Workflow](#asff-workflow)
 
 ### Compliance<a name="asff-compliance"></a>
 
-Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard \(for example, CIS AWS Foundations\)\. Contains compliance\-related finding details\.
+Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard \(for example, CIS AWS Foundations\)\. Contains standards\-related finding details\.
 
 Example:
 
@@ -568,7 +596,7 @@ The `Compliance` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Status`  | No | The result of a compliance check\. Type: enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Status": "PASSED"</pre>  | 
+|  `Status`  | No | The result of a security check\. Type: enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Status": "PASSED"</pre>  | 
 |  `RelatedRequirements`  |  No  |  List of standards requirements that are related to the control that triggered the finding\. You can provide up to 32 related requirements\. To identify a requirement, use its identifier\. Type: array of strings  | 
 
 ### Malware<a name="asff-malware"></a>
@@ -1511,8 +1539,51 @@ The `AwsS3Bucket` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `OwnerId`  |  No  | The canonical user ID of the owner of the Amazon S3 bucket\.Type: string \(64 char max\) | 
+|  `CreatedAt`  |  No  |  The date and time when the S3 bucket was created\. Type: string \(Uses the RFC 3339 format\)  | 
+|  `OwnerId`  |  No  |  The canonical user ID of the owner of the Amazon S3 bucket\. Type: string \(64 char max\)  | 
 |  `OwnerName`  |  No  | The display name of the owner of the Amazon S3 bucket\.Type: string \(128 char max\) | 
+|  `ServerSideEncryptionConfiguration`  |  No  |  The encryption rules that are applied to the S3 bucket\. Type: object Consists of a `Rules` object, which contains the [`ApplyServerSideEncryptionByDefault`](#asff-resourcedetails-awss3bucket-applyserversideencryptionbydefault) object\.  Example: <pre>"ServerSideEncryptionConfiguration": {<br />  "Rules": [<br />    {<br />      "ApplyServerSideEncryptionByDefault": {<br />        "KMSMasterKeyID": "12345678-abcd-abcd-abcd-123456789012",<br />        "SSEAlgorithm": "aws.kms"<br />      }<br />    }<br />  ]<br />}</pre>  | 
+
+##### ApplyServerSideEncryptionByDefault<a name="asff-resourcedetails-awss3bucket-applyserversideencryptionbydefault"></a>
+
+Specifies the default server\-side encryption to apply to new objects in the bucket\.
+
+`ApplyServerSideEncryptionByDefault` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `KMSMasterKeyID`  |  No  |  AWS KMS customer master key \(CMK\) ID to use for the default encryption\. Can be either the key ID or the CMK ARN\. Type: string  | 
+|  `SSEAAlgorithm`  |  Yes  |  Server\-side encryption algorithm to use for the default encryption\. Type: string Valid values: `AES256` \| `aws:kms`  | 
+
+#### AwsS3Object<a name="asff-resourcedetails-awss3object"></a>
+
+Details about an AWS S3 object\.
+
+Example:
+
+```
+"AwsS3Object": {
+    "ContentType": "text/html",
+    "ETag": "\"30a6ec7e1a9ad79c203d05a589c8b400\"",
+    "LastModified": "2012-04-23T18:25:43.511Z",
+    "ServerSideEncryption": "aws:kms",
+    "SSEKMSKeyId": "arn:aws:kms:us-west-2:123456789012:key/4dff8393-e225-4793-a9a0-608ec069e5a7",
+    "VersionId": "ws31OurgOOjH_HHllIxPE35P.MELYaYh"
+}
+```
+
+`AWSS3Object` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ContentType`  |  No  |  A standard MIME type describing the format of the object data\. Type: string  | 
+|  `ETag`  |  No  |  The opaque identifier assigned by a web server to a specific version of a resource found at a URL\. Type: string  | 
+|  `LastModified`  |  No  |  The date and time when the object was last modified\. Type: datetime  | 
+|  `ServerSideEncryption`  |  No  |  If the object is stored using server\-side encryption, the value of the server\-side encryption algorithm used when storing this object in Amazon S3\. Type: string  | 
+|  `SSEKMSKeyId`  |  No  |  The identifier of the AWS Key Management Service\) symmetric customer managed customer master key \(CMK\) that was used for the object\. Type: string  | 
+|  `VersionId`  |  No  |  The version of the object\. Type: string  | 
 
 #### AwsSnsTopic<a name="asff-resourcedetails-awssnstopic"></a>
 
@@ -1677,20 +1748,52 @@ Each key\-value pair must meet the following requirements\.
 
 ### Severity<a name="asff-severity"></a>
 
+Details about the severity of the finding\.
+
+The finding severity does not consider the criticality of the involved assets or the underlying resource\. Criticality is defined as the level of importance of the resources associated with the finding\. For example, a resource associated with a mission critical application versus one associated with non\-production testing\. To capture information about resource criticality, use the `Criticality` field\.
+
 The `Severity` object can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-| Severity Label | Severity Score Range | 
+|  Normalized  |  Label  | 
 | --- | --- | 
-|  `Normalized`  |  Yes  |  The normalized severity of a finding\. For findings that supported AWS services generate, Security Hub automatically translates the native severity into the normalized severity based on the following guidance\. For findings supported third\-party partner products generate, partners can use this guidance to determine the normalized severity required by the AWS Security Finding Format before sending these findings to Security Hub\.  In the AWS Security Finding Format, a finding severity doesn't include consideration of the criticality of the assets that are involved in the activity that resulted in this finding\. Findings that are associated with actual data loss or denial of service are considered most severe\. Findings that are associated with an active compromise but that don't indicate that data loss or other negative effects have occurred are considered second\-most severe\. Findings associated with issues that indicate potential for a future compromise are considered third\-most severe\.  Severity is scored on a 0–100 basis, using a ratio scale that supports only full integers\. This means that when determining the normalized severity, you should assess not only which findings are more severe than others but also how more severe one finding is than another\. Zero means that no severity applies \(for example, the severity is "Informational"\), and 100 means that the finding has the maximum possible severity\. We recommend that you use the following guidance when translating findings' native severity scores to normalized severity for the AWS Security Finding Format: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) In Security Hub, the normalized severity scores are available both in their numeric form and in a translated severity label using the following translation table\. You can use the severity labels in **Filters** and **Group By** statements when managing insights using `Severity.Label`\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
-|  `Product`  |  No  | The native severity as defined by the finding product that generated the finding\. Type: number \(single\-precision 32\-bit IEEE 754 floating point number, restricted to finite values\) | 
-| Informational | 0 | 
-| Low | 1–39 | 
-| Medium | 40–69 | 
-| High | 70–89 | 
-| Critical | 90–100 | 
+|  `Label`  |  No  |  The severity value for the finding\. Type: enum Available values: `INFORMATIONAL` \| `LOW` \| `MEDIUM` \| `HIGH` \|`CRITICAL` At a high level, the `Label` values can be interpreted as follows\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
+|  `Normalized` \(To be deprecated\)  |  No  |  The normalized severity of a finding\. We plan to deprecate this attribute\. Instead of providing `Normalized`, provide `Label`\. The finding must have either `Normalized` or `Label` populated\. If neither attribute is populated, then the finding is invalid\. Type: integer The value of `Normalized` must be an integer between 0 and 100\. Zero means that no severity applies, and 100 means that the finding has the maximum possible severity\. For guidance on setting the value of `Normalized`, see [Guidance for Assigning the Normalized Severity \(AWS Services and Partners\)](#asff-severity-normalized-guidance)\. If you provide `Normalized` and do not provide `Label`, `Label` is set automatically as follows\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
+|  `Product`  |  No  |  The native severity as defined by the finding product that generated the finding\. Type: number \(single\-precision 32\-bit IEEE 754 floating point number, restricted to finite values\)  | 
+|  0  |  `INFORMATIONAL`  | 
+|  1–39  |  `LOW`  | 
+|  40–69  |  `MEDIUM`  | 
+|  70–89  |  `HIGH`  | 
+|  90–100  |  `CRITICAL`  | 
+
+#### Guidance for Assigning the Normalized Severity \(AWS Services and Partners\)<a name="asff-severity-normalized-guidance"></a>
+
+For findings generated by AWS services and third\-party partner products, the severity is based on the following\.
++ Most severe – Findings that are associated with actual data loss or denial of service
++ Second\-most severe – Findings that are associated with an active compromise but that do not indicate that data loss or other negative effects have occurred
++ Third\-most severe – Findings associated with issues that indicate potential for a future compromise
+
+We recommend that you use the following guidance when translating findings' native severity scores to a normalized severity for the ASFF\.
++ Informational findings\. For example, a finding for a passed check or a sensitive data identification\.
+
+  Suggested score: 0
++ Findings that are associated with issues that could result in future compromises\. For example, vulnerabilities, configuration weaknesses, exposed passwords\.
+
+  This generally aligns to the `Software and Configuration Checks` namespace under a finding's type\.
+
+  Suggested score: 1–39 \(Low\)
++ Findings that are associated with issues that indicate an active compromise, but no indication that an adversary completed their objectives\. For example, malware activity, hacking activity, or unusual behavior detection\.
+
+  This generally aligns to the `Threat Detections and Unusual Behavior` namespaces under a finding's type\.
+
+  Suggested score: 40–69 \(Medium\)
++ Findings that indicate that an adversary completed their objectives, such as active data loss or compromise or a denial of service\.
+
+  This generally aligns to the `Effects` namespace under a finding's type\.
+
+  Suggested score: 70–100 \(High or Critical\)
 
 ### ThreatIntelIndicators<a name="asff-threatintelindicators"></a>
 
@@ -1725,16 +1828,34 @@ Each threat intelligence indicator object can have the following attributes\.
 |  `Type`  |  No  | The type of a threat intelligence indicator\.Type: enum Valid values: `DOMAIN` \| `EMAIL_ADDRESS` \| `HASH_MD5` \| `HASH_SHA1` \| `HASH_SHA256` \|` HASH_SHA512` \| `IPV4_ADDRESS` \| `IPV6_ADDRESS` \| `MUTEX` \| `PROCESS` \| `URL` | 
 |  `Value`  |  No  | The value of a threat intelligence indicator\.Type: string \(512 characters max\) | 
 
+### Workflow<a name="asff-workflow"></a>
+
+The `Workflow` object provides information about the status of the investigation into a finding\.
+
+It is not intended for finding providers\. It is only to be used by customers and by remediation, orchestration, and ticketing tools used by customers\.
+
+`Workflow` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Status`  |  No  |  The status of the investigation into the finding\. Type: enum Valid values: `NEW` \| `NOTIFIED` \| `RESOLVED` \| `SUPPRESSED` [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
+
 ## Types Taxonomy of the AWS Security Finding<a name="securityhub-findings-format-type-taxonomy"></a>
 
-The following information describes the first three levels of the `Types` path\. The top\-level bullets are namespaces, the second\-level bullets are categories, and the third\-level bullets \(shown only for Software and Configuration Checks\) are `Classifiers`\.
+The following information describes the first three levels of the `Types` path\. In the list, the top\-level bullets are namespaces, the second\-level bullets are categories, and the third\-level bullets are classifiers\. Only the Software and Configuration Checks namespace has defined classifiers\.
 + Namespaces
   + Categories
     + Classifiers
 
-Findings products can define classifiers\. A findings product might define a partial path\. For example, the following finding types are all valid: TTPs, TTPs/Defense Evasion, and TTPs/Defense Evasion/CloudTrailStopped\.
+Finding providers must use the defined namespaces\. The defined categories and classifiers are recommended for use, but are not required\.
 
-TTPs stands for Tactics, Techniques, and Procedures\. The TTP categories in the following list align to the [MITRE ATT&CK MatrixTM](https://attack.mitre.org/matrices/enterprise/)\. Unusual Behaviors are different from TTPs because they reflect general unusual behavior \(e\.g\., general statistical anomalies\) and aren't aligned with a specific TTP\. However, you could classify a finding with both Unusual Behaviors and TTPs finding types\.
+A finding provider might define a partial path for namespace/category/classifier\. For example, the following finding types are all valid\.
++ TTPs
++ TTPs/Defense Evasion
++ TTPs/Defense Evasion/CloudTrailStopped
+
+TTPs stands for Tactics, Techniques, and Procedures\. The TTP categories in the following list align to the [MITRE ATT&CK MatrixTM](https://attack.mitre.org/matrices/enterprise/)\. Unusual Behaviors reflect general unusual behavior, such as general statistical anomalies, and are not aligned with a specific TTP\. However, you could classify a finding with both Unusual Behaviors and TTPs finding types\.
 + Software and Configuration Checks
   + Vulnerabilities
     + CVE

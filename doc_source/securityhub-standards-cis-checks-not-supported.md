@@ -1,6 +1,6 @@
 # CIS AWS Foundations Security Checks That Aren't Supported in Security Hub<a name="securityhub-standards-cis-checks-not-supported"></a>
 
-The following rules are *not* supported in the CIS AWS Foundations standard in Security Hub, because they cannot be evaluated in an automated way\. Security Hub focuses on automated compliance checks\.
+The following rules are *not* supported in the CIS AWS Foundations standard in Security Hub, because they cannot be evaluated in an automated way\. Security Hub focuses on automated security checks\.
 + 1\.15 – Ensure security questions are registered in the AWS account 
 + 1\.17 – Maintain current contact details 
 + 1\.18 – Ensure security contact information is registered 

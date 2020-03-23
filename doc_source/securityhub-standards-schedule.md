@@ -4,7 +4,7 @@ After you enable a security standard, AWS Security Hub begins to run the checks 
 
 After the initial check, the schedule for each control may be either periodic or change\-triggered\.
 + Periodic checks run automatically within 12 hours after the most recent run\. You cannot change the periodicity\.
-+ Change\-triggered checks run when the associated resource changes state\.
++ Change\-triggered checks run when the associated resource changes state\. Even if the resource does not change state, the updated at time for change\-triggered checks is refreshed every 18 hours\. This helps to indicate that the control is still enabled\.
 
 In general, Security Hub uses change\-triggered rules whenever possible\. For a resource to use a change\-triggered rule, there must be AWS Config Configuration Item support\.
 

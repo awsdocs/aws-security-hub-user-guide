@@ -1,4 +1,4 @@
-# Viewing Details for Security Standard Controls<a name="securityhub-standards-view-controls"></a>
+# Viewing Details for Controls<a name="securityhub-standards-view-controls"></a>
 
 The **Security standards** page provides access to the supported security standards in Security Hub\.
 

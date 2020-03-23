@@ -46,7 +46,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Schedule for Running Security Checks](securityhub-standards-schedule.md)
    + [Results of Security Checks](securityhub-standards-results.md)
    + [Disabling or Enabling a Security Standard](securityhub-standards-enable-disable.md)
-   + [Viewing Details for Security Standard Controls](securityhub-standards-view-controls.md)
+   + [Viewing Details for Controls](securityhub-standards-view-controls.md)
    + [Disabling and Enabling Individual Controls](securityhub-standards-enable-disable-controls.md)
    + [CIS AWS Foundations Standard](securityhub-standards-cis.md)
       + [AWS Config Resources Required for CIS Controls](securityhub-standards-cis-config-resources.md)

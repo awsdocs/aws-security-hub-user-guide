@@ -77,7 +77,7 @@ Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of
 We recommend enabling MFA for all accounts that have a console password\. Enabling MFA provides increased security for console access because it requires the authenticating principal to possess a device that emits a time\-sensitive key and have knowledge of a credential\.
 
 **Important**  
-The AWS Config rule used for this check may take up to 4 hours to accurately report results for MFA\. Any findings that are generated within the first 4 hours after enabling the CIS security checks may not be accurate\. It may also take up to 4 hours after remediating this issue for the check to report compliance\.
+The AWS Config rule used for this check may take up to 4 hours to accurately report results for MFA\. Any findings that are generated within the first 4 hours after enabling the CIS security checks may not be accurate\. It may also take up to 4 hours after remediating this issue for the check to pass\.
 
 ### Remediation<a name="cis-1.2-remediation"></a>
 
@@ -454,7 +454,7 @@ For more information about adding users to groups, see [Adding and Removing User
 
 **Severity:** Low
 
-**AWS Config rule:** [iam\-role\-managed\-policy\-check](https://docs.aws.amazon.com/config/latest/developerguide/iam-role-managed-policy-check.html)
+**AWS Config rule:** [iam\-policy\-in\-use](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-in-use.html)
 
 AWS provides a support center that can be used for incident notification and response, as well as technical support and customer services\.
 
@@ -705,9 +705,9 @@ We recommend that you enable AWS Config in all Regions\. The AWS configuration i
 **Note**  
 CIS 2\.5 requires that AWS Config is enabled in all Regions in which you are using Security Hub\.  
 Because Security Hub is a regional service, the check performed for this control checks only the current Region for the account\. It does not check all Regions\.  
-You also must record global resources so that compliance checks against global resources can be checked in each Region\.
+You also must record global resources so that security checks against global resources can be checked in each Region\.
 
-To run this check, Security Hub performs custom logic to perform the audit steps prescribed for it in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. Security Hub also requires that global resources are recorded in each Region, because Security Hub is a regional service and performs its compliance checks on a Region\-by\-Region basis\.
+To run this check, Security Hub performs custom logic to perform the audit steps prescribed for it in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. Security Hub also requires that global resources are recorded in each Region, because Security Hub is a regional service and performs its security checks on a Region\-by\-Region basis\.
 
 ### Remediation<a name="cis-2.5-remediation"></a>
 
