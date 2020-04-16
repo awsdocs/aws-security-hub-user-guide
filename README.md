@@ -1,6 +1,6 @@
 ## AWS Security Hub User Guide
 
-The open source version of the AWS Security Hub documentation. To provide feedback or requests changes, you can submit a pull request that contains your proposed changes.
+The open source version of the AWS Security Hub documentation. To provide feedback or request changes, you can submit a pull request that contains your proposed changes.
 
 ## License Summary
 
