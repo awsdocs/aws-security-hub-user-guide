@@ -1,4 +1,4 @@
-# Disabling and Enabling Individual Controls<a name="securityhub-standards-enable-disable-controls"></a>
+# Disabling and enabling individual controls<a name="securityhub-standards-enable-disable-controls"></a>
 
 When you enable a standard, all of the controls for that standard are enabled by default\. You can then disable and enable specific controls within an enabled standard\.
 
@@ -11,9 +11,9 @@ It can be useful to turn off security checks for controls that are not relevant 
 
 Remember that Security Hub is regional\. When you disable or enable a control, it is disabled only in the current Region, or in the Region that you specify in an API request\.
 
-Also, when you disable an entire standard \(See [Disabling or Enabling a Security Standard](securityhub-standards-enable-disable.md)\), Security Hub does not track which controls were disabled\. If you subsequently enable the standard again, all of the controls are enabled\.
+Also, when you disable an entire standard \(See [Disabling or enabling a security standard](securityhub-standards-enable-disable.md)\), Security Hub does not track which controls were disabled\. If you subsequently enable the standard again, all of the controls are enabled\.
 
-## Disabling a Control \(Console\)<a name="securityhub-standard-control-disable-console"></a>
+## Disabling a control \(Console\)<a name="securityhub-standard-control-disable-console"></a>
 
 On the Security Hub console, each enabled control provides an option to disable that control\.
 
@@ -33,12 +33,12 @@ On the Security Hub console, each enabled control provides an option to disable 
 
 1. Choose **Disable**\.
 
-## Enabling a Control \(Console\)<a name="securityhub-standard-control-enable-console"></a>
+## Enabling a control \(Console\)<a name="securityhub-standard-control-enable-console"></a>
 
 For a disabled control, **Disabled** is displayed next to the control title\.
 
 To enable the control at any time, choose **Enable**\.
 
-## Disabling or Enabling a Control \(API\)<a name="securityhub-standard-control-enable-disable-api"></a>
+## Disabling or enabling a control \(API\)<a name="securityhub-standard-control-enable-disable-api"></a>
 
 To enable or disable a control programmatically, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html) operation of the Security Hub API\.

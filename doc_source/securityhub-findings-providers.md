@@ -1,4 +1,4 @@
-# Product Integrations in AWS Security Hub<a name="securityhub-findings-providers"></a>
+# Product integrations in AWS Security Hub<a name="securityhub-findings-providers"></a>
 
 AWS Security Hub provides available integrations with several AWS services and third\-party products\.
 
@@ -9,7 +9,7 @@ Security Hub detects and consolidates only those security findings from the supp
 It does not retroactively detect and consolidate security findings that were generated before you enabled Security Hub\.
 
 **Topics**
-+ [Managing Product Integrations](securityhub-integrations-managing.md)
-+ [Available AWS Service Integrations](securityhub-internal-providers.md)
-+ [Available Third\-Party Partner Product Integrations](securityhub-partner-providers.md)
-+ [Using Custom Product Integrations To Import Findings](securityhub-custom-providers.md)
++ [Managing product integrations](securityhub-integrations-managing.md)
++ [Available AWS service integrations](securityhub-internal-providers.md)
++ [Available third\-party partner product integrations](securityhub-partner-providers.md)
++ [Using custom product integrations to import findings](securityhub-custom-providers.md)

@@ -1,4 +1,4 @@
-# Data Protection in AWS Security Hub<a name="data-protection"></a>
+# Data protection in AWS Security Hub<a name="data-protection"></a>
 
 Security Hub is a multi\-tenant service offering\. To ensure data protection, Security Hub encrypts data at rest and data in transit between component services\.
 

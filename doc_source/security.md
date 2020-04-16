@@ -9,7 +9,7 @@ Security is a shared responsibility between AWS and you\. The [shared responsibi
 This documentation helps you understand how to apply the shared responsibility model when using Security Hub\. The following topics show you how to configure Security Hub to meet your security and compliance objectives\. You also learn how to use other AWS services that help you to monitor and secure your Security Hub resources\.
 
 **Topics**
-+ [Data Protection in AWS Security Hub](data-protection.md)
-+ [Identity and Access Management for AWS Security Hub](security-iam.md)
-+ [Compliance Validation for AWS Security Hub](SERVICENAME-compliance.md)
-+ [Infrastructure Security in AWS Security Hub](infrastructure-security.md)
++ [Data protection in AWS Security Hub](data-protection.md)
++ [Identity and access management for AWS Security Hub](security-iam.md)
++ [Compliance validation for AWS Security Hub](SERVICENAME-compliance.md)
++ [Infrastructure security in AWS Security Hub](infrastructure-security.md)

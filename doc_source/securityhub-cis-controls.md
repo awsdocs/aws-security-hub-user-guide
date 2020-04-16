@@ -1,4 +1,4 @@
-# CIS AWS Foundations Controls<a name="securityhub-cis-controls"></a>
+# CIS AWS Foundations controls<a name="securityhub-cis-controls"></a>
 
 For the CIS AWS Foundations standard, Security Hub supports the following controls\. For each control, the information includes the required AWS Config rule and the remediation steps\.
 
@@ -10,7 +10,7 @@ For the CIS AWS Foundations standard, Security Hub supports the following contro
 
 The root account has unrestricted access to all resources in the AWS account\. We highly recommend that you avoid using this account\. The root account is the most privileged account\. Minimizing the use of this account and adopting the principle of least privilege for access management reduces the risk of accidental changes and unintended disclosure of highly privileged credentials\.
 
-As a best practice, use your root credentials only when required to [ perform account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\. Apply IAM policies directly to groups and roles but not users\. For a tutorial on how to set up an administrator for daily use, see [ Creating Your First IAM Admin User and Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*
+As a best practice, use your root credentials only when required to [ perform account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\. Apply IAM policies directly to groups and roles but not users\. For a tutorial on how to set up an administrator for daily use, see [ Creating your first IAM admin user and group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.3 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -24,7 +24,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -109,7 +109,7 @@ We recommend that you remove or deactivate all credentials that have been unused
 
 To get some of the information that you need to monitor accounts for dated credentials, use the IAM console\. For example, when you view users in your account, there is a column for **Access key age**, **Password age**, and **Last activity**\. If the value in any of these columns is greater than 90 days, make the credentials for those users inactive\.
 
-You can also use credential reports to monitor user accounts and identify those with no activity for 90 or more days\. You can download credential reports in \.csv format from the IAM console\. For more information about credential reports, see [ Getting Credential Reports for Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html#getting-credential-reports-console)\. 
+You can also use credential reports to monitor user accounts and identify those with no activity for 90 or more days\. You can download credential reports in \.csv format from the IAM console\. For more information about credential reports, see [ Getting credential reports for your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html#getting-credential-reports-console)\. 
 
 After you identify the inactive accounts or unused credentials, use the following steps to disable them\.
 
@@ -424,7 +424,7 @@ To resolve this issue, create an IAM group, assign the policy to the group, and 
 
 1. Confirm the details on the **Review** page and then choose **Create Group**\.
 
-For more information about creating groups, see [Creating IAM Groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html) in the *IAM User Guide*\.
+For more information about creating groups, see [Creating IAM groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html) in the *IAM User Guide*\.
 
 **To add users to an IAM group**
 
@@ -436,7 +436,7 @@ For more information about creating groups, see [Creating IAM Groups](https://do
 
 1. Select the users to add to the group and then choose **Add Users**\.
 
-For more information about adding users to groups, see [Adding and Removing Users in an IAM Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\.
+For more information about adding users to groups, see [Adding and removing users in an IAM group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\.
 
 **To remove a policy attached directly to a user**
 
@@ -488,7 +488,7 @@ The administrator of the specified account can grant permission to assume this r
 
 1. \(Optional\) To add metadata to the role, attach tags as key–value pairs\.
 
-   For more information about using tags in IAM, see [Tagging IAM Users and Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the *IAM User Guide*\.
+   For more information about using tags in IAM, see [Tagging IAM users and roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the *IAM User Guide*\.
 
 1. Choose **Next: Review**\.
 
@@ -690,7 +690,7 @@ Sending CloudTrail logs to CloudWatch Logs facilitates real\-time and historic a
 
 1. Choose **Allow**\.
 
-For more information, see [Configuring CloudWatch Logs Monitoring with the Console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/send-cloudtrail-events-to-cloudwatch-logs.html#send-cloudtrail-events-to-cloudwatch-logs-console) in the *AWS CloudTrail User Guide*\.
+For more information, see [Configuring CloudWatch Logs monitoring with the console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/send-cloudtrail-events-to-cloudwatch-logs.html#send-cloudtrail-events-to-cloudwatch-logs-console) in the *AWS CloudTrail User Guide*\.
 
 ## 2\.5 – Ensure AWS Config is enabled<a name="securityhub-cis-controls-2.5"></a>
 
@@ -733,7 +733,7 @@ To run this check, Security Hub performs custom logic to perform the audit steps
 
 For more information about using AWS Config from the AWS Command Line Interface, see [Turning on AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/gs-cli-subscribe.html) in the *AWS Config Developer Guide*\.
 
-You can also use an AWS CloudFormation template to automate this process\. For more information, see the [AWS CloudFormation StackSets Sample Template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-sampletemplates.html) in the *AWS CloudFormation User Guide*\.
+You can also use an AWS CloudFormation template to automate this process\. For more information, see the [AWS CloudFormation StackSets sample template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-sampletemplates.html) in the *AWS CloudFormation User Guide*\.
 
 ## 2\.6 – Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket<a name="securityhub-cis-controls-2.6"></a>
 
@@ -809,7 +809,7 @@ The AWS KMS key and S3 bucket must be in the same Region\.
 
 1. Choose **Save**\.
 
-You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail Log Files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
+You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail log files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
 
 ## 2\.8 – Ensure rotation for customer\-created CMKs is enabled<a name="securityhub-cis-controls-2.8"></a>
 
@@ -896,7 +896,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -965,7 +965,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1034,7 +1034,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1103,7 +1103,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1172,7 +1172,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1241,7 +1241,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1310,7 +1310,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1379,7 +1379,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1448,7 +1448,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1586,7 +1586,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1655,7 +1655,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1724,7 +1724,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1793,7 +1793,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -1893,7 +1893,7 @@ Perform the following steps for each security group associated with a VPC\.
 
 ## 4\.3 – Ensure the default security group of every VPC restricts all traffic<a name="securityhub-cis-controls-4.3"></a>
 
-**Severity:** Low
+**Severity:** Medium
 
 **AWS Config rule:** [vpc\-default\-security\-group\-closed](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
 

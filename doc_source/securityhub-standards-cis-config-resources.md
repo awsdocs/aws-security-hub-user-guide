@@ -1,4 +1,4 @@
-# AWS Config Resources Required for CIS Controls<a name="securityhub-standards-cis-config-resources"></a>
+# AWS Config resources required for CIS controls<a name="securityhub-standards-cis-config-resources"></a>
 
 To run security checks for the enabled CIS AWS Foundations controls on your environment's resources, Security Hub either runs through the exact audit steps prescribed for the checks in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/) or uses specific AWS Config managed rules\.
 

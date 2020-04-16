@@ -1,9 +1,11 @@
-# Document History for the AWS Security Hub User Guide<a name="doc-history"></a>
+# Document history for the AWS Security Hub User Guide<a name="doc-history"></a>
 
 The following table describes the updates to the documentation for AWS Security Hub\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [New console option to update the workflow status for a finding](https://docs.aws.amazon.com/securityhub/latest/userguide/finding-workflow-status.html) | Added information for using the Security Hub console or API to set the workflow status for findings\. | April 16, 2020 | 
+| [New BatchUpdateFindings API for customer updates to findings](https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html) | Added information on using `BatchUpdateFindings` to update information related to the process of investigating a finding\. `BatchUpdateFindings` replaces `UpdateFindings`, which is deprecated\. | April 16, 2020 | 
 | [Updates to the AWS Security Finding Format \(ASFF\)](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) | Added several new resource types\. Added a new `Label` attribute to the `Severity` object\. `Label` is intended to replace the `Normalized` field\. Added a new `Workflow` object to track the process of an investigation into a finding\. `Workflow` contains a `Status` attribute, which replaces the existing `Workflowstate` attribute\. | March 12, 2020 | 
 | [Updates to the Integrations page](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-integrations-managing.html) | Updated to reflect the changes to the **Integrations** page\. For each integration, the page now shows the integration category and whether each integration sends findings to or receives findings from Security Hub\. It also provides the specific steps required to enable each integration\. | February 26, 2020 | 
 | [New third\-party product integrations](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-partner-providers.html) | Added the following new product integrations: Cloud Custodian, FireEye Helix, Forcepoint CASB, Forcepoint DLP, Forcepoint NGFW, Rackspace Cloud Native Security, and Vectra\.ai Cognito\. | February 21, 2020 | 

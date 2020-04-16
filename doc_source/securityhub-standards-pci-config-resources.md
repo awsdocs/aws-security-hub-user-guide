@@ -1,4 +1,4 @@
-# AWS Config Resources Required for PCI DSS Controls<a name="securityhub-standards-pci-config-resources"></a>
+# AWS Config resources required for PCI DSS controls<a name="securityhub-standards-pci-config-resources"></a>
 
 For AWS Security Hub to accurately report findings for all of the PCI DSS controls, you must enable the following resources in AWS Config\.
 + Amazon ES domain

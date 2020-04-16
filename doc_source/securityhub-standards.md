@@ -1,4 +1,4 @@
-# Security Standards in AWS Security Hub<a name="securityhub-standards"></a>
+# Security standards in AWS Security Hub<a name="securityhub-standards"></a>
 
 AWS Security Hub consumes, aggregates, and analyzes security findings from various supported AWS and third\-party products\.
 
@@ -9,11 +9,11 @@ Security Hub provides controls for the following standards\.
 + [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)
 
 **Topics**
-+ [AWS Config Requirements for Running Security Checks](securityhub-standards-awsconfigrules.md)
-+ [Schedule for Running Security Checks](securityhub-standards-schedule.md)
-+ [Results of Security Checks](securityhub-standards-results.md)
-+ [Disabling or Enabling a Security Standard](securityhub-standards-enable-disable.md)
-+ [Viewing Details for Controls](securityhub-standards-view-controls.md)
-+ [Disabling and Enabling Individual Controls](securityhub-standards-enable-disable-controls.md)
-+ [CIS AWS Foundations Standard](securityhub-standards-cis.md)
++ [AWS Config requirements for running security checks](securityhub-standards-awsconfigrules.md)
++ [Schedule for running security checks](securityhub-standards-schedule.md)
++ [Results of security checks](securityhub-standards-results.md)
++ [Disabling or enabling a security standard](securityhub-standards-enable-disable.md)
++ [Viewing details for controls](securityhub-standards-view-controls.md)
++ [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)
++ [CIS AWS Foundations standard](securityhub-standards-cis.md)
 + [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)

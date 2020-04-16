@@ -1,17 +1,17 @@
-# How AWS Security Hub Works with IAM<a name="security_iam_service-with-iam"></a>
+# How AWS Security Hub works with IAM<a name="security_iam_service-with-iam"></a>
 
 Before you use IAM to manage access to Security Hub, you should understand what IAM features are available to use with Security Hub\. To get a high\-level view of how Security Hub and other AWS services work with IAM, see [AWS Services That Work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) in the *IAM User Guide*\.
 
 **Topics**
-+ [Security Hub Identity\-Based Policies](#security_iam_service-with-iam-id-based-policies)
-+ [Security Hub Resource\-Based Policies \(Not Supported\)](#security_iam_service-with-iam-resource-based-policies)
-+ [Authorization Based on Security Hub Tags](#security_iam_service-with-iam-tags)
-+ [Security Hub IAM Roles](#security_iam_service-with-iam-roles)
-+ [Service\-Linked Roles](#security_iam_service-with-iam-roles-service-linked)
-+ [Service Roles](#security_iam_service-with-iam-roles-service)
-+ [AWS Security Hub Identity\-Based Policy Examples](#security_iam_id-based-policy-examples)
++ [Security Hub identity\-based policies](#security_iam_service-with-iam-id-based-policies)
++ [Security Hub resource\-based policies \(Not supported\)](#security_iam_service-with-iam-resource-based-policies)
++ [Authorization based on Security Hub tags](#security_iam_service-with-iam-tags)
++ [Security Hub IAM roles](#security_iam_service-with-iam-roles)
++ [Service\-linked roles](#security_iam_service-with-iam-roles-service-linked)
++ [Service roles](#security_iam_service-with-iam-roles-service)
++ [AWS Security Hub identity\-based policy examples](#security_iam_id-based-policy-examples)
 
-## Security Hub Identity\-Based Policies<a name="security_iam_service-with-iam-id-based-policies"></a>
+## Security Hub identity\-based policies<a name="security_iam_service-with-iam-id-based-policies"></a>
 
 With IAM identity\-based policies, you can specify allowed or denied actions and resources as well as the conditions under which actions are allowed or denied\. Security Hub supports specific actions, resources, and condition keys\. To learn about all of the elements that you use in a JSON policy, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html) in the *IAM User Guide*\.
 
@@ -45,7 +45,7 @@ For more information about the format of ARNs, see [Amazon Resource Names \(ARNs
 
 To see a list of Security Hub resource types and their ARNs, see [Resources Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-resources-for-iam-policies) in the *IAM User Guide*\. To learn with which actions you can specify the ARN of each resource, see [Actions Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-actions-as-permissions)\.
 
-### Condition Keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
+### Condition keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 
 The `Condition` element \(or `Condition` *block*\) lets you specify conditions in which a statement is in effect\. The `Condition` element is optional\. You can build conditional expressions that use [condition operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html), such as equals or less than, to match the condition in the policy with values in the request\. 
 
@@ -59,48 +59,48 @@ Security Hub actions support the `securityhub:TargetAccount` condition key\.
 
 To see a list of Security Hub condition keys, see [Condition Keys for AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-policy-keys) in the *IAM User Guide*\. To learn with which actions and resources you can use a condition key, see [Actions Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-actions-as-permissions)\.
 
-## Security Hub Resource\-Based Policies \(Not Supported\)<a name="security_iam_service-with-iam-resource-based-policies"></a>
+## Security Hub resource\-based policies \(Not supported\)<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
 Security Hub does not support resource\-based policies\.
 
-## Authorization Based on Security Hub Tags<a name="security_iam_service-with-iam-tags"></a>
+## Authorization based on Security Hub tags<a name="security_iam_service-with-iam-tags"></a>
 
 You can add tags to Security Hub resources or pass tags in a request to Security Hub\. To control access based on tags, you provide tag information in the [condition element](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) of a policy using the `securityhub:ResourceTag/key-name`, `aws:RequestTag/key-name`, or `aws:TagKeys` condition keys\.
 
-## Security Hub IAM Roles<a name="security_iam_service-with-iam-roles"></a>
+## Security Hub IAM roles<a name="security_iam_service-with-iam-roles"></a>
 
 An [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) is an entity within your AWS account that has specific permissions\.
 
-### Using Temporary Credentials with Security Hub<a name="security_iam_service-with-iam-roles-tempcreds"></a>
+### Using temporary credentials with Security Hub<a name="security_iam_service-with-iam-roles-tempcreds"></a>
 
 You can use temporary credentials to sign in with federation, assume an IAM role, or to assume a cross\-account role\. You obtain temporary security credentials by calling AWS STS API operations such as [AssumeRole](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) or [GetFederationToken](https://docs.aws.amazon.com/STS/latest/APIReference/API_GetFederationToken.html)\. 
 
 Security Hub supports using temporary credentials\. 
 
-## Service\-Linked Roles<a name="security_iam_service-with-iam-roles-service-linked"></a>
+## Service\-linked roles<a name="security_iam_service-with-iam-roles-service-linked"></a>
 
 [Service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role) allow AWS services to access resources in other services to complete an action on your behalf\. Service\-linked roles appear in your IAM account and are owned by the service\. An IAM administrator can view but not edit the permissions for service\-linked roles\.
 
 Security Hub supports service\-linked roles\.
 
-## Service Roles<a name="security_iam_service-with-iam-roles-service"></a>
+## Service roles<a name="security_iam_service-with-iam-roles-service"></a>
 
 This feature allows a service to assume a [service role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-role) on your behalf\. This role allows the service to access resources in other services to complete an action on your behalf\. Service roles appear in your IAM account and are owned by the account\. This means that an IAM administrator can change the permissions for this role\. However, doing so might break the functionality of the service\.
 
 Security Hub supports service roles\.
 
-## AWS Security Hub Identity\-Based Policy Examples<a name="security_iam_id-based-policy-examples"></a>
+## AWS Security Hub identity\-based policy examples<a name="security_iam_id-based-policy-examples"></a>
 
 By default, IAM users and roles don't have permission to create or modify Security Hub resources\. They also can't perform tasks using the AWS Management Console, AWS CLI, or AWS API\. An IAM administrator must create IAM policies that grant users and roles permission to perform specific API operations on the specified resources they need\. The administrator must then attach those policies to the IAM users or groups that require those permissions\.
 
 To learn how to create an IAM identity\-based policy using these example JSON policy documents, see [Creating Policies on the JSON Tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html#access_policies_create-json-editor) in the *IAM User Guide*\.
 
 **Topics**
-+ [Policy Best Practices](#security_iam_service-with-iam-policy-best-practices)
-+ [Using the Security Hub Console](#security_iam_id-based-policy-examples-console)
-+ [Troubleshooting AWS Security Hub Identity and Access](security_iam_troubleshoot.md)
++ [Policy best practices](#security_iam_service-with-iam-policy-best-practices)
++ [Using the Security Hub console](#security_iam_id-based-policy-examples-console)
++ [Troubleshooting AWS Security Hub identity and access](security_iam_troubleshoot.md)
 
-### Policy Best Practices<a name="security_iam_service-with-iam-policy-best-practices"></a>
+### Policy best practices<a name="security_iam_service-with-iam-policy-best-practices"></a>
 
 Identity\-based policies are very powerful\. They determine whether someone can create, access, or delete Security Hub resources in your account\. These actions can incur costs for your AWS account\. When you create or edit identity\-based policies, follow these guidelines and recommendations:
 + **Get Started Using AWS Managed Policies** – To start using Security Hub quickly, use AWS managed policies to give your employees the permissions they need\. These policies are already available in your account and are maintained and updated by AWS\. For more information, see [Get Started Using Permissions With AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-use-aws-defined-policies) in the *IAM User Guide*\.
@@ -108,11 +108,11 @@ Identity\-based policies are very powerful\. They determine whether someone can 
 + **Enable MFA for Sensitive Operations** – For extra security, require IAM users to use multi\-factor authentication \(MFA\) to access sensitive resources or API operations\. For more information, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 + **Use Policy Conditions for Extra Security** – To the extent that it's practical, define the conditions under which your identity\-based policies allow access to a resource\. For example, you can write conditions to specify a range of allowable IP addresses that a request must come from\. You can also write conditions to allow requests only within a specified date or time range, or to require the use of SSL or MFA\. For more information, see [IAM JSON Policy Elements: Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) in the *IAM User Guide*\.
 
-### Using the Security Hub Console<a name="security_iam_id-based-policy-examples-console"></a>
+### Using the Security Hub console<a name="security_iam_id-based-policy-examples-console"></a>
 
 To access the AWS Security Hub console, you must have a minimum set of permissions\. These permissions must allow you to list and view details about the Security Hub resources in your AWS account\. If you create an identity\-based policy that is more restrictive than the minimum required permissions, the console won't function as intended for entities \(IAM users or roles\) with that policy\.
 
-To ensure that those entities can still use the Security Hub console, also attach the following AWS managed policy to the entities\. For more information, see [Adding Permissions to a User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console) in the *IAM User Guide*:
+To ensure that those entities can still use the Security Hub console, also attach the following AWS managed policy to the entities\. For more information, see [Adding permissions to a user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console) in the *IAM User Guide*:
 
 ```
 {

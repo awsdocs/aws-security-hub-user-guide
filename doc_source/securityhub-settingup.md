@@ -1,4 +1,4 @@
-# Setting Up AWS Security Hub<a name="securityhub-settingup"></a>
+# Setting up AWS Security Hub<a name="securityhub-settingup"></a>
 
 You must have an AWS account to enable AWS Security Hub\. If you don't have an account, use the following procedure to create one\.
 
@@ -10,7 +10,7 @@ You must have an AWS account to enable AWS Security Hub\. If you don't have an a
 
    Part of the sign\-up procedure involves receiving a phone call and entering a verification code on the phone keypad\.
 
-## Attaching the Required IAM Policy to the IAM Identity<a name="securityhub-enable-attach-policy"></a>
+## Attaching the required IAM policy to the IAM identity<a name="securityhub-enable-attach-policy"></a>
 
 The IAM identity \(user, role, or group\) that you use to enable Security Hub must have the required permissions\.
 
@@ -61,31 +61,31 @@ When you enable Security Hub from the console, you are also given the option to 
 
    To disable a standard, clear its check box\.
 
-   You can enable or disable a standard or its individual controls at any time\. For information about the security standards and how to manage them, see [Security Standards in AWS Security Hub](securityhub-standards.md)\.
+   You can enable or disable a standard or its individual controls at any time\. For information about the security standards and how to manage them, see [Security standards in AWS Security Hub](securityhub-standards.md)\.
 
 1. Choose **Enable Security Hub**\.
 
-### Enabling Security Hub Using the API<a name="securityhub-enable-api"></a>
+### Enabling Security Hub using the API<a name="securityhub-enable-api"></a>
 
 To enable Security Hub from the API, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html) operation\.
 
-When you enable Security Hub from the API, it automatically enables the CIS AWS Foundations security standard\.
+When you enable Security Hub from the API, it automatically enables the CIS AWS Foundations security standard\. If you do not want to enable the CIS AWS Foundations security standard, then set `EnableDefaultStandards` to `false`\.
 
-To enable other standards, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html) operation\.
+After you enable Security Hub, to enable standards, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html) operation\.
 
 To disable standards, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchDisableStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchDisableStandards.html) operation\.
 
-## Service\-Linked Role Assigned to Security Hub<a name="security-hub-enable-slr"></a>
+## Service\-linked role assigned to Security Hub<a name="security-hub-enable-slr"></a>
 
 When you enable Security Hub, it is assigned a service\-linked role named `AWSServiceRoleForSecurityHub`\. This service\-linked role includes the permissions and trust policy that Security Hub requires to do the following:
 + Detect and aggregate findings from Amazon GuardDuty, Amazon Inspector, and Amazon Macie
 + Configure the requisite AWS Config infrastructure to run security checks for the supported standards \(in this release, CIS AWS Foundations\)
 
-To view the details of `AWSServiceRoleForSecurityHub`, on the **Enable Security Hub** page, choose **View service role permissions**\. For more information, see [Using Service\-Linked Roles for AWS Security Hub](using-service-linked-roles.md)\.
+To view the details of `AWSServiceRoleForSecurityHub`, on the **Enable Security Hub** page, choose **View service role permissions**\. For more information, see [Using service\-linked roles for AWS Security Hub](using-service-linked-roles.md)\.
 
-For more information about service\-linked roles, see [Using Service\-Linked Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html) in the *IAM User Guide*\.
+For more information about service\-linked roles, see [Using service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html) in the *IAM User Guide*\.
 
-## Enabling AWS Config To Support Security Checks<a name="securityhub-enable-config"></a>
+## Enabling AWS Config to support security checks<a name="securityhub-enable-config"></a>
 
 When you enable Security Hub from the console, you also have the option to enable the supported security standards\. When you enable Security Hub from the API, then the CIS AWS Foundations standard is enabled automatically\.
 
@@ -100,4 +100,4 @@ If you do not have AWS Config enabled, you can enable it manually or you can use
 **Important**  
 When you turn on the AWS Config recorder, choose to record all resources supported in a given Region, including global resources\.
 
-For more information, see [Getting Started with AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\.
+For more information, see [Getting started with AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\.

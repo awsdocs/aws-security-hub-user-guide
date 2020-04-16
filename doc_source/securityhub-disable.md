@@ -5,7 +5,7 @@ To disable AWS Security Hub, you can use the Security Hub console or the [https:
 When you disable Security Hub, the following occurs\.
 + After 90 days, your existing findings and insights and any Security Hub configuration settings are deleted and cannot be recovered\.
 
-  If you want to save your existing findings, you must export them before you disable Security Hub\. For more information, see [Accounts and Data Retention in Security Hub](securityhub-accounts.md#securityhub-data-retention)\.
+  If you want to save your existing findings, you must export them before you disable Security Hub\. For more information, see [Accounts and data retention in Security Hub](securityhub-accounts.md#securityhub-data-retention)\.
 + Any enabled standards are disabled\.
 + Your master and member account relationships are removed\.
 

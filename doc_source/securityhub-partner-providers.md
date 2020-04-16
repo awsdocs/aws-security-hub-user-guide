@@ -1,4 +1,4 @@
-# Available Third\-Party Partner Product Integrations<a name="securityhub-partner-providers"></a>
+# Available third\-party partner product integrations<a name="securityhub-partner-providers"></a>
 
 AWS Security Hub is integrated with the following third\-party products\. For each provider, the list indicates whether the product sends findings to Security Hub, receives findings from Security Hub, or both\.
 

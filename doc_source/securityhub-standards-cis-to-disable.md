@@ -1,4 +1,4 @@
-# CIS AWS Foundations Controls that You May Want To Disable<a name="securityhub-standards-cis-to-disable"></a>
+# CIS AWS Foundations controls that you may want to disable<a name="securityhub-standards-cis-to-disable"></a>
 
 For the CIS AWS Foundations standard, here are some specific controls that you may want to disable\.
 + CIS AWS Foundations Benchmark 2\.3 and 2\.6 controls\.

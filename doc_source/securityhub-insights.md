@@ -11,6 +11,6 @@ To track security issues that are unique to your AWS environment and usage, you 
 An insight only returns results if you have enabled product integrations or security standards that produce matching findings\. For example, the managed insight **29\. Top resources by counts of failed CIS checks** only returns results if you enable the CIS AWS Foundations security standard\.
 
 **Topics**
-+ [Viewing and Taking Action on Insight Results and Findings](securityhub-insights-view-take-action.md)
-+ [Managed Insights](securityhub-managed-insights.md)
-+ [Managing Custom Insights](securityhub-custom-insights.md)
++ [Viewing and taking action on insight results and findings](securityhub-insights-view-take-action.md)
++ [Managed insights](securityhub-managed-insights.md)
++ [Managing custom insights](securityhub-custom-insights.md)

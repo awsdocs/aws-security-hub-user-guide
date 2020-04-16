@@ -1,4 +1,4 @@
-# Master and Member Accounts in AWS Security Hub<a name="securityhub-accounts"></a>
+# Master and member accounts in AWS Security Hub<a name="securityhub-accounts"></a>
 
 You can invite other AWS accounts to enable AWS Security Hub and become associated with your AWS account\. If the owner of the account that you invite enables Security Hub and then accepts the invitation, your account is designated as the *master* Security Hub account, and the invited accounts become associated as *member* accounts\. When the invited account accepts the invitation, permission is granted to the master account to view the findings from the member account\. The master account can also perform actions on findings in a member account\.
 
@@ -10,7 +10,7 @@ For example, suppose that as a user from a GuardDuty master account A you can se
 
 An account can't be a Security Hub master account and member account at the same time\. An account can accept only one Security Hub membership invitation\. Accepting a membership invitation is optional\.
 
-## Designating Master and Member Accounts on the Security Hub Console<a name="securityhub-become-console"></a>
+## Designating master and member accounts on the Security Hub console<a name="securityhub-become-console"></a>
 
 In Security Hub, your account becomes the master account when the account that you invite accepts your invitation\. When you accept an invitation from another account, your account becomes a member account\. If your account is the master account, you can't accept an invitation to become a member account\.
 
@@ -68,7 +68,7 @@ You must enable Security Hub before you can accept a membership invitation\.
 
    After you accept the invitation, your account becomes a Security Hub member account\. The account used to send the invitation becomes the Security Hub master account\.  The master account user can now view Security Hub aggregated findings for your member account\.
 
-## Designating Master and Member Accounts Through Security Hub API Operations<a name="securityhub-become-api"></a>
+## Designating master and member accounts through Security Hub API operations<a name="securityhub-become-api"></a>
 
 You can also designate Security Hub master and member accounts with operations in the Security Hub API\. Use the following Security Hub API operations in the order listed to create master and member accounts\.
 
@@ -88,7 +88,7 @@ Use these operations to enable Security Hub and then accept an invitation\. Use 
 
 1. Run [AcceptInvitation](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AcceptInvitation.html) for each account you invited to accept your invitation\.
 
-## Accounts and Data Retention in Security Hub<a name="securityhub-data-retention"></a>
+## Accounts and data retention in Security Hub<a name="securityhub-data-retention"></a>
 
 When you disable Security Hub for an account, either master or member, it is disabled only for that account in the AWS Region that is selected when you disable it\. You must disable Security Hub separately in each Region where you enabled it\.
 
