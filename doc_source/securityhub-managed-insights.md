@@ -41,3 +41,4 @@ In the current release, Security Hub offers the following managed insights:
 |  28\. Top IAM users by counts of findings  |  IAM access key user name  |  Resource type is `AwsIamAccessKey` Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 
 |  29\. Top resources by counts of failed CIS checks  |  Resource ID  |  Generator ID starts with `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule` Updated in the last day Compliance status is `FAILED` Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 
 |  30\. Top integrations by counts of findings  |  Product ARN  |  Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 
+|  31\. Resources with the most failed security checks  |  Resource ID  |  Updated in the last day Compliance status is `FAILED` Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 

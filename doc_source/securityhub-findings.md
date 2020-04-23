@@ -5,7 +5,7 @@ AWS Security Hub eliminates the complexity of addressing large volumes of findin
 Security Hub receives findings from the following sources\.
 + Integrations with AWS security services that you enable\. See [Available AWS service integrations](securityhub-internal-providers.md)\.
 + Integrations with third\-party products that you enable\. See [Available third\-party partner product integrations](securityhub-partner-providers.md)\.
-+ Custom integrations that you configure\. See [Using custom product integrations to import findings](securityhub-custom-providers.md)\.
++ Custom integrations that you configure\. See [Using custom product integrations to send findings to AWS Security Hub](securityhub-custom-providers.md)\.
 + Security Hub checks against enabled controls\. See [Results of security checks](securityhub-standards-results.md)\.
 
 Security Hub consumes findings using a standard findings format called the AWS Security Finding Format\. For more information about the finding format, see [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\.

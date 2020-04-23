@@ -36,4 +36,4 @@ You can use these keys to further refine the conditions under which the policy s
 
 | Condition Keys | Description | Type | 
 | --- | --- | --- | 
-|   securityhub:TargetAccount  |  The ID of the AWS account to import findings into\. In the AWS Security Finding Format, this field is called `AwsAccountId`\.  | String | 
+|   securityhub:TargetAccount  |  The ID of the AWS account associated with a finding\. In the AWS Security Finding Format, this field is called `AwsAccountId`\.  | String | 

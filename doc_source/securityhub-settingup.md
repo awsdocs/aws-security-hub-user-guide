@@ -69,7 +69,11 @@ When you enable Security Hub from the console, you are also given the option to 
 
 To enable Security Hub from the API, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html) operation\.
 
-When you enable Security Hub from the API, it automatically enables the CIS AWS Foundations security standard\. If you do not want to enable the CIS AWS Foundations security standard, then set `EnableDefaultStandards` to `false`\.
+When you enable Security Hub from the API, it automatically enables these security standards security standard\.
++ CIS AWS Foundations Standard
++ AWS Foundational Security Best Practices Standard
+
+If you do not want to enable these standards, then set `EnableDefaultStandards` to `false`\.
 
 After you enable Security Hub, to enable standards, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html) operation\.
 

@@ -2,9 +2,12 @@
 
 The **Integrations** page provides access to all of the available AWS and third\-party product integrations\. The AWS Security Hub API also provides operations to allow you to manage integrations\.
 
+**Note**  
+Some integrations are not available in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
+
 ## Viewing and filtering the list of integrations<a name="securityhub-integrations-view-filter"></a>
 
-From the **Integrations** page, you can view and filter the list integrations\.
+From the **Integrations** page, you can view and filter the list of integrations\.
 
 **To view the list of integrations**
 
@@ -38,7 +41,7 @@ For third\-party product integrations, you may need to purchase the integration 
 
 If more than one version of a product is available in AWS Marketplace, select the version to subscribe to and then choose **Continue to Subscribe**\. For example, some products offer a standard version and an AWS GovCloud \(US\) version\.
 
-When you enable a product integration, a resource policy is automatically attached to that product subscription\. This resource policy defines the permissions that Security Hub needs to import findings from that product\.
+When you enable a product integration, a resource policy is automatically attached to that product subscription\. This resource policy defines the permissions that Security Hub needs to receive findings from that product\.
 
 ## Disabling and enabling the flow of findings from an integration \(Console\)<a name="securityhub-integration-findings-flow-console"></a>
 
@@ -50,9 +53,9 @@ To resume accepting findings, choose **Accept findings**\.
 
 ## Disabling and enabling the flow of findings from an integration \(API\)<a name="securityhub-integration-findings-flow-api"></a>
 
-To use the API to stop receiving findings from an integration, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DisableImportFindingsForProduct.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DisableImportFindingsForProduct.html) operation\. To disable the import of findings, you need the ARN for your subscription\. To get the subscription ARNs for your currently enabled integrations, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListEnabledProductsForImport.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListEnabledProductsForImport.html) operation\.
+To use the API to stop receiving findings from an integration, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DisableImportFindingsForProduct.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DisableImportFindingsForProduct.html) operation\. To disable the flow of findings from the integration, you need the ARN for your subscription\. To get the subscription ARNs for your currently enabled integrations, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListEnabledProductsForImport.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListEnabledProductsForImport.html) operation\.
 
-To use the API to enable receiving findings from an integration, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableImportFindingsForProduct.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableImportFindingsForProduct.html) operation\. To enable the import of findings from an integration, you need the product ARN\. To get the ARNs for the available integrations, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeProducts.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeProducts.html) operation\.
+To use the API to enable receiving findings from an integration, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableImportFindingsForProduct.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableImportFindingsForProduct.html) operation\. To enable Security Hub to receive findings from an integration, you need the product ARN\. To get the ARNs for the available integrations, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeProducts.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeProducts.html) operation\.
 
 ## Viewing the findings from an integration<a name="securityhub-integration-view-findings"></a>
 

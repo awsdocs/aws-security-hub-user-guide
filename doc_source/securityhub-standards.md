@@ -7,6 +7,7 @@ Security Hub also generates its own findings as the result of running automated 
 Security Hub provides controls for the following standards\.
 + [CIS AWS Foundations](securityhub-standards-cis.md)
 + [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)
++ [AWS Foundational Security Best Practices](securityhub-standards-fsbp.md)
 
 **Topics**
 + [AWS Config requirements for running security checks](securityhub-standards-awsconfigrules.md)
@@ -17,3 +18,4 @@ Security Hub provides controls for the following standards\.
 + [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)
 + [CIS AWS Foundations standard](securityhub-standards-cis.md)
 + [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)
++ [AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)

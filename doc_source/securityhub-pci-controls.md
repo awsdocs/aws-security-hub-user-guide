@@ -10,13 +10,13 @@ The PCI DSS security standard in Security Hub supports the following controls\. 
 
 **AWS Config** rule: [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html)
 
-This AWS control checks whether your Auto Scaling groups that are associated with a load balancer are using Elastic Load Balancing health checks\.
+This control checks whether your Auto Scaling groups that are associated with a load balancer are using Elastic Load Balancing health checks\.
 
 PCI DSS does not require load balancing or highly available configurations\. However, this check aligns with AWS best practices\.
 
-### Related PCI DSS Requirements<a name="pcidss-autoscaling-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-autoscaling-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 2\.2: Develop configuration standards for all system components\. Assure that these standards address all known security vulnerabilities and are consistent with industry\-accepted system hardening standards\.**  
 Replicating systems using load balancing provides high availability and is a means to mitigate the effects of a DDoS event\.  
@@ -50,13 +50,13 @@ For more information on using a load balancer with an auto scaling group, see th
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
 
-This AWS control checks whether AWS CloudTrail is configured to use the server\-side encryption \(SSE\) AWS KMS customer master key \(CMK\) encryption\.
+This control checks whether AWS CloudTrail is configured to use the server\-side encryption \(SSE\) AWS KMS customer master key \(CMK\) encryption\.
 
 If you are only using the default encryption option, you can choose to disable this check\.
 
-### Related PCI DSS Requirements<a name="pcidss-cloudtrail-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-cloudtrail-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 3\.4: Render Primary Account Numbers \(PAN\) unreadable anywhere it is stored \(including on portable digital media, backup media, and in logs\)\.**  
 If you are using AWS services to process and store PAN, your CloudTrail logs should be encrypted at rest to ensure that if logs capture PAN\(s\), the PAN\(s\) are protected\.  
@@ -96,13 +96,13 @@ You might need to modify the policy for CloudTrail to successfully interact with
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-enabled.html)
 
-This AWS control checks whether CloudTrail is enabled in your AWS account\.
+This control checks whether CloudTrail is enabled in your AWS account\.
 
 However, some AWS services do not enable logging of all APIs and events\. You should implement any additional audit trails other than CloudTrail and review the documentation for each service in [CloudTrail Supported Services and Integrations](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-aws-service-specific-topics.html)\.
 
-### Related PCI DSS Requirements<a name="pcidss-cloudtrail-2-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-cloudtrail-2-requirements"></a>
 
-This AWS control is associated with the following PCI DSS requirements:
+This control is associated with the following PCI DSS requirements:
 
 PCI DSS 10\.1: Implement audit trails to link all access to system components to each individual user\.  
 By enabling CloudTrail, Event History provides you with 90 days of readily available events and audit trails for access to system components by each individual user\.  
@@ -197,15 +197,15 @@ For more details, see the tutorial in the [https://docs.aws.amazon.com/awscloudt
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html)
 
-This AWS control checks whether CloudTrail log file validation is enabled\.
+This control checks whether CloudTrail log file validation is enabled\.
 
 It does not check when configurations are altered\.
 
 To monitor and alert on log file changes, you can use CloudWatch Events or CloudWatch Metric Filters\.
 
-### Related PCI DSS Requirements<a name="pcidss-cloudtrail-3-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-cloudtrail-3-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 10\.5\.2: Protect audit trail files from unauthorized modifications\.**  
 CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to Amazon S3\.  
@@ -241,15 +241,15 @@ This is a method that helps to ensure file\-integrity monitoring or change\-dete
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html)
 
-This AWS control checks whether CloudTrail trails are configured to send logs to CloudWatch Logs\.
+This control checks whether CloudTrail trails are configured to send logs to CloudWatch Logs\.
 
 It does not check for user permissions to alter logs or log groups\. You should create specific CloudWatch rules to alert when CloudTrail logs are altered\.
 
 This control also does not check for any additional audit log sources other than CloudTrail being sent to a CloudWatch Logs group\.
 
-### Related PCI DSS Requirements<a name="pcidss-cloudtrail-4-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-cloudtrail-4-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 10\.5\.3: Promptly back up audit trail files to a centralized log server or media that is difficult to alter\.**  
 CloudTrail uses Amazon S3 for log file storage and delivery, so log files are stored permanently\.  
@@ -294,17 +294,21 @@ For more information about configuring CloudWatch Logs monitoring with the conso
 
 ## \[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth<a name="pcidss-codebuild-1"></a>
 
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
+\.
+
 **Severity:** Critical
 
 **Resource:** CodeBuild project
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html)
 
-This AWS control checks whether the GitHub or Bitbucket source repository URL contains either personal access tokens or a user name and password\.
+This control checks whether the GitHub or Bitbucket source repository URL contains either personal access tokens or a user name and password\.
 
-### Related PCI DSS Requirements<a name="pcidss-codebuild-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-codebuild-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 8\.2\.1: Using strong cryptography, render all authentication credentials \(such as passwords/phrases\) unreadable during transmission and storage on all system components\.**  
 If you are using CodeBuild in your PCI DSS environment to compile your source code, run unit tests, or produce artifacts that are ready to deploy, authentication credentials should never be stored or transmitted in clear text or appear in the repository URL\.  
@@ -334,17 +338,21 @@ To see CodeBuild use case\-based samples, see the [https://docs.aws.amazon.com/c
 
 ## \[PCI\.CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials<a name="pcidss-codebuild-2"></a>
 
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
+\.
+
 **Severity:** Critical
 
 **Resource:** CodeBuild project
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html)
 
-This AWS control checks whether the project contains environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`\.
+This control checks whether the project contains environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`\.
 
-### Related PCI DSS Requirements<a name="pcidss-codebuild-2-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-codebuild-2-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 8\.2\.1: Using strong cryptography, render all authentication credentials \(such as passwords/phrases\) unreadable during transmission and storage on all system components\.**  
 If you are using CodeBuild in your PCI DSS environment to compile your source code, runs unit tests, or produce artifacts that are ready to deploy, then the authentication credentials `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` should never be stored in clear text\.  
@@ -404,15 +412,15 @@ See the information on environment variables in build environments in the [https
 
 **AWS Config rule:** None\. To run this check, Security Hub runs through audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
 
-This AWS control checks whether AWS Config is enabled in current account and region\.
+This control checks whether AWS Config is enabled in current account and region\.
 
 It does not check for change detection for all critical system files and content files, as AWS Config supports only a subset of resource types\.
 
 For more information, see the [https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html](https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html)\.
 
-### Related PCI DSS Requirements<a name="pcidss-config-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-config-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 10\.5\.2: Protect audit trail files from unauthorized modifications\.**  
 AWS Config continuously monitors, tracks, and evaluates your [AWS resource configurations ](https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html) for desired settings and generates configuration change history files every six hours\.  
@@ -471,9 +479,9 @@ It checks the following:
 + There is at least one Event Selector for a Trail with `IncludeManagementEvents` set to `true` and `ReadWriteType` set to `All`\.
 + There is at least one active subscriber to an Amazon SNS topic associated with the alarm\.
 
-### Related PCI DSS Requirements<a name="pcidss-cw-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-cw-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 7\.2\.1: Establish an access control system\(s\) for systems components that restricts access based on a user’s need to know, and is set to "deny all" unless specifically allowed\. This access control system\(s\) must include the following: Coverage of all system components\.**  
 The root user is the most privileged user in an AWS account and has unrestricted access to all resources in the AWS account\.  
@@ -544,13 +552,13 @@ These are the same steps to remediate findings for [3\.3 – Ensure a log metric
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html)
 
-This AWS control checks whether Amazon Elastic Block Store snapshots are not publicly restorable by everyone which makes them public\.
+This control checks whether Amazon Elastic Block Store snapshots are not publicly restorable by everyone which makes them public\.
 
 You should also ensure that permission to change Amazon EBS configurations are restricted to authorized AWS accounts only\. Learn more about managing Amazon EBS snapshot permissions in the [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html)\.
 
-### Related PCI DSS Requirements<a name="pcidss-ec2-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-ec2-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 Amazon EBS snapshots are used to back up the data on your Amazon EBS volumes to Amazon S3 at a specific point in time, and can be used to restore previous states of EBS volumes\.  
@@ -594,13 +602,13 @@ For more information about sharing an Amazon EBS snapshot, see the [https://docs
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
 
-This AWS control checks that the default security group of a VPC does not allow inbound or outbound traffic\.
+This control checks that the default security group of a VPC does not allow inbound or outbound traffic\.
 
 It does not check for access restrictions for other security groups that are not default, and other VPC configurations\.
 
-### Related PCI DSS Requirements<a name="pcidss-ec2-2-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-ec2-2-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 If a service that is in scope for PCI DSS is associated with the default security group, the default rules for the security group will allow all outbound traffic, as well as all inbound traffic from network interfaces \(and their associated instances\) that are assigned to the same security group\.  
@@ -642,11 +650,11 @@ For more information about working with security groups in Amazon VPC, see the [
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni.html)
 
-This AWS control will help you maintain an accurate asset inventory of needed security groups in your CDE by checking that security groups are attached to Amazon EC2 instances or to an ENI\. A failed finding indicates you may have unused Amazon EC2 security groups\.
+This control will help you maintain an accurate asset inventory of needed security groups in your CDE by checking that security groups are attached to Amazon EC2 instances or to an ENI\. A failed finding indicates you may have unused Amazon EC2 security groups\.
 
-### Related PCI DSS Requirements<a name="pcidss-ec2-3-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-ec2-3-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 2\.4: Maintain an inventory of system components that are in scope for PCI DSS\.**  
 If a security group is not attached to an Amazon EC2 instance or an elastic network interface \(ENI\), this is an indication that the resource is no longer in use\.  
@@ -676,15 +684,15 @@ You must perform the following steps for each security group not attached to an 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/eip-attached.html](https://docs.aws.amazon.com/config/latest/developerguide/eip-attached.html)
 
-This AWS control checks whether Elastic IP addresses that are allocated to a VPC are attached to Amazon EC2 instances or in\-use elastic network interfaces \(ENIs\)\.
+This control checks whether Elastic IP addresses that are allocated to a VPC are attached to Amazon EC2 instances or in\-use elastic network interfaces \(ENIs\)\.
 
 A failed finding indicates you may have unused Amazon EC2 EIPs\.
 
 This will help you maintain an accurate asset inventory of EIPs in your CDE\.
 
-### Related PCI DSS Requirements<a name="pcidss-ec2-4-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-ec2-4-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 2\.4: Maintain an inventory of system components that are in scope for PCI DSS\.**  
 If an EIP is not attached to an Amazon EC2 instance, this is an indication that it is no longer in use\.  
@@ -692,7 +700,7 @@ Unless there is a business need to retain them, you should remove unused resourc
 
 ### Remediation<a name="pcidss-ec2-4-remediation"></a>
 
-If you no longer need an Elastic IP address, we recommend that you release it \(the address must not be associated with an instance\)\. 
+If you no longer need an Elastic IP address, Security Hub recommends that you release it \(the address must not be associated with an instance\)\. 
 
 **To release an Elastic IP address using the console**
 
@@ -714,7 +722,7 @@ For more information, see the information on releasing Elastic IP addresses in t
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html)
 
-This AWS control checks whether Amazon Elasticsearch Service domains are in a VPC\.
+This control checks whether Amazon Elasticsearch Service domains are in a VPC\.
 
 It does not evaluate the VPC subnet routing configuration to determine public reachability\.
 
@@ -722,9 +730,9 @@ This AWS control also does not check whether the Amazon ES resource\-based polic
 
 You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
 
-### Related PCI DSS Requirements<a name="pcidss-es-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-es-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC, which enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
@@ -763,11 +771,11 @@ See the information on migrating from public access to VPC access in the [https:
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html)
 
-This AWS control checks whether Amazon ES domains have encryption at rest configuration enabled\.
+This control checks whether Amazon ES domains have encryption at rest configuration enabled\.
 
-### Related PCI DSS Requirements<a name="pcidss-es-2-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-es-2-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 3\.4: Render Primary Account Numbers \(PAN\) unreadable anywhere it is stored \(including on portable digital media, backup media, and in logs\)\.**  
 If you use Amazon ES to store credit card Primary Account Numbers \(PAN\), the PAN should be protected by enabling Amazon ES domain encryption at rest\.  
@@ -790,11 +798,11 @@ Encryption of data at rest requires Amazon ES 5\.1 or later\. For more informati
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
 
-This AWS control checks whether user access keys exist for the root user\.
+This control checks whether user access keys exist for the root user\.
 
-### Related PCI DSS Requirements<a name="pcidss-iam-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-iam-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 2\.1: Always change vendor\-supplied defaults and remove or disable unnecessary default accounts before installing a system on the network\.**  
 The root user is the most privileged AWS user\. AWS Access Keys provide programmatic access to a given account\.  
@@ -832,13 +840,13 @@ No access keys should be created for the root user, as this may violate the requ
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
 
-This AWS control checks that none of your IAM users have policies attached\. IAM users must inherit permissions from IAM groups or roles\.
+This control checks that none of your IAM users have policies attached\. IAM users must inherit permissions from IAM groups or roles\.
 
 It does not check whether least privileged policies are applied to IAM roles and groups\.
 
-### Related PCI DSS Requirements<a name="pcidss-iam-2-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-iam-2-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 7\.2\.1: Establish an access control system\(s\) for systems components that restricts access based on a user’s need to know, and is set to "deny all" unless specifically allowed\. This access control system\(s\) must include the following: Coverage of all system components\.**  
 IAM policies are how privileges are granted to users, groups, or roles in AWS\.  
@@ -909,15 +917,15 @@ For more information about adding users to groups, see the [https://docs.aws.ama
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
 
-This AWS control checks whether the default version of AWS Identity and Access Management policies \(also known as customer managed policies\) do not have administrator access with a statement that has `"Effect": "Allow" with "Action": "*"` over `"Resource": "*"`\.
+This control checks whether the default version of AWS Identity and Access Management policies \(also known as customer managed policies\) do not have administrator access with a statement that has `"Effect": "Allow" with "Action": "*"` over `"Resource": "*"`\.
 
 It only checks for the [customer managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#customer-managed-policies) that you created, but does not check for full access to individual services, such as "`S3:*`"\.
 
 It does not check for [inline and AWS managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies)\.
 
-### Related PCI DSS Requirements<a name="pcidss-iam-3-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-iam-3-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 7\.2\.1: Establish an access control system\(s\) for systems components that restricts access based on a user’s need to know, and is set to "deny all" unless specifically allowed\. This access control system\(s\) must include the following: Coverage of all system components\.**  
 Providing full administrative privileges instead of restricting to the minimum required may violate the requirement to ensure access to systems components is restricted to the least privilege necessary, or a user’s need to know\.
@@ -940,21 +948,25 @@ Providing full administrative privileges instead of restricting to the minimum r
 
 ## \[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user<a name="pcidss-iam-4"></a>
 
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
+\.
+
 **Severity:** Critical
 
 **Resource:** Account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
-This AWS control checks whether your AWS account is enabled to use multi\-factor authentication \(MFA\) hardware device to sign in with root credentials\.
+This control checks whether your AWS account is enabled to use multi\-factor authentication \(MFA\) hardware device to sign in with root credentials\.
 
 It does not check whether you are using virtual MFA\.
 
 To address PCI DSS requirement 8\.3\.1, you can choose between hardware MFA \(this control\) or virtual MFA \([\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](#pcidss-iam-5)\)\.
 
-### Related PCI DSS Requirements<a name="pcidss-iam-4-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-iam-4-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 8\.3\.1: Incorporate multi\-factor authentication for all non\-console access into the Cardholder Data Environment \(CDE\) for personnel with administrative access\.**  
 The root user is the most privileged user in an account\.  
@@ -981,21 +993,25 @@ Enabling hardware MFA is a method used to incorporate multi\-factor authenticati
 
 ## \[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user<a name="pcidss-iam-5"></a>
 
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
+\.
+
 **Severity: ** Critical
 
 **Resource: ** Account 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html)
 
-This AWS control checks whether users of your AWS account require a multi\-factor authentication \(MFA\) device to sign in with root credentials\.
+This control checks whether users of your AWS account require a multi\-factor authentication \(MFA\) device to sign in with root credentials\.
 
 It does not check whether you are using hardware MFA\.
 
 To address PCI DSS requirement 8\.3\.1, you can choose between virtual MFA \(this control\) or hardware MFA \([\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](#pcidss-iam-4)\)\.
 
-### Related PCI DSS Requirements<a name="pcidss-iam-5-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-iam-5-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 8\.3\.1: Incorporate multi\-factor authentication for all non\-console access into the Cardholder Data Environment \(CDE\) for personnel with administrative access\.**  
 The root user is the most privileged user in an account\.  
@@ -1028,11 +1044,11 @@ Enabling virtual MFA is a method used to incorporate multi\-factor authenticatio
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-mfa-enabled.html)
 
-This AWS control checks whether the IAM users have multi\-factor authentication \(MFA\) enabled\.
+This control checks whether the IAM users have multi\-factor authentication \(MFA\) enabled\.
 
-### Related PCI DSS Requirements<a name="pcidss-iam-6-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-iam-6-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 8\.3\.1: Incorporate multi\-factor authentication for all non\-console access into the Cardholder Data Environment \(CDE\) for personnel with administrative access\.**  
 Enabling MFA for all IAM users is a method used to incorporate multi\-factor authentication \(MFA\) for all non\-console administrative access\.
@@ -1061,13 +1077,13 @@ To learn how to delegate MFA setup to users, the AWS Security Blog post [How to 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
-This AWS control checks that key rotation is enabled for each customer master key \(CMK\)\. It does not check CMKs that have imported key material\.
+This control checks that key rotation is enabled for each customer master key \(CMK\)\. It does not check CMKs that have imported key material\.
 
 You should ensure keys that have imported material and those that are not stored in AWS KMS are rotated\. AWS managed customer master keys are rotated once every 3 years\.
 
-### Related PCI DSS Requirements<a name="pcidss-kms-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-kms-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 3\.6\.4: Cryptographic keys should be changed once they have reached the end of their cryptoperiod\.**  
 While PCI DSS does not specify the time frame for cryptoperiods, if key rotation is enabled, rotation will occur annually by default\.  
@@ -1098,15 +1114,15 @@ This is a method used to change cryptographic keys once they have reached the en
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html)
 
-This AWS control checks whether the Lambda function resource\-based policy prohibits public access\.
+This control checks whether the Lambda function resource\-based policy prohibits public access\.
 
 It does not check for access to the Lambda function by internal principals, such as IAM roles\. You should ensure that access to the Lambda function is restricted to authorized principals only by using least privilege Lambda resource\-based policies\.
 
 For more information about using resource\-based policies for AWS Lambda, see the [https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html)\.
 
-### Related PCI DSS Requirements<a name="pcidss-lambda-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-lambda-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 If you use a Lambda function that is in scope for PCI DSS, the function should not be publicly accessible\. A publicly accessible function might violate the requirement to allow only necessary traffic to and from the CDE\.
@@ -1180,13 +1196,13 @@ For other Lambda resource\-based policies examples that allow you to grant usage
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-inside-vpc.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-inside-vpc.html) 
 
-This AWS control checks whether a Lambda function is in a VPC\.
+This control checks whether a Lambda function is in a VPC\.
 
 It does not evaluate the VPC subnet routing configuration to determine public reachability\. 
 
-### Related PCI DSS Requirements<a name="pcidss-lambda-2-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-lambda-2-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 By default, Lambda runs your functions in a secure default VPC with access to AWS services and the internet\.  
@@ -1214,7 +1230,7 @@ If you use a Lambda function that is in scope for PCI DSS, the function can be c
 
 1. Scroll to **Network** and then select a VPC with the connectivity requirements of the function 
 
-1. To run your functions in high availability mode, we recommend that you choose at least 2 subnets
+1. To run your functions in high availability mode, Security Hub recommends that you choose at least 2 subnets
 
 1. Choose at least 1 Security Group with the connectivity requirements of the function 
 
@@ -1230,15 +1246,15 @@ For more information see the section on configuring a Lambda function to access 
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html)
 
-This AWS control checks whether Amazon RDS DB snapshots prohibit access by other accounts\. You should also ensure that access to the snapshot and permission to change Amazon RDS configuration is restricted to authorized principals only\.
+This control checks whether Amazon RDS DB snapshots prohibit access by other accounts\. You should also ensure that access to the snapshot and permission to change Amazon RDS configuration is restricted to authorized principals only\.
 
 To learn more about sharing DB snapshots in Amazon RDS, see the [https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html)\.
 
 Note that if the configuration is changed to allow public access, the AWS Config rule may not be able to detect the change for up to 12 hours\. Until the AWS Config rule detects the change, the check passes even though the configuration violates the rule\.
 
-### Related PCI DSS Requirements<a name="pcidss-rds-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-rds-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 RDS snapshots are used to back up the data on your RDS instances at a specific point in time and can be used to restore previous states of RDS instances\.  
@@ -1284,7 +1300,7 @@ To remove public access for Amazon RDS Snapshots
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html)
 
-This AWS control checks whether RDS instances are publicly accessible by evaluating the `publiclyAccessible` field in the instance configuration item\. The value of `publiclyAccessible` indicates whether the DB instance is publicly accessible\. When the DB instance is publicly accessible, it is an Internet\-facing instance with a publicly resolvable DNS name, which resolves to a public IP address\. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address\.
+This control checks whether RDS instances are publicly accessible by evaluating the `publiclyAccessible` field in the instance configuration item\. The value of `publiclyAccessible` indicates whether the DB instance is publicly accessible\. When the DB instance is publicly accessible, it is an Internet\-facing instance with a publicly resolvable DNS name, which resolves to a public IP address\. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address\.
 
 The control does not check VPC subnet routing settings or the Security Group rules\. You should also ensure VPC subnet routing does not allow public access, and that the security group inbound rule associated with the RDS instance does not allow unrestricted access \(0\.0\.0\.0/0\)\. You should also ensure that access to your RDS instance configuration is limited to only authorized users by restricting users' IAM permissions to modify RDS instances settings and resources\.
 
@@ -1292,7 +1308,7 @@ For more information, see [Hiding a DB instance in a VPC from the Internet](http
 
 ### Related PCI DSS requirements<a name="pcidss-rds-2-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 If you use an RDS instance that is in scope for PCI DSS, the RDS instance should not be publicly accessible, as this might violate the requirement to allow only necessary traffic to and from the CDE\.
@@ -1342,11 +1358,11 @@ For more information about working with a DB Instance in a VPC, see the [https:/
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html)
 
-This AWS control checks whether Amazon Redshift clusters are publicly accessible by evaluating the `publiclyAccessible` field in the cluster configuration item\.
+This control checks whether Amazon Redshift clusters are publicly accessible by evaluating the `publiclyAccessible` field in the cluster configuration item\.
 
 ### Related PCI DSS requirements<a name="pcidss-redshift-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 If you use an Amazon Redshift cluster to store cardholder data, the cluster should not be publicly accessible, as this might violate the requirement to allow only necessary traffic to and from the CDE\.
@@ -1387,13 +1403,13 @@ For more information about creating a cluster in a VPC, see the [https://docs.aw
 
 **AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
 
-This AWS control checks whether your S3 buckets allow public write access by evaluating the Block Public Access settings, the bucket policy, and the bucket access control list \(ACL\)\.
+This control checks whether your S3 buckets allow public write access by evaluating the Block Public Access settings, the bucket policy, and the bucket access control list \(ACL\)\.
 
 It does not check for write access to the bucket by internal principals, such as IAM roles\. You should ensure that access to the bucket is restricted to authorized principals only\.
 
-### Related PCI DSS Requirements<a name="pcidss-s3-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-s3-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 ** PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 If you use an S3 bucket to store cardholder data, the bucket should prohibit public write access\. Allowing public write access might violate the requirement to allow only necessary traffic to and from the CDE\.
@@ -1436,15 +1452,15 @@ If you use an S3 bucket to store cardholder data, the bucket should prohibit pub
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html)
 
-This AWS control checks whether your S3 buckets allow public read access by evaluating the Block Public Access settings, the bucket policy, and the bucket access control list \(ACL\)\.
+This control checks whether your S3 buckets allow public read access by evaluating the Block Public Access settings, the bucket policy, and the bucket access control list \(ACL\)\.
 
 Unless you explicitly require everyone on the internet to be able to write to your S3 bucket, you should ensure that your S3 bucket is not publicly writable\.
 
 It does not check for read access to the bucket by internal principals, such as IAM roles\. You should ensure that access to the bucket is restricted to authorized principals only\.
 
-### Related PCI DSS Requirements<a name="pcidss-s3-2-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-s3-2-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment, and specifically deny all other traffic\.**  
 If you use an S3 bucket to store cardholder data, the bucket should prohibit public read access\. Public read access might violate the requirement to allow only necessary traffic to and from the CDE\.
@@ -1483,15 +1499,15 @@ If you use an S3 bucket to store cardholder data, the bucket should prohibit pub
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-replication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-replication-enabled.html)
 
-This AWS control checks whether S3 buckets have cross\-region replication enabled\.
+This control checks whether S3 buckets have cross\-region replication enabled\.
 
 PCI DSS does not require data replication or highly available configurations\. However, this check aligns with AWS best practices for this control\.
 
 In addition to availability, you should consider other systems hardening settings\.
 
-### Related PCI DSS Requirements<a name="pcidss-s3-3-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-s3-3-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 2\.2: Develop configuration standards for all system components\. Assure that these standards address all known security vulnerabilities and are consistent with industry\-accepted system hardening standards\.**  
 Enabling cross\-region replication on S3 buckets ensures that multiple versions of the data are available in different distinct Regions\. This allows you to store data at even greater distances, minimize latency, increase operational efficiency, and protect against DDoS and data corruption events\.  
@@ -1529,15 +1545,15 @@ For more information about replication, see the [https://docs.aws.amazon.com/Ama
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html)
 
-This AWS control checks that your Amazon S3 bucket either has Amazon S3 default encryption enabled or that the S3 bucket policy explicitly denies put\-object requests without server\-side encryption\.
+This control checks that your Amazon S3 bucket either has Amazon S3 default encryption enabled or that the S3 bucket policy explicitly denies put\-object requests without server\-side encryption\.
 
 When you set default encryption on a bucket, all new objects stored in the bucket are encrypted when they are stored, including clear text PAN data\.
 
 Server\-side encryption for all of the objects stored in a bucket can also be enforced using a bucket policy\. For more information about server\-side encryption, see the [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
 
-### Related PCI DSS Requirements<a name="pcidss-s3-4-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-s3-4-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 3\.4: Render Primary Account Numbers \(PAN\) unreadable anywhere it is stored \(including on portable digital media, backup media, and in logs\)\.**  
 If you use an S3 bucket to store credit card Primary Account Numbers \(PAN\), then to render the PAN unreadable, the bucket default encryption should be enabled and/or the S3 bucket policy should explicitly deny put\-object requests without server\-side encryption\.
@@ -1580,7 +1596,7 @@ For more information about default S3 bucket encryption, see the [https://docs.a
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html)
 
-This AWS control checks whether the compliance status of the Amazon EC2 Systems Manager patch compliance is COMPLIANT or NON\_COMPLIANT after the patch installation on the instance\.
+This control checks whether the compliance status of the Amazon EC2 Systems Manager patch compliance is COMPLIANT or NON\_COMPLIANT after the patch installation on the instance\.
 
 It only checks instances that are managed by AWS Systems Manager Patch Manager\.
 
@@ -1590,9 +1606,9 @@ It also does not validate whether the patches applied were classified as securit
 
 You should create patching groups with the appropriate baseline settings and ensure in\-scope systems are managed by those patch groups in Systems Manager\. For more information about patch groups, see the [https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-patch-group-tagging.html](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-patch-group-tagging.html)\.
 
-### Related PCI DSS Requirements<a name="pcidss-ssm-1-requirements"></a>
+### Related PCI DSS requirements<a name="pcidss-ssm-1-requirements"></a>
 
-This AWS control is related to the following PCI DSS requirements:
+This control is related to the following PCI DSS requirements:
 
 **PCI DSS 6\.2: Ensure that all system components and software are protected from known vulnerabilities by installing applicable vendor\-supplied security patches\. Install critical security patches within one month of release\.**  
 Patches released by the vendor for systems that are in\-scope for PCI DSS should be tested and validated prior to installation in production environment\. Once deployed, security settings and controls should be validated to ensure that deployed patches have not impacted the security of the Card Data Environment \(CDE\)\.  

@@ -2,6 +2,9 @@
 
 Security Hub supports integrations with several AWS services\.
 
+**Note**  
+Some integrations are not available in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
+
 For these services, the integration allows the service to send findings to Security Hub\.
 + [AWS Firewall Manager](#integration-aws-firewall-manager)
 + [IAM Access Analyzer](#integration-iam-access-analyzer)
@@ -32,17 +35,17 @@ For the list of finding types that Detective supports, see [Supported finding ty
 If a link does not work, then for troubleshooting advice, see [Troubleshooting the pivot](https://docs.aws.amazon.com/detective/latest/userguide/profile-pivot-from-service.html#profile-pivot-troubleshooting)\.
 
 **Amazon GuardDuty**  <a name="integration-amazon-guardduty"></a>
-With GuardDuty, Security Hub imports GuardDuty findings of all of the supported finding types\.  
+GuardDuty sends findings to Security Hub for all of the supported finding types\.  
 New findings from GuardDuty are sent to Security Hub within 5 minutes\. Updates to findings are sent based on the **Updated findings** setting for CloudWatch Events in GuardDuty settings\.  
-When you generate GuardDuty sample findings using the GuardDuty **Setting** page, Security Hub ingests the sample findings and omits the prefix '\[Sample\]' in the finding type\. For example, the sample finding type in GuardDuty "\[SAMPLE\] Recon:IAMUser/ResourcePermissions" is displayed as "Recon:IAMUser/ResourcePermissions” in Security Hub\.  
+When you generate GuardDuty sample findings using the GuardDuty **Setting** page, Security Hub receives the sample findings and omits the prefix '\[Sample\]' in the finding type\. For example, the sample finding type in GuardDuty "\[SAMPLE\] Recon:IAMUser/ResourcePermissions" is displayed as "Recon:IAMUser/ResourcePermissions” in Security Hub\.  
 For more information about GuardDuty findings, see [Amazon GuardDuty findings](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html) in the *Amazon GuardDuty User Guide*\.
 
 **Amazon Inspector**  <a name="integration-amazon-inspector"></a>
-With Amazon Inspector, Security Hub imports Amazon Inspector findings that are generated through assessment runs based on all supported rules packages\.  
+Amazon Inspector sends Amazon Inspector findings to Security Hub that are generated through assessment runs for all supported rules packages\.  
 For more information about Amazon Inspector rules packages and rules, see [Amazon Inspector rules packages and rules](https://docs.aws.amazon.com/inspector/latest/userguide/inspector_rule-packages.html) in the *Amazon Inspector User Guide*\.
 
 **Amazon Macie**  <a name="integration-amazon-macie"></a>
 With Macie, a finding \(currently known as an alert\) can be one of the following indices: **CloudTrail data**, **S3 bucket properties**, and **S3 objects**\.  
 For more information, see [Locating and analyzing Macie alerts](https://docs.aws.amazon.com/macie/latest/userguide/macie-alerts.html#macie-alert-working-locate) in the *Amazon Macie User Guide*\.  
-Security Hub imports Macie basic and custom alerts \(findings\) only from the **S3 bucket properties** and **S3 objects** indices\. Macie does not send data classifications\.  
-Security Hub does *not* import Macie findings from the **CloudTrail data** index\.
+Macie sends basic and custom alerts \(findings\) to Security Hub only from the **S3 bucket properties** and **S3 objects** indices\. Macie does not send data classifications\.  
+Macie does not send findings to Security Hub from the **CloudTrail data** index\.

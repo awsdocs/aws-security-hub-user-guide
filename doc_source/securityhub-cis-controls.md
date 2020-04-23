@@ -337,13 +337,17 @@ We recommend that all access keys be associated with the root account be removed
 
 ## 1\.13 – Ensure MFA is enabled for the "root" account<a name="securityhub-cis-controls-1.13"></a>
 
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
+\.
+
 **Severity:** Critical
 
 **AWS Config rule:** [root\-account\-mfa\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html)
 
 The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
 
-When you use virtual MFA for root accounts, we recommend that the device used is *not* a personal device\. Instead, use a dedicated mobile device \(tablet or phone\) that you manage to keep charged and secured independent of any individual personal devices\. This lessens the risks of losing access to the MFA due to device loss, device trade\-in, or if the individual owning the device is no longer employed at the company\.
+When you use virtual MFA for root accounts, Security Hub recommends that the device used is *not* a personal device\. Instead, use a dedicated mobile device \(tablet or phone\) that you manage to keep charged and secured independent of any individual personal devices\. This lessens the risks of losing access to the MFA due to device loss, device trade\-in, or if the individual owning the device is no longer employed at the company\.
 
 ### Remediation<a name="cis-1.13-remediation"></a>
 
@@ -367,13 +371,17 @@ When you use virtual MFA for root accounts, we recommend that the device used is
 
 ## 1\.14 – Ensure hardware MFA is enabled for the "root" account<a name="securityhub-cis-controls-1.14"></a>
 
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
+\.
+
 **Severity:** Critical
 
 **AWS Config rule:** [root\-account\-hardware\-mfa\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
 The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
 
-For Level 2, we recommend that you protect the root account with a hardware MFA\. A hardware MFA has a smaller attack surface than a virtual MFA\. For example, a hardware MFA doesn't suffer the attack surface introduced by the mobile smartphone that a virtual MFA resides on\.
+For Level 2, Security Hub recommends that you protect the root account with a hardware MFA\. A hardware MFA has a smaller attack surface than a virtual MFA\. For example, a hardware MFA doesn't suffer the attack surface introduced by the mobile smartphone that a virtual MFA resides on\.
 
 **Note**  
 Using hardware MFA for many, many accounts might create a logistical device management issue\. If this is the case, consider implementing this Level 2 recommendation selectively to the highest security accounts, and applying the Level 1 recommendation to the remaining accounts\.
