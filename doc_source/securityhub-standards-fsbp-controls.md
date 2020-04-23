@@ -1234,4 +1234,4 @@ Having your EC2 instances fully patched as required by your organization reduces
 
 1. After the command completes, to monitor the new compliance status of your patched instances, in the navigation pane, choose **Compliance**\.
 
-For more information about using Systems Manager Documents to patch a managed instance, see[ About SSM socuments for patching instances](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-ssm-documents.html) and [Running commands using Systems Manager Run command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html) in the *AWS Systems Manager User Guide*\.
+For more information about using Systems Manager Documents to patch a managed instance, see[ About SSM documents for patching instances](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-ssm-documents.html) and [Running commands using Systems Manager Run command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html) in the *AWS Systems Manager User Guide*\.
