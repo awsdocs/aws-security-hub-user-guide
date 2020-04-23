@@ -885,7 +885,7 @@ You can only update resource\-based policies for Lambda resources within the sco
 
 1. Get the ID of the statement from the output of `GetPolicy`\.
 
-   1. From the AWS CLI, run `aws lambda get-policy —function-name yourfunctionname`\. This command returns the Lambda resource\-based policy string associated with the publicly accessible Lambda\.
+   1. From the AWS CLI, run `aws lambda get-policy —-function-name yourfunctionname`\. This command returns the Lambda resource\-based policy string associated with the publicly accessible Lambda\.
 
    1. Copy the string value of the **Sid** field in the policy statement\.
 
