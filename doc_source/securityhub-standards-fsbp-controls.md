@@ -11,9 +11,9 @@ The AWS Foundational Security Best Practices standard contains the following con
 
 **Category:** Protect \- Data Protection \- Encryption of data\-in\-transit
 
-**Severity: **Medium
+**Severity:** Medium
 
-**Resource: **ACM certificate
+**Resource:** ACM certificate
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html](https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html)
 
@@ -52,7 +52,7 @@ ACM sends notifications to your Personal Health Dashboard to notify you that one
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html)
 
-**Parameters: **
+**Parameters:**
 + `readWriteType`: `ALL`
 
 This control checks that there is at least one multi\-Region CloudTrail trail\.
@@ -146,7 +146,7 @@ For an added layer of security for your sensitive CloudTrail log files, you shou
 1. For **Encrypt log files with SSE\-KMS**, choose **Yes**\.
 
 1. For **Create a new KMS key**, do one of the following:
-   + To create a key, choose **Yes** and then enter an alias for the key in the **KMS key **field\. The key is created in the same Region as the bucket\.
+   + To create a key, choose **Yes** and then enter an alias for the key in the **KMS key** field\. The key is created in the same Region as the bucket\.
    + To use an existing key, choose **No** and then select the key from the KMS key list\.
 **Note**  
 The AWS KMS key and S3 bucket must be in the same Region\.
@@ -160,7 +160,7 @@ The AWS KMS key and S3 bucket must be in the same Region\.
 **Note**  
 This control is not supported in AWS GovCloud \(US\-West\)\.
 
-**Category: **Protect \- Secure Development
+**Category:** Protect \- Secure Development
 
 **Severity:** Critical
 
@@ -201,9 +201,9 @@ For more information, refer to [CodeBuild use case\-based samples](https://docs.
 **Note**  
 This control is not supported in AWS GovCloud \(US\-West\)\.
 
-**Category: **Protect \- Secure Development
+**Category:** Protect \- Secure Development
 
-**Severity: **Critical
+**Severity:** Critical
 
 **Resource:** CodeBuild project
 
@@ -239,7 +239,7 @@ Authentication credentials `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` shoul
 
 1. Expand **Build**\.
 
-1. Choose** Build project**, and then choose the build project that contains plaintext credentials\.
+1. Choose **Build project**, and then choose the build project that contains plaintext credentials\.
 
 1. From **Edit**, choose **Environment**\.
 
@@ -299,7 +299,7 @@ To learn more, see [Getting started with AWS Config](https://docs.aws.amazon.com
 
 1. On the **Settings** page, do the following:
 
-   1. Under **Resource types to record**, choose** Record all resources supported in this region** and Include global resources \(for example, IAM resources\)\. 
+   1. Under **Resource types to record**, choose **Record all resources supported in this region** and Include global resources \(for example, IAM resources\)\. 
 
    1. Under **Amazon S3 bucket**, specify the bucket to use or create a bucket and optionally include a prefix\. 
 
@@ -469,7 +469,7 @@ To learn more, see [Listeners for your Application Load Balancers](https://docs.
 
 1. Choose a HTTP listener \(port 80 TCP\) and then choose **Edit**\.
 
-1. If there is an existing rule, you must delete it\. Otherwise, choose **Add action** and then choose** Redirect to\.\.\.**
+1. If there is an existing rule, you must delete it\. Otherwise, choose **Add action** and then choose **Redirect to\.\.\.**
 
 1. Choose **HTTPS** and then enter **443**\.
 
@@ -1196,7 +1196,7 @@ To learn more, see [https://docs.aws.amazon.com/systems-manager/latest/userguide
 
 1. On the configuration screen, keep the default options\.
 
-1. Choose** Set up Systems Manager**\.
+1. Choose **Set up Systems Manager**\.
 
 To determine whether your instances support Systems Manager associations, see [Systems Manager prerequisites](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-prereqs.html) in the *AWS Systems Manager User Guide*\.
 
