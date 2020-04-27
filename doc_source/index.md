@@ -15,6 +15,9 @@ Amazon's trademarks and trade dress may not be used in
 -----
 ## Contents
 + [What is AWS Security Hub?](what-is-securityhub.md)
+   + [Benefits of AWS Security Hub](securityhub-benefits.md)
+   + [Getting started with Security Hub](securityhub-get-started.md)
+   + [AWS Security Hub free trial, usage, and pricing](securityhub-free-trial.md)
 + [Terminology and concepts](securityhub-concepts.md)
 + [Quotas](securityhub_limits.md)
 + [Supported Regions](securityhub-regions.md)

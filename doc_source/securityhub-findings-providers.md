@@ -8,6 +8,8 @@ You can also send findings that are generated from your own custom security prod
 Security Hub receives and consolidates only those security findings from the supported AWS and partner product integrations that are generated after Security Hub is enabled in your AWS accounts\.  
 It does not retroactively receive and consolidate security findings that were generated before you enabled Security Hub\.
 
+For details on how Security Hub charges for ingested findings, see [Security Hub pricing](http://aws.amazon.com/security-hub/pricing/)\.
+
 **Topics**
 + [Managing product integrations](securityhub-integrations-managing.md)
 + [Available AWS service integrations](securityhub-internal-providers.md)

@@ -331,7 +331,7 @@ Parameters: None
 
 This control checks that Amazon Elastic Block Store snapshots are not public, determined by the ability to be restorable by anyone\.
 
-EBS snapshots are used to back up the data on your EBS volumes to Amazon S3 at a specific point in time, and can be used to restore previous states of EBS volumes\. EBS snapshots should not be publicly restorable by everyone unless you explicitly allow it\.
+EBS snapshots are used to back up the data on your EBS volumes to Amazon S3 at a specific point in time, and can be used to restore previous states of EBS volumes\. EBS snapshots should not be publicly restorable by everyone unless you explicitly allow it, to avoid accidental exposure of your company’s sensitive data\.
 
 ### Remediation<a name="ec2-1-remediation"></a>
 
@@ -885,7 +885,7 @@ You can only update resource\-based policies for Lambda resources within the sco
 
 1. Get the ID of the statement from the output of `GetPolicy`\.
 
-   1. From the AWS CLI, run `aws lambda get-policy —-function-name yourfunctionname`\. This command returns the Lambda resource\-based policy string associated with the publicly accessible Lambda\.
+   1. From the AWS CLI, run `aws lambda get-policy --function-name yourfunctionname`\. This command returns the Lambda resource\-based policy string associated with the publicly accessible Lambda\.
 
    1. Copy the string value of the **Sid** field in the policy statement\.
 

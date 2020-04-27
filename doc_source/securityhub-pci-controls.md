@@ -552,7 +552,7 @@ These are the same steps to remediate findings for [3\.3 – Ensure a log metric
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html)
 
-This control checks whether Amazon Elastic Block Store snapshots are not publicly restorable by everyone which makes them public\.
+This control checks whether Amazon Elastic Block Store snapshots are not publicly restorable by everyone, which makes them public\. Amazon EBS snapshots should not be publicly restorable by everyone unless you explicitly allow it, to avoid accidental exposure of your company’s sensitive data\.
 
 You should also ensure that permission to change Amazon EBS configurations are restricted to authorized AWS accounts only\. Learn more about managing Amazon EBS snapshot permissions in the [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html)\.
 

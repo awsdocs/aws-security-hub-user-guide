@@ -9,6 +9,8 @@ Security Hub provides controls for the following standards\.
 + [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)
 + [AWS Foundational Security Best Practices](securityhub-standards-fsbp.md)
 
+For information on Security Hub pricing for security checks, see [Security Hub pricing](http://aws.amazon.com/security-hub/pricing/)\.
+
 **Topics**
 + [AWS Config requirements for running security checks](securityhub-standards-awsconfigrules.md)
 + [Schedule for running security checks](securityhub-standards-schedule.md)
