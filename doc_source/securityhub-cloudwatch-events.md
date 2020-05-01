@@ -5,7 +5,7 @@ Amazon CloudWatch Events enables you to automate your AWS services and respond a
 + Invoking Amazon EC2 Run Command
 + Relaying the event to Amazon Kinesis Data Streams
 + Activating an AWS Step Functions state machine
-+ Notifying an Amazon SNS topic or an AWS SMS queue
++ Notifying an Amazon SNS topic or an Amazon SQS queue
 + Sending a finding to a third\-party ticketing, chat, SIEM, or incident response and management tool
 
 For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)\.

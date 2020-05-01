@@ -11,6 +11,8 @@ After a finding is created, it can be updated by the finding provider or by the 
 
   From the Security Hub console, they can view finding details, manage the workflow status of findings, and send findings to custom actions\. See [Viewing and taking action on findings](securityhub-managing-findings.md)\.
 
+Security Hub also automatically updates and deletes findings\.
+
 **Topics**
 + [Using `BatchImportFindings` to create and update findings](finding-update-batchimportfindings.md)
 + [Using `BatchUpdateFindings` to update a finding](finding-update-batchupdatefindings.md)

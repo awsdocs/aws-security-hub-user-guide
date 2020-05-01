@@ -10,6 +10,8 @@ From **Insights**, you can display a list of findings for a matching insight res
 
 You can also use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html) API operation to retrieve a filtered list of findings\.
 
+All findings are automatically deleted if they were not updated in the past 90 days\.
+
 **Topics**
 + [Filtering and grouping findings](findings-filtering-grouping.md)
 + [Viewing finding details](finding-view-details.md)

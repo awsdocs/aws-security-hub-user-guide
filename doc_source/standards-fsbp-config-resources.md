@@ -1,4 +1,4 @@
-# AWS Config resources required for the AWS Foundational Security Best Practices controls<a name="standards-fsbp-config-resources"></a>
+# Required AWS Config resources<a name="standards-fsbp-config-resources"></a>
 
 For AWS Security Hub to accurately report findings for all of the AWS Foundational Security Best Practices controls, you must enable the following resources in AWS Config\.
 
@@ -7,27 +7,27 @@ In Regions where a control is not available, the corresponding resource is not a
 + ACM Certificate
 + Amazon EBS volume
 + Application Load Balancer
-+ Amazon EFS FileSystem
-+ CloudFront Distribution
-+ CloudTrail Trail
-+ CodeBuild Project
-+ Amazon EC2 Instance
-+ Amazon EC2 SecurityGroup
-+ Amazon EC2 Volume
-+ Elastic Load Balancing LoadBalancer
-+ Elasticsearch Domain
-+ GuardDuty Detector
-+ IAM Group
-+ IAM Policy
-+ IAM Role
-+ IAM User
-+ AWS KMS Key
-+ Lambda Function
-+ Managed Instance Inventory
-+ Amazon RDS DB Cluster Snapshot
-+ Amazon RDS DB Instance
++ Amazon EFS file system
++ CloudFront distribution
++ CloudTrail trail
++ CodeBuild project
++ Amazon EC2 instance
++ Amazon EC2 security group
++ Amazon EC2 volume
++ Elastic Load Balancing load balancer
++ Elasticsearch domain
++ GuardDuty detector
++ IAM group
++ IAM policy
++ IAM role
++ IAM user
++ AWS KMS key
++ Lambda function
++ Amazon RDS DB cluster snapshot
++ Amazon RDS DB instance
 + Amazon RDS snapshot
-+ S3 AccountPublicAccessBlock
-+ S3 Bucket
-+ Systems Manager PatchCompliance
++ Amazon S3 Block Public Access
++ S3 bucket
++ Systems Manager managed instance inventory
++ Systems Manager patch compliance
 + Subnet

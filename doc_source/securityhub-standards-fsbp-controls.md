@@ -9,7 +9,7 @@ The AWS Foundational Security Best Practices standard contains the following con
 
 ## \[ACM\.1\] Imported ACM certificates should be renewed within 90 days of expiration<a name="fsbp-acm-1"></a>
 
-**Category:** Protect \- Data Protection \- Encryption of data\-in\-transit
+**Category:** Protect > Data protection > Encryption of data in transit
 
 **Severity:** Medium
 
@@ -26,25 +26,25 @@ If you're using certificates provided by ACM, you do not need to rotate SSL/TLS 
 
 ### Remediation<a name="acm-1-remediation"></a>
 
-ACM provides managed renewal for your Amazon\-issued SSL/TLS certificates\. This includes both public and private certificates issued by using ACM\. If possible, ACM renews your certificates automatically with no action required from you\. A certificate is eligible for renewal if it is associated with another AWS service, such as Elastic Load Balancing or Amazon CloudFront, or if it has been exported since being issued or last renewed\.
+ACM provides managed renewal for your Amazon issued SSL/TLS certificates\. This includes both public and private certificates issued by using ACM\. If possible, ACM renews your certificates automatically with no action required from you\. A certificate is eligible for renewal if it is associated with another AWS service, such as Elastic Load Balancing or Amazon CloudFront\. It can also be renewed if it has been exported since being issued or last renewed\.
 
 If ACM cannot automatically validate one or more domain names in a certificate, ACM notifies the domain owner that the domain must be validated manually\. A domain can require manual validation for the following reasons\.
 + ACM cannot establish an HTTPS connection with the domain\.
 + The certificate that is returned in the response to the HTTPS requests does not match the one that ACM is renewing\.
 
-When a certificate is 45 days from expiration and one or more domain names in the certificate requires manual validation, ACM notifies the domain owner in the following ways\.
+When a certificate is 45 days from expiration and one or more domain names in the certificate requires manual validation, ACM notifies the domain owner:
 
 **By email \(for email\-validated certificates\)**  
 If the certificate was last validated by email, ACM sends to the domain owner an email for each domain name that requires manual validation\. To ensure that this email can be received, the domain owner must correctly configure email for each domain\.  
 For more information, see [\(Optional\) Configure email for your domain](https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html)\. The email contains a link that performs the validation\. This link expires after 72 hours\. If necessary, you can use the ACM console,AWS CLI, or API to request that ACM resend the domain validation email\. For more information, see [Request a domain validation email for certificate renewal](https://docs.aws.amazon.com/acm/latest/userguide/request-domain-validation-email-for-renewal.html)\.  
-Email\-validated certificates are automatically renewed up to 825 days after their last manual validation date\. After 825 days, to proceed with the renewal, the domain owner or an authorized representative must manually re\-validate ownership of the domain\. To avoid this issue, Security Hub recommends that you create a new certificate and use DNS validation if possible\. If they are properly configured, DNS\-validated certificates are re\-validated indefinitely\.
+Email\-validated certificates are automatically renewed up to 825 days after their last manual validation date\. After 825 days, to proceed with the renewal, the domain owner or an authorized representative must manually revalidate ownership of the domain\. To avoid this issue, Security Hub recommends that you create a new certificate and use DNS validation if possible\. If they are properly configured, DNS\-validated certificates are revalidated indefinitely\.
 
 **By notification in your AWS Personal Health Dashboard**  
 ACM sends notifications to your Personal Health Dashboard to notify you that one or more domain names in the certificate require validation before the certificate can be renewed\. ACM sends these notifications when your certificate is 45 days, 30 days, 15 days, 7 days, 3 days, and 1 day from expiration\. These notifications are informational only\.
 
 ## \[CloudTrail\.1\] CloudTrail should be enabled and configured with at least one multi\-Region trail<a name="fsbp-cloudtrail-1"></a>
 
-**Category:** Identify \- Logging
+**Category:** Identify > Logging
 
 **Severity:** High
 
@@ -62,13 +62,13 @@ AWS CloudTrail records AWS API calls for your account and delivers log files to 
 + Time of the API call
 + Source IP address of the API caller
 + Request parameters
-+ Response elements returned by the AWS service\.
++ Response elements returned by the AWS service
 
-CloudTrail provides a history of AWS API calls for an account, including API calls made via the AWS Management Console, AWS SDKs, command\-line tools, and higher\-level AWS services such as AWS CloudFormation\.
+CloudTrail provides a history of AWS API calls for an account, including API calls made from the AWS Management Console, AWS SDKs, command\-line tools\. The history also includes API calls from higher\-level AWS services such as AWS CloudFormation\.
 
 The AWS API call history produced by CloudTrail enables security analysis, resource change tracking, and compliance auditing\. Multi\-Region trails also provide the following benefits\.
-+ multi\-Region trail helps to detect unexpected activity occurring in otherwise unused Regions
-+ A multi\-Region trail ensures that Global Service Logging is enabled for a trail by default\. Global Service Logging records events generated by AWS global services\.
++ A multi\-Region trail helps to detect unexpected activity occurring in otherwise unused Regions\.
++ A multi\-Region trail ensures that global service event logging is enabled for a trail by default\. Global service event logging records events generated by AWS global services\.
 + For a multi\-Region trail, management events for all read and write operations ensure that CloudTrail records management operations on all of an AWS account’s resources\.
 
 ### Remediation<a name="cloudtrail-1-remediation"></a>
@@ -105,19 +105,19 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 
 1. For **Trail settings**, choose the pencil icon\.
 
-1. For **Apply trail to all regions**, choose **Yes**, then choose **Save**\.
+1. For **Apply trail to all regions**, choose **Yes**, and then choose **Save**\.
 
 1. For **Management events**, choose the pencil icon\.
 
-1. For **Read/Write events**, choose **All**, then choose **Save**\.
+1. For **Read/Write events**, choose **All**, and then choose **Save**\.
 
 1. For **Storage location**, choose the pencil icon\.
 
-1. For **Enable log file validation**, choose **Yes**, then choose **Save**\.
+1. For **Enable log file validation**, choose **Yes**, and then choose **Save**\.
 
 ## \[CloudTrail\.2\] CloudTrail should have encryption at\-rest enabled<a name="fsbp-cloudtrail-2"></a>
 
-**Category:** Protect \- Data Protection \- Encryption of data\-at\-rest
+**Category:** Protect > Data protection > Encryption of data at rest
 
 **Severity:** Medium
 
@@ -129,7 +129,7 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 
 This control checks whether CloudTrail is configured to use the server\-side encryption \(SSE\) AWS Key Management Service customer master key \(CMK\) encryption\. The check passes if the `KmsKeyId` is defined\.
 
-For an added layer of security for your sensitive CloudTrail log files, you should use [server\-side encryption with AWS KMS–managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) for your CloudTrail log files for encryption at\-rest\. Note that by default, the log files delivered by CloudTrail to your buckets are encrypted by [Amazon server\-side encryption with Amazon S3\-managed encryption keys \(SSE\-S3\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. 
+For an added layer of security for your sensitive CloudTrail log files, you should use [server\-side encryption with AWS KMS–managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) for your CloudTrail log files for encryption at rest\. Note that by default, the log files delivered by CloudTrail to your buckets are encrypted by [Amazon server\-side encryption with Amazon S3\-managed encryption keys \(SSE\-S3\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. 
 
 ### Remediation<a name="cloudtrail-2-remediation"></a>
 
@@ -157,10 +157,7 @@ The AWS KMS key and S3 bucket must be in the same Region\.
 
 ## \[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth<a name="fsbp-codebuild-1"></a>
 
-**Note**  
-This control is not supported in AWS GovCloud \(US\-West\)\.
-
-**Category:** Protect \- Secure Development
+**Category:** Protect > Secure development
 
 **Severity:** Critical
 
@@ -171,6 +168,9 @@ This control is not supported in AWS GovCloud \(US\-West\)\.
 **Parameters:** None
 
 This control checks whether the GitHub or Bitbucket source repository URL contains either personal access tokens or a user name and password\.
+
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
 
 Authentication credentials should never be stored or transmitted in clear text or appear in the repository URL\. Instead of personal access tokens or user name and password, you should use OAuth to grant authorization for accessing GitHub or Bitbucket repositories\. Using personal access tokens or a user name and password could expose your credentials to unintended data exposure and unauthorized access\.
 
@@ -198,10 +198,7 @@ For more information, refer to [CodeBuild use case\-based samples](https://docs.
 
 ## \[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials<a name="fsbp-codebuild-2"></a>
 
-**Note**  
-This control is not supported in AWS GovCloud \(US\-West\)\.
-
-**Category:** Protect \- Secure Development
+**Category:** Protect > Secure development
 
 **Severity:** Critical
 
@@ -214,6 +211,9 @@ This control is not supported in AWS GovCloud \(US\-West\)\.
 This control checks whether the project contains the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`\.
 
 Authentication credentials `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` should never be stored in clear text, as this could lead to unintended data exposure and unauthorized access\.
+
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="codebuild-2-remediation"></a>
 
@@ -257,7 +257,7 @@ Authentication credentials `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` shoul
 
 1. For **Type**, choose **Parameter**\.
 
-1. To remove your non\-compliant environmental variable that contains plaintext credentials, choose **Remove**\.
+1. To remove your noncompliant environmental variable that contains plaintext credentials, choose **Remove**\.
 
 1. Choose **Update environment**\.
 
@@ -265,7 +265,7 @@ For more information, see [Environment variables in build environments](https://
 
 ## \[Config\.1\] AWS Config should be enabled<a name="fsbp-config-1"></a>
 
-**Category:** Identify \- Inventory
+**Category:** Identify > Inventory
 
 **Severity:** Medium
 
@@ -275,14 +275,14 @@ For more information, see [Environment variables in build environments](https://
 
 **Parameters:** None
 
-This control checks whether AWS Config is enabled in the account for the local region and is recording all resources\.
+This control checks whether AWS Config is enabled in the account for the local Region and is recording all resources\.
 
 The AWS Config service performs configuration management of supported AWS resources in your account and delivers log files to you\. The recorded information includes the configuration item \(AWS resource\), relationships between configuration items, and any configuration changes between resources\. 
 
 Security Hub recommends that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\. 
 
 **Note**  
-Because Security Hub is a regional service, the check performed for this control checks only the current Region for the account\. It does not check all Regions\.   
+Because Security Hub is a Regional service, the check performed for this control checks only the current Region for the account\. It does not check all Regions\.   
 To allow security checks against global resources in each Region, you also must record global resources\. 
 
 To learn more, see [Getting started with AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\.
@@ -299,7 +299,7 @@ To learn more, see [Getting started with AWS Config](https://docs.aws.amazon.com
 
 1. On the **Settings** page, do the following:
 
-   1. Under **Resource types to record**, choose **Record all resources supported in this region** and Include global resources \(for example, IAM resources\)\. 
+   1. Under **Resource types to record**, choose **Record all resources supported in this region** and **Include global resources \(e\.g\. AWS IAM resources\)**\. 
 
    1. Under **Amazon S3 bucket**, specify the bucket to use or create a bucket and optionally include a prefix\. 
 
@@ -319,7 +319,7 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 ## \[EC2\.1\] Amazon EBS snapshots should not be public, determined by the ability to be restorable by anyone<a name="fsbp-ec2-1"></a>
 
-**Category:** Protect \- Secure Network Configuration
+**Category:** Protect > Secure network configuration
 
 **Severity:** Critical 
 
@@ -329,9 +329,9 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 Parameters: None
 
-This control checks that Amazon Elastic Block Store snapshots are not public, determined by the ability to be restorable by anyone\.
+This control checks that Amazon Elastic Block Store snapshots are not public, as determined by the ability to be restorable by anyone\.
 
-EBS snapshots are used to back up the data on your EBS volumes to Amazon S3 at a specific point in time, and can be used to restore previous states of EBS volumes\. EBS snapshots should not be publicly restorable by everyone unless you explicitly allow it, to avoid accidental exposure of your company’s sensitive data\.
+EBS snapshots are used to back up the data on your EBS volumes to Amazon S3 at a specific point in time\. You can use the snapshots to restore previous states of EBS volumes\. EBS snapshots should not be publicly restorable by everyone unless you explicitly allow it\. Restricting this ability avoids accidental exposure of your company’s sensitive data\.
 
 ### Remediation<a name="ec2-1-remediation"></a>
 
@@ -345,13 +345,13 @@ EBS snapshots are used to back up the data on your EBS volumes to Amazon S3 at a
 
 1. Choose **Private**\.
 
-1. Optionally, add the AWS account numbers of the authorized accounts to share your snapshot with
+1. Optionally, add the AWS account numbers of the authorized accounts to share your snapshot with\.
 
 1. Choose **Save**\.
 
 ## \[EC2\.2\] The VPC default security group should not allow inbound and outbound traffic<a name="fsbp-ec2-2"></a>
 
-**Category:** Protect \- Secure Network Configuration
+**Category:** Protect > Secure network configuration
 
 **Severity:** Medium 
 
@@ -389,7 +389,7 @@ For more information, see [Working with security groups](https://docs.aws.amazon
 
 ## \[EC2\.3\] Attached EBS volumes should be encrypted at\-rest<a name="fsbp-ec2-3"></a>
 
-**Category:** Protect \- Data Protection \- Encryption of data\-at\-rest
+**Category:** Protect > Data protection > Encryption of data at rest
 
 **Severity:** Medium
 
@@ -399,7 +399,7 @@ For more information, see [Working with security groups](https://docs.aws.amazon
 
 **Parameters:** None
 
-This control checks whether the EBS volumes that are in an attached state are encrypted\. To pass this check, EBS volumes must be in\-use state and encrypted\. If the EBS volume is not attached, then it is not in scope for this check\.
+This control checks whether the EBS volumes that are in an attached state are encrypted\. To pass this check, EBS volumes must be in use and encrypted\. If the EBS volume is not attached, then it is not subject to this check\.
 
 For an added layer of security of your sensitive data in EBS volumes, you should enable EBS encryption at rest\. Amazon EBS encryption offers a straightforward encryption solution for your EBS resources that doesn't require you to build, maintain, and secure your own key management infrastructure\. It uses AWS KMS customer master keys \(CMK\) when creating encrypted volumes and snapshots\.
 
@@ -415,7 +415,7 @@ For more information, see [Creating an Amazon EBS volume](https://docs.aws.amazo
 
 ## \[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS<a name="fsbp-efs-1"></a>
 
-**Category:** Protect \- Data Protection \- Encryption of data\-at\-rest
+**Category:** Protect > Data protection > Encryption of data at rest
 
 **Severity:** Medium
 
@@ -439,7 +439,7 @@ For details on how to encrypt a new Amazon EFS file system, see [Encrypting data
 
 ## \[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS<a name="fsbp-elbv2-1"></a>
 
-**Category:** Protect \- Data Protection \- Encryption of data\-in\-transit
+**Category:** Protect > Data protection > Encryption of data in transit
 
 **Severity:** Medium
 
@@ -451,7 +451,7 @@ For details on how to encrypt a new Amazon EFS file system, see [Encrypting data
 
 This control checks whether HTTP to HTTPS redirection is configured on all HTTP listeners of Application Load Balancers\. The check fails if one or more HTTP listeners of Application Load Balancers do not have HTTP to HTTPS redirection configured\.
 
-Before you start to use your Application Load Balancer, you must add one or more listeners\. A listener is a process that uses the configured protocol and port to check for connection requests\. Listeners support the both HTTP and HTTPS protocols\. You can use an HTTPS listener to offload the work of encryption and decryption to your Application Load Balancer\. You should use redirect actions with Application Load Balancer to redirect client HTTP request to an HTTPS request on port 443 to enforce encryption in\-transit\.
+Before you start to use your Application Load Balancer, you must add one or more listeners\. A listener is a process that uses the configured protocol and port to check for connection requests\. Listeners support both HTTP and HTTPS protocols\. You can use an HTTPS listener to offload the work of encryption and decryption to your Application Load Balancer\. You should use redirect actions with Application Load Balancer to redirect client HTTP request to an HTTPS request on port 443 to enforce encryption in\-transit\.
 
 To learn more, see [Listeners for your Application Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) in *User Guide for Application Load Balancers*\.
 
@@ -467,7 +467,7 @@ To learn more, see [Listeners for your Application Load Balancers](https://docs.
 
 1. Choose the **Listeners** tab\.
 
-1. Choose a HTTP listener \(port 80 TCP\) and then choose **Edit**\.
+1. Choose an HTTP listener \(port 80 TCP\) and then choose **Edit**\.
 
 1. If there is an existing rule, you must delete it\. Otherwise, choose **Add action** and then choose **Redirect to\.\.\.**
 
@@ -477,7 +477,7 @@ To learn more, see [Listeners for your Application Load Balancers](https://docs.
 
 ## \[ES\.1\] Elasticsearch domains should have encryption at\-rest enabled<a name="fsbp-es-1"></a>
 
-**Category:** Protect \- Data Protection \- Encryption of data\-at\-rest
+**Category:** Protect > Data protection > Encryption of data at rest
 
 **Severity:** Medium
 
@@ -487,7 +487,7 @@ To learn more, see [Listeners for your Application Load Balancers](https://docs.
 
 **Parameters:** None
 
-This control checks whether Amazon Elasticsearch Service \(Amazon ES\) domains have encryption at rest configuration enabled\. The check fails if the EncryptionAtRestOptions field is not enabled\.
+This control checks whether Amazon Elasticsearch Service \(Amazon ES\) domains have encryption at rest configuration enabled\. The check fails if encryption at rest is not enabled\.
 
 For an added layer of security for your sensitive data in Elasticsearch, you should configure your Elasticsearch to be encrypted at rest\. Elasticsearch domains offer encryption of data at rest\. The feature uses AWS KMS to store and manage your encryption keys\. To perform the encryption, it uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
 
@@ -506,10 +506,7 @@ Encryption of data at rest requires Amazon ES 5\.1 or later\. For more informati
 
 ## \[GuardDuty\.1\] GuardDuty should be enabled<a name="fsbp-guardduty-1"></a>
 
-**Note**  
-This control is not supported in AWS GovCloud \(US\-West\)\.
-
-**Category:** Detect \- Detection Services 
+**Category:** Detect > Detection services 
 
 **Severity:** Medium
 
@@ -521,7 +518,14 @@ This control is not supported in AWS GovCloud \(US\-West\)\.
 
 This control checks whether Amazon GuardDuty is enabled in your GuardDuty account and Region\.
 
-It is highly recommended that you enable GuardDuty in all supported AWS regions\. This allows GuardDuty to generate findings about unauthorized or unusual activity, even in regions that you do not actively use\. This also allows GuardDuty to monitor CloudTrail events for global AWS services such as IAM\.
+It is highly recommended that you enable GuardDuty in all supported AWS Regions\. Doing so allows GuardDuty to generate findings about unauthorized or unusual activity, even in Regions that you do not actively use\. This also allows GuardDuty to monitor CloudTrail events for global AWS services such as IAM\.
+
+**Note**  
+This control is not supported in the following Regions\.  
+Asia Pacific \(Hong Kong\)
+Middle East \(Bahrain\)
+ AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="guardduty-1-remediation"></a>
 
@@ -535,7 +539,7 @@ It is highly recommended that you enable GuardDuty in all supported AWS regions\
 
 ## \[IAM\.1\] IAM policies should not allow full "\*" administrative privileges<a name="fsbp-iam-1"></a>
 
-**Category:** Protect \- Secure Access Management
+**Category:** Protect > Secure access management
 
 **Severity:** High
 
@@ -549,7 +553,7 @@ This control checks whether the default version of IAM policies \(also known as 
 
 The control only checks the customer managed policies that you create\. It does not check inline and AWS managed policies\.
 
-IAM policies define a set of privileges granted to users, groups, or roles\. It is recommended and considered a standard security advice to grant least privilege, which means to grant only the permissions required to perform a task\. When you provide full administrative privileges instead of the minimum set of permissions that the user needs, you expose the resources to potentially unwanted actions\.
+IAM policies define a set of privileges that are granted to users, groups, or roles\. Following standard security advice, AWS recommends that you grant least privilege, which means to grant only the permissions that are required to perform a task\. When you provide full administrative privileges instead of the minimum set of permissions that the user needs, you expose the resources to potentially unwanted actions\.
 
 Instead of allowing full administrative privileges, determine what users need to do and then craft policies that let the users perform only those tasks\. It is more secure to start with a minimum set of permissions and grant additional permissions as necessary\. Do not start with permissions that are too lenient and then try to tighten them later\.
 
@@ -563,17 +567,17 @@ You should remove IAM policies that have a statement with `"Effect": "Allow" `wi
 
 1. Choose **Policies**\.
 
-1. Choose the radio button next to the policy to remove\.
+1. Choose the button next to the policy to remove\.
 
 1. From **Policy actions**, choose **Detach**\.
 
-1. For each user to detach the policy from, choose the radio button next to the user, then choose **Detach policy**\.
+1. For each user to detach the policy from, choose the button next to the user, then choose **Detach policy**\.
 
 Confirm that the user that you detached the policy from can still access AWS services and resources as expected\.
 
 ## \[IAM\.2\] IAM users should not have IAM policies attached<a name="fsbp-iam-2"></a>
 
-**Category:** Protect \- Secure Access Management
+**Category:** Protect > Secure access management
 
 **Severity:** Low
 
@@ -603,7 +607,7 @@ To resolve this issue, create an IAM group, assign the policy to the group, and 
 
 1. Add users to a group and then assign the policies to that group\. Each user in the group is then assigned the policies that are assigned to the group\.
 
-1. Confirm the details on the Review page and then choose **Create Group**\.
+1. Confirm the details on the **Review** page and then choose **Create Group**\.
 
 For more information about creating groups, see [Creating IAM groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html) in the *IAM User Guide*\.
 
@@ -633,7 +637,7 @@ For more information about adding users to groups, see [Adding and removing user
 
 ## \[IAM\.3\] IAM users access keys should be rotated every 90 days or less<a name="fsbp-iam-3"></a>
 
-**Category:** Protect \- Secure Access Management
+**Category:** Protect > Secure access management
 
 **Severity:** Medium 
 
@@ -646,9 +650,9 @@ For more information about adding users to groups, see [Adding and removing user
 
 This control checks whether the active access keys are rotated within 90 days\.
 
-We highly recommend that you do not generate and remove all access keys in your account\. Instead, the recommended best practice is to either create one or more IAM roles, or to use [federation](https://aws.amazon.com/identity/federation/) to allow your users to use their existing corporate credentials to log into the AWS console and AWS CLI\.
+We highly recommend that you do not generate and remove all access keys in your account\. Instead, the recommended best practice is to either create one or more IAM roles or to use [federation](https://aws.amazon.com/identity/federation/)\. You can use these methods to allow your users to use their existing corporate credentials to log into the AWS Management Console and AWS CLI\.
 
-Each approach has its use cases\. Federation is generally better for enterprises that have an existing central directory or plan to need more than the current limit IAM users\. Applications running outside of an AWS environment need access keys for programmatic access to AWS resources\.
+Each approach has its use cases\. Federation is generally better for enterprises that have an existing central directory or plan to need more than the current limit IAM users\. Applications that run outside of an AWS environment need access keys for programmatic access to AWS resources\.
 
 However, if the resources that need programmatic access run inside AWS, the best practice is to use IAM roles\. Roles allow you to grant a resource access without hardcoding an access key ID and secret access key into the configuration\.
 
@@ -672,7 +676,7 @@ If your organization uses AWS Single Sign\-On \(AWS SSO\), your users can sign i
 
 1. Choose **Security credentials**\.
 
-1. To create a new key for the user:
+1. Create a new key for the user:
 
    1. Choose **Create access key**\.
 
@@ -694,7 +698,7 @@ If your organization uses AWS Single Sign\-On \(AWS SSO\), your users can sign i
 
 ## \[IAM\.4\] IAM root user access key should not exist<a name="fsbp-iam-4"></a>
 
-**Category:** Protect \- Secure Access Management
+**Category:** Protect > Secure access management
 
 **Severity:** Critical 
 
@@ -714,7 +718,7 @@ Security Hub recommends that you remove all access keys that are associated with
 
 **To deactivate or delete access keys**
 
-1. Log in to your account using the root credentials\.
+1. Log in to your account using the AWS account root user credentials\.
 
 1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
 
@@ -728,7 +732,7 @@ Security Hub recommends that you remove all access keys that are associated with
 
 ## \[IAM\.5\] MFA should be enabled for all IAM users that have a console password<a name="fsbp-iam-5"></a>
 
-**Category:** Protect \- Secure Access Management
+**Category:** Protect > Secure access management
 
 **Severity:** Medium
 
@@ -740,7 +744,7 @@ Security Hub recommends that you remove all access keys that are associated with
 
 This control checks whether AWS Multi\-Factor Authentication \(MFA\) is enabled for all IAM users that use a console password\.
 
-Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they are prompted for their user name and password as well as for an authentication code from their AWS MFA device\.
+Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they are prompted for their user name and password\. In addition, they are prompted for an authentication code from their AWS MFA device\.
 
 We recommend that you enable MFA for all accounts that have a console password\. MFA is designed to provide increased security for console access\. The authenticating principal must possess a device that emits a time\-sensitive key and must have knowledge of a credential\. 
 
@@ -764,10 +768,7 @@ To learn how to delegate MFA setup to users, see the blog post [How to delegate 
 
 ## \[IAM\.6\] Hardware MFA should be enabled for the root user<a name="fsbp-iam-6"></a>
 
-**Note**  
-This control is not supported in AWS GovCloud \(US\-West\)\.
-
-**Category:** Protect \- Secure Access Management
+**Category:** Protect > Secure access management
 
 **Severity:** Critical
 
@@ -777,15 +778,18 @@ This control is not supported in AWS GovCloud \(US\-West\)\.
 
 **Parameters:** None
 
-This control checks whether your AWS account is enabled to use a hardware multi\-factor authentication \(MFA\) device to sign in with root credentials\.
+This control checks whether your AWS account is enabled to use a hardware multi\-factor authentication \(MFA\) device to sign in with root user credentials\.
 
-Virtual MFA might not provide the same level of security as hardware MFA devices\. We recommend that you only use a virtual MFA device while you wait for hardware purchase approval or for your hardware to arrive\. To learn more, see[ Enabling a virtual multi\-factor authentication \(MFA\) device \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html) in the *IAM User Guide*\.
+Virtual MFA might not provide the same level of security as hardware MFA devices\. We recommend that you use only a virtual MFA device while you wait for hardware purchase approval or for your hardware to arrive\. To learn more, see[ Enabling a virtual multi\-factor authentication \(MFA\) device \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html) in the *IAM User Guide*\.
+
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="iam-6-remediation"></a>
 
 **To enable hardware\-based MFA for the root account**
 
-1. Log in to your account using the root credentials\.
+1. Log in to your account using the root user credentials\.
 
 1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
 
@@ -801,7 +805,7 @@ Virtual MFA might not provide the same level of security as hardware MFA devices
 
 ## \[IAM\.7\] Password policies for IAM users should have strong configurations<a name="fsbp-iam-7"></a>
 
-**Category:** Protect \- Secure Access Management
+**Category:** Protect > Secure access management
 
 **Severity:** Medium
 
@@ -827,7 +831,7 @@ This control checks whether the account password policy for IAM users uses the f
 + `PasswordReusePrevention`: 24
 + `MaxPasswordAge`: 90
 
-We highly recommend that you do not generate and remove all access keys in your account\. Instead, the recommended best practice is to either create one or more IAM roles, or to use federation to allow your users to use their existing corporate credentials to log into the AWS console and AWS CLI\.
+We highly recommend that you do not generate and remove all access keys in your account\. Instead, the recommended best practice is to either create one or more IAM roles, or to use federation\. You can use these methods to allow your users to use their existing corporate credentials to log into the AWS Management Console and AWS CLI\.
 
 Each approach has its use cases\. Federation is generally better for enterprises that have an existing central directory or plan to need more than the current limit IAM users\. Applications running outside of an AWS environment need access keys for programmatic access to AWS resources\.
 
@@ -863,7 +867,7 @@ If you already have an access key, Security Hub recommends that you enforce the 
 
 ## \[Lambda\.1\] Lambda functions should prohibit public access by other accounts<a name="fsbp-lambda-1"></a>
 
-**Category:** Protect \- Secure Network Configuration
+**Category:** Protect > Secure network configuration
 
 **Severity:** Critical
 
@@ -879,7 +883,7 @@ The Lambda function should not be publicly accessible, as this may allow uninten
 
 ### Remediation<a name="lambda-1-remediation"></a>
 
-You can only update resource\-based policies for Lambda resources within the scope of the [https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html](https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) and [https://docs.aws.amazon.com/lambda/latest/dg/API_AddLayerVersionPermission.html](https://docs.aws.amazon.com/lambda/latest/dg/API_AddLayerVersionPermission.html) API actions\. You cannot author policies for your Lambda resources in JSON, or use conditions that don't map to parameters for those actions using the AWS CLI or the SDK\. We will use the AWS CLI\.
+You can only update resource\-based policies for Lambda resources within the scope of the [https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html](https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) and [https://docs.aws.amazon.com/lambda/latest/dg/API_AddLayerVersionPermission.html](https://docs.aws.amazon.com/lambda/latest/dg/API_AddLayerVersionPermission.html) API operations\. You cannot author policies for your Lambda resources in JSON\. Neither can you use conditions that don't map to parameters for those actions using the AWS CLI or the SDK\. The following steps use the AWS CLI\.
 
 **To create a private Lambda function**
 
@@ -893,7 +897,7 @@ You can only update resource\-based policies for Lambda resources within the sco
 
 ## \[Lambda\.2\] Lambda functions should use latest runtimes<a name="fsbp-lambda-2"></a>
 
-**Category:** Protect \- Secure Development
+**Category:** Protect > Secure development
 
 **Severity:** Medium
 
@@ -906,7 +910,7 @@ You can only update resource\-based policies for Lambda resources within the sco
 
 This control checks that the Lambda function settings for runtimes match the expected values set for the latest runtimes for each supported language\. This control checks for the following runtimes: `nodejs12.x`, `nodejs10.x`, `python3.8`, `python3.7`, `python3.6`, `ruby2.5`, `java11`, `java8`, `go1.x`, `dotnetcore2.1`
 
-[Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a runtime component is no longer supported for security updates, Lambda deprecates the runtime\. Even though you cannot create functions that use the deprecated runtime, the function is still available to process invocation events\. Make sure that your Lambda functions are current and do not use out\-of\-date runtimes environments\.
+[Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a runtime component is no longer supported for security updates, Lambda deprecates the runtime\. Even though you cannot create functions that use the deprecated runtime, the function is still available to process invocation events\. Make sure that your Lambda functions are current and do not use out\-of\-date runtime environments\.
 
 To learn more about the latest runtimes this control checks for all supported languages, see [AWS Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) in the *AWS Lambda Developer Guide*\.
 
@@ -916,7 +920,7 @@ For more information on supported runtimes and deprecation schedules, see the [R
 
 ## \[RDS\.1\] RDS snapshots should be private<a name="fsbp-rds-1"></a>
 
-**Category:** Protect \- Secure Network Configuration
+**Category:** Protect > Secure network configuration
 
 **Severity:** Critical
 
@@ -926,7 +930,7 @@ For more information on supported runtimes and deprecation schedules, see the [R
 
 **Parameters:** None
 
-This control checks whether RDS snapshots are public\.
+This control checks whether Amazon RDS snapshots are public\.
 
 RDS snapshots are used to back up the data on your RDS instances at a specific point in time\. They can be used to restore previous states of RDS instances\.
 
@@ -954,7 +958,7 @@ To learn more about sharing a DB snapshot, see [Sharing a DB snapshot](https://d
 
 ## \[RDS\.2\] RDS DB instances should prohibit public access, determined by the PubliclyAccessible configuration<a name="fsbp-rds-2"></a>
 
-**Category:** Protect \- Secure Network Configuration
+**Category:** Protect > Secure network configuration
 
 **Severity:** Critical
 
@@ -964,7 +968,7 @@ To learn more about sharing a DB snapshot, see [Sharing a DB snapshot](https://d
 
 **Parameters:** None
 
-This control checks whether RDS instances are publicly accessible by evaluating the `PubliclyAccessible` field in the instance configuration item\.
+This control checks whether Amazon RDS instances are publicly accessible by evaluating the `PubliclyAccessible` field in the instance configuration item\.
 
 The `PubliclyAccessible` value in the RDS instance configuration indicates whether the DB instance is publicly accessible\. When the DB instance is configured with `PubliclyAccessible`, it is an Internet\-facing instance with a publicly resolvable DNS name, which resolves to a public IP address\. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address\.
 
@@ -992,7 +996,7 @@ For more information, see [Working with a DB instance in a VPC](https://docs.aws
 
 ## \[RDS\.3\] RDS DB instances should have encryption at\-rest enabled<a name="fsbp-rds-3"></a>
 
-**Category:** Protect \- Data Protection \- Encryption of data\-at\-rest
+**Category:** Protect > Data protection > Encryption of data at rest
 
 **Severity:** Medium
 
@@ -1002,11 +1006,11 @@ For more information, see [Working with a DB instance in a VPC](https://docs.aws
 
 **Parameters:** None
 
-This control checks whether storage encryption is enabled for your RDS DB instances\.
+This control checks whether storage encryption is enabled for your Amazon RDS DB instances\.
 
-For an added layer of security for your sensitive data in RDS DB instances, you should configure your RDS DB instances to be encrypted at rest\. To encrypt your Amazon RDS DB instances and snapshots at rest, enable the encryption option for your RDS DB instances\. Data that is encrypted at rest includes the underlying storage for DB instances, its automated backups, Read Replicas, and snapshots\. 
+For an added layer of security for your sensitive data in RDS DB instances, you should configure your RDS DB instances to be encrypted at rest\. To encrypt your RDS DB instances and snapshots at rest, enable the encryption option for your RDS DB instances\. Data that is encrypted at rest includes the underlying storage for DB instances, its automated backups, read replicas, and snapshots\. 
 
-RDS encrypted DB instances use the industry standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your RDS DB instances\. After your data is encrypted, Amazon RDS handles authentication of access and decryption of your data transparently with a minimal impact on performance\. You do not need to modify your database client applications to use encryption\. 
+RDS encrypted DB instances use the open standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your RDS DB instances\. After your data is encrypted, Amazon RDS handles authentication of access and decryption of your data transparently with a minimal impact on performance\. You do not need to modify your database client applications to use encryption\. 
 
 Amazon RDS encryption is currently available for all database engines and storage types\. Amazon RDS encryption is available for most DB instance classes\. To learn about DB instance classes that do not support Amazon RDS encryption, see [Encrypting Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html) in the *Amazon RDS User Guide*\.
 
@@ -1016,7 +1020,7 @@ For information about encrypting DB instances in Amazon RDS, see [Encrypting Ama
 
 ## \[S3\.1\] S3 Block Public Access setting should be enabled<a name="fsbp-s3-1"></a>
 
-**Category:** Protect \- Secure Network Configuration
+**Category:** Protect > Secure network configuration
 
 **Severity:** Medium
 
@@ -1030,17 +1034,20 @@ For information about encrypting DB instances in Amazon RDS, see [Encrypting Ama
 + `blockPublicAcls`: `true`
 + `restrictPublicBuckets`: `true`
 
-This control checks whether the following public access block settings are configured at the account level:
+This control checks whether the following Amazon S3 public access block settings are configured at the account level:
 + `ignorePublicAcls`: `true`
 + `blockPublicPolicy`: `true`
 + `blockPublicAcls`: `true`
 + `restrictPublicBuckets`: `true`
 
-S3 Block Public Access is designed to provide controls across an entire AWS account or at the individual S3 bucket level to ensure that objects never have public access\. Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\.
+Amazon S3 public access block is designed to provide controls across an entire AWS account or at the individual S3 bucket level to ensure that objects never have public access\. Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\.
 
-Unless you intend to have your S3 buckets be publicly accessible, you should configure the account level S3 block public access feature\.
+Unless you intend to have your S3 buckets be publicly accessible, you should configure the account level Amazon S3 Block Public Access feature\.
 
 To learn more, see [Using Amazon S3 Block Public Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon Simple Storage Service Developer Guide*\.
+
+**Note**  
+This control is not supported in Middle East \(Bahrain\)\.
 
 ### Remediation<a name="s3-1-remediation"></a>
 
@@ -1054,11 +1061,11 @@ To learn more, see [Using Amazon S3 Block Public Access](https://docs.aws.amazon
 
 1. Choose **Save changes**\.
 
-For more information, see [Using Amazon S3 Block Public Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon Simple Storage Service Developer Guide*\.
+For more information, see [Using Amazon S3 block public access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon Simple Storage Service Developer Guide*\.
 
 ## \[S3\.2\] S3 buckets should prohibit public read access<a name="fsbp-s3-2"></a>
 
-**Category:** Protect \- Secure Network Configuration
+**Category:** Protect > Secure network configuration
 
 **Severity:** Critical
 
@@ -1070,7 +1077,7 @@ For more information, see [Using Amazon S3 Block Public Access](https://docs.aws
 
 This control checks whether your S3 buckets allow public read access\. It evaluates the Block Public Access settings, the bucket policy, and the bucket access control list \(ACL\)\.
 
-There are select use cases that require everyone on the internet to read from your S3 bucket\. However, those situations are extremely rare\. To ensure the integrity and security of your data, your S3 bucket should not be publicly readable\.
+Some use cases require that everyone on the internet be able to read from your S3 bucket\. However, those situations are rare\. To ensure the integrity and security of your data, your S3 bucket should not be publicly readable\.
 
 ### Remediation<a name="s3-2-remediation"></a>
 
@@ -1090,7 +1097,7 @@ There are select use cases that require everyone on the internet to read from yo
 
 ## \[S3\.3\] S3 buckets should prohibit public write access<a name="fsbp-s3-3"></a>
 
-**Category:** Protect \- Secure Network Configuration
+**Category:** Protect > Secure network configuration
 
 **Severity:** Critical
 
@@ -1100,9 +1107,9 @@ There are select use cases that require everyone on the internet to read from yo
 
 **Parameters:** None
 
-This control checks whether your S3 buckets allow public write access\. It evaluates the Block Public Access settings, the bucket policy, and the bucket access control list \(ACL\)\.
+This control checks whether your S3 buckets allow public write access\. It evaluates the block public access settings, the bucket policy, and the bucket access control list \(ACL\)\.
 
-There are select use cases that require everyone on the internet to write to your S3 bucket\. However, those situations are extremely rare\. To ensure the integrity and security of your data, your S3 bucket should not be publicly writable\.
+Some use cases require that everyone on the internet be able to write to your S3 bucket\. However, those situations are rare\. To ensure the integrity and security of your data, your S3 bucket should not be publicly writable\.
 
 ### Remediation<a name="s3-3-remediation"></a>
 
@@ -1122,7 +1129,7 @@ There are select use cases that require everyone on the internet to write to you
 
 ## \[S3\.4\] S3 buckets should have server\-side encryption enabled<a name="fsbp-s3-4"></a>
 
-**Category:** Protect \- Data Protection \- Encryption of data\-at\-rest
+**Category:** Protect > Data protection > Encryption of data at rest
 
 **Severity:** Medium
 
@@ -1132,7 +1139,7 @@ There are select use cases that require everyone on the internet to write to you
 
 **Parameters:** None
 
-This control checks that your S3 bucket either has Amazon S3 default encryption enabled or that the S3 bucket policy explicitly denies put\-object requests without server side encryption\.
+This control checks that your S3 bucket either has Amazon S3 default encryption enabled or that the S3 bucket policy explicitly denies put\-object requests without server\-side encryption\.
 
 For an added layer of security for your sensitive data in S3 buckets, you should configure your buckets with server\-side encryption to protect your data at rest\. Amazon S3 encrypts each object with a unique key\. As an additional safeguard, it encrypts the key itself with a master key that it rotates regularly\. Amazon S3 server\-side encryption uses one of the strongest block ciphers available to encrypt your data, 256\-bit Advanced Encryption Standard \(AES\-256\)\.
 
@@ -1152,7 +1159,7 @@ To learn more, see [Protecting data using server\-side encryption with Amazon S3
 
 1. For the encryption, choose either **AES\-256** or **AWS\-KMS**\.
    + To use keys that are managed by Amazon S3 for default encryption, choose **AES\-256**\. For more information about using Amazon S3 server\-side encryption to encrypt your data, see the [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
-   + To use keys that are managed by AWS KMS for default encryption, choose **AWS\-KMS**, and then choose a master key from the list of the AWS KMS master keys that you have created\.
+   + To use keys that are managed by AWS KMS for default encryption, choose **AWS\-KMS**\. Then choose a master key from the list of the AWS KMS master keys that you have created\.
 
      Type the Amazon Resource Name \(ARN\) of the AWS KMS key to use\. You can find the ARN for your AWS KMS key in the IAM console, under **Encryption keys**\. Or, you can choose a key name from the drop\-down list\.
 **Important**  
@@ -1170,7 +1177,7 @@ For more information about default S3 bucket encryption, see the [https://docs.a
 
 ## \[SSM\.1\] EC2 instances should be managed by AWS Systems Manager<a name="fsbp-ssm-1"></a>
 
-**Category:** Identify \- Inventory
+**Category:** Identify > Inventory
 
 **Severity:** Medium
 
@@ -1188,7 +1195,7 @@ To learn more, see [https://docs.aws.amazon.com/systems-manager/latest/userguide
 
 ### Remediation<a name="ssm-1-remediation"></a>
 
-**To ensure EC2 instances are managed by Systems Manager**
+**To ensure that EC2 instances are managed by Systems Manager**
 
 1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/](https://console.aws.amazon.com/systems-manager/)\.
 
@@ -1202,7 +1209,7 @@ To determine whether your instances support Systems Manager associations, see [S
 
 ## \[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements<a name="fsbp-ssm-2"></a>
 
-**Category:** Detect \- Detection Services 
+**Category:** Detect > Detection services 
 
 **Severity:** Medium
 
@@ -1216,22 +1223,25 @@ This control checks whether the compliance status of the Amazon EC2 Systems Mana
 
 Having your EC2 instances fully patched as required by your organization reduces the attack surface of your AWS accounts\. 
 
+**Note**  
+This control is not supported in Middle East \(Bahrain\)\.
+
 ### Remediation<a name="ssm-2-remediation"></a>
 
-**To remediate non\-compliant patches**
+**To remediate noncompliant patches**
 
 1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/](https://console.aws.amazon.com/systems-manager/)\.
 
 1. Under **Instances & Nodes**, choose **Run Command** and then choose **Run command**\.
 
-1. Choose the radio button next to **AWS\-RunPatchBaseline**\.
+1. Choose the button next to **AWS\-RunPatchBaseline**\.
 
 1. Change the **Operation** to **Install**\.
 
-1. Choose **Choose instances manually** and then choose the non\-compliant instances\.
+1. Choose **Choose instances manually** and then choose the noncompliant instances\.
 
 1. At the bottom of the page, choose **Run**\.
 
-1. After the command completes, to monitor the new compliance status of your patched instances, in the navigation pane, choose **Compliance**\.
+1. After the command is complete, to monitor the new compliance status of your patched instances, in the navigation pane, choose **Compliance**\.
 
 For more information about using Systems Manager Documents to patch a managed instance, see[ About SSM documents for patching instances](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-ssm-documents.html) and [Running commands using Systems Manager Run command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html) in the *AWS Systems Manager User Guide*\.

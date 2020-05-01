@@ -2,9 +2,9 @@
 
 When you first display a list of findings, the list is always filtered based on the record state and workflow status\. This is in addition to the filters for an insight, integration, or control\.
 
-The record state indicates whether the finding is active or archived\. A finding can be archived by the finding provider\. Findings are also automatically archived after 90 days\. By default, a finding list only shows active findings\.
+The record state indicates whether the finding is active or archived\. A finding can be archived by the finding provider\. AWS Security Hub also automatically archives findings for controls if the associated resource is deleted\. By default, a finding list only shows active findings\.
 
-The workflow status indicates the status of the investigation into the finding\. The workflow status can only be updated by the AWS Security Hub user\. By default, a finding list only shows findings with a workflow status of `NEW` or `NOTIFIED`\. The default finding list for a control also includes `RESOLVED` findings\.
+The workflow status indicates the status of the investigation into the finding\. The workflow status can only be updated by the Security Hub customer or a system operating on the customer's behalf\. By default, a finding list only shows findings with a workflow status of `NEW` or `NOTIFIED`\. The default finding list for a control also includes `RESOLVED` findings\.
 
 When you display a list of findings for a control, you can only filter based on text in the finding list\. You cannot add or remove filters, or group the findings\.
 

@@ -1,6 +1,8 @@
 # Using `BatchImportFindings` to create and update findings<a name="finding-update-batchimportfindings"></a>
 
-The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) API operation allows finding providers to create new findings and to update information about existing findings\.
+Finding providers use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) API operation to create new findings and to update information about the findings they created\. They cannot update findings that they did not create\.
+
+Customers, SIEMs, ticketing tools, and SOAR tools use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to make updates related to their processing of findings from finding providers\. See [Using `BatchUpdateFindings` to update a finding](finding-update-batchupdatefindings.md)\.
 
 AWS Security Hub can only accept finding updates for accounts that have Security Hub enabled\. The finding provider also must be enabled\. If Security Hub is disabled, or the finding provider integration is not enabled, then the findings are returned in the `FailedFindings` list, with an `InvalidAccess` error\.
 

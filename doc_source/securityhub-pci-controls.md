@@ -294,10 +294,6 @@ For more information about configuring CloudWatch Logs monitoring with the conso
 
 ## \[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth<a name="pcidss-codebuild-1"></a>
 
-**Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
-\.
-
 **Severity:** Critical
 
 **Resource:** CodeBuild project
@@ -305,6 +301,9 @@ This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html)
 
 This control checks whether the GitHub or Bitbucket source repository URL contains either personal access tokens or a user name and password\.
+
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-codebuild-1-requirements"></a>
 
@@ -338,10 +337,6 @@ To see CodeBuild use case\-based samples, see the [https://docs.aws.amazon.com/c
 
 ## \[PCI\.CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials<a name="pcidss-codebuild-2"></a>
 
-**Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
-\.
-
 **Severity:** Critical
 
 **Resource:** CodeBuild project
@@ -349,6 +344,9 @@ This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html)
 
 This control checks whether the project contains environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`\.
+
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-codebuild-2-requirements"></a>
 
@@ -948,10 +946,6 @@ Providing full administrative privileges instead of restricting to the minimum r
 
 ## \[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user<a name="pcidss-iam-4"></a>
 
-**Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
-\.
-
 **Severity:** Critical
 
 **Resource:** Account
@@ -963,6 +957,9 @@ This control checks whether your AWS account is enabled to use multi\-factor aut
 It does not check whether you are using virtual MFA\.
 
 To address PCI DSS requirement 8\.3\.1, you can choose between hardware MFA \(this control\) or virtual MFA \([\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](#pcidss-iam-5)\)\.
+
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-iam-4-requirements"></a>
 
@@ -993,10 +990,6 @@ Enabling hardware MFA is a method used to incorporate multi\-factor authenticati
 
 ## \[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user<a name="pcidss-iam-5"></a>
 
-**Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
-\.
-
 **Severity: ** Critical
 
 **Resource: ** Account 
@@ -1008,6 +1001,9 @@ This control checks whether users of your AWS account require a multi\-factor au
 It does not check whether you are using hardware MFA\.
 
 To address PCI DSS requirement 8\.3\.1, you can choose between virtual MFA \(this control\) or hardware MFA \([\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](#pcidss-iam-4)\)\.
+
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-iam-5-requirements"></a>
 
@@ -1226,15 +1222,15 @@ If you use a Lambda function that is in scope for PCI DSS, the function can be c
 
 1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. Navigate to **Functions** and then select your Lambda function
+1. Navigate to **Functions** and then select your Lambda function\.
 
-1. Scroll to **Network** and then select a VPC with the connectivity requirements of the function 
+1. Scroll to **Network** and then select a VPC with the connectivity requirements of the function\.
 
-1. To run your functions in high availability mode, Security Hub recommends that you choose at least 2 subnets
+1. To run your functions in high availability mode, Security Hub recommends that you choose at least 2 subnets\.
 
-1. Choose at least 1 Security Group with the connectivity requirements of the function 
+1. Choose at least 1 security group that has the connectivity requirements of the function 
 
-1. Choose **Save**
+1. Choose **Save**\.
 
 For more information see the section on configuring a Lambda function to access resources in a VPC in the [https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)\.
 

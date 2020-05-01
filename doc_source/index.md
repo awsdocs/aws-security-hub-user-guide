@@ -67,7 +67,7 @@ Amazon's trademarks and trade dress may not be used in
       + [AWS Config resources required for PCI DSS controls](securityhub-standards-pci-config-resources.md)
       + [PCI DSS controls](securityhub-pci-controls.md)
    + [AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)
-      + [AWS Config resources required for the AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)
+      + [Required AWS Config resources](standards-fsbp-config-resources.md)
       + [AWS Foundational Security Best Practices controls](securityhub-standards-fsbp-controls.md)
 + [Logging AWS Security Hub API calls with AWS CloudTrail](securityhub-ct.md)
 + [Automating AWS Security Hub with CloudWatch Events](securityhub-cloudwatch-events.md)
