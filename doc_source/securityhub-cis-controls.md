@@ -633,7 +633,7 @@ CloudTrail logs a record of every API call made in your account\. These log file
 
 **Important**  
 Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you are using Security Hub in the US East \(N\. Virginia\) Region, and you are storing AWS CloudTrail logs in a bucket in the US West \(N\. California\) Region, Security Hub cannot find the bucket in a the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource cannot be located\.  
+For example, if you are using Security Hub in the US East \(N\. Virginia\) Region, and you are storing AWS CloudTrail logs in a bucket in the US West \(N\. California\) Region, Security Hub cannot find the bucket in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource cannot be located\.  
 Similarly, if you are aggregating logs from multiple accounts into a single bucket, the CIS check returns a warning finding for all accounts except the account that owns the bucket\. Failed findings are returned when the bucket is located in the account and region where the check is being performed and that bucket is publicly accessible\.
 
 To run this check, Security Hub first uses custom logic to look for the bucket where your CloudTrail logs are stored\. It then uses the AWS Config managed rules to check that bucket is publicly accessible\.
@@ -765,7 +765,7 @@ By enabling S3 bucket logging on target S3 buckets, you can capture all events t
 
 **Important**  
 Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you are using Security Hub in the US East \(N\. Virginia\) Region, and you are storing AWS CloudTrail logs in a bucket in the US West \(N\. California\) Region, Security Hub cannot find the bucket in a the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource cannot be located\.  
+For example, if you are using Security Hub in the US East \(N\. Virginia\) Region, and you are storing AWS CloudTrail logs in a bucket in the US West \(N\. California\) Region, Security Hub cannot find the bucket in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource cannot be located\.  
 Similarly, if you are aggregating logs from multiple accounts into a single bucket, the CIS check returns a warning finding for all accounts except the account that owns the bucket\.  
 Failed findings are returned when the bucket is located in the account and region where the check is being performed and that bucket is publicly accessible\.
 
