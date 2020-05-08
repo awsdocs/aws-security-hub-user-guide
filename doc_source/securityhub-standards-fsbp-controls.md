@@ -20,9 +20,16 @@ The AWS Foundational Security Best Practices standard contains the following con
 **Parameters:**
 + `daysToExpiration`: 90
 
-This control checks whether ACM certificates in your account are marked for expiration within 90 days\. Certificates provided by AWS Certificate Manager are automatically renewed\. ACM does not automatically renew certificates that you import\.
+This control checks whether ACM certificates in your account are marked for expiration within 90 days\. It checks both imported certificates and certificates provided by AWS Certificate Manager\.
 
-If you're using certificates provided by ACM, you do not need to rotate SSL/TLS certificates\. ACM manages certificate renewals for you\. For more information, see [Managed renewal](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) in the *AWS Certificate Manager User Guide*\. 
+Certificates provided by ACM are automatically renewed\. If you're using certificates provided by ACM, you do not need to rotate SSL/TLS certificates\. ACM manages certificate renewals for you\.
+
+ACM does not automatically renew certificates that you import\. You must renew imported certificates manually\.
+
+For more information, see [Managed renewal](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) in the *AWS Certificate Manager User Guide*\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Remediation<a name="acm-1-remediation"></a>
 
@@ -170,7 +177,11 @@ The AWS KMS key and S3 bucket must be in the same Region\.
 This control checks whether the GitHub or Bitbucket source repository URL contains either personal access tokens or a user name and password\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Europe \(Milan\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 Authentication credentials should never be stored or transmitted in clear text or appear in the repository URL\. Instead of personal access tokens or user name and password, you should use OAuth to grant authorization for accessing GitHub or Bitbucket repositories\. Using personal access tokens or a user name and password could expose your credentials to unintended data exposure and unauthorized access\.
 
@@ -213,7 +224,11 @@ This control checks whether the project contains the environment variables `AWS_
 Authentication credentials `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` should never be stored in clear text, as this could lead to unintended data exposure and unauthorized access\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Europe \(Milan\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="codebuild-2-remediation"></a>
 
@@ -331,7 +346,10 @@ Parameters: None
 
 This control checks that Amazon Elastic Block Store snapshots are not public, as determined by the ability to be restorable by anyone\.
 
-EBS snapshots are used to back up the data on your EBS volumes to Amazon S3 at a specific point in time\. You can use the snapshots to restore previous states of EBS volumes\. EBS snapshots should not be publicly restorable by everyone unless you explicitly allow it\. Restricting this ability avoids accidental exposure of your company’s sensitive data\.
+EBS snapshots are used to back up the data on your EBS volumes to Amazon S3 at a specific point in time\. You can use the snapshots to restore previous states of EBS volumes\. It is rarely acceptable to share a snapshot with the public\. Typically the decision to share a snapshot publicly was made in error or without a complete understanding of the implications\. This check helps ensure that all such sharing was fully planned and intentional\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Remediation<a name="ec2-1-remediation"></a>
 
@@ -405,6 +423,9 @@ For an added layer of security of your sensitive data in EBS volumes, you should
 
 To learn more about Amazon EBS encryption, see [Amazon EBS encryption](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
 ### Remediation<a name="ec2-3-remediation"></a>
 
 There is no direct way to encrypt an existing unencrypted volume or snapshot\. You can only encrypt a new volume or snapshot when you create it\.
@@ -433,6 +454,9 @@ Note that this control does not use the `KmsKeyId` parameter for [https://docs.a
 
 For an added layer of security for your sensitive data in Amazon EFS, you should create encrypted file systems\. Amazon EFS supports encryption for file systems at\-rest\. You can enable encryption of data at\-rest when you create an Amazon EFS file system\. To learn more about Amazon EFS encryption, see[ Data encryption in Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/encryption.html) in the *Amazon Elastic File System User Guide*\.
 
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
 ### Remediation<a name="efs-1-remediation"></a>
 
 For details on how to encrypt a new Amazon EFS file system, see [Encrypting data at rest](https://docs.aws.amazon.com/efs/latest/ug/encryption-at-rest.html) in the *Amazon Elastic File System User Guide*\.
@@ -454,6 +478,9 @@ This control checks whether HTTP to HTTPS redirection is configured on all HTTP 
 Before you start to use your Application Load Balancer, you must add one or more listeners\. A listener is a process that uses the configured protocol and port to check for connection requests\. Listeners support both HTTP and HTTPS protocols\. You can use an HTTPS listener to offload the work of encryption and decryption to your Application Load Balancer\. You should use redirect actions with Application Load Balancer to redirect client HTTP request to an HTTPS request on port 443 to enforce encryption in\-transit\.
 
 To learn more, see [Listeners for your Application Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) in *User Guide for Application Load Balancers*\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Remediation<a name="elbv2-1-remediation"></a>
 
@@ -522,7 +549,9 @@ It is highly recommended that you enable GuardDuty in all supported AWS Regions\
 
 **Note**  
 This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
 Asia Pacific \(Hong Kong\)
+Europe \(Milan\)
 Middle East \(Bahrain\)
  AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
@@ -664,6 +693,9 @@ Access keys consist of an access key ID and a secret access key\. They are used 
 
 If your organization uses AWS Single Sign\-On \(AWS SSO\), your users can sign in to Active Directory, a built\-in AWS SSO directory, or [another iDP connected to AWS SSO](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html)\. They can then be mapped to an IAM role that enables them to run AWS CLI commands or call AWS APIs without the need for IAM user access keys\. To learn more, see [Configuring the AWS CLI to use AWS Single Sign\-On](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html) in the *AWS Command Line Interface User Guide*\.
 
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
 ### Remediation<a name="iam-3-remediation"></a>
 
 **To ensure that access keys aren't more than 90 days old**
@@ -713,6 +745,9 @@ This control checks whether the root user access key is available\.
 The root account is the most privileged user in an AWS account\. AWS access keys provide programmatic access to a given account\.
 
 Security Hub recommends that you remove all access keys that are associated with the root account\. This limits that vectors that can be used to compromise the account\. It also encourages the creation and use of role\-based accounts that are least privileged\. 
+
+**Note**  
+This control is not supported in Africa \(Cape Town\)\.
 
 ### Remediation<a name="iam-4-remediation"></a>
 
@@ -906,9 +941,9 @@ You can only update resource\-based policies for Lambda resources within the sco
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html)
 
 **Parameters:** 
-+ `runtime`: `nodejs12.x, nodejs10.x, python3.8, python3.7, python3.6, python2.7, ruby2.5, java11, java8,go1.x, dotnetcore2.1`
++ `runtime`: `nodejs12.x, nodejs10.x, python3.8, python3.7, python3.6, python2.7, ruby2.5, ruby2.7, java11, java8,go1.x, dotnetcore2.1, dotnetcore3.1`
 
-This control checks that the Lambda function settings for runtimes match the expected values set for the latest runtimes for each supported language\. This control checks for the following runtimes: `nodejs12.x`, `nodejs10.x`, `python3.8`, `python3.7`, `python3.6`, `ruby2.5`, `java11`, `java8`, `go1.x`, `dotnetcore2.1`
+This control checks that the Lambda function settings for runtimes match the expected values set for the latest runtimes for each supported language\. This control checks for the following runtimes: `nodejs12.x`, `nodejs10.x`, `python3.8`, `python3.7`, `python3.6`, `ruby2.5`, `ruby2.7`,`java11`, `java8`, `go1.x`, `dotnetcore2.1`, `dotnetcore3.1`
 
 [Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a runtime component is no longer supported for security updates, Lambda deprecates the runtime\. Even though you cannot create functions that use the deprecated runtime, the function is still available to process invocation events\. Make sure that your Lambda functions are current and do not use out\-of\-date runtime environments\.
 
@@ -939,6 +974,9 @@ An RDS snapshot must not be public unless intended\. If you share an unencrypted
 Note that if the configuration is changed to allow public access, the AWS Config rule may not be able to detect the change for up to 12 hours\. Until the AWS Config rule detects the change, the check passes even though the configuration violates the rule\.
 
 To learn more about sharing a DB snapshot, see [Sharing a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html) in the *Amazon RDS User Guide*\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Remediation<a name="rds-1-remediation"></a>
 
@@ -1047,7 +1085,10 @@ Unless you intend to have your S3 buckets be publicly accessible, you should con
 To learn more, see [Using Amazon S3 Block Public Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon Simple Storage Service Developer Guide*\.
 
 **Note**  
-This control is not supported in Middle East \(Bahrain\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Europe \(Milan\)
+Middle East \(Bahrain\)
 
 ### Remediation<a name="s3-1-remediation"></a>
 
@@ -1224,7 +1265,10 @@ This control checks whether the compliance status of the Amazon EC2 Systems Mana
 Having your EC2 instances fully patched as required by your organization reduces the attack surface of your AWS accounts\. 
 
 **Note**  
-This control is not supported in Middle East \(Bahrain\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Europe \(Milan\)
+Middle East \(Bahrain\)
 
 ### Remediation<a name="ssm-2-remediation"></a>
 

@@ -105,6 +105,8 @@ IAM users can access AWS resources using different types of credentials, such as
 
 We recommend that you remove or deactivate all credentials that have been unused in 90 days or more\. Disabling or removing unnecessary credentials reduces the window of opportunity for credentials associated with a compromised or abandoned account to be used\. 
 
+The AWS Config rule for this control uses the [https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetCredentialReport.html](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetCredentialReport.html) and [https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateCredentialReport.html](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateCredentialReport.html) API operations, which are only updated every four hours\. Changes to IAM users can take up to four hours to be visible to this control\.
+
 ### Remediation<a name="cis-1.3-remediation"></a>
 
 To get some of the information that you need to monitor accounts for dated credentials, use the IAM console\. For example, when you view users in your account, there is a column for **Access key age**, **Password age**, and **Last activity**\. If the value in any of these columns is greater than 90 days, make the credentials for those users inactive\.
@@ -130,6 +132,9 @@ After you identify the inactive accounts or unused credentials, use the followin
 Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS\. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface \(AWS CLI\), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services\.
 
 We recommend that you regularly rotate all access keys\. Rotating access keys reduces the chance for an access key that is associated with a compromised or terminated account to be used\. Rotate access keys to ensure that data can't be accessed with an old key that might have been lost, cracked, or stolen\. 
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Remediation<a name="cis-1.4-remediation"></a>
 
@@ -319,6 +324,9 @@ The root account is the most privileged user in an AWS account\. AWS Access Keys
 
 We recommend that all access keys be associated with the root account be removed\. Removing access keys associated with the root account limits vectors that the account can be compromised by\. Removing the root access keys also encourages the creation and use of role\-based accounts that are least privileged\.
 
+**Note**  
+This control is not supported in Africa \(Cape Town\)\.
+
 ### Remediation<a name="cis-1.12-remediation"></a>
 
 **To deactivate or delete access keys**
@@ -464,6 +472,9 @@ For more information about adding users to groups, see [Adding and removing user
 AWS provides a support center that can be used for incident notification and response, as well as technical support and customer services\.
 
 Create an IAM role to allow authorized users to manage incidents with AWS Support\. By implementing least privilege for access control, an IAM role will require an appropriate IAM policy to allow support center access in order to manage incidents with AWS Support\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Remediation<a name="cis-1.20-remediation"></a>
 
@@ -1850,6 +1861,9 @@ Security groups provide stateful filtering of ingress and egress network traffic
 
 We recommend that no security group allow unrestricted ingress access to port 22\. Removing unfettered connectivity to remote console services, such as SSH, reduces a server's exposure to risk\.
 
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
 ### Remediation<a name="cis-4.1-remediation"></a>
 
 Perform the following steps for each security group associated with a VPC\.
@@ -1877,6 +1891,9 @@ Perform the following steps for each security group associated with a VPC\.
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
 We recommend that no security group allow unrestricted ingress access to port 3389\. Removing unfettered connectivity to remote console services, such as RDP, reduces a server's exposure to risk\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Remediation<a name="cis-4.2-remediation"></a>
 

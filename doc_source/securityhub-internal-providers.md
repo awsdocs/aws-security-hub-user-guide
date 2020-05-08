@@ -3,7 +3,7 @@
 Security Hub supports integrations with several AWS services\.
 
 **Note**  
-Some integrations are not available in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
+Some integrations are not available in Africa \(Cape Town\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
 
 For these services, the integration allows the service to send findings to Security Hub\.
 + [AWS Firewall Manager](#integration-aws-firewall-manager)

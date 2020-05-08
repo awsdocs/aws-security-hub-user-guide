@@ -3,7 +3,7 @@
 AWS Security Hub is integrated with the following third\-party products\. For each provider, the list indicates whether the product sends findings to Security Hub, receives findings from Security Hub, or both\.
 
 **Note**  
-Some integrations are not available in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
+Some integrations are not available in Africa \(Cape Town\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
 
 If applicable, the list also specifies the product ARN\. Integrations that send findings to Security Hub always have an ARN\.
 

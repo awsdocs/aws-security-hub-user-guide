@@ -303,7 +303,11 @@ For more information about configuring CloudWatch Logs monitoring with the conso
 This control checks whether the GitHub or Bitbucket source repository URL contains either personal access tokens or a user name and password\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Europe \(Milan\)
+ AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Related PCI DSS requirements<a name="pcidss-codebuild-1-requirements"></a>
 
@@ -346,7 +350,11 @@ To see CodeBuild use case\-based samples, see the [https://docs.aws.amazon.com/c
 This control checks whether the project contains environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Europe \(Milan\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Related PCI DSS requirements<a name="pcidss-codebuild-2-requirements"></a>
 
@@ -554,6 +562,9 @@ This control checks whether Amazon Elastic Block Store snapshots are not publicl
 
 You should also ensure that permission to change Amazon EBS configurations are restricted to authorized AWS accounts only\. Learn more about managing Amazon EBS snapshot permissions in the [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html)\.
 
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
 ### Related PCI DSS requirements<a name="pcidss-ec2-1-requirements"></a>
 
 This control is related to the following PCI DSS requirements:
@@ -650,6 +661,9 @@ For more information about working with security groups in Amazon VPC, see the [
 
 This control will help you maintain an accurate asset inventory of needed security groups in your CDE by checking that security groups are attached to Amazon EC2 instances or to an ENI\. A failed finding indicates you may have unused Amazon EC2 security groups\.
 
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
 ### Related PCI DSS requirements<a name="pcidss-ec2-3-requirements"></a>
 
 This control is related to the following PCI DSS requirements:
@@ -687,6 +701,9 @@ This control checks whether Elastic IP addresses that are allocated to a VPC are
 A failed finding indicates you may have unused Amazon EC2 EIPs\.
 
 This will help you maintain an accurate asset inventory of EIPs in your CDE\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-ec2-4-requirements"></a>
 
@@ -797,6 +814,9 @@ Encryption of data at rest requires Amazon ES 5\.1 or later\. For more informati
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
 
 This control checks whether user access keys exist for the root user\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-iam-1-requirements"></a>
 
@@ -1248,6 +1268,9 @@ To learn more about sharing DB snapshots in Amazon RDS, see the [https://docs.aw
 
 Note that if the configuration is changed to allow public access, the AWS Config rule may not be able to detect the change for up to 12 hours\. Until the AWS Config rule detects the change, the check passes even though the configuration violates the rule\.
 
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
 ### Related PCI DSS requirements<a name="pcidss-rds-1-requirements"></a>
 
 This control is related to the following PCI DSS requirements:
@@ -1601,6 +1624,9 @@ It does not check whether the patch was applied within the 30\-day limit prescri
 It also does not validate whether the patches applied were classified as security patches\.
 
 You should create patching groups with the appropriate baseline settings and ensure in\-scope systems are managed by those patch groups in Systems Manager\. For more information about patch groups, see the [https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-patch-group-tagging.html](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-patch-group-tagging.html)\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-ssm-1-requirements"></a>
 
