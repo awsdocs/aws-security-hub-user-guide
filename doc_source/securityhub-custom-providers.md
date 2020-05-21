@@ -8,7 +8,7 @@ You can send these findings into Security Hub manually using the [https://docs.a
 
 Before you can successfully invoke the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) API operation, you must enable Security Hub\.
 
-You must provide the finding details using the [AWS Security Finding format](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)\. For the findings from your custom integration, use the following requirements and recommendations\.
+You must provide the finding details using the [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\. For the findings from your custom integration, use the following requirements and recommendations\.
 
 **Setting the product ARN**  
 When you enable Security Hub, a default product Amazon Resource Name \(ARN\) for Security Hub is generated in your current account\.  

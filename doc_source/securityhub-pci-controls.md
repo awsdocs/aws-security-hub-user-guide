@@ -86,7 +86,7 @@ These are methods used to render PAN unreadable\.
 
 1. Choose **Save**\.
 
-You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information on encrypting CloudTrail log files with AWS KMS managed keys \(SSE\-KMS\), see the []()\.
+You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information on encrypting CloudTrail log files with AWS KMS managed keys \(SSE\-KMS\), see the [https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console)\.
 
 ## \[PCI\.CloudTrail\.2\] CloudTrail should be enabled<a name="pcidss-cloudtrail-2"></a>
 

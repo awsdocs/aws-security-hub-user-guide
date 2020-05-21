@@ -61,7 +61,7 @@ Amazon's trademarks and trade dress may not be used in
    + [CIS AWS Foundations standard](securityhub-standards-cis.md)
       + [AWS Config resources required for CIS controls](securityhub-standards-cis-config-resources.md)
       + [CIS AWS Foundations controls](securityhub-cis-controls.md)
-      + [CIS AWS Foundations controls that you may want to disable](securityhub-standards-cis-to-disable.md)
+      + [CIS AWS Foundations controls that you might want to disable](securityhub-standards-cis-to-disable.md)
       + [CIS AWS Foundations security checks that are not supported in Security Hub](securityhub-standards-cis-checks-not-supported.md)
    + [Payment Card Industry Data Security Standard (PCI DSS)](securityhub-standards-pcidss.md)
       + [AWS Config resources required for PCI DSS controls](securityhub-standards-pci-config-resources.md)

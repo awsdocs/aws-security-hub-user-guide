@@ -70,7 +70,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Medium
 
-**AWS Config rule: **[mfa\-enabled\-for\-iam\-console\-access](https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html)
+**AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html](https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html)
 
 Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password as well as for an authentication code from their AWS MFA device\.
 
@@ -99,7 +99,7 @@ To learn how to delegate MFA setup to users, see [How to Delegate Management of 
 
 **Severity:** Medium
 
-**AWS Config rule:** [iam\-user\-unused\-credentials\-check](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
 
 IAM users can access AWS resources using different types of credentials, such as passwords or access keys\.
 
@@ -127,7 +127,7 @@ After you identify the inactive accounts or unused credentials, use the followin
 
 **Severity:** Medium
 
-**AWS Config managed rule:** [access\-keys\-rotated](https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html)
+**AWS Config managed rule:** [https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html](https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html)
 
 Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS\. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface \(AWS CLI\), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services\.
 
@@ -172,7 +172,7 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 **Severity:** Medium
 
-**AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
@@ -192,7 +192,7 @@ We recommend that the password policy require at least one uppercase letter\. Se
 
 **Severity:** Medium
 
-**AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\. We recommend that the password policy require at least one lowercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
 
@@ -210,7 +210,7 @@ Password policies, in part, enforce password complexity requirements\. Use IAM p
 
 **Severity:** Medium
 
-**AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
@@ -230,7 +230,7 @@ We recommend that the password policy require at least one symbol\. Setting a pa
 
 **Severity:** Medium
 
-**AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
@@ -250,7 +250,7 @@ We recommend that the password policy require at least one number\. Setting a pa
 
 **Severity:** Medium
 
-**AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords are at least a given length\.
 
@@ -270,7 +270,7 @@ We recommend that the password policy require a minimum password length of 14 ch
 
 **Severity:** Low
 
-**AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 IAM password policies can prevent the reuse of a given password by the same user\.
 
@@ -292,7 +292,7 @@ We recommend that the password policy prevent the reuse of passwords\. Preventin
 
 **Severity:** Low
 
-**AWS Config rule:** [iam\-password\-policy](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
 IAM password policies can require passwords to be rotated or expired after a given number of days\.
 
@@ -318,7 +318,7 @@ We recommend that the password policy expire passwords after 90 days or less\. R
 
 **Severity:** Critical
 
-**AWS Config rule:** [iam\-root\-access\-key\-check](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
 
 The root account is the most privileged user in an AWS account\. AWS Access Keys provide programmatic access to a given account\.
 
@@ -347,7 +347,7 @@ This control is not supported in Africa \(Cape Town\)\.
 
 **Severity:** Critical
 
-**AWS Config rule:** [root\-account\-mfa\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html)
 
 The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
 
@@ -380,7 +380,7 @@ This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\
 
 **Severity:** Critical
 
-**AWS Config rule:** [root\-account\-hardware\-mfa\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
 The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
 
@@ -413,7 +413,7 @@ This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\
 
 **Severity:** Low
 
-**AWS Config rule:** [iam\-user\-no\-policies\-check](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
 
 By default, IAM users, groups, and roles have no access to AWS resources\. IAM policies are how privileges are granted to users, groups, or roles\.
 
@@ -467,7 +467,7 @@ For more information about adding users to groups, see [Adding and removing user
 
 **Severity:** Low
 
-**AWS Config rule:** [iam\-policy\-in\-use](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-in-use.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-in-use.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-in-use.html)
 
 AWS provides a support center that can be used for incident notification and response, as well as technical support and customer services\.
 
@@ -492,7 +492,7 @@ To remediate this issue, create a role to allow authorized users to manage AWS S
 
    If the users or groups that will assume this role are in the same account, then enter the local account number\.
 **Note**  
-The administrator of the specified account can grant permission to assume this role to any IAM user in that account\. To do this, the administrator attaches a policy to the user or a group that grants permission for the` sts:AssumeRole` action\. In that policy, the resource must be the role ARN\.
+The administrator of the specified account can grant permission to assume this role to any IAM user in that account\. To do this, the administrator attaches a policy to the user or a group that grants permission for the `sts:AssumeRole` action\. In that policy, the resource must be the role ARN\.
 
 1. Choose **Next: Permissions**\.
 
@@ -520,13 +520,13 @@ The administrator of the specified account can grant permission to assume this r
 
 **Severity:** Critical
 
-**AWS Config rule:** [iam\-policy\-no\-statements\-with\-admin\-access](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
 
 IAM policies define a set of privileges granted to users, groups, or roles\. It's recommended and considered a standard security advice to grant least privilege—that is, granting only the permissions required to perform a task\. Determine what users need to do and then craft policies that let the users perform only those tasks, instead of allowing full administrative privileges\.
 
 It's more secure to start with a minimum set of permissions and grant additional permissions as necessary, rather than starting with permissions that are too lenient and then trying to tighten them later\. Providing full administrative privileges instead of restricting to the minimum set of permissions that the user is required to do exposes the resources to potentially unwanted actions\.
 
-You should remove IAM policies that have a statement with "Effect": "Allow" with "Action": "\*" over "Resource": "\*"\.
+You should remove IAM policies that have a statement with `"Effect": "Allow"` with `"Action": "*" `over `"Resource": "*"`\.
 
 ### Remediation<a name="cis-1.22-remediation"></a>
 
@@ -548,7 +548,7 @@ Confirm that the user that you detached the policy from can still access AWS ser
 
 **Severity:** Critical
 
-**AWS Config rule:** [multi\-region\-cloud\-trail\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html)
 
 CloudTrail is a service that records AWS API calls for your account and delivers log files to you\. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, the request parameters, and the response elements returned by the AWS service\. CloudTrail provides a history of AWS API calls for an account, including API calls made via the AWS Management Console, AWS SDKs, command\-line tools, and higher\-level AWS services \(such as AWS CloudFormation\)\.
 
@@ -603,7 +603,7 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 
 **Severity:** Low
 
-**AWS Config rule:** [cloud\-trail\-log\-file\-validation\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html)
 
 CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to S3\. You can use these digest files to determine whether a log file was changed, deleted, or unchanged after CloudTrail delivered the log\.
 
@@ -627,7 +627,7 @@ We recommend that you enable file validation on all trails\. Enabling log file v
 
 **Severity:** Critical
 
-**AWS Config rules:** [s3\-bucket\-public\-read\-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html), [s3\-bucket\-public\-write\-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
+**AWS Config rules:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html), [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
 
 CloudTrail logs a record of every API call made in your account\. These log files are stored in an S3 bucket\. We recommend that the bucket policy, or access control list \(ACL\), applied to the S3 bucket that CloudTrail logs to prevents public access to the CloudTrail logs\. Allowing public access to CloudTrail log content might aid an adversary in identifying weaknesses in the affected account's use or configuration\.
 
@@ -660,7 +660,7 @@ If the bucket is discovered and is publicly accessible, the check generates a fa
 
 **Severity:** Low
 
-**AWS Config rule: **[cloud\-trail\-cloud\-watch\-logs\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html)
+**AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html)
 
 CloudTrail is a web service that records AWS API calls made in a given account\. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, the request parameters, and the response elements returned by the AWS service\.
 
@@ -738,7 +738,7 @@ To run this check, Security Hub performs custom logic to perform the audit steps
 1. On the Settings page, do the following:
    + Under **Resource types to record**, select **Record all resources supported in this region** and **Include global resources \(e\.g\., AWS IAM resources\)**\.
    + Under **Amazon S3 bucket**, specify the bucket to use or create a bucket and optionally include a prefix\.
-   + Under **Amazon SNS topic**, select an Amazon SNS topic from your account or create one\. For more information about Amazon SNS, see the [Amazon Simple Notification Service Getting Started Guide](https://docs.aws.amazon.com/sns/latest/gsg/)\.
+   + Under **Amazon SNS topic**, select an Amazon SNS topic from your account or create one\. For more information about Amazon SNS, see the [https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html)\.
    + Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or choose **Choose a role from your account** and then select the role to use\.
 
 1. Choose **Next**\.
@@ -747,15 +747,15 @@ To run this check, Security Hub performs custom logic to perform the audit steps
 
 1. Choose **Confirm**\.
 
-For more information about using AWS Config from the AWS Command Line Interface, see [Turning on AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/gs-cli-subscribe.html) in the *AWS Config Developer Guide*\.
+For more information about using AWS Config from the AWS Command Line Interface, see [Turning on AWS Config](https://docs.aws.amazon.com/config/latest/gs-cli-subscribe.html) in the *AWS Config Developer Guide*\.
 
-You can also use an AWS CloudFormation template to automate this process\. For more information, see the [AWS CloudFormation StackSets sample template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-sampletemplates.html) in the *AWS CloudFormation User Guide*\.
+You can also use an AWS CloudFormation template to automate this process\. For more information, see the [AWS CloudFormation StackSets sample template](https://docs.aws.amazon.com/AWSCloudFormation/latest/stacksets-sampletemplates.html) in the *AWS CloudFormation User Guide*\.
 
 ## 2\.6 – Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket<a name="securityhub-cis-controls-2.6"></a>
 
 **Severity:** Low
 
-**AWS Config rule:** [s3\-bucket\-logging\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html)
 
 Amazon S3 bucket access logging generates a log that contains access records for each request made to your S3 bucket\. An access log record contains details about the request, such as the request type, the resources specified in the request worked, and the time and date the request was processed\.
 
@@ -793,7 +793,7 @@ If the bucket cannot be discovered because it is in a different account or regio
 
 **Severity:** Medium
 
-**AWS Config rule:** [cloud\-trail\-encryption\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
 
 CloudTrail is a web service that records AWS API calls for an account and makes those logs available to users and resources in accordance with IAM policies\. AWS Key Management Service \(AWS KMS\) is a managed service that helps create and control the encryption keys used to encrypt account data, and uses hardware security modules \(HSMs\) to protect the security of encryption keys\.
 
@@ -825,13 +825,13 @@ The AWS KMS key and S3 bucket must be in the same Region\.
 
 1. Choose **Save**\.
 
-You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail log files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
+You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail log files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
 
 ## 2\.8 – Ensure rotation for customer\-created CMKs is enabled<a name="securityhub-cis-controls-2.8"></a>
 
 **Severity:** High
 
-**AWS Config rule: **[cmk\-backing\-key\-rotation\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
+**AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
 AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the CMK\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\.
 
@@ -857,7 +857,7 @@ We recommend that you enable CMK key rotation\. Rotating encryption keys helps r
 
 **Severity:** Medium
 
-**AWS Config rule:** [vpc\-flow\-logs\-enabled](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
 
 VPC flow logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC\. After you have created a flow log, you can view and retrieve its data in CloudWatch Logs\.
 
@@ -1855,7 +1855,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** High
 
-**AWS Config rule:** [restricted\-ssh](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html)
 
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
@@ -1886,7 +1886,7 @@ Perform the following steps for each security group associated with a VPC\.
 
 **Severity:** High
 
-**AWS Config rule:** [restricted\-common\-ports](https://docs.aws.amazon.com/config/latest/developerguide/restricted-common-ports.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/restricted-common-ports.html](https://docs.aws.amazon.com/config/latest/developerguide/restricted-common-ports.html)
 
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
@@ -1917,7 +1917,7 @@ Perform the following steps for each security group associated with a VPC\.
 
 **Severity:** Medium
 
-**AWS Config rule:** [vpc\-default\-security\-group\-closed](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
 
 A VPC comes with a default security group with initial settings that deny all inbound traffic, allow all outbound traffic, and allow all traffic between instances assigned to the security group\. If you don't specify a security group when you launch an instance, the instance is automatically assigned to this default security group\. Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
@@ -1926,7 +1926,7 @@ We recommend that the default security group restrict all traffic\.
 Update the default security group for the default VPC in every Region to comply\. Any new VPCs automatically contain a default security group that you need to remediate to comply with this recommendation\.
 
 **Note**  
-When implementing this recommendation, you can use VPC flow logging, enabled for [check 2\.9](#securityhub-cis-controls-2.9), to determine the least\-privilege port access required by systems to work properly because it can log all packet acceptances and rejections occurring under the current security groups\.
+When implementing this recommendation, you can use VPC flow logging, enabled for [2\.9 – Ensure VPC flow logging is enabled in all VPCs ](#securityhub-cis-controls-2.9), to determine the least\-privilege port access required by systems to work properly because it can log all packet acceptances and rejections occurring under the current security groups\.
 
 Configuring all VPC default security groups to restrict all traffic encourages least\-privilege security group development and mindful placement of AWS resources into security groups, which in turn reduces the exposure of those resources\.
 

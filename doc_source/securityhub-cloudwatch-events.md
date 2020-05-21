@@ -8,7 +8,7 @@ Amazon CloudWatch Events enables you to automate your AWS services and respond a
 + Notifying an Amazon SNS topic or an Amazon SQS queue
 + Sending a finding to a third\-party ticketing, chat, SIEM, or incident response and management tool
 
-For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/)\.
+For more information, see the [https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html)\.
 
 **Note**  
 As a best practice, make sure that the permissions granted to your users to access CloudWatch Events use least\-privilege IAM policies, and that only the required permissions are granted\.  

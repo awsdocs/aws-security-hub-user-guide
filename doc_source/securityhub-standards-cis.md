@@ -9,5 +9,5 @@ AWS Security Hub has satisfied the requirements of CIS Security Software Certifi
 **Topics**
 + [AWS Config resources required for CIS controls](securityhub-standards-cis-config-resources.md)
 + [CIS AWS Foundations controls](securityhub-cis-controls.md)
-+ [CIS AWS Foundations controls that you may want to disable](securityhub-standards-cis-to-disable.md)
++ [CIS AWS Foundations controls that you might want to disable](securityhub-standards-cis-to-disable.md)
 + [CIS AWS Foundations security checks that are not supported in Security Hub](securityhub-standards-cis-checks-not-supported.md)

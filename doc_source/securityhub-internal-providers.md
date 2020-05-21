@@ -3,7 +3,7 @@
 Security Hub supports integrations with several AWS services\.
 
 **Note**  
-Some integrations are not available in Africa \(Cape Town\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
+Some integrations are not available in Africa \(Cape Town\), Asia Pacific \(Hong Kong\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
 
 For these services, the integration allows the service to send findings to Security Hub\.
 + [AWS Firewall Manager](#integration-aws-firewall-manager)
@@ -45,7 +45,7 @@ Amazon Inspector sends Amazon Inspector findings to Security Hub that are genera
 For more information about Amazon Inspector rules packages and rules, see [Amazon Inspector rules packages and rules](https://docs.aws.amazon.com/inspector/latest/userguide/inspector_rule-packages.html) in the *Amazon Inspector User Guide*\.
 
 **Amazon Macie**  <a name="integration-amazon-macie"></a>
-With Macie, a finding \(currently known as an alert\) can be one of the following indices: **CloudTrail data**, **S3 bucket properties**, and **S3 objects**\.  
-For more information, see [Locating and analyzing Macie alerts](https://docs.aws.amazon.com/macie/latest/userguide/macie-alerts.html#macie-alert-working-locate) in the *Amazon Macie User Guide*\.  
-Macie sends basic and custom alerts \(findings\) to Security Hub only from the **S3 bucket properties** and **S3 objects** indices\. Macie does not send data classifications\.  
-Macie does not send findings to Security Hub from the **CloudTrail data** index\.
+A finding from Macie can indicate that there is a policy violation, or that sensitive data, such as personal identifying information \(PII\) and intellectual property, is present in the data that your organization stores in Amazon S3\. Macie only sends policy violation findings to Security Hub\.  
+For more information, see [Amazon Macie findings](https://docs.aws.amazon.com/macie/latest/user/findings.html) in the *Amazon Macie User Guide*\.  
+Security Hub can also receive findings from Macie Classic\. Macie Classic sends basic and custom findings to Macie from the **S3 bucket properties** and **S3 objects** indices\. Macie Classic does not send data classifications, or findings from the **CloudTrail data** index\.  
+For more information, see [Locating and analyzing Macie Classic alerts](https://docs.aws.amazon.com/macie/latest/userguide/macie-alerts.html#macie-alert-working-locate) in the *Amazon Macie Classic User Guide*\.

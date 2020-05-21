@@ -31,13 +31,13 @@ Use the following procedures to add an account, invite an account, or accept an 
 
    To add more accounts, enter the account ID and then choose **Add** for each account\.
 
-   You can add multiple accounts at the same time by using a comma\-separated values \(CSV\) file\. Add the account ID for each account to add, and then choose **Upload list \(\.csv\)** to bulk\-add accounts\.
+   You can add multiple accounts at the same time by using a comma\-separated values \(CSV\) file\. Add the account ID and email address for each account to add, and then choose **Upload list \(\.csv\)** to bulk\-add accounts\.
 **Important**  
-In your \.csv list, accounts must appear one per line\. The first line of the \.csv file must contain the following header, as shown in the following example: **Account ID**\. Each subsequent line must contain a valid account ID for the account to add\.  
+In your \.csv list, accounts must appear one per line\. The first line of the \.csv file must contain the following header, as shown in the following example: **Account ID,Email**\. Each subsequent line must contain a valid account ID and email address for the account to add\. Separate the account ID and email address with a comma\.  
 
    ```
-   Account ID
-   111111111111
+   Account ID,Email
+   111111111111,user@example.com
    ```
 
 1. After you finish adding accounts, choose **Add**\. Then in the **Accounts to be added** section, choose **Next**\.
@@ -72,21 +72,19 @@ You must enable Security Hub before you can accept a membership invitation\.
 
 You can also designate Security Hub master and member accounts with operations in the Security Hub API\. Use the following Security Hub API operations in the order listed to create master and member accounts\.
 
-Use these operations to designate a master account and then send an invitation to become a member account\.
+**To designate a master account and send invitations to become a member account**
 
-****
+1. Run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateMembers.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateMembers.html) using the credentials of the account that has Security Hub enabled\. This is the account that you want to be the master Security Hub account\.
 
-1. Run [CreateMembers](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateMembers.html) using the credentials of the account that has Security Hub enabled\. This is the account that you want to be the master Security Hub account\.
-
-1. Run [InviteMembers](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_InviteMembers.html) using the master account\.
+1. Run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_InviteMembers.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_InviteMembers.html) using the master account\.
 
 Use these operations to enable Security Hub and then accept an invitation\. Use the credentials for the account you invited to become the member account\.
 
-****
+**To enable Security Hub for the member accounts and accept the invitation**
 
-1. Run [EnableSecurityHub](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html) for each account that you invited\. Security Hub must be enabled in the account before the account owner can accept the invitation\.
+1. Run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html) for each account that you invited\. Security Hub must be enabled in the account before the account owner can accept the invitation\.
 
-1. Run [AcceptInvitation](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AcceptInvitation.html) for each account you invited to accept your invitation\.
+1. Run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AcceptInvitation.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AcceptInvitation.html) for each account you invited to accept your invitation\.
 
 ## Accounts and data retention in Security Hub<a name="securityhub-data-retention"></a>
 
