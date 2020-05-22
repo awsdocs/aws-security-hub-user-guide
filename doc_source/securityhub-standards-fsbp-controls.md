@@ -853,7 +853,7 @@ This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\
 + `RequireLowercaseCharacters`: `true`
 + `RequireSymbols`: `true`
 + `RequireNumbers`: `true`
-+ `MinimumPasswordLength`: 14 or greater
++ `MinimumPasswordLength`: 14
 + `PasswordReusePrevention`: 24
 + `MaxPasswordAge`: 90
 
@@ -862,7 +862,7 @@ This control checks whether the account password policy for IAM users uses the f
 + `RequireLowercaseCharacters`: `true`
 + `RequireSymbols`: `true`
 + `RequireNumbers`: `true`
-+ `MinimumPasswordLength`: 14 or greater
++ `MinimumPasswordLength`: 14
 + `PasswordReusePrevention`: 24
 + `MaxPasswordAge`: 90
 
