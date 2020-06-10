@@ -747,9 +747,9 @@ To run this check, Security Hub performs custom logic to perform the audit steps
 
 1. Choose **Confirm**\.
 
-For more information about using AWS Config from the AWS Command Line Interface, see [Turning on AWS Config](https://docs.aws.amazon.com/config/latest/gs-cli-subscribe.html) in the *AWS Config Developer Guide*\.
+For more information about using AWS Config from the AWS Command Line Interface, see [Turning on AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/gs-cli-subscribe.html) in the *AWS Config Developer Guide*\.
 
-You can also use an AWS CloudFormation template to automate this process\. For more information, see the [AWS CloudFormation StackSets sample template](https://docs.aws.amazon.com/AWSCloudFormation/latest/stacksets-sampletemplates.html) in the *AWS CloudFormation User Guide*\.
+You can also use an AWS CloudFormation template to automate this process\. For more information, see the [AWS CloudFormation StackSets sample template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-sampletemplates.html) in the *AWS CloudFormation User Guide*\.
 
 ## 2\.6 – Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket<a name="securityhub-cis-controls-2.6"></a>
 
@@ -825,7 +825,7 @@ The AWS KMS key and S3 bucket must be in the same Region\.
 
 1. Choose **Save**\.
 
-You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail log files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
+You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail log files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
 
 ## 2\.8 – Ensure rotation for customer\-created CMKs is enabled<a name="securityhub-cis-controls-2.8"></a>
 
