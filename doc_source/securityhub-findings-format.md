@@ -818,7 +818,7 @@ The `Recommendation` object can have the following attributes\.
 
 The `Resources` object provides information about the resources involved in a finding\.
 
-Type: Array of up to 10 resource objects
+Type: Array of up to 32 resource objects
 
 Example:
 

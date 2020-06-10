@@ -1,4 +1,4 @@
-# Required AWS Config resources<a name="standards-fsbp-config-resources"></a>
+# AWS Config resources required for AWS Foundational Security Best Practices controls<a name="standards-fsbp-config-resources"></a>
 
 For AWS Security Hub to accurately report findings for all of the AWS Foundational Security Best Practices controls, you must enable the following resources in AWS Config\.
 

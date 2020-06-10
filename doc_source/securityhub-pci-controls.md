@@ -418,9 +418,17 @@ See the information on environment variables in build environments in the [https
 
 **AWS Config rule:** None\. To run this check, Security Hub runs through audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
 
-This control checks whether AWS Config is enabled in current account and region\.
+This control checks whether AWS Config is enabled in the account for the local Region and is recording all resources\.
 
 It does not check for change detection for all critical system files and content files, as AWS Config supports only a subset of resource types\.
+
+The AWS Config service performs configuration management of supported AWS resources in your account and delivers log files to you\. The recorded information includes the configuration item \(AWS resource\), relationships between configuration items, and any configuration changes between resources\. 
+
+Security Hub recommends that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\. 
+
+**Note**  
+Because Security Hub is a Regional service, the check performed for this control checks only the current Region for the account\. It does not check all Regions\.   
+To allow security checks against global resources in each Region, you also must record global resources\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
 
 For more information, see the [https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html](https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html)\.
 

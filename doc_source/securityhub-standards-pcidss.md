@@ -11,3 +11,4 @@ This standard was validated by AWS Security Assurance Services LLC \(AWS SAS\), 
 **Topics**
 + [AWS Config resources required for PCI DSS controls](securityhub-standards-pci-config-resources.md)
 + [PCI DSS controls](securityhub-pci-controls.md)
++ [PCI DSS controls that you might want to disable](securityhub-standards-pcidss-to-disable.md)

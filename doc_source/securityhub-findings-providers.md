@@ -1,11 +1,11 @@
 # Product integrations in AWS Security Hub<a name="securityhub-findings-providers"></a>
 
-AWS Security Hub provides available integrations with several AWS services and third\-party products\.
+AWS Security Hub can aggregate security finding data from several AWS services and from supported AWS Partner Network \(APN\) security solutions\. This provides a comprehensive view of security and compliance across your AWS environment\.
 
 You can also send findings that are generated from your own custom security products\.
 
 **Important**  
-Security Hub receives and consolidates only those security findings from the supported AWS and partner product integrations that are generated after Security Hub is enabled in your AWS accounts\.  
+From the supported AWS and partner product integrations, Security Hub only receives and consolidates findings that are generated after you enable Security Hub in your AWS accounts\.  
 It does not retroactively receive and consolidate security findings that were generated before you enabled Security Hub\.
 
 For details on how Security Hub charges for ingested findings, see [Security Hub pricing](http://aws.amazon.com/security-hub/pricing/)\.

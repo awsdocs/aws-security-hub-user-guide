@@ -716,12 +716,12 @@ For more information, see [Configuring CloudWatch Logs monitoring with the conso
 
 AWS Config is a web service that performs configuration management of supported AWS resources in your account and delivers log files to you\. The recorded information includes the configuration item \(AWS resource\), relationships between configuration items \(AWS resources\), and any configuration changes between resources\.
 
-We recommend that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\.
+Security Hub recommends that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\.
 
 **Note**  
-CIS 2\.5 requires that AWS Config is enabled in all Regions in which you are using Security Hub\.  
+CIS 2\.5 requires that AWS Config is enabled in all Regions in which you use Security Hub\.  
 Because Security Hub is a regional service, the check performed for this control checks only the current Region for the account\. It does not check all Regions\.  
-You also must record global resources so that security checks against global resources can be checked in each Region\.
+You also must record global resources so that security checks against global resources can be checked in each Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
 
 To run this check, Security Hub performs custom logic to perform the audit steps prescribed for it in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. Security Hub also requires that global resources are recorded in each Region, because Security Hub is a regional service and performs its security checks on a Region\-by\-Region basis\.
 

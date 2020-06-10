@@ -11,5 +11,6 @@ The controls include best practices from across multiple AWS services\. Each con
 + Recover
 
 **Topics**
-+ [Required AWS Config resources](standards-fsbp-config-resources.md)
++ [AWS Config resources required for AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)
 + [AWS Foundational Security Best Practices controls](securityhub-standards-fsbp-controls.md)
++ [AWS Foundational Best Practices controls that you might want to disable](securityhub-standards-fsbp-to-disable.md)
