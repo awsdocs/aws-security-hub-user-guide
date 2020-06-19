@@ -928,7 +928,7 @@ You can only update resource\-based policies for Lambda resources within the sco
 
    1. Copy the string value of the **Sid** field in the policy statement\.
 
-1. From the AWS CLI, run `aws lambda remove-permission --function-name yourfunctionname —statement-id youridvalue`
+1. From the AWS CLI, run `aws lambda remove-permission --function-name yourfunctionname --statement-id youridvalue`
 
 ## \[Lambda\.2\] Lambda functions should use latest runtimes<a name="fsbp-lambda-2"></a>
 

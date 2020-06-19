@@ -69,6 +69,7 @@ Amazon's trademarks and trade dress may not be used in
       + [PCI DSS controls that you might want to disable](securityhub-standards-pcidss-to-disable.md)
    + [AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)
       + [AWS Config resources required for AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)
+      + [Control categories](control-categories.md)
       + [AWS Foundational Security Best Practices controls](securityhub-standards-fsbp-controls.md)
       + [AWS Foundational Best Practices controls that you might want to disable](securityhub-standards-fsbp-to-disable.md)
 + [Logging AWS Security Hub API calls with AWS CloudTrail](securityhub-ct.md)
