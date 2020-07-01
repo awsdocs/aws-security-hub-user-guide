@@ -39,7 +39,7 @@ You must supply your own timestamps for the [https://docs.aws.amazon.com/securit
 
 ## Updating findings from custom products<a name="securityhub-custom-providers-update-findings"></a>
 
-In addition to sending new findings from custom products, you can also use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) API operation to update existing findings from custom products \.
+In addition to sending new findings from custom products, you can also use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) API operation to update existing findings from custom products\.
 
 To update existing findings, use the existing finding ID \(via the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-Id](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-Id) attribute\)\. Resend the full finding with the appropriate information updated in the request, including a modified [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-UpdatedAt](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-UpdatedAt) timestamp\.
 

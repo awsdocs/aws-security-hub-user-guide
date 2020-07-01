@@ -1,6 +1,6 @@
 # AWS Config resources required for CIS controls<a name="securityhub-standards-cis-config-resources"></a>
 
-To run security checks for the enabled CIS AWS Foundations controls on your environment's resources, Security Hub either runs through the exact audit steps prescribed for the checks in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/) or uses specific AWS Config managed rules\.
+To run security checks for the enabled controls on your environment's resources, Security Hub either runs through the exact audit steps prescribed for the checks in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/) or uses specific AWS Config managed rules\.
 
 If you don't enable all resources in AWS Config, a finding is generated for the control [2\.5 – Ensure AWS Config is enabled](securityhub-cis-controls.md#securityhub-cis-controls-2.5)\. For other CIS controls, for Security Hub to accurately report findings, you must enable the following resources in AWS Config\.
 + AWS CloudTrail trail

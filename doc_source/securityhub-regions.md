@@ -14,7 +14,7 @@ The following Regions do not support all of the Security Hub controls\. For each
 
 The following controls are not supported in Africa \(Cape Town\)\.
 
-**[CIS AWS Foundations standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
 [1\.4 – Ensure access keys are rotated every 90 days or less ](securityhub-cis-controls.md#securityhub-cis-controls-1.4)  
 [1\.12 – Ensure no root account access key exists](securityhub-cis-controls.md#securityhub-cis-controls-1.12)  
 [1\.20 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
@@ -57,7 +57,7 @@ The following controls are not supported in Asia Pacific \(Hong Kong\)\.
 
 The following controls are not supported in Europe \(Milan\)\.
 
-**[CIS AWS Foundations standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
 [1\.4 – Ensure access keys are rotated every 90 days or less ](securityhub-cis-controls.md#securityhub-cis-controls-1.4)  
 [1\.20 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
 [4\.1 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22 ](securityhub-cis-controls.md#securityhub-cis-controls-4.1)  
@@ -99,7 +99,7 @@ The following controls are not supported in Middle East \(Bahrain\)\.
 
 The following controls are not supported in AWS GovCloud \(US\-East\)\.
 
-**[CIS AWS Foundations standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
 [1\.13 – Ensure MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
 
@@ -119,7 +119,7 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 
 The following controls are not supported in AWS GovCloud \(US\-West\)\.
 
-**[CIS AWS Foundations standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
 [1\.13 – Ensure MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
 

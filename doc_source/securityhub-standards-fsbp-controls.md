@@ -57,7 +57,7 @@ ACM sends notifications to your Personal Health Dashboard to notify you that one
 
 **Resource:** Account
 
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html)
 
 **Parameters:**
 + `readWriteType`: `ALL`
@@ -1126,7 +1126,7 @@ Some use cases require that everyone on the internet be able to read from your S
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Choose the name of the bucket where your CloudTrail logs are stored\.
+1. Choose the name of the S3 bucket to update\.
 
 1. Choose **Permissions** and then choose **Public access settings**\. 
 
@@ -1158,7 +1158,7 @@ Some use cases require that everyone on the internet be able to write to your S3
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Choose the name of the bucket where your CloudTrail logs are stored\.
+1. Choose the name of the S3 bucket to update\.
 
 1. Choose **Permissions** and then choose **Public access settings**\.
 
@@ -1192,7 +1192,7 @@ To learn more, see [Protecting data using server\-side encryption with Amazon S3
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Choose the bucket from the list\.
+1. Choose the S3 bucket from the list\.
 
 1. Choose **Properties**\.
 

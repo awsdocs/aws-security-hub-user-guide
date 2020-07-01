@@ -1,4 +1,4 @@
-# Using `BatchUpdateFindings` to update a finding<a name="finding-update-batchupdatefindings"></a>
+# Using BatchUpdateFindings to update a finding<a name="finding-update-batchupdatefindings"></a>
 
 Customers \(or SIEM, ticketing, incident management, or SOAR tools working on behalf of a customer to update findings from finding providers\) use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update information related to their processing of existing findings\. [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) cannot be used to create new findings\. It can be used to update up to 100 findings at a time\.
 

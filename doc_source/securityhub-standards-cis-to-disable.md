@@ -1,6 +1,6 @@
-# CIS AWS Foundations controls that you might want to disable<a name="securityhub-standards-cis-to-disable"></a>
+# CIS AWS Foundations Benchmark controls that you might want to disable<a name="securityhub-standards-cis-to-disable"></a>
 
-For the CIS AWS Foundations standard, below are some specific controls that you might want to disable\. You might want to disable them because they are related to resources that only exist in specific accounts or Regions\. The controls would then produce `WARNING` statuses if the relevant resource cannot be found\.
+For the CIS AWS Foundations Benchmark standard, below are some specific controls that you might want to disable\. You might want to disable them because they are related to resources that only exist in specific accounts or Regions\. The controls would then produce `WARNING` statuses if the relevant resource cannot be found\.
 
 **CIS AWS Foundations Benchmark 2\.3 and 2\.6 controls**  
 These controls deal with logging of CloudTrail trails\. If you log these trails in a centralized logging account, you only need to run these controls in the account and Region where centralized logging takes place\.

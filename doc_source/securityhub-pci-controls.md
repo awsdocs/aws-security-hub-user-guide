@@ -528,33 +528,41 @@ These are the same steps to remediate findings for [3\.3 – Ensure a log metric
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\. 
+1. Choose **Logs**, then choose **Log groups**\. 
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\. 
+1. Choose the log group where CloudTrail is logging\.
 
-1. Choose **Add Metric Filter**\. 
+1. On the log group details page, choose ** Metric filters**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Choose **Create metric filter**\. 
+
+1. Copy the following pattern and then paste it into **Filter pattern**\.
 
    ```
    {$.userIdentity.type="Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !="AwsServiceEvent"}
    ```
 
-1. Choose **Assign Metric**\. 
+1. Choose **Next**\.
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+1. Enter the name of the new filter\. For example, **RootAccountUsage**\.
 
-1. Confirm that the value for **Metric Namespace** is `LogMetrics`\. 
+1. Confirm that the value for **Metric namespace** is `LogMetrics`\. 
 
    This ensures that all CIS Benchmark metrics are grouped together\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\. 
+1. In **Metric name**, enter the name of the metric\.
 
-1. Choose **Create Alarm**\. 
+1. In **Metric value**, enter **1**, and then choose **Next**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-1\.1\-RootAccountUsage**\. 
+1. Choose **Create metric filter**\. 
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+1. Next, set up the notification\. Select the select the metric filter you just created, then choose **Create alarm**\.
+
+1. Enter the threshold for the alarm \(for example, **1**\), then choose **Next**\.
+
+1. Under **Select an SNS topic**, for **Send notification to**, choose an email list, then choose **Next**\.
+
+1. Enter a **Name** and **Description** for the alarm, such as **RootAccountUsageAlarm**, then choose **Next**\. 
 
 1. Choose **Create Alarm**\. 
 

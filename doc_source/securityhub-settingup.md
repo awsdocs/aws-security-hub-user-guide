@@ -43,11 +43,11 @@ To grant the permissions required to enable Security Hub, attach the following p
 
 After you attach the required policy to the IAM identity, you use that identity to enable Security Hub\.
 
-You can enable Security Hub from the console or the API\.
+You can enable Security Hub from the AWS Management Console or the API\.
 
-### Enabling Security Hub from the console<a name="securityhub-enable-console"></a>
+### Enabling Security Hub \(console\)<a name="securityhub-enable-console"></a>
 
-When you enable Security Hub from the console, you are also given the option to enable the supported security standards\.
+When you enable Security Hub from the console, you also have the option to enable the supported security standards\.
 
 **To enable Security Hub**
 
@@ -65,19 +65,31 @@ When you enable Security Hub from the console, you are also given the option to 
 
 1. Choose **Enable Security Hub**\.
 
-### Enabling Security Hub using the API<a name="securityhub-enable-api"></a>
+### Enabling Security Hub \(Security Hub API, AWS CLI\)<a name="securityhub-enable-api"></a>
 
-To enable Security Hub from the API, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html) operation\.
+To enable Security Hub, you can use an API call or the AWS Command Line Interface\.
 
-When you enable Security Hub from the API, it automatically enables these security standards\.
-+ CIS AWS Foundations Standard
-+ AWS Foundational Security Best Practices Standard
+**To enable Security Hub \(Security Hub API, AWS CLI\)**
++ **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html) operation\. When you enable Security Hub from the API, it automatically enables these security standards\.
+  + CIS AWS Foundations Benchmark
+  + AWS Foundational Security Best Practices Standard
 
-If you do not want to enable these standards, then set `EnableDefaultStandards` to `false`\.
+  If you do not want to enable these standards, then set `EnableDefaultStandards` to `false`\.
 
-After you enable Security Hub, to enable standards, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html) operation\.
+  You can also use the `Tags` parameter to assign tag values to the hub resource\.
++ **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/enable-security-hub.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/enable-security-hub.html) command\. To enable the default standards, include `--enable-default-standards`\. To not enable the default standards, include `--no-enable-default-standards`\.
 
-To disable standards, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchDisableStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchDisableStandards.html) operation\.
+  ```
+  aws securityhub enable-security-hub [--tags <tag values>] [--enable-default-standards | --no-enable-default-standards]
+  ```
+
+  **Example**
+
+  ```
+  aws securityhub enable-security-hub --enable-default-standards --tags '{"Department": "Security"}'
+  ```
+
+After you enable Security Hub, you can enable or disable standards\. See [Disabling or enabling a security standard](securityhub-standards-enable-disable.md)\.
 
 ## Service\-linked role assigned to Security Hub<a name="security-hub-enable-slr"></a>
 
@@ -91,7 +103,7 @@ For more information about service\-linked roles, see [Using service\-linked rol
 
 ## Enabling AWS Config to support security checks<a name="securityhub-enable-config"></a>
 
-When you enable Security Hub from the console, you also have the option to enable the supported security standards\. When you enable Security Hub from the API, then the CIS AWS Foundations standard is enabled automatically\.
+When you enable Security Hub from the console, you also have the option to enable the supported security standards\. When you enable Security Hub from the API, then the CIS AWS Foundations Benchmark standard is enabled automatically\.
 
 Many of the controls for the security standards rely on AWS Config service\-level rules\.
 
@@ -99,7 +111,7 @@ If you have any of the security standards enabled, you must enable AWS Config in
 
 Security Hub does not manage AWS Config for you\. If you already have AWS Config enabled, you can continue configuring its settings through the AWS Config console or APIs\.
 
-If you do not have AWS Config enabled, you can enable it manually or you can use the AWS CloudFormation "Enable AWS Config" template in AWS CloudFormation StackSets Sample Templates\. If you use the Security Hub [multi\-account, multi\-region enablement script](https://github.com/awslabs/aws-securityhub-multiaccount-scripts), it also enables AWS Config for you\.
+If you do not have AWS Config enabled, you can enable it manually\. You can also use the AWS CloudFormation "Enable AWS Config" template in AWS CloudFormation StackSets Sample Templates\. If you use the Security Hub [multi\-account, multi\-region enablement script](https://github.com/awslabs/aws-securityhub-multiaccount-scripts), it also enables AWS Config for you\.
 
 **Important**  
 When you turn on the AWS Config recorder, choose to record all resources supported in a given Region, including global resources\.

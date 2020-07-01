@@ -18,6 +18,6 @@ For information on Security Hub pricing for security checks, see [Security Hub p
 + [Disabling or enabling a security standard](securityhub-standards-enable-disable.md)
 + [Viewing details for controls](securityhub-standards-view-controls.md)
 + [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)
-+ [CIS AWS Foundations standard](securityhub-standards-cis.md)
++ [CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)
 + [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)
 + [AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)

@@ -1,4 +1,4 @@
-# CIS AWS Foundations controls<a name="securityhub-cis-controls"></a>
+# CIS AWS Foundations Benchmark controls<a name="securityhub-cis-controls"></a>
 
 For the CIS AWS Foundations standard, Security Hub supports the following controls\. For each control, the information includes the required AWS Config rule and the remediation steps\.
 
@@ -548,7 +548,7 @@ Confirm that the user that you detached the policy from can still access AWS ser
 
 **Severity:** Critical
 
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloud-trail-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html)
 
 CloudTrail is a service that records AWS API calls for your account and delivers log files to you\. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, the request parameters, and the response elements returned by the AWS service\. CloudTrail provides a history of AWS API calls for an account, including API calls made via the AWS Management Console, AWS SDKs, command\-line tools, and higher\-level AWS services \(such as AWS CloudFormation\)\.
 
@@ -575,7 +575,7 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
    + To create a new S3 bucket for CloudTrail logs, choose **Yes** next to **Create a new S3 bucket** and then enter a name for the bucket\.
    + Choose **No** next to **Create a new S3 bucket** and then select the bucket to use\.
 
-1. Choose **Advanced** and, for **Enable log file validation**, choose **Yes** to pass [2\.2\. – Ensure CloudTrail log file validation is enabled ](#securityhub-cis-controls-2.2) \.
+1. Choose **Additional settings** and, for **Enable log file validation**, choose **Yes** to pass [2\.2\. – Ensure CloudTrail log file validation is enabled ](#securityhub-cis-controls-2.2) \.
 
 1. Choose **Create**\.
 
@@ -1060,37 +1060,43 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. Choose **Logs**, then choose **Log groups**\. 
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Choose the log group where CloudTrail is logging\.
 
-1. Choose **Add Metric Filter**\.
+1. On the log group details page, choose ** Metric filters**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Choose **Create metric filter**\. 
+
+1. Copy the following pattern and then paste it into **Filter pattern**\.
 
    ```
    {$.userIdentity.type="Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !="AwsServiceEvent"}
    ```
 
-1. Choose **Assign Metric**\.
+1. Choose **Next**\.
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+1. Enter the name of the new filter\. For example, **RootAccountUsage**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Confirm that the value for **Metric namespace** is `LogMetrics`\. 
 
    This ensures that all CIS Benchmark metrics are grouped together\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+1. In **Metric name**, enter the name of the metric\.
 
-   The filter is created, and its details appear\.
+1. In **Metric value**, enter **1**, and then choose **Next**\.
 
-1. Choose **Create Alarm**\.
+1. Choose **Create metric filter**\. 
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.3\-RootAccountUsage**\.
+1. Next, set up the notification\. Select the select the metric filter you just created, then choose **Create alarm**\.
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+1. Enter the threshold for the alarm \(for example, **1**\), then choose **Next**\.
 
-1. Choose **Create Alarm**\.
+1. Under **Select an SNS topic**, for **Send notification to**, choose an email list, then choose **Next**\.
+
+1. Enter a **Name** and **Description** for the alarm, such as **RootAccountUsageAlarm**, then choose **Next**\. 
+
+1. Choose **Create Alarm**\. 
 
 ## 3\.4 – Ensure a log metric filter and alarm exist for IAM policy changes<a name="securityhub-cis-controls-3.4"></a>
 

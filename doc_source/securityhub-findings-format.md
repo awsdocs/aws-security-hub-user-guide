@@ -46,6 +46,10 @@ The following is the syntax of the complete finding JSON in the ASFF\.
             "DestinationIpV6": "string",
             "DestinationPort": number,
             "Direction": "string",
+            "OpenPortRange": {
+                  "Begin": integer,
+                  "End": integer
+            },
             "Protocol": "string",
             "SourceDomain": "string",
             "SourceIpV4": "string",
@@ -53,6 +57,42 @@ The following is the syntax of the complete finding JSON in the ASFF\.
             "SourceMac": "string",
             "SourcePort": number
         },
+        "NetworkPath" : [
+            {
+                "ComponentId": "string",
+                "ComponentType": "string",
+                "Egress": {
+                    "Destination": {
+                        "Address": ["string"],
+                        "PortRanges": [
+                            {
+                                "Begin": integer,
+                                "End": integer
+                            }
+                        ]
+                    },
+                    "Protocol": "string",
+                    "Source": {
+                        "Address": ["string"]
+                    }
+                },
+                "Ingress": {
+                    "Destination": {
+                        "Address": ["string"],
+                        "PortRanges": [
+                            {
+                                "Begin": integer,
+                                "End": integer
+                            }
+                        ],
+                    },
+                    "Protocol": "string",
+                    "Source": {
+                        "Address": ["string"]
+                    }
+                }
+            }
+        ],
         "Note": { 
             "Text": "string",
             "UpdatedAt": "string",
@@ -86,6 +126,13 @@ The following is the syntax of the complete finding JSON in the ASFF\.
         "Resources": [ 
             { 
                 "Details": { 
+                    "AwsAutoScalingAutoScalingGroup": {
+                        "CreatedTime": "string",
+                        "HealthCheckGracePeriod": integer,
+                        "HealthCheckType": "string",
+                        "LaunchConfigurationName": "string",
+                        "LoadBalancerNames": ["string"]
+                    },
                     "AwsCloudFrontDistribution": {
                         "DomainName": "string",
                         "Etag": "string",
@@ -145,7 +192,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "Attachment": {
                             "AttachmentId": "string",
                             "AttachTime": "string",
-                            "DeleteOnTermination": true,
+                            "DeleteOnTermination": boolean,
                             "DeviceIndex": number,
                             "InstanceId": "string"
                             "InstanceOwnerId": "string",
@@ -157,8 +204,8 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "GroupName": "string"
                             }
                         ],
-                        "NetworkInterfaceId": '"string",
-                        "SourceDestCheck": false
+                        "NetworkInterfaceId": "string",
+                        "SourceDestCheck": boolean
                     },
                     "AwsEc2SecurityGroup": {
                         "GroupId": "string",
@@ -175,7 +222,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "PrefixListIds": [
                                     {"PrefixListId": "string"}
                                 ],
-                                "ToPort": number
+                                "ToPort": number,
                                 "UserIdGroupPairs": [
                                     {
                                         "UserId": "string",
@@ -196,7 +243,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "PrefixListIds": [
                                     {"PrefixListId": "string"}
                                 ],
-                                "ToPort": number
+                                "ToPort": number,
                                 "UserIdGroupPairs": [
                                     {
                                         "UserId": "string",
@@ -207,6 +254,40 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         ],
                         "OwnerId": "string",
                         "VpcId": "string"
+                    },
+                    "AwsEc2Volume": {
+                         "Attachments": [
+                            {
+                                "AttachTime": "string",
+                                "DeleteOnTermination": Boolean,
+                                "InstanceId": "string",
+                                "Status": "string"
+                           }
+                          ],
+                          "CreateTime": "string",
+                          "Encrypted": Boolean,
+                          "KmsKeyId": "string",
+                          "Size": number
+                          "SnapshotId": "string",
+                          "Status": "string"
+                    },
+                    "AwsEc2Vpc": {
+                        "CidrBlockAssociationSet": [
+                            {
+                                "AssociationId": "string",
+                                "CidrBlock": "string",
+                                "CidrBlockState": "string"
+                            }
+                        ],
+                        "DhcpOptionsId": "string",
+                        "Ipv6CidrBlockAssociationSet": [
+                            {
+                                "AssociationId": "string",
+                                "CidrBlockState": "string"
+                                "Ipv6CidrBlock": "string",
+                           }
+                        ],
+                        "State": "string"
                     },
                     "AwsElasticSearchDomain": {
                         "AccessPolicies": "string",
@@ -479,7 +560,37 @@ The following is the syntax of the complete finding JSON in the ASFF\.
             "Status": "string"
         },
         "WorkflowState": "string"
-    }
+    },
+    "Vulnerabilities" : [
+        {
+            "Cvss": [
+                {
+                    "BaseScore": number,
+                    "BaseVector": "string",
+                    "Version": "string"
+                },
+            ],
+            "Id": "string",
+            "ReferenceUrls":["string"],
+            "RelatedVulnerabilities": ["string"],
+            "Vendor": {
+                "Name": "string",
+                "Url":"string",
+                "VendorCreatedAt":"string",
+                "VendorSeverity":"string",
+                "VendorUpdatedAt":"string"
+            },
+            "VulnerablePackages": [
+                {
+                    "Architecture": "string",
+                    "Epoch": "string",
+                    "Name": "string",
+                    "Release": "string",
+                    "Version": "string"
+                }
+            ]
+        }
+    ]
 ]
 ```
 
@@ -493,15 +604,16 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
 |  `AwsAccountId`  |  Yes  | The AWS account ID that the finding applies to\. Type: String \(12 digits max\) Example: <pre>"AwsAccountId": "111111111111"</pre>  | 
 |  [`Compliance`](#asff-compliance)  |  No  | Finding details related to a control\. Only returned for findings generated from a control\. Type: Object Example: <pre>"Compliance": {<br />    "RelatedRequirements": ["Req1", "Req2"],<br />    "Status": "PASSED",<br />    "StatusReasons": [<br />        {<br />            "ReasonCode": "CLOUDWATCH_ALARMS_NOT_PRESENT";<br />            "Description": "CloudWatch alarms do not exist in the account"<br />        }<br />    ]<br />}</pre>  | 
 |  `Confidence`  |  No  |  A finding's confidence\. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify\. A finding provider can provide an initial value for this attribute, but cannot update it after that\. This attribute can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It can only be updated by a master account\. It cannot be updated by a member account\. Type: Integer \(range 0–100\) Confidence is scored on a 0–100 basis using a ratio scale, where 0 means zero\-percent confidence and 100 means 100\-percent confidence\. However, a data exfiltration detection based on a statistical deviation of network traffic has a much lower confidence because an actual exfiltration hasn't been verified\. Example: <pre>"Confidence": 42</pre>  | 
-|  `CreatedAt`  |  Yes  |  An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the potential security issue captured by a finding was created\. Because the `CreatedAt` timestamp reflects the time when the finding record was created, it can differ from the `FirstObservedAt` timestamp, which reflects the time when the event or vulnerability was first observed\. This timestamp *must* be provided on the first generation of the finding and *can't* be changed upon subsequent updates to the finding\. Type: Timestamp Example: <pre>"CreatedAt": "2017-03-22T13:22:13.933Z"</pre>  Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\.  | 
-|  `Criticality`  |  No  | The level of importance that is assigned to the resources associated with the finding\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\.  A finding provider can provide an initial value for this attribute, but cannot update it after that\. This attribute can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It can only be updated by a master account\. It cannot be updated by a member account\. Type: Integer \(range 0–100\) Criticality is scored on a 0–100 basis, using a ratio scale that supports only full integers\. This means that you should assess not only which findings impact resources that are more critical than others but also how much more critical those resources are compared to other resources\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\. When assessing criticality of a finding, consider the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) You can use the following guidelines: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Criticality": 99</pre>  | 
+|  `CreatedAt`  |  Yes  |  An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the potential security issue captured by a finding was created\. The `CreatedAt` timestamp reflects the time when the finding record was created\. Consequently, it can differ from the `FirstObservedAt` timestamp, which reflects the time when the event or vulnerability was first observed\. This timestamp *must* be provided on the first generation of the finding and *can't* be changed upon subsequent updates to the finding\. Type: Timestamp Example: <pre>"CreatedAt": "2017-03-22T13:22:13.933Z"</pre>  Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\.  | 
+|  `Criticality`  |  No  | The level of importance that is assigned to the resources that are associated with the finding\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\.  A finding provider can provide an initial value for this attribute, but cannot update it after that\. This attribute can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It can only be updated by a master account\. It cannot be updated by a member account\. Type: Integer \(range 0–100\) Criticality is scored on a 0–100 basis, using a ratio scale that supports only full integers\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\. At a high level, when assessing criticality, you need to consider the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) For each resource, consider the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) You can use the following guidelines: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Criticality": 99</pre>  | 
 |  `Description`  |  Yes  | A finding's description\. This field can be nonspecific boilerplate text or details that are specific to the instance of the finding\. Type: String \(1,024 characters max\) Example: <pre>"Description": "The version of openssl found on instance i-abcd1234 is known to contain a vulnerability."</pre>  | 
 |  `FirstObservedAt`  |  No  | An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the potential security issue captured by a finding was first observed\. Type: Timestamp Because this timestamp reflects the time of when the event or vulnerability was first observed, it can differ from the `CreatedAt` timestamp, which reflects the time this finding record was created\.  This timestamp should be immutable between updates of the finding record, but can be updated if a more accurate timestamp has been determined\. Example: <pre>"FirstObservedAt": "2017-03-22T13:22:13.933Z"</pre>  | 
-|  `GeneratorId`  |  Yes  | The identifier for the solution\-specific component \(a discrete unit of logic\) that generated a finding\. In various solutions from security findings products, this generator can be called a rule, a check, a detector, a plug\-in, and so on\. Type: String \(512 characters max\) or Amazon Resource Name \(ARN\) Example: <pre>"GeneratorId": "acme-vuln-9ab348"</pre>  | 
+|  `GeneratorId`  |  Yes  | The identifier for the solution\-specific component \(a discrete unit of logic\) that generated a finding\. In various solutions from security findings products, this generator can be called a rule, a check, a detector, a plugin, and so on\. Type: String \(512 characters max\) or Amazon Resource Name \(ARN\) Example: <pre>"GeneratorId": "acme-vuln-9ab348"</pre>  | 
 |  `Id`  |  Yes  | The product\-specific identifier for a finding\. Type: String \(512 characters max\) or ARN The finding ID must comply with the following constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) These constraints are expected to hold within a findings product, but are not required to hold across findings products\. Example: <pre>"Id": "us-west-2/111111111111/98aebb2207407c87f51e89943f12b1ef"</pre>  | 
-|  `LastObservedAt`  |  No  | An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the potential security issue captured by a finding was most recently observed by the security findings product\. Type: Timestamp Because this timestamp reflects the time of when the event or vulnerability was last or most recently observed, it can differ from the `UpdatedAt` timestamp, which reflects the time this finding record was last or most recently updated\.  You can provide this timestamp, but it isn't required upon the first observation\. If you provide the field in this case, the timestamp should be the same as the `FirstObservedAt` timestamp\. You should update this field to reflect the last or most recently observed timestamp each time a finding is observed\. Example: <pre>"LastObservedAt": "2017-03-23T13:22:13.933Z"</pre>  | 
+|  `LastObservedAt`  |  No  | An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the potential security issue captured by a finding was most recently observed by the security findings product\. Type: Timestamp This timestamp reflects the time of when the event or vulnerability was last or most recently observed\. Consequently, it can differ from the `UpdatedAt` timestamp, which reflects the time this finding record was last or most recently updated\.  You can provide this timestamp, but it isn't required upon the first observation\. If you provide the field in this case, the timestamp should be the same as the `FirstObservedAt` timestamp\. You should update this field to reflect the last or most recently observed timestamp each time a finding is observed\. Example: <pre>"LastObservedAt": "2017-03-23T13:22:13.933Z"</pre>  | 
 |  [`Malware`](#asff-malware)  |  No  | A list of malware related to a finding\. Type: Array of up to five malware objects Example: <pre>"Malware": [<br />    {<br />        "Name": "Stringler",<br />        "Type": "COIN_MINER",<br />        "Path": "/usr/sbin/stringler",<br />        "State": "OBSERVED"<br />    }<br />]</pre>  | 
 |  [`Network`](#asff-network)  |  No  | The details of network\-related information about a finding\. Type: Object Example: <pre>"Network": {<br />    "Direction": "IN",<br />    "Protocol": "TCP",<br />    "SourceIpV4": "1.2.3.4",<br />    "SourceIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C",<br />    "SourcePort": "42",<br />    "SourceDomain": "here.com",<br />    "SourceMac": "00:0d:83:b1:c0:8e",<br />    "DestinationIpV4": "2.3.4.5",<br />    "DestinationIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C",<br />    "DestinationPort": "80",<br />    "DestinationDomain": "there.com"<br />}</pre>  | 
+|  [`NetworkPath`](#asff-networkpath)  |  No  |  A network path that is related to the finding\. Each entry in `NetworkPath` represents a component of the path\. Type: Array of objects  | 
 |  [`Note`](#asff-note)  |  No  |  A user\-defined note that is added to a finding\. A finding provider can provide an initial note for a finding, but cannot add notes after that\. A note can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. Notes can be added by both master accounts and member accounts\. Type: Object Example: <pre>"Note": {<br />    "Text": "Don't forget to check under the mat.",<br />    "UpdatedBy": "jsmith",<br />    "UpdatedAt": "2018-08-31T00:15:09Z"<br />}</pre>  | 
 |  [`Process`](#asff-process)  |  No  | The details of process\-related information about a finding\.Type: Object Example: <pre>"Process": {<br />    "Name": "syslogd",<br />    "Path": "/usr/sbin/syslogd",<br />    "Pid": 12345,<br />    "ParentPid": 56789,<br />    "LaunchedAt": "2018-09-27T22:37:31Z",<br />    "TerminatedAt": "2018-09-27T23:37:31Z"<br />}</pre>  | 
 |  `ProductArn`  |  Yes  | The ARN generated by Security Hub that uniquely identifies a third\-party findings product after the product is registered with Security Hub\. Type: ARN The format of this field is `arn:partition:securityhub:region:account-id:product/company-id/product-id`\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>// Private ARN<br />    "ProductArn": "arn:aws:securityhub:us-east-1:111111111111:product/111111111111/default"<br /><br />// Public ARN<br />    "ProductArn": "arn:aws:securityhub:us-west-2::product/aws/guardduty"<br />    "ProductArn": "arn:aws:securityhub:us-west-2:222222222222:product/generico/secure-pro"</pre>  | 
@@ -516,9 +628,10 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
 |  [`ThreatIntelIndicators`](#asff-threatintelindicators)  |  No  | Threat intelligence details that are related to a finding\. Type: Array of up to five threat intelligence indicator objects Example: <pre>"ThreatIntelIndicators": [<br />  {<br />    "Type": "IPV4_ADDRESS",<br />    "Value": "8.8.8.8",<br />    "Category": "BACKDOOR",<br />    "LastObservedAt": "2018-09-27T23:37:31Z",<br />    "Source": "Threat Intel Weekly",<br />    "SourceUrl": "http://threatintelweekly.org/backdoors/8888"<br />  }<br />]</pre>  | 
 |  `Title`  |  Yes  | A finding's title\. This field can contain nonspecific boilerplate text or details that are specific to this instance of the finding\.Type: String \(256 characters max\) | 
 |  `Types`  |  Yes  | One or more finding types in the format of `namespace/category/classifier` that classify a finding\. Type: Array of 50 strings max [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Namespaces are required for all finding types, but categories and classifiers are optional\. If you specify a classifier, you must also specify a category\. The '`/`' character is reserved and must *not* be used in a category or classifier\. Escaping the '`/`' character is not supported\. Example: <pre>"Types": [<br />    "Software and Configuration Checks/Vulnerabilities/CVE"<br />]</pre>  | 
-|  `UpdatedAt`  |  Yes  | An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the findings product last updated the finding record\. Because this timestamp reflects the time when the finding record was last or most recently updated, it can differ from the `LastObservedAt` timestamp, which reflects when the event or vulnerability was last or most recently observed\. When you update the finding record, you must update this timestamp to the current timestamp\. Upon creation of a finding record, the `CreatedAt` and `UpdatedAt` timestamps must be the same timestamp\. After an update to the finding record, the value of this field must be greater than all of the previous values that it contained\. Note that `UpdatedAt` is not updated by changes from [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It is only updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.Type: Timestamp Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\.  | 
+|  `UpdatedAt`  |  Yes  | An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the findings product last updated the finding record\. This timestamp reflects the time when the finding record was last or most recently updated\. Consequently, it can differ from the `LastObservedAt` timestamp, which reflects when the event or vulnerability was last or most recently observed\. When you update the finding record, you must update this timestamp to the current timestamp\. Upon creation of a finding record, the `CreatedAt` and `UpdatedAt` timestamps must be the same timestamp\. After an update to the finding record, the value of this field must be greater than all of the previous values that it contained\. Note that `UpdatedAt` is not updated by changes from [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It is only updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.Type: Timestamp Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\.  | 
 |  `UserDefinedFields`  |  No  | A list of name\-value string pairs that are associated with the finding\. These are custom, user\-defined fields that are added to a finding\. These fields can be generated automatically via your specific configuration\. Findings products must *not* use this field for data that the product generates\. Instead, findings products can use the `ProductFields` field for data that doesn't map to any standard AWS Security Finding Format field\. These fields can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. They can only be updated by a master account\. They cannot be updated by a member account\.Type: map of up to 50 key\-value pairs Example: <pre>"UserDefinedFields": {<br />    "reviewedByCio": "true",<br />    "comeBackToLater": "Check this again on Monday"<br />}</pre>  | 
 |  `VerificationState`  |  No  | The veracity of a finding\. Findings products can provide the value of `UNKNOWN` for this field\. A findings product should provide this value if there is a meaningful analog in the findings product's system\. This field is typically populated by a user determination or action after they investigate a finding\. A finding provider can provide an initial value for this attribute, but cannot update it after that\. This attribute can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It can only be updated by a master account\. It cannot be updated by a member account\.Type: Enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
+|  [`Vulnerabilities`](#asff-vulnerabilities)  |  No  |  A list of vulnerabilities that apply to the finding\. Type: Array of objects  | 
 |  [`Workflow`](#asff-workflow)  |  No  |  Provides information about the status of the investigation into a finding\. The workflow status is not intended for finding providers\. The workflow status can only be updated using `BatchUpdateFindings`\. Customers can also update it from the console\. See [Setting the workflow status for a finding](finding-workflow-status.md)\. The workflow status can only be updated by a master account\. It cannot be updated by a member account\. Type: Object Example: <pre>Workflow: {<br />    "Status": "NEW"<br />}</pre>  | 
 |  `WorkflowState` \(deprecated\)  |  No  |  This field is being deprecated in favor of the `Status` field of the `Workflow` object\.The workflow state of a finding\. Findings products can provide the value of `NEW` for this field\. A findings product can provide a value for this field if there is a meaningful analog in the findings product's system\. Type: Enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"WorkflowState": "NEW"</pre>  | 
 
@@ -527,12 +640,21 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
   + [StatusReasons](#asff-compliance-statusreasons)
 + [Malware](#asff-malware)
 + [Network](#asff-network)
+  + [OpenPortRange](#asff-network-openportrange)
++ [NetworkPath](#asff-networkpath)
+  + [Egress](#asff-networkpath-egress)
+    + [Destination](#asff-networkpath-egress-destination)
+    + [Source](#asff-networkpath-egress-source)
+  + [Ingress](#asff-networkpath-ingress)
+    + [Destination](#asff-networkpath-ingress-destination)
+    + [Source](#asff-networkpath-ingress-source)
 + [Note](#asff-note)
 + [Process](#asff-process)
 + [RelatedFindings](#asff-relatedfindings)
 + [Remediation](#asff-remediation)
   + [Recommendation](#asff-remediation-recommendation)
 + [Resources](#asff-resources)
+  + [AwsAutoScalingAutoScalingGroup](#asff-resourcedetails-awsautoscalingautoscalinggroup)
   + [AwsCloudFrontDistribution](#asff-resourcedetails-awscloudfrontdistribution)
     + [Logging](#asff-resourcedetails-awscloudfrontdistribution-logging)
     + [Origins](#asff-resourcedetails-awscloudfrontdistribution-origins)
@@ -546,6 +668,11 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
     + [SecurityGroups](#asff-resourcedetails-awsec2networkinterface-securitygroups)
   + [AwsEc2SecurityGroup](#asff-resourcedetails-awsec2securitygroup)
     + [IP permission object](#asff-resourcedetails-awsec2securitygroup-ippermission)
+  + [AwsEc2Volume](#asff-resourcedetails-awsec2volume)
+    + [Attachments](#asff-resourcedetails-awsec2volume-attachments)
+  + [AwsEc2Vpc](#asff-resourcedetails-awsec2vpc)
+    + [CidrBlockAssociationSet](#asff-resourcedetails-awsec2vpc-cidrblockassociationset)
+    + [IpV6CidrBlockAssociationSet](#asff-resourcedetails-awsec2vpc-ipv6cidrblockassociationset)
   + [AwsElasticSearchDomain](#asff-resourcedetails-awselasticsearchdomain)
     + [DomainEndpointOptions](#asff-resourcedetails-awselasticsearchdomain-domainendpointoptions)
     + [DomainStatus](#asff-resourcedetails-awselasticsearchdomain-domainstatus)
@@ -581,16 +708,20 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
   + [Container](#asff-resourcedetails-container)
   + [Other](#asff-resourcedetails-other)
 + [Severity](#asff-severity)
-  + [How Security Hub maps `Label` and `Normalized` values](#asff-severity-map-normalized-label)
+  + [How Security Hub maps Label and Normalized values](#asff-severity-map-normalized-label)
   + [Guidance for assigning the normalized severity \(AWS services and partners\)](#asff-severity-normalized-guidance)
 + [ThreatIntelIndicators](#asff-threatintelindicators)
++ [Vulnerabilities](#asff-vulnerabilities)
+  + [Cvss](#asff-vulnerabilities-cvss)
+  + [Vendor](#asff-vulnerabilities-vendor)
+  + [VulnerablePackages](#asff-vulnerabilities-vulnerablepackages)
 + [Workflow](#asff-workflow)
 
 ### Compliance<a name="asff-compliance"></a>
 
 Contains finding details related to a control\. Only returned for findings that are generated as the result of a check that is run on a control\.
 
-Example:
+**Example**
 
 ```
 "Compliance": {
@@ -637,9 +768,9 @@ Each reason in the `StatusReasons` object can have the following attributes\.
 
 ### Malware<a name="asff-malware"></a>
 
-The `Malware` object provides a list of malware related to a finding\. It is an array that can contain up to 5 malware objects\.
+The `Malware` object provides a list of malware related to a finding\. It is an array that can contain up to five malware objects\.
 
-Example:
+**Example**
 
 ```
 "Malware": [
@@ -695,7 +826,8 @@ The `Network` object can have the following attributes\.
 |  `DestinationIpV4`  |  No  | The destination IPv4 address of network\-related information about a finding\.Type: IPv4 Example: <pre>"DestinationIpV4": "2.3.4.5"</pre>  | 
 |  `DestinationIpV6`  |  No  | The destination IPv6 address of network\-related information about a finding\. Type: IPv6 Example: <pre>"DestinationIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C"</pre>  | 
 |  `DestinationPort`  |  No  | The destination port of network\-related information about a finding\.Type: Number \(range of 0–65535\) Example: <pre>"DestinationPort": "80"</pre>  | 
-|  `Direction`  |  No  | The direction of network traffic associated with a finding\. Type: Enum Valid values: `IN` \| `OUT` Example: <pre>"Direction": "IN"</pre>  | 
+|  `Direction`  |  No  | The direction of network traffic that is associated with a finding\. Type: Enum Valid values: `IN` \| `OUT` Example: <pre>"Direction": "IN"</pre>  | 
+|  [`OpenPortRange`](#asff-network-openportrange)  |   |  The range of open ports that is present in the network\. Type: Object  | 
 |  `Protocol`  |  No  | The protocol of network\-related information about a finding\. Type: String \(16 characters max\) The name should be the [IANA registered name](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml) for the associated port except in the case where the finding product can determine a more accurate protocol\. Example: <pre>"Protocol": "TCP"</pre>  | 
 |  `SourceDomain`  |  No  | The source domain of network\-related information about a finding\.  Type: String \(128 characters max\) Example: <pre>"SourceDomain": "here.com"</pre>  | 
 |  `SourceIpV4`  |  No  | The source IPv4 address of network\-related information about a finding\. Type: IPv4 Example: <pre>"SourceIpV4": "1.2.3.4"</pre>  | 
@@ -703,13 +835,144 @@ The `Network` object can have the following attributes\.
 |  `SourceMac`  |  No  | The source media access control \(MAC\) address of network\-related information about a finding\.Type: String \(must match `MM:MM:MM:SS:SS:SS`\) Example: <pre>"SourceMac": "00:0d:83:b1:c0:8e"</pre>  | 
 |  `SourcePort`  |  No  | The source port of network\-related information about a finding\. Type: Number \(range of 0–65535\) Example: <pre>"SourcePort": "80"</pre>  | 
 
+#### OpenPortRange<a name="asff-network-openportrange"></a>
+
+Provides the beginning and end ports of the open port range\.
+
+`OpenPortRange` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Begin`  |  No  |  The first port in the port range\. Type: Integer  | 
+|  End  |  No  |  The last port in the port range\. Type: Integer  | 
+
+### NetworkPath<a name="asff-networkpath"></a>
+
+The `NetworkPath` object provides information about a network path that is relevant to a finding\. Each entry under `NetworkPath` represents a component of that path\.
+
+**Example**
+
+```
+"NetworkPath" : [
+    {
+        "ComponentId": "abc-01a234bc56d8901ee",
+        "ComponentType": "AWS::EC2::InternetGateway",
+        "Egress": {
+            "Destination": {
+                "Address": [ "192.0.2.0/24" ],
+                "PortRanges": [
+                    {
+                        "Begin": 443,
+                        "End": 443
+                    }
+                ],
+            },
+            "Protocol": "TCP",
+            "Source": {
+                Address": ["203.0.113.0/24"]
+            }
+        },
+        "Ingress": {
+            "Destination": {
+                "Address": [ "198.51.100.0/24" ],
+                "PortRanges": [
+                    {
+                        "Begin": 443,
+                        "End": 443
+                    }
+                 ]
+            },
+            "Protocol": "TCP",
+            "Source": {
+                "Address": [ "203.0.113.0/24" ]
+            }
+        }
+     }
+]
+```
+
+Each component of the network path can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ComponentId`  |  Yes  |  The identifier of a component in the network path\. Type: String  | 
+|  `ComponentType`  |  Yes  |  The type of component\. Type: String  | 
+|  [`Egress`](#asff-networkpath-egress)  |  No  |  Information about the component that comes after the current component in the network path\. Type: Object  | 
+|  [`Ingress`](#asff-networkpath-ingress)  |  No  |  Information about the component that comes before the current node in the network path\. Type: Object  | 
+
+#### Egress<a name="asff-networkpath-egress"></a>
+
+The `Egress` object contains information about the component that comes after the current component in the network path\. It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`Destination`](#asff-networkpath-egress-destination)  |  No  |  Information about the destination of the component\. Type: Object  | 
+|  `Protocol`  |  No  |  The protocol used for the component\. Type: String  | 
+|  [`Source`](#asff-networkpath-egress-source)  |  No  |  Information about the origin of the component\. Type: Object  | 
+
+##### Destination<a name="asff-networkpath-egress-destination"></a>
+
+The `Destination` object contains information about the destination of the next component in the network path\. It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Address`  |  No  |  The IP addresses of the destination\. Type: Array of strings  | 
+|  `PortRanges`  |  No  |  A list of port ranges for the destination\. Type: Array of objects  | 
+|  `PortRanges.Begin`  |  No  |  For a destination port range, the beginning port number\. Type: Integer  | 
+|  `PortRanges.End`  |  No  |  For a destination port range, the ending port number\. Type: Integer  | 
+
+##### Source<a name="asff-networkpath-egress-source"></a>
+
+The `Source` object provides information about the origin of the next component\. It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Address`  |  No  |  The IP addresses of the origin\. Type: Array of strings  | 
+
+#### Ingress<a name="asff-networkpath-ingress"></a>
+
+The `Ingress` object contains information about the previous component in the network path\. It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`Destination`](#asff-networkpath-ingress-destination)  |  No  |  Information about the destination for the previous component\. Type: Object  | 
+|  `Protocol`  |  No  |  The protocol used by the previous component\. Type: String  | 
+|  [`Source`](#asff-networkpath-ingress-source)  |  No  |  Information about the origin of the previous component\. Type: Object  | 
+
+##### Destination<a name="asff-networkpath-ingress-destination"></a>
+
+The `Destination` object contains the destination information for the previous component\. It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Address`  |  No  |  IP addresses of the previous component\. Type: Array of strings  | 
+|  `PortRanges`  |  No  |  List of open port ranges for the previous component\. Type: Array of objects  | 
+|  `PortRanges.Begin`  |  No  |  For an open port range, the beginning of the range\. Type: Integer  | 
+|  `PortRanges.End`  |  No  |  For an open port range, the end of the range\. Type: Number  | 
+
+##### Source<a name="asff-networkpath-ingress-source"></a>
+
+The `Source` object contains information about the origin of the previous component\. It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Address`  |  No  |  IP addresses for the origin of the previous component\. Type: Array of strings  | 
+
 ### Note<a name="asff-note"></a>
 
 The `Note` object adds a user\-defined note to the finding\.
 
 A finding provider can provide an initial note for a finding, but cannot add notes after that\. A note can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. Notes can be added by both master accounts and member accounts\.
 
-Example:
+**Example**
 
 ```
 "Note": {
@@ -732,7 +995,7 @@ The `Note` object can have the following attributes\.
 
 The `Process` object provides process\-related details about the finding\.
 
-Example:
+**Example**
 
 ```
 "Process": {
@@ -763,7 +1026,7 @@ The `RelatedFindings` object provides a list of findings that are related to the
 
 A finding provider can provide an initial list of related findings, but cannot update it after that\. `RelatedFindings` can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It can only be updated by a master account\. It cannot be updated by a member account\.
 
-Example:
+**Example**
 
 ```
 "RelatedFindings": [
@@ -786,7 +1049,7 @@ Each related finding object can have the following attributes\.
 
 The `Remediation` object provides information about recommended remediation steps to address the finding\.
 
-Example:
+**Example**
 
 ```
 "Remediation": {
@@ -858,14 +1121,41 @@ Each resource object can have the following attributes\.
 | Partition | Description | 
 | --- | --- | 
 |  `Details`  |  No  |  This field provides additional details about a single resource using the appropriate subfields\. Each resource must be provided in a separate resource object in the `Resources` field\. Security Hub provides a set of available subfields for its supported resource types\. These subfields correspond to values of the resource `Type`\. Use the provided types and subfields whenever possible\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) For example, if the resource is an S3 bucket, then set the resource `Type` to `AwsS3Bucket`, and provide the resource details in the `AwsS3Bucket` subfield\. The [`Other`](#asff-resourcedetails-other) subfield allows you to provide custom fields and values\. You use the `Other` subfield in the following cases\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: Object Example: <pre>"Details": {<br />  "AwsEc2Instance": {<br />    "Type": "i3.xlarge",<br />    "ImageId": "ami-abcd1234",<br />    "IpV4Addresses": [ "54.194.252.215", "192.168.1.88" ],<br />    "IpV6Addresses": [ "2001:db8:1234:1a2b::123" ],<br />    "KeyName": "my_keypair",<br />    "IamInstanceProfileArn": "arn:aws:iam::111111111111:instance-profile/AdminRole",<br />    "VpcId": "vpc-11112222",<br />    "SubnetId": "subnet-56f5f633",<br />    "LaunchedAt": "2018-05-08T16:46:19.000Z"<br />  },<br />  "AwsS3Bucket": {<br />    "OwnerId": "da4d66eac431652a4d44d490a00500bded52c97d235b7b4752f9f688566fe6de",<br />    "OwnerName": "acmes3bucketowner"<br />  },<br />  "Other": [<br />    { "Key": "LightPen", "Value": "blinky" },<br />    { "Key": "SerialNo", "Value": "1234abcd" }<br />  ]<br />}</pre>  | 
-|  `Id`  |  Yes  | The canonical identifier for the given resource type\. For AWS resources that are identified by ARNs, this must be the ARN\. For all other AWS resource types that lack ARNs, this must be the identifier as defined by the AWS service that created the resource\. For non\-AWS resources, this should be a unique identifier associated with the resource\.Type: String \(512 characters max\) or ARN Example: <pre>"Id": "arn:aws:s3:::example-bucket"</pre>  | 
+|  `Id`  |  Yes  | The canonical identifier for the given resource type\. For AWS resources that are identified by ARNs, this must be the ARN\. For all other AWS resource types that lack ARNs, this must be the identifier as defined by the AWS service that created the resource\. For non AWS resources, this should be a unique identifier that is associated with the resource\.Type: String \(512 characters max\) or ARN Example: <pre>"Id": "arn:aws:s3:::example-bucket"</pre>  | 
 |  `Partition`  |  No  | The canonical AWS partition name that the Region is assigned to\.  Type: Enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Partition": "aws"</pre>  | 
 |  `Region`  |  No  | The canonical AWS external Region name where this resource is located\. Type: String \(16 characters max\) Example: <pre>"Region": "us-west-2"</pre>  | 
 |  `Tags`  |  No  | A list of AWS tags that are associated with a resource at the time the finding was processed\. Include the `Tags` attribute only for resources that have an associated tag\. If a resource has no associated tag, don't include a `Tags` attribute in the finding\. Type: Map of up to 50 tags \(values are limited to 256 characters max\) The following basic restrictions apply to tags: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Tags": {<br />    "billingCode": "Lotus-1-2-3",<br />    "needsPatching": "true"<br />}</pre>  | 
-|  `Type`  |  Yes  |  The type of the resource that you are providing details for\. Whenever possible, use one of the provided resource types, such as `AwsEc2Instance` or `AwsS3Bucket`\. If the resource type does not match any the provided resource types, then set the resource `Type` to `Other`, and use the `Other` details subfield to populate the details\. Type: String \(256 characters max\) Supported values are as follows\. If a type has a corresponding subfield, then to view the details for the subfield, choose the type name\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Type": "AwsS3Bucket"</pre>  | 
+|  `Type`  |  Yes  |  The type of the resource that you are providing details for\. Whenever possible, use one of the provided resource types, such as `AwsEc2Instance` or `AwsS3Bucket`\. If the resource type does not match any of the provided resource types, then set the resource `Type` to `Other`, and use the `Other` details subfield to populate the details\. Type: String \(256 characters max\) Supported values are as follows\. If a type has a corresponding subfield, then to view the details for the subfield, choose the type name\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Type": "AwsS3Bucket"</pre>  | 
 | aws | Commercial | 
 | aws\-cn | China | 
 | aws\-us\-gov | AWS GovCloud \(US\) | 
+
+#### AwsAutoScalingAutoScalingGroup<a name="asff-resourcedetails-awsautoscalingautoscalinggroup"></a>
+
+The `AwsAutoScalingAutoScalingGroup` object provides details about an automatic scaling group\.
+
+**Example**
+
+```
+"AwsAutoScalingAutoScalingGroup": {
+        "CreatedTime": "2017-10-17T14:47:11Z",
+        "HealthCheckGracePeriod": 300,
+        "HealthCheckType": "EC2",
+        "LaunchConfigurationName": "mylaunchconf",
+        "LoadBalancerNames": []
+}
+```
+
+The `AwsAutoScalingAutoScalingGroup` object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CreatedTime`  |  Yes  |  The date and time when the automatic scaling group was created\. Type: String \(timestamp\) Format: yyyy\-MM\-ddTHH:mm:ssZ  | 
+|  `HealthCheckGracePeriod`  |  No  |  The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it checks the health status of an EC2 instance that has come into service\. Type: Integer  | 
+|  `HealthCheckType`  |  Yes  |  The service to use for the health checks\. Type: String \(32 characters max\) Valid values: `EC2` \| `ELB`  | 
+|  `LaunchConfigurationName`  |  Yes  |  The name of the launch configuration\. Type: String \(32 characters max\)  | 
+|  `LoadBalancerNames`  |  No  |  The list of load balancers that are associated with the group\. Type: Array of strings Each load balancer name is limited to 255 characters\.  | 
 
 #### AwsCloudFrontDistribution<a name="asff-resourcedetails-awscloudfrontdistribution"></a>
 
@@ -922,7 +1212,7 @@ Each item can have the following attributes\.
 
 The `AwsCodeBuildProject` object provides information about an AWS CodeBuild project\.
 
-Example:
+**Example**
 
 ```
 "AwsCodeBuildProject": {
@@ -1036,7 +1326,7 @@ The `AwsEc2Instance` object can have the following attributes\.
 
 The `AwsEc2NetworkInterface` object provides information about an Amazon EC2 network interface\.
 
-Example:
+**Example**
 
 ```
 "AwsEc2NetworkInterface": {
@@ -1103,7 +1393,7 @@ Each security group can have the following attributes\.
 
 The `AwsEc2SecurityGroup` object describes an Amazon EC2 security group\.
 
-Example:
+**Example**
 
 ```
 "AwsEc2SecurityGroup": {
@@ -1148,8 +1438,8 @@ The `AwsEc2SecurityGroup` object can have the following attributes\.
 | --- | --- | --- | 
 |  `GroupId`  |  No  |  The ID of the security group\. Type: String  | 
 |  `GroupName`  |  No  |  The name of the security group\. Type: String  | 
-|  [`IpPermissions`](#asff-resourcedetails-awsec2securitygroup-ippermission)  |  No  |  The inbound rules associated with the security group\. Type: Array of IP permission objects  | 
-|  [`IpPermissionsEgress`](#asff-resourcedetails-awsec2securitygroup-ippermission)  |  No  |  \[VPC only\] The outbound rules associated with the security group\. Type: Array of IP permission objects  | 
+|  [`IpPermissions`](#asff-resourcedetails-awsec2securitygroup-ippermission)  |  No  |  The inbound rules that are associated with the security group\. Type: Array of IP permission objects  | 
+|  [`IpPermissionsEgress`](#asff-resourcedetails-awsec2securitygroup-ippermission)  |  No  |  \[VPC only\] The outbound rules that are associated with the security group\. Type: Array of IP permission objects  | 
 |  `OwnerId`  |  No  |  The AWS account ID of the owner of the security group\. Type: String  | 
 |  `VpcId`  |  No  |  \[VPC only\] The ID of the VPC for the security group\. Type: String  | 
 
@@ -1165,7 +1455,7 @@ Each IP permission object can have the following attributes\.
 |  `FromPort`  |  No  |  The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number\. A value of `-1` indicates all ICMP/ICMPv6 types\. If you specify all ICMP/ICMPv6 types, you must specify all codes\. Type: Integer  | 
 |  `IpProtocol`  |  No  |  The IP protocol name \(`tcp`, `udp`, `icmp`, `icmpv6`\) or number \(see the [protocol numbers list](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)\)\. \[VPC only\] Use `-1` to specify all protocols\. When authorizing security group rules, specifying `-1` or a protocol number other than `tcp`, `udp`, `icmp`, or `icmpv6` allows traffic on all ports, regardless of any port range you specify\. For `tcp`, `udp`, and `icmp`, you must specify a port range\. For `icmpv6`, the port range is optional\. If you omit the port range, traffic for all types and codes is allowed\. Type: String  | 
 |  `IpRanges`  |  No  |  The ranges of IP addresses\. Type: Array of IP range objects  | 
-|  `PrefixListIds`  |  No  |  \[VPC only\] The prefix list IDs for an AWS service\. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group\. Type: Array of prefix list ID objects  | 
+|  `PrefixListIds`  |  No  |  \[VPC only\] The prefix list IDs for an AWS service\. With outbound rules, this is the AWS service to access through a VPC endpoint from instances that are associated with the security group\. Type: Array of prefix list ID objects  | 
 |  `ToPort`  |  No  |  The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code\. A value of `-1` indicates all ICMP/ICMPv6 codes\. If you specify all ICMP/ICMPv6 types, you must specify all codes\. Type: Integer  | 
 |  `UserIdGroupPairs`  |  No  |  The security group and AWS account ID pairs\. Type: Array of user ID group pair objects  | 
 
@@ -1190,6 +1480,120 @@ Each entry in the `UserIdGroupPairs` array can have the following attributes\.
 | --- | --- | --- | 
 |  GroupId  |  No  |  The ID of the security group\. Type: String  | 
 |  UserId  |  No  |  The ID of an AWS account\. For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response\. If the referenced security group is deleted, this value is not returned\. \[Amazon EC2\-Classic\] Required when adding or removing rules that reference a security group in another AWS account\. Type: String  | 
+
+#### AwsEc2Volume<a name="asff-resourcedetails-awsec2volume"></a>
+
+The `AwsEc2Volume` object provides details about an EC2 volume\.
+
+**Example**
+
+```
+"AwsEc2Volume": {
+     "Attachments": [
+        {
+            "AttachTime": "2017-10-17T14:47:11Z",
+            "DeleteOnTermination": true
+            "InstanceId": "i-123abc456def789g",
+            "Status": "attached",
+       }
+      ],
+      "CreateTime": "2020-02-24T15:54:30Z",
+      "Encrypted": true,
+      "KmsKeyId": "arn:aws:kms:us-east-1:111122223333:key/wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+      "Size": 80,
+      "SnapshotId": "",
+      "Status": "available"
+}
+```
+
+The `AwsEc2Volume` object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`Attachments`](#asff-resourcedetails-awsec2volume-attachments)  |  No  |  The volume attachments\. Type: Array of objects  | 
+|  `CreateTime`  |  Yes  |  The date and time when the volume was created\. Type: String \(timestamp\) Format: yyyy\-MM\-ddTHH:mm:ssZ  | 
+|  `Encrypted`  |  Yes  |  Whether the volume is encrypted\. Type: Boolean  | 
+|  `KmsKeyId`  |  Yes  |  The ARN of the AWS KMS customer master key \(CMK\) that was used to protect the volume encryption key for the volume\. Type: String  | 
+|  `Size`  |  Yes  |  The size of the volume, in GiBs\. Type: Integer  | 
+|  `SnapshotId`  |  Yes  |  The snapshot from which the volume was created\. Type: String  | 
+|  `Status`  |  Yes  |  The volume state\. Type: String Valid values: `creating` \| `available` \| `in-use` \| `deleting` \| `deleted` \| `error`  | 
+
+##### Attachments<a name="asff-resourcedetails-awsec2volume-attachments"></a>
+
+The `Attachments` object contains the set of attachments for the EC2 volume\. Each attachment can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AttachTime`  |  Yes  |  The date and time when the attachment initiated\. Type: String \(timestamp\) Format: `yyyy-MM-ddTHH:mm:ssZ`  | 
+|  `DeleteOnTermination`  |  Yes  |  Whether the EBS volume is deleted when the EC2 instance is terminated\. Type: Boolean  | 
+|  `InstanceId`  |  Yes  |  The identifier of the EC2 instance\. Type: String  | 
+|  `Status`  |  Yes  |  The attachment state of the volume\. Type: String Valid values: `attaching` \| `attached` \| `detaching` \| `detached` \| `busy`  | 
+
+#### AwsEc2Vpc<a name="asff-resourcedetails-awsec2vpc"></a>
+
+The `AwsEc2Vpc` object provides details about an EC2 virtual private cloud \(VPC\)\.
+
+**Example**
+
+```
+"AwsEc2Vpc": {
+    "CidrBlockAssociationSet": [
+        {
+            "AssociationId": "vpc-cidr-assoc-0dc4c852f52abda97",
+            "CidrBlock": "192.0.2.0/24",
+            "CidrBlockState": "associated"
+        }
+    ],
+    "DhcpOptionsId": "dopt-4e42ce28",
+    "Ipv6CidrBlockAssociationSet": [
+        {
+            "AssociationId": "vpc-cidr-assoc-0dc4c852f52abda97",
+            "CidrBlockState": "associated"
+            "Ipv6CidrBlock": "192.0.2.0/24",
+       }
+
+    ],
+    "State": "available",
+}
+```
+
+The `AwsEc2Vpc` object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`CidrBlockAssociationSet`](#asff-resourcedetails-awsec2vpc-cidrblockassociationset)  |  No  |  Information about the IPv4 CIDR blocks that are associated with the VPC\. Type: Array of objects  | 
+|  `DhcpOptionsId`  |  Yes  |  The identifier of the set of Dynamic Host Configuration Protocol \(DHCP\) options that are associated with the VPC\. If the default options are associated with the VPC, then this is `default`\. Type: String \(32 characters max\)  | 
+|  [`IpV6CidrBlockAssociationSet`](#asff-resourcedetails-awsec2vpc-ipv6cidrblockassociationset)  |  No  |  Information about the IPv6 CIDR blocks that are associated with the VPC\. Type: Array of objects\.  | 
+|  `State`  |  Yes  |  The current state of the VPC\. Type: String \(32 characters max\) Valid values: `pending` \| `available`  | 
+
+##### CidrBlockAssociationSet<a name="asff-resourcedetails-awsec2vpc-cidrblockassociationset"></a>
+
+The `CidrBlockAssociationSet` object provides a list of IPV4 CIDR block associations\.
+
+Each CIDR block association can contain the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AssociationId`  |  Yes  |  The association ID for the IPv4 CIDR block\. Type: String \(32 characters max\)  | 
+|  `CidrBlock`  |  Yes  |  The IPv4 CIDR block\. Type: CIDR IPV4  | 
+|  `CidrBlockState`  |  No  |  Information about the state of the CIDR block\. Type: String \(32 characters max\)  | 
+
+##### IpV6CidrBlockAssociationSet<a name="asff-resourcedetails-awsec2vpc-ipv6cidrblockassociationset"></a>
+
+The `IPV6CidrBlockAssociationSet` object provides a list of IPV6 CIDR block associations\.
+
+Each CIDR block association can contain the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Associationid`  |  Yes  |  The association ID for the IPv6 CIDR block\. Type: String \(32 characters max\)  | 
+|  `CidrBlockState`  |  No  |  Information about the state of the CIDR block\. Type: String \(32 characters max\)  | 
+|  `IpV6CidrBlock`  |  Yes  |  The IPv6 CIDR block\. Type: CIDR IPV6  | 
 
 #### AwsElasticSearchDomain<a name="asff-resourcedetails-awselasticsearchdomain"></a>
 
@@ -1266,9 +1670,9 @@ It can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `AvailabilityZones`  |  No  |  The list of Availability Zones associated with the VPC subnets\. Type: Array of strings  | 
-|  `SecurityGroupIds`  |  No  |  The list of security group IDs associated with the VPC endpoints for the domain Type: Array of strings\.  | 
-|  `SubnetIds`  |  No  |  A list of subnet IDs associated with the VPC endpoints for the domain\. Type: Array of strings  | 
+|  `AvailabilityZones`  |  No  |  The list of Availability Zones that are associated with the VPC subnets\. Type: Array of strings  | 
+|  `SecurityGroupIds`  |  No  |  The list of security group IDs that are associated with the VPC endpoints for the domain Type: Array of strings\.  | 
+|  `SubnetIds`  |  No  |  A list of subnet IDs that are associated with the VPC endpoints for the domain\. Type: Array of strings  | 
 |  `VPCId`  |  No  |  ID for the VPC\. Type: String  | 
 
 #### AwsElbv2LoadBalancer<a name="asff-resourcedetails-awselbv2loadbalancer"></a>
@@ -1281,7 +1685,7 @@ It can have the following attributes\.
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
 |  [`AvailabilityZones`](#asff-resourcedetails-awselbv2loadbalancer-availabilityzones)  |  No  | The Availability Zones for the load balancer\.Type: Object | 
-|  `CanonicalHostedZoneId`  |  No  | The ID of the Amazon Route 53 hosted zone associated with the load balancer\.Type: String | 
+|  `CanonicalHostedZoneId`  |  No  | The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\.Type: String | 
 |  `CreatedTime`  |  No  | The date and time the load balancer was created\.Type: String | 
 |  `DNSName`  |  No  | The public DNS name of the load balancer\.Type: String | 
 |  `IpAddressType`  |  No  | The type of IP addresses used by the subnets for your load balancer\. The possible values are `ipv4` \(for IPv4 addresses\) and `dualstack` \(for IPv4 and IPv6 addresses\)\.Type: String | 
@@ -1327,7 +1731,7 @@ The `AwsIamAccessKey` object can have the following attributes\.
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
 |  `CreatedAt`  |  No  | The creation date and time of the IAM access key that is related to a finding\.Type: Timestamp | 
-|  `PrincipalId`  |  No  | The ID of the principal associated with an access key\. Type: String | 
+|  `PrincipalId`  |  No  | The ID of the principal that is associated with an access key\. Type: String | 
 |  `PrincipalName`  |  No  | The name of the principal\.Type: String | 
 |  `PrincipalType`  |  No  | The type of principal\.Type: String | 
 |  `Status`  |  No  | The status of the IAM access key that is related to a finding\. Valid values are `ACTIVE` and `INACTIVE`\.Type: Enum | 
@@ -1366,7 +1770,7 @@ The `AwsKmsKey` object can have the following attributes\.
 |  `KeyId`  |  Yes  |  The globally unique identifier for the CMK\. Type: String The minimum length is 1\. The maximum length is 2048\.  | 
 |  `KeyManager`  |  No  |  The manager of the CMK\. CMKs in an AWS account are either customer managed or AWS managed\. Type: String Valid values: `AWS` \| `CUSTOMER`\.  | 
 |  `KeyState`  |  No  |  The state of the CMK\. Type: String Valid values: `Enabled` \| `Disabled` \| `PendingDeletion` \| `PendingImport` \| `Unavailable`  | 
-|  `Origin`  |  No  |  The source of the CMK's key material\. When this value is `AWS_KMS`, AWS KMS created the key material\. When this value is `EXTERNAL`, either the key material was imported from your existing key management infrastructure, or the CMK lacks key material\. When this value is `AWS_CLOUDHSM`, the key material was created in the AWS CloudHSM cluster associated with a custom key store\. Type: String Valid values: `AWS_KMS` \| `EXTERNAL` \| `AWS_CLOUDHSM`  | 
+|  `Origin`  |  No  |  The source of the CMK's key material\. When this value is `AWS_KMS`, AWS KMS created the key material\. When this value is `EXTERNAL`, either the key material was imported from your existing key management infrastructure, or the CMK lacks key material\. When this value is `AWS_CLOUDHSM`, the key material was created in the AWS CloudHSM cluster that is associated with a custom key store\. Type: String Valid values: `AWS_KMS` \| `EXTERNAL` \| `AWS_CLOUDHSM`  | 
 
 #### AwsLambdaFunction<a name="asff-resourcedetails-awslambdafunction"></a>
 
@@ -1387,7 +1791,7 @@ It can have the following attributes\.
 |  `LastModified`  |  No  | The date and time that the function was last updated, in ISO\-8601 format \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.Type: String | 
 |  [`Layers`](#asff-resourcedetails-awslambdafunction-layers)  |  No  | The function's layers\.Type: Object | 
 |  `MasterArn`  |  No  | For Lambda@Edge functions, the ARN of the master function\.Type: String | 
-|  `MemorySize`  |  No  | The memory that's allocated to the function\.Type: Integer | 
+|  `MemorySize`  |  No  | The memory that is allocated to the function\.Type: Integer | 
 |  `RevisionId`  |  No  | The latest updated revision of the function or alias\.Type: String | 
 |  `Role`  |  No  | The function's execution role\.Type: String | 
 |  `Runtime`  |  No  | The runtime environment for the Lambda function\.Type: String | 
@@ -1480,7 +1884,7 @@ The `VpcConfig` object can have the following attributes\.
 
 The `AwsLambdaLayerVersion` object provides details about a Lambda layer version\.
 
-Example:
+**Example**
 
 ```
 "AwsLambdaLayerVersion": {
@@ -1510,7 +1914,7 @@ It can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  [`AssociatedRoles`](#asff-resourcedetails-awsrdsdbinstance-associatedroles)  |  No  |  The IAM roles associated with the DB instance\. Type: Array of role objects  | 
+|  [`AssociatedRoles`](#asff-resourcedetails-awsrdsdbinstance-associatedroles)  |  No  |  The IAM roles that are associated with the DB instance\. Type: Array of role objects  | 
 |  `CACertificateIdentifier`  |  No  |  The identifier of the CA certificate for this DB instance\. Type: String  | 
 |  `DBClusterIdentifier`  |  No  |  If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of\. Type: String  | 
 |  `DBInstanceClass`  |  No  |  Contains the name of the compute and memory capacity class of the DB instance\. Type: String  | 
@@ -1532,14 +1936,14 @@ It can have the following attributes\.
 
 ##### AssociatedRoles<a name="asff-resourcedetails-awsrdsdbinstance-associatedroles"></a>
 
-The `AssociatedRoles` array lists the IAM roles associated with the DB instance\.
+The `AssociatedRoles` array lists the IAM roles that are associated with the DB instance\.
 
 Each role object in the `AssociatedRoles` array can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `FeatureName`  |  No  |  The name of the feature associated with the IAM role\. Type: String  | 
+|  `FeatureName`  |  No  |  The name of the feature that is associated with the IAM role\. Type: String  | 
 |  `RoleArn`  |  No  |  The ARN of the IAM role that is associated with the DB instance\. Type: String  | 
 |  `Status`  |  No  |  Describes the state of association between the IAM role and the DB instance\. Type: String Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
 
@@ -1598,9 +2002,9 @@ Specifies the default server\-side encryption to apply to new objects in the buc
 
 #### AwsS3Object<a name="asff-resourcedetails-awss3object"></a>
 
-Details about an AWS S3 object\.
+Details about an Amazon S3 object\.
 
-Example:
+**Example**
 
 ```
 "AwsS3Object": {
@@ -1671,7 +2075,7 @@ The `AwsSqsQueue` object can have the following attributes\.
 
 The `AwsWafWebAcl` object provides details about an AWS WAF WebACL\.
 
-Example:
+**Example**
 
 ```
 "AwsWafWebAcl": {
@@ -1792,7 +2196,7 @@ Details about the severity of the finding\.
 
 The finding provider can provide the initial severity, but cannot update it after that\. The severity can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It can only be updated by a master account\. It cannot be updated by a member account\.
 
-The finding severity does not consider the criticality of the involved assets or the underlying resource\. Criticality is defined as the level of importance of the resources that are associated with the finding\. For example, a resource that is associated with a mission critical application versus one associated with nonproduction testing\. To capture information about resource criticality, use the `Criticality` field\.
+The finding severity does not consider the criticality of the involved assets or the underlying resource\. Criticality is defined as the level of importance of the resources that are associated with the finding\. For example, a resource that is associated with a mission critical application versus one that is associated with nonproduction testing\. To capture information about resource criticality, use the `Criticality` field\.
 
 The finding must have either `Label` or `Normalized` populated\. If neither attribute is populated, then the finding is invalid\. `Label` is the preferred attribute\.
 
@@ -1806,11 +2210,13 @@ The `Severity` object can have the following attributes\.
 |  `Original`  |  No  |  The native severity from the finding product that generated the finding\. Type: String \(maximum 64 characters\)  | 
 |  `Product` \(Deprecated\)  |  No  |  The native severity as defined by the finding product that generated the finding\. This is deprecated in favor of `Original`\. Type: Number \(single\-precision 32\-bit IEEE 754 floating point number, restricted to finite values\)  | 
 
-#### How Security Hub maps `Label` and `Normalized` values<a name="asff-severity-map-normalized-label"></a>
+#### How Security Hub maps Label and Normalized values<a name="asff-severity-map-normalized-label"></a>
 
-If you only provide `Label` or only provide `Normalized`, then Security Hub automatically populates the value of the other field\.
+If a [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) request for a new finding only provides `Label` or only provides `Normalized`, then Security Hub automatically populates the value of the other field\.
 
-If you provide `Normalized` and do not provide `Label`, `Label` is set automatically as follows\.
+Security Hub does not make any automatic updates based on changes from [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+
+If [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides `Normalized` and does not provide `Label`, `Label` is set automatically as follows\.
 
 
 |  Normalized  |  Label  | 
@@ -1821,7 +2227,7 @@ If you provide `Normalized` and do not provide `Label`, `Label` is set automatic
 |  70–89  |  `HIGH`  | 
 |  90–100  |  `CRITICAL`  | 
 
-If you only provide `Label` and do not provide `Normalized`, `Normalized` is set automatically as follows\.
+If [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) only provides `Label` and does not provide `Normalized`, `Normalized` is set automatically as follows\.
 
 
 |  Label  |  Normalized  | 
@@ -1837,7 +2243,7 @@ If you only provide `Label` and do not provide `Normalized`, `Normalized` is set
 For findings generated by AWS services and third\-party partner products, the severity is based on the following\.
 + **Most severe** – Findings that are associated with actual data loss or denial of service
 + **Second\-most severe** – Findings that are associated with an active compromise but that do not indicate that data loss or other negative effects have occurred
-+ **Third\-most severe** – Findings associated with issues that indicate potential for a future compromise
++ **Third\-most severe** – Findings that are associated with issues that indicate potential for a future compromise
 
 We recommend that you use the following guidance when translating findings' native severity scores to a normalized severity for the ASFF\.
 + Informational findings\. For example, a finding for a passed check or a sensitive data identification\.
@@ -1891,6 +2297,108 @@ Each threat intelligence indicator object can have the following attributes\.
 |  `SourceUrl`  |  No  | The URL for more details from the source of the threat intelligence\.Type: URL | 
 |  `Type`  |  No  | The type of a threat intelligence indicator\.Type: Enum Valid values: `DOMAIN` \| `EMAIL_ADDRESS` \| `HASH_MD5` \| `HASH_SHA1` \| `HASH_SHA256` \|` HASH_SHA512` \| `IPV4_ADDRESS` \| `IPV6_ADDRESS` \| `MUTEX` \| `PROCESS` \| `URL` | 
 |  `Value`  |  No  | The value of a threat intelligence indicator\.Type: String \(512 characters max\) | 
+
+### Vulnerabilities<a name="asff-vulnerabilities"></a>
+
+The `Vulnerabilities` object provides a list of vulnerabilities that are associated with the findings\.
+
+**Example**
+
+```
+"Vulnerabilities" : [
+    {
+        "Cvss": [
+            {
+                "BaseScore": 4.7,
+                "BaseVector": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+                "Version": "V3"
+            },
+            {
+                "BaseScore": 4.7,
+                "BaseVector": "AV:L/AC:M/Au:N/C:C/I:N/A:N",
+                "Version": "V2"
+            }
+        ],
+        "Id": "CVE-2020-12345",
+        "ReferenceUrls":[
+           "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12418",
+            "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17563"
+        ],
+        "RelatedVulnerabilities": ["CVE-2020-12345"],
+        "Vendor": {
+            "Name": "Alas",
+            "Url":"https://alas.aws.amazon.com/ALAS-2020-1337.html",
+            "VendorCreatedAt":"2020-01-16T00:01:43Z",
+            "VendorSeverity":"Medium",
+            "VendorUpdatedAt":"2020-01-16T00:01:43Z"
+        },
+        "VulnerablePackages": [
+            {
+                "Architecture": "x86_64",
+                "Epoch": "1",
+                "Name": "openssl",
+                "Release": "16.amzn2.0.3",
+                "Version": "1.0.2k"
+            }
+        ]
+    }
+]
+```
+
+Each vulnerability can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`Cvss`](#asff-vulnerabilities-cvss)  |  No  |  Common Vulnerability Scoring System \(CVSS\) scores from the advisory that are related to the vulnerability\. Type: Array of objects  | 
+|  `Id`  |  Yes  |  The identifier of the vulnerability\. Type: String \(32 characters max\)  | 
+|  `ReferenceUrls`  |  No  |  A list of URLs that provide additional information about the vulnerability\. Type: Array of strings  | 
+|  `RelatedVulnerabilities`  |  No  |  List of vulnerabilities that are related to this vulnerability\. For each vulnerability, provide the vulnerability ID\. Type: Array of strings  | 
+|  [`Vendor`](#asff-vulnerabilities-vendor)  |  No  |  Information about the vendor that generates the vulnerability report\. Type: Object  | 
+|  [`VulnerablePackages`](#asff-vulnerabilities-vulnerablepackages)  |  No  |  List of packages that have the vulnerability\. Type: Array of objects  | 
+
+#### Cvss<a name="asff-vulnerabilities-cvss"></a>
+
+The `Cvss` object provides a list of CVSS scores for the vulnerability\.
+
+Each `CVSS` score can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `BaseScore`  |  No  |  The base CVSS score\. Type: Number  | 
+|  `BaseVector`  |  No  |  The base scoring vector for the CVSS score\. Type: String  | 
+|  `Version`  |  No  |  The version of CVSS for the CVSS score\. Type: String  | 
+
+#### Vendor<a name="asff-vulnerabilities-vendor"></a>
+
+The `Vendor` object provides information about the vendor that generated the vulnerability advisory for the vulnerability\.
+
+The `Vendor` object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Name`  |  Yes  |  The name of the vendor\. Type: String \(32 characters max\)  | 
+|  `Url`  |  No  |  The URL of the vulnerability advisory\. Type: String  | 
+|  `VendorCreatedAt`  |  No  |  The date and time when the vulnerability advisory was created\. Type: String \(timestamp\) Format: `yyyy-MM-ddTHH:mm:ssZ`  | 
+|  `VendorSeverity`  |  No  |  The severity that the vendor assigned to the vulnerability\. Type: String \(32 characters max\)  | 
+|  `VendorUpdatedAt`  |  No  |  The date and time when the vulnerability advisory was last updated\. Type: String \(timestamp\) Format: `yyyy-MM-ddTHH:mm:ssZ`  | 
+
+#### VulnerablePackages<a name="asff-vulnerabilities-vulnerablepackages"></a>
+
+The `VulnerablePackages` object provides the list of packages that have the vulnerability\.
+
+Each package can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Architecture`  |  No  |  The architecture used for the vulnerable package\. Type: String  | 
+|  `Epoch`  |  No  |  The epoch for the vulnerable package\. Type: String  | 
+|  `Name`  |  No  |  The name of the vulnerable package\. Type: String  | 
+|  `Release`  |  No  |  The release for the vulnerable package\. Type: String  | 
+|  `Version`  |  No  |  The version of the vulnerable package\. Type: String  | 
 
 ### Workflow<a name="asff-workflow"></a>
 

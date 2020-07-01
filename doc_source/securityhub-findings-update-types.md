@@ -14,5 +14,5 @@ After a finding is created, it can be updated by the finding provider or by the 
 Security Hub also automatically updates and deletes findings\.
 
 **Topics**
-+ [Using `BatchImportFindings` to create and update findings](finding-update-batchimportfindings.md)
-+ [Using `BatchUpdateFindings` to update a finding](finding-update-batchupdatefindings.md)
++ [Using BatchImportFindings to create and update findings](finding-update-batchimportfindings.md)
++ [Using BatchUpdateFindings to update a finding](finding-update-batchupdatefindings.md)

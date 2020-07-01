@@ -14,7 +14,8 @@ Indicates that you notified the resource owner about the security issue\. You ca
 The finding will not be reviewed again and will not be acted upon\.
 
 `RESOLVED`  
-The finding was reviewed and remediated and is now considered resolved\.
+The finding was reviewed and remediated and is now considered resolved\.  
+For findings from controls, if `Compliance.Status` is `PASSED`, then Security Hub automatically sets the workflow status to `RESOLVED`\.
 
 ## Setting the workflow status \(Console\)<a name="finding-workflow-status-console"></a>
 

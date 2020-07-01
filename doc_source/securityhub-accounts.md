@@ -45,12 +45,15 @@ Use the following procedures to add an account, invite an account, or accept an 
 
    You can add multiple accounts at the same time by using a comma\-separated values \(CSV\) file\. Add the account ID and email address for each account to add, and then choose **Upload list \(\.csv\)** to bulk\-add accounts\.
 **Important**  
-In your \.csv list, accounts must appear one per line\. The first line of the \.csv file must contain the following header, as shown in the following example: **Account ID,Email**\. Each subsequent line must contain a valid account ID and email address for the account to add\. Separate the account ID and email address with a comma\.  
+In your \.csv list, accounts must appear one per line\. The first line of the \.csv file must contain the header\. In the header, the first column is **Account ID** and the second column is **Email**\.  
+Each subsequent line must contain a valid account ID and email address for the account to add\.  
+Here is an example of a \.csv file when viewed in a text editor\.  
 
    ```
    Account ID,Email
    111111111111,user@example.com
    ```
+In a spreadsheet program, the fields appear in separate columns\. The underlying format is still comma\-separated\.
 
 1. After you finish adding accounts, choose **Add**\. Then in the **Accounts to be added** section, choose **Next**\.
 
