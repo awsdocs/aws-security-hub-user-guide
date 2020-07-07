@@ -23,6 +23,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                     "Description": "string",
                     "ReasonCode": "string"
                 }
+            ]
         },
         "Confidence": number,
         "CreatedAt": "string",
@@ -73,7 +74,13 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                     },
                     "Protocol": "string",
                     "Source": {
-                        "Address": ["string"]
+                        "Address": ["string"],
+                        "PortRanges": [
+                            {
+                                "Begin": integer,
+                                "End": integer
+                            }
+                        ]
                     }
                 },
                 "Ingress": {
@@ -84,11 +91,17 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "Begin": integer,
                                 "End": integer
                             }
-                        ],
+                        ]
                     },
                     "Protocol": "string",
                     "Source": {
-                        "Address": ["string"]
+                        "Address": ["string"],
+                        "PortRanges": [
+                            {
+                                "Begin": integer,
+                                "End": integer
+                            }
+                        ]
                     }
                 }
             }
@@ -267,7 +280,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                           "CreateTime": "string",
                           "Encrypted": Boolean,
                           "KmsKeyId": "string",
-                          "Size": number
+                          "Size": number,
                           "SnapshotId": "string",
                           "Status": "string"
                     },
@@ -283,8 +296,8 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "Ipv6CidrBlockAssociationSet": [
                             {
                                 "AssociationId": "string",
-                                "CidrBlockState": "string"
-                                "Ipv6CidrBlock": "string",
+                                "CidrBlockState": "string",
+                                "Ipv6CidrBlock": "string"
                            }
                         ],
                         "State": "string"
@@ -612,7 +625,7 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
 |  `Id`  |  Yes  | The product\-specific identifier for a finding\. Type: String \(512 characters max\) or ARN The finding ID must comply with the following constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) These constraints are expected to hold within a findings product, but are not required to hold across findings products\. Example: <pre>"Id": "us-west-2/111111111111/98aebb2207407c87f51e89943f12b1ef"</pre>  | 
 |  `LastObservedAt`  |  No  | An ISO8601\-formatted timestamp \(as defined in [RFC\-3339 Date and Time on the Internet: Timestamps](https://tools.ietf.org/html/rfc3339)\) that indicates when the potential security issue captured by a finding was most recently observed by the security findings product\. Type: Timestamp This timestamp reflects the time of when the event or vulnerability was last or most recently observed\. Consequently, it can differ from the `UpdatedAt` timestamp, which reflects the time this finding record was last or most recently updated\.  You can provide this timestamp, but it isn't required upon the first observation\. If you provide the field in this case, the timestamp should be the same as the `FirstObservedAt` timestamp\. You should update this field to reflect the last or most recently observed timestamp each time a finding is observed\. Example: <pre>"LastObservedAt": "2017-03-23T13:22:13.933Z"</pre>  | 
 |  [`Malware`](#asff-malware)  |  No  | A list of malware related to a finding\. Type: Array of up to five malware objects Example: <pre>"Malware": [<br />    {<br />        "Name": "Stringler",<br />        "Type": "COIN_MINER",<br />        "Path": "/usr/sbin/stringler",<br />        "State": "OBSERVED"<br />    }<br />]</pre>  | 
-|  [`Network`](#asff-network)  |  No  | The details of network\-related information about a finding\. Type: Object Example: <pre>"Network": {<br />    "Direction": "IN",<br />    "Protocol": "TCP",<br />    "SourceIpV4": "1.2.3.4",<br />    "SourceIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C",<br />    "SourcePort": "42",<br />    "SourceDomain": "here.com",<br />    "SourceMac": "00:0d:83:b1:c0:8e",<br />    "DestinationIpV4": "2.3.4.5",<br />    "DestinationIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C",<br />    "DestinationPort": "80",<br />    "DestinationDomain": "there.com"<br />}</pre>  | 
+|  [`Network`](#asff-network)  |  No  | The details of network\-related information about a finding\. Type: Object Example: <pre>"Network": {<br />    "Direction": "IN",<br />    "OpenPortRange": {<br />        "Begin": 443,<br />        "End": 443<br />    },<br />    "Protocol": "TCP",<br />    "SourceIpV4": "1.2.3.4",<br />    "SourceIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C",<br />    "SourcePort": "42",<br />    "SourceDomain": "example1.com",<br />    "SourceMac": "00:0d:83:b1:c0:8e",<br />    "DestinationIpV4": "2.3.4.5",<br />    "DestinationIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C",<br />    "DestinationPort": "80",<br />    "DestinationDomain": "example2.com"<br />}</pre>  | 
 |  [`NetworkPath`](#asff-networkpath)  |  No  |  A network path that is related to the finding\. Each entry in `NetworkPath` represents a component of the path\. Type: Array of objects  | 
 |  [`Note`](#asff-note)  |  No  |  A user\-defined note that is added to a finding\. A finding provider can provide an initial note for a finding, but cannot add notes after that\. A note can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. Notes can be added by both master accounts and member accounts\. Type: Object Example: <pre>"Note": {<br />    "Text": "Don't forget to check under the mat.",<br />    "UpdatedBy": "jsmith",<br />    "UpdatedAt": "2018-08-31T00:15:09Z"<br />}</pre>  | 
 |  [`Process`](#asff-process)  |  No  | The details of process\-related information about a finding\.Type: Object Example: <pre>"Process": {<br />    "Name": "syslogd",<br />    "Path": "/usr/sbin/syslogd",<br />    "Pid": 12345,<br />    "ParentPid": 56789,<br />    "LaunchedAt": "2018-09-27T22:37:31Z",<br />    "TerminatedAt": "2018-09-27T23:37:31Z"<br />}</pre>  | 
@@ -643,11 +656,9 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
   + [OpenPortRange](#asff-network-openportrange)
 + [NetworkPath](#asff-networkpath)
   + [Egress](#asff-networkpath-egress)
-    + [Destination](#asff-networkpath-egress-destination)
-    + [Source](#asff-networkpath-egress-source)
   + [Ingress](#asff-networkpath-ingress)
-    + [Destination](#asff-networkpath-ingress-destination)
-    + [Source](#asff-networkpath-ingress-source)
+  + [Destination](#asff-networkpath-egress-ingress-destination)
+  + [Source](#asff-networkpath-egress-ingress-source)
 + [Note](#asff-note)
 + [Process](#asff-process)
 + [RelatedFindings](#asff-relatedfindings)
@@ -804,16 +815,20 @@ Example:
 ```
 "Network": {
     "Direction": "IN",
+    "OpenPortRange": {
+        "Begin": 443,
+        "End": 443
+    },
     "Protocol": "TCP",
     "SourceIpV4": "1.2.3.4",
     "SourceIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C",
     "SourcePort": "42",
-    "SourceDomain": "here.com",
+    "SourceDomain": "example1.com",
     "SourceMac": "00:0d:83:b1:c0:8e",
     "DestinationIpV4": "2.3.4.5",
     "DestinationIpV6": "FE80:CD00:0000:0CDE:1257:0000:211E:729C",
     "DestinationPort": "80",
-    "DestinationDomain": "there.com"
+    "DestinationDomain": "example2.com"
 }
 ```
 
@@ -866,7 +881,7 @@ The `NetworkPath` object provides information about a network path that is relev
                         "Begin": 443,
                         "End": 443
                     }
-                ],
+                ]
             },
             "Protocol": "TCP",
             "Source": {
@@ -900,7 +915,7 @@ Each component of the network path can have the following attributes\.
 |  `ComponentId`  |  Yes  |  The identifier of a component in the network path\. Type: String  | 
 |  `ComponentType`  |  Yes  |  The type of component\. Type: String  | 
 |  [`Egress`](#asff-networkpath-egress)  |  No  |  Information about the component that comes after the current component in the network path\. Type: Object  | 
-|  [`Ingress`](#asff-networkpath-ingress)  |  No  |  Information about the component that comes before the current node in the network path\. Type: Object  | 
+|  [`Ingress`](#asff-networkpath-ingress)  |  No  |  Information about the component that comes before the current component in the network path\. Type: Object  | 
 
 #### Egress<a name="asff-networkpath-egress"></a>
 
@@ -909,30 +924,9 @@ The `Egress` object contains information about the component that comes after th
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  [`Destination`](#asff-networkpath-egress-destination)  |  No  |  Information about the destination of the component\. Type: Object  | 
+|  [`Destination`](#asff-networkpath-egress-ingress-destination)  |  No  |  Information about the destination of the component\. Type: Object  | 
 |  `Protocol`  |  No  |  The protocol used for the component\. Type: String  | 
-|  [`Source`](#asff-networkpath-egress-source)  |  No  |  Information about the origin of the component\. Type: Object  | 
-
-##### Destination<a name="asff-networkpath-egress-destination"></a>
-
-The `Destination` object contains information about the destination of the next component in the network path\. It can have the following attributes\.
-
-
-|  Attribute  |  Required  |  Description  | 
-| --- | --- | --- | 
-|  `Address`  |  No  |  The IP addresses of the destination\. Type: Array of strings  | 
-|  `PortRanges`  |  No  |  A list of port ranges for the destination\. Type: Array of objects  | 
-|  `PortRanges.Begin`  |  No  |  For a destination port range, the beginning port number\. Type: Integer  | 
-|  `PortRanges.End`  |  No  |  For a destination port range, the ending port number\. Type: Integer  | 
-
-##### Source<a name="asff-networkpath-egress-source"></a>
-
-The `Source` object provides information about the origin of the next component\. It can have the following attributes\.
-
-
-|  Attribute  |  Required  |  Description  | 
-| --- | --- | --- | 
-|  `Address`  |  No  |  The IP addresses of the origin\. Type: Array of strings  | 
+|  [`Source`](#asff-networkpath-egress-ingress-source)  |  No  |  Information about the origin of the component\. Type: Object  | 
 
 #### Ingress<a name="asff-networkpath-ingress"></a>
 
@@ -941,30 +935,33 @@ The `Ingress` object contains information about the previous component in the ne
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  [`Destination`](#asff-networkpath-ingress-destination)  |  No  |  Information about the destination for the previous component\. Type: Object  | 
+|  [`Destination`](#asff-networkpath-egress-ingress-destination)  |  No  |  Information about the destination for the previous component\. Type: Object  | 
 |  `Protocol`  |  No  |  The protocol used by the previous component\. Type: String  | 
-|  [`Source`](#asff-networkpath-ingress-source)  |  No  |  Information about the origin of the previous component\. Type: Object  | 
+|  [`Source`](#asff-networkpath-egress-ingress-source)  |  No  |  Information about the origin of the previous component\. Type: Object  | 
 
-##### Destination<a name="asff-networkpath-ingress-destination"></a>
+#### Destination<a name="asff-networkpath-egress-ingress-destination"></a>
 
-The `Destination` object contains the destination information for the previous component\. It can have the following attributes\.
+The `Destination` object in `Egress` or `Ingress` contains the destination information for the previous or next component\. It can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Address`  |  No  |  IP addresses of the previous component\. Type: Array of strings  | 
-|  `PortRanges`  |  No  |  List of open port ranges for the previous component\. Type: Array of objects  | 
+|  `Address`  |  No  |  IP addresses of the previous or next component\. Type: Array of strings  | 
+|  `PortRanges`  |  No  |  List of open port ranges for the destination of the previous or next component\. Type: Array of objects  | 
 |  `PortRanges.Begin`  |  No  |  For an open port range, the beginning of the range\. Type: Integer  | 
 |  `PortRanges.End`  |  No  |  For an open port range, the end of the range\. Type: Number  | 
 
-##### Source<a name="asff-networkpath-ingress-source"></a>
+#### Source<a name="asff-networkpath-egress-ingress-source"></a>
 
-The `Source` object contains information about the origin of the previous component\. It can have the following attributes\.
+The `Source` object under `Egress` or `Ingress` contains information about the origin of the previous or next component\. It can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Address`  |  No  |  IP addresses for the origin of the previous component\. Type: Array of strings  | 
+|  `Address`  |  No  |  IP addresses for the origin of the previous or next component\. Type: Array of strings  | 
+|  `PortRanges`  |  No  |  List of open port ranges for the origin of the previous or next component\. Type: Array of objects  | 
+|  `PortRanges.Begin`  |  No  |  For an open port range, the beginning of the range\. Type: Integer  | 
+|  `PortRanges.End`  |  No  |  For an open port range, the end of the range\. Type: Number  | 
 
 ### Note<a name="asff-note"></a>
 
@@ -1151,10 +1148,10 @@ The `AwsAutoScalingAutoScalingGroup` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `CreatedTime`  |  Yes  |  The date and time when the automatic scaling group was created\. Type: String \(timestamp\) Format: yyyy\-MM\-ddTHH:mm:ssZ  | 
+|  `CreatedTime`  |  No  |  The date and time when the automatic scaling group was created\. Type: String \(timestamp\) Format: yyyy\-MM\-ddTHH:mm:ssZ  | 
 |  `HealthCheckGracePeriod`  |  No  |  The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it checks the health status of an EC2 instance that has come into service\. Type: Integer  | 
-|  `HealthCheckType`  |  Yes  |  The service to use for the health checks\. Type: String \(32 characters max\) Valid values: `EC2` \| `ELB`  | 
-|  `LaunchConfigurationName`  |  Yes  |  The name of the launch configuration\. Type: String \(32 characters max\)  | 
+|  `HealthCheckType`  |  No  |  The service to use for the health checks\. Type: String \(32 characters max\) Valid values: `EC2` \| `ELB`  | 
+|  `LaunchConfigurationName`  |  No  |  The name of the launch configuration\. Type: String \(32 characters max\)  | 
 |  `LoadBalancerNames`  |  No  |  The list of load balancers that are associated with the group\. Type: Array of strings Each load balancer name is limited to 255 characters\.  | 
 
 #### AwsCloudFrontDistribution<a name="asff-resourcedetails-awscloudfrontdistribution"></a>
@@ -1492,9 +1489,9 @@ The `AwsEc2Volume` object provides details about an EC2 volume\.
      "Attachments": [
         {
             "AttachTime": "2017-10-17T14:47:11Z",
-            "DeleteOnTermination": true
+            "DeleteOnTermination": true,
             "InstanceId": "i-123abc456def789g",
-            "Status": "attached",
+            "Status": "attached"
        }
       ],
       "CreateTime": "2020-02-24T15:54:30Z",
@@ -1512,12 +1509,12 @@ The `AwsEc2Volume` object can have the following attributes\.
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
 |  [`Attachments`](#asff-resourcedetails-awsec2volume-attachments)  |  No  |  The volume attachments\. Type: Array of objects  | 
-|  `CreateTime`  |  Yes  |  The date and time when the volume was created\. Type: String \(timestamp\) Format: yyyy\-MM\-ddTHH:mm:ssZ  | 
-|  `Encrypted`  |  Yes  |  Whether the volume is encrypted\. Type: Boolean  | 
-|  `KmsKeyId`  |  Yes  |  The ARN of the AWS KMS customer master key \(CMK\) that was used to protect the volume encryption key for the volume\. Type: String  | 
-|  `Size`  |  Yes  |  The size of the volume, in GiBs\. Type: Integer  | 
-|  `SnapshotId`  |  Yes  |  The snapshot from which the volume was created\. Type: String  | 
-|  `Status`  |  Yes  |  The volume state\. Type: String Valid values: `creating` \| `available` \| `in-use` \| `deleting` \| `deleted` \| `error`  | 
+|  `CreateTime`  |  No  |  The date and time when the volume was created\. Type: String \(timestamp\) Format: yyyy\-MM\-ddTHH:mm:ssZ  | 
+|  `Encrypted`  |  No  |  Whether the volume is encrypted\. Type: Boolean  | 
+|  `KmsKeyId`  |  No  |  The ARN of the AWS KMS customer master key \(CMK\) that was used to protect the volume encryption key for the volume\. Type: String  | 
+|  `Size`  |  No  |  The size of the volume, in GiBs\. Type: Integer  | 
+|  `SnapshotId`  |  No  |  The snapshot from which the volume was created\. Type: String  | 
+|  `Status`  |  No  |  The volume state\. Type: String Valid values: `creating` \| `available` \| `in-use` \| `deleting` \| `deleted` \| `error`  | 
 
 ##### Attachments<a name="asff-resourcedetails-awsec2volume-attachments"></a>
 
@@ -1526,10 +1523,10 @@ The `Attachments` object contains the set of attachments for the EC2 volume\. Ea
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `AttachTime`  |  Yes  |  The date and time when the attachment initiated\. Type: String \(timestamp\) Format: `yyyy-MM-ddTHH:mm:ssZ`  | 
-|  `DeleteOnTermination`  |  Yes  |  Whether the EBS volume is deleted when the EC2 instance is terminated\. Type: Boolean  | 
-|  `InstanceId`  |  Yes  |  The identifier of the EC2 instance\. Type: String  | 
-|  `Status`  |  Yes  |  The attachment state of the volume\. Type: String Valid values: `attaching` \| `attached` \| `detaching` \| `detached` \| `busy`  | 
+|  `AttachTime`  |  No  |  The date and time when the attachment initiated\. Type: String \(timestamp\) Format: `yyyy-MM-ddTHH:mm:ssZ`  | 
+|  `DeleteOnTermination`  |  No  |  Whether the EBS volume is deleted when the EC2 instance is terminated\. Type: Boolean  | 
+|  `InstanceId`  |  No  |  The identifier of the EC2 instance\. Type: String  | 
+|  `Status`  |  No  |  The attachment state of the volume\. Type: String Valid values: `attaching` \| `attached` \| `detaching` \| `detached` \| `busy`  | 
 
 #### AwsEc2Vpc<a name="asff-resourcedetails-awsec2vpc"></a>
 
@@ -1550,12 +1547,12 @@ The `AwsEc2Vpc` object provides details about an EC2 virtual private cloud \(VPC
     "Ipv6CidrBlockAssociationSet": [
         {
             "AssociationId": "vpc-cidr-assoc-0dc4c852f52abda97",
-            "CidrBlockState": "associated"
-            "Ipv6CidrBlock": "192.0.2.0/24",
+            "CidrBlockState": "associated",
+            "Ipv6CidrBlock": "192.0.2.0/24"
        }
 
     ],
-    "State": "available",
+    "State": "available"
 }
 ```
 
@@ -1565,9 +1562,9 @@ The `AwsEc2Vpc` object can have the following attributes\.
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
 |  [`CidrBlockAssociationSet`](#asff-resourcedetails-awsec2vpc-cidrblockassociationset)  |  No  |  Information about the IPv4 CIDR blocks that are associated with the VPC\. Type: Array of objects  | 
-|  `DhcpOptionsId`  |  Yes  |  The identifier of the set of Dynamic Host Configuration Protocol \(DHCP\) options that are associated with the VPC\. If the default options are associated with the VPC, then this is `default`\. Type: String \(32 characters max\)  | 
+|  `DhcpOptionsId`  |  No  |  The identifier of the set of Dynamic Host Configuration Protocol \(DHCP\) options that are associated with the VPC\. If the default options are associated with the VPC, then this is `default`\. Type: String \(32 characters max\)  | 
 |  [`IpV6CidrBlockAssociationSet`](#asff-resourcedetails-awsec2vpc-ipv6cidrblockassociationset)  |  No  |  Information about the IPv6 CIDR blocks that are associated with the VPC\. Type: Array of objects\.  | 
-|  `State`  |  Yes  |  The current state of the VPC\. Type: String \(32 characters max\) Valid values: `pending` \| `available`  | 
+|  `State`  |  No  |  The current state of the VPC\. Type: String \(32 characters max\) Valid values: `pending` \| `available`  | 
 
 ##### CidrBlockAssociationSet<a name="asff-resourcedetails-awsec2vpc-cidrblockassociationset"></a>
 
@@ -1578,8 +1575,8 @@ Each CIDR block association can contain the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `AssociationId`  |  Yes  |  The association ID for the IPv4 CIDR block\. Type: String \(32 characters max\)  | 
-|  `CidrBlock`  |  Yes  |  The IPv4 CIDR block\. Type: CIDR IPV4  | 
+|  `AssociationId`  |  No  |  The association ID for the IPv4 CIDR block\. Type: String \(32 characters max\)  | 
+|  `CidrBlock`  |  No  |  The IPv4 CIDR block\. Type: CIDR IPV4  | 
 |  `CidrBlockState`  |  No  |  Information about the state of the CIDR block\. Type: String \(32 characters max\)  | 
 
 ##### IpV6CidrBlockAssociationSet<a name="asff-resourcedetails-awsec2vpc-ipv6cidrblockassociationset"></a>
@@ -1591,9 +1588,9 @@ Each CIDR block association can contain the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Associationid`  |  Yes  |  The association ID for the IPv6 CIDR block\. Type: String \(32 characters max\)  | 
+|  `Associationid`  |  No  |  The association ID for the IPv6 CIDR block\. Type: String \(32 characters max\)  | 
 |  `CidrBlockState`  |  No  |  Information about the state of the CIDR block\. Type: String \(32 characters max\)  | 
-|  `IpV6CidrBlock`  |  Yes  |  The IPv6 CIDR block\. Type: CIDR IPV6  | 
+|  `IpV6CidrBlock`  |  No  |  The IPv6 CIDR block\. Type: CIDR IPV6  | 
 
 #### AwsElasticSearchDomain<a name="asff-resourcedetails-awselasticsearchdomain"></a>
 
