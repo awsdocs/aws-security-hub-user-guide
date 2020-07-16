@@ -12,4 +12,4 @@ After you set up a custom action, you can send findings to it\.
 
    You can send up to 20 findings at a time\.
 
-1. From **Actions**, choose the custom action\.
+1. For **Actions**, choose the custom action\.

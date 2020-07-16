@@ -1232,6 +1232,8 @@ This control checks whether a Lambda function is in a VPC\.
 
 It does not evaluate the VPC subnet routing configuration to determine public reachability\. 
 
+Note that if Lambda@Edge is found in the account, then this control generates failed findings\. To prevent these findings, you can disable this control\.
+
 ### Related PCI DSS requirements<a name="pcidss-lambda-2-requirements"></a>
 
 This control is related to the following PCI DSS requirements:

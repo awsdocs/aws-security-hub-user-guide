@@ -32,7 +32,7 @@ A standardized format for the contents of findings that Security Hub aggregates 
 A safeguard or countermeasure prescribed for an information system or an organization designed to protect the confidentiality, integrity, and availability of its information and to meet a set of defined security requirements\. A security standard consists of controls\.
 
 **Custom action**  
-A Security Hub mechanism for sending selected findings to CloudWatch Events\. A custom action is created in Security Hub\. It is then linked to a CloudWatch Events rule\. The rule defines a specific action to take when a finding is received that is associated with the custom action ID\. Custom actions can be used, for example, to send a specific finding, or a small set of findings, to a response or remediation workflow\. For more information, see [Creating a custom action and associating it with a CloudWatch Events rule](securityhub-cloudwatch-events.md#securityhub-cwe-configure)\.
+A Security Hub mechanism for sending selected findings to CloudWatch Events\. A custom action is created in Security Hub\. It is then linked to a CloudWatch Events rule\. The rule defines a specific action to take when a finding is received that is associated with the custom action ID\. Custom actions can be used, for example, to send a specific finding, or a small set of findings, to a response or remediation workflow\. For more information, see [Creating a custom action \(console\)](securityhub-cwe-custom-actions.md#securityhub-cwe-configure)\.
 
 **Finding**  
 The observable record of a security check or security\-related detection\.  

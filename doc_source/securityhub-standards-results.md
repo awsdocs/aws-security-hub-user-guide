@@ -107,6 +107,6 @@ If a subsequent check against a given rule generates a new result \(for example,
 
 If a subsequent check against a given rule generates a result that is identical to the current result, the existing finding is updated\. No new finding is generated\.
 
-Security Hub automatically archives findings from controls if the associated resource was deleted, based on one of the following criteria:
+Security Hub automatically archives findings from controls if the associated resource is deleted, the resource does not exist, or the control is disabled\. A resource might no longer exist because the associated service is not currently used\. The findings are archived automatically based on one of the following criteria:
 + The finding was not updated in three days\.
 + The associated AWS Config evaluation returned `NOT_APPLICABLE`\.

@@ -13,7 +13,8 @@ You can also use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/A
 All findings are automatically deleted if they were not updated in the past 90 days\.
 
 **Topics**
-+ [Filtering and grouping findings](findings-filtering-grouping.md)
-+ [Viewing finding details](finding-view-details.md)
++ [Filtering and grouping findings \(console\)](findings-filtering-grouping.md)
++ [Viewing finding details \(console\)](finding-view-details.md)
++ [Retrieving finding details \(Security Hub API, AWS CLI\)](finding-retrieve-api-cli.md)
 + [Setting the workflow status for a finding](finding-workflow-status.md)
 + [Sending findings to a custom action](finding-send-to-custom-action.md)

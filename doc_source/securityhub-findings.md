@@ -15,6 +15,6 @@ Security Hub correlates the findings across integrated products to prioritize th
 Finding providers can update findings to reflect additional instances of the finding\. You can update findings to provide details about your investigation and its results\.
 
 **Topics**
-+ [Types of finding updates in Security Hub](securityhub-findings-update-types.md)
++ [Creating and updating findings in AWS Security Hub](securityhub-findings-update-types.md)
 + [Viewing and taking action on findings](securityhub-managing-findings.md)
 + [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)

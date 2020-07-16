@@ -5,9 +5,9 @@ For the CIS AWS Foundations Benchmark standard, below are some specific controls
 **CIS AWS Foundations Benchmark 2\.3 and 2\.6 controls**  
 These controls deal with logging of CloudTrail trails\. If you log these trails in a centralized logging account, you only need to run these controls in the account and Region where centralized logging takes place\.
 
-**CIS AWS Foundations Benchmark 1\.2\-1\.14, 1\.16, 1\.22, and 2\.5 controls**  
+**CIS AWS Foundations Benchmark 1\.2\-1\.14, 1\.16, 1\.20, 1\.22, and 2\.5 controls**  
 To save on the cost of AWS Config, you can disable recording of global resources in all but one Region, and then disable these controls that deal with global resources in all Regions except for the Region that runs global recording\.  
 If you disable these 1\.x controls and disable recording of global resources in a particular Region, you should also disable 2\.5\. This is because 2\.5 requires recording of global resources in order to pass\.
 
-**CIS AWS Foundations Benchmark 3\.x controls**  
+**CIS AWS Foundations Benchmark 1\.1 and 3\.x controls**  
 If you have an SNS topic in a centralized account that is aligned to these control requirements, you can disable these controls in all accounts except for that centralized account\. Also, for a multi\-Region or organization CloudTrail trail, you can disable these controls in all accounts and Regions except where you receive CloudWatch logs in a log group\.
