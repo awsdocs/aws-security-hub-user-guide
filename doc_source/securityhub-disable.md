@@ -7,7 +7,7 @@ When you disable Security Hub for an account, it is disabled only in the current
 The following also occurs\.
 + After 90 days, your existing findings and insights and any Security Hub configuration settings are deleted and cannot be recovered\.
 
-  If you want to save your existing findings, you must export them before you disable Security Hub\. For more information, see [Accounts and data retention in Security Hub](securityhub-accounts.md#securityhub-data-retention)\.
+  If you want to save your existing findings, you must export them before you disable Security Hub\. For more information, see [Effect of account actions on Security Hub data](securityhub-data-retention.md)\.
 + Any enabled standards are disabled\.
 + Your master and member account relationships are removed\.
 
