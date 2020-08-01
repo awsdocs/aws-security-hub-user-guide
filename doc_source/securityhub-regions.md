@@ -24,19 +24,27 @@ The following controls are not supported in Africa \(Cape Town\)\.
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
 [\[PCI\.CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-pci-controls.md#pcidss-codebuild-2)  
+[\[PCI\.DMS\.1\] AWS Database Migration Service replication instances should not be public](securityhub-pci-controls.md#pcidss-dms-1)  
 [\[PCI\.EC2\.1\] Amazon EBS snapshots should not be publicly restorable](securityhub-pci-controls.md#pcidss-ec2-1)  
 [\[PCI\.EC2\.3\] Unused EC2 security groups should be removed](securityhub-pci-controls.md#pcidss-ec2-3)  
 [\[PCI\.EC2\.4\] Unused EC2 EIPs should be removed](securityhub-pci-controls.md#pcidss-ec2-4)  
+[\[PCI\.EC2\.5\] Security groups should not allow ingress from 0\.0\.0\.0/0 to port 22](securityhub-pci-controls.md#pcidss-ec2-5)  
+[\[PCI\.ELBV2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-pci-controls.md#pcidss-elbv2-1)  
+[\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
 [\[PCI\.IAM\.1\] IAM root user access key should not exist](securityhub-pci-controls.md#pcidss-iam-1)  
 [\[PCI\.RDS\.1\] RDS snapshots should prohibit public access](securityhub-pci-controls.md#pcidss-rds-1)  
-[\[PCI\.SSM\.1\] Amazon EC2 instances managed by Systems Manager should have a patch compliance status of COMPLIANT after a patch installation](securityhub-pci-controls.md#pcidss-ssm-1)
+[\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)  
+[\[PCI\.SSM\.1\] Amazon EC2 instances managed by Systems Manager should have a patch compliance status of COMPLIANT after a patch installation](securityhub-pci-controls.md#pcidss-ssm-1)  
+[\[PCI\.SSM\.2\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT](securityhub-pci-controls.md#pcidss-ssm-2)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
-[\[ACM\.1\] Imported ACM certificates should be renewed within 90 days of expiration](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
+[\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
+[\[DMS\.1\] Database Migration Service replication instances should not be public](securityhub-standards-fsbp-controls.md#fsbp-dms-1)  
 [\[EC2\.1\] Amazon EBS snapshots should not be public, determined by the ability to be restorable by anyone](securityhub-standards-fsbp-controls.md#fsbp-ec2-1)  
 [\[EC2\.3\] Attached EBS volumes should be encrypted at\-rest](securityhub-standards-fsbp-controls.md#fsbp-ec2-3)  
+[\[EC2\.4\] Stopped EC2 instances should be removed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-ec2-4)  
 [\[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
 [\[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-standards-fsbp-controls.md#fsbp-elbv2-1)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
@@ -44,14 +52,9 @@ The following controls are not supported in Africa \(Cape Town\)\.
 [\[IAM\.4\] IAM root user access key should not exist](securityhub-standards-fsbp-controls.md#fsbp-iam-4)  
 [\[RDS\.1\] RDS snapshots should be private](securityhub-standards-fsbp-controls.md#fsbp-rds-1)  
 [\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
-[\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)
-
-### Asia Pacific \(Hong Kong\)<a name="securityhub-control-support-apeast1"></a>
-
-The following controls are not supported in Asia Pacific \(Hong Kong\)\.
-
-**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
-[\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)
+[\[SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
+[\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)  
+[\[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT ](securityhub-standards-fsbp-controls.md#fsbp-ssm-3)
 
 ### Europe \(Milan\)<a name="securityhub-control-support-eusouth1"></a>
 
@@ -66,29 +69,44 @@ The following controls are not supported in Europe \(Milan\)\.
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
 [\[PCI\.CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-pci-controls.md#pcidss-codebuild-2)  
+[\[PCI\.DMS\.1\] AWS Database Migration Service replication instances should not be public](securityhub-pci-controls.md#pcidss-dms-1)  
 [\[PCI\.EC2\.1\] Amazon EBS snapshots should not be publicly restorable](securityhub-pci-controls.md#pcidss-ec2-1)  
 [\[PCI\.EC2\.3\] Unused EC2 security groups should be removed](securityhub-pci-controls.md#pcidss-ec2-3)  
 [\[PCI\.EC2\.4\] Unused EC2 EIPs should be removed](securityhub-pci-controls.md#pcidss-ec2-4)  
+[\[PCI\.EC2\.5\] Security groups should not allow ingress from 0\.0\.0\.0/0 to port 22](securityhub-pci-controls.md#pcidss-ec2-5)  
+[\[PCI\.ELBV2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-pci-controls.md#pcidss-elbv2-1)  
+[\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
 [\[PCI\.RDS\.1\] RDS snapshots should prohibit public access](securityhub-pci-controls.md#pcidss-rds-1)  
-[\[PCI\.SSM\.1\] Amazon EC2 instances managed by Systems Manager should have a patch compliance status of COMPLIANT after a patch installation](securityhub-pci-controls.md#pcidss-ssm-1)
+[\[PCI\.S3\.6\] S3 Block Public Access setting should be enabled](securityhub-pci-controls.md#pcidss-s3-6)  
+[\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)  
+[\[PCI\.SSM\.1\] Amazon EC2 instances managed by Systems Manager should have a patch compliance status of COMPLIANT after a patch installation](securityhub-pci-controls.md#pcidss-ssm-1)  
+[\[PCI\.SSM\.2\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT](securityhub-pci-controls.md#pcidss-ssm-2)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
-[\[ACM\.1\] Imported ACM certificates should be renewed within 90 days of expiration](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
+[\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
+[\[DMS\.1\] Database Migration Service replication instances should not be public](securityhub-standards-fsbp-controls.md#fsbp-dms-1)  
 [\[EC2\.1\] Amazon EBS snapshots should not be public, determined by the ability to be restorable by anyone](securityhub-standards-fsbp-controls.md#fsbp-ec2-1)  
 [\[EC2\.3\] Attached EBS volumes should be encrypted at\-rest](securityhub-standards-fsbp-controls.md#fsbp-ec2-3)  
+[\[EC2\.4\] Stopped EC2 instances should be removed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-ec2-4)  
 [\[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
 [\[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-standards-fsbp-controls.md#fsbp-elbv2-1)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](securityhub-standards-fsbp-controls.md#fsbp-iam-3)  
 [\[RDS\.1\] RDS snapshots should be private](securityhub-standards-fsbp-controls.md#fsbp-rds-1)  
 [\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
-[\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)
+[\[SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
+[\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)  
+[\[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT ](securityhub-standards-fsbp-controls.md#fsbp-ssm-3)
 
 ### Middle East \(Bahrain\)<a name="securityhub-control-support-mesouth1"></a>
 
 The following controls are not supported in Middle East \(Bahrain\)\.
+
+**[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
+[\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
+[\[PCI\.S3\.6\] S3 Block Public Access setting should be enabled](securityhub-pci-controls.md#pcidss-s3-6)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
@@ -106,8 +124,10 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
 [\[PCI\.CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-pci-controls.md#pcidss-codebuild-2)  
+[\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
 [\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-4)  
-[\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-5)
+[\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-5)  
+[\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
@@ -132,5 +152,4 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
-[\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.6\] Hardware MFA should be enabled for the root user](securityhub-standards-fsbp-controls.md#fsbp-iam-6)

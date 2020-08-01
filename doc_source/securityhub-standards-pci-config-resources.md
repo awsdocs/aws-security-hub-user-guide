@@ -2,10 +2,10 @@
 
 For AWS Security Hub to accurately report findings for all of the PCI DSS controls, you must enable the following resources in AWS Config\.
 + Amazon ES domain
-+ Auto scaling group
++ Auto Scaling group
 + CloudTrail trail
 + CodeBuild project
-+ Amazon EC2 elastic IP
++ Amazon EC2 Elastic IP address
 + Amazon EC2 security group
 + Amazon EC2 volume
 + IAM user

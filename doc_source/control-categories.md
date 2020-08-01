@@ -12,7 +12,17 @@ What resources does the service use? Are they approved resources for this servic
 Do you have visibility into the approved inventory? For example, do you use services such as Amazon EC2 Systems Manager and AWS Service Catalog? 
 
 **Logging**  
-Have you securely enabled all relevant logging for the service? Examples of log files include Amazon VPC flow logs, Elastic Load Balancing access logs, Amazon CloudFront logs, Amazon CloudWatch logs, Amazon Relational Database Service logging, Amazon Elasticsearch Service slow index logs, X\-Ray tracing, AWS Directory Service logs, AWS Config items, and snapshots\.
+Have you securely enabled all relevant logging for the service? Examples of log files include the following:  
++ Amazon VPC Flow Logs
++ Elastic Load Balancing access logs
++ Amazon CloudFront logs
++ Amazon CloudWatch Logs
++ Amazon Relational Database Service logging
++ Amazon Elasticsearch Service slow index logs
++ X\-Ray tracing
++ AWS Directory Service logs
++ AWS Config items
++ Snapshots
 
 ## Protect<a name="control-category-protect"></a>
 

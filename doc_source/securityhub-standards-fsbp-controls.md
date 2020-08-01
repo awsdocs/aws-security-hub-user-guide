@@ -7,7 +7,7 @@ The AWS Foundational Security Best Practices standard contains the following con
 + The required AWS Config rule, and any specific parameter values set by AWS Security Hub
 + Remediation steps
 
-## \[ACM\.1\] Imported ACM certificates should be renewed within 90 days of expiration<a name="fsbp-acm-1"></a>
+## \[ACM\.1\] Imported ACM certificates should be renewed after a specified time period<a name="fsbp-acm-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data in transit
 
@@ -18,9 +18,9 @@ The AWS Foundational Security Best Practices standard contains the following con
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html](https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html)
 
 **Parameters:**
-+ `daysToExpiration`: 90
++ `daysToExpiration`: 30
 
-This control checks whether ACM certificates in your account are marked for expiration within 90 days\. It checks both imported certificates and certificates provided by AWS Certificate Manager\.
+This control checks whether ACM certificates in your account are marked for expiration within 30 days\. It checks both imported certificates and certificates provided by AWS Certificate Manager\.
 
 Certificates provided by ACM are automatically renewed\. If you're using certificates provided by ACM, you do not need to rotate SSL/TLS certificates\. ACM manages certificate renewals for you\.
 
@@ -43,11 +43,49 @@ When a certificate is 45 days from expiration and one or more domain names in th
 
 **By email \(for email\-validated certificates\)**  
 If the certificate was last validated by email, ACM sends to the domain owner an email for each domain name that requires manual validation\. To ensure that this email can be received, the domain owner must correctly configure email for each domain\.  
-For more information, see [\(Optional\) Configure email for your domain](https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html)\. The email contains a link that performs the validation\. This link expires after 72 hours\. If necessary, you can use the ACM console,AWS CLI, or API to request that ACM resend the domain validation email\. For more information, see [Request a domain validation email for certificate renewal](https://docs.aws.amazon.com/acm/latest/userguide/request-domain-validation-email-for-renewal.html)\.  
+For more information, see [\(Optional\) Configure email for your domain](https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html)\. The email contains a link that performs the validation\. This link expires after 72 hours\. If necessary, you can use the ACM console, AWS CLI, or API to request that ACM resend the domain validation email\. For more information, see [Request a domain validation email for certificate renewal](https://docs.aws.amazon.com/acm/latest/userguide/request-domain-validation-email-for-renewal.html)\.  
 Email\-validated certificates are automatically renewed up to 825 days after their last manual validation date\. After 825 days, to proceed with the renewal, the domain owner or an authorized representative must manually revalidate ownership of the domain\. To avoid this issue, Security Hub recommends that you create a new certificate and use DNS validation if possible\. If they are properly configured, DNS\-validated certificates are revalidated indefinitely\.
 
 **By notification in your AWS Personal Health Dashboard**  
 ACM sends notifications to your Personal Health Dashboard to notify you that one or more domain names in the certificate require validation before the certificate can be renewed\. ACM sends these notifications when your certificate is 45 days, 30 days, 15 days, 7 days, 3 days, and 1 day from expiration\. These notifications are informational only\.
+
+## \[AutoScaling\.1\] Auto Scaling groups associated with a load balancer should use load balancer health checks<a name="fsbp-autoscaling-1"></a>
+
+**Category:** Identify > Inventory
+
+**Severity:** Low
+
+**Resource type:** AutoScaling AutoScalingGroup
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html)
+
+**Parameters:** None
+
+This control checks whether your Auto Scaling groups that are associated with a load balancer are using Elastic Load Balancing health checks\.
+
+This ensures that the group can determine an instance's health based on additional tests provided by the load balancer\. Using Elastic Load Balancing health checks can help support the availability of applications that use EC2 Auto Scaling groups\. 
+
+### Remediation<a name="autoscaling-1-remediation"></a>
+
+To remediate, update your Auto Scaling groups to use Elastic Load Balancing health checks\.
+
+**To enable Elastic Load Balancing health checks**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, under **Auto Scaling**, choose **Auto Scaling Groups**\.
+
+1. Select the check box for your group\.
+
+1. Choose **Edit**\.
+
+1. Under **Health checks**, for **Health check type**, choose **ELB**\.
+
+1. For **Health check grace period**, enter **300**\.
+
+1. At the bottom of the page, choose **Update**\.
+
+For more information on using a load balancer with an Auto Scaling group, see the [https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)\.
 
 ## \[CloudTrail\.1\] CloudTrail should be enabled and configured with at least one multi\-Region trail<a name="fsbp-cloudtrail-1"></a>
 
@@ -71,7 +109,7 @@ AWS CloudTrail records AWS API calls for your account and delivers log files to 
 + Request parameters
 + Response elements returned by the AWS service
 
-CloudTrail provides a history of AWS API calls for an account, including API calls made from the AWS Management Console, AWS SDKs, command\-line tools\. The history also includes API calls from higher\-level AWS services such as AWS CloudFormation\.
+CloudTrail provides a history of AWS API calls for an account, including API calls made from the AWS Management Console, AWS SDKs, command line tools\. The history also includes API calls from higher\-level AWS services such as AWS CloudFormation\.
 
 The AWS API call history produced by CloudTrail enables security analysis, resource change tracking, and compliance auditing\. Multi\-Region trails also provide the following benefits\.
 + A multi\-Region trail helps to detect unexpected activity occurring in otherwise unused Regions\.
@@ -332,6 +370,43 @@ For more information about using AWS Config from the AWS CLI, see [Turning on AW
 
 You can also use an AWS CloudFormation template to automate this process\. For more information, see the [AWS CloudFormation StackSets sample template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-sampletemplates.html) in the *AWS CloudFormation User Guide*\. 
 
+## \[DMS\.1\] Database Migration Service replication instances should not be public<a name="fsbp-dms-1"></a>
+
+**Severity:** Critical
+
+**Resource:** DMS:ReplicationInstance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html](https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html)
+
+**Parameters:** None
+
+This control checks whether AWS DMS replication instances are public\. To do this, it examines the value of the `PubliclyAccessible` field\.
+
+A private replication instance has a private IP address that you cannot access outside of the replication network\. A replication instance should have a private IP address when the source and target databases are in the same network\. The network must also be connected to the replication instance's VPC using a VPN, AWS Direct Connect, or VPC peering\. To learn more about public and private replication instances, see [Public and private replication instances](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.PublicPrivate) in the *AWS Database Migration Service User Guide*\.
+
+You should also ensure that access to your AWS DMS instance configuration is limited to only authorized users\. To do this, restrict users’ IAM permissions to modify AWS DMS settings and resources\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
+### Remediation<a name="dms-1-remediation"></a>
+
+Note that you cannot change the public access setting once a replication instance is created\. It must be deleted and recreated\.
+
+**To configure the AWS DMS replication instances setting to block public access**
+
+1. Open the AWS Database Migration Service console at [https://console\.aws\.amazon\.com/dms/](https://console.aws.amazon.com/dms/)\.
+
+1. Navigate to** Replication instances**, then delete the public instance\. Choose the instance, choose **Actions**, then choose **delete**\.
+
+1. Choose **Create replication instance**\. Provide the configuration details\.
+
+1. To disable public access, make sure that **Publicly accessible** is not selected\.
+
+1. Choose **Create**\.
+
+For more information, see the section on [Creating a replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.Creating) in the *AWS Database Migration Service User Guide*\.
+
 ## \[EC2\.1\] Amazon EBS snapshots should not be public, determined by the ability to be restorable by anyone<a name="fsbp-ec2-1"></a>
 
 **Category:** Protect > Secure network configuration
@@ -342,7 +417,7 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html)
 
-Parameters: None
+**Parameters:** None
 
 This control checks that Amazon Elastic Block Store snapshots are not public, as determined by the ability to be restorable by anyone\.
 
@@ -357,13 +432,13 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. On the navigation pane, choose **Snapshots** menu and then choose your public snapshot\.
+1. In the navigation pane, under **Elastic Block Store**, choose **Snapshots** menu and then choose your public snapshot\.
 
 1. From **Actions**, choose **Modify permissions**\.
 
 1. Choose **Private**\.
 
-1. Optionally, add the AWS account numbers of the authorized accounts to share your snapshot with\.
+1. \(Optional\) Add the AWS account numbers of the authorized accounts to share your snapshot with and choose **Add Permission**\.
 
 1. Choose **Save**\.
 
@@ -387,21 +462,35 @@ We do not recommend using the default security group\. Because the default secur
 
 ### Remediation<a name="ec2-2-remediation"></a>
 
-**To update the default security group to restrict all access**
+To remediate this issue, create new security groups and assign those security groups to your resources\. To prevent the default security groups from being used, remove their inbound and outbound rules\.
+
+**To create new security groups and assign them to your resources**
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. View the default security groups details to see the resources that are assigned to them\. 
+1. In the navigation pane, choose **Security groups**\. View the default security groups details to see the resources that are assigned to them\.
 
-1. Create a set of least\-privilege security groups for the resources\.
+1. Create a set of least\-privilege security groups for the resources\. For details on how to create security groups, see [Creating a security group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#CreatingSecurityGroups) in the *Amazon VPC User Guide*\.
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. On the Amazon EC2 console, change the security group for the resources that use the default security groups to the least\-privilege security group you created\. 
+1. On the Amazon EC2 console, change the security group for the resources that use the default security groups to the least\-privilege security group you created\. See [Changing an instance's security groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) in the *Amazon VPC User Guide*\.
 
-1. For each default security group, choose the **Inbound** tab and then delete all inbound rules\. 
+After you assign the new security groups to the resources, remove the inbound and outbound rules from the default security groups\. This ensures that the default security groups are not used\.
 
-1. For each default security group, choose the **Outbound** tab and then delete all outbound rules\. 
+**To remove the rules from the default security group**
+
+1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+1. In the navigation pane, choose **Security groups**\.
+
+1. Select a default security group and choose the **Inbound rules** tab\. Choose **Edit inbound rules**\. Then delete all inbound rules\. Choose **Save rules**\.
+
+1. Repeat the previous step for each default security group\.
+
+1. Select a default security group and choose the **Outbound rule** tab\. Choose **Edit outbound rules**\. Then delete all outbound rules\. Choose **Save rules**\.
+
+1. Repeat the previous step for each default security group\.
 
 For more information, see [Working with security groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#WorkingWithSecurityGroups) in the *Amazon VPC User Guide*\.
 
@@ -434,6 +523,96 @@ If you enabled encryption by default, Amazon EBS encrypts the resulting new volu
 
 For more information, see [Creating an Amazon EBS volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html) and [Copying an Amazon EBS snapshot](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
+## \[EC2\.4\] Stopped EC2 instances should be removed after a specified time period<a name="fsbp-ec2-4"></a>
+
+**Category:** Identify > Inventory
+
+**Severity:** Medium
+
+**Resource:** EC2 Instance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-stopped-instance.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-stopped-instance.html)
+
+**Parameters:**
++ `allowedDays`: 30
+
+This control checks whether any EC2 instances have been stopped for more than the allowed number of days\. An EC2 instance fails this check if it is stopped for longer than the maximum allowed time period, which by default is 30 days\.
+
+A failed finding indicates that an EC2 instance has not run for a significant period of time\. This creates a security risk because the EC2 instance is not being actively maintained \(analyzed, patched, updated\)\. If it is later launched, the lack of proper maintenance could result in unexpected issues in your AWS environment\. To safely maintain an EC2 instance over time in a nonrunning state, start it periodically for maintenance and then stop it after maintenance\. Ideally this is an automated process\. 
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
+### Remediation<a name="ec2-4-remediation"></a>
+
+You can terminate an EC2 instance using either the console or the command line\.
+
+Before you terminate the EC2 instance, verify that you won't lose any data:
++ Check that your Amazon EBS volumes will not be deleted on termination\.
++ Copy any data that you need from your EC2 instance store volumes to Amazon EBS or Amazon S3\. 
+
+**To terminate an EC2 instance \(console\)**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, under **Instances**, choose **Instances**\.
+
+1. Select the instance, and then choose **Actions**, **Instance State**, **Terminate**\. 
+
+1. When prompted for confirmation, choose **Yes, Terminate**\. 
+
+**To terminate an EC2 instance \(AWS CLI, Tools for Windows PowerShell\)**  
+Use one of the following commands\. For more information about the command line interface, see [Accessing Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html#access-ec2) in the *Amazon EC2 User Guide for Linux Instances*\.
++ From the AWS CLI, use [https://docs.aws.amazon.com/cli/latest/reference/ec2/terminate-instances.html](https://docs.aws.amazon.com/cli/latest/reference/ec2/terminate-instances.html)
++ From the Tools for Windows PowerShell, use [https://docs.aws.amazon.com/powershell/latest/reference/items/Stop-EC2Instance.html](https://docs.aws.amazon.com/powershell/latest/reference/items/Stop-EC2Instance.html)\.
+
+To learn more about terminating instances, see [Terminating an instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#terminating-instances-console) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+## \[EC2\.6\] VPC flow logging should be enabled in all VPCs<a name="fsbp-ec2-6"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource:** EC2 VPC
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
+
+**Parameters:**
++ `trafficType`: `REJECT`
+
+This control checks whether Amazon VPC flow logs are found and enabled for VPCs\. The traffic type is set to `Reject`\. 
+
+With the VPC Flow Logs feature, you can capture information about the IP address traffic going to and from network interfaces in your VPC\. After you create a flow log, you can view and retrieve its data in CloudWatch Logs\. To reduce cost, you can also send your flow logs to Amazon S3\. 
+
+Security Hub recommends that you enable flow logging for packet rejects for VPCs\. Flow logs provide visibility into network traffic that traverses the VPC and can detect anomalous traffic or provide insight during security workflows\. 
+
+By default, the record includes values for the different components of the IP address flow, including the source, destination, and protocol\. For more information and descriptions of the log fields, see [VPC Flow Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html) in the *Amazon VPC User Guide*\.
+
+### Remediation<a name="ec2-6-remediation"></a>
+
+To remediate this issue, enable VPC flow logging\.
+
+**To enable VPC flow logging**
+
+1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+1. Under **Virtual Private Cloud**, choose **Your VPCs**\.
+
+1. Select a VPC to update\.
+
+1. At the bottom of the page, choose **Flow Logs**\.
+
+1. Choose **Create flow log**\.
+
+1. For **Filter**, choose **Reject**\.
+
+1. For **Destination log group**, choose the log group to use\.
+
+1. For **IAM role**, choose the IAM role to use\.
+
+1. Choose **Create**\.
+
 ## \[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS<a name="fsbp-efs-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data at rest
@@ -452,7 +631,7 @@ This control checks whether Amazon Elastic File System is configured to encrypt 
 
 Note that this control does not use the `KmsKeyId` parameter for [https://docs.aws.amazon.com/config/latest/developerguide/efs-encrypted-check.html](https://docs.aws.amazon.com/config/latest/developerguide/efs-encrypted-check.html)\. It only checks the value of `Encrypted`\.
 
-For an added layer of security for your sensitive data in Amazon EFS, you should create encrypted file systems\. Amazon EFS supports encryption for file systems at\-rest\. You can enable encryption of data at\-rest when you create an Amazon EFS file system\. To learn more about Amazon EFS encryption, see[ Data encryption in Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/encryption.html) in the *Amazon Elastic File System User Guide*\.
+For an added layer of security for your sensitive data in Amazon EFS, you should create encrypted file systems\. Amazon EFS supports encryption for file systems at\-rest\. You can enable encryption of data at rest when you create an Amazon EFS file system\. To learn more about Amazon EFS encryption, see[ Data encryption in Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/encryption.html) in the *Amazon Elastic File System User Guide*\.
 
 **Note**  
 This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
@@ -550,11 +729,9 @@ It is highly recommended that you enable GuardDuty in all supported AWS Regions\
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
-Asia Pacific \(Hong Kong\)
 Europe \(Milan\)
 Middle East \(Bahrain\)
  AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="guardduty-1-remediation"></a>
 
@@ -1010,7 +1187,7 @@ This control checks whether Amazon RDS instances are publicly accessible by eval
 
 The `PubliclyAccessible` value in the RDS instance configuration indicates whether the DB instance is publicly accessible\. When the DB instance is configured with `PubliclyAccessible`, it is an Internet\-facing instance with a publicly resolvable DNS name, which resolves to a public IP address\. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address\.
 
-Unless you intend for your RDS instance to be publicly accessible, the RDS instance should not be configured with `PubliclyAccessible` value, as this may allow unnecessary traffic to your database instance\.
+Unless you intend for your RDS instance to be publicly accessible, the RDS instance should not be configured with `PubliclyAccessible` value\. Doing so might allow unnecessary traffic to your database instance\.
 
 ### Remediation<a name="rds-2-remediation"></a>
 
@@ -1098,7 +1275,9 @@ Middle East \(Bahrain\)
 
 1. Choose **Block public access \(account settings\)**\.
 
-1. Select **Block all public access**\.
+1. Choose **Edit**\.
+
+1. Select **Block *all* public access**\.
 
 1. Choose **Save changes**\.
 
@@ -1126,15 +1305,17 @@ Some use cases require that everyone on the internet be able to read from your S
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
+1. In the left navigation pane, choose **Buckets**\.
+
 1. Choose the name of the S3 bucket to update\.
 
-1. Choose **Permissions** and then choose **Public access settings**\. 
+1. Choose **Permissions** and then choose **Block public access**\. 
 
 1. Choose **Edit**\.
 
-1. Select all four options and then choose **Save**\.
+1. Select **Block *all* public access**\. Then choose **Save**\.
 
-1. If prompted, enter confirm and then choose **Confirm**\.
+1. If prompted, enter **confirm** and then choose **Confirm**\.
 
 ## \[S3\.3\] S3 buckets should prohibit public write access<a name="fsbp-s3-3"></a>
 
@@ -1158,15 +1339,17 @@ Some use cases require that everyone on the internet be able to write to your S3
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
+1. In the left navigation pane, choose **Buckets**\.
+
 1. Choose the name of the S3 bucket to update\.
 
-1. Choose **Permissions** and then choose **Public access settings**\.
+1. Choose **Permissions** and then choose **Block public access**\.
 
 1. Choose **Edit**\.
 
-1. Select all four options and then choose **Save**\.
+1. Select **Block *all* public access**\. Then choose **Save**\.
 
-1. If prompted, enter confirm and then choose **Confirm**\.
+1. If prompted, enter **confirm** and then choose **Confirm**\.
 
 ## \[S3\.4\] S3 buckets should have server\-side encryption enabled<a name="fsbp-s3-4"></a>
 
@@ -1192,6 +1375,8 @@ To learn more, see [Protecting data using server\-side encryption with Amazon S3
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
+1. In the left navigation pane, choose **Buckets**\.
+
 1. Choose the S3 bucket from the list\.
 
 1. Choose **Properties**\.
@@ -1199,8 +1384,8 @@ To learn more, see [Protecting data using server\-side encryption with Amazon S3
 1. Choose **Default encryption**\.
 
 1. For the encryption, choose either **AES\-256** or **AWS\-KMS**\.
-   + To use keys that are managed by Amazon S3 for default encryption, choose **AES\-256**\. For more information about using Amazon S3 server\-side encryption to encrypt your data, see the [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
-   + To use keys that are managed by AWS KMS for default encryption, choose **AWS\-KMS**\. Then choose a master key from the list of the AWS KMS master keys that you have created\.
+   + Choose **AES\-256** to use keys that are managed by Amazon S3 for default encryption\. For more information about using Amazon S3 server\-side encryption to encrypt your data, see the [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
+   + Choose **AWS\-KMS** to use keys that are managed by AWS KMS for default encryption\. Then choose a master key from the list of the AWS KMS master keys that you have created\.
 
      Type the Amazon Resource Name \(ARN\) of the AWS KMS key to use\. You can find the ARN for your AWS KMS key in the IAM console, under **Encryption keys**\. Or, you can choose a key name from the drop\-down list\.
 **Important**  
@@ -1215,6 +1400,108 @@ If you use the AWS KMS option for your default encryption configuration, you are
 1. Choose **Save**\.
 
 For more information about default S3 bucket encryption, see the [https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)\.
+
+## \[S3\.5\] S3 buckets should require requests to use Secure Socket Layer<a name="fsbp-s3-5"></a>
+
+**Severity:** Medium
+
+**Resource:** S3 Bucket
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html)
+
+**Parameters:** None
+
+This control checks whether S3 buckets have policies that require requests to use Secure Socket Layer \(SSL\)\. 
+
+S3 buckets should have policies that require all requests \(`Action: S3:*`\) to only accept transmission of data over HTTPS in the S3 resource policy, indicated by the condition key `aws:SecureTransport`\.
+
+### Remediation<a name="s3-5-remediation"></a>
+
+To remediate this issue, update the permissions policy of the S3 bucket\.
+
+**To configure an S3 bucket to deny nonsecure transport**
+
+1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
+
+1. Navigate to the noncompliant bucket, then choose the bucket name\.
+
+1. Choose **Permissions**, and then choose **Bucket Policy**\.
+
+1. Add a similar policy statement to that in the policy below\. Replace `awsexamplebucket` with the name of the bucket you are modifying\.
+
+   ```
+   {
+       "Id": "ExamplePolicy",
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "AllowSSLRequestsOnly",
+               "Action": "s3:*",
+               "Effect": "Deny",
+               "Resource": [
+                   "arn:aws:s3:::awsexamplebucket",
+                   "arn:aws:s3:::awsexamplebucket/*"
+               ],
+               "Condition": {
+                   "Bool": {
+                        "aws:SecureTransport": "false"
+                   }
+               },
+              "Principal": "*"
+           }
+       ]
+   }
+   ```
+
+1. Choose **Save**\.
+
+For more information, see the knowledge center article [What S3 bucket policy should I use to comply with the AWS Config rule s3\-bucket\-ssl\-requests\-only?](http://aws.amazon.com/premiumsupport/knowledge-center/s3-bucket-policy-for-config-rule/)\.
+
+## \[SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access<a name="fsbp-sagemaker-1"></a>
+
+**Severity:** High
+
+**Resource:** SageMaker:NotebookInstance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html](https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html)
+
+**Parameters:** None
+
+This control checks whether direct internet access is disabled for an Amazon SageMaker notebook instance\. To do this, it checks whether the `DirectInternetAccess` field is disabled for the notebook instance\. 
+
+If you configure your Amazon SageMaker instance without a VPC, then by default direct internet access is enabled on your instance\. You should configure your instance with a VPC and change the default setting to **Disable — Access the internet through a VPC**\.
+
+To train or host models from a notebook, you need internet access\. To enable internet access, make sure that your VPC has a NAT gateway and your security group allows outbound connections\. To learn more about how to connect a notebook instance to resources in a VPC, see [Connect a notebook instance to resources in a VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html) in the Amazon SageMaker Developer Guide\.
+
+You should also ensure that access to your Amazon SageMaker configuration is limited to only authorized users\. Restrict users' IAM permissions to modify Amazon SageMaker settings and resources\.
+
+**Note**  
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Europe \(Milan\)
+ AWS GovCloud \(US\-East\)
+
+### Remediation<a name="sagemaker-1-remediation"></a>
+
+Note that you cannot change the internet access setting after a notebook instance is created\. It must be stopped, deleted, and recreated\.
+
+**To configure an Amazon SageMaker notebook instance to deny direct internet access**
+
+1. Open the Amazon SageMaker console at [https://console.aws.amazon.com/sagemaker/](https://console.aws.amazon.com/sagemaker/)
+
+1. Navigate to **Notebook instances**\.
+
+1. Delete the instance that has direct internet access enabled\. Choose the instance, choose **Actions**, then choose stop\.
+
+   After the instance is stopped, choose **Actions**, then choose **delete**\.
+
+1. Choose **Create notebook instance**\. Provide the configuration details\.
+
+1. Expand the network section, then choose a VPC, subnet, and security group\. Under **Direct internet access**, choose **Disable — Access the internet through a VPC**\.
+
+1. Choose **Create notebook instance**\.
+
+For more information, see [Connect a notebook instance to resources in a VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html) in the *Amazon SageMaker Developer Guide*\.
 
 ## \[SSM\.1\] EC2 instances should be managed by AWS Systems Manager<a name="fsbp-ssm-1"></a>
 
@@ -1289,3 +1576,52 @@ Middle East \(Bahrain\)
 1. After the command is complete, to monitor the new compliance status of your patched instances, in the navigation pane, choose **Compliance**\.
 
 For more information about using Systems Manager Documents to patch a managed instance, see[ About SSM documents for patching instances](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-ssm-documents.html) and [Running commands using Systems Manager Run command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html) in the *AWS Systems Manager User Guide*\.
+
+## \[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT<a name="fsbp-ssm-3"></a>
+
+**Category:** Detect > Detection Services
+
+**Severity:** Low
+
+**Resource:** AwsSSMAssociationCompliance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html)
+
+**Parameters:** None
+
+This control checks whether the status of the AWS Systems Manager association compliance is `COMPLIANT` or `NON_COMPLIANT` after the association is run on an instance\. The control passes if the association compliance status is `COMPLIANT`\.
+
+A State Manager association is a configuration that is assigned to your managed instances\. The configuration defines the state that you want to maintain on your instances\. For example, an association can specify that antivirus software must be installed and running on your instances or that certain ports must be closed\. 
+
+After you create one or more State Manager associations, compliance status information is immediately available to you\. You can view the compliance status in the console or in response to AWS CLI commands or corresponding Systems Manager API actions\. For associations, Configuration Compliance shows the compliance status \(`Compliant` or `Non-compliant`\)\. It also shows the severity level assigned to the association, such as `Critical` or `Medium`\.
+
+To learn more about State Manager association compliance, see [About State Manager association compliance](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-about-association) in the *AWS Systems Manager User Guide*\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
+### Remediation<a name="ssm-3-remediation"></a>
+
+A failed association can be related to different things, including targets and SSM document names\. To remediate this issue, you must first identify and investigate the association\. You can then update the association to correct the specific issue\.
+
+You can edit an association to specify a new name, schedule, severity level, or targets\. After you edit an association, AWS Systems Manager creates a new version\.
+
+**To investigate and update a failed association**
+
+1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/](https://console.aws.amazon.com/systems-manager/)\.
+
+1. In the navigation pane, under **Instances & Nodes**, choose **Managed Instances**\.
+
+1. Choose the instance ID that has an **Association status** of **Failed**\.
+
+1. Choose **View details**\.
+
+1. Choose **Associations**\.
+
+1. Note the name of the association that has an **Association status** of **Failed**\. This is the association that you need to investigate\. You need to use the association name in the next step\.
+
+1. In the navigation pane, under **Instances & Nodes**, choose **State Manager**\. Search for the association name, then select the association\.
+
+1. After you determine the issue, edit the failed association to correct the problem\. For information on how to edit an association, see [Edit an association](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc-edit.html)\.
+
+For more information on creating and editing State Manager associations, see [Working with associations in Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-associations.html) in the *AWS Systems Manager User Guide*\.
