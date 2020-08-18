@@ -2,7 +2,7 @@
 
 For the CIS AWS Foundations Benchmark standard, below are some specific controls that you might want to disable\. You might want to disable them because they are related to resources that only exist in specific accounts or Regions\. The controls would then produce `WARNING` statuses if the relevant resource cannot be found\.
 
-**CIS AWS Foundations Benchmark 2\.3 and 2\.6 controls**  
+**CIS AWS Foundations Benchmark 2\.3, 2\.6, and 2\.7 controls**  
 These controls deal with logging of CloudTrail trails\. If you log these trails in a centralized logging account, you only need to run these controls in the account and Region where centralized logging takes place\.
 
 **CIS AWS Foundations Benchmark 1\.2\-1\.14, 1\.16, 1\.20, 1\.22, and 2\.5 controls**  

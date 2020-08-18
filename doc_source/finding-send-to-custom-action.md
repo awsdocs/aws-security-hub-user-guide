@@ -2,7 +2,7 @@
 
 You can create AWS Security Hub custom actions to automate Security Hub with Amazon CloudWatch Events\. For custom actions, the event type is **Security Hub Findings \- Custom Action**\.
 
-For more information and detailed steps on creating custom actions, see [Automating AWS Security Hub with CloudWatch Events](securityhub-cloudwatch-events.md)\.
+For more information and detailed steps on creating custom actions, see [Automated response and remediation](securityhub-cloudwatch-events.md)\.
 
 After you set up a custom action, you can send findings to it\.
 

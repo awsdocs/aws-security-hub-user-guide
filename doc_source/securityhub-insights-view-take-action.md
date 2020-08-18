@@ -17,7 +17,7 @@ In addition to the results list, the insight results display a set of charts sum
 + **Resource ID** – Top five resource IDs for the matching findings
 + **Product name** \- Top five finding providers for the matching findings
 
-If you have configured custom actions, then you can send selected results to a custom action\. The action must be associated with a CloudWatch rule for the `Security Hub Insight Results` event type\. See [Automating AWS Security Hub with CloudWatch Events](securityhub-cloudwatch-events.md)\.
+If you have configured custom actions, then you can send selected results to a custom action\. The action must be associated with a CloudWatch rule for the `Security Hub Insight Results` event type\. See [Automated response and remediation](securityhub-cloudwatch-events.md)\.
 
 If you have not configured custom actions, then the **Actions** menu is disabled\.
 

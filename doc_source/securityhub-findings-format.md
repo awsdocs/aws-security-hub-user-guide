@@ -2,9 +2,123 @@
 
 AWS Security Hub consumes, aggregates, organizes, and prioritizes findings from AWS security services and from the third\-party product integrations\. Security Hub processes these findings using a standard findings format called the AWS Security Finding Format \(ASFF\), which eliminates the need for time\-consuming data conversion efforts\. Then it correlates ingested findings across products to prioritize the most important ones\.
 
-**Topics**
+**Contents**
 + [ASFF syntax](#securityhub-findings-format-syntax)
 + [ASFF attributes](#securityhub-findings-format-attributes)
+  + [Compliance](#asff-compliance)
+    + [StatusReasons](#asff-compliance-statusreasons)
+  + [Malware](#asff-malware)
+  + [Network](#asff-network)
+    + [OpenPortRange](#asff-network-openportrange)
+  + [NetworkPath](#asff-networkpath)
+    + [Egress](#asff-networkpath-egress)
+    + [Ingress](#asff-networkpath-ingress)
+    + [Destination](#asff-networkpath-egress-ingress-destination)
+    + [Source](#asff-networkpath-egress-ingress-source)
+  + [Note](#asff-note)
+  + [Process](#asff-process)
+  + [RelatedFindings](#asff-relatedfindings)
+  + [Remediation](#asff-remediation)
+    + [Recommendation](#asff-remediation-recommendation)
+  + [Resources](#asff-resources)
+    + [AwsAutoScalingAutoScalingGroup](#asff-resourcedetails-awsautoscalingautoscalinggroup)
+    + [AwsCloudFrontDistribution](#asff-resourcedetails-awscloudfrontdistribution)
+      + [Logging](#asff-resourcedetails-awscloudfrontdistribution-logging)
+      + [Origins](#asff-resourcedetails-awscloudfrontdistribution-origins)
+    + [AwsCodeBuildProject](#asff-resourcedetails-awscodebuildproject)
+      + [Environment](#asff-resourcedetails-awscodebuildproject-environment)
+      + [Source](#asff-resourcedetails-awscodebuildproject-source)
+      + [VpcConfig](#asff-resourcedetails-awscodebuildproject-vpcconfig)
+    + [AwsDynamoDbTable](#asff-resourcedetails-awsdynamodbtable)
+      + [AttributeDefinitions](#asff-resourcedetails-awsdynamodbtable-attributedefinitions)
+      + [BillingModeSummary](#asff-resourcedetails-awsdynamodbtable-billingmodesummary)
+      + [GlobalSecondaryIndexes](#asff-resourcedetails-awsdynamodbtable-globalsecondaryindexes)
+      + [KeySchema](#asff-resourcedetails-awsdynamodbtable-keyschema)
+      + [LocalSecondaryIndexes](#asff-resourcedetails-awsdynamodbtable-localsecondaryindexes)
+      + [Projection \(for global and local secondary indexes\)](#asff-resourcedetails-awsdynamodbtable-projection)
+      + [ProvisionedThroughput](#asff-resourcedetails-awsdynamodbtable-provisionedthroughput)
+      + [Replicas](#asff-resourcedetails-awsdynamodbtable-replicas)
+      + [RestoreSummary](#asff-resourcedetails-awsdynamodbtable-restoresummary)
+      + [SseDescription](#asff-resourcedetails-awsdynamodbtable-ssedescription)
+      + [StreamSpecification](#asff-resourcedetails-awsdynamodbtable-streamspecification)
+    + [AwsEc2Eip](#asff-resourcedetails-awsec2eip)
+    + [AwsEc2Instance](#asff-resourcedetails-awsec2instance)
+    + [AwsEc2NetworkInterface](#asff-resourcedetails-awsec2networkinterface)
+      + [Attachment](#asff-resourcedetails-awsec2networkinterface-attachment)
+      + [SecurityGroups](#asff-resourcedetails-awsec2networkinterface-securitygroups)
+    + [AwsEc2SecurityGroup](#asff-resourcedetails-awsec2securitygroup)
+      + [IP permission object](#asff-resourcedetails-awsec2securitygroup-ippermission)
+    + [AwsEc2Volume](#asff-resourcedetails-awsec2volume)
+      + [Attachments](#asff-resourcedetails-awsec2volume-attachments)
+    + [AwsEc2Vpc](#asff-resourcedetails-awsec2vpc)
+      + [CidrBlockAssociationSet](#asff-resourcedetails-awsec2vpc-cidrblockassociationset)
+      + [IpV6CidrBlockAssociationSet](#asff-resourcedetails-awsec2vpc-ipv6cidrblockassociationset)
+    + [AwsElasticSearchDomain](#asff-resourcedetails-awselasticsearchdomain)
+      + [DomainEndpointOptions](#asff-resourcedetails-awselasticsearchdomain-domainendpointoptions)
+      + [DomainStatus](#asff-resourcedetails-awselasticsearchdomain-domainstatus)
+      + [EncryptionAtRestOptions](#asff-resourcedetails-awselasticsearchdomain-encryptionatrestoptions)
+      + [NodeToNodeEncryptionOptions](#asff-resourcedetails-awselasticsearchdomain-nodetonodeencryptionoptions)
+      + [VpcOptions](#asff-resourcedetails-awselasticsearchdomain-vpcoptions)
+    + [AwsElbv2LoadBalancer](#asff-resourcedetails-awselbv2loadbalancer)
+      + [AvailabilityZones](#asff-resourcedetails-awselbv2loadbalancer-availabilityzones)
+      + [State](#asff-resourcedetails-awselbv2loadbalancer-state)
+    + [AwsIamAccessKey](#asff-resourcedetails-awsiamaccesskey)
+    + [AwsIamPolicy](#asff-resourcedetails-awsiampolicy)
+      + [PolicyVersionList](#asff-resourcedetails-awsiampolicy-policyversionlist)
+    + [AwsIamRole](#asff-resourcedetails-awsiamrole)
+    + [AwsIamUser](#asff-resourcedetails-awsiamuser)
+      + [AttachedManagedPolicies](#asff-resourcedetails-awsiamuser-attachedmanagedpolicies)
+      + [PermissionsBoundary](#asff-resourcedetails-awsiamuser-permissionsboundary)
+      + [UserPolicyList](#asff-resourcedetails-awsiamuser-userpolicylist)
+    + [AwsKmsKey](#asff-resourcedetails-awskmskey)
+    + [AwsLambdaFunction](#asff-resourcedetails-awslambdafunction)
+      + [Code](#asff-resourcedetails-awslambdafunction-code)
+      + [DeadLetterConfig](#asff-resourcedetails-awslambdafunction-deadletterconfig)
+      + [Environment](#asff-resourcedetails-awslambdafunction-environment)
+      + [Layers](#asff-resourcedetails-awslambdafunction-layers)
+      + [TracingConfig](#asff-resourcedetails-awslambdafunction-tracingconfig)
+      + [VpcConfig](#asff-resourcedetails-awslambdafunction-vpcconfig)
+    + [AwsLambdaLayerVersion](#asff-resourcedetails-awslambdalayerversion)
+    + [AwsRdsDbCluster](#asff-resourcedetails-awsrdsdbcluster)
+      + [AssociatedRoles](#asff-resourcedetails-awsrdsdbcluster-associatedroles)
+      + [DbClusterMembers](#asff-resourcedetails-awsrdsdbcluster-dbclustermembers)
+      + [DbClusterOptionGroupMemberships](#asff-resourcedetails-awsrdsdbcluster-dbclusteroptiongroupmemberships)
+      + [DomainMemberships](#asff-resourcedetails-awsrdsdbcluster-domainmemberships)
+      + [VpcSecurityGroups](#asff-resourcedetails-awsrdsdbcluster-vpcsecuritygroups)
+    + [AwsRdsDbClusterSnapshot](#asff-resourcedetails-awsrdsdbclustersnapshot)
+    + [AwsRdsDbInstance](#asff-resourcedetails-awsrdsdbinstance)
+      + [AssociatedRoles](#asff-resourcedetails-awsrdsdbinstance-associatedroles)
+      + [DbParameterGroups](#asff-resourcedetails-awsrdsdbinstance-dbparametergroups)
+      + [DbSubnetGroup](#asff-resourcedetails-awsrdsdbinstance-dbsubnetgroup)
+      + [DomainMemberships](#asff-resourcedetails-awsrdsdbinstance-domainmemberships)
+      + [Endpoint](#asff-resourcedetails-awsrdsdbinstance-endpoint)
+      + [ListenerEndpoint](#asff-resourcedetails-awsrdsdbinstance-listenerendpoint)
+      + [OptionGroupMemberships](#asff-resourcedetails-awsrdsdbinstance-optiongroupmemberships)
+      + [PendingModifiedValues](#asff-resourcedetails-awsrdsdbinstance-pendingmodifiedvalues)
+      + [ProcessorFeatures](#asff-resourcedetails-awsrdsdbinstance-processorfeatures)
+      + [StatusInfos](#asff-resourcedetails-awsrdsdbinstance-statusinfos)
+      + [VpcSecurityGroups](#asff-resourcedetails-awsrdsdbinstance-vpcsecuritygroups)
+    + [AwsRdsDbSnapshot](#asff-resourcedetails-awsrdsdbsnapshot)
+    + [AwsS3Bucket](#asff-resourcedetails-awss3bucket)
+      + [ApplyServerSideEncryptionByDefault](#asff-resourcedetails-awss3bucket-applyserversideencryptionbydefault)
+    + [AwsS3Object](#asff-resourcedetails-awss3object)
+    + [AwsSecretsManagerSecret](#asff-resourcedetails-awssecretsmanagersecret)
+    + [AwsSnsTopic](#asff-resourcedetails-awssnstopic)
+      + [Subscription](#asff-resourcedetails-awssnstopic-subscription)
+    + [AwsSqsQueue](#asff-resourcedetails-awssqsqueue)
+    + [AwsWafWebAcl](#asff-resourcedetails-awswafwebacl)
+      + [Rule object](#asff-resourcedetails-awswafwebacl-rule)
+    + [Container](#asff-resourcedetails-container)
+    + [Other](#asff-resourcedetails-other)
+  + [Severity](#asff-severity)
+    + [How Security Hub maps Label and Normalized values](#asff-severity-map-normalized-label)
+    + [Guidance for assigning the normalized severity \(AWS services and partners\)](#asff-severity-normalized-guidance)
+  + [ThreatIntelIndicators](#asff-threatintelindicators)
+  + [Vulnerabilities](#asff-vulnerabilities)
+    + [Cvss](#asff-vulnerabilities-cvss)
+    + [Vendor](#asff-vulnerabilities-vendor)
+    + [VulnerablePackages](#asff-vulnerabilities-vulnerablepackages)
+  + [Workflow](#asff-workflow)
 + [Types taxonomy for ASFF](#securityhub-findings-format-type-taxonomy)
 
 ## ASFF syntax<a name="securityhub-findings-format-syntax"></a>
@@ -190,6 +304,129 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "SecurityGroupIds": ["string"]
                         }
                     },
+                    "AwsDynamoDbTable": {
+                        "AttributeDefinitions": [
+                            {
+                                "AttributeName": "string",
+                                "AttributeType": "string"
+                            }
+                        ],
+                        "BillingModeSummary" {
+                            "BillingMode": "string",
+                            "LastUpdateToPayPerRequestDateTime": "string"
+                        },
+                        "CreationDateTime": "string",
+                        "GlobalSecondaryIndexes": [
+                            {
+                                "Backfilling": boolean,
+                                "IndexArn": "string",
+                                "IndexName": "string",
+                                "IndexSizeBytes": number,
+                                "IndexStatus": "string",
+                                "ItemCount": number,
+                                "KeySchema": [
+                                    {
+                                        "AttributeName": "string",
+                                        "KeyType": "string"
+                                    }
+                                ],
+                                "Projection": {
+                                    "NonKeyAttributes": [ "string" ],
+                                    "ProjectionType": "string"
+                                },
+                                "ProvisionedThroughput": {
+                                    "LastDecreaseDateTime": "string",
+                                    "LastIncreaseDateTime": "string",
+                                    "NumberOfDecreasesToday": number,
+                                    "ReadCapacityUnits": number,
+                                    "WriteCapacityUnits": number
+                                },
+                            }
+                        ],
+                        "GlobalTableVersion": "string",
+                        "ItemCount": number,
+                        "KeySchema": [
+                            {
+                                "AttributeName": "string",
+                                "KeyType": "string"
+                            }
+                        ],
+                        "LatestStreamArn": "string",
+                        "LatestStreamLabel": "string",
+                        "LocalSecondaryIndexes": [
+                            {
+                                "IndexArn": "string",
+                                "IndexName": "string",
+                                "KeySchema": [
+                                    {
+                                    "AttributeName": "string",
+                                    "KeyType": "string"
+                                    }
+                                ],
+                                "Projection": {
+                                    "NonKeyAttributes": [ "string" ],
+                                    "ProjectionType": "string"
+                                }
+                            }
+                        ],
+                        "ProvisionedThroughput": {
+                            "LastDecreaseDateTime": "string",
+                            "LastIncreaseDateTime": "string",
+                            "NumberOfDecreasesToday": number,
+                            "ReadCapacityUnits": number,
+                            "WriteCapacityUnits": number
+                        },
+                        "Replicas": [
+                            {
+                                "GlobalSecondaryIndexes":[
+                                    {
+                                        "IndexName": "string",
+                                        "ProvisionedThroughputOverride": {
+                                            "ReadCapacityUnits": number
+                                    }
+                                ],
+                                "KmsMasterKeyId" : "string"
+                                "ProvisionedThroughputOverride": {
+                                    "ReadCapacityUnits": number
+                                },
+                                "RegionName": "string"
+                                "ReplicaStatus": "string"
+                                "ReplicaStatusDescription": "string"
+                            }
+                        ],
+                        "RestoreSummary": {
+                                "RestoreDateTime": "string",
+                                "RestoreInProgress": boolean,
+                                "SourceBackupArn": "string",
+                                "SourceTableArn": "string"
+                        },
+                        "SseDescription": {
+                            "InaccessibleEncryptionDateTime": "string",
+                            "KmsMasterKeyArn": "string",
+                            "SseType": "string",
+                            "Status": "string"
+                        },
+                        "StreamSpecification": {
+                            "StreamEnabled": boolean,
+                            "StreamViewType": "string"
+                        },
+                        "TableId": "string",
+                        "TableName": "string",
+                        "TableSizeBytes": number,
+                        "TableStatus": "string"
+                    },
+                    "AwsEc2Eip": {
+                        "AllocationId": "string",
+                        "AssociationId": "string",
+                        "Domain": "string",
+                        "InstanceId": "string",
+                        "NetworkBorderGroup": "string",
+                        "NetworkInterfaceId": "string",
+                        "NetworkInterfaceOwnerId": "string",
+                        "PrivateIpAddress": "string",
+                        "PublicIp": "string",
+                        "PublicIpv4Pool": "string"
+                    },
                     "AwsEc2Instance": { 
                         "IamInstanceProfileArn": "string",
                         "ImageId": "string",
@@ -362,6 +599,25 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "PrincipalType": "string",
                         "Status": "string"
                     },
+                    "AwsIamPolicy": {
+                        "AttachmentCount": number,
+                        "CreateDate": "string",
+                        "DefaultVersionId": "string",
+                        "Description": "string",
+                        "IsAttachable": boolean,
+                        "Path": "string",
+                        "PermissionsBoundaryUsageCount": number,
+                        "PolicyId": "string",
+                        "PolicyName": "string",
+                        "PolicyVersionList": [
+                            {
+                                "CreateDate": "string",
+                                "IsDefaultVersion": boolean,
+                                "VersionId": "string"
+                            }
+                        ,
+                        "UpdateDate": "string"
+                    },
                     "AwsIamRole": {
                         "AssumeRolePolicyDocument": "string",
                         "CreateDate": "string",
@@ -370,9 +626,32 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "RoleId": "string",
                         "RoleName": "string"
                     },
+                    "AwsIamUser": {
+                        "AttachedManagedPolicies": [
+                            {
+                                "PolicyArn": "string",
+                                "PolicyName": "string"
+                            }
+                        ],
+                        "CreateDate": "string",
+                        "GroupList": [ "string" ],
+                        "Path": "string",
+                        "PermissionsBoundary" : {
+                            "PermissionsBoundaryArn" : "string",
+                            "PermissionsBoundaryType" : "string"
+                        }.
+                        "UserId": "string",
+                        "UserName": "string",
+                        "UserPolicyList": [
+                            {
+                                "PolicyName": "string"
+                            }
+                        ]
+                    },
                     "AwsKmsKey": {
                         "AWSAccountId": "string",
                         "CreationDate": "string",
+                        "Description": string,
                         "KeyId": "string",
                         "KeyManager": "string",
                         "KeyState": "string",
@@ -428,7 +707,96 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "CreatedDate": "string",
                         "Version": number
                     },
+                    "AwsRdsDbCluster": {
+                        "ActivityStreamStatus": "string",
+                        "AllocatedStorage": number,
+                        "AssociatedRoles": [
+                            {
+                                "RoleArn": "string",
+                                "Status": "string"
+                            }
+                        ],
+                        "AvailabilityZones": [ "string" ],
+                        "BackupRetentionPeriod": integer,
+                        "ClusterCreateTime": "string",
+                        "CopyTagsToSnapshot": boolean,
+                        "CrossAccountClone": boolean,
+                        "CustomEndpoints": [ "string" ],
+                        "DatabaseName": "string",
+                        "DbClusterIdentifier": "string",
+                        "DbClusterMembers": [
+                            {
+                                "DbClusterParameterGroupStatus": "string",
+                                "DbInstanceIdentifier": "string",
+                                "IsClusterWriter": boolean,
+                                "PromotionTier": integer
+                            }
+                        ],
+                        "DbClusterOptionGroupMemberships": [
+                            {
+                                "DbClusterOptionGroupName": "string",
+                                "Status": "string"
+                            }
+                         ],
+                        "DbClusterParameterGroup": "string",
+                        "DbClusterResourceId": "string",
+                        "DbSubnetGroup": "string",
+                        "DeletionProtection": boolean,
+                        "DomainMemberships": [
+                            {
+                                "Domain": "string",
+                                "Fqdn": "string",
+                                "IamRoleName": "string",
+                                "Status": "string"
+                            }
+                        ],
+                        "EnabledCloudwatchLogsExports": [ "string" ],
+                        "Endpoint": "string",
+                        "Engine": "string",
+                        "EngineMode": "string",
+                        "EngineVersion": "string",
+                        "HostedZoneId": "string",
+                        "HttpEndpointEnabled": boolean,
+                        "IamDatabaseAuthenticationEnabled": boolean
+                        "KmsKeyId": "string",
+                        "MasterUsername": "string",
+                        "MultiAz": boolean,
+                        "Port": integer,
+                        "PreferredBackupWindow": "string",
+                        "PreferredMaintenanceWindow": "string",
+                        "ReaderEndpoint": "string",
+                        "ReadReplicaIdentifiers": [],
+                        "Status": "string",
+                        "StorageEncrypted": boolean,
+                        "VpcSecurityGroups": [
+                            {
+                                "Status": "string",
+                                "VpcSecurityGroupId": "string"
+                            }
+                        ]
+                    },
+                    "AwsRdsDbClusterSnapshot": {
+                        "AllocatedStorage": integer,
+                        "AvailabilityZones": [ "string" ],
+                        "ClusterCreateTime": "string",
+                        "DbClusterIdentifier": "string",
+                        "DbClusterSnapshotIdentifier": "string",
+                        "Engine": "string",
+                        "EngineVersion": "string",
+                        "IamDatabaseAuthenticationEnabled": boolean,
+                        "KmsKeyId": "string",
+                        "LicenseModel": "string",
+                        "MasterUsername": "string",
+                        "PercentProgress": integer,
+                        "Port": integer,
+                        "SnapshotCreateTime": "string",
+                        "SnapshotType": "string",
+                        "Status": "string",
+                        "StorageEncrypted": boolean,
+                        "VpcId": "string"
+                    },
                     "AwsRdsDbInstance": {
+                        "AllocatedStorage": number,
                         "AssociatedRoles": [
                             {
                                 "RoleArn": "string",
@@ -436,33 +804,170 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "Status": "string"
                             }
                         ],
+                        "AutoMinorVersionUpgrade": boolean,
+                        "AvailabilityZone": "string",
+                        "BackupRetentionPeriod": number,
                         "CACertificateIdentifier": "string",
+                        "CharacterSetName": "string",
+                        "CopyTagsToSnapshot": boolean,
                         "DBClusterIdentifier": "string",
                         "DBInstanceClass": "string",
                         "DBInstanceIdentifier": "string",
                         "DbInstancePort": number,
+                        "DbInstanceStatus": "string",
                         "DbiResourceId": "string",
                         "DBName": "string",
+                        "DbParameterGroups": [
+                            {
+                                "DbParameterGroupName": "string",
+                                "ParameterApplyStatus": "string"
+                            }
+                        ],
+                        "DbSecurityGroups": [ "string" ],
+                        "DbSubnetGroup": {
+                            "DbSubnetGroupArn": "string",
+                            "DbSubnetGroupDescription": "string",
+                            "DbSubnetGroupName": "string",
+                            "SubnetGroupStatus": "string",
+                            "Subnets": [
+                                {
+                                    "SubnetAvailabilityZone": {
+                                        "Name": "string"
+                                    },
+                                    "SubnetIdentifier": "string",
+                                    "SubnetStatus": "string"
+                                }
+                            ],
+                            "VpcId": "string",
+                        },
                         "DeletionProtection": boolean,
                         "Endpoint": {
                             "Address": "string",
                             "Port": number,
                             "HostedZoneId": "string"
                         },
+                        "DomainMemberships": [
+                            {
+                                "Domain": "string",
+                                "Fqdn": "string",
+                                "IamRoleName": "string",
+                                "Status": "string"
+                            }
+                        ],
+                        "EnabledCloudwatchLogsExports": [ "string" ],
                         "Engine": "string",
                         "EngineVersion": "string",
+                        "EnhancedMonitoringResourceArn": "string",
                         "IAMDatabaseAuthenticationEnabled": boolean,
                         "InstanceCreateTime": "string",
+                        "Iops": number,
                         "KmsKeyId": "string",
+                        "LatestRestorableTime": "string",
+                        "LicenseModel": "string",
+                        "ListenerEndpoint": {
+                            "Address": "string",
+                            "HostedZoneId": "string",
+                            "Port": number
+                        },
+                        "MasterUsername": "admin",
+                        "MaxAllocatedStorage": number.
+                        "MonitoringInterval": number,
+                        "MonitoringRoleArn": "string",
+                        "MultiAz": boolean,
+                        "OptionGroupMemberships": [
+                            {
+                                "OptionGroupName": "string",
+                                "Status": "string"
+                            }
+                        ],
+                        "PendingModifiedValues": {
+                            "AllocatedStorage": number,
+                            "BackupRetentionPeriod": number,
+                            "CaCertificateIdentifier": "string",
+                            "DbInstanceClass": "string",
+                            "DbInstanceIdentifier": "string",
+                            "DbSubnetGroupName": "string",
+                            "EngineVersion": "string",
+                            "Iops": number,
+                            "LicenseModel": "string",
+                            "MasterUserPassword": "string",
+                            "MultiAZ": boolean,
+                            "PendingCloudWatchLogsExports": {
+                               "LogTypesToDisable": [ "string" ],
+                               "LogTypesToEnable": [ "string" ]
+                            },
+                            "Port": number,
+                            "ProcessorFeatures": [
+                                {
+                                    "Name": "string",
+                                    "Value": "string"
+                                }
+                            ],
+                            "StorageType": "string"
+                        },
+                        "PerformanceInsightsEnabled": boolean,
+                        "PerformanceInsightsKmsKeyId": "string",
+                        "PerformanceInsightsRetentionPeriod": number,
+                        "PreferredBackupWindow": "string",
+                        "PreferredMaintenanceWindow": "string",
+                        "ProcessorFeatures": [
+                            {
+                                "Name": "string",
+                                "Value": "string"
+                            }
+                        ],
+                        "PromotionTier": number,
                         "PubliclyAccessible": boolean,
-                        "TdeCredentialArn": "string",
+                        "ReadReplicaDBClusterIdentifiers": [ "string" ],
+                        "ReadReplicaDBInstanceIdentifiers": [ "string" ],
+                        "ReadReplicaSourceDBInstanceIdentifier": "string",
+                        "SecondaryAvailabilityZone": "string",
+                        "StatusInfos": [
+                            {
+                                "Message": "string"
+                                "Normal": boolean,
+                                "Status": "string",
+                                "StatusType": "string"
+                            }
+                        ],
                         "StorageEncrypted": boolean,
+                        "TdeCredentialArn": "string",
+                        "Timezone": "string",
                         "VpcSecurityGroups": [
                             {
                                 "VpcSecurityGroupId": "string",
                                 "Status": "string"
                             }
                         ]
+                    },
+                    "AwsRdsDbSnapshot": {
+                        "AllocatedStorage": integer,
+                        "AvailabilityZone": "string",
+                        "DbInstanceIdentifier": "string",
+                        "DbiResourceId": "string",
+                        "DbSnapshotIdentifier": "string",
+                         Encrypted": boolean,
+                        "Engine": "string",
+                        "EngineVersion": "string",
+                        "IamDatabaseAuthenticationEnabled": boolean,
+                        "InstanceCreateTime": "string",
+                        "Iops": number,
+                        "KmsKeyId": "string",
+                        "LicenseModel": "string",
+                        "MasterUsername": "string",
+                        "OptionGroupName": "string",
+                        "PercentProgress": integer,
+                        "Port": integer,
+                        "ProcessorFeatures": [],
+                        "SnapshotCreateTime": "string",
+                        "SnapshotType": "string",
+                        "SourceDbSnapshotIdentifier": "string",
+                        "SourceRegion": "string",
+                        "Status": "string",
+                        "StorageType": "string",
+                         TdeCredentialArn": "string",
+                        "Timezone": "string",
+                        "VpcId": "string"
                     },
                     "AwsS3Bucket": { 
                         "CreatedAt": "string",
@@ -486,6 +991,18 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "ServerSideEncryption": "string",
                         "SSEKMSKeyId": "string",
                         "VersionId": "string"
+                    },
+                    "AwsSecretsManagerSecret": {
+                        "Deleted": Boolean,
+                        "Description": "string",
+                        "KmsKeyId": "string",
+                        "Name": "string",
+                        "RotationEnabled": boolean,
+                        "RotationLambdaArn": "string",
+                        "RotationOccurredWithinFrequency": boolean,
+                        "RotationRules": {
+                            "AutomaticallyAfterDays": integer
+                        }
                     },
                     "AwsSnsTopic": {
                         "KmsMasterKeyId": "string",
@@ -642,91 +1159,11 @@ The following table lists the top\-level attributes and objects for the ASFF\. F
 |  `Title`  |  Yes  | A finding's title\. This field can contain nonspecific boilerplate text or details that are specific to this instance of the finding\.Type: String \(256 characters max\) | 
 |  `Types`  |  Yes  | One or more finding types in the format of `namespace/category/classifier` that classify a finding\. Type: Array of 50 strings max [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Namespaces are required for all finding types, but categories and classifiers are optional\. If you specify a classifier, you must also specify a category\. The '`/`' character is reserved and must *not* be used in a category or classifier\. Escaping the '`/`' character is not supported\. Example: <pre>"Types": [<br />    "Software and Configuration Checks/Vulnerabilities/CVE"<br />]</pre>  | 
 |  `UpdatedAt`  |  Yes  |  Indicates when the finding provider last updated the finding record\. This timestamp reflects the time when the finding record was last or most recently updated\. Consequently, it can differ from the `LastObservedAt` timestamp, which reflects when the event or vulnerability was last or most recently observed\. When you update the finding record, you must update this timestamp to the current timestamp\. Upon creation of a finding record, the `CreatedAt` and `UpdatedAt` timestamps must be the same timestamp\. After an update to the finding record, the value of this field must be greater than all of the previous values that it contained\. Note that `UpdatedAt` is not updated by changes from [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It is only updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\. Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
-|  `UserDefinedFields`  |  No  | A list of name\-value string pairs that are associated with the finding\. These are custom, user\-defined fields that are added to a finding\. These fields can be generated automatically via your specific configuration\. Findings products must *not* use this field for data that the product generates\. Instead, findings products can use the `ProductFields` field for data that doesn't map to any standard AWS Security Finding Format field\. These fields can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. They can only be updated by a master account\. They cannot be updated by a member account\.Type: map of up to 50 key\-value pairs Example: <pre>"UserDefinedFields": {<br />    "reviewedByCio": "true",<br />    "comeBackToLater": "Check this again on Monday"<br />}</pre>  | 
+|  `UserDefinedFields`  |  No  | A list of name\-value string pairs that are associated with the finding\. These are custom, user\-defined fields that are added to a finding\. These fields can be generated automatically via your specific configuration\. Findings products must *not* use this field for data that the product generates\. Instead, findings products can use the `ProductFields` field for data that doesn't map to any standard AWS Security Finding Format field\. These fields can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. They can only be updated by a master account\. They cannot be updated by a member account\.Type: map of up to 50 key\-value pairs Format: The key name can only contain letters, numbers, and the following special characters: \-\_=\+@\./: Example: <pre>"UserDefinedFields": {<br />    "reviewedByCio": "true",<br />    "comeBackToLater": "Check this again on Monday"<br />}</pre>  | 
 |  `VerificationState`  |  No  | The veracity of a finding\. Findings products can provide the value of `UNKNOWN` for this field\. A findings product should provide this value if there is a meaningful analog in the findings product's system\. This field is typically populated by a user determination or action after they investigate a finding\. A finding provider can provide an initial value for this attribute, but cannot update it after that\. This attribute can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It can only be updated by a master account\. It cannot be updated by a member account\.Type: Enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
 |  [`Vulnerabilities`](#asff-vulnerabilities)  |  No  |  A list of vulnerabilities that apply to the finding\. Type: Array of objects  | 
 |  [`Workflow`](#asff-workflow)  |  No  |  Provides information about the status of the investigation into a finding\. The workflow status is not intended for finding providers\. The workflow status can only be updated using `BatchUpdateFindings`\. Customers can also update it from the console\. See [Setting the workflow status for a finding](finding-workflow-status.md)\. The workflow status can only be updated by a master account\. It cannot be updated by a member account\. Type: Object Example: <pre>Workflow: {<br />    "Status": "NEW"<br />}</pre>  | 
 |  `WorkflowState` \(deprecated\)  |  No  |  This field is being deprecated in favor of the `Status` field of the `Workflow` object\.The workflow state of a finding\. Findings products can provide the value of `NEW` for this field\. A findings product can provide a value for this field if there is a meaningful analog in the findings product's system\. Type: Enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"WorkflowState": "NEW"</pre>  | 
-
-**Contents**
-+ [Compliance](#asff-compliance)
-  + [StatusReasons](#asff-compliance-statusreasons)
-+ [Malware](#asff-malware)
-+ [Network](#asff-network)
-  + [OpenPortRange](#asff-network-openportrange)
-+ [NetworkPath](#asff-networkpath)
-  + [Egress](#asff-networkpath-egress)
-  + [Ingress](#asff-networkpath-ingress)
-  + [Destination](#asff-networkpath-egress-ingress-destination)
-  + [Source](#asff-networkpath-egress-ingress-source)
-+ [Note](#asff-note)
-+ [Process](#asff-process)
-+ [RelatedFindings](#asff-relatedfindings)
-+ [Remediation](#asff-remediation)
-  + [Recommendation](#asff-remediation-recommendation)
-+ [Resources](#asff-resources)
-  + [AwsAutoScalingAutoScalingGroup](#asff-resourcedetails-awsautoscalingautoscalinggroup)
-  + [AwsCloudFrontDistribution](#asff-resourcedetails-awscloudfrontdistribution)
-    + [Logging](#asff-resourcedetails-awscloudfrontdistribution-logging)
-    + [Origins](#asff-resourcedetails-awscloudfrontdistribution-origins)
-  + [AwsCodeBuildProject](#asff-resourcedetails-awscodebuildproject)
-    + [Environment](#asff-resourcedetails-awscodebuildproject-environment)
-    + [Source](#asff-resourcedetails-awscodebuildproject-source)
-    + [VpcConfig](#asff-resourcedetails-awscodebuildproject-vpcconfig)
-  + [AwsEc2Instance](#asff-resourcedetails-awsec2instance)
-  + [AwsEc2NetworkInterface](#asff-resourcedetails-awsec2networkinterface)
-    + [Attachment](#asff-resourcedetails-awsec2networkinterface-attachment)
-    + [SecurityGroups](#asff-resourcedetails-awsec2networkinterface-securitygroups)
-  + [AwsEc2SecurityGroup](#asff-resourcedetails-awsec2securitygroup)
-    + [IP permission object](#asff-resourcedetails-awsec2securitygroup-ippermission)
-  + [AwsEc2Volume](#asff-resourcedetails-awsec2volume)
-    + [Attachments](#asff-resourcedetails-awsec2volume-attachments)
-  + [AwsEc2Vpc](#asff-resourcedetails-awsec2vpc)
-    + [CidrBlockAssociationSet](#asff-resourcedetails-awsec2vpc-cidrblockassociationset)
-    + [IpV6CidrBlockAssociationSet](#asff-resourcedetails-awsec2vpc-ipv6cidrblockassociationset)
-  + [AwsElasticSearchDomain](#asff-resourcedetails-awselasticsearchdomain)
-    + [DomainEndpointOptions](#asff-resourcedetails-awselasticsearchdomain-domainendpointoptions)
-    + [DomainStatus](#asff-resourcedetails-awselasticsearchdomain-domainstatus)
-    + [EncryptionAtRestOptions](#asff-resourcedetails-awselasticsearchdomain-encryptionatrestoptions)
-    + [NodeToNodeEncryptionOptions](#asff-resourcedetails-awselasticsearchdomain-nodetonodeencryptionoptions)
-    + [VpcOptions](#asff-resourcedetails-awselasticsearchdomain-vpcoptions)
-  + [AwsElbv2LoadBalancer](#asff-resourcedetails-awselbv2loadbalancer)
-    + [AvailabilityZones](#asff-resourcedetails-awselbv2loadbalancer-availabilityzones)
-    + [State](#asff-resourcedetails-awselbv2loadbalancer-state)
-  + [AwsIamAccessKey](#asff-resourcedetails-awsiamaccesskey)
-  + [AwsIamRole](#asff-resourcedetails-awsiamrole)
-  + [AwsKmsKey](#asff-resourcedetails-awskmskey)
-  + [AwsLambdaFunction](#asff-resourcedetails-awslambdafunction)
-    + [Code](#asff-resourcedetails-awslambdafunction-code)
-    + [DeadLetterConfig](#asff-resourcedetails-awslambdafunction-deadletterconfig)
-    + [Environment](#asff-resourcedetails-awslambdafunction-environment)
-    + [Layers](#asff-resourcedetails-awslambdafunction-layers)
-    + [TracingConfig](#asff-resourcedetails-awslambdafunction-tracingconfig)
-    + [VpcConfig](#asff-resourcedetails-awslambdafunction-vpcconfig)
-  + [AwsLambdaLayerVersion](#asff-resourcedetails-awslambdalayerversion)
-  + [AwsRdsDbInstance](#asff-resourcedetails-awsrdsdbinstance)
-    + [AssociatedRoles](#asff-resourcedetails-awsrdsdbinstance-associatedroles)
-    + [Endpoint](#asff-resourcedetails-awsrdsdbinstance-endpoint)
-    + [VpcSecurityGroups](#asff-resourcedetails-awsrdsdbinstance-vpcsecuritygroups)
-  + [AwsS3Bucket](#asff-resourcedetails-awss3bucket)
-    + [ApplyServerSideEncryptionByDefault](#asff-resourcedetails-awss3bucket-applyserversideencryptionbydefault)
-  + [AwsS3Object](#asff-resourcedetails-awss3object)
-  + [AwsSnsTopic](#asff-resourcedetails-awssnstopic)
-    + [Subscription](#asff-resourcedetails-awssnstopic-subscription)
-  + [AwsSqsQueue](#asff-resourcedetails-awssqsqueue)
-  + [AwsWafWebAcl](#asff-resourcedetails-awswafwebacl)
-    + [Rule object](#asff-resourcedetails-awswafwebacl-rule)
-  + [Container](#asff-resourcedetails-container)
-  + [Other](#asff-resourcedetails-other)
-+ [Severity](#asff-severity)
-  + [How Security Hub maps Label and Normalized values](#asff-severity-map-normalized-label)
-  + [Guidance for assigning the normalized severity \(AWS services and partners\)](#asff-severity-normalized-guidance)
-+ [ThreatIntelIndicators](#asff-threatintelindicators)
-+ [Vulnerabilities](#asff-vulnerabilities)
-  + [Cvss](#asff-vulnerabilities-cvss)
-  + [Vendor](#asff-vulnerabilities-vendor)
-  + [VulnerablePackages](#asff-vulnerabilities-vulnerablepackages)
-+ [Workflow](#asff-workflow)
 
 ### Compliance<a name="asff-compliance"></a>
 
@@ -810,7 +1247,7 @@ The details of network\-related information about a finding\.
 
 Type: Object
 
-Example:
+**Example**
 
 ```
 "Network": {
@@ -1080,7 +1517,7 @@ The `Resources` object provides information about the resources involved in a fi
 
 Type: Array of up to 32 resource objects
 
-Example:
+**Example**
 
 ```
 "Resources": [
@@ -1297,6 +1734,362 @@ It can have the following attributes\.
 |  `SecurityGroupIds`  |  No  |  A list of one or more security group IDs in your Amazon VPC\. Type: Array of strings Array members: Maximum number of 5 items Length constraints: Minimum length of 1  | 
 |  `Subnets`  |  No  |  A list of one or more subnet IDs in your Amazon VPC\. Type: Array of strings Array members: Maximum number of 16 items Length constraints: Minimum length of 1  | 
 |  VpcId  |  No  |  The ID of the VPC\. Type: String Length constraints: Minimum length of 1  | 
+
+#### AwsDynamoDbTable<a name="asff-resourcedetails-awsdynamodbtable"></a>
+
+The `AwsDynamoDbTable` object provides details about a DynamoDB table\.
+
+**Example**
+
+```
+"AwsDynamoDbTable": {
+    "AttributeDefinitions": [   
+        {        
+            "AttributeName": "attribute1",
+            "AttributeType": "value 1"
+        },
+        {
+            "AttributeName": "attribute2",
+            "AttributeType": "value 2"
+        },
+        {
+            "AttributeName": "attribute3",
+            "AttributeType": "value 3"
+        }
+    ],
+    "BillingModeSummary": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "LastUpdateToPayPerRequestDateTime": "2019-12-03T15:23:10.323Z"
+    },
+    "CreationDateTime": "2019-12-03T15:23:10.248Z",
+    "GlobalSecondaryIndexes": [
+        {
+            "Backfilling": false,
+            "IndexArn": "arn:aws:dynamodb:us-west-2:111122223333:table/exampleTable/index/exampleIndex",                
+            "IndexName": "standardsControlArnIndex",
+            "IndexSizeBytes": 1862513,
+            "IndexStatus": "ACTIVE",
+            "ItemCount": 20,
+            "KeySchema": [
+                {
+                    "AttributeName": "City",
+                    "KeyType": "HASH"
+                },     
+                {
+                    "AttributeName": "Date",
+                    "KeyType": "RANGE"
+                }
+            ],      
+            "Projection": {
+                "NonKeyAttributes": ["predictorName"],
+                "ProjectionType": "ALL"
+            },     
+            "ProvisionedThroughput": {
+                "LastIncreaseDateTime": "2019-03-14T13:21:00.399Z",
+                "LastDecreaseDateTime": "2019-03-14T12:47:35.193Z",
+                "NumberOfDecreasesToday": 0,
+                "ReadCapacityUnits": 100,
+                "WriteCapacityUnits": 50
+            },
+        }
+   ],
+   "GlobalTableVersion": "V1",
+   "ItemCount": 2705,
+   "KeySchema": [
+        {
+            "AttributeName": "zipcode",
+            "KeyType": "HASH"
+        }
+    ],
+    "LatestStreamArn": "arn:aws:dynamodb:us-west-2:111122223333:table/exampleTable/stream/2019-12-03T23:23:10.248",
+    "LatestStreamLabel": "2019-12-03T23:23:10.248",
+    "LocalSecondaryIndexes": [
+        {
+            "IndexArn": "arn:aws:dynamodb:us-east-1:111122223333:table/exampleGroup/index/exampleId",
+            "IndexName": "CITY_DATE_INDEX_NAME",
+            "KeySchema": [
+                {
+                    "AttributeName": "zipcode",
+                    "KeyType": "HASH"
+                }
+            ],
+            "Projection": {
+                "NonKeyAttributes": ["predictorName"],
+                "ProjectionType": "ALL"
+            },  
+        }
+    ],
+    "ProvisionedThroughput": {
+        "LastIncreaseDateTime": "2019-03-14T13:21:00.399Z",
+        "LastDecreaseDateTime": "2019-03-14T12:47:35.193Z",
+        "NumberOfDecreasesToday": 0,
+        "ReadCapacityUnits": 100,
+        "WriteCapacityUnits": 50
+    },
+    "Replicas": [
+        {
+            "GlobalSecondaryIndexes":[
+                {
+                    "IndexName": "CITY_DATE_INDEX_NAME", 
+                    "ProvisionedThroughputOverride": {
+                        "ReadCapacityUnits": 10
+                    }
+                }
+            ],
+            "KmsMasterKeyId" : "KmsMasterKeyId"
+            "ProvisionedThroughputOverride": {
+                "ReadCapacityUnits": 10
+            },
+            "RegionName": "regionName",
+            "ReplicaStatus": "CREATING",
+            "ReplicaStatusDescription": "replicaStatusDescription"
+        }
+    ],
+    "RestoreSummary" : {
+        "SourceBackupArn": "arn:aws:dynamodb:us-west-2:111122223333:table/exampleTable/backup/backup1",
+        "SourceTableArn": "arn:aws:dynamodb:us-west-2:111122223333:table/exampleTable",
+        "RestoreDateTime": "2020-06-22T17:40:12.322Z",
+        "RestoreInProgress": true
+    },
+    "SseDescription": {
+        "InaccessibleEncryptionDateTime": "2018-01-26T23:50:05.000Z",
+        "Status": "ENABLED",
+        "SseType": "KMS",
+        "KmsMasterKeyArn": "arn:aws:kms:us-east-1:111122223333:key/key1"
+    },
+    "StreamSpecification" : {
+        "StreamEnabled": true,
+        "StreamViewType": "NEW_IMAGE"
+    },
+    "TableId": "example-table-id-1",
+    "TableName": "example-table",
+    "TableSizeBytes": 1862513,
+    "TableStatus": "ACTIVE"
+}
+```
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`AttributeDefinitions`](#asff-resourcedetails-awsdynamodbtable-attributedefinitions)  |  No  |  A list of attribute definitions for the table\. Type: Array of objects\.  | 
+|  [`BillingModeSummary`](#asff-resourcedetails-awsdynamodbtable-billingmodesummary)  |  No  |  Information about the billing for read/write capacity on the table\. Type: Object  | 
+|  `CreationDateTime`  |  No  |  Indicates when the table was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreationDateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  [`GlobalSecondaryIndexes`](#asff-resourcedetails-awsdynamodbtable-globalsecondaryindexes)  |  No  |  List of global secondary indexes for the table\. Type: Array of objects  | 
+|  `GlobalTableVersion`  |  No  |  The version of global tables being used\. Type: String  | 
+|  `ItemCount`  |  No  |  The number of items in the table\. Type: Number  | 
+|  [`KeySchema`](#asff-resourcedetails-awsdynamodbtable-keyschema)  |  No  |  The primary key structure for the table\. Type: Array of objects  | 
+|  `LatestStreamArn`  |  No  |  The ARN of the latest stream for the table\. Type: String  | 
+|  `LatestStreamLabel`  |  No  |  The label of the latest stream\. The label is not a unique identifier\. Type: String  | 
+|  [`LocalSecondaryIndexes`](#asff-resourcedetails-awsdynamodbtable-localsecondaryindexes)  |  No  |  The list of local secondary indexes for the table\. Type: Array of objects  | 
+|  [`ProvisionedThroughput`](#asff-resourcedetails-awsdynamodbtable-provisionedthroughput)  |  No  |  Information about the provisioned throughput for the table\. Type: Object  | 
+|  [`Replicas`](#asff-resourcedetails-awsdynamodbtable-replicas)  |  No  |  The list of replicas of this table\. Type: Array of objects  | 
+|  [`RestoreSummary`](#asff-resourcedetails-awsdynamodbtable-restoresummary)  |  No  |  Information about the restore for the table\. Type: Object  | 
+|  [`SseDescription`](#asff-resourcedetails-awsdynamodbtable-ssedescription)  |  No  |  Information about the server\-side encryption for the table\. Type: Object  | 
+|  [`StreamSpecification`](#asff-resourcedetails-awsdynamodbtable-streamspecification)  |  No  |  The current DynamoDB Streams configuration for the table\. Type: Object  | 
+|  `TableId`  |  No  |  The identifier of the table\. Type: String  | 
+|  `TableName`  |  No  |  The name of the table\. Type: String Minimum length: 3 Maximum length: 255  | 
+|  `TableSizeBytes`  |  No  |  The total size of the table in bytes\. Type: Integer  | 
+|  `TableStatus`  |  No  |  The current status of the table\. Type: String Valid values: `CREATING` \| `UPDATING` \| `DELETING` \| `ACTIVE` \| `INACCESSIBLE_ENCRYPTION_CREDENTIALS` \| `ARCHIVING` \| `ARCHIVED`  | 
+
+##### AttributeDefinitions<a name="asff-resourcedetails-awsdynamodbtable-attributedefinitions"></a>
+
+The `AttributeDefinitions` object contains a list of attribute definitions for the table\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AttributeName`  |  No  |  The name of the attribute\. Type: String  | 
+|  `AttributeType`  |  No  |  The type of the attribute\. Type: String  | 
+
+##### BillingModeSummary<a name="asff-resourcedetails-awsdynamodbtable-billingmodesummary"></a>
+
+The `BillingModeSummary` object provides information about the billing for read/write capacity on the table\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `BillingMode`  |  No  |  The method used to charge for read and write throughput and to manage capacity\. Type: String Valid values: `PROVISIONED` \| `PAY_PER_REQUEST`  | 
+|  `LastUpdateToPayPerRequestDateTime`  |  No  |  If the billing mode is `PAY_PER_REQUEST`, indicates when the billing mode was set to that value\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"LastUpdateToPayPerRequestDateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+
+##### GlobalSecondaryIndexes<a name="asff-resourcedetails-awsdynamodbtable-globalsecondaryindexes"></a>
+
+The `GlobalSecondaryIndexes` object contains a list of global secondary indexes for the table\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Backfilling`  |  No  |  Whether the index is currently backfilling\. Type: Boolean  | 
+|  `IndexArn`  |  No  |  The ARN of the index\. Type: String  | 
+|  `IndexName`  |  No  |  The name of the index\. Type: String  | 
+|  `IndexSizeBytes`  |  No  |  The total size in bytes of the index\. Type: Number  | 
+|  `IndexStatus`  |  No  |  The current status of the index\. Type: String Valid values: `CREATING` \| `UPDATING` \| `DELETING` \| `ACTIVE`   | 
+|  `ItemCount`  |  No  |  The number of items in the index\. Type: Number  | 
+|  [`KeySchema`](#asff-resourcedetails-awsdynamodbtable-keyschema)  |  No  |  The key schema for the index\. Type: Array of objects  | 
+|  [`Projection`](#asff-resourcedetails-awsdynamodbtable-projection)  |  No  |  Attributes that are copied from the table into an index\. Type: Object  | 
+|  [`ProvisionedThroughput`](#asff-resourcedetails-awsdynamodbtable-provisionedthroughput)  |  No  |  Information about the provisioned throughput settings for the indexes\. Type: Object  | 
+
+##### KeySchema<a name="asff-resourcedetails-awsdynamodbtable-keyschema"></a>
+
+The `KeySchema` object contains the key schema for the table, a global secondary index, or a local secondary index\.
+
+Each component of the key schema can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AttributeName`  |  No  |  The name of the attribute\. Type: String\.  | 
+|  `KeyType`  |  No  |  The type of key used for the attribute\. Type: String Valid values: `HASH` \| `RANGE`  | 
+
+##### LocalSecondaryIndexes<a name="asff-resourcedetails-awsdynamodbtable-localsecondaryindexes"></a>
+
+`LocalSecondaryIndexes` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `IndexArn`  |  No  |  The ARN of the index\. Type: String  | 
+|  `IndexName`  |  No  |  The name of the index\. Type: String Minimum length: 3 Maximum length: 255  | 
+|  [`KeySchema`](#asff-resourcedetails-awsdynamodbtable-keyschema)  |  No  |  The complete key schema for the index\. Type: Array of objects  | 
+|  [`Projection`](#asff-resourcedetails-awsdynamodbtable-projection)  |  No  |  Attributes that are copied from the table into the index\. These are in addition to the primary key attributes and index key attributes, which are automatically projected\. Type: Object  | 
+
+##### Projection \(for global and local secondary indexes\)<a name="asff-resourcedetails-awsdynamodbtable-projection"></a>
+
+For global and local secondary indexes, the `Projection` object identifies the attributes that are copied from the table into the index\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `NonKeyAttributes`  |  No  |  The nonkey attributes that are projected into the index\. For each attribute, provide the attribute name\. Type: Array of strings Maximum number of items: 20 Minimum length per attribute: 1 Maximum length per attribute: 225  | 
+|  `ProjectionType`  |  No  |  The types of attributes that are projected into the index\. Type: String Valid values: `ALL` \| `KEYS_ONLY` \| `INCLUDE`  | 
+
+##### ProvisionedThroughput<a name="asff-resourcedetails-awsdynamodbtable-provisionedthroughput"></a>
+
+The `ProvisionedThroughput` object contains information about the provisioned throughput for the table or for a global secondary index\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `LastDecreaseDateTime`  |  No  |  Indicates when the provisioned throughput was last decreased\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"LastDecreaseDateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `LastIncreaseDateTime`  |  No  |  Indicates when the provisioned throughput was last increased\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"LastIncreaseDateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `NumberOfDecreasesToday`  |  No  |  The number of times during the current UTC calendar day that the provisioned throughput was decreased\. Type: Number  | 
+|  `ReadCapacityUnits`  |  No  |  The maximum number of strongly consistent reads consumed per second before DynamoDB returns a `ThrottlingException`\.  Type: Number  | 
+|  `WriteCapacityUnits`  |  No  |  The maximum number of writes consumed per second before DynamoDB returns a `ThrottlingException`\. Type: Number  | 
+
+##### Replicas<a name="asff-resourcedetails-awsdynamodbtable-replicas"></a>
+
+The `Replicas` object contains the list of replicas of this table\.
+
+Each replica can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `GlobalSecondaryIndexes`  | No |  List of global secondary indexes for the replica\. Type: Array of objects  | 
+| GlobalSecondaryIndexes\.IndexName  |  No  |  The name of the index\. Type: String  | 
+|  `GlobalSecondaryIndexes.ProvisionedThroughputOverride`  |  No  |  Replica\-specific configuration for the provisioned throughput for the index\. Type: Object  | 
+|  `KmsMasterKeyID`  |  No  |  The identifier of the AWS KMS customer master key \(CMK\) that will be used for AWS KMS encryption for the replica\. Type: String  | 
+|  `ProvisionedThroughputOverride`  |  No  |  Replica\-specific configuration for the provisioned throughput\. Type: Object  | 
+|  `RegionName`  |  No  |  The name of the Region where the replica is located\. Type: String  | 
+|  `ReplicaStatus`  |  No  |  The current status of the replica\. Type: String Valid values: `CREATING` \| `CREATION_FAILED` \| `UPDATING` \| `DELETING` \| `ACTIVE`  | 
+|  `ReplicaStatusDescription`  |  No  |  Detailed information about the replica status\. Type: String  | 
+
+The `ProvisionedThroughputOverride` object provides replica\-specific configuration for the provisioned throughput for the table or the global secondary indexes\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ReadCapacityUnits`  |  No  |  The read capacity units for the replica\. Type: Number Minimum value: 1  | 
+
+##### RestoreSummary<a name="asff-resourcedetails-awsdynamodbtable-restoresummary"></a>
+
+The `RestoreSummary` object provides information about the restore for the table\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `RestoreDateTime`  |  No  |  Indicates the point in time that the table was restored to\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"RestoreDateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `RestoreInProgress`  |  No  |  Whether a restore is currently in progress\. Type: Boolean  | 
+|  `SourceBackupArn`  |  No  |  The ARN of the source backup from which the table was restored\. Type: String  | 
+|  `SourceTableArn`  |  No  |  The ARN of the source table for the backup\. Type: String  | 
+
+##### SseDescription<a name="asff-resourcedetails-awsdynamodbtable-ssedescription"></a>
+
+The `SseDescription` object provides information about the server\-side encryption for the table\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `InaccessibleEncryptionDateTime`  |  No  |  If the key is inaccessible, the date and time when DynamoDB detected that the key was inaccessible\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"InaccessibleEncryptionDateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `KmsMasterKeyArn`  |  No  |  The ARN of the AWS KMS customer master key \(CMK\) that is used for the AWS KMS encryption\. Type: String  | 
+|  `SseType`  |  No  |  The type of server\-side encryption\. Type: String Valid values: `KMS`  | 
+|  `Status`  |  No  |  The status of the server\-side encryption\. Type: String Valid values: `ENABLED` \| `UPDATING`  | 
+
+##### StreamSpecification<a name="asff-resourcedetails-awsdynamodbtable-streamspecification"></a>
+
+The `StreamSpecification` object contains the current DynamoDB Streams configuration for the table\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `StreamEnabled`  |  No  |  Indicates whether DynamoDB Streams is enabled on the table\. Type: Boolean  | 
+|  `StreamViewType`  |  No  |  Determines the information that is written to the table\. Type: String Valid values: `NEW_IMAGE` \| `OLD_IMAGE` \| `NEW_AND_OLD_IMAGES` \| `KEYS_ONLY`  | 
+
+#### AwsEc2Eip<a name="asff-resourcedetails-awsec2eip"></a>
+
+The `AwsEc2Eip` object provides information about an Elastic IP address\.
+
+**Example**
+
+```
+"AwsEc2Eip": {
+    "InstanceId": "instance1",
+    "PublicIp": "192.0.2.04",
+    "AllocationId": "eipalloc-example-id-1",
+    "AssociationId": "eipassoc-example-id-1",
+    "Domain": "vpc",
+    "PublicIpv4Pool": "anycompany",
+    "NetworkBorderGroup": "eu-central-1",
+    "NetworkInterfaceId": "eni-example-id-1",
+    "NetworkInterfaceOwnerId": "777788889999",
+    "PrivateIpAddress": "192.0.2.03"
+}
+```
+
+The `AwsEc2Eip` object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AllocationId`  |  No  |  The identifier that AWS assigns to represent the allocation of the Elastic IP address for use with Amazon VPC\. Type: String  | 
+|  `AssociationId`  |  No  |  The identifier that represents the association of the Elastic IP address with an EC2 instance\. Type: String  | 
+|  `Domain`  |  No  |  The domain in which to allocate the address\. If the address is for use with EC2 instances in a VPC, then `Domain` is `vpc`\. Otherwise, `Domain` is `standard`\.  Type: String Valid values: `standard` \| `vpc`  | 
+|  `InstanceId`  |  No  |  The identifier of the EC2 instance\. Type: String  | 
+|  `NetworkBorderGroup`  |  No  |  The name of the location from which the Elastic IP address is advertised\. Type: String  | 
+|  `NetworkInterfaceId`  |  No  |  The identifier of the network interface\. Type: String  | 
+|  `NetworkInterfaceOwnerId`  |  No  |  The AWS account ID of the owner of the network interface\. Type: String Format: Must be a 12\-digit number\.  | 
+|  `PrivateIpAddress`  |  No  |  The private IP address that is associated with the Elastic IP address\. Type: IPv4  | 
+|  `PublicIp`  |  No  |  A public IP address that is associated with the EC2 instance\. Type: IPv4  | 
+|  `PublicIpv4Pool`  |  No  |  The identifier of an IP address pool\. This parameter allows Amazon EC2 to select an IP address from the address pool\. Type: String  | 
 
 #### AwsEc2Instance<a name="asff-resourcedetails-awsec2instance"></a>
 
@@ -1682,7 +2475,7 @@ It can have the following attributes\.
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
 |  [`AvailabilityZones`](#asff-resourcedetails-awselbv2loadbalancer-availabilityzones)  |  No  | The Availability Zones for the load balancer\.Type: Object | 
-|  `CanonicalHostedZoneId`  |  No  | The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\.Type: String | 
+|  `CanonicalHostedZoneId`  |  No  | The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\.Type: String | 
 |  `CreatedTime`  |  No  | Indicates when the load balancer was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. | 
 |  `DNSName`  |  No  | The public DNS name of the load balancer\.Type: String | 
 |  `IpAddressType`  |  No  | The type of IP addresses used by the subnets for your load balancer\. The possible values are `ipv4` \(for IPv4 addresses\) and `dualstack` \(for IPv4 and IPv6 addresses\)\.Type: String | 
@@ -1718,9 +2511,7 @@ The `State` object can have the following attributes\.
 
 #### AwsIamAccessKey<a name="asff-resourcedetails-awsiamaccesskey"></a>
 
-IAM access key details that are related to a finding\.
-
-Type: Object
+The `AwsIamAccessKey` object contains details about an IAM access key that is related to a finding\.
 
 The `AwsIamAccessKey` object can have the following attributes\.
 
@@ -1733,11 +2524,67 @@ The `AwsIamAccessKey` object can have the following attributes\.
 |  `PrincipalType`  |  No  | The type of principal\.Type: String | 
 |  `Status`  |  No  | The status of the IAM access key that is related to a finding\. Valid values are `ACTIVE` and `INACTIVE`\.Type: Enum | 
 
+#### AwsIamPolicy<a name="asff-resourcedetails-awsiampolicy"></a>
+
+The `AwsIamPolicy` object represents an IAM permissions policy\.
+
+**Example**
+
+```
+"AwsIamPolicy": {
+    "AttachmentCount": 1,
+    "CreateDate": "2017-09-14T08:17:29.000Z",
+    "DefaultVersionId": "v1",
+    "Description": "Example IAM policy",
+    "IsAttachable": true,
+    "Path": "/",
+    "PermissionsBoundaryUsageCount": 5,
+    "PolicyId": "ANPAJ2UCCR6DPCEXAMPLE",
+    "PolicyName": "EXAMPLE-MANAGED-POLICY",
+    "PolicyVersionList": [
+        {
+            "VersionId": "v1",
+            "IsDefaultVersion": true,
+            "CreateDate": "2017-09-14T08:17:29.000Z"
+        }
+    ],
+    "UpdateDate": "2017-09-14T08:17:29.000Z"
+}
+```
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AttachmentCount`  |  No  |  The number of users, groups, and roles that the policy is attached to\. Type: Number  | 
+|  CreateDate  |  No  |  When the policy was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreateDate": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `DefaultVersionId`  |  No  |  The identifier of the default version of the policy\. Type: String  | 
+|  `Description`  |  No  |  A description of the policy\. Type: String Maximum length: 1000 characters  | 
+|  `IsAttachable`  |  No  |  Whether the policy can be attached to a user, group, or role\. Type: Boolean  | 
+|  `Path`  |  No  |  The path to the policy\. Type: String Minimum length: 1 Maximum length: 512 For more information about paths, see [IAM Identifiers]() in the *IAM User Guide*\.  | 
+|  `PermissionsBoundaryUsageCount`  |  No  |  The number of users and roles that use the policy to set the permissions boundary\. Type: Number  | 
+|  `PolicyId`  |  No  |  The unique identifier of the policy\. Type: String Minimum length: 16 Maximum length: 128  | 
+|  `PolicyName`  |  No  |  The name of the policy\. Type: String Minimum length: 1 Maximum length: 128  | 
+|  [`PolicyVersionList`](#asff-resourcedetails-awsiampolicy-policyversionlist)  |  No  |  List of versions of the policy\. Type: Array of objects  | 
+|  `UpdateDate`  |  No  |  When the policy was most recently updated\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"UpdateDate": "2020-06-22T17:40:12.322Z"</pre>  | 
+
+##### PolicyVersionList<a name="asff-resourcedetails-awsiampolicy-policyversionlist"></a>
+
+The `PolicyVersionList` object contains a list of versions of the IAM policy\.
+
+Each version can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CreateDate`  |  No  |  Indicates when the version was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreateDate": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `IsDefaultVersion`  |  No  |  Whether the version is the default version\. Type: Boolean  | 
+|  `VersionId`  |  No  |  The identifier of the policy version\. Type: String  | 
+
 #### AwsIamRole<a name="asff-resourcedetails-awsiamrole"></a>
 
-Contains information about an IAM role, including all of the role's policies\.
-
-Type: Object
+The `AwsIamRole` object contains information about an IAM role, including all of the role's policies\.
 
 The `AwsIamRole` object can have the following attributes\.
 
@@ -1751,11 +2598,89 @@ The `AwsIamRole` object can have the following attributes\.
 |  `MaxSessionDuration`  |  No  | The maximum session duration \(in seconds\) that you want to set for the specified role\.Type: Integer | 
 |  `Path`  |  No  | The path to the role\.Type: String | 
 
+#### AwsIamUser<a name="asff-resourcedetails-awsiamuser"></a>
+
+The `AwsIamUser` object provides information about an IAM user\.
+
+**Example**
+
+```
+"AwsIamUser": {
+    "AttachedManagedPolicies": [
+        {
+            "PolicyName": "ExamplePolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/ExampleAccess"
+        }
+    ],
+    "CreateDate": "2018-01-26T23:50:05.000Z",
+    "GroupList": [],
+    "Path": "/",
+    "PermissionsBoundary" : {
+        "PermissionsBoundaryArn" : "arn:aws:iam::aws:policy/AdministratorAccess",
+        "PermissionsBoundaryType" : "PermissionsBoundaryPolicy"
+    },
+    "UserId": "AIDACKCEVSQ6C2EXAMPLE",
+    "UserName": "ExampleUser",
+    "UserPolicyList": [
+        {
+            "PolicyName": "InstancePolicy"
+        }
+    ]
+}
+```
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`AttachedManagedPolicies`](#asff-resourcedetails-awsiamuser-attachedmanagedpolicies)  |  No  |  A list of the managed policies that are attached to the user\. Type: Array of objects  | 
+|  `CreateDate`  |  No  |  Indicates when the user was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreateDate": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `GroupList`  |  No  |  A list of IAM groups that the user belongs to\. Type: Array of strings Minimum length: 1 Maximum length: 128  | 
+|  `Path`  |  No  |  The path to the user\. Type: String Minimum length: 1 Maximum length: 512  | 
+|  [`PermissionsBoundary`](#asff-resourcedetails-awsiamuser-permissionsboundary)  |  No  |  The permissions boundary for the user\. Type: Object  | 
+|  `UserId`  |  No  |  The unique identifier for the user\. Type: String Minimum length: 16 Maximum length: 128  | 
+|  `UserName`  |  No  |  The name of the user\. Type: String Minimum length: 1 Maximum length: 64  | 
+|  [`UserPolicyList`](#asff-resourcedetails-awsiamuser-userpolicylist)  |  No  |  The list of inline policies that are embedded in the user\. Type: Array of objects  | 
+
+##### AttachedManagedPolicies<a name="asff-resourcedetails-awsiamuser-attachedmanagedpolicies"></a>
+
+The `AttachedManagedPolicies` object contains the list of managed policies that are attached to the IAM user\.
+
+Each policy can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `PolicyArn`  |  No  |  The ARN of the policy\. Type: String  | 
+|  `PolicyName`  |  No  |  The name of the policy\. Type: String  | 
+
+##### PermissionsBoundary<a name="asff-resourcedetails-awsiamuser-permissionsboundary"></a>
+
+The `PermissionsBoundary` object contains information about the policy used to set the permissions boundary for the user\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `PermissionsBoundaryArn`  |  No  |  The ARN of the policy used to set the permissions boundary for the user\. Type: String Minimum length: 20 Maximum length: 2,048  | 
+|  `PermissionsBoundaryType`  |  No  |  The usage type for the permissions boundary\. Type: String The value must be `PermissionsBoundaryPolicy`\.  | 
+
+##### UserPolicyList<a name="asff-resourcedetails-awsiamuser-userpolicylist"></a>
+
+The `UserPolicyList` object contains the list of inline policies that are embedded in the user\.
+
+Each policy can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `PolicyName`  |  No  |  The name of the policy\. Type: String Minimum length: 1 Maximum length: 128  | 
+
 #### AwsKmsKey<a name="asff-resourcedetails-awskmskey"></a>
 
-Details about an AWS KMS customer master key \(CMK\)\.
-
-Type: Object
+The `AwsKmsKey` object provides details about an AWS KMS customer master key \(CMK\)\.
 
 The `AwsKmsKey` object can have the following attributes\.
 
@@ -1764,6 +2689,7 @@ The `AwsKmsKey` object can have the following attributes\.
 | --- | --- | --- | 
 |  `AWSAccountId`  |  No  |  The AWS account identifier of the account that owns the CMK\. Type: String  | 
 |  `CreationDate`  |  No  |  Indicates when the CMK was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
+|  `Description`  |  No  |  A description of the key\. Type: String  | 
 |  `KeyId`  |  Yes  |  The globally unique identifier for the CMK\. Type: String The minimum length is 1\. The maximum length is 2048\.  | 
 |  `KeyManager`  |  No  |  The manager of the CMK\. CMKs in an AWS account are either customer managed or AWS managed\. Type: String Valid values: `AWS` \| `CUSTOMER`\.  | 
 |  `KeyState`  |  No  |  The state of the CMK\. Type: String Valid values: `Enabled` \| `Disabled` \| `PendingDeletion` \| `PendingImport` \| `Unavailable`  | 
@@ -1783,7 +2709,7 @@ It can have the following attributes\.
 |  [`DeadLetterConfig`](#asff-resourcedetails-awslambdafunction-deadletterconfig)  |  No  | The function's dead letter queue\.Type: Object | 
 |  [`Environment`](#asff-resourcedetails-awslambdafunction-environment)  |  No  | A function's environment variable settings\.Type: Object | 
 |  `FunctionName`  |  No  | The name of the function\.Type: String | 
-|  `Handler`  |  No  | The function that Lambda calls to begin executing your function\.Type: String | 
+|  `Handler`  |  No  | The function that Lambda calls to begin running your function\.Type: String | 
 |  `KmsKeyArn`  |  No  | The AWS KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.Type: String | 
 |  `LastModified`  |  No  | The date and time that the function was last updated, in ISO\-8601 format \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.Type: String | 
 |  [`Layers`](#asff-resourcedetails-awslambdafunction-layers)  |  No  | The function's layers\.Type: Object | 
@@ -1902,33 +2828,431 @@ The `AwsLambdaLayerVersion` object can have the following attributes\.
 |  `CreatedDate`  |  No  |  Indicates when the layer version was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
 |  `Version`  |  No  |  The version number\. Type: Long  | 
 
+#### AwsRdsDbCluster<a name="asff-resourcedetails-awsrdsdbcluster"></a>
+
+The `AwsRdsDbCluster` object provides details about an Amazon RDS database cluster\.
+
+`Example`
+
+```
+"AwsRdsDbCluster": {
+    "AllocatedStorage": 1,
+    "AvailabilityZones": [
+        "us-east-1c",
+        "us-east-1e",
+        "us-east-1a"
+    ],
+    "BackupRetentionPeriod": 1,
+    "DatabaseName": "",
+    "Status": "modifying",
+    "Endpoint": "database-3.cluster-example.us-east-1.rds.amazonaws.com",
+    "ReaderEndpoint": "database-3.cluster-ro-example.us-east-1.rds.amazonaws.com",
+    "CustomEndpoints": [],
+    "MultiAz": false,
+    "Engine": "aurora-mysql",
+    "EngineVersion": "5.7.mysql_aurora.2.03.4",
+    "Port": 3306,
+    "MasterUsername": "admin",
+    "PreferredBackupWindow": "04:52-05:22",
+    "PreferredMaintenanceWindow": "sun:09:32-sun:10:02",
+    "ReadReplicaIdentifiers": [],
+    "VpcSecurityGroups": [
+        {
+            "VpcSecurityGroupId": "sg-example-1",
+            "Status": "active"
+        }
+    ],
+    "HostedZoneId": "ZONE1",
+    "StorageEncrypted": true,
+    "KmsKeyId": "arn:aws:kms:us-east-1:777788889999:key/key1",
+    "DbClusterResourceId": "cluster-example",
+    "AssociatedRoles": [
+        {
+        "RoleArn": "arn:aws:iam::777788889999:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
+        "Status": "PENDING"
+        }
+    ],
+    "ClusterCreateTime": "2020-06-22T17:40:12.322Z",
+    "EnabledCloudwatchLogsExports": [
+        "audit",
+        "error",
+        "general",
+        "slowquery"
+    ],
+    "EngineMode": "provisioned",
+    "DeletionProtection": false,
+    "HttpEndpointEnabled": false,
+    "ActivityStreamStatus": "stopped",
+    "CopyTagsToSnapshot": true,
+    "CrossAccountClone": false,
+    "DomainMemberships": [],
+    "DbClusterParameterGroup": "cluster-parameter-group",
+    "DbSubnetGroup": "subnet-group",
+    "DbClusterOptionGroupMemberships": [],
+    "DbClusterIdentifier": "database-3",
+    "DbClusterMembers": [
+        {
+        "IsClusterWriter": true,
+        "PromotionTier": 1,
+        "DbInstanceIdentifier": "database-3-instance-1",
+        "DbClusterParameterGroupStatus": "in-sync"
+        }
+    ],
+    "IamDatabaseAuthenticationEnabled": false
+}
+```
+
+The `AwsRdsDbCluster` object can contain the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ActivityStreamStatus`  |  No  |  The status of the database activity stream\. Type: String Valid values: `stopped`\| `starting` \| `started` \| `stopping`  | 
+|  `AllocatedStorage`  |  No  |  For all database engines except Amazon Aurora, specifies the allocated storage size in gibibytes \(GiB\)\. For Aurora, `AllocatedStorage` is always 1\. The Aurora database cluster storage size is not fixed\. Instead, it automatically adjusts as needed\. Type: Number  | 
+|  [`AssociatedRoles`](#asff-resourcedetails-awsrdsdbcluster-associatedroles)  |  No  |  A list of the IAM roles that are associated with the DB cluster\. Type: Array of objects  | 
+|  `AvailabilityZones`  |  No  |  A list of Availability Zones \(AZs\) where instances in the DB cluster can be created\. Type: Array of strings Example: <pre>"AvailabilityZones": [<br />    "us-east-1c",<br />    "us-east-1e",<br />    "us-east-1a"<br />]</pre>  | 
+|  `BackupRetentionPeriod`  |  No  |  The number of days for which automated backups are retained\. Type: Number Minimum value: 1 Maximum value: 35  | 
+|  `ClusterCreateTime`  |  No  |  Indicates when the DB cluster was created, in Universal Coordinated Time \(UTC\)\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"ClusterCreateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `CopyTagsToSnapshot`  |  No  |  Whether tags are copied from the DB cluster to snapshots of the DB cluster\. Type: Boolean  | 
+|  `CrossAccountClone`  |  No  |  Whether the DB cluster is a clone of a DB cluster owned by a different AWS account\. Type: Boolean  | 
+|  `CustomEndpoints`  |  No  |  A list of custom endpoints for the DB cluster\. Type: Array of strings  | 
+|  `DatabaseName`  |  No  |  The name of the database\. Type: String  | 
+|  `DbClusterIdentifier`  |  No  |  The DB cluster identifier that the user assigned to the cluster\. This identifier is the unique key that identifies a DB cluster\. Type: String  | 
+|  [`DbClusterMembers`](#asff-resourcedetails-awsrdsdbcluster-dbclustermembers)  |  No  |  The list of instances that make up the DB cluster\. Type: Array of objects  | 
+|  [`DbClusterOptionGroupMemberships`](#asff-resourcedetails-awsrdsdbcluster-dbclusteroptiongroupmemberships)  |  No  |  The list of option group memberships for this DB cluster\. Type: Array of objects  | 
+|  `DbClusterParameterGroup`  |  No  |  The name of the DB cluster parameter group for the DB cluster\. Type: String  | 
+|  `DbClusterResourceId`  |  No  |  The identifier of the DB cluster\. The identifier must be unique within each AWS Region and is immutable\. Type: String  | 
+|  `DbSubnetGroup`  |  No  |  The subnet group that is associated with the DB cluster, including the name, description, and subnets in the subnet group\. Type: String  | 
+|  `DeletionProtection`  |  No  |  Whether the DB cluster has deletion protection enabled\. Type: Boolean  | 
+|  [`DomainMemberships`](#asff-resourcedetails-awsrdsdbcluster-domainmemberships)  |  No  |  The Active Directory domain membership records that are associated with the DB cluster\. Type: Array of objects  | 
+|  `EnabledCloudwatchLogsExports`  |  No  |  A list of log types that this DB cluster is configured to export to CloudWatch Logs\. Type: Array of strings Example: <pre>"EnabledCloudwatchLogsExports": [<br />    "audit",<br />    "error",<br />    "general",<br />    "slowquery"<br />]</pre>  | 
+|  `Endpoint`  |  No  |  The connection endpoint for the primary instance of the DB cluster\. Type: String  | 
+|  `Engine`  |  No  |  The name of the database engine to use for this DB cluster\. Type: String Valid values: `aurora` \| `aurora-mysql` \| a`urora-postgresql`  | 
+|  `EngineMode`  |  No  |  The database engine mode of the DB cluster\. Type: String Valid values: `provisioned` \| `serverless` \| `parallelquery` \| `global` \| `multimaster`  | 
+|  `EngineVersion`  |  No  |  The version number of the database engine to use\. Type: String Example: <pre>"EngineVersion": "5.7.mysql_aurora.2.03.4",</pre>  | 
+|  `HostedZoneId`  |  No  |  Specifies the identifier that Amazon Route 53 assigns when you create a hosted zone\. Type: String  | 
+|  `HttpEndpointEnabled`  |  No  |  Whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled\. Type: Boolean  | 
+|  `IamDatabaseAuthenticationEnabled`  |  No  |  Whether the mapping of IAM accounts to database accounts is enabled\. Type: Boolean  | 
+|  `KmsKeyId`  |  No  |  The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster\. Type: String  | 
+|  `MasterUsername`  |  No  |  The name of the master user for the DB cluster\. Type: String  | 
+|  `MultiAz`  |  No  |  Whether the DB cluster has instances in multiple Availability Zones\. Type: Boolean  | 
+|  `Port`  |  No  |  The port number on which the DB instances in the DB cluster accept connections\. Type: Number  | 
+|  `PreferredBackupWindow`  |  No  |  The range of time each day when automated backups are created, if automated backups are enabled\. Type: string Format: `HH:MM-HH:MM`  Example: <pre>"PreferredBackupWindow": "04:52-05:22"</pre>  | 
+|  `PreferredMaintenanceWindow`  |  No  |  The weekly time range during which system maintenance can occur, in Universal Coordinated Time \(UTC\)\. Type: String Format: `<day>:HH:MM-<day>:HH:MM` For the day values, use `mon`\|`tue`\|`wed`\|`thu`\|`fri`\|`sat`\|`sun` Example: <pre>"PreferredMaintenanceWindow": "sun:09:32-sun:10:02"</pre>  | 
+|  `ReaderEndpoint`  |  No  |  The reader endpoint for the DB cluster\. Type: String  | 
+|  `ReadReplicaIdentifiers`  |  No  |  The identifiers of the read replicas that are associated with this DB cluster\. Type: Array of strings  | 
+|  `Status`  |  No  |  The current status of this DB cluster\. Type: String  | 
+|  `StorageEncrypted`  |  No  |  Whether the DB cluster is encrypted\. Type: Boolean  | 
+|  [`VpcSecurityGroups`](#asff-resourcedetails-awsrdsdbcluster-vpcsecuritygroups)  |  No  |  A list of VPC security groups that the DB cluster belongs to\. Type: Array of objects  | 
+
+##### AssociatedRoles<a name="asff-resourcedetails-awsrdsdbcluster-associatedroles"></a>
+
+The `AssociatedRoles` object specifies the list of IAM roles that are associated with the Amazon RDS DB cluster\.
+
+Each role can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `RoleArn`  |  No  |  The ARN of an IAM role that is associated with the Amazon RDS DB cluster\. Type: String  | 
+|  `Status`  |  No  |  The status of the association between the IAM role and the DB cluster\. Type: String Valid values: `ACTIVE` \| `PENDING` \| `INVALID`  | 
+
+##### DbClusterMembers<a name="asff-resourcedetails-awsrdsdbcluster-dbclustermembers"></a>
+
+The `DbClusterMembers` object contains the list of instances in the cluster\.
+
+For each instance, the object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DbClusterParameterGroupStatus`  |  No  |  The status of the DB cluster parameter group for this member of the DB cluster\. Type: String  | 
+|  `DbInstanceIdentifier`  |  No  |  The instance identifier for this member of the DB cluster\. Type: String  | 
+|  `IsClusterWriter`  |  No  |  Whether the cluster member is the primary instance for the DB cluster\. Type: Boolean  | 
+|  `PromotionTier`  |  No  |  Specifies the order in which an Aurora replica is promoted to the primary instance when the existing primary instance fails\. Type: Number  | 
+
+##### DbClusterOptionGroupMemberships<a name="asff-resourcedetails-awsrdsdbcluster-dbclusteroptiongroupmemberships"></a>
+
+The `DbClusterOptionGroupMemberships` object contains a list of option group members for this DB cluster\.
+
+Each option group membership can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DbClusterOptionGroupName`  |  No  |  The name of the DB cluster option group\. Type: String  | 
+|  `Status`  |  No  |  The status of the DB cluster option group\. Type: String  | 
+
+##### DomainMemberships<a name="asff-resourcedetails-awsrdsdbcluster-domainmemberships"></a>
+
+The `DomainMemberships` object contains the list of Active Directory domain memberships for the DB cluster\.
+
+Each membership can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Domain`  |  No  |  The identifier of the Active Directory domain\. Type: String  | 
+|  `Fqdn`  |  No  |  The fully qualified domain name of the Active Directory domain\. Type: String  | 
+|  `IamRoleName`  |  No  |  The name of the IAM role to use when making API calls to the Directory Service\. Type: String  | 
+|  `Status`  |  No  |  The status of the Active Directory domain membership for the DB cluster\. Type: String  | 
+
+##### VpcSecurityGroups<a name="asff-resourcedetails-awsrdsdbcluster-vpcsecuritygroups"></a>
+
+The `VpcSecurityGroups` object contains the list of VPC security groups that the DB cluster belongs to\.
+
+Each security group can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Status`  |  No  |  The status of the VPC security group\. Type: string  | 
+|  `VpcSecurityGroupId`  |  No  |  The name of the VPC security group\. Type: string  | 
+
+#### AwsRdsDbClusterSnapshot<a name="asff-resourcedetails-awsrdsdbclustersnapshot"></a>
+
+The `AwsRdsDbClusterSnapshot` object contains information about an Amazon RDS DB cluster snapshot\.
+
+**Example**
+
+```
+"AwsRdsDbClusterSnaphot": {
+    "AvailabilityZones": [
+        "us-east-1a",
+        "us-east-1d",
+        "us-east-1e"
+    ],
+    "SnapshotCreateTime": "2020-06-22T17:40:12.322Z",
+    "Engine": "aurora",
+    "AllocatedStorage": 0,
+    "Status": "available",
+    "Port": 0,
+    "VpcId": "vpc-faf7e380",
+    "ClusterCreateTime": "2020-06-12T13:23:15.577Z",
+    "MasterUsername": "admin",
+    "EngineVersion": "5.6.10a",
+    "LicenseModel": "aurora",
+    "SnapshotType": "automated",
+    "PercentProgress": 100,
+    "StorageEncrypted": true,
+    "KmsKeyId": "arn:aws:kms:us-east-1:777788889999:key/key1",
+    "DbClusterIdentifier": "database-2",
+    "DbClusterSnapshotIdentifier": "rds:database-2-2020-06-23-03-52",
+    "IamDatabaseAuthenticationEnabled": false
+}
+```
+
+`AwsRdsDbClusterSnapshot` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AllocatedStorage`  |  No  |  Specifies the allocated storage size in gibibytes \(GiB\)\. Type: Number  | 
+|  `AvailabilityZones`  |  No  |  A list of Availability Zones where instances in the DB cluster can be created\. Type: Array of strings  | 
+|  `ClusterCreateTime`  |  No  |  Indicates when the DB cluster was created, in Universal Coordinated Time \(UTC\)\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"ClusterCreateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `DbClusterIdentifier`  |  No  |  The DB cluster identifier\. Type: String Format: Must be lowercase  | 
+|  `DbClusterSnapshotIdentifier`  |  No  |  The identifier of the DB cluster snapshot\. Type: String  | 
+|  `Engine`  |  No  |  The name of the database engine to be used for this DB cluster\. Type: String  | 
+|  `EngineVersion`  |  No  |  The version of the database engine to use\. Type: String  | 
+|  `IamDatabaseAuthenticationEnabled`  |  No  |  Whether mapping of IAM accounts to database accounts is enabled\. Type: Boolean  | 
+|  `KmsKeyId`  |  No  |  The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster\. Type: String  | 
+|  `LicenseModel`  |  No  |  The license model information for this DB cluster snapshot\. Type: String  | 
+|  `MasterUsername`  |  No  |  The name of the master user for the DB cluster\. Type: String  | 
+|  `PercentProgress`  |  No  |  Specifies the percentage of the estimated data that has been transferred\. Type: Number Example: <pre>"PercentProgress": 100</pre>  | 
+|  `Port`  |  No  |  The port number on which the DB instances in the DB cluster accept connections\. Type: Number  | 
+|  `SnapshotCreateTime`  |  No  |  Indicates when the snapshot was taken\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"SnapshotCreateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `SnapshotType`  |  No  |  The type of DB cluster snapshot\. Type: String  | 
+|  `Status`  |  No  |  The status of this DB cluster snapshot\. Type: String  | 
+|  `StorageEncrypted`  |  No  |  Whether the DB cluster is encrypted\. Type: Boolean  | 
+|  `VpcId`  |  No  |  The VPC ID that is associated with the DB cluster snapshot\. Type: String  | 
+
 #### AwsRdsDbInstance<a name="asff-resourcedetails-awsrdsdbinstance"></a>
 
 The `AwsRdsDbInstance` object provides details about an Amazon RDS DB instance\.
+
+**Example**
+
+```
+"AwsRdsDbInstance": {
+    "AllocatedStorage": 20,
+    "AssociatedRoles": [],
+    "AutoMinorVersionUpgrade": true,
+    "AvailabilityZone": "us-east-1d",
+    "BackupRetentionPeriod": 7,
+    "CaCertificateIdentifier": "certificate1",
+    "CharacterSetName": "",
+    "CopyTagsToSnapshot": true,
+    "DbClusterIdentifier": "",
+    "DbInstanceArn": "arn:aws:rds:us-east-1:111122223333:db:database-1",
+    "DbInstanceClass": "db.t2.micro",
+    "DbInstanceIdentifier": "database-1",
+    "DbInstancePort": 0,
+    "DbInstanceStatus": "available",
+    "DbiResourceId": "db-EXAMPLE123",
+    "DbName": "",
+    "DbParameterGroups": [
+        {
+            "DbParameterGroupName": "default.mysql5.7",
+            "ParameterApplyStatus": "in-sync"
+        }
+    ],
+    "DbSecurityGroups": [],                                                                                                                                                                                                 
+    "DbSubnetGroup": {
+        "DbSubnetGroupName": "my-group-123abc",
+        "DbSubnetGroupDescription": "My subnet group",
+        "VpcId": "vpc-example1",
+        "SubnetGroupStatus": "Complete",
+        "Subnets": [
+            {
+                "SubnetIdentifier": "subnet-123abc",
+                "SubnetAvailabilityZone": {
+                    "Name": "us-east-1d"
+                },
+                "SubnetStatus": "Active"
+            },
+            {
+                "SubnetIdentifier": "subnet-456def",
+                "SubnetAvailabilityZone": {
+                    "Name": "us-east-1c"
+                },
+                "SubnetStatus": "Active"
+            }
+      ],
+        "DbSubnetGroupArn": ""
+    },
+    "DeletionProtection": false,
+    "DomainMemberships": [],
+    "EnabledCloudWatchLogsExports": [],
+    "Endpoint": {
+        "address": "database-1.example.us-east-1.rds.amazonaws.com",
+        "port": 3306,
+        "hostedZoneId": "ZONEID1"
+    },
+    "Engine": "mysql",
+    "EngineVersion": "5.7.22",
+    "EnhancedMonitoringResourceArn": "arn:aws:logs:us-east-1:111122223333:log-group:Example:log-stream:db-EXAMPLE1",
+    "IamDatabaseAuthenticationEnabled": false,
+    "InstanceCreateTime": "2020-06-22T17:40:12.322Z",
+    "Iops": "",
+    "KmsKeyId": "",
+    "LatestRestorableTime": "2020-06-24T05:50:00.000Z",
+    "LicenseModel": "general-public-license",
+    "ListenerEndpoint": "",
+    "MasterUsername": "admin",
+    "MaxAllocatedStorage": 1000,
+    "MonitoringInterval": 60,
+    "MonitoringRoleArn": "arn:aws:iam::111122223333:role/rds-monitoring-role",
+    "MultiAz": false,
+    "OptionGroupMemberships": [
+        {
+            "OptionGroupName": "default:mysql-5-7",
+            "Status": "in-sync"
+        }
+    ],
+    "PreferredBackupWindow": "03:57-04:27",
+    "PreferredMaintenanceWindow": "thu:10:13-thu:10:43",
+    "PendingModifiedValues": {
+        "DbInstanceClass": "",
+        "AllocatedStorage": "",
+        "MasterUserPassword": "",
+        "Port": "",
+        "BackupRetentionPeriod": "",
+        "MultiAZ": "",
+        "EngineVersion": "",
+        "LicenseModel": "",
+        "Iops": "",
+        "DbInstanceIdentifier": "",
+        "StorageType": "",
+        "CaCertificateIdentifier": "",
+        "DbSubnetGroupName": "",
+        "PendingCloudWatchLogsExports": "",
+        "ProcessorFeatures": []
+    },
+    "PerformanceInsightsEnabled": false,
+    "PerformanceInsightsKmsKeyId": "",
+    "PerformanceInsightsRetentionPeriod": "",
+    "ProcessorFeatures": [],
+    "PromotionTier": "",
+    "PubliclyAccessible": false,
+    "ReadReplicaDBClusterIdentifiers": [],
+    "ReadReplicaDBInstanceIdentifiers": [],
+    "ReadReplicaSourceDBInstanceIdentifier": "",
+    "SecondaryAvailabilityZone": "",
+    "StatusInfos": [],
+    "StorageEncrypted": false,
+    "StorageType": "gp2",
+    "TdeCredentialArn": "",
+    "Timezone": "",
+    "VpcSecurityGroups": [
+        {
+            "VpcSecurityGroupId": "sg-example1",
+            "Status": "active"
+        }
+    ]
+}
+```
 
 It can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
+|  `AllocatedStorage`  |  No  |  The amount of storage \(in gigabytes\) to initially allocate for the DB instance\. Type: Number  | 
 |  [`AssociatedRoles`](#asff-resourcedetails-awsrdsdbinstance-associatedroles)  |  No  |  The IAM roles that are associated with the DB instance\. Type: Array of role objects  | 
+|  `AutoMinorVersionUpgrade`  |  No  |  Indicates whether minor version patches are applied automatically\. Type: Boolean  | 
+|  `AvailabilityZone`  |  No  |  The Availability Zone where the DB instance will be created\. Type: String  | 
+|  `BackupRetentionPeriod`  |  No  |  The number of days for which to retain automated backups\. Type: Number Minimum value: 0 Maximum value: 35  | 
 |  `CACertificateIdentifier`  |  No  |  The identifier of the CA certificate for this DB instance\. Type: String  | 
+|  `CharacterSetName`  |  No  |  The name of the character set that this DB instance is associated with\. Type: String  | 
+|  `CopyTagsToSnapshot`  |  No  |  Whether to copy resource tags to snapshots of the DB instance\. Type: Boolean  | 
 |  `DBClusterIdentifier`  |  No  |  If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of\. Type: String  | 
 |  `DBInstanceClass`  |  No  |  Contains the name of the compute and memory capacity class of the DB instance\. Type: String  | 
 |  `DBInstanceIdentifier`  |  No  |  Contains a user\-supplied database identifier\. This identifier is the unique key that identifies a DB instance\. Type: String  | 
 |  `DbInstancePort`  |  No  |  Specifies the port that the DB instance listens on\. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port\. Type: Integer  | 
+|  `DbInstanceStatus`  |  No  |  The current status of the DB instance\. Type: String  | 
 |  `DbiResourceId`  |  No  |  The AWS Region\-unique, immutable identifier for the DB instance\. This identifier is found in CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed\. Type: String  | 
-|  `DBName`  |  No  |  The meaning of this parameter differs according to the database engine you use\. **MySQL, MariaDB, SQL Server, PostgreSQL** Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created\. This same name is returned for the life of the DB instance\. Type: String **Oracle** Contains the Oracle System ID \(SID\) of the created DB instance\. Not shown when the returned parameters do not apply to an Oracle DB instance\. Type: String  | 
+|  `DBName`  |  No  |  The meaning of this parameter differs according to the database that engine you use\. **MySQL, MariaDB, SQL Server, PostgreSQL** Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created\. This same name is returned for the life of the DB instance\. Type: String **Oracle** Contains the Oracle System ID \(SID\) of the created DB instance\. Not shown when the returned parameters do not apply to an Oracle DB instance\. Type: String  | 
+|  [`DbParameterGroups`](#asff-resourcedetails-awsrdsdbinstance-dbparametergroups)  |  No  |  A list of the DB parameter groups to assign to the DB instance\. Type: Array of objects  | 
+|  `DbSecurityGroups`  |  No  |  A list of the DB security groups to assign to the DB instance\. Type: Array of strings  | 
+|  [`DbSubnetGroup`](#asff-resourcedetails-awsrdsdbinstance-dbsubnetgroup)  |  No  |  Information about the subnet group that is associated with the DB instance\. Type: Object  | 
 |  `DeletionProtection`  |  No  |  Indicates whether the DB instance has deletion protection enabled\. The database can't be deleted when deletion protection is enabled\. Type: Boolean  | 
+|  [`DomainMemberships`](#asff-resourcedetails-awsrdsdbinstance-domainmemberships)  |  No  |  The Active Directory domain membership records associated with the DB instance\. Type: Array of objects  | 
+|  `EnabledCloudwatchLogsExports`  |  No  |  A list of log types that this DB instance is configured to export to CloudWatch Logs\. Type: Array of strings  | 
 |  [`Endpoint`](#asff-resourcedetails-awsrdsdbinstance-endpoint)  |  No  |  Specifies the connection endpoint\. Type: Object  | 
 |  `Engine`  |  No  |  Provides the name of the database engine to be used for this DB instance\. Type: String  | 
 |  `EngineVersion`  |  No  |  Indicates the database engine version\. Type: String  | 
-|  `IAMDatabaseAuthenticationEnabled`  |  No  |  True if mapping of IAM accounts to database accounts is enabled, and otherwise false\. IAM database authentication can be enabled for the following database engines\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: Boolean  | 
+|  `EnhancedMonitoringResourceArn`  |  No  |  The ARN of the CloudWatch Logs log stream that receives the enhanced monitoring metrics data for the DB instance\. Type: String  | 
+|  `IamDatabaseAuthenticationEnabled`  |  No  |  True if mapping of IAM accounts to database accounts is enabled, and otherwise false\. IAM database authentication can be enabled for the following database engines: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: Boolean  | 
 |  `InstanceCreateTime`  |  No  |  Indicates when the DB instance was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
+|  `Iops`  |  No  |  Specifies the provisioned IOPS \(I/O operations per second\) for this DB instance\. Type: Number  | 
 |  `KmsKeyId`  |  No  |  If `StorageEncrypted` is true, the AWS KMS key identifier for the encrypted DB instance\. Type: String  | 
-|  `PubliclyAccessible`  |  No  |  Specifies the accessibility options for the DB instance\. A value of true specifies an Internet\-facing instance with a publicly resolvable DNS name, which resolves to a public IP address\. A value of false specifies an internal instance with a DNS name that resolves to a private IP address\. Type: Boolean  | 
+|  `LatestRestorableTime`  |  No  |  Specifies the latest time to which a database can be restored with point\-in\-time restore\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"LatestRestorableTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `LicenseModel`  |  No  |  License model information for this DB instance\. Type: String  | 
+|  [`ListenerEndpoint`](#asff-resourcedetails-awsrdsdbinstance-listenerendpoint)  |  No  |  Information about the listener connection endpoint for SQL Server Always On\. Type: Object  | 
+|  `MasterUsername`  |  No  |  The master user name of the DB instance\. Type: String  | 
+|  `MaxAllocatedStorage`  |  No  |  The upper limit to which Amazon RDS can automatically scale the storage of the DB instance\. Type: Number  | 
+|  `MonitoringInterval`  |  No  |  The interval, in seconds, between points when enhanced monitoring metrics are collected for the DB instance\. Type: Number  | 
+|  `MonitoringRoleArn`  |  No  |  The ARN for the IAM role that permits Amazon RDS to send enhanced monitoring metrics to CloudWatch Logs\. Type: String  | 
+|  `MultiAz`  |  No  |  Whether the DB instance is a multiple Availability Zone deployment\. Type: Boolean  | 
+|  [`OptionGroupMemberships`](#asff-resourcedetails-awsrdsdbinstance-optiongroupmemberships)  |  No  |  The list of option group memberships for this DB instance\. Type: Array of objects  | 
+|  [`PendingModifiedValues`](#asff-resourcedetails-awsrdsdbinstance-pendingmodifiedvalues)  |  No  |  Changes to the DB instance that are currently pending\. Type: Object  | 
+|  `PerformanceInsightsEnabled`  |  No  |  Indicates whether Performance Insights is enabled for the DB instance\. Type: Boolean  | 
+|  `PerformanceInsightsKmsKeyId`  |  No  |  The identifier of the AWS KMS key used to encrypt the Performance Insights data\. Type: String  | 
+|  `PerformanceInsightsRetentionPeriod`  |  No  |  The number of days to retain Performance Insights data\. Type: Number  | 
+|  `PreferredBackupWindow`  |  No  |  The range of time each day when automated backups are created, if automated backups are enabled\. Type: string Format: `HH:MM-HH:MM`  Example: <pre>"PreferredBackupWindow": "04:52-05:22"</pre>  | 
+|  `PreferredMaintenanceWindow`  |  No  |  The weekly time range during which system maintenance can occur, in Universal Coordinated Time \(UTC\)\. Type: String Format: `<day>:HH:MM-<day>:HH:MM` For the day values, use `mon`\|`tue`\|`wed`\|`thu`\|`fri`\|`sat`\|`sun` Example: <pre>"PreferredMaintenanceWindow": "sun:09:32-sun:10:02"</pre>  | 
+|  [`ProcessorFeatures`](#asff-resourcedetails-awsrdsdbinstance-processorfeatures)  |  No  |  The number of CPU cores and the number of threads per core for the DB instance class of the DB instance\. Type: Array of objects  | 
+|  `PromotionTier`  |  No  |  The order in which to promote an Aurora replica to the primary instance after a failure of the existing primary instance\. Type: Number  | 
+|  `PubliclyAccessible`  |  No  |  Specifies the accessibility options for the DB instance\. A value of true specifies an internet\-facing instance with a publicly resolvable DNS name, which resolves to a public IP address\. A value of false specifies an internal instance with a DNS name that resolves to a private IP address\. Type: Boolean  | 
+|  `ReadReplicaDBClusterIdentifiers`  |  No  |  List of identifiers of Aurora DB clusters to which the RDS DB instance is replicated as a read replica\. Type: Array of strings  | 
+|  `ReadReplicaDBInstanceIdentifiers`  |  No  |  List of identifiers of the read replicas associated with this DB instance\. Type: Array of strings  | 
+|  `ReadReplicaSourceDBInstanceIdentifier`  |  No  |  If this DB instance is a read replica, contains the identifier of the source DB instance\. Type: String  | 
+|  `SecondaryAvailabilityZone`  |  No  |  For a DB instance with multi\-Availability Zone support, the name of the secondary Availability Zone\. Type: String   | 
+|  `StatusInfos` No  |  |  The status of a read replica\. If the instance isn't a read replica, this is empty\. Type: Array of objects  | 
 |  `StorageEncrypted`  |  No  |  Specifies whether the DB instance is encrypted\. Type: Boolean  | 
+|  `StorageType`  |  No  |  The storage type for the DB instance\. Type: String  | 
 |  `TdeCredentialArn`  |  No  |  The ARN from the key store with which the instance is associated for TDE encryption\. Type: String  | 
+|  `Timezone`  |  No  |  The time zone of the DB instance\. Type: String  | 
 |  [`VpcSecurityGroups`](#asff-resourcedetails-awsrdsdbinstance-vpcsecuritygroups)  |  No  |  List of VPC security groups that the DB instance belongs to\. Type: Array of objects  | 
 
 ##### AssociatedRoles<a name="asff-resourcedetails-awsrdsdbinstance-associatedroles"></a>
@@ -1944,6 +3268,60 @@ Each role object in the `AssociatedRoles` array can have the following attribute
 |  `RoleArn`  |  No  |  The ARN of the IAM role that is associated with the DB instance\. Type: String  | 
 |  `Status`  |  No  |  Describes the state of association between the IAM role and the DB instance\. Type: String Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)  | 
 
+##### DbParameterGroups<a name="asff-resourcedetails-awsrdsdbinstance-dbparametergroups"></a>
+
+The `DbParameterGroups` object contains the list of parameter groups to assign to the database instance\.
+
+Each parameter group can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DbParameterGroupName`  |  No  |  The name of the parameter group\. Type: String  | 
+|  `ParameterApplyStatus`  |  No  |  The status of parameter updates\. Type: String   | 
+
+##### DbSubnetGroup<a name="asff-resourcedetails-awsrdsdbinstance-dbsubnetgroup"></a>
+
+The `DbSubnetGroup` object contains information about the subnet group for the database instance\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DbSubnetGroupArn`  |  No  |  The ARN of the subnet group\. Type: String  | 
+|  `DbSubnetGroupDescription`  |  No  |  The description of the subnet group\. Type: String  | 
+|  `DbSubnetGroupName`  |  No  |  The name of the subnet group\. Type: String  | 
+|  `SubnetGroupStatus`  |  No  |  The status of the subnet group\. Type: String  | 
+|  `Subnets`  |  No  |  A list of subnets in the subnet group\. Type: Array of objects\.  | 
+|  `VpcId`  |  No  |  The VPC ID of the subnet group\. Type: String  | 
+
+The `Subnets` object contains the list of subnets in the subnet group\.
+
+Each subnet can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `SubnetAvailabilityZone`  |  No  |  Information about the Availability Zone for a subnet in the subnet group\. Type: Object  | 
+|  `SubnetAvailabilityZone.Name`  |  No  |  The name of the Availability Zone for a subnet in the subnet group\. Type: String  | 
+|  `SubnetIdentifier`  |  No  |  The identifier of a subnet in the subnet group\. Type: String\.  | 
+|  `SubnetStatus`  |  No  |  The status of a subnet in the subnet group\. Type: String  | 
+
+##### DomainMemberships<a name="asff-resourcedetails-awsrdsdbinstance-domainmemberships"></a>
+
+The `DomainMemberships` object contains the Active Directory domain membership records associated with the DB instance\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Domain`  |  No  |  The identifier of the Active Directory domain\. Type: String  | 
+|  `Fqdn`  |  No  |  The fully qualified domain name of the Active Directory domain\. Type: String  | 
+|  `IamRoleName`  |  No  |  The name of the IAM role to use when making API calls to the Directory Service\. Type: String  | 
+|  `Status`  |  No  |  The status of the Active Directory Domain membership for the DB instance\. Type: String  | 
+
 ##### Endpoint<a name="asff-resourcedetails-awsrdsdbinstance-endpoint"></a>
 
 The `Endpoint` object provides details about the connection endpoint for the DB instance\.
@@ -1957,6 +3335,92 @@ It can have the following attributes\.
 |  `HostedZoneId`  |  No  |  Specifies the ID that Amazon Route 53 assigns when you create a hosted zone\. Type: String  | 
 |  `Port`  |  No  |  Specifies the port that the database engine is listening on\. Type: Integer  | 
 
+##### ListenerEndpoint<a name="asff-resourcedetails-awsrdsdbinstance-listenerendpoint"></a>
+
+The `ListenerEndpoint` object contains information about the listener connection endpoint for SQL Server Always On\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Address`  |  No  |  Specifies the DNS address of the DB instance\. Type: String  | 
+|  `HostedZoneId`  |  No  |  The ID that Amazon Route 53 assigns when you create a hosted zone\. Type: String  | 
+|  `Port`  |  No  |  The port that the database engine is listening on\. Type: Number  | 
+
+##### OptionGroupMemberships<a name="asff-resourcedetails-awsrdsdbinstance-optiongroupmemberships"></a>
+
+The `OptionGroupMemberships` object contains the list of option group memberships for the DB instance\.
+
+Each option group membership can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `OptionGroupName`  |  No  |  The name of the option group\. Type: String  | 
+|  `Status`  |  No  |  The status of the DB instance membership in the option group\. Type: String  | 
+
+##### PendingModifiedValues<a name="asff-resourcedetails-awsrdsdbinstance-pendingmodifiedvalues"></a>
+
+The `PendingModifiedValues` object lists changes to the DB instance that are currently pending\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AllocatedStorage`  |  No  |  The new value of the allocated storage for the DB instance\. Type: Number  | 
+|  `BackupRetentionPeriod`  |  No  |  The new backup retention period for the DB instance\. Type: Number  | 
+|  `CaCertificateIdentifier`  |  No  |  The new CA certificate identifier for the DB instance\. Type: String  | 
+|  `DbInstanceClass`  |  No  |  The new DB instance class for the DB instance\. Type: String  | 
+|  `DbInstanceIdentifier`  |  No  |  The new DB instance identifier for the DB instance\. Type: String  | 
+|  `DbSubnetGroupName`  |  No  |  The name of the new subnet group for the DB instance\. Type: String  | 
+|  `EngineVersion`  |  No  |  The new engine version for the DB instance\. Type: String  | 
+|  `Iops`  |  No  |  The new provisioned IOPS value for the DB instance\. Type: Number  | 
+|  `LicenseModel`  |  No  |  The new license model value for the DB instance\. Type: String  | 
+|  `MasterUserPassword`  |  No  |  The new master user password for the DB instance\. Type: String  | 
+|  `MultiAZ`  |  No  |  Indicates that a single Availability Zone DB instance is changing to a multiple Availability Zone deployment\. Type: Boolean  | 
+|  `PendingCloudWatchLogsExports`  |  No  |  A list of log types that are being enabled or disabled\. Type: Object  | 
+|  `Port`  |  No  |  The new port for the DB instance\. Type: Number  | 
+|  [`ProcessorFeatures`](#asff-resourcedetails-awsrdsdbinstance-processorfeatures)  |  No  |  Processor features that are being updated\. Type: Array of objects  | 
+|  `StorageType`  |  No  |  The new storage type for the DB instance\. Type: String  | 
+
+The `PendingCloudWatchLogsExport` object identifies the log types to enable and disable\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `LogTypesToDisable`  |  No  |  A list of log types that are being disabled\. Type: Array of strings  | 
+|  `LogTypesToEnable`  |  No  |  A list of log types that are being enabled\. Type: Array of strings  | 
+
+##### ProcessorFeatures<a name="asff-resourcedetails-awsrdsdbinstance-processorfeatures"></a>
+
+The `ProcessorFeatures` object contains a list of processor features\. In the context of `PendingModifiedValues`, it identifies the features to be updated\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Name`  |  No  |  The name of the processor feature\. Type: String  | 
+|  `Value`  |  No  |  The value of the processor feature\. Type: String  | 
+
+##### StatusInfos<a name="asff-resourcedetails-awsrdsdbinstance-statusinfos"></a>
+
+The `StatusInfos` object contains information about the status of a read replica\. If the instance isn't a read replica, the object is empty\.
+
+It can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Message`  |  No  |  If the read replica is currently in an error state, provides the error details\. Type: String  | 
+|  `Normal`  |  No  |  Whether the read replica instance is operating normally\. Type: Boolean  | 
+|  `Status`  |  No  |  The status of the read replica instance\. Type: String  | 
+|  `StatusType`  |  No  |  The type of status\. For a read replica, the status type is read replication\. Type: String  | 
+
 ##### VpcSecurityGroups<a name="asff-resourcedetails-awsrdsdbinstance-vpcsecuritygroups"></a>
 
 The `VpcSecurityGroups` array provides the list of VPC security groups that the DB instance belongs to\.
@@ -1969,13 +3433,84 @@ Each object in the `VpcSecurityGroups` array can have the following attributes\.
 |  `VpcSecurityGroupId`  |  No  |  The name of the VPC security group\. Type: String  | 
 |  `Status`  |  No  |  The status of the VPC security group\. Type: String  | 
 
+#### AwsRdsDbSnapshot<a name="asff-resourcedetails-awsrdsdbsnapshot"></a>
+
+The `AwsRdsDbSnapshot` object contains details about an Amazon RDS DB cluster snapshot\.
+
+**Example**
+
+```
+"AwsRdsDbSnapshot": {
+    "DbSnapshotIdentifier": "rds:database-1-2020-06-22-17-41",
+    "DbInstanceIdentifier": "database-1",
+    "SnapshotCreateTime": "2020-06-22T17:41:29.967Z",
+    "Engine": "mysql",
+    "AllocatedStorage": 20,
+    "Status": "available",
+    "Port": 3306,
+    "AvailabilityZone": "us-east-1d",
+    "VpcId": "vpc-example1",
+    "InstanceCreateTime": "2020-06-22T17:40:12.322Z",
+    "MasterUsername": "admin",
+    "EngineVersion": "5.7.22",
+    "LicenseModel": "general-public-license",
+    "SnapshotType": "automated",
+    "Iops": null,
+    "OptionGroupName": "default:mysql-5-7",
+    "PercentProgress": 100,
+    "SourceRegion": null,
+    "SourceDbSnapshotIdentifier": "",
+    "StorageType": "gp2",
+    "TdeCredentialArn": "",
+    "Encrypted": false,
+    "KmsKeyId": "",
+    "Timezone": "",
+    "IamDatabaseAuthenticationEnabled": false,
+    "ProcessorFeatures": [],
+    "DbiResourceId": "db-resourceexample1"
+}
+```
+
+`AwsRdsDbSnapshot` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AllocatedStorage`  |  No  |  The amount of storage \(in gigabytes\) to be initially allocated for the database instance\. Type: Number  | 
+|  `AvailabilityZone`  |  No  |  Specifies the name of the Availability Zone in which the DB instance was located at the time of the DB snapshot\. Type: String  | 
+|  `DbInstanceIdentifier`  |  No  |  A name for the DB instance\. Type: String  | 
+|  `DbiResourceId`  |  No  |  The identifier for the source DB instance\. Type: String  | 
+|  `DbSnapshotIdentifier`  |  No  |  The name or ARN of the DB snapshot that is used to restore the DB instance\. Type: String  | 
+|  `Encrypted`  |  No  |  Whether the DB snapshot is encrypted\. Type: Boolean  | 
+|  `Engine`  |  No  |  The name of the database engine that you want to use for this DB instance\. Type: String Valid values: `aurora` \| `aurora-mysql` \| `aurora-postgresql` \| `mariadb` \| `mysql` \| `oracle-ee` \| `oracle-se2` \| `oracle-se1` \| `oracle-se` \| c`` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \| `sqlserver-web`  | 
+|  `EngineVersion`  |  No  |  The version of the database engine\. Type: String  | 
+|  `IamDatabaseAuthenticationEnabled`  |  No  |  Whether mapping of IAM accounts to database accounts is enabled\. Type: Boolean  | 
+|  `InstanceCreateTime`  |  No  |  Specifies the time in Coordinated Universal Time \(UTC\) when the DB instance, from which the snapshot was taken, was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"InstanceCreateTime": "2020-06-22T17:40:12.322Z"</pre>  | 
+|  `Iops`  |  No  |  The provisioned IOPS \(I/O operations per second\) value of the DB instance at the time of the snapshot\. Type: Number  | 
+|  `KmsKeyId`  |  No  |  If `Encrypted` is `true`, the AWS KMS key identifier for the encrypted DB snapshot\. Type: String  | 
+|  `LicenseModel`  |  No  |  License model information for the restored DB instance\. Type: String Example: <pre>"LicenseModel": "general-public-license"</pre>  | 
+|  `MasterUsername`  |  No  |  The master user name for the DB snapshot\. Type: String Example:  | 
+|  `OptionGroupName`  |  No  |  The option group name for the DB snapshot\. Type: String  | 
+|  `PercentProgress`  |  No  |  The percentage of the estimated data that has been transferred\. Type: Number Example: <pre>"PercentProgress": 100</pre>  | 
+|  `Port`  |  No  |  The port that the database engine was listening on at the time of the snapshot\. Type: Number  | 
+|  ProcessorFeatures  |  No  |  The number of CPU cores and the number of threads per core for the DB instance class of the DB instance\. Type: Array of objects Example: <pre>"ProcessorFeatures": [<br />    {<br />        "Name": "coreCount",<br />        "Value": "3"<br />    }<br />]<br /></pre>  | 
+|  `ProcessorFeatures.Name`  |  No  |  The name of the processor feature\. Type: String Valid values: `coreCount` \| `threadsPerCore`  | 
+|  `ProcessorFeatures.Value`  |  No  |  The value of the specified processor feature\. Type: String  | 
+|  `SnapshotCreateTime`  |  No  |  When the snapshot was taken in Coordinated Universal Time \(UTC\)\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"SnapshotCreateTime": "2020-06-22T17:41:29.967Z"</pre>  | 
+|  `SnapshotType`  |  No  |  The type of the DB snapshot\. Type: String  | 
+|  `SourceDbSnapshotIdentifier`  |  No  |  The DB snapshot ARN that the DB snapshot was copied from\. Type: String  | 
+|  `SourceRegion`  |  No  |  The AWS Region that the DB snapshot was created in or copied from\. Type: String  | 
+|  `Status`  |  No  |  The status of this DB snapshot\. Type: String  | 
+|  `StorageType`  |  No  |  The storage type associated with DB snapshot\. Type: String Valid values: `standard` \| `gp2` \| `io1`  | 
+|  `TdeCredentialArn`  |  No  |  The ARN from the key store with which to associate the instance for TDE encryption\. Type: String  | 
+|  `Timezone`  |  No  |  The time zone of the DB snapshot\. Type: String  | 
+|  VpcId  |  No  |  The VPC ID associated with the DB snapshot\. Type: String  | 
+
 #### AwsS3Bucket<a name="asff-resourcedetails-awss3bucket"></a>
 
-The details of an Amazon S3 bucket\.
+The `AwsS3Bucket` object provides details about an Amazon S3 bucket\.
 
-Type: Object
-
-The `AwsS3Bucket` object can have the following attributes\.
+`AwsS3Bucket` can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
@@ -1999,7 +3534,7 @@ Specifies the default server\-side encryption to apply to new objects in the buc
 
 #### AwsS3Object<a name="asff-resourcedetails-awss3object"></a>
 
-Details about an Amazon S3 object\.
+The `AwsS3Object` object provides information about an Amazon S3 object\.
 
 **Example**
 
@@ -2026,25 +3561,61 @@ Details about an Amazon S3 object\.
 |  `SSEKMSKeyId`  |  No  |  The identifier of the AWS Key Management Service\) symmetric customer managed customer master key \(CMK\) that was used for the object\. Type: String  | 
 |  `VersionId`  |  No  |  The version of the object\. Type: String  | 
 
+#### AwsSecretsManagerSecret<a name="asff-resourcedetails-awssecretsmanagersecret"></a>
+
+The `AwsSecretsManagerSecret` object provides details about a Secrets Manager secret\.
+
+**Example**
+
+```
+"AwsSecretsManagerSecret": {
+    "RotationRules": {
+        "AutomaticallyAfterDays": 30
+    },
+    "RotationOccurredWithinFrequency": true,
+    "KmsKeyId": "kmsKeyId",
+    "RotationEnabled": true,
+    "RotationLambdaArn": "arn:aws:lambda:us-west-2:777788889999:function:MyTestRotationLambda",
+    "Deleted": false,
+    "Name": "MyTestDatabaseSecret",
+    "Description": "My test database secret"
+}
+```
+
+`AwsSecretsManagerSecret` can have the following attributes\.
+
+
+|  Attribute Required Description  |  |  | 
+| --- | --- | --- | 
+|  `Deleted`  |  No  |  Whether the secret is deleted\. Type: Boolean  | 
+|  `Description`  |  No  |  The user\-provided description of the secret\. Type: String Maximum length: 2,048  | 
+|  `KmsKeyId`  |  No  |  The ARN, Key ID, or alias of the AWS KMS customer master key \(CMK\) used to encrypt the `SecretString` or `SecretBinary` values for versions of this secret\. Type: String  | 
+|  `Name`  |  No  |  The name of the secret\. Type: String Minimum length: 1 Maximum length: 256  | 
+|  `RotationEnabled`  |  No  |  Whether rotation is enabled\. Type: Boolean  | 
+|  `RotationLambdaArn`  |  No  |  The ARN of the Lambda function that rotates the secret\. Type: String  | 
+|  `RotationOccurredWithinFrequency`  |  No  |  Whether the rotation occurred within the specified rotation frequency\. Type: Boolean  | 
+|  `RotationRules`  |  No  |  Defines the rotation schedule for the secret\. Type: Object  | 
+|  `RotationRules.AutomaticallyAfterDays`  |  No  |  The number of days after the previous rotation to rotate the secret\. Type: Integer Minimum value: 1 Maximum value: 1000  | 
+
 #### AwsSnsTopic<a name="asff-resourcedetails-awssnstopic"></a>
 
-A wrapper type for the topic's Amazon Resource Name \(ARN\)\.
+The `AwsSnsTopic` object contains details about an Amazon SNS topic\.
 
-Type: Object
-
-The `AwsSnsTopic` object can have the following attributes\.
+`AwsSnsTopic` can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
 |  `KmsMasterKeyId`  |  No  | The ID of an AWS managed customer master key \(CMK\) for Amazon SNS or a custom CMK\.Type: String | 
-|  `Subscription`  |  No  | Subscription is an embedded property that describes the subscription endpoints of an Amazon SNS topic\.Type: Array of objects | 
+|  `Subscription`  |  No  | List of subscription endpoints of an Amazon SNS topic\.Type: Array of objects | 
 |  `TopicName`  |  No  | The name of the topic\.Type: String | 
 |  `Owner`  |  No  | The subscription's owner\.Type: String | 
 
 ##### Subscription<a name="asff-resourcedetails-awssnstopic-subscription"></a>
 
-The `Subscription` object in an `AwsSnsTopic` object can have the following attributes\.
+The `Subscription` object in an `AwsSnsTopic` object describes the subscription endpoints of an Amazon SNS topic\.
+
+For each subscription endpoint, `Subscription` can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
@@ -2054,11 +3625,9 @@ The `Subscription` object in an `AwsSnsTopic` object can have the following attr
 
 #### AwsSqsQueue<a name="asff-resourcedetails-awssqsqueue"></a>
 
-Data about an Amazon SQS queue\.
+The `AwsSqsQueue` object contains information about an Amazon SQS queue\.
 
-Type: Object
-
-The `AwsSqsQueue` object can have the following attributes\.
+`AwsSqsQueue` can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
@@ -2070,7 +3639,7 @@ The `AwsSqsQueue` object can have the following attributes\.
 
 #### AwsWafWebAcl<a name="asff-resourcedetails-awswafwebacl"></a>
 
-The `AwsWafWebAcl` object provides details about an AWS WAF WebACL\.
+The `AwsWafWebAcl` object provides details about an AWS WAF web ACL\.
 
 **Example**
 
@@ -2105,14 +3674,14 @@ An `AwsWafWebAcl` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `DefaultAction`  |  Yes  |  The action to perform if none of the rules contained in the WebACL match\. The action is specified by the `WafAction` object\. Type: `WafAction` object  | 
-|  `Name`  |  No  |  A friendly name or description of the WebACL\. You can't change the name of a WebACL after you create it\. Type: String Length constraints: Minimum length of 1\. Maximum length of 128\.  | 
-|  [`Rules`](#asff-resourcedetails-awswafwebacl-rule)  |  Yes  |  A list of rules for the WebACL\. Type: Array of objects  | 
-|  `WebAclId`  |  Yes  |  A unique identifier for a WebACL\. Type: String Length constraints: Minimum length of 1\. Maximum length of 128\.  | 
+|  `DefaultAction`  |  Yes  |  The action to perform if none of the rules contained in the web ACL match\. The action is specified by the `WafAction` object\. Type: `WafAction` object  | 
+|  `Name`  |  No  |  A friendly name or description of the web ACL\. You can't change the name of a web ACL after you create it\. Type: String Length constraints: Minimum length of 1\. Maximum length of 128\.  | 
+|  [`Rules`](#asff-resourcedetails-awswafwebacl-rule)  |  Yes  |  A list of rules for the web ACL\. Type: Array of objects  | 
+|  `WebAclId`  |  Yes  |  A unique identifier for a web ACL\. Type: String Length constraints: Minimum length of 1\. Maximum length of 128\.  | 
 
 ##### Rule object<a name="asff-resourcedetails-awswafwebacl-rule"></a>
 
-The `Rules` array provides the list of rules for the WebACL\.
+The `Rules` array provides the list of rules for the web ACL\.
 
 Each rule object in the array can have the following attributes\.
 
@@ -2121,8 +3690,8 @@ Each rule object in the array can have the following attributes\.
 | --- | --- | --- | 
 |  `Action`  |  No  |  Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule\. Type: Object  | 
 |  `ExcludedRules`  |  No  |  An array of rules to exclude from a rule group\. This is applicable only when the `ActivatedRule` refers to a rule group\. Type: Array of objects  | 
-|  `OverrideAction`  |  No  |  Use the `OverrideAction` to test your RuleGroup\. Any rule in a rule group can potentially block a request\. If you set the `OverrideAction` to `None`, the rule group blocks a request if any individual rule in the rule group matches the request and is configured to block that request\. However, if you first want to test the rule group, set the `OverrideAction` to `Count`\. The rule group then overrides any block action specified by individual rules contained within the group\. Instead of blocking matching requests, those requests are counted\. `ActivatedRule\|OverrideAction` applies only when updating or adding a rule group to a WebACL\. In this case, you do not use `ActivatedRule\|Action`\. For all other update requests, `ActivatedRule\|Action` is used instead of `ActivatedRule\|OverrideAction`\. Type: Object  | 
-|  `Priority`  |  Yes  |  Specifies the order in which to evaluate the rules in a WebACL\. Rules with a lower value for `Priority` are evaluated before rules with a higher value\. The value must be a unique integer\. If you add multiple rules to a WebACL, the values don't need to be consecutive\. Type: Integer  | 
+|  `OverrideAction`  |  No  |  Use the `OverrideAction` to test your RuleGroup\. Any rule in a rule group can potentially block a request\. If you set the `OverrideAction` to `None`, the rule group blocks a request if any individual rule in the rule group matches the request and is configured to block that request\. However, if you first want to test the rule group, set the `OverrideAction` to `Count`\. The rule group then overrides any block action specified by individual rules contained within the group\. Instead of blocking matching requests, those requests are counted\. `ActivatedRule\|OverrideAction` applies only when updating or adding a rule group to a web ACL\. In this case, you do not use `ActivatedRule\|Action`\. For all other update requests, `ActivatedRule\|Action` is used instead of `ActivatedRule\|OverrideAction`\. Type: Object  | 
+|  `Priority`  |  Yes  |  Specifies the order in which to evaluate the rules in a web ACL\. Rules with a lower value for `Priority` are evaluated before rules with a higher value\. The value must be a unique integer\. If you add multiple rules to a web ACL, the values don't need to be consecutive\. Type: Integer  | 
 |  `RuleId`  |  Yes  |  The identifier for a rule\. Type: String Length constraints: Minimum length of 1\. Maximum length of 128\.  | 
 |  `Type`  |  No  |  The rule type, either `REGULAR`,` RATE_BASED`, or `GROUP`\. The default is `REGULAR`\. Type: String Valid values: `REGULAR` \| `RATE_BASED` \| `GROUP`  | 
 
@@ -2268,7 +3837,7 @@ Threat intelligence details that are related to a finding\.
 
 Type: Array of up to five threat intelligence indicator objects
 
-Example:
+**Example**
 
 ```
 "ThreatIntelIndicators": [

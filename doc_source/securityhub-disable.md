@@ -9,7 +9,6 @@ The following also occurs\.
 
   If you want to save your existing findings, you must export them before you disable Security Hub\. For more information, see [Effect of account actions on Security Hub data](securityhub-data-retention.md)\.
 + Any enabled standards are disabled\.
-+ Your master and member account relationships are removed\.
 
 ## Disabling Security Hub \(console\)<a name="securityhub-disable-console"></a>
 

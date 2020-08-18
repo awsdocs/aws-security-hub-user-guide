@@ -82,7 +82,7 @@ Amazon's trademarks and trade dress may not be used in
       + [AWS Foundational Security Best Practices controls](securityhub-standards-fsbp-controls.md)
       + [AWS Foundational Best Practices controls that you might want to disable](securityhub-standards-fsbp-to-disable.md)
 + [Logging AWS Security Hub API calls with AWS CloudTrail](securityhub-ct.md)
-+ [Automating AWS Security Hub with CloudWatch Events](securityhub-cloudwatch-events.md)
++ [Automated response and remediation](securityhub-cloudwatch-events.md)
    + [Types of Security Hub integration with CloudWatch Events](securityhub-cwe-integration-types.md)
    + [CloudWatch Events formats for Security Hub](securityhub-cwe-event-formats.md)
    + [Configuring a CloudWatch Events rule for automatically sent findings](securityhub-cwe-all-findings.md)
