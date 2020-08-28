@@ -16,5 +16,6 @@ Finding providers can update findings to reflect additional instances of the fin
 
 **Topics**
 + [Creating and updating findings in AWS Security Hub](securityhub-findings-update-types.md)
-+ [Viewing and taking action on findings](securityhub-managing-findings.md)
++ [Viewing findings in AWS Security Hub](securityhub-findings-viewing.md)
++ [Taking action on findings in AWS Security Hub](securityhub-findings-taking-action.md)
 + [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)

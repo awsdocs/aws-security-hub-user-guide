@@ -52,7 +52,7 @@ A set of automated criteria that is used to assess whether a control is being ad
 A specific point\-in\-time evaluation of a rule against a single resource resulting in a passed, failed, warning, or not available state\. Running a security check produces a finding\.
 
 **Security standard**  
-A published statement on a topic specifying the characteristics, usually measurable and in the form of controls, that must be satisfied or achieved for compliance\. Security standards can be based on regulatory frameworks, best practices, or internal company policies\. To learn more about security standards in Security Hub, see [Security standards in AWS Security Hub](securityhub-standards.md)\.
+A published statement on a topic specifying the characteristics, usually measurable and in the form of controls, that must be satisfied or achieved for compliance\. Security standards can be based on regulatory frameworks, best practices, or internal company policies\. To learn more about security standards in Security Hub, see [Security standards and controls in AWS Security Hub](securityhub-standards.md)\.
 
 **Workflow status**  
 The status of an investigation into a finding\. Tracked using the `Workflow.Status` attribute\.  

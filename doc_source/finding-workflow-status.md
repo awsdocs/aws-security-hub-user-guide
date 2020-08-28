@@ -1,8 +1,8 @@
-# Setting the workflow status for a finding<a name="finding-workflow-status"></a>
+# Setting the workflow status for findings<a name="finding-workflow-status"></a>
 
 For findings, the workflow status tracks the progress of your investigation into a finding\.
 
-The workflow status values are as follows\.
+The workflow status has the following values:
 
 `NEW`  
 The initial state of a finding before you review it\.
@@ -19,15 +19,23 @@ For findings from controls, if `Compliance.Status` is `PASSED`, then Security Hu
 
 ## Setting the workflow status \(console\)<a name="finding-workflow-status-console"></a>
 
-To set the workflow status from the finding details for a finding, from **Workflow status**, choose the status\.
+To set the workflow status from a finding details pane, from **Workflow status**, choose the status\.
 
-You can also set the workflow status for multiple selected findings in the findings list\.
+You can also set the workflow status for multiple selected findings in a finding list\.
 
-**To set the workflow status for multiple findings**
+**To set the workflow status for multiple findings \(console\)**
 
-1. In the findings list, select the check box for each finding that you want to update\.
+1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
-1. For **Change workflow status**, choose the status\.
+1. To display a finding list, do one of the following:
+   + In the Security Hub navigation pane, choose **Findings**\.
+   + In the Security Hub navigation pane, choose **Insights**\. Choose an insight\. Then on the results list, choose an insight result\.
+   + In the Security Hub navigation pane, choose **Integrations**\. Choose **See findings** for an integration\.
+   + In the Security Hub navigation pane, choose **Security standards**\. Choose **View results** to display a list of controls\. Then choose the control name\.
+
+1. In the finding list, select the check box for each finding that you want to update\.
+
+1. At the top of the list, for **Workflow status**, choose the status\.
 
 ## Setting the workflow status \(Security Hub API, AWS CLI\)<a name="finding-workflow-status-api"></a>
 

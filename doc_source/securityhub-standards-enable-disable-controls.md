@@ -17,7 +17,9 @@ Also, when you disable an entire standard, Security Hub does not track which con
 
 On the Security Hub console, each enabled control provides an option to disable that control\.
 
-**To disable a control**
+You can disable a control from the controls list, or from the control details page\.
+
+**To disable a control \(console\)**
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
@@ -27,7 +29,9 @@ On the Security Hub console, each enabled control provides an option to disable 
 
 1. For the standard that you want to disable controls for, choose **View results**\.
 
-1. Identify the control that you want to disable\. Then choose **Disable**\.
+1. For the control that you want to disable, do one of the following:
+   + Choose **Disable**\.
+   + Choose the control title\. Then on the control details page, choose **Disable**\.
 
 1. Enter a reason why you are disabling the control\. This can help others in your organization understand why the control is disabled\.
 
@@ -55,7 +59,7 @@ To disable a control, you can use an API call or the AWS Command Line Interface\
 
 For a disabled control, **Disabled** appears next to the control title\.
 
-To enable the control at any time, choose **Enable**\.
+To enable the control at any time, choose **Enable**\. The enable option is available from the control list and on the control details page\.
 
 ## Enabling a control \(Security Hub API, AWS CLI\)<a name="securityhub-standard-control-enable-api"></a>
 

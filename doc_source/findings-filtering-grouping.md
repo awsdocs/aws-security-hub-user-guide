@@ -1,14 +1,12 @@
 # Filtering and grouping findings \(console\)<a name="findings-filtering-grouping"></a>
 
-When you first display a list of findings, the list is always filtered based on the record state and workflow status\. This is in addition to the filters for an insight, integration, or control\.
+When you display a list of findings from the **Findings** page, the **Integrations** page, or the **Insights** page, the list is always filtered based on the record state and workflow status\. This is in addition to the filters for an insight or integration\.
 
 The record state indicates whether the finding is active or archived\. A finding can be archived by the finding provider\. AWS Security Hub also automatically archives findings for controls if the associated resource is deleted\. By default, a finding list only shows active findings\.
 
 The workflow status indicates the status of the investigation into the finding\. The workflow status can only be updated by the Security Hub customer or a system that is operating on the customer's behalf\. By default, a finding list only shows findings with a workflow status of `NEW` or `NOTIFIED`\. The default finding list for a control also includes `RESOLVED` findings\.
 
-When you display a list of findings for a control, you can only filter based on text in the finding list\. You cannot add or remove filters, or group the findings\.
-
-For other lists of findings, you can change the filters and group the findings\.
+For information on working with the finding list for a control, see [Filtering and sorting the control finding list](control-finding-list.md)\.
 
 ## Adding filters<a name="finding-list-filters"></a>
 
@@ -20,23 +18,40 @@ However, Security Hub applies OR logic to filters that use the same attribute bu
 
 **To add a filter to the finding list**
 
-1. Choose the search box\.
+1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
+
+1. To display a finding list, do one of the following:
+   + In the Security Hub navigation pane, choose **Findings**\.
+   + In the Security Hub navigation pane, choose **Insights**\. Choose an insight\. Then on the results list, choose an insight result\.
+   + In the Security Hub navigation pane, choose **Integrations**\. Choose **See findings** for an integration\.
+
+1. Choose the **Add filters** box\.
 
 1. In the menu, under **Filters**, choose a filter\.
 
 1. Choose the filter match type\.
 
-   For a string filter, you can choose whether the value matches \(**EQUALS**\) or starts with \(**PREFIX**\) the filter value\.
+   For a string filter, you can choose from the following comparison options:
+   + **is** – Find a value that exactly matches the filter value\.
+   + **starts with** – Find a value that starts with the filter value\.
+   + **is not** – Find a value that does not match the filter value\.
+   + **does not start with** – Find a value that does not start with the filter value\.
 
    For a numeric filter, you can choose whether to provide a single number \(**Simple**\) or a range of numbers \(**Range**\)\.
 
-   For a datetime field, you can choose whether to provide a length of time from the current date time \(**Rolling window**\) or a date range \(**Fixed range**\)\.
+   For a date or time filter, you can choose whether to provide a length of time from the current date time \(**Rolling window**\) or a date range \(**Fixed range**\)\.
+
+   Adding multiple filters has the following interactions:
+   + **is** and **starts with** filters are joined by OR\. A value matches if it contains any of the filter values\. For example, if you specify **Severity label is CRITICAL** and **Severity label is HIGH**, the results include both critical and high severity findings\.
+   + **is not** and **does not start with** filters are joined by AND\. A value matches only if it does not contain any of those filter values\. For example, if you specify **Severity label is not LOW** and **Severity label is not MEDIUM**, the results do not include either low or medium severity findings\.
+
+   If you have an **is** filter on a field, you cannot have a **is not** or a **does not start with** filter on the same field\.
 
 1. Specify the filter value\.
 
-   Note that for string fields, the filter value is case sensitive\.
+   Note that for string filters, the filter value is case sensitive\.
 
-   For example, for findings from Security Hub, **Product name** isSecurity Hub\. If you use the **EQUALS** operator to see findings from Security Hub, you must enter **Security Hub** as the filter value\. If you enter **security hub**, no findings are displayed\.
+   For example, for findings from Security Hub, **Product name** is Security Hub\. If you use the **EQUALS** operator to see findings from Security Hub, you must enter **Security Hub** as the filter value\. If you enter **security hub**, no findings are displayed\.
 
    Similarly, if you use the **PREFIX** operator, and enter **Sec**, Security Hub findings are displayed\. If you enter **sec**, no Security Hub findings are displayed\.
 
@@ -54,11 +69,11 @@ When you choose an attribute value, the list of matching findings for that value
 
 **To group the findings in a findings list**
 
-1. Choose the search box\.
+1. On the finding list, choose the **Add filters** box\.
 
 1. In the menu, under **Grouping**, choose **Group by**\.
 
-1. In the list, choose the field to use for the grouping\.
+1. In the list, choose the attribute to use for the grouping\.
 
 1. Choose **Apply**\.
 
@@ -70,9 +85,9 @@ For example, you can change the **Record state** filter to look for `ARCHIVED` f
 
 **To edit a filter or grouping attribute**
 
-1. Choose the filter or grouping attribute\.
+1. On a filtered finding list, choose the filter or grouping attribute\.
 
-1. For the grouping field, choose the new attribute, then choose **Apply**\.
+1. For **Group by**, choose the new attribute, then choose **Apply**\.
 
 1. For a filter, choose the new value, and then choose **Apply**\.
 

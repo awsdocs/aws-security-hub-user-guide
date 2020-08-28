@@ -1,8 +1,12 @@
-# Viewing details for controls<a name="securityhub-standards-view-controls"></a>
+# Viewing the list of controls for a standard<a name="securityhub-standards-view-controls"></a>
 
 The **Security standards** page provides access to the supported security standards in AWS Security Hub\.
 
-For each enabled standard, you can view and filter the list of controls\. For each control, you can view a details page that includes the list of findings for the control\.
+For each enabled standard, you can view and filter the list of controls\.
+
+From the controls list, you can perform the following actions:
++ [Enable or disable the control](securityhub-standards-enable-disable-controls.md)
++ [View the details for a control](securityhub-standards-control-details.md)\. The control details page includes the list of findings for the control\. See [Viewing and taking action on control findings](securityhub-control-manage-findings.md)\.
 
 ## Displaying the controls for an enabled standard \(console\)<a name="securityhub-standards-display-control-list"></a>
 
@@ -27,28 +31,19 @@ For each control, the controls page provides the following information:
 
 By default, the list of controls includes all of the controls for the selected standard\. You can filter the list based on the control identifier, description, related requirements, status, or severity\.
 
-To filter the list of controls based on text in the identifier, description, or a related requirement, begin typing the text in the search box\. The list is updated automatically to only include controls that contain the matching text\.
+**To filter the list of controls**
 
-To filter the list of controls based on the control status, from the menu next to the search box, choose the status to include\. For enabled controls, you can show all enabled controls or only show enabled controls that have a specific overall status \(**Passed**, **Failed**, or **Unknown**\)\. You can also choose to only display disabled standards\.
+1. To filter based on text in the identifier, description, or a related requirement, begin typing the text in the search box\.
 
-To filter the list of controls based on the control severity, from the severity menu, choose the severity to include\.
+   The list is updated automatically to only include controls that contain the matching text\.
 
-## Viewing details and findings for a control<a name="securityhub-standards-control-details"></a>
+1. To filter based on the control status, from the menu next to the search box, choose the status to include\.
 
-For each control, you can display the details page for that control\. The details page includes an overview and the list of findings\.
+   For enabled controls, you can show all enabled controls or only show enabled controls that have a specific overall status \(**Passed**, **Failed**, or **Unknown**\)\.
 
-To display the details for a control, choose the control name\.
+   You can also choose to only display disabled standards\.
 
-At the top of the details page is an overview of the control and its current status\.
-
-At the bottom of the details page is the list of findings for the control\. The findings list shows the active findings for the selected control that have a workflow status of `NEW`, `NOTIFIED`, or `RESOLVED`\.
-
-You can only filter the list based on text in the finding list\. You cannot add or remove filters, or group the findings\.
-
-You can also perform the following actions:
-+ [View details for individual findings](finding-view-details.md)\.
-+ [Update the workflow status of findings](finding-workflow-status.md)\.
-+ [Send findings to custom actions](finding-send-to-custom-action.md)\.
+1. To filter based on the control severity, from the severity menu, choose the severity to include\.
 
 ## Viewing the controls for an enabled standard \(Security Hub API, AWS CLI\)<a name="securityhub-standards-view-controls-api"></a>
 
