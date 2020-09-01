@@ -111,20 +111,6 @@ The available values for the overall status are as follows:
 + **Unknown** – Indicates that at least one finding has a `Compliance.Status` of `WARNING` or `NOT_AVAILABLE`\. No findings are `FAILED`\.
 + **No data** – Indicates that there are no findings for the control\. For example, a new control has this status until it begins to generate findings\. A control also has this status if all of the findings are `SUPPRESSED`\.
 
-## Account\-level and resource\-level findings<a name="securityhub-standards-results-findingresourcetypes"></a>
-
-When Security Hub runs security checks against controls, those security checks produce findings\. A check generates either account\-level findings only or both account\-level findings and resource\-level findings\. This is based on the type of involved resource for the control\.
-
-**Controls that involve only AWS accounts**  
-If the involved resource for the control is an AWS account, then the control only produces account\-level findings for the account\. The finding identifies whether the account passed the control\.
-
-**Controls that involve resources other than AWS accounts**  
-If the involved resource is something other than an AWS account, then the control produces both resource\-level findings and account\-level findings\. Security Hub uses both the resource\-level findings and account\-level findings to determine the overall status of a control\.  
-The resource\-level finding is for the involved resource, such as an EC2 instance\.  
-The control also produces an account\-level finding for each account\. The account\-level finding summarizes the compliance status for all of the resource\-level findings across all resources for that account for the control\. For the account\-level finding, `Resource.Type` is `AwsAccount`\. For example, for a control that involves EC2 instances, an account\-level finding can reflect the resource\-level findings for different EC2 instances for that account\.  
-Security Hub automatically updates `Compliance.Status` for account\-level findings based on the resource\-level findings\. If all of the resource\-level findings pass, then the account\-level finding passes\. If at least one of the resource\-level findings fails, then the account\-level finding fails\.  
-The workflow status of an account\-level finding is not automatically updated to reflect changes to the workflow status of the resource\-level findings\. For example, if you resolve or suppress all of the failed resource\-level findings for a control, then you also should resolve or suppress the account\-level findings\.
-
 ## Determining the security score for a security standard<a name="securityhub-standards-security-score"></a>
 
 On the **Security standards** page, each enabled standard displays a security score, which is between 0% and 100%\.

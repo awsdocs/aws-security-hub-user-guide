@@ -1457,7 +1457,7 @@ To remediate this issue, update the permissions policy of the S3 bucket\.
 
 For more information, see the knowledge center article [What S3 bucket policy should I use to comply with the AWS Config rule s3\-bucket\-ssl\-requests\-only?](http://aws.amazon.com/premiumsupport/knowledge-center/s3-bucket-policy-for-config-rule/)\.
 
-## \[SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access<a name="fsbp-sagemaker-1"></a>
+## \[SageMaker\.1\] SageMaker notebook instances should not have direct internet access<a name="fsbp-sagemaker-1"></a>
 
 **Severity:** High
 
@@ -1467,13 +1467,13 @@ For more information, see the knowledge center article [What S3 bucket policy sh
 
 **Parameters:** None
 
-This control checks whether direct internet access is disabled for an Amazon SageMaker notebook instance\. To do this, it checks whether the `DirectInternetAccess` field is disabled for the notebook instance\. 
+This control checks whether direct internet access is disabled for an SageMaker notebook instance\. To do this, it checks whether the `DirectInternetAccess` field is disabled for the notebook instance\. 
 
-If you configure your Amazon SageMaker instance without a VPC, then by default direct internet access is enabled on your instance\. You should configure your instance with a VPC and change the default setting to **Disable — Access the internet through a VPC**\.
+If you configure your SageMaker instance without a VPC, then by default direct internet access is enabled on your instance\. You should configure your instance with a VPC and change the default setting to **Disable — Access the internet through a VPC**\.
 
 To train or host models from a notebook, you need internet access\. To enable internet access, make sure that your VPC has a NAT gateway and your security group allows outbound connections\. To learn more about how to connect a notebook instance to resources in a VPC, see [Connect a notebook instance to resources in a VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html) in the Amazon SageMaker Developer Guide\.
 
-You should also ensure that access to your Amazon SageMaker configuration is limited to only authorized users\. Restrict users' IAM permissions to modify Amazon SageMaker settings and resources\.
+You should also ensure that access to your SageMaker configuration is limited to only authorized users\. Restrict users' IAM permissions to modify SageMaker settings and resources\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -1485,9 +1485,9 @@ Europe \(Milan\)
 
 Note that you cannot change the internet access setting after a notebook instance is created\. It must be stopped, deleted, and recreated\.
 
-**To configure an Amazon SageMaker notebook instance to deny direct internet access**
+**To configure an SageMaker notebook instance to deny direct internet access**
 
-1. Open the Amazon SageMaker console at [https://console.aws.amazon.com/sagemaker/](https://console.aws.amazon.com/sagemaker/)
+1. Open the SageMaker console at [https://console.aws.amazon.com/sagemaker/](https://console.aws.amazon.com/sagemaker/)
 
 1. Navigate to **Notebook instances**\.
 
