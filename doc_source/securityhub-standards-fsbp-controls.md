@@ -302,7 +302,7 @@ AWS GovCloud \(US\-West\)
 
 1. After you create the parameter, copy the parameter name\.
 
-1. Back in the CodeBuild Console, choose **Create environmental variable**\.
+1. Back in the CodeBuild console, choose **Create environmental variable**\.
 
 1. Enter the name of your variable as it appears in your build spec\.
 
@@ -581,7 +581,7 @@ To learn more about terminating instances, see [Terminating an instance](https:/
 **Parameters:**
 + `trafficType`: `REJECT`
 
-This control checks whether Amazon VPC flow logs are found and enabled for VPCs\. The traffic type is set to `Reject`\. 
+This control checks whether Amazon VPC Flow Logs are found and enabled for VPCs\. The traffic type is set to `Reject`\. 
 
 With the VPC Flow Logs feature, you can capture information about the IP address traffic going to and from network interfaces in your VPC\. After you create a flow log, you can view and retrieve its data in CloudWatch Logs\. To reduce cost, you can also send your flow logs to Amazon S3\. 
 
@@ -1076,6 +1076,101 @@ If you already have an access key, Security Hub recommends that you enforce the 
 1. Choose **Enable password expiration**\. For **Password expiration period \(in days\)**, enter **90**\. 
 
 1. Choose **Apply password policy**\.
+
+## \[KMS\.1\] IAM customer managed policies should not allow decryption actions on all KMS keys<a name="fsbp-kms-1"></a>
+
+**Category:** Protect > Secure access management
+
+**Severity:** Medium
+
+**Resource:** IAM policy
+
+**AWS Config rule:** `iam_customer_policy_blocked_kms_actions`
+
+**Parameters:** 
++ `kms:ReEncryptFrom, kms:Decrypt`
+
+Checks whether the default version of IAM customer managed policies allow principals to use the AWS KMS decryption actions on all resources\. This control uses [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), an automated reasoning engine, to validate and warn you about policies that may grant broad access to your secrets across AWS accounts\.
+
+This control fails if the `kms:Decrypt` or `kms:ReEncryptFrom` actions are allowed on all KMS keys\. The control evaluates both attached and unattached customer managed policies\. It does not check inline policies or AWS managed policies\.
+
+With AWS KMS, you control who can use your customer master keys \(CMKs\) and gain access to your encrypted data\. IAM policies define which actions an identity \(user, group, or role\) can perform on which resources\. Following security best practices, AWS recommends that you allow least privilege\. In other words, you should grant to identities only the `kms:Decrypt` or `kms:ReEncryptFrom` permissions and only for the keys that are required to perform a task\. Otherwise, the user might use keys that are not appropriate for your data\.
+
+Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data\. Then design policies that allow users to use only those keys\. For example, do not allow `kms:Decrypt` permission on all KMS keys\. Instead, allow `kms:Decrypt` only on keys in a particular Region for your account\. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data\.
+
+### Remediation<a name="kms-1-remediation"></a>
+
+To remediate this issue, you modify the IAM customer managed policies to restrict access to the keys\.
+
+**To modify an IAM customer managed policy**
+
+1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+
+1. In the IAM navigation pane, choose **Policies**\.
+
+1. Choose the arrow next to the policy you want to modify\.
+
+1. Choose **Edit policy**\.
+
+1. Choose the **JSON** tab\.
+
+1. Change the `“Resource”` value to the specific key or keys that you want to allow\.
+
+1. After you modify the policy, choose **Review policy**\.
+
+1. Choose **Save changes**\.
+
+For more information, see [Using IAM policies with AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html) in the *AWS Key Management Service Developer Guide*\.
+
+## \[KMS\.2\] IAM principals should not have IAM inline policies that allow decryption actions on all KMS keys<a name="fsbp-kms-2"></a>
+
+**Category:** Protect > Secure access management
+
+**Severity:** Medium
+
+**Resource:**
++ IAM role
++ IAM user
++ IAM group
+
+**AWS Config rule:** `iam_inline_policy_blocked_kms_actions` 
+
+**Parameters:**
++ `kms:ReEncryptFrom, kms:Decrypt`
+
+Checks whether the inline policies that are embedded in your IAM identities \(role, user, or group\) allow the AWS KMS decryption actions on all KMS keys\. This control uses [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), an automated reasoning engine, to validate and warn you about policies that may grant broad access to your secrets across AWS accounts\.
+
+This control fails if `kms:Decrypt` or `kms:ReEncryptFrom` actions are allowed on all KMS keys in an inline policy\. 
+
+With AWS KMS, you control who can use your customer master keys \(CMKs\) and gain access to your encrypted data\. IAM policies define which actions an identity \(user, group, or role\) can perform on which resources\. Following security best practices, AWS recommends that you allow least privilege\. In other words, you should grant to identities only the permissions they need and only for keys that are required to perform a task\. Otherwise, the user might use keys that are not appropriate for your data\.
+
+Instead of granting permission for all keys, determine the minimum set of keys that users need to access encrypted data\. Then design policies that allow the users to use only those keys\. For example, do not allow `kms:Decrypt` permission on all KMS keys\. Instead, allow them only on keys in a particular Region for your account\. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data\.
+
+### Remediation<a name="kms-2-remediation"></a>
+
+To remediate this issue, you modify the inline policy to restrict access to the keys\.
+
+**To modify an IAM inline policy**
+
+1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+
+1. In the IAM navigation pane, choose **Users**, **Groups**, or **Roles**\. 
+
+1. Choose the name of the user, group or role for which to modify IAM inline policies\. 
+
+1. Choose the arrow next to the policy to modify\.
+
+1. Choose **Edit policy**\.
+
+1. Choose the **JSON** tab\.
+
+1. Change the `"Resource"` value to the specific keys you want to allow\.
+
+1. After you modify the policy, choose **Review policy**\.
+
+1. Choose **Save changes**\.
+
+For more information, see [Using IAM policies with AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html) in the *AWS Key Management Service Developer Guide*\.
 
 ## \[Lambda\.1\] Lambda functions should prohibit public access by other accounts<a name="fsbp-lambda-1"></a>
 

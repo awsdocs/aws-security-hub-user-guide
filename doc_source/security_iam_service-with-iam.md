@@ -57,6 +57,8 @@ Security Hub defines its own set of condition keys and also supports using some 
 
 Security Hub actions support the `securityhub:TargetAccount` condition key\.
 
+To control access to [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html), Security Hub supports the `securityhub.ASFFSyntaxPath` condition key\. For details on configuring access to [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html), see [Configuring access to BatchUpdateFindings](finding-update-batchupdatefindings.md#batchupdatefindings-configure-access)\.
+
 To see a list of Security Hub condition keys, see [Condition Keys for AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-policy-keys) in the *IAM User Guide*\. To learn with which actions and resources you can use a condition key, see [Actions Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-actions-as-permissions)\.
 
 ## Security Hub resource\-based policies \(Not supported\)<a name="security_iam_service-with-iam-resource-based-policies"></a>
