@@ -48,7 +48,7 @@ Data deletion protection – Does the service protect data from accidental delet
 Data management / usage – Do you use services such as Amazon Macie to track the location of your sensitive data?
 
 **API protection**  
-Does the service use AWS PrivateLink to protect the service APIs?
+Does the service use AWS PrivateLink to protect the service API operations?
 
 **Protective services**  
 Are the correct protective services in place? Do they provide the correct amount of coverage?  

@@ -285,11 +285,13 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "Prefix": "string"
                         },
                         "Origins": {
-                            "Items": {
-                                "OriginPath": "string",
-                                "Id": "string",
-                                "DomainName": "string"
-                            }
+                            "Items": [
+                                {
+                                    "DomainName": "string",
+                                    "Id": "string",
+                                    "OriginPath": "string"
+                                }
+                            ]
                         },
                         "Status": "string",
                         "WebAclId": "string"
@@ -1685,16 +1687,16 @@ It can contain the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Items`  |  No  |  A complex type that contains origins or origin groups for this distribution\. Type: Object  | 
+|  `Items`  |  No  |  A complex type that contains origins or origin groups for this distribution\. Type: Array of objects  | 
 
 Each item can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `OriginPath`  |  No  |  An optional element that causes CloudFront to request your content from a directory in your S3 bucket or your custom origin\. Type: String  | 
-|  `Id`  |  No  |  A unique identifier for the origin or origin group\. Type: String  | 
 |  `DomainName`  |  No  |  Amazon S3 origins: The DNS name of the S3 bucket from which you want CloudFront to get objects for this origin\. Type: String  | 
+|  `Id`  |  No  |  A unique identifier for the origin or origin group\. Type: String  | 
+|  `OriginPath`  |  No  |  An optional element that causes CloudFront to request your content from a directory in your S3 bucket or your custom origin\. Type: String  | 
 
 #### AwsCodeBuildProject<a name="asff-resourcedetails-awscodebuildproject"></a>
 

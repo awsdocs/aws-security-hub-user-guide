@@ -45,8 +45,10 @@ The following controls are not supported in Africa \(Cape Town\)\.
 [\[EC2\.1\] Amazon EBS snapshots should not be public, determined by the ability to be restorable by anyone](securityhub-standards-fsbp-controls.md#fsbp-ec2-1)  
 [\[EC2\.3\] Attached EBS volumes should be encrypted at\-rest](securityhub-standards-fsbp-controls.md#fsbp-ec2-3)  
 [\[EC2\.4\] Stopped EC2 instances should be removed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-ec2-4)  
+[\[EC2\.8\] EC2 instances should use IMDSv2](securityhub-standards-fsbp-controls.md#fsbp-ec2-8)  
 [\[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
 [\[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-standards-fsbp-controls.md#fsbp-elbv2-1)  
+[\[EMR\.1\] Amazon EMR cluster master nodes should not have public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-emr-1)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](securityhub-standards-fsbp-controls.md#fsbp-iam-3)  
 [\[IAM\.4\] IAM root user access key should not exist](securityhub-standards-fsbp-controls.md#fsbp-iam-4)  
@@ -90,8 +92,10 @@ The following controls are not supported in Europe \(Milan\)\.
 [\[EC2\.1\] Amazon EBS snapshots should not be public, determined by the ability to be restorable by anyone](securityhub-standards-fsbp-controls.md#fsbp-ec2-1)  
 [\[EC2\.3\] Attached EBS volumes should be encrypted at\-rest](securityhub-standards-fsbp-controls.md#fsbp-ec2-3)  
 [\[EC2\.4\] Stopped EC2 instances should be removed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-ec2-4)  
+[\[EC2\.8\] EC2 instances should use IMDSv2](securityhub-standards-fsbp-controls.md#fsbp-ec2-8)  
 [\[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
 [\[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-standards-fsbp-controls.md#fsbp-elbv2-1)  
+[\[EMR\.1\] Amazon EMR cluster master nodes should not have public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-emr-1)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](securityhub-standards-fsbp-controls.md#fsbp-iam-3)  
 [\[RDS\.1\] RDS snapshots should be private](securityhub-standards-fsbp-controls.md#fsbp-rds-1)  
@@ -110,8 +114,16 @@ The following controls are not supported in Middle East \(Bahrain\)\.
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
+[\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)  
 [\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)
+
+### South America \(São Paulo\)<a name="securityhub-control-support-sasouth1"></a>
+
+The following controls are not supported in South America \(São Paulo\)\.
+
+[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)  
+[\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)
 
 ### AWS GovCloud \(US\-East\)<a name="securityhub-control-support-govuseast1"></a>
 

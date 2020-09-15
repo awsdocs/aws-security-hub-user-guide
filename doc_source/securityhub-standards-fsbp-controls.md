@@ -613,6 +613,89 @@ To remediate this issue, enable VPC flow logging\.
 
 1. Choose **Create**\.
 
+## \[EC2\.7\] EBS default encryption should be enabled<a name="fsbp-ec2-7"></a>
+
+**Category:** Protect > Data Protection > Encryption of data at rest 
+
+**Severity:** Medium
+
+**Resource type:** AWS Account
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-ebs-encryption-by-default.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-ebs-encryption-by-default.html)
+
+**Parameters:** None
+
+This control checks whether account\-level encryption is enabled by default for Amazon Elastic Block Store\(Amazon EBS\)\. The control fails if the account level encryption is not enabled\. 
+
+When encryption is enabled for your account, Amazon EBS volumes and snapshot copies are encrypted at rest\. This adds an additional layer of protection for your data\. For more information, see [Encryption by default](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+Note that following instance types do not support encryption: R1, C1, and M1\.
+
+### Remediation<a name="ec2-7-remediation"></a>
+
+You can use the Amazon EC2 console to enable default encryption for Amazon EBS volumes\.
+
+**To configure the default encryption for Amazon EBS encryption for a Region**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. From the navigation pane, select **EC2 Dashboard**\.
+
+1. In the upper\-right corner of the page, choose **Account Attributes, EBS encryption**\.
+
+1. Choose **Manage**\.
+
+1. Select **Enable**\. You can keep the AWS managed CMK with the alias `alias/aws/ebs` created on your behalf as the default encryption key, or choose a symmetric customer managed CMK\.
+
+1. Choose **Update EBS encryption**\.
+
+## \[EC2\.8\] EC2 instances should use IMDSv2<a name="fsbp-ec2-8"></a>
+
+**Category:** Protect > Network Security
+
+**Severity:** High
+
+**Resource type:** EC2 Instance 
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-imdsv2-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-imdsv2-check.html)
+
+**Parameters:** None
+
+This control checks whether your EC2 instance metadata version is configured with Instance Metadata Service Version 2 \(IMDSv2\)\. The control passes if `HttpTokens` is set to required for IMDSv2\. The control fails if `HttpTokens` is set to `optional`\.
+
+You use instance metadata to configure or manage the running instance\. The IMDS provides access to temporary, frequently rotated credentials\. These credentials remove the need to hard\-code or distribute sensitive credentials to instances manually or programmatically\. The IMDS is attached locally to every EC2 instance\. It runs on a special "link local" IP address of 169\.254\.169\.254\. This IP address is only accessible by software that runs on the instance\.
+
+Version 2 of the IMDS adds new protections for the following types of vulnerabilities\. These vulnerabilities could be used to try to access the IMDS\.
++ Open website application firewalls
++ Open reverse proxies
++ Service\-side request forgery \(SSRF\) vulnerabilities
++ Open Layer 3 firewalls and network address translation \(NAT\)
+
+Security Hub recommends that you configure your EC2 instances with IMDSv2\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
+### Remediation<a name="ec2-8-remediation"></a>
+
+To remediate an EC2 instance that is not configured with IMDSv2, you can require the use of IMDSv2\.
+
+To require IMDSv2 on an existing instance, when you request instance metadata, modify the Amazon EC2 metadata options\. Follow the instructions in [Configuring instance metadata options for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+To require the use of IMDSv2 on a new instance when you launch it, follow the instructions in [Configuring instance metadata options for new instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+**To configure your new EC2 instance with IMDSv2 from the console**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. Choose **Launch instance** and then choose **Launch instance**\.
+
+1. In the **Configure Instance Details** step, under **Advanced Details**, for **Metadata version**, choose **V2 \(token required\)**\.
+
+1. Choose **Review and Launch**\.
+
+If your software uses IMDSv1, you can reconfigure your software to use IMDSv2\. For details, see [Transitioning to using Instance Metadata Service Version 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2) in the *Amazon EC2 User Guide for Linux Instances*\.
+
 ## \[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS<a name="fsbp-efs-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data at rest
@@ -680,6 +763,37 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 1. Choose **HTTPS** and then enter **443**\.
 
 1. Choose the check mark in a circle symbol and then choose **Update**\.
+
+## \[EMR\.1\] Amazon EMR cluster master nodes should not have public IP addresses<a name="fsbp-emr-1"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** High
+
+**Resource type:** EMR:Cluster
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/emr-master-no-public-ip.html](https://docs.aws.amazon.com/config/latest/developerguide/emr-master-no-public-ip.html)
+
+**Parameters:** None
+
+This control checks whether master nodes on Amazon EMR clusters have public IP addresses\. 
+
+The control fails if the master node has public IP addresses that are associated with any of its instances\. Public IP addresses are designated in the `PublicIp` field of the `NetworkInterfaces` configuration for the instance\. This control only checks Amazon EMR clusters that are in a `RUNNING` or `WAITING` state\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+
+### Remediation<a name="emr-1-remediation"></a>
+
+During launch, you can control whether your instance in a default or nondefault subnet is assigned a public IPv4 address\.
+
+By default, default subnets have this attribute set to `true`\. Nondefault subnets have the IPv4 public addressing attribute set to `false`, unless it was created by the Amazon EC2 launch instance wizard\. In that case, the wizard sets the attribute to `true`\.
+
+You need to launch your cluster in a VPC with a private subnet that has the IPv4 public addressing attribute set to `false`\. 
+
+After launch, you cannot manually disassociate a public IPv4 address from your instance\.
+
+To remediate this finding, you need to create a new cluster in VPC private subnet\. For information on how to launch a cluster in into a VPC private subnet, see [Launch clusters into a VPC](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-vpc-launching-job-flows.html) in the *Amazon EMR Management Guide*\.
 
 ## \[ES\.1\] Elasticsearch domains should have encryption at\-rest enabled<a name="fsbp-es-1"></a>
 
@@ -1077,6 +1191,45 @@ If you already have an access key, Security Hub recommends that you enforce the 
 
 1. Choose **Apply password policy**\.
 
+## \[IAM\.8\] Unused IAM user credentials should be removed<a name="fsbp-iam-8"></a>
+
+**Category:** Protect > Secure access management 
+
+**Severity:** Medium 
+
+**Resource:** IAM User
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
+
+**Parameters:**
++ `maxCredentialUsageAge`: 90 
+
+This control checks whether your IAM users have passwords or active access keys that have not been used for 90 days\.
+
+IAM users can access AWS resources using different types of credentials, such as passwords or access keys\. 
+
+Security Hub recommends that you remove or deactivate all credentials that were unused for 90 days or more\. Disabling or removing unnecessary credentials reduces the window of opportunity for credentials associated with a compromised or abandoned account to be used\.
+
+### Remediation<a name="iam-8-remediation"></a>
+
+To get some of the information that you need to monitor accounts for dated credentials, use the IAM console\. For example, when you view users in your account, there is a column for **Access key age**, **Password age**, and **Last activity**\. If the value in any of these columns is greater than 90 days, make the credentials for those users inactive\.
+
+You can also use credential reports to monitor user accounts and identify those with no activity for 90 or more days\. You can download credential reports in `.csv` format from the IAM console\. For more information about credential reports, see [Getting credential reports for your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html#getting-credential-reports-console) in the *IAM User Guide*\.
+
+After you identify the inactive accounts or unused credentials, use the following steps to disable them\.
+
+**To disable credentials for inactive accounts**
+
+1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+
+1. Choose **Users**\.
+
+1. Choose the name of the user that has credentials over 90 days old\.
+
+1. Choose** Security credentials**\.
+
+1. For each sign\-in credential and access key that hasn't been used in at least 90 days, choose **Make inactive**\.
+
 ## \[KMS\.1\] IAM customer managed policies should not allow decryption actions on all KMS keys<a name="fsbp-kms-1"></a>
 
 **Category:** Protect > Secure access management
@@ -1328,6 +1481,181 @@ Amazon RDS encryption is currently available for all database engines and storag
 
 For information about encrypting DB instances in Amazon RDS, see [Encrypting Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html) in the *Amazon RDS User Guide*\.
 
+## \[RDS\.4\] RDS cluster snapshots and database snapshots should be encrypted at rest<a name="fsbp-rds-4"></a>
+
+**Category:** Protect > Data Protection > Encryption of data at rest
+
+**Severity:** Medium
+
+**Resource type:** DBClusterSnapshot, DBSnapshot
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshot-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshot-encrypted.html)
+
+**Parameters:** None
+
+This control checks whether RDS DB snapshots are encrypted\.
+
+Encrypting data at rest reduces the risk that an unauthenticated user gets access to data that is stored on disk\. Data in RDS snapshots should be encrypted at rest for an added layer of security\.
+
+### Remediation<a name="rds-4-remediation"></a>
+
+You can use the Amazon RDS console to remediate this issue\.
+
+**To encrypt an unencrypted RDS snapshot**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Snapshots**\.
+
+1. Find the snapshot to encrypt under **Manual** or **System**\.
+
+1. Select the check box next to the snapshot to encrypt\.
+
+1. Choose **Actions**, then choose **Copy Snapshot**\.
+
+1. Under **New DB Snapshot Identifier**, type a name for the new snapshot\.
+
+1. Under **Encryption**, select **Enable Encryption**\.
+
+1. Choose the KMS key to use to encrypt the snapshot\.
+
+1. Choose **Copy Snapshot**\.
+
+1. After the new snapshot is created, delete the original snapshot\.
+
+1. For **Backup Retention Period**, choose a positive nonzero value\. For example, 30 days\.
+
+## \[RDS\.5\] RDS DB instances should be configured with multiple Availability Zones<a name="fsbp-rds-5"></a>
+
+**Category:** Recover > Resilience > High availability
+
+**Severity:** Medium
+
+**Resource type:** DBInstance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-multi-az-support.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-multi-az-support.html)
+
+**Parameters:** None
+
+This control checks whether high availability is enabled for your RDS DB instances\.
+
+RDS DB instances should be configured for multiple Availability Zones \(AZs\)\. This ensures the availability of the data stored\. Multi\-AZ deployments allow for automated failover if there is an issue with Availability Zone availability and during regular RDS maintenance\.
+
+### Remediation<a name="rds-5-remediation"></a>
+
+**To enable multiple Availability Zones for a DB instance**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
+
+1. Choose **Modify**\. The **Modify DB Instance** page appears\. 
+
+1. Under **Instance Specifications**, set **Multi\-AZ deployment** to **Yes**\.
+
+1. Choose **Continue** and then check the summary of modifications\. 
+
+1. \(Optional\) Choose **Apply immediately** to apply the changes immediately\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately setting](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.ApplyImmediately) in the *Amazon RDS User Guide*\.
+
+1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\.
+
+## \[RDS\.6\] Enhanced monitoring should be configured for RDS DB instances and clusters<a name="fsbp-rds-6"></a>
+
+**Category:** Detect > Detection Services
+
+**Severity:** Low
+
+**Resource type:** DBInstance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-enhanced-monitoring-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-enhanced-monitoring-enabled.html)
+
+**Parameters:** None
+
+This control checks whether enhanced monitoring is enabled for your RDS DB instances\.
+
+In Amazon RDS, Enhanced Monitoring enables a more rapid response to performance changes in underlying infrastructure\. These performance changes could result in a lack of availability of the data\. Enhanced Monitoring provides real\-time metrics of the operating system that your RDS DB instance runs on\. An agent is installed on the instance\. The agent can obtain metrics more accurately than is possible from the hypervisor layer\.
+
+Enhanced Monitoring metrics are useful when you want to see how different processes or threads on a DB instance use the CPU\. For more information, see [Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html) in the *Amazon RDS User Guide*\.
+
+### Remediation<a name="rds-6-remediation"></a>
+
+For detailed instructions on how to enable Enhanced Monitoring for your DB instance, see [Setting up for and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*\.
+
+## \[RDS\.7\] RDS clusters should have deletion protection enabled<a name="fsbp-rds-7"></a>
+
+**Category:** Protect > Data Protection > Data deletion protection
+
+**Severity:** Low
+
+**Resource type:** DBCluster
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html)
+
+**Parameters:** None
+
+This control checks whether RDS clusters have deletion protection enabled\. 
+
+Enabling cluster deletion protection is an additional layer of protection against accidental database deletion or deletion by an unauthorized entity\.
+
+When deletion protection is enabled, an RDS cluster cannot be deleted\. Before a deletion request can succeed, deletion protection must be disabled\.
+
+**Note**  
+This control is not supported in Middle East \(Bahrain\) or South America \(São Paulo\)\.
+
+### Remediation<a name="rds-7-remediation"></a>
+
+**To enable deletion protection for RDS DB cluster**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, then choose the DB cluster that you want to modify\. 
+
+1. Choose **Modify**\.
+
+1. Under **Deletion protection**, choose **Enable deletion protection**\.
+
+1. Choose **Continue**\.
+
+1. Under **Scheduling of modifications**, choose when to apply modifications\. The options are **Apply during the next scheduled maintenance window** or **Apply immediately**\.
+
+1. Choose **Modify Cluster**\.
+
+## \[RDS\.8\] RDS DB instances should have deletion protection enabled<a name="fsbp-rds-8"></a>
+
+**Category: **Protect > Data Protection > Data deletion protection
+
+**Severity:** Low
+
+**Resource type:** DBInstance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-deletion-protection-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-deletion-protection-enabled.html)
+
+**Parameters:** None
+
+This control checks whether your RDS DB instances have deletion protection enabled\.
+
+Enabling instance deletion protection is an additional layer of protection against accidental database deletion or deletion by an unauthorized entity\.
+
+While deletion protection is enabled, an RDS DB instance cannot be deleted\. Before a deletion request can succeed, deletion protection must be disabled\.
+
+### Remediation<a name="rds-8-remediation"></a>
+
+**To enable deletion protection for an RDS DB instance**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, then choose the DB instance that you want to modify\. 
+
+1. Choose **Modify**\.
+
+1. Under **Deletion protection**, choose **Enable deletion protection**\.
+
+1. Choose **Continue**\.
+
+1. Under **Scheduling of modifications**, choose when to apply modifications\. The options are **Apply during the next scheduled maintenance window** or **Apply immediately**\.
+
+1. Choose **Modify DB Instance**\.
+
 ## \[S3\.1\] S3 Block Public Access setting should be enabled<a name="fsbp-s3-1"></a>
 
 **Category:** Protect > Secure network configuration
@@ -1552,6 +1880,54 @@ To remediate this issue, update the permissions policy of the S3 bucket\.
 
 For more information, see the knowledge center article [What S3 bucket policy should I use to comply with the AWS Config rule s3\-bucket\-ssl\-requests\-only?](http://aws.amazon.com/premiumsupport/knowledge-center/s3-bucket-policy-for-config-rule/)\.
 
+## \[S3\.6\] Amazon S3 permissions granted to other AWS accounts in bucket policies should be restricted<a name="fsbp-s3-6"></a>
+
+**Category:** Protect > Secure Access Management > Sensitive APIs actions restricted 
+
+**Severity:** High
+
+**Resource type:** AWS::S3::Bucket
+
+**AWS Config** rule: [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-blacklisted-actions-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-blacklisted-actions-prohibited.html)
+
+**Parameters:**
+
+Default parameters set by Security Hub: 
++ `blacklistedactionpatterns`: `s3:DeleteBucketEncryption, s3:DeleteBucketPolicy, s3:PutBucketAcl, s3:PutBucketEncryption, s3:PutBucketPolicy, s3:PutObjectAcl`
+
+Customer provided parameters:
++ `blacklistedactionpatterns`\. This is a comma\-separated list of action patterns to deny\. For example, `s3:PutBucketPolicy and s3:DeleteObject`\.
+
+This control checks whether the S3 bucket policy prevents principals from other AWS accounts from performing denied actions on resources in the S3 bucket\. The control fails if the S3 bucket policy allows any of the following actions for a principal in another AWS account:
++ `s3:DeleteBucketEncryption`
++ `s3:DeleteBucketPolicy`
++ `s3:PutBucketAcl`
++ `s3:PutBucketEncryption`
++ `s3:PutBucketPolicy`
++ `s3:PutObjectAcl`
+
+Implementing least privilege access is fundamental to reducing security risk and the impact of errors or malicious intent\. If an S3 bucket policy allows access from external accounts, it could result in data exfiltration by an insider threat or an attacker\.
+
+The `blacklistedactionpatterns` parameter allows for successful evaluation of the rule for S3 buckets\. The parameter grants access to external accounts for action patterns that are not included in the `blacklistedactionpatterns` list\.
+
+### Remediation<a name="s3-6-remediation"></a>
+
+To remediate this issue, edit the S3 bucket policy to remove the permissions\.
+
+**To edit an S3 bucket policy**
+
+1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
+
+1. In the **Bucket name** list, choose the name of the S3 bucket for which you want to edit the policy\. 
+
+1. Choose **Permissions**, and then choose **Bucket Policy**\.
+
+1. In the **Bucket policy editor** text box, do one of the following:
+   + Remove the statements that grant access to denied actions to other AWS accounts
+   + Remove the permitted denied actions from the statements
+
+1. Choose **Save**\.
+
 ## \[SageMaker\.1\] SageMaker notebook instances should not have direct internet access<a name="fsbp-sagemaker-1"></a>
 
 **Severity:** High
@@ -1566,7 +1942,7 @@ This control checks whether direct internet access is disabled for an SageMaker 
 
 If you configure your SageMaker instance without a VPC, then by default direct internet access is enabled on your instance\. You should configure your instance with a VPC and change the default setting to **Disable — Access the internet through a VPC**\.
 
-To train or host models from a notebook, you need internet access\. To enable internet access, make sure that your VPC has a NAT gateway and your security group allows outbound connections\. To learn more about how to connect a notebook instance to resources in a VPC, see [Connect a notebook instance to resources in a VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html) in the Amazon SageMaker Developer Guide\.
+To train or host models from a notebook, you need internet access\. To enable internet access, make sure that your VPC has a NAT gateway and your security group allows outbound connections\. To learn more about how to connect a notebook instance to resources in a VPC, see [Connect a notebook instance to resources in a VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html) in the *Amazon SageMaker Developer Guide*\.
 
 You should also ensure that access to your SageMaker configuration is limited to only authorized users\. Restrict users' IAM permissions to modify SageMaker settings and resources\.
 
@@ -1598,6 +1974,78 @@ Note that you cannot change the internet access setting after a notebook instanc
 
 For more information, see [Connect a notebook instance to resources in a VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html) in the *Amazon SageMaker Developer Guide*\.
 
+## \[SecretsManager\.1\] Secrets Manager secrets should have automatic rotation enabled<a name="fsbp-secretsmanager-1"></a>
+
+**Category:** Protect > Secure development
+
+**Severity:** Medium
+
+**Resource:** Secrets Manager secret 
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-rotation-enabled-check.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-rotation-enabled-check.html)
+
+**Parameters:** None
+
+This control checks whether a secret stored in AWS Secrets Manager is configured with automatic rotation\.
+
+Secrets Manager helps you improve the security posture of your organization\. Secrets include database credentials, passwords, and third\-party API keys\. You can use Secrets Manager to store secrets centrally, encrypt secrets automatically, control access to secrets, and rotate secrets safely and automatically\.
+
+Secrets Manager can rotate secrets\. You can use rotation to replace long\-term secrets with short\-term ones\. Rotating your secrets limits how long an unauthorized user can use a compromised secret\. For this reason, you should rotate your secrets frequently\. To learn more about rotation, see [Rotating your AWS Secrets Manager secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html) in the *AWS Secrets Manager User Guide*\.
+
+### Remediation<a name="secretsmanager-1-remediation"></a>
+
+To remediate this issue, you enable automatic rotation for your secrets\.
+
+**To enable automatic rotation for secrets**
+
+1. Open the Secrets Manager console at [https://console\.aws\.amazon\.com/secretsmanager](https://console.aws.amazon.com/secretsmanager/)\.
+
+1. To find the secret that requires rotating, enter the secret name in the search field\. 
+
+1. Choose the secret you want to rotate, which displays the secrets details page\. 
+
+1. Under **Rotation configuration**, choose **Edit rotation**\.
+
+1. From **Edit rotation configuration**, choose **Enable automatic rotation**\.
+
+1. For **Select Rotation Interval**, choose a rotation interval\.
+
+1. Choose a Lambda function for rotation\. For information about customizing your Lambda rotation function, see [Understanding and customizing your Lambda rotation function](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-lambda-function-customizing.html) in the *AWS Secrets Manager User Guide*\.
+
+1. To configure the secret for rotation, choose **Next**\.
+
+To learn more about Secrets Manager rotation, see [Rotating your AWS Secrets Manager secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html) in the *AWS Secrets Manager User Guide*\.
+
+## \[SecretsManager\.2\] Secrets Manager secrets configured with automatic rotation should rotate successfully<a name="fsbp-secretsmanager-2"></a>
+
+**Category:** Protect > Secure development
+
+**Severity:** Medium
+
+**Resource:** Secrets Manager secret 
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-scheduled-rotation-success-check.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-scheduled-rotation-success-check.html)
+
+**Parameters:** None
+
+This control checks whether an AWS Secrets Manager secret rotated successfully based on the rotation schedule\. The control fails if `RotationOccurringAsScheduled` is `false`\. The control does not evaluate secrets that do not have rotation configured\.
+
+Secrets Manager helps you improve the security posture of your organization\. Secrets include database credentials, passwords, and third\-party API keys\. You can use Secrets Manager to store secrets centrally, encrypt secrets automatically, control access to secrets, and rotate secrets safely and automatically\.
+
+Secrets Manager can rotate secrets\. You can use rotation to replace long\-term secrets with short\-term ones\. Rotating your secrets limits how long an unauthorized user can use a compromised secret\. For this reason, you should rotate your secrets frequently\.
+
+In addition to configuring secrets to rotate automatically, you should ensure that those secrets rotate successfully based on the rotation schedule\.
+
+To learn more about rotation, see [Rotating your AWS Secrets Manager secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html) in the *AWS Secrets Manager User Guide*\.
+
+### Remediation<a name="secretsmanager-2-remediation"></a>
+
+If the automatic rotation fails, then Secrets Manager might have encountered errors with the configuration\. 
+
+To rotate secrets in Secrets Manager, you use a Lambda function that defines how to interact with the database or service that owns the secret\. 
+
+For help on how to diagnose and fix common errors related to secrets rotation, see [Troubleshooting AWS Secrets Manager rotation of secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot_rotation.html) in the *AWS Secrets Manager User Guide*\.
+
 ## \[SSM\.1\] EC2 instances should be managed by AWS Systems Manager<a name="fsbp-ssm-1"></a>
 
 **Category:** Identify > Inventory
@@ -1617,6 +2065,8 @@ To help you to maintain security and compliance, Systems Manager scans your mana
 To learn more, see [https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html)\.
 
 ### Remediation<a name="ssm-1-remediation"></a>
+
+You can use the Systems Manager console to remediate this issue\.
 
 **To ensure that EC2 instances are managed by Systems Manager**
 
@@ -1670,7 +2120,7 @@ Middle East \(Bahrain\)
 
 1. After the command is complete, to monitor the new compliance status of your patched instances, in the navigation pane, choose **Compliance**\.
 
-For more information about using Systems Manager Documents to patch a managed instance, see[ About SSM documents for patching instances](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-ssm-documents.html) and [Running commands using Systems Manager Run command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html) in the *AWS Systems Manager User Guide*\.
+For more information about using Systems Manager documents to patch a managed instance, see[ About SSM documents for patching instances](https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-ssm-documents.html) and [Running commands using Systems Manager Run command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html) in the *AWS Systems Manager User Guide*\.
 
 ## \[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT<a name="fsbp-ssm-3"></a>
 
