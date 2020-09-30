@@ -11,6 +11,7 @@ For these services, the integration allows the service to send findings to Secur
 + [Amazon GuardDuty](#integration-amazon-guardduty)
 + [Amazon Inspector](#integration-amazon-inspector)
 + [Amazon Macie](#integration-amazon-macie)
++ [AWS Systems Manager Patch Manager](#patch-manager)
 
 Security Hub also supports an integration with [Amazon Detective](#integration-amazon-detective)\. That integration allows you to pivot from Security Hub to Detective to investigate a GuardDuty finding\.
 
@@ -49,3 +50,8 @@ A finding from Macie can indicate that there is a policy violation, or that sens
 For more information, see [Amazon Macie findings](https://docs.aws.amazon.com/macie/latest/user/findings.html) in the *Amazon Macie User Guide*\.  
 Security Hub can also receive findings from Macie Classic\. Macie Classic sends basic and custom findings to Macie from the **S3 bucket properties** and **S3 objects** indices\. Macie Classic does not send data classifications, or findings from the **CloudTrail data** index\.  
 For more information, see [Locating and analyzing Macie Classic alerts](https://docs.aws.amazon.com/macie/latest/userguide/macie-alerts.html#macie-alert-working-locate) in the *Amazon Macie Classic User Guide*\.
+
+**AWS Systems Manager Patch Manager**  <a name="patch-manager"></a>
+AWS Systems Manager Patch Manager sends findings to Security Hub when instances in a customer's fleet go out of compliance with their patch compliance standard\.  
+Patch Manager automates the process of patching managed instances with both security related and other types of updates\.   
+For more information about using Patch Manager, see [AWS Systems Manager Patch Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-patch.html) in the *AWS Systems Manager User Guide*\.

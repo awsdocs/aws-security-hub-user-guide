@@ -22,10 +22,31 @@ AWS Security Hub consumes, aggregates, organizes, and prioritizes findings from 
   + [Remediation](#asff-remediation)
     + [Recommendation](#asff-remediation-recommendation)
   + [Resources](#asff-resources)
+    + [AwsApiGatewayRestApi](#asff-resourcedetails-awsapigatewayrestapi)
+      + [EndpointConfiguration](#asff-resourcedetails-awsapigatewayrestapi-endpointconfiguration)
+    + [AwsApiGatewayStage](#asff-resourcedetails-awsapigatewaystage)
+      + [AccessLogSettings](#asff-resourcedetails-awsapigatewaystage-accesslogsettings)
+      + [CanarySettings](#asff-resourcedetails-awsapigatewaystage-canarysettings)
+      + [MethodSettings](#asff-resourcedetails-awsapigatewaystage-methodsettings)
+    + [AwsApiGatewayV2Api](#asff-resourcedetails-awsapigatewayv2api)
+      + [CorsConfiguration](#asff-resourcedetails-awsapigatewayv2api-corsconfiguration)
+    + [AwsApiGatewayV2Stage](#asff-resourcedetails-awsapigatewayv2stage)
+      + [AccessLogSettings](#asff-resourcedetails-awsapigatewayv2stage-accesslogsettings)
+      + [DefaultRouteSettings and RouteSettings](#asff-resourcedetails-awsapigatewayv2stage-defaultroutesettings)
     + [AwsAutoScalingAutoScalingGroup](#asff-resourcedetails-awsautoscalingautoscalinggroup)
+    + [AwsCertificateManagerCertificate](#asff-resourcedetails-awscertificatemanagercertificate)
+      + [DomainValidationOptions](#asff-resourcedetails-awscertificatemanagercertificate-domainvalidationoptions)
+      + [ExtendedKeyUsages](#asff-resourcedetails-awscertificatemanagercertificate-extendedkeyusages)
+      + [KeyUsages](#asff-resourcedetails-awscertificatemanagercertificate-keyusages)
+      + [Options](#asff-resourcedetails-awscertificatemanagercertificate-options)
+      + [RenewalSummary](#asff-resourcedetails-awscertificatemanagercertificate-renewalsummary)
     + [AwsCloudFrontDistribution](#asff-resourcedetails-awscloudfrontdistribution)
+      + [CacheBehaviors](#asff-resourcedetails-awscloudfrontdistribution-cachebehaviors)
+      + [DefaultCacheBehavior](#asff-resourcedetails-awscloudfrontdistribution-defaultcachebehavior)
       + [Logging](#asff-resourcedetails-awscloudfrontdistribution-logging)
+      + [OriginGroups](#asff-resourcedetails-awscloudfrontdistribution-origingroups)
       + [Origins](#asff-resourcedetails-awscloudfrontdistribution-origins)
+    + [AwsCloudTrailTrail](#asff-resourcedetails-awscloudtrailtrail)
     + [AwsCodeBuildProject](#asff-resourcedetails-awscodebuildproject)
       + [Environment](#asff-resourcedetails-awscodebuildproject-environment)
       + [Source](#asff-resourcedetails-awscodebuildproject-source)
@@ -60,13 +81,29 @@ AWS Security Hub consumes, aggregates, organizes, and prioritizes findings from 
       + [EncryptionAtRestOptions](#asff-resourcedetails-awselasticsearchdomain-encryptionatrestoptions)
       + [NodeToNodeEncryptionOptions](#asff-resourcedetails-awselasticsearchdomain-nodetonodeencryptionoptions)
       + [VpcOptions](#asff-resourcedetails-awselasticsearchdomain-vpcoptions)
+    + [AwsElbLoadBalancer](#asff-resourcedetails-awselbloadbalancer)
+      + [BackendServerDescriptions](#asff-resourcedetails-awselbloadbalancer-backendserverdescriptions)
+      + [HealthCheck](#asff-resourcedetails-awselbloadbalancer-healthcheck)
+      + [Instances](#asff-resourcedetails-awselbloadbalancer-instances)
+      + [ListenerDescriptions](#asff-resourcedetails-awselbloadbalancer-listenerdescriptions)
+      + [LoadBalancerAttributes](#asff-resourcedetails-awselbloadbalancer-loadbalancerattributes)
+      + [Policies](#asff-resourcedetails-awselbloadbalancer-policies)
+      + [SourceSecurityGroup](#asff-resourcedetails-awselbloadbalancer-sourcesecuritygroup)
     + [AwsElbv2LoadBalancer](#asff-resourcedetails-awselbv2loadbalancer)
       + [AvailabilityZones](#asff-resourcedetails-awselbv2loadbalancer-availabilityzones)
       + [State](#asff-resourcedetails-awselbv2loadbalancer-state)
     + [AwsIamAccessKey](#asff-resourcedetails-awsiamaccesskey)
+      + [SessionContext](#asff-resourcedetails-awsiamaccesskey-sessioncontext)
+    + [AwsIamGroup](#asff-resourcedetails-awsiamgroup)
+      + [AttachedManagedPolicies](#asff-resourcedetails-awsiamgroup-attachedmanagedpolicies)
+      + [GroupPolicyList](#asff-resourcedetails-awsiamgroup-grouppolicylist)
     + [AwsIamPolicy](#asff-resourcedetails-awsiampolicy)
       + [PolicyVersionList](#asff-resourcedetails-awsiampolicy-policyversionlist)
     + [AwsIamRole](#asff-resourcedetails-awsiamrole)
+      + [AttachedManagedPolicies](#asff-resourcedetails-awsiamrole-attachedmanagedpolicies)
+      + [InstanceProfileList](#asff-resourcedetails-awsiamrole-instanceprofilelist)
+      + [PermissionsBoundary](#asff-resourcedetails-awsiamrole-permissionsboundary)
+      + [RolePolicyList](#asff-resourcedetails-awsiamrole-rolepolicylist)
     + [AwsIamUser](#asff-resourcedetails-awsiamuser)
       + [AttachedManagedPolicies](#asff-resourcedetails-awsiamuser-attachedmanagedpolicies)
       + [PermissionsBoundary](#asff-resourcedetails-awsiamuser-permissionsboundary)
@@ -100,6 +137,20 @@ AWS Security Hub consumes, aggregates, organizes, and prioritizes findings from 
       + [StatusInfos](#asff-resourcedetails-awsrdsdbinstance-statusinfos)
       + [VpcSecurityGroups](#asff-resourcedetails-awsrdsdbinstance-vpcsecuritygroups)
     + [AwsRdsDbSnapshot](#asff-resourcedetails-awsrdsdbsnapshot)
+    + [AwsRedshiftCluster](#asff-resourcedetails-awsredshiftcluster)
+      + [ClusterNodes](#asff-resourcedetails-awsredshiftcluster-clusternodes)
+      + [ClusterParameterGroups](#asff-resourcedetails-awsredshiftcluster-clusterparametergroups)
+      + [ClusterSecurityGroups](#asff-resourcedetails-awsredshiftcluster-clustersecuritygroups)
+      + [ClusterSnapshotCopyStatus](#asff-resourcedetails-awsredshiftcluster-clustersnapshotcopystatus)
+      + [DeferredMaintenanceWindows](#asff-resourcedetails-awsredshiftcluster-deferredmaintenancewindows)
+      + [ElasticIpStatus](#asff-resourcedetails-awsredshiftcluster-elasticipstatus)
+      + [Endpoint](#asff-resourcedetails-awsredshiftcluster-endpoint)
+      + [HsmStatus](#asff-resourcedetails-awsredshiftcluster-hsmstatus)
+      + [IamRoles](#asff-resourcedetails-awsredshiftcluster-iamroles)
+      + [PendingModifiedValues](#asff-resourcedetails-awsredshiftcluster-pendingmodifiedvalues)
+      + [ResizeInfo](#asff-resourcedetails-awsredshiftcluster-resizeinfo)
+      + [RestoreStatus](#asff-resourcedetails-awsredshiftcluster-restorestatus)
+      + [VpcSecurityGroups](#asff-resourcedetails-awsredshiftcluster-vpcsecuritygroups)
     + [AwsS3Bucket](#asff-resourcedetails-awss3bucket)
       + [ApplyServerSideEncryptionByDefault](#asff-resourcedetails-awss3bucket-applyserversideencryptionbydefault)
     + [AwsS3Object](#asff-resourcedetails-awss3object)
@@ -173,7 +224,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
             "SourceMac": "string",
             "SourcePort": number
         },
-        "NetworkPath" : [
+        "NetworkPath": [
             {
                 "ComponentId": "string",
                 "ComponentType": "string",
@@ -226,18 +277,18 @@ The following is the syntax of the complete finding JSON in the ASFF\.
             "UpdatedAt": "string",
             "UpdatedBy": "string"
         },
-        "PatchSummary" : {
-            "FailedCount" : number,
-            "Id" : "string",
-            "InstalledCount" : number,
-            "InstalledOtherCount" : number,
-            "InstalledPendingReboot" : number,
-            "InstalledRejectedCount" : number,
-            "MissingCount" : number,
-            "Operation" : "string",
-            "OperationEndTime" : "string",
-            "OperationStartTime" : "string",
-            "RebootOption" : "string"
+        "PatchSummary": {
+            "FailedCount": number,
+            "Id": "string",
+            "InstalledCount": number,
+            "InstalledOtherCount": number,
+            "InstalledPendingReboot": number,
+            "InstalledRejectedCount": number,
+            "MissingCount": number,
+            "Operation": "string",
+            "OperationEndTime": "string",
+            "OperationStartTime": "string",
+            "RebootOption": "string"
         },
         "Process": { 
             "LaunchedAt": "string",
@@ -249,7 +300,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
         },
         "ProductArn": "string",
         "ProductFields": { 
-            "string" : "string" 
+            "string": "string" 
         },
         "RecordState": "string",
         "RelatedFindings": [ 
@@ -267,6 +318,112 @@ The following is the syntax of the complete finding JSON in the ASFF\.
         "Resources": [ 
             { 
                 "Details": { 
+                    "AwsApiGatewayRestApi": {
+                        "ApiKeySource": "string",
+                        "BinaryMediaTypes": [" string" ],
+                        "CreatedDate": "string",
+                        "Description": "string",
+                        "EndpointConfiguration": {
+                            "Types": [ "string" ]
+                        },
+                        "Id": "string",
+                        "MinimumCompressionSize": number,
+                        "Name": "string",
+                        "Version": "string"
+                    },
+                    "AwsApiGatewayStage": {
+                        "AccessLogSettings": {
+                            "DestinationArn": "string",
+                            "Format": "string"
+                        },
+                        "CacheClusterEnabled": boolean,
+                        "CacheClusterSize": "string",
+                        "CacheClusterStatus": "string",
+                        "CanarySettings": {
+                            "DeploymentId": "string",
+                            "PercentTraffic": number,
+                            "StageVariableOverrides": [
+                                "string": "string"
+                            ],
+                            "UseStageCache": boolean
+                        },
+                        "ClientCertificateId": "string", 
+                        "CreatedDate": "string",
+                        "DeploymentId": "string",
+                        "Description": "string",
+                        "DocumentationVersion": "string",
+                        "LastUpdatedDate": "string",
+                        "MethodSettings": [
+                            {
+                                "CacheDataEncrypted": boolean,
+                                "CachingEnabled": boolean,
+                                "CacheTtlInSeconds": number,
+                                "DataTraceEnabled": boolean,
+                                "HttpMethod": "string",
+                                "LoggingLevel": "string",
+                                "MetricsEnabled": boolean,
+                                "RequireAuthorizationForCacheControl": boolean,
+                                "ResourcePath": "string",
+                                "ThrottlingBurstLimit": number,
+                                "ThrottlingRateLimit": number,
+                                "UnauthorizedCacheControlHeaderStrategy": "string"
+                            }
+                        ],
+                        "StageName": "string",
+                        "TracingEnabled": boolean,
+                        "Variables": {
+                            "string": "string"
+                        },
+                        "WebAclArn": "string"
+                    },
+                    "AwsApiGatewayV2Api": {
+                        "ApiEndpoint": "string",
+                        "ApiId": "string",
+                        "ApiKeySelectionExpression": "string",
+                        "CorsConfiguration": {
+                            "AllowCredentials": boolean,
+                            "AllowHeaders": [ "string" ],
+                            "AllowMethods": [ "string" ],
+                            "AllowOrigins": [ "string" ],
+                            "ExposeHeaders": [ "string" ],
+                            "MaxAge": number
+                        },
+                        "CreatedDate": "string",
+                        "Description": "string",
+                        "Name": "string",
+                        "ProtocolType": "string",
+                        "RouteSelectionExpression": "string",
+                        "Version": "string"
+                    },
+                    "AwsApiGatewayV2Stage": {
+                        "AccessLogSettings": {
+                            "DestinationArn": "string",
+                            "Format": "string"
+                        },
+                        "ApiGatewayManaged": boolean,
+                        "AutoDeploy": boolean,
+                        "CreatedDate": "string",
+                        "DefaultRouteSettings": {
+                            "DataTraceEnabled": boolean,
+                            "DetailedMetricsEnabled": boolean,
+                            "LoggingLevel": "string",
+                            "ThrottlingBurstLimit": number,
+                            "ThrottlingRateLimit": number
+                        },
+                        "DeploymentId": "string",
+                        "Description": "string",
+                        "LastDeploymentStatusMessage": "string",
+                        "LastUpdatedDate": "string",
+                        "RouteSettings": {
+                            "DetailedMetricsEnabled": boolean,
+                            "LoggingLevel": "string",
+                            "DataTraceEnabled": boolean,
+                            "ThrottlingBurstLimit": number,
+                            "ThrottlingRateLimit": number
+                        },
+                        "StageName": "string",
+                        "StageVariables": [ "string": "string" ]
+                    },
                     "AwsAutoScalingAutoScalingGroup": {
                         "CreatedTime": "string",
                         "HealthCheckGracePeriod": integer,
@@ -274,7 +431,85 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "LaunchConfigurationName": "string",
                         "LoadBalancerNames": ["string"]
                     },
+                    "AwsCertificateManagerCertificate": {
+                        "CertificateAuthorityArn": "string",
+                        "CreatedAt": "string",
+                        "DomainName": "string",
+                        "DomainValidationOptions": [
+                            {
+                                "DomainName": "string",
+                                "ResourceRecord": {
+                                    "Name": "string",
+                                    "Type": "string",
+                                    "Value": "string",
+                                }
+                                "ValidationDomain": "string",
+                                "ValidationEmails": [ "string" ],
+                                "ValidationMethod": "string",
+                                "ValidationStatus": "string"
+                            }
+                        ],
+                        "ExtendedKeyUsages": [
+                            {
+                                "Name": "string",
+                                "OId": "string"
+                            }
+                        ],
+                        "FailureReason": "string",
+                        "ImportedAt": "string",
+                        "InUseBy": [ "string" ],
+                        "IssuedAt": "string",
+                        "Issuer": "string",
+                        "KeyAlgorithm": "string",
+                        "KeyUsages": [
+                            {
+                                "Name": "string",
+                            }
+                        ],
+                        "NotAfter": "string",
+                        "NotBefore": "string",
+                        "Options": {
+                            "CertificateTransparencyLoggingPreference": "string",
+                        }
+                        "RenewalEligibility": "string",
+                        "RenewalSummary": {
+                            "DomainValidationOptions": [
+                                {
+                                    "DomainName": "string",
+                                    "ResourceRecord": {
+                                        "Name": "string",
+                                        "Type": "string",
+                                        "Value": "string",
+                                    },
+                                    "ValidationDomain": "string",
+                                    "ValidationEmails": [ "string" ],
+                                    "ValidationMethod": "string",
+                                    "ValidationStatus": "string"
+                                }
+                            ],
+                            "RenewalStatus": "string",
+                            "RenewalStatusReason": "string",
+                            "UpdatedAt": "string",
+                        },
+                        "Serial": "string",
+                        "SignatureAlgorithm": "string",
+                        "Status": "string",
+                        "Subject": "string",
+                        "SubjectAlternativeNames": [ "string" ],
+                        "Type": "string"
+                    },
                     "AwsCloudFrontDistribution": {
+                        "CacheBehaviors": {
+                            "Items": [
+                                {
+                                    "ViewerProtocolPolicy": "string"
+                                }
+                            ]
+                        },
+                        "DefaultCacheBehavior": {
+                            "ViewerProtocolPolicy": "string"
+                        },
+                        "DefaultRootObject": "string",
                         "DomainName": "string",
                         "Etag": "string",
                         "LastModifiedTime": "string",
@@ -284,17 +519,49 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "IncludeCookies": boolean,
                             "Prefix": "string"
                         },
+                        "OriginGroups": {
+                            "Items": [
+                                {
+                                    "FailoverCriteria": {
+                                        "StatusCodes": {
+                                            "Items": [ number ],
+                                            "Quantity": number
+                                         }
+                                    }
+                                }
+                            ]
+                        },
                         "Origins": {
                             "Items": [
                                 {
                                     "DomainName": "string",
                                     "Id": "string",
                                     "OriginPath": "string"
+                                    "S3OriginConfig": {
+                                        "OriginAccessIdentity": "string"
+                                    }
                                 }
                             ]
                         },
                         "Status": "string",
                         "WebAclId": "string"
+                    },
+                    "AwsCloudTrailTrail": {
+                        "CloudWatchLogsLogGroupArn": "string",
+                        "CloudWatchLogsRoleArn": "string",
+                        "HasCustomEventSelectors": boolean,
+                        "HomeRegion": "string",
+                        "IncludeGlobalServiceEvents": boolean,
+                        "IsMultiRegionTrail": boolean,
+                        "IsOrganizationTrail": boolean,
+                        "KmsKeyId": "string",
+                        "LogFileValidationEnabled": boolean,
+                        "Name": "string",
+                        "S3BucketName": "string",
+                        "S3KeyPrefix": "string",
+                        "SnsTopicArn": "string",
+                        "SnsTopicName": "string",
+                        "TrailArn": "string"
                     },
                     "AwsCodeBuildProject": {
                         "EncryptionKey": "string",
@@ -401,7 +668,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                             "ReadCapacityUnits": number
                                     }
                                 ],
-                                "KmsMasterKeyId" : "string"
+                                "KmsMasterKeyId": "string"
                                 "ProvisionedThroughputOverride": {
                                     "ReadCapacityUnits": number
                                 },
@@ -590,6 +857,85 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "VPCId": "string"
                         }
                     },
+                    "AwsElbLoadBalancer": {
+                        "AvailabilityZones": [ "string" ],
+                        "BackendServerDescriptions": [
+                            {
+                                "InstancePort": number,
+                                "PolicyNames": [ "string" ]
+                            }
+                        ],
+                        "CanonicalHostedZoneName": "string",
+                        "CanonicalHostedZoneNameID": "string",
+                        "CreatedTime": "string",
+                        "DnsName": "string",
+                        "HealthCheck": {
+                            "HealthyThreshold": number,
+                            "Interval": number,
+                            "Target": "string",
+                            "Timeout": number,
+                            "UnhealthyThreshold": number
+                        },
+                        "Instances": [
+                            {
+                                "InstanceId": "string"
+                            }
+                        ],
+                        "ListenerDescriptions": [
+                            {
+                                "Listener": {
+                                    "InstancePort": number,
+                                    "InstanceProtocol": "string",
+                                    "LoadBalancerPort": number,
+                                    "Protocol": "string",
+                                    "SslCertificateId": "string"
+                                },
+                                "PolicyNames": [ "string" ]
+                            }
+                        ],
+                        "LoadBalancerAttributes": {
+                            "AccessLog": {
+                                "EmitInterval": number,
+                                "Enabled": boolean,
+                                "S3BucketName": "string",
+                                "S3BucketPrefix": "string"
+                            },
+                            "ConnectionDraining": {
+                                "Enabled": boolean,
+                                "Timeout": number
+                            },
+                            "ConnectionSettings": {
+                                "IdleTimeout": number
+                            },
+                            "CrossZoneLoadBalancing": {
+                                "Enabled": boolean
+                            }
+                        },
+                        "LoadBalancerName": "string",
+                        "Policies": {
+                            "AppCookieStickinessPolicies": [
+                                {
+                                    "CookieName": "string",
+                                    "PolicyName": "string"
+                                }
+                            ],
+                            "LbCookieStickinessPolicies": [
+                                {
+                                    "CookieExpirationPeriod": number,
+                                    "PolicyName": "string"
+                                }
+                            ],
+                            "OtherPolicies": [ "string" ]
+                        },
+                        "Scheme": "string",
+                        "SecurityGroups": [ "string" ],
+                        "SourceSecurityGroup": {
+                            "GroupName": "string",
+                            "OwnerAlias": "string"
+                        },
+                        "Subnets": [ "string" ],
+                        "VpcId": "string"
+                    },
                     "AwsElbv2LoadBalancer": {
                         "AvailabilityZones": {
                             "SubnetId": "string",
@@ -609,11 +955,43 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "VpcId": "string"
                     },
                     "AwsIamAccessKey": { 
+                        "AccessKeyId" "string",
+                        "AccountId": "string",
                         "CreatedAt": "string",
                         "PrincipalId": "string",
                         "PrincipalName": "string",
                         "PrincipalType": "string",
+                        "SessionContext": {
+                            Attributes": {
+                                "CreationDate": "string",
+                                "MfaAuthenticated": boolean
+                            },
+                            "SessionIssuer": {
+                                "AccountId": "string",
+                                "Arn": "string",
+                                "PrincipalId"; "string",
+                                "Type: "string",
+                                "UserName": "string"
+                            }
+                        },
                         "Status": "string"
+                    },
+                    "AwsIamGroup": {
+                        "AttachedManagedPolicies": [
+                            {
+                                "PolicyArn": "string",
+                                "PolicyName": "string",
+                            }
+                        ],
+                        "CreateDate": "string",
+                        "GroupId": "string",
+                        "GroupName": "string",
+                        "GroupPolicyList": [
+                            {
+                                "PolicyName": "string"
+                            }
+                        ],
+                        "Path": "/"
                     },
                     "AwsIamPolicy": {
                         "AttachmentCount": number,
@@ -636,11 +1014,45 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                     },
                     "AwsIamRole": {
                         "AssumeRolePolicyDocument": "string",
+                        "AttachedManagedPolicies": [
+                            {
+                                "PolicyArn": "string",
+                                "PolicyName": "string",
+                            }
+                        ],
                         "CreateDate": "string",
+                        "InstanceProfileList": [
+                            {
+                                "Arn": "string",
+                                "CreateDate": "string",
+                                "InstanceProfileId": "string",
+                                "InstanceProfileName": "string",
+                                "Path": "string",
+                                "Roles": [
+                                    {
+                                        "Arn": "string",
+                                        "AssumeRolePolicyDocument": "string",
+                                        "CreateDate": "string",
+                                        "Path": "string",
+                                        "RoleId": "string",
+                                        "RoleName": "string"
+                                    }
+                                ]
+                            }
+                        ],
                         "MaxSessionDuration": number,
                         "Path": "string",
+                        "PermissionsBoundary": {
+                            "PermissionsBoundaryArn": "string",
+                            "PermissionsBoundaryType": "string"
+                        },
                         "RoleId": "string",
                         "RoleName": "string"
+                        "RolePolicyList": [
+                            {
+                                "PolicyName": "string"
+                            }
+                        ]
                     },
                     "AwsIamUser": {
                         "AttachedManagedPolicies": [
@@ -652,9 +1064,9 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "CreateDate": "string",
                         "GroupList": [ "string" ],
                         "Path": "string",
-                        "PermissionsBoundary" : {
-                            "PermissionsBoundaryArn" : "string",
-                            "PermissionsBoundaryType" : "string"
+                        "PermissionsBoundary": {
+                            "PermissionsBoundaryArn": "string",
+                            "PermissionsBoundaryType": "string"
                         }.
                         "UserId": "string",
                         "UserName": "string",
@@ -985,6 +1397,127 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "Timezone": "string",
                         "VpcId": "string"
                     },
+                    "AwsRedshiftCluster": {
+                        "AllowVersionUpgrade": boolean,
+                        "AutomatedSnapshotRetentionPeriod": number,
+                        "AvailabilityZone": "string",
+                        "ClusterAvailabilityStatus": "string",
+                        "ClusterCreateTime": "string",
+                        "ClusterIdentifier": "string",
+                        "ClusterNodes": [
+                            {
+                                "NodeRole": "string",
+                                "PrivateIPAddress": "string",
+                                "PublicIPAddress": "string"
+                            }
+                        ],
+                        "ClusterParameterGroups": [
+                            { 
+                                "ClusterParameterStatusList": [
+                                    {
+                                        "ParameterApplyErrorDescription": "string",
+                                        "ParameterApplyStatus": "string",
+                                        "ParameterName": "string"
+                                    }
+                                ],
+                                "ParameterApplyStatus": "string",
+                                "ParameterGroupName": "string"
+                            }
+                        ], 
+                        "ClusterPublicKey": "string",
+                        "ClusterRevisionNumber": "string",
+                        "ClusterSecurityGroups": [
+                            {
+                                "ClusterSecurityGroupName": "string",
+                                "Status": "string"
+                            }
+                        ],
+                        "ClusterSnapshotCopyStatus": {
+                            "DestinationRegion": "string",
+                            "ManualSnapshotRetentionPeriod": number,
+                            "RetentionPeriod": number,
+                            "SnapshotCopyGrantName": "string"
+                        },
+                        "ClusterStatus": "string",
+                        "ClusterSubnetGroupName": "string",
+                        "ClusterVersion": "string",
+                        "DBName": "string",
+                        "DeferredMaintenanceWindows": [
+                            {
+                                "DeferMaintenanceEndTime": "string",
+                                "DeferMaintenanceIdentifier": "string",
+                                "DeferMaintenanceStartTime": "string"
+                            }
+                        ],
+                        "ElasticIpStatus": {
+                            "ElasticIp": "string",
+                            "Status": "string"
+                        },
+                        "ElasticResizeNumberOfNodeOptions": "string",
+                        "Encrypted": boolean,
+                        "Endpoint": {
+                            "Address": "string",
+                            "Port": number
+                        },
+                        "EnhancedVpcRouting": boolean,
+                        "ExpectedNextSnapshotScheduleTime": "string",
+                        "ExpectedNextSnapshotScheduleTimeStatus": "string",
+                        "HsmStatus": {
+                            "HsmClientCertificateIdentifier": "string",
+                            "HsmConfigurationIdentifier": "string",
+                            "Status": "string"
+                        }
+                        "IamRoles": [
+                            {
+                                "ApplyStatus": "string",
+                                "IamRoleArn": "string"   
+                            }
+                        ],
+                        "KmsKeyId": "string",
+                        "MaintenanceTrackName": "string",
+                        "ManualSnapshotRetentionPeriod": "number",
+                        "MasterUsername": "string",
+                        "NextMaintenanceWindowStartTime": "string",
+                        "NodeType": "string",
+                        "NumberOfNodes": number,
+                        "PendingActions": [ "string" ],
+                        "PendingModifiedValues": {
+                            "AutomatedSnapshotRetentionPeriod": number,
+                            "ClusterIdentifier": "string",
+                            "ClusterType": "string",
+                            "ClusterVersion": "string",
+                            "EncryptionType": "string",
+                            "EnhancedVpcRouting": boolean,
+                            "MaintenanceTrackName": "string",
+                            "MasterUserPassword": "string",
+                            "NodeType": "string",
+                            "NumberOfNodes": number,
+                            "PubliclyAccessible": "string"
+                        },
+                        "PreferredMaintenanceWindow": "string",
+                        "PubliclyAccessible": boolean,
+                        "ResizeInfo": {
+                            "AllowCancelResize": boolean,
+                            "ResizeType": "string",
+                        },
+                        "RestoreStatus": {
+                            "CurrentRestoreRateInMegaBytesPerSecond": number,
+                            "ElapsedTimeInSeconds": number,
+                            "EstimatedTimeToCompletionInSeconds": number,
+                            "ProgressInMegaBytes": number,
+                            "SnapshotSizeInMegaBytes": number,
+                            "Status": "string",
+                        },
+                        "SnapshotScheduleIdentifier": "string",
+                        "SnapshotScheduleState": "string",
+                        "VpcId": "string",
+                        "VpcSecurityGroups": [
+                            {
+                                "Status": "string",
+                                "VpcSecurityGroupId": "string",
+                            }
+                        ]
+                    },
                     "AwsS3Bucket": { 
                         "CreatedAt": "string",
                         "OwnerId": "string",
@@ -1065,14 +1598,15 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "Name": "string"
                     },
                     "Other": { 
-                        "string" : "string" 
+                        "string": "string" 
                     }
                 },
                 "Id": "string",
                 "Partition": "string",
                 "Region": "string",
+                "ResourceRole": "string",
                 "Tags": { 
-                    "string" : "string" 
+                    "string": "string" 
                 },
                 "Type": "string"
             }
@@ -1099,7 +1633,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
         "Types": [ "string" ],
         "UpdatedAt": "string",
         "UserDefinedFields": { 
-            "string" : "string" 
+            "string": "string" 
 		},
         "VerificationState": "string",
         "Workflow": {
@@ -1107,7 +1641,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
         },
         "WorkflowState": "string"
     },
-    "Vulnerabilities" : [
+    "Vulnerabilities": [
         {
             "Cvss": [
                 {
@@ -1582,6 +2116,7 @@ Type: Array of up to 32 resource objects
     "Id": "i-cafebabe",
     "Partition": "aws",
     "Region": "us-west-2",
+    "ResourceRole": "TARGET",
     "Tags": {
       "billingCode": "Lotus-1-2-3",
       "needsPatching": "true"
@@ -1611,14 +2146,340 @@ Each resource object can have the following attributes\.
 | Partition | Description | 
 | --- | --- | 
 |  `Details`  |  No  |  This field provides additional details about a single resource using the appropriate subfields\. Each resource must be provided in a separate resource object in the `Resources` field\. Security Hub provides a set of available subfields for its supported resource types\. These subfields correspond to values of the resource `Type`\. Use the provided types and subfields whenever possible\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) For example, if the resource is an S3 bucket, then set the resource `Type` to `AwsS3Bucket`, and provide the resource details in the `AwsS3Bucket` subfield\. The [`Other`](#asff-resourcedetails-other) subfield allows you to provide custom fields and values\. You use the `Other` subfield in the following cases\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: Object Example: <pre>"Details": {<br />  "AwsEc2Instance": {<br />    "Type": "i3.xlarge",<br />    "ImageId": "ami-abcd1234",<br />    "IpV4Addresses": [ "54.194.252.215", "192.168.1.88" ],<br />    "IpV6Addresses": [ "2001:db8:1234:1a2b::123" ],<br />    "KeyName": "my_keypair",<br />    "IamInstanceProfileArn": "arn:aws:iam::111111111111:instance-profile/AdminRole",<br />    "VpcId": "vpc-11112222",<br />    "SubnetId": "subnet-56f5f633",<br />    "LaunchedAt": "2018-05-08T16:46:19.000Z"<br />  },<br />  "AwsS3Bucket": {<br />    "OwnerId": "da4d66eac431652a4d44d490a00500bded52c97d235b7b4752f9f688566fe6de",<br />    "OwnerName": "acmes3bucketowner"<br />  },<br />  "Other": [<br />    { "Key": "LightPen", "Value": "blinky" },<br />    { "Key": "SerialNo", "Value": "1234abcd" }<br />  ]<br />}</pre>  | 
-|  `Id`  |  Yes  | The canonical identifier for the given resource type\. For AWS resources that are identified by ARNs, this must be the ARN\. For all other AWS resource types that lack ARNs, this must be the identifier as defined by the AWS service that created the resource\. For non AWS resources, this should be a unique identifier that is associated with the resource\.Type: String \(512 characters max\) or ARN Example: <pre>"Id": "arn:aws:s3:::example-bucket"</pre>  | 
-|  `Partition`  |  No  | The canonical AWS partition name that the Region is assigned to\.  Type: Enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Partition": "aws"</pre>  | 
-|  `Region`  |  No  | The canonical AWS external Region name where this resource is located\. Type: String \(16 characters max\) Example: <pre>"Region": "us-west-2"</pre>  | 
-|  `Tags`  |  No  | A list of AWS tags that are associated with a resource at the time the finding was processed\. Include the `Tags` attribute only for resources that have an associated tag\. If a resource has no associated tag, don't include a `Tags` attribute in the finding\. Type: Map of up to 50 tags \(values are limited to 256 characters max\) The following basic restrictions apply to tags: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Tags": {<br />    "billingCode": "Lotus-1-2-3",<br />    "needsPatching": "true"<br />}</pre>  | 
+|  `Id`  |  Yes  |  The canonical identifier for the given resource type\. For AWS resources that are identified by ARNs, this must be the ARN\. For all other AWS resource types that lack ARNs, this must be the identifier as defined by the AWS service that created the resource\. For non AWS resources, this should be a unique identifier that is associated with the resource\. Type: String \(512 characters max\) or ARN Example: <pre>"Id": "arn:aws:s3:::example-bucket"</pre>  | 
+|  `Partition`  |  No  |  The canonical AWS partition name that the Region is assigned to\.  Type: Enum Valid values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Partition": "aws"</pre>  | 
+|  `Region`  |  No  |  The canonical AWS external Region name where this resource is located\.  Type: String \(16 characters max\) Example: <pre>"Region": "us-west-2"</pre>  | 
+|  `ResourceRole`  |  No  |  Identifies the role of the resource in the finding\. A resource is either the target of the finding activity, Type: String Valid values: `ACTOR` \| `TARGET`  | 
+|  `Tags`  |  No  |  A list of AWS tags that are associated with a resource at the time the finding was processed\. Include the `Tags` attribute only for resources that have an associated tag\. If a resource has no associated tag, don't include a `Tags` attribute in the finding\. Type: Map of up to 50 tags \(values are limited to 256 characters max\) The following basic restrictions apply to tags: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Tags": {<br />    "billingCode": "Lotus-1-2-3",<br />    "needsPatching": "true"<br />}</pre>  | 
 |  `Type`  |  Yes  |  The type of the resource that you are providing details for\. Whenever possible, use one of the provided resource types, such as `AwsEc2Instance` or `AwsS3Bucket`\. If the resource type does not match any of the provided resource types, then set the resource `Type` to `Other`, and use the `Other` details subfield to populate the details\. Type: String \(256 characters max\) Supported values are as follows\. If a type has a corresponding subfield, then to view the details for the subfield, choose the type name\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Example: <pre>"Type": "AwsS3Bucket"</pre>  | 
 | aws | Commercial | 
 | aws\-cn | China | 
 | aws\-us\-gov | AWS GovCloud \(US\) | 
+
+#### AwsApiGatewayRestApi<a name="asff-resourcedetails-awsapigatewayrestapi"></a>
+
+The `AwsApiGatewayRestApi` object contains information about a REST API in version 1 of Amazon API Gateway\.
+
+**Example**
+
+```
+AwsApiGatewayRestApi: {
+    "Id": "exampleapi",
+    "Name": "Security Hub",
+    "Description": "AWS Security Hub",
+    "CreatedDate": "2018-11-18T10:20:05-08:00",
+    "Version": "2018-10-26",
+    "BinaryMediaTypes" : ["-'*~1*'"],
+    "MinimumCompressionSize": 1024,
+    "ApiKeySource": "AWS_ACCOUNT_ID",
+    "EndpointConfiguration": {
+        "Types": [
+            "REGIONAL"
+        ]
+    }
+}
+```
+
+`AwsApiGatewayRestApi` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ApiKeySource`  |  No  |  The source of the API key for metering requests according to a usage plan\. `HEADER` indicates whether to read the API key from the X\-API\-Key header of a request\. `AUTHORIZER` indicates whether to read the API key from the `UsageIdentifierKey` from a custom authorizer\. Type: String Valid values: `HEADER` \| `AUTHORIZER`  | 
+|  `BinaryMediaTypes`  |  No  |  The list of binary media types supported by the REST API\. Type: Array of strings  | 
+|  CreatedDate  |  No  |  Indicates when the API was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreatedDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `Description`  |  No  |  A description of the REST API\. Type: String  | 
+|  [`EndpointConfiguration`](#asff-resourcedetails-awsapigatewayrestapi-endpointconfiguration)  |  No  |  The endpoint configuration of the REST API\. Type: Object  | 
+|  `Id`  |  No  |  The identifier of the REST API\. Type: String  | 
+|  `MinimumCompressionSize`  |  No  |  The minimum size in bytes of a payload before compression is enabled\. If `null`, then compression is disabled\. If 0, then all payloads are compressed\. Type: Number Minimum value: 0 Maximum value: 10\.485,760   | 
+|  `Name`  |  No  |  The name of the REST API\. Type: String  | 
+|  `Version`  |  No  |  The version identifier for the REST API\. Type: String  | 
+
+##### EndpointConfiguration<a name="asff-resourcedetails-awsapigatewayrestapi-endpointconfiguration"></a>
+
+The `EndPointConfiguration` object contains information about the endpoints for the API\.
+
+`EndPointConfiguration` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  Types  |  No  |  A list of endpoint types for the REST API\. For an edge\-optimized API, the endpoint type is `EDGE`\. For a Regional API, the endpoint type is `REGIONAL`\. For a private API, the endpoint type is `PRIVATE`\. Type: Array of strings Valid values: `EDGE` \| `REGIONAL` \| `PRIVATE`  | 
+
+#### AwsApiGatewayStage<a name="asff-resourcedetails-awsapigatewaystage"></a>
+
+The `AwsApiGatewayStage` object provides information about a version 1 Amazon API Gateway stage\.
+
+**Example**
+
+```
+"AwsApiGatewayStage": {
+    "DeploymentId": "n7hlmf",
+    "ClientCertificateId": "a1b2c3", 
+    "StageName": "Prod",
+    "Description" : "Stage Description",
+    "CacheClusterEnabled": false,
+    "CacheClusterSize" : "1.6",
+    "CacheClusterStatus": "NOT_AVAILABLE",
+    "MethodSettings": [
+        {
+            "MetricsEnabled": true,
+            "LoggingLevel": "INFO",
+            "DataTraceEnabled": false,
+            "ThrottlingBurstLimit": 100,
+            "ThrottlingRateLimit": 5.0,
+            "CachingEnabled": false,
+            "CacheTtlInSeconds": 300,
+            "CacheDataEncrypted": false,
+            "RequireAuthorizationForCacheControl": true,
+            "UnauthorizedCacheControlHeaderStrategy": "SUCCEED_WITH_RESPONSE_HEADER",
+            "HttpMethod": "POST",
+            "ResourcePath": "/echo"
+        }
+    ],
+    "Variables": {"test": "value"},
+    "DocumentationVersion": "2.0",
+    "AccessLogSettings": {
+        "Format": "{\"requestId\": \"$context.requestId\", \"extendedRequestId\": \"$context.extendedRequestId\", \"ownerAccountId\": \"$context.accountId\", \"requestAccountId\": \"$context.identity.accountId\", \"callerPrincipal\": \"$context.identity.caller\", \"httpMethod\": \"$context.httpMethod\", \"resourcePath\": \"$context.resourcePath\", \"status\": \"$context.status\", \"requestTime\": \"$context.requestTime\", \"responseLatencyMs\": \"$context.responseLatency\", \"errorMessage\": \"$context.error.message\", \"errorResponseType\": \"$context.error.responseType\", \"apiId\": \"$context.apiId\", \"awsEndpointRequestId\": \"$context.awsEndpointRequestId\", \"domainName\": \"$context.domainName\", \"stage\": \"$context.stage\", \"xrayTraceId\": \"$context.xrayTraceId\", \"sourceIp\": \"$context.identity.sourceIp\", \"user\": \"$context.identity.user\", \"userAgent\": \"$context.identity.userAgent\", \"userArn\": \"$context.identity.userArn\", \"integrationLatency\": \"$context.integrationLatency\", \"integrationStatus\": \"$context.integrationStatus\", \"authorizerIntegrationLatency\": \"$context.authorizer.integrationLatency\" }",
+        "DestinationArn": "arn:aws:logs:us-west-2:111122223333:log-group:SecurityHubAPIAccessLog/Prod"
+    },
+    "CanarySettings": {
+        "PercentTraffic": 0.0,
+        "DeploymentId": "ul73s8",
+        "StageVariableOverrides" : [
+            "String" : "String"
+        ],
+        "UseStageCache": false
+    },
+    "TracingEnabled": false,
+    "CreatedDate": "2018-07-11T10:55:18-07:00",
+    "LastUpdatedDate": "2020-08-26T11:51:04-07:00",
+    "WebAclArn" : "arn:aws:waf-regional:us-west-2:111122223333:webacl/cb606bd8-5b0b-4f0b-830a-dd304e48a822"
+}
+```
+
+`AwsApiGatewayStage` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`AccessLogSettings`](#asff-resourcedetails-awsapigatewaystage-accesslogsettings)  |  No  |  Settings for logging access for the stage\. Type: Object  | 
+|  `CacheClusterEnabled`  |  No  |  Indicates whether a cache cluster is enabled for the stage\. Type: Boolean  | 
+|  `CacheClusterSize`  |  No  |  If a cache cluster is enabled, the size of the cache cluster\. Type: String  | 
+|  `CacheClusterStatus`  |  No  |  If a cache cluster is enabled, the status of the cache cluster\. Type: String  | 
+|  [`CanarySettings`](#asff-resourcedetails-awsapigatewaystage-canarysettings)  |  No  |  Information about settings for canary deployment in the stage\. Type: Object  | 
+|  `ClientCertificateId`  |  No  |  The identifier of the client certificate for the stage\. Type: String  | 
+|  CreatedDate  |  No  |  Indicates when the stage was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreatedDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `DeploymentId`  |  No  |  The identifier of the deployment that the stage points to\. Type: String  | 
+|  `Description`  |  No  |  A description of the stage\. Type: String  | 
+|  `DocumentationVersion`  |  No  |  The version of the API documentation that is associated with the stage\. Type: String  | 
+|  `LastUpdatedDate`  |  No  |  Indicates when the stage was most recently updated\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"LastUpdatedDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  [`MethodSettings`](#asff-resourcedetails-awsapigatewaystage-methodsettings)  |  No  |  Defines the method settings for the stage\. For each method, the key is the method path, which is defined as follows: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: Array of objects  | 
+|  `StageName`  |  No  |  The name of the stage\. Type: String  | 
+|  `TracingEnabled`  |  No  |  Indicates whether active tracing with AWS X\-Ray is enabled for the stage\. Type: Boolean  | 
+|  `Variables`  |  No  |  A map that defines the stage variables for the stage\. Variable names can have alphanumeric and underscore characters\. Variable values can contain the following characters: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: Map of strings  | 
+|  `WebAclArn`  |  No  |  The ARN of the web ACL associated with the stage\. Type: String  | 
+
+##### AccessLogSettings<a name="asff-resourcedetails-awsapigatewaystage-accesslogsettings"></a>
+
+The `AccessLogSettings` object contains information about settings for logging access for the stage\.
+
+`AccessLogSettings` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DestinationArn`  |  No  |  The ARN of the CloudWatch Logs log group orKinesis Data Firehose delivery stream that receives the access logs\. For a Kinesis Data Firehose delivery stream, the stream name always begins with `amazon-apigateway-`\. Type: String  | 
+|  `Format`  | No |  A single\-line format of the access logs of data, as specified by selected `$context` variables\. The format must include at least `$context.requestId`\. Type: String  | 
+
+##### CanarySettings<a name="asff-resourcedetails-awsapigatewaystage-canarysettings"></a>
+
+The `CanarySettings` object contains information about settings for canary deployment in the stage\.
+
+`CanarySettings` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DeploymentId`  |  No  |  The deployment identifier for the canary deployment\. Type: String  | 
+|  `PercentTraffic`  |  No  |  The percentage of traffic that is diverted to a canary deployment\. Type: Number Minimum value: 0 Maximum value: 100  | 
+|  `StageVariableOverrides`  |  No  |  Stage variables that are overridden in the canary release deployment\. The variables include new stage variables that are introduced in the canary\. Each variable is represented as a string\-to\-string map between the stage variable name and the variable value\. <pre>"variableName" : "variableValue"</pre> Type: Object  | 
+|  `UseStageCache`  |  No  |  Indicates whether the canary deployment uses the stage cache\. Type: Boolean  | 
+
+##### MethodSettings<a name="asff-resourcedetails-awsapigatewaystage-methodsettings"></a>
+
+The `MethodSettings` object defines the method settings for the stage\.
+
+Each method object in `MethodSettings` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CacheDataEncrypted`  |  No  |  Indicates whether the cached responses are encrypted\.  Type: Boolean  | 
+|  `CachingEnabled`  |  No  |  Indicates whether responses are cached and returned for requests\. For responses to be cached, a cache cluster must be enabled on the stage\. Type: Boolean  | 
+|  `CacheTtlInSeconds`  |  No  |  Specifies the time to live \(TTL\), in seconds, for cached responses\. The higher the TTL, the longer the response is cached\. Type: Number  | 
+|  `DataTraceEnabled`  |  No  |  Indicates whether data trace logging is enabled for the method\. Data trace logging affects the log entries that are pushed to CloudWatch Logs\. Type: Boolean  | 
+|  `HttpMethod`  |  No  |  The HTTP method\. You can use an asterisk \(\*\) as a wildcard to apply method settings to multiple methods\. Type: String  | 
+|  `LoggingLevel`  |  No  |  The logging level for this method\. The logging level affects the log entries that are pushed to CloudWatch Logs\. If the logging level is `ERROR`, then the logs only include error\-level entries\. If the logging level is `INFO`, then the logs include both `ERROR` events and extra informational events\. Type: String Valid values: `OFF` \| `ERROR` \| `INFO`  | 
+|  `MetricsEnabled`  |  No  |  Indicates whether CloudWatch metrics are enabled for the method\.  Type: Boolean  | 
+|  `RequireAuthorizationForCacheControl`  |  No  |  Indicates whether authorization is required for a cache invalidation request\. Type: Boolean  | 
+|  `ResourcePath`  |  No  |  The resource path for this method\. Forward slashes \(/\) are encoded as \~1 \. The initial slash must include a forward slash\. For example, the path value `/resource/subresource` must be encoded as `/~1resource~1subresource`\. To specify the root path, use only a slash \(/\)\. You can use an asterisk \(\*\) as a wildcard to apply method settings to multiple methods\. Type: String  | 
+|  `ThrottlingBurstLimit`  |  No  |  The throttling burst limit for the method\. Type: Number \(Integer\)  | 
+|  `ThrottlingRateLimit`  |  No  |  The throttling rate limit for the method\. Type: Number  | 
+|  `UnauthorizedCacheControlHeaderStrategy`  |  No  |  Indicates how to handle unauthorized requests for cache invalidation\. Type: String Valid values: `FAIL_WITH_403` \| `SUCCEED_WITH_RESPONSE_HEADER` \| `SUCCEED_WITHOUT_RESPONSE_HEADER`  | 
+
+#### AwsApiGatewayV2Api<a name="asff-resourcedetails-awsapigatewayv2api"></a>
+
+The `AwsApiGatewayV2Api` object contains information about a version 2 API in Amazon API Gateway\.
+
+**Example**
+
+```
+"AwsApiGatewayV2Api": {
+    "ApiEndpoint": "https://example.us-west-2.amazonaws.com",
+    "ApiId": "a1b2c3d4",
+    "ApiKeySelectionExpression": "$request.header.x-api-key",
+    "CreatedDate": "2020-03-28T00:32:37Z",
+   "Description": "ApiGatewayV2 Api",
+   "Version": "string",
+    "Name": "my-api",
+    "ProtocolType": "HTTP",
+    "RouteSelectionExpression": "$request.method $request.path",
+   "CorsConfiguration": {
+        "AllowOrigins": [ "*" ],
+        "AllowCredentials": true,
+        "ExposeHeaders": [ "string" ],
+        "MaxAge": 3000,
+        "AllowMethods": [
+          "GET",
+          "PUT",
+          "POST",
+          "DELETE",
+          "HEAD"
+        ],
+        "AllowHeaders": [ "*" ]
+    }
+}
+```
+
+`AwsApiGatewayV2Api` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ApiEndpoint`  |  No  |  The URI of the API\.  Type: String Format: `<api-id>.execute-api.<region>.amazonaws.com` The stage name is typically appended to the URI to form a complete path to a deployed API stage\.  | 
+|  `ApiId`  |  No  |  The identifier of the API\. Type: String  | 
+|  `ApiKeySelectionExpression`  |  No  |  An API key selection expression\. Supported only for WebSocket APIs\.  Type: String  | 
+|  [`CorsConfiguration`](#asff-resourcedetails-awsapigatewayv2api-corsconfiguration)  |  No  |  A cross\-origin resource sharing \(CORS\) configuration\. Supported only for HTTP APIs\. Type: Object  | 
+|  `CreatedDate`  |  No  |  Indicates when the API was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreatedDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `Description`  |  No  |  A description of the API\. Type: String  | 
+|  `Name`  |  No  |  The name of the API\. Type: String  | 
+|  `ProtocolType`  |  No  |  The API protocol for the API\. Type: String Valid values: `WEBSOCKET` \| `HTTP`  | 
+|  `RouteSelectionExpression`  |  No  |  The route selection expression for the API\. For HTTP APIs, must be `${request.method} ${request.path}`\. This is the default value for HTTP APIs\. For WebSocket APIs, there is no default value\. Type: String  | 
+|  `Version`  |  No  |  The version identifier for the API\. Type: String  | 
+
+##### CorsConfiguration<a name="asff-resourcedetails-awsapigatewayv2api-corsconfiguration"></a>
+
+The `CorsConfiguration` object contains the cross\-origin resource sharing \(CORS\) configuration for the API\. CORS is only supported for HTTP APIs\.
+
+`CorsConfiguration` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AllowCredentials`  |  No  |  Indicates whether the CORS request includes credentials\. Type: Boolean  | 
+|  `AllowHeaders`  |  No  |  The allowed headers for CORS requests\. Type: Array of strings  | 
+|  `AllowMethods`  |  No  |  The allowed methods for CORS requests\. Type: Array of strings  | 
+|  `AllowOrigins`  |  No  |  The allowed origins for CORS requests\. Type: Array of strings  | 
+|  `ExposeHeaders`  |  No  |  The exposed headers for CORS requests\. Type: Array of strings  | 
+|  `MaxAge`  |  No  |  The number of seconds for which the browser caches preflight request results\. Type: Number  | 
+
+#### AwsApiGatewayV2Stage<a name="asff-resourcedetails-awsapigatewayv2stage"></a>
+
+`AwsApiGatewayV2Stage` contains information about a version 2 stage for Amazon API Gateway\.
+
+**Example**
+
+```
+"AwsApiGatewayV2Stage": {
+    "CreatedDate": "2020-04-08T00:36:05Z",
+    "Description" : "ApiGatewayV2",
+    "DefaultRouteSettings": {
+        "DetailedMetricsEnabled": false,
+        "LoggingLevel": "INFO",
+        "DataTraceEnabled": true,
+        "ThrottlingBurstLimit": 100,
+        "ThrottlingRateLimit": 50
+    },
+    "DeploymentId": "x1zwyv",
+    "LastUpdatedDate": "2020-04-08T00:36:13Z",
+    "RouteSettings": {
+        "DetailedMetricsEnabled": false,
+        "LoggingLevel": "INFO",
+        "DataTraceEnabled": true,
+        "ThrottlingBurstLimit": 100,
+        "ThrottlingRateLimit": 50
+    },
+    "StageName": "prod",
+    "StageVariables": [
+        "function": "my-prod-function"
+    ],
+    "AccessLogSettings": {
+        "Format": "{\"requestId\": \"$context.requestId\", \"extendedRequestId\": \"$context.extendedRequestId\", \"ownerAccountId\": \"$context.accountId\", \"requestAccountId\": \"$context.identity.accountId\", \"callerPrincipal\": \"$context.identity.caller\", \"httpMethod\": \"$context.httpMethod\", \"resourcePath\": \"$context.resourcePath\", \"status\": \"$context.status\", \"requestTime\": \"$context.requestTime\", \"responseLatencyMs\": \"$context.responseLatency\", \"errorMessage\": \"$context.error.message\", \"errorResponseType\": \"$context.error.responseType\", \"apiId\": \"$context.apiId\", \"awsEndpointRequestId\": \"$context.awsEndpointRequestId\", \"domainName\": \"$context.domainName\", \"stage\": \"$context.stage\", \"xrayTraceId\": \"$context.xrayTraceId\", \"sourceIp\": \"$context.identity.sourceIp\", \"user\": \"$context.identity.user\", \"userAgent\": \"$context.identity.userAgent\", \"userArn\": \"$context.identity.userArn\", \"integrationLatency\": \"$context.integrationLatency\", \"integrationStatus\": \"$context.integrationStatus\", \"authorizerIntegrationLatency\": \"$context.authorizer.integrationLatency\" }",
+        "DestinationArn": "arn:aws:logs:us-west-2:111122223333:log-group:SecurityHubAPIAccessLog/Prod"
+    },
+    "AutoDeploy": false,
+    "LastDeploymentStatusMessage": "Message",
+    "ApiGatewayManaged": true,
+}
+```
+
+`AwsApiGatewayV2Stage` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`AccessLogSettings`](#asff-resourcedetails-awsapigatewayv2stage-accesslogsettings)  |  No  |  Information about settings for logging access for the stage\. Type: Object  | 
+|  ApiGatewayManaged  |  No  |  Indicates whether the stage is managed by API Gateway\. Type: Boolean  | 
+|  `AutoDeploy`  |  No  |  Indicates whether updates to an API automatically trigger a new deployment\. Type: Boolean  | 
+|  `CreatedDate`  |  No  |  Indicates when the stage was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreatedDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  [`DefaultRouteSettings`](#asff-resourcedetails-awsapigatewayv2stage-defaultroutesettings)  |  No  |  Default route settings for the stage\. Type: Object  | 
+|  `DeploymentId`  |  No  |  The identifier of the deployment that the stage is associated with\.  Type: String  | 
+|  `Description`  |  No  |  The description of the stage\. Type: String  | 
+|  `LastDeploymentStatusMessage`  |  No  |  The status of the last deployment of a stage\. Supported only if the stage has automatic deployment enabled\. Type: String  | 
+|  `LastUpdatedDate`  |  No  |  Indicates when the stage was most recently updated\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"LastUpdatedDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  [`RouteSettings`](#asff-resourcedetails-awsapigatewayv2stage-defaultroutesettings)  |  No  |  The route settings for the stage\. Type: Object  | 
+|  `StageName`  |  No  |  The name of the stage\. Type: String  | 
+|  `StageVariables`  |  No  |  A map that defines the stage variables for the stage\. Variable names can have alphanumeric and underscore characters\. Variable values can contain the following characters: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: Map of strings  | 
+
+##### AccessLogSettings<a name="asff-resourcedetails-awsapigatewayv2stage-accesslogsettings"></a>
+
+The `AccessLogSettings` object contains information about settings for logging access for the stage\.
+
+`AccessLogSettings` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DestinationArn`  |  No  |  The ARN of the CloudWatch Logs log group that receives the access logs\. Type: String  | 
+|  `Format`  |  No  |  A single\-line format of the access logs of data, as specified by selected `$context` variables\. The format must include at least `$context.requestId`\. Type: String  | 
+
+##### DefaultRouteSettings and RouteSettings<a name="asff-resourcedetails-awsapigatewayv2stage-defaultroutesettings"></a>
+
+The `DefaultRouteSettings` object contains the default route settings for the stage\.
+
+The `RouteSettings` object contains the route settings for the stage\.
+
+These objects can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DataTraceEnabled`  |  No  |  Indicates whether data trace logging is enabled\. Data trace logging affects the log entries that are pushed to CloudWatch Logs\. Supported only for WebSocket APIs\. Type: Boolean  | 
+|  `DetailedMetricsEnabled`  |  No  |  Indicates whether detailed metrics are enabled\. Type: Boolean  | 
+|  `LoggingLevel`  |  No  |  The logging level\. The logging level affects the log entries that are pushed to CloudWatch Logs\. Supported only for WebSocket APIs\. If the logging level is `ERROR`, then the logs only include error\-level entries\. If the logging level is `INFO`, then the logs include both `ERROR` events and extra informational events\. Type: String Valid values: `OFF` \| `ERROR` \| `INFO`  | 
+|  `ThrottlingBurstLimit`  |  No  |  The throttling burst limit\. Type: Number  | 
+|  `ThrottlingRateLimit`  |  No  |  The throttling rate limit\. Type: Number  | 
 
 #### AwsAutoScalingAutoScalingGroup<a name="asff-resourcedetails-awsautoscalingautoscalinggroup"></a>
 
@@ -1647,6 +2508,195 @@ The `AwsAutoScalingAutoScalingGroup` object can have the following attributes\.
 |  `LaunchConfigurationName`  |  No  |  The name of the launch configuration\. Type: String \(32 characters max\)  | 
 |  `LoadBalancerNames`  |  No  |  The list of load balancers that are associated with the group\. Type: Array of strings Each load balancer name is limited to 255 characters\.  | 
 
+#### AwsCertificateManagerCertificate<a name="asff-resourcedetails-awscertificatemanagercertificate"></a>
+
+The `AwsCertificateManagerCertificate` object provides details about an AWS Certificate Manager \(ACM\) certificate\.
+
+**Example**
+
+```
+"AwsCertificateManagerCertificate": {
+    "CertificateAuthorityArn": "arn:aws:acm:us-west-2:444455556666:certificate-authority/example",
+    "CreatedAt": "2019-05-24T18:12:02.000Z",
+    "DomainName": "example.amazondomains.com",
+    "DomainValidationOptions": [
+        {
+            "DomainName": "example.amazondomains.com",
+            "ResourceRecord": {
+                "Name": "_1bacb61828d3a1020c40a560ceed08f7.example.amazondomains.com",
+                "Type": "CNAME",
+                "Value": "_example.acm-validations.aws."
+             },
+             "ValidationDomain": "example.amazondomains.com"",
+             "ValidationEmails": [],
+             "ValidationMethod": "DNS",
+             "ValidationStatus": "SUCCESS"
+        }
+    ],
+    "ExtendedKeyUsages": [
+        {
+            "Name": "TLS_WEB_SERVER_AUTHENTICATION",
+            "OId": "1.3.6.1.5.5.7.3.1"
+        },
+        {
+            "Name": "TLS_WEB_CLIENT_AUTHENTICATION",
+            "OId": "1.3.6.1.5.5.7.3.2"
+        }
+    ],
+    "FailureReason": "",
+    "ImportedAt": "2018-08-17T00:13:00.000Z",
+    "InUseBy": ["arn:aws:amazondomains:us-west-2:444455556666:loadbalancer/example"],
+    "IssuedAt": "2020-04-26T00:41:17.000Z",
+    "Issuer": "Amazon",
+    "KeyAlgorithm": "RSA-1024",
+    "KeyUsages": [
+        {
+            "Name": "DIGITAL_SIGNATURE",
+        },
+        {
+            "Name": "KEY_ENCIPHERMENT",
+        }
+    ],
+    "NotAfter": "2021-05-26T12:00:00.000Z",
+    "NotBefore": "2020-04-26T00:00:00.000Z",
+    "Options": {
+        "CertificateTransparencyLoggingPreference": "ENABLED",
+    }
+    "RenewalEligibility": "ELIGIBLE",
+    "RenewalSummary": {
+        "DomainValidationOptions": [
+            {
+                "DomainName": "example.amazondomains.com",
+                "ResourceRecord": {
+                    "Name": "_1bacb61828d3a1020c40a560ceed08f7.example.amazondomains.com",
+                    "Type": "CNAME",
+                    "Value": "_example.acm-validations.aws.com",
+                },
+                "ValidationDomain": "example.amazondomains.com",
+                "ValidationEmails": [],
+                "ValidationMethod": "DNS",
+                "ValidationStatus": "SUCCESS"
+            }
+        ],
+        "RenewalStatus": "SUCCESS",
+        "RenewalStatusReason": "",
+        "UpdatedAt": "2020-04-26T00:41:35.000Z",
+    },
+    "Serial": "02:ac:86:b6:07:2f:0a:61:0e:3a:ac:fd:d9:ab:17:1a",
+    "SignatureAlgorithm": "SHA256WITHRSA",
+    "Status": "ISSUED",
+    "Subject": "CN=example.amazondomains.com"",
+    "SubjectAlternativeNames": ["example.amazondomains.com"],
+    "Type": "AMAZON_ISSUED"
+}
+```
+
+`AwsCertificateManagerCertificate` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CertificateAuthorityArn`  |  No  |  The ARN of the private certificate authority \(CA\) that will be used to issue the certificate\. Type: String  | 
+|  `CreatedAt`  |  No  |  Indicates when the certificate was requested\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreatedAt": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `DomainName`  |  No  |  The fully qualified domain name \(FQDN\), such as www\.example\.com, that is secured by the certificate\. Type: String Minimum length: 1 Maximum length: 253\.  | 
+|  [`DomainValidationOptions`](#asff-resourcedetails-awscertificatemanagercertificate-domainvalidationoptions)  | No |  Contains information about the initial validation of each domain name that occurs as a result of the `RequestCertificate` request\. Only provided if the certificate type is `AMAZON_ISSUED`\. Type: Array of objects  | 
+|  [`ExtendedKeyUsages`](#asff-resourcedetails-awscertificatemanagercertificate-extendedkeyusages)  |  No  |  Contains a list of Extended Key Usage X\.509 v3 extension objects\. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier \(OID\)\. Type: Array of objects  | 
+|  `FailureReason`  |  No  |  For a failed certificate request, the reason for the failure\. Type: String Valid values: `NO_AVAILABLE_CONTACTS` \| `ADDITIONAL_VERIFICATION_REQUIRED` \| `DOMAIN_NOT_ALLOWED` \| `INVALID_PUBLIC_DOMAIN` \| `DOMAIN_VALIDATION_DENIED` \| `CAA_ERROR` \| `PCA_LIMIT_EXCEEDED` \| `PCA_INVALID_ARN` \| `PCA_INVALID_STATE` \| `PCA_REQUEST_FAILED` \| `PCA_NAME_CONSTRAINTS_VALIDATION` \| `PCA_RESOURCE_NOT_FOUND` \| `PCA_INVALID_ARGS` \| `PCA_INVALID_DURATION` \| `PCA_ACCESS_DENIED` \| `SLR_NOT_FOUND` \| `OTHER`  | 
+|  `ImportedAt`  |  No  |  Indicates when the certificate was imported\. Provided if the certificate type is `IMPORTED`\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"ImportedAt": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `InUseBy`  |  No  |  The list of ARNs for the AWS resources that use the certificate\. Type: Array of strings  | 
+|  `IssuedAt`  |  No  |  Indicates when the certificate was issued\. Provided if the certificate type is `AMAZON_ISSUED`\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"IssuedAt": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `Issuer`  |  No  |  The name of the certificate authority that issued and signed the certificate\. Type: String  | 
+|  `KeyAlgorithm`  |  No  |  The algorithm that was used to generate the public\-private key pair\. Type: String Valid values: `RSA_2048` \| `RSA_1024` \|` RSA_4096` \| `EC_prime256v1` \| `EC_secp384r1` \| `EC_secp521r1`  | 
+|  [`KeyUsages`](#asff-resourcedetails-awscertificatemanagercertificate-keyusages)  |  No  |  A list of key usage X\.509 v3 extension objects\. Type: Array of objects  | 
+|  `NotAfter`  |  No  |  The time after which the certificate becomes invalid\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"NotAfter": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `NotBefore`  |  No  |  The time before which the certificate is not valid\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"NotBefore": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  [`Options`](#asff-resourcedetails-awscertificatemanagercertificate-options)  |  No  |  Provides a value that specifies whether to add the certificate to a transparency log\. Type: Object  | 
+|  `RenewalEligibility`  |  No  |  Whether the certificate is eligible for renewal\. Type: String Valid values: `ELIGIBLE` \| `INELIGIBLE`  | 
+|  [`RenewalSummary`](#asff-resourcedetails-awscertificatemanagercertificate-renewalsummary)  |  No  |  Information about the status of the ACM managed renewal for the certificate\. Provided only when the certificate type is `AMAZON_ISSUED`\. Type: Object  | 
+|  `Serial`  |  No  |  The serial number of the certificate\. Type: String  | 
+|  `SignatureAlgorithm`  |  No  |  The algorithm that was used to sign the certificate\. Type: String  | 
+|  `Status`  |  No  |  The status of the certificate\. Type: String Valid values: `PENDING_VALIDATION` \| `ISSUED` \| `INACTIVE` \| `EXPIRED` \| `VALIDATION_TIMED_OUT` \| `REVOKED` \| `FAILED`  | 
+|  `Subject`  |  No  |  The name of the entity that is associated with the public key contained in the certificate\. Type: String  | 
+|  `SubjectAlternativeNames`  |  No  |  One or more domain names \(subject alternative names\) included in the certificate\. This list contains the domain names that are bound to the public key that is contained in the certificate\. The subject alternative names include the canonical domain name \(CN\) of the certificate and additional domain names that can be used to connect to the website\. Type: Array of strings Minimum number of items: 1 Maximum number of items: 100 Minimum length per item: 1 Maximum length per item: 253  | 
+|  `Type`  |  No  |  The source of the certificate\. For certificates that ACM provides, `Type` is `AMAZON_ISSUED`\. For certificates that are imported with `ImportCertificate`, `Type` is `IMPORTED`\. Type: String Valid values: `IMPORTED` \| `AMAZON_ISSUED` \| `PRIVATE`  | 
+
+##### DomainValidationOptions<a name="asff-resourcedetails-awscertificatemanagercertificate-domainvalidationoptions"></a>
+
+The `DomainValidationOptions` object contains information about one of the following:
++ The initial validation of each domain name that occurs as a result of the `RequestCertificate` request
++ The validation of each domain name in the certificate, as it pertains to ACM managed renewal
+
+`DomainValidationOptions` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DomainName`  |  No  |  A fully qualified domain name \(FQDN\) in the certificate\. Type: String  | 
+|  `ResourceRecord`  |  No  |  The CNAME record that is added to the DNS database for domain validation\. Type: Object  | 
+|  `ValidationDomain`  |  No  |  The domain name that ACM uses to send domain validation emails\. Type: String  | 
+|  `ValidationEmails`  |  No  |  A list of email addresses that ACM uses to send domain validation emails\. Type: Array of strings  | 
+|  `ValidationMethod`  |  No  |  The method used to validate the domain name\. Type: String  | 
+|  `ValidationStatus`  |  No  |  The validation status of the domain name\. Type: String  | 
+
+`ResourceRecord` provides the following details about the resource\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Name`  |  No  |  The name of the resource\. Type: String  | 
+|  `Type`  |  No  |  The type of resource\. Type: String  | 
+|  `Value`  |  No  |  The value of the resource\. Type: String  | 
+
+##### ExtendedKeyUsages<a name="asff-resourcedetails-awscertificatemanagercertificate-extendedkeyusages"></a>
+
+`ExtendedKeyUsages` contains a list of extended key usage X\.509 v3 extension objects\.
+
+Each extension object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Name`  |  No  |  The name of an extension value\. Indicates the purpose for which the certificate public key can be used\. Type: String  | 
+|  `Oid`  |  No  |  An object identifier \(OID\) for the extension value\. Type: String Format: Numbers separated by periods Example <pre>"OId": "1.3.6.1.5.5.7.3.1"</pre>  | 
+
+##### KeyUsages<a name="asff-resourcedetails-awscertificatemanagercertificate-keyusages"></a>
+
+The `KeyUsages` object contains a list of key usage X\.509 v3 extension objects\.
+
+Each extension object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Name`  |  No  |  The key usage extension name\. Type: String  | 
+
+##### Options<a name="asff-resourcedetails-awscertificatemanagercertificate-options"></a>
+
+The `Options` object contains other options for the certificate\.
+
+Currently, the only option indicates whether to add the certificate to a transparency log\.
+
+`Options` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CertificateTransparencyLoggingPreference`  |  No  |  Whether to add the certificate to a transparency log\. Type: String Valid values: `DISABLED` \| `ENABLED`  | 
+
+##### RenewalSummary<a name="asff-resourcedetails-awscertificatemanagercertificate-renewalsummary"></a>
+
+The `RenewalSummary` object contains information about the ACM managed renewal for an `AMAZON_ISSUED` certificate\.
+
+`RenewalSummary` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`DomainValidationOptions`](#asff-resourcedetails-awscertificatemanagercertificate-domainvalidationoptions)  |  No  |  Information about the validation of each domain name in the certificate, as it pertains to ACM managed renewal\. Provided only when the certificate type is `AMAZON_ISSUED`\. Type: Array of objects  | 
+|  `RenewalStatus`  |  No  |  The status of the ACM managed renewal of the certificate\. Type: String Valid values: `PENDING_AUTO_RENEWAL` \| `PENDING_VALIDATION` \| `SUCCESS` \| `FAILED`  | 
+|  `RenewalStatusReason`  |  No  |  The reason that a renewal request was unsuccessful\. Type: String Valid values: `NO_AVAILABLE_CONTACTS` \| `ADDITIONAL_VERIFICATION_REQUIRED` \| `DOMAIN_NOT_ALLOWED` \| `INVALID_PUBLIC_DOMAIN` \| `DOMAIN_VALIDATION_DENIED` \| `CAA_ERROR` \| `PCA_LIMIT_EXCEEDED` \| `PCA_INVALID_ARN` \| `PCA_INVALID_STATE` \| `PCA_REQUEST_FAILED` \| `PCA_NAME_CONSTRAINTS_VALIDATION` \| `PCA_RESOURCE_NOT_FOUND` \| `PCA_INVALID_ARGS` \| `PCA_INVALID_DURATION` \| `PCA_ACCESS_DENIED` \| `SLR_NOT_FOUND` \| `OTHER`  | 
+|  `UpdatedAt`  |  No  |  Indicates when the renewal summary was last updated\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"UpdatedAt": "2017-03-22T13:22:13.933Z"</pre>  | 
+
 #### AwsCloudFrontDistribution<a name="asff-resourcedetails-awscloudfrontdistribution"></a>
 
 The `AwsCloudFrontDistribution` object provides details about a distribution configuration\.
@@ -1656,13 +2706,39 @@ It can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `DomainName`  |  No  | The domain name corresponding to the distribution\.Type: String | 
-|  `Etag`  |  No  | The entity tag is a hash of the object\.Type: String | 
-|  `LastModifiedTime`  |  No  | Indicates when the distribution was last modified\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. | 
-|  [`Logging`](#asff-resourcedetails-awscloudfrontdistribution-logging)  |  No  | A complex type that controls whether access logs are written for the distribution\.Type: Object | 
-|  [`Origins`](#asff-resourcedetails-awscloudfrontdistribution-origins)  |  No  | A complex type that contains information about origins and origin groups for this distribution\.Type: String | 
-|  `Status`  |  No  | Indicates the current status of the distribution\.Type: String | 
-|  `WebAclId`  |  No  | A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution\.Type: String | 
+|  [`CacheBehaviors`](#asff-resourcedetails-awscloudfrontdistribution-cachebehaviors)  |  No  |  Provides information about the cache configuration for the distribution\. Type: Object  | 
+|  [`DefaultCacheBehavior`](#asff-resourcedetails-awscloudfrontdistribution-defaultcachebehavior)  |  No  |  The default cache behavior for the configuration\. Type: Object  | 
+|  `DefaultRootObject`  |  No  |  The object that CloudFront sends in response to requests from the origin \(for example, index\.html\) when a viewer requests the root URL for the distribution \(http://www\.example\.com\) instead of an object in your distribution \(http://www\.example\.com/product\-description\.html\)\.  Type: String  | 
+|  `DomainName`  |  No  |  The domain name that corresponds to the distribution\. Type: String  | 
+|  `Etag`  |  No  |  The entity tag is a hash of the object\. Type: String  | 
+|  `LastModifiedTime`  |  No  |  Indicates when the distribution was last modified\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
+|  [`Logging`](#asff-resourcedetails-awscloudfrontdistribution-logging)  |  No  |  A complex type that controls whether access logs are written for the distribution\. Type: Object  | 
+|  [`OriginGroups`](#asff-resourcedetails-awscloudfrontdistribution-origingroups)  |  No  |  Provides information about the origin groups in the distribution\. Type: Object  | 
+|  [`Origins`](#asff-resourcedetails-awscloudfrontdistribution-origins)  |  No  |  A complex type that contains information about origins and origin groups for this distribution\. Type: String  | 
+|  `Status`  |  No  |  Indicates the current status of the distribution\. Type: String  | 
+|  `WebAclId`  |  No  |  A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution\. Type: String  | 
+
+##### CacheBehaviors<a name="asff-resourcedetails-awscloudfrontdistribution-cachebehaviors"></a>
+
+The `CacheBehaviors` object provides information about caching for the distribution\. The `CacheBehaviors` object contains an `Items` array of objects\. The `Items` objects represent cache behaviors\.
+
+Each object in `Items` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ViewerProtocolPolicy`  |  No  |  The protocol that viewers can use to access the files in an origin\. You can specify the following options: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: String Valid values: `allow-all` \| `https-only` \| `redirect-to-https`  | 
+
+##### DefaultCacheBehavior<a name="asff-resourcedetails-awscloudfrontdistribution-defaultcachebehavior"></a>
+
+The `DefaultCacheBehavior` object contains information about the default cache configuration for the distribution\.
+
+`DefaultCacheBehavior` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ViewerProtocolPolicy`  |  No  |  The protocol that viewers can use to access the files in an origin\. You can specify the following options: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: String Valid values: `allow-all` \| `https-only` \| `redirect-to-https` Type: String  | 
 
 ##### Logging<a name="asff-resourcedetails-awscloudfrontdistribution-logging"></a>
 
@@ -1673,10 +2749,43 @@ It can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Bucket`  |  No  | The S3 bucket to store the access logs in\.Type: String | 
-|  `Enabled`  |  No  | With this field, you can enable or disable the selected distribution\.Type: Boolean | 
-|  `IncludeCookies`  |  No  | Specifies whether you want CloudFront to include cookies in access logs\.Type: Boolean | 
-|  `Prefix`  |  No  | An optional string that you want CloudFront to prefix to the access log file names for this distribution\.Type: String | 
+|  `Bucket`  |  No  |  The S3 bucket to store the access logs in\. Type: String  | 
+|  `Enabled`  |  No  |  With this field, you can enable or disable the selected distribution\. Type: Boolean  | 
+|  `IncludeCookies`  |  No  |  Specifies whether you want CloudFront to include cookies in access logs\. Type: Boolean  | 
+|  `Prefix`  |  No  |  An optional string that you want CloudFront to prefix to the access log file names for this distribution\. Type: String  | 
+
+##### OriginGroups<a name="asff-resourcedetails-awscloudfrontdistribution-origingroups"></a>
+
+The `OriginGroups` object contains information about the origin groups for the distribution\.
+
+The structure is as follows:
+
+```
+"OriginGroups": {
+    "Items": [
+        {
+            "FailoverCriteria": {
+                "StatusCodes": {
+                    "Items": [ number ],
+                    "Quantity": number
+                }
+            }
+        }
+    ]
+},
+```
+
+`OriginGroups` contains an `Items` array of objects\. Each object represents an origin group\.
+
+Each `Items` object contains a `FailoverCriteria` object\. The `FailoverCriteria` object provides information about when an origin group fails over\.
+
+The `FailoverCriteria` object contains a `StatusCodes` object\. `StatusCodes` indicates the status codes that cause the failover\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Items`  |  No  |  The list of status code values that can cause a failover to the next origin\. Type: Array of numbers\.  | 
+|  `Quantity`  |  No  |  The number of status codes that can cause a failover\. Type: Number  | 
 
 ##### Origins<a name="asff-resourcedetails-awscloudfrontdistribution-origins"></a>
 
@@ -1697,6 +2806,61 @@ Each item can have the following attributes\.
 |  `DomainName`  |  No  |  Amazon S3 origins: The DNS name of the S3 bucket from which you want CloudFront to get objects for this origin\. Type: String  | 
 |  `Id`  |  No  |  A unique identifier for the origin or origin group\. Type: String  | 
 |  `OriginPath`  |  No  |  An optional element that causes CloudFront to request your content from a directory in your S3 bucket or your custom origin\. Type: String  | 
+|  `S3OriginConfig`  |  No  |  An origin that is an S3 bucket that is not configured with static website hosting\. Type: Object  | 
+
+`S3OriginConfig` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `OriginAccessIdentity`  |  No  |  The CloudFront origin access identity to associate with the origin\. Type: String  | 
+
+#### AwsCloudTrailTrail<a name="asff-resourcedetails-awscloudtrailtrail"></a>
+
+The `AwsCloudTrailTrail` object provides details about a CloudTrail trail\.
+
+**Example**
+
+```
+"AwsCloudTrailTrail": {
+    "CloudWatchLogsLogGroupArn": "arn:aws:logs:us-west-2:123456789012:log-group:CloudTrail/regression:*",
+    "CloudWatchLogsRoleArn": "arn:aws:iam::866482105055:role/CloudTrail_CloudWatchLogs",
+    "HasCustomEventSelectors": true,
+    "HomeRegion": "us-west-2",
+    "IncludeGlobalServiceEvents": true,
+    "IsMultiRegionTrail": true,
+    "IsOrganizationTrail": false,
+    "KmsKeyId": "kmsKeyId",
+    "LogFileValidationEnabled": true,
+    "Name": "regression-trail",
+    "S3BucketName": "cloudtrail-bucket",
+    "S3KeyPrefix": "s3KeyPrefix",
+    "SnsTopicArn": "arn:aws:sns:us-east-2:123456789012:MyTopic",
+    "SnsTopicName": "snsTopicName",
+    "TrailArn": "arn:aws:cloudtrail:us-west-2:123456789012:trail"
+}
+```
+
+`AwsCloudTrailTrail` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CloudWatchLogsLogGroupArn`  |  No  |  The ARN of the log group that CloudTrail logs are delivered to\. Type: String  | 
+|  `CloudWatchLogsRoleArn`  |  No  |  The ARN of the role that the CloudWatch Logs endpoint assumes when it writes to the log group\. Type: String\.  | 
+|  `HasCustomEventSelectors`  |  No  |  Indicates whether the trail has custom event selectors\. Type: Boolean  | 
+|  `HomeRegion`  |  No  |  The Region where the trail was created\. Type: String  | 
+|  `IncludeGlobalServiceEvents`  |  No  |  Indicates whether the trail publishes events from global services such as IAM to the log files\. Type: Boolean  | 
+|  `IsMultiRegionTrail`  |  No  |  Indicates whether the trail applies only to the current Region or to all Regions\. Type: Boolean  | 
+|  `IsOrganizationTrail`  |  No  |  Whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account\. Type: Boolean  | 
+|  `KmsKeyId`  |  No  |  The AWS KMS key ID to use to encrypt the logs\. Type: String  | 
+|  `LogFileValidationEnabled`  |  No  |  Indicates whether CloudTrail log file validation is enabled\. Type: Boolean  | 
+|  `Name`  |  No  |  The name of the trail\. Type: String  | 
+|  `S3BucketName`  |  No  |  The name of the S3 bucket where the log files are published\. Type: String Minimum length: 3 Maximum length: 63  | 
+|  `S3KeyPrefix`  |  No  |  The S3 key prefix\. The key prefix is added after the name of the S3 bucket where the log files are published\. Type: String Maximum length: 200  | 
+|  `SnsTopicArn`  |  No  |  The ARN of the SNS topic that is used for notifications of log file delivery\. Type: String  | 
+|  `SnsTopicName`  |  No  |  The name of the SNS topic that is used for notifications of log file delivery\. Type: String Maximum length: 255  | 
+|  `TrailArn`  |  No  |  The ARN of the trail\. Type: String  | 
 
 #### AwsCodeBuildProject<a name="asff-resourcedetails-awscodebuildproject"></a>
 
@@ -2158,15 +3322,15 @@ The `AwsEc2Instance` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `IamInstanceProfileArn`  |  No  | The IAM profile ARN of the instance\. Type: String \(conforms to the AWS ARN format\) | 
-|  `ImageId`  |  No  | The Amazon Machine Image \(AMI\) ID of the instance\.Type: String \(64 characters max\) | 
-|  `IpV4Addresses`  |  No  | The IPv4 addresses that are associated with the instance\.Type: Array of up to 10 IPv4 addresses | 
-|  `IpV6Addresses`  |  No  | The IPv6 addresses that are associated with the instance\.Type: Array of up to 10 IPv6 addresses | 
-|  `KeyName`  |  No  | The key name that is associated with the instance\.Type: String \(128 characters max\) | 
-|  `LaunchedAt`  |  No  | Indicates when the instance was launched\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. | 
-|  `SubnetId`  |  No  | The identifier of the subnet where the instance was launched\. Type: String \(32 characters max\) | 
-|  `Type`  |  No  | The instance type of the instance\. This must be a valid [EC2 instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)\. Type: String \(16 characters max\) | 
-|  `VpcId`  |  No  | The identifier of the VPC where the instance was launched\. Type: String \(32 characters max\) | 
+|  `IamInstanceProfileArn`  |  No  |  The IAM profile ARN of the instance\. Type: String \(conforms to the AWS ARN format\)  | 
+|  `ImageId`  |  No  |  The Amazon Machine Image \(AMI\) ID of the instance\. Type: String \(64 characters max\)  | 
+|  `IpV4Addresses`  |  No  |  The IPv4 addresses that are associated with the instance\. Type: Array of up to 10 IPv4 addresses  | 
+|  `IpV6Addresses`  |  No  |  The IPv6 addresses that are associated with the instance\. Type: Array of up to 10 IPv6 addresses  | 
+|  `KeyName`  |  No  |  The key name that is associated with the instance\. Type: String \(128 characters max\)  | 
+|  `LaunchedAt`  |  No  |  Indicates when the instance was launched\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
+|  `SubnetId`  |  No  |  The identifier of the subnet where the instance was launched\. Type: String \(32 characters max\)  | 
+|  `Type`  |  No  |  The instance type of the instance\. This must be a valid [EC2 instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)\. Type: String \(16 characters max\)  | 
+|  `VpcId`  |  No  |  The identifier of the VPC where the instance was launched\. Type: String \(32 characters max\)  | 
 
 #### AwsEc2NetworkInterface<a name="asff-resourcedetails-awsec2networkinterface"></a>
 
@@ -2521,6 +3685,285 @@ It can have the following attributes\.
 |  `SubnetIds`  |  No  |  A list of subnet IDs that are associated with the VPC endpoints for the domain\. Type: Array of strings  | 
 |  `VPCId`  |  No  |  ID for the VPC\. Type: String  | 
 
+#### AwsElbLoadBalancer<a name="asff-resourcedetails-awselbloadbalancer"></a>
+
+The `AwsElbLoadBalancer` object contains details about a Classic Load Balancer\.
+
+**Example**
+
+```
+"AwsElbLoadBalancer": {
+    "AvailabilityZones": ["us-west-2a"],
+    "BackendServerDescriptions": [
+         {
+            "InstancePort": 80,
+            "PolicyNames": ["doc-example-policy"]
+        }
+    ],
+    "CanonicalHostedZoneName": "Z3DZXE0EXAMPLE",
+    "CanonicalHostedZoneNameID": "my-load-balancer-444455556666.us-west-2.elb.amazonaws.com",
+    "CreatedTime": "2020-08-03T19:22:44.637Z",
+    "DnsName": "my-load-balancer-444455556666.us-west-2.elb.amazonaws.com",
+    "HealthCheck": {
+        "HealthyThreshold": 2,
+        "Interval": 30,
+        "Target": "HTTP:80/png",
+        "Timeout": 3,
+        "UnhealthyThreshold": 2
+    },
+    "Instances": [
+        {
+            "InstanceId": "i-example"
+        }
+    ],
+    "ListenerDescriptions": [
+        {
+            "Listener": {
+                "InstancePort": 443,
+                "InstanceProtocol": "HTTPS",
+                "LoadBalancerPort": 443,
+                "Protocol": "HTTPS",
+                "SslCertificateId": "arn:aws:iam::444455556666:server-certificate/my-server-cert"
+            },
+            "PolicyNames": ["ELBSecurityPolicy-TLS-1-2-2017-01"]
+        }
+    ],
+    "LoadBalancerAttributes": {
+        "AccessLog": {
+            "EmitInterval": 60,
+            "Enabled": true,
+            "S3BucketName": "doc-example-bucket",
+            "S3BucketPrefix": "doc-example-prefix"
+        },
+        "ConnectionDraining": {
+            "Enabled": false,
+            "Timeout": 300
+        },
+        "ConnectionSettings": {
+            "IdleTimeout": 30
+        },
+        "CrossZoneLoadBalancing": {
+            "Enabled": true
+        }
+    },
+    "LoadBalancerName": "example-load-balancer",
+    "Policies": {
+        "AppCookieStickinessPolicies": [
+            {
+                "CookieName": "",
+                "PolicyName": ""
+            }
+        ],
+        "LbCookieStickinessPolicies": [
+            {
+                "CookieExpirationPeriod": 60,
+                "PolicyName": "my-example-cookie-policy"
+            }
+        ],
+        "OtherPolicies": [
+            "my-PublicKey-policy",
+            "my-authentication-policy",
+            "my-SSLNegotiation-policy",
+            "my-ProxyProtocol-policy",
+            "ELBSecurityPolicy-2015-03"
+        ]
+    },
+    "Scheme": "internet-facing",
+    "SecurityGroups": ["sg-example"],
+    "SourceSecurityGroup": {
+        "GroupName": "my-elb-example-group",
+        "OwnerAlias": "444455556666"
+    },
+    "Subnets": ["subnet-example"],
+    "VpcId": "vpc-a01106c2"
+}
+```
+
+`AwsElbLoadBalancer` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AvailabilityZones`  |  No  |  The list of Availability Zones for the load balancer\. Type: Array of strings  | 
+|  [`BackendServerDescriptions`](#asff-resourcedetails-awselbloadbalancer-backendserverdescriptions)  |  No  |  Information about the configuration of the EC2 instances\. Type: Array of objects  | 
+|  `CanonicalHostedZoneName`  |  No  |  The name of the Amazon Route 53 hosted zone for the load balancer\. Type: String  | 
+|  `CanonicalHostedZoneNameID`  |  No  |  The ID of the Amazon Route 53 hosted zone for the load balancer\. Type: String  | 
+|  `CreatedTime`  |  No  |  Indicates when the load balancer was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreatedTime": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `DnsName`  |  No  |  The DNS name of the load balancer\. Type: String  | 
+|  [`HealthCheck`](#asff-resourcedetails-awselbloadbalancer-healthcheck)  |  No  |  Information about the health checks that are conducted on the load balancer\. Type: Object  | 
+|  [`Instances`](#asff-resourcedetails-awselbloadbalancer-instances)  |  No  |  List of EC2 instances for the load balancer\. Type: Array of objects  | 
+|  [`ListenerDescriptions`](#asff-resourcedetails-awselbloadbalancer-listenerdescriptions)  |  No  |  The policies that are enabled for the load balancer listeners\. Type: Array of objects  | 
+|  [`LoadBalancerAttributes`](#asff-resourcedetails-awselbloadbalancer-loadbalancerattributes)  |  No  |  The attributes for a load balancer\. Type: Object  | 
+|  `LoadBalancerName`  |  No  |  The name of the load balancer\. Type: String  | 
+|  [`Policies`](#asff-resourcedetails-awselbloadbalancer-policies)  |  No  |  The policies for a load balancer\. Type: Object  | 
+|  `Scheme`  |  No  |  The type of load balancer\. Only provided if the load balancer is in a VPC\. If `Scheme` is `internet-facing`, the load balancer has a public DNS name that resolves to a public IP address\. If `Scheme` is `internal`, the load balancer has a public DNS name that resolves to a private IP address\. Type: String Valid values: `internet-facing` \| `internal`  | 
+|  `SecurityGroups`  |  No  |  The security groups for the load balancer\. Only provided if the load balancer is in a VPC\. Type: Array of strings  | 
+|  [`SourceSecurityGroup`](#asff-resourcedetails-awselbloadbalancer-sourcesecuritygroup)  |  No  |  Information about the security group for the load balancer\. This is the security group that is used for inbound rules\. Type: Object  | 
+|  `Subnets`  |  No  |  The list of subnet identifiers for the load balancer\. Type: Array of strings  | 
+|  `VpcId`  |  No  |  The identifier of the VPC for the load balancer\. Type: String  | 
+
+##### BackendServerDescriptions<a name="asff-resourcedetails-awselbloadbalancer-backendserverdescriptions"></a>
+
+The `BackendServerDescriptions` object provides information about the configuration of the EC2 instances for the load balancer\.
+
+For each EC2 instance, `BackendServerDescriptions` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `InstancePort`  |  No  |  The port on which the EC2 instance is listening\. Type: Number  | 
+|  `PolicyNames`  |  No  |  The names of the policies that are enabled for the EC2 instance\. Type: Array of strings  | 
+
+##### HealthCheck<a name="asff-resourcedetails-awselbloadbalancer-healthcheck"></a>
+
+The `HealthCheck` object contains information about the health checks that are conducted on the load balancer\.
+
+`HealthCheck` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `HealthyThreshold`  |  No  |  The number of consecutive health check successes required before the instance is moved to the Healthy state\. Type: Number Minimum value: 2 Maximum value: 10  | 
+|  `Interval`  |  No  |  The approximate interval, in seconds, between health checks of an individual instance\. Type: number Minimum value: 5 Maximum value: 300  | 
+|  Target  |  No  |  The instance that is being checked\. The target specifies the protocol and port\. The available protocols are TCP, SSL, HTTP, and HTTPS\. The range of valid ports is 1 through 65535\. For the HTTP and HTTPS protocols, the target also specifies the ping path\. For the TCP protocol, the target is specified as `TCP: <port>`\. For the SSL protocol, the target is specified as `SSL.<port>`\. For the HTTP and HTTPS protocols, the target is specified as `<protocol>:<port>/<path to ping>`\. Type: String Maximum length: 1,024 Example: `HTTP:80/png`  | 
+|  `Timeout`  |  No  |  The amount of time, in seconds, during which no response means a failed health check\. Type: Number Minimum value: 2 Maximum value: 60  | 
+|  `UnhealthyThreshold`  |  No  |  The number of consecutive health check failures that must occur before the instance is moved to the Unhealthy state\. Type: Number Minimum value: 2 Maximum value: 10  | 
+
+##### Instances<a name="asff-resourcedetails-awselbloadbalancer-instances"></a>
+
+The `Instances` object contains the list of EC2 instances for the load balancer\.
+
+Each EC2 instance can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `InstanceId`  |  No  |  The instance identifier\. Type: String  | 
+
+##### ListenerDescriptions<a name="asff-resourcedetails-awselbloadbalancer-listenerdescriptions"></a>
+
+The `ListenerDescriptions` object lists the policies that are enabled for the load balancer listeners\.
+
+`ListenerDescriptions` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Listener`  |  No  |  Information about the listener\. Type: Object  | 
+|  `PolicyNames`  |  No  |  The policies enabled for the listener\. Type: Array of strings  | 
+
+The `Listener` object contains information about the listener\.
+
+`Listener` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `InstancePort`  |  No  |  The port on which the instance is listening\. Type: Number Minimum value: 1 Maximum value: 65,535  | 
+|  `InstanceProtocol`  |  No  |  The protocol to use to route traffic to instances\. Type: String Valid values: `HTTP` \| `HTTPS` \| `TCP` \| `SSL`  | 
+|  `LoadBalancerPort`  |  No  |  The port on which the load balancer is listening\. On EC2\-VPC, you can specify any port from the range 1\-65535\. On EC2\-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024\-65535\. Type: Number  | 
+|  `Protocol`  |  No  |  The load balancer transport protocol to use for routing\. Type: String Valid values: `HTTP` \| `HTTPS` \| `TCP` \| `SSL`  | 
+|  `SslCertificateId`  |  No  |  The ARN of the server certificate\. Type: String  | 
+
+##### LoadBalancerAttributes<a name="asff-resourcedetails-awselbloadbalancer-loadbalancerattributes"></a>
+
+The `LoadBalancerAttributes` object contains attributes for the load balancer\.
+
+`LoadBalancerAttributes` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AccessLog`  |  No  |  Information about the access log configuration for the load balancer\. If the access log is enabled, the load balancer captures detailed information about all requests\. It delivers the information to a specified S3 bucket\. Type: Object  | 
+|  `ConnectionDraining`  |  No  |  Information about the connection draining configuration for the load balancer\. If connection draining is enabled, the load balancer allows existing requests to complete before it shifts traffic away from a deregistered or unhealthy instance\. Type: Object  | 
+|  `ConnectionSettings`  |  No  |  Connection settings for the load balancer\. If an idle timeout is configured, the load balancer allows connections to remain idle for the specified duration\. When a connection is idle, no data is sent over the connection\. Type: Object  | 
+|  `CrossZoneLoadBalancing`  |  No  |  Cross\-zone load balancing settings for the load balancer\. If cross\-zone load balancing is enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones\. Type: Object  | 
+
+The `AccessLog` object contains information about the access log configuration for the load balancer\.
+
+`AccessLog` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `EmitInterval`  |  No  |  The interval in minutes for publishing the access logs\. You can publish access logs either every 5 minutes or every 60 minutes\. Type: Number Valid values: `5` \| `60`  | 
+|  `Enabled`  |  No  |  Indicates whether access logs are enabled for the load balancer\. Type: Boolean  | 
+|  `S3BucketName`  |  No  |  The name of the S3 bucket where the access logs are stored\. Type: String  | 
+|  `S3BucketPrefix`  |  No  |  The logical hierarchy that was created for the S3 bucket\. If a prefix is not provided, the log is placed at the root level of the bucket\. Type: String  | 
+
+The `ConnectionDraining` object contains information about the connection draining configuration for the load balancer\.
+
+`ConnectionDraining` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Enabled`  |  No  |  Indicates whether connection draining is enabled for the load balancer\. Type: Boolean  | 
+|  `Timeout`  |  No  |  The maximum time, in seconds, to keep the existing connections open before deregistering the instances\. Type: Number  | 
+
+The `ConnectionSettings` object contains connection settings for the load balancer\.
+
+`ConnectionSettings` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `IdleTimeout`  |  No  |  The time, in seconds, that the connection can be idle \(no data is sent over the connection\) before it is closed by the load balancer\. Type: Number  | 
+
+The `CrossZoneLoadBalancing` object contains cross\-zone load balancing settings for the load balancer\.
+
+`CrossZoneLoadBalancing` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  Enabled  |  No  |  Indicates whether cross\-zone load balancing is enabled for the load balancer\. Type: Boolean  | 
+
+##### Policies<a name="asff-resourcedetails-awselbloadbalancer-policies"></a>
+
+The `Policies` object contains information about the policies for a load balancer\.
+
+`Policies` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AppCookieStickinessPolicies`  |  No  |  The stickiness policies that are created using `CreateAppCookieStickinessPolicy`\. Type: Array of objects  | 
+|  `LbCookieStickinessPolicies`  |  No  |  The stickiness policies that are created using `CreateLBCookieStickinessPolicy`\. Type: Array of objects  | 
+|  `OtherPolicies`  |  No  |  The policies other than the stickiness policies\. Type: Array of strings  | 
+
+The `AppCookieStickinessPolicies` object contains information about stickiness policies that are created using `CreateAppCookieStickinessPolicy`\.
+
+Each policy can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CookieName`  |  No  |  The name of the application cookie used for stickiness\. Type: String  | 
+|  `PolicyName`  |  No  |  The mnemonic name for the policy being created\. The name must be unique within the set of policies for the load balancer\. Type: String  | 
+
+The `LbCookieStickinessPolicies` object contains information about the stickiness policies that are created using `CreateLBCookieStickinessPolicy`\.
+
+Each policy can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CookieExpirationPeriod`  |  No  |  The amount of time, in seconds, after which the cookie is considered stale\. If an expiration period is not specified, the stickiness session lasts for the duration of the browser session\. Type: Number  | 
+|  `PolicyName`  |  No  |  The name of the policy\. The name must be unique within the set of policies for the load balancer\. Type: String  | 
+
+##### SourceSecurityGroup<a name="asff-resourcedetails-awselbloadbalancer-sourcesecuritygroup"></a>
+
+The `SourceSecurityGroup` object contains information about the security group for the load balancer\.
+
+`SourceSecurityGroup` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `GroupName`  |  No  |  The name of the security group\. Type: String  | 
+|  `OwnerAlias`  |  No  |  The owner of the security group\. Type: String  | 
+
 #### AwsElbv2LoadBalancer<a name="asff-resourcedetails-awselbv2loadbalancer"></a>
 
 The `AwsElbv2LoadBalancer` object provides information about a load balancer\.
@@ -2530,16 +3973,16 @@ It can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  [`AvailabilityZones`](#asff-resourcedetails-awselbv2loadbalancer-availabilityzones)  |  No  | The Availability Zones for the load balancer\.Type: Object | 
-|  `CanonicalHostedZoneId`  |  No  | The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\.Type: String | 
-|  `CreatedTime`  |  No  | Indicates when the load balancer was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. | 
-|  `DNSName`  |  No  | The public DNS name of the load balancer\.Type: String | 
-|  `IpAddressType`  |  No  | The type of IP addresses used by the subnets for your load balancer\. The possible values are `ipv4` \(for IPv4 addresses\) and `dualstack` \(for IPv4 and IPv6 addresses\)\.Type: String | 
-|  `Scheme`  |  No  | The nodes of an Internet\-facing load balancer have public IP addresses\.Type: String | 
-|  `SecurityGroups`  |  No  | The IDs of the security groups for the load balancer\.Type: Array of strings | 
-|  [`State`](#asff-resourcedetails-awselbv2loadbalancer-state)  |  No  | The state of the load balancer\.Type: Object | 
-|  `Type`  |  No  | The type of load balancer\.Type: String | 
-|  `VpcId`  |  No  | The ID of the VPC for the load balancer\.Type: String | 
+|  [`AvailabilityZones`](#asff-resourcedetails-awselbv2loadbalancer-availabilityzones)  |  No  |  The Availability Zones for the load balancer\. Type: Object  | 
+|  `CanonicalHostedZoneId`  |  No  |  The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\. Type: String  | 
+|  `CreatedTime`  |  No  |  Indicates when the load balancer was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
+|  `DNSName`  |  No  |  The public DNS name of the load balancer\. Type: String  | 
+|  `IpAddressType`  |  No  |  The type of IP addresses used by the subnets for your load balancer\. The possible values are `ipv4` \(for IPv4 addresses\) and `dualstack` \(for IPv4 and IPv6 addresses\)\. Type: String  | 
+|  `Scheme`  |  No  |  The nodes of an Internet\-facing load balancer have public IP addresses\. Type: String  | 
+|  `SecurityGroups`  |  No  |  The IDs of the security groups for the load balancer\. Type: Array of strings  | 
+|  [`State`](#asff-resourcedetails-awselbv2loadbalancer-state)  |  No  |  The state of the load balancer\. Type: Object  | 
+|  `Type`  |  No  |  The type of load balancer\. Type: String  | 
+|  `VpcId`  |  No  |  The ID of the VPC for the load balancer\. Type: String  | 
 
 ##### AvailabilityZones<a name="asff-resourcedetails-awselbv2loadbalancer-availabilityzones"></a>
 
@@ -2550,8 +3993,8 @@ Each Availability Zone can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `SubnetId`  |  No  | The ID of the subnet\.Type: String | 
-|  `ZoneName`  |  No  | The name of the Availability Zone\.Type: String | 
+|  `SubnetId`  |  No  |  The ID of the subnet\. Type: String  | 
+|  `ZoneName`  |  No  |  The name of the Availability Zone\. Type: String  | 
 
 ##### State<a name="asff-resourcedetails-awselbv2loadbalancer-state"></a>
 
@@ -2562,8 +4005,8 @@ The `State` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Code`  |  No  | The state code\. The initial state of the load balancer is provisioning\. After the load balancer is fully set up and ready to route traffic, its state is active\. If the load balancer could not be set up, its state is failed\.Type: String | 
-|  `Reason`  |  No  | A description of the state\.Type: String | 
+|  `Code`  |  No  |  The state code\. The initial state of the load balancer is provisioning\. After the load balancer is fully set up and ready to route traffic, its state is active\. If the load balancer could not be set up, its state is failed\. Type: String  | 
+|  `Reason`  |  No  |  A description of the state\. Type: String  | 
 
 #### AwsIamAccessKey<a name="asff-resourcedetails-awsiamaccesskey"></a>
 
@@ -2574,11 +4017,106 @@ The `AwsIamAccessKey` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `CreatedAt`  |  No  | Indicates when the related IAM access key was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. | 
-|  `PrincipalId`  |  No  | The ID of the principal that is associated with an access key\. Type: String | 
-|  `PrincipalName`  |  No  | The name of the principal\.Type: String | 
-|  `PrincipalType`  |  No  | The type of principal\.Type: String | 
-|  `Status`  |  No  | The status of the IAM access key that is related to a finding\. Valid values are `ACTIVE` and `INACTIVE`\.Type: Enum | 
+|  `AccessKeyId`  |  No  |  The identifier of the access key\. Type: String Minimum length: 16 Maximum length: 128  | 
+|  `AccountId`  |  No  |  The AWS account ID of the account for the key\. Type: String  | 
+|  `CreatedAt`  |  No  |  Indicates when the related IAM access key was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
+|  `PrincipalId`  |  No  |  The ID of the principal that is associated with an access key\. Type: String  | 
+|  `PrincipalName`  |  No  |  The name of the principal\. Type: String  | 
+|  `PrincipalType`  |  No  |  The type of principal\. Type: String  | 
+|  [`SessionContext`](#asff-resourcedetails-awsiamaccesskey-sessioncontext)  |  No  |  Information about the session that the key was used for\. Type: Object  | 
+|  `Status`  |  No  |  The status of the IAM access key that is related to a finding\. Valid values are `ACTIVE` and `INACTIVE`\. Type: Enum  | 
+
+##### SessionContext<a name="asff-resourcedetails-awsiamaccesskey-sessioncontext"></a>
+
+The `SessionContext` object provides information about the session that the key was used for\.
+
+`SessionContext` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Attributes`  |  No  |  Attributes of the session that the key was used for\. Type: Object  | 
+|  `SessionIssuer`  |  No  |  Information about the entity that created the session\. Type: Object  | 
+
+The `Attributes` object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CreationDate`  |  No  |  Indicates when the session was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreationDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `MfaAuthenticated`  |  No  |  Indicates whether the session used multi\-factor authentication \(MFA\)\. Type: Boolean  | 
+
+The `SessionIssuer` object can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AccountId`  |  No  |  The identifier of the AWS account that created the session\. Type: String  | 
+|  `Arn`  |  No  |  The ARN of the session\. Type: String  | 
+|  `PrincipalId`  |  No  |  The principal ID of the principal \(user, role, or group\) that created the session\. Type: String  | 
+|  `Type`  |  No  |  The type of principal \(user, role, or group\) that created the session\. Type: String  | 
+|  `UserName`  |  No  |  The name of the principal that created the session\. Type: String  | 
+
+#### AwsIamGroup<a name="asff-resourcedetails-awsiamgroup"></a>
+
+The `AwsIamGroup` object contains details about an IAM group\.
+
+**Example**
+
+```
+"AwsIamGroup": {
+    "AttachedManagedPolicies": [
+        {
+            "PolicyArn": "arn:aws:iam::aws:policy/ExampleManagedAccess",
+            "PolicyName": "ExampleManagedAccess",
+        }
+    ],
+    "CreateDate": "2020-04-28T14:08:37.000Z",
+    "GroupId": "AGPA4TPS3VLP7QEXAMPLE",
+    "GroupName": "Example_User_Group",
+    "GroupPolicyList": [
+        {
+            "PolicyName": "ExampleGroupPolicy"
+        }
+    ],
+    "Path": "/"
+}
+```
+
+`AwsIamGroup` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  [`AttachedManagedPolicies`](#asff-resourcedetails-awsiamgroup-attachedmanagedpolicies)  |  No  |  A list of the managed policies that are attached to the IAM group\. Type: Array of objects  | 
+|  `CreateDate`  |  No  |  Indicates when the IAM group was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreateDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `GroupId`  |  No  |  The identifier of the IAM group\. Type: String Minimum length: 16 Maximum length: 128  | 
+|  `GroupName`  |  No  |  The name of the IAM group\. Type: String Minimum length: 1 Maximum length: 128  | 
+|  [`GroupPolicyList`](#asff-resourcedetails-awsiamgroup-grouppolicylist)  |  No  |  The list of inline policies that are embedded in the group\. Type: Array of objects  | 
+|  `Path`  |  No  |  The path to the group\. Type: String Minimum length: 1 Maximum length: 512  | 
+
+##### AttachedManagedPolicies<a name="asff-resourcedetails-awsiamgroup-attachedmanagedpolicies"></a>
+
+The `AttachedManagedPolicies` object contains the list of the managed policies that are attached to the IAM group\.
+
+Each policy can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `PolicyArn`  |  No  |  The ARN of the policy\. Type: String Minimum length: 20 Maximum length: 2,048  | 
+|  `PolicyName`  |  No  |  The name of the policy\. Type: String Minimum length: 1 Maximum length: 128  | 
+
+##### GroupPolicyList<a name="asff-resourcedetails-awsiamgroup-grouppolicylist"></a>
+
+The `GroupPolicyList` object contains the list of inline policies that are embedded in the group\.
+
+Each policy can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `PolicyName`  |  No  |  The name of the policy\. Type: String Minimum length: 1 Maximum length: 128  | 
 
 #### AwsIamPolicy<a name="asff-resourcedetails-awsiampolicy"></a>
 
@@ -2616,7 +4154,7 @@ It can have the following attributes\.
 |  `AttachmentCount`  |  No  |  The number of users, groups, and roles that the policy is attached to\. Type: Number  | 
 |  CreateDate  |  No  |  When the policy was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreateDate": "2020-06-22T17:40:12.322Z"</pre>  | 
 |  `DefaultVersionId`  |  No  |  The identifier of the default version of the policy\. Type: String  | 
-|  `Description`  |  No  |  A description of the policy\. Type: String Maximum length: 1000 characters  | 
+|  `Description`  |  No  |  A description of the policy\. Type: String Maximum length: 1,000 characters  | 
 |  `IsAttachable`  |  No  |  Whether the policy can be attached to a user, group, or role\. Type: Boolean  | 
 |  `Path`  |  No  |  The path to the policy\. Type: String Minimum length: 1 Maximum length: 512 For more information about paths, see [IAM Identifiers]() in the *IAM User Guide*\.  | 
 |  `PermissionsBoundaryUsageCount`  |  No  |  The number of users and roles that use the policy to set the permissions boundary\. Type: Number  | 
@@ -2642,17 +4180,135 @@ Each version can have the following attributes\.
 
 The `AwsIamRole` object contains information about an IAM role, including all of the role's policies\.
 
+**Example**
+
+```
+"AwsIamRole": {
+    "AssumeRolePolicyDocument": "{'Version': '2012-10-17','Statement': [{'Effect': 'Allow','Action': 'sts:AssumeRole'}]}",
+    "AttachedManagedPolicies": [
+        {
+            "PolicyArn": "arn:aws:iam::aws:policy/ExamplePolicy1",
+            "PolicyName": "Example policy 1"
+        },
+        {
+            "PolicyArn": "arn:aws:iam::444455556666:policy/ExamplePolicy2",
+            "PolicyName": "Example policy 2"
+        }
+        ],
+        "CreateDate": "2020-03-14T07:19:14.000Z",
+        "InstanceProfileList": [
+            {
+                "Arn": "arn:aws:iam::333333333333:ExampleProfile",
+                "CreateDate": "2020-03-11T00:02:27Z",
+                "InstanceProfileId": "AIPAIXEU4NUHUPEXAMPLE",
+                "InstanceProfileName": "ExampleInstanceProfile",
+                "Path": "/",
+                "Roles": [
+                    {
+                       "Arn": "arn:aws:iam::444455556666:role/example-role",
+                        "AssumeRolePolicyDocument": "",
+                        "CreateDate": "2020-03-11T00:02:27Z",
+                        "Path": "/",
+                        "RoleId": "AROAJ52OTH4H7LEXAMPLE",
+                        "RoleName": "example-role",
+                    }
+                ]
+            }
+        ],
+        "MaxSessionDuration": 3600,
+        "Path": "/",
+        "PermissionsBoundary": {
+            "PermissionsBoundaryArn": "arn:aws:iam::aws:policy/AdministratorAccess",
+            "PermissionsBoundaryType": "PermissionsBoundaryPolicy"
+        },
+        "RoleId": "AROA4TPS3VLEXAMPLE",
+        "RoleName": "BONESBootstrapHydra-OverbridgeOpsFunctionsLambda",
+        "RolePolicyList": [
+            {
+                "PolicyName": "Example role policy"
+            }
+        ]
+    }
+```
+
 The `AwsIamRole` object can have the following attributes\.
 
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `AssumeRolePolicyDocument`  |  No  | The trust policy that grants permission to assume the role\.Type: String | 
-|  `CreateDate`  |  No  | Indicates when the role was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. | 
-|  `RoleId`  |  No  | The stable and unique string identifying the role\.Type: String | 
-|  `RoleName`  |  No  | The friendly name that identifies the role\.Type: String | 
-|  `MaxSessionDuration`  |  No  | The maximum session duration \(in seconds\) that you want to set for the specified role\.Type: Integer | 
-|  `Path`  |  No  | The path to the role\.Type: String | 
+|  `AssumeRolePolicyDocument`  |  No  |  The trust policy that grants permission to assume the role\. Type: String  | 
+|  [`AttachedManagedPolicies`](#asff-resourcedetails-awsiamrole-attachedmanagedpolicies)  |  No  |  The list of the managed policies that are attached to the role\. Type: Array of objects  | 
+|  `CreateDate`  |  No  |  Indicates when the role was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
+|  [`InstanceProfileList`](#asff-resourcedetails-awsiamrole-instanceprofilelist)  |  No  |  The list of instance profiles that contain this role\. Type: Array of objects  | 
+|  [`PermissionsBoundary`](#asff-resourcedetails-awsiamrole-permissionsboundary)  |  No  |  The permissions boundary for the role\. Type: Object  | 
+|  `RoleId`  |  No  |  The stable and unique string identifying the role\. Type: String  | 
+|  `RoleName`  |  No  |  The friendly name that identifies the role\. Type: String  | 
+|  [`RolePolicyList`](#asff-resourcedetails-awsiamrole-rolepolicylist)  |  No  |  The list of inline policies that are embedded in the role\. Type: Array of objects  | 
+|  `MaxSessionDuration`  |  No  |  The maximum session duration \(in seconds\) that you want to set for the specified role\. Type: Integer  | 
+|  `Path`  |  No  |  The path to the role\. Type: String  | 
+
+##### AttachedManagedPolicies<a name="asff-resourcedetails-awsiamrole-attachedmanagedpolicies"></a>
+
+The `AttachedManagedPolicies` object contains a list of the managed policies that are attached to the role\.
+
+Each policy can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `PolicyArn`  |  No  |  The ARN of the policy\. Type: String Minimum length: 20 Maximum length: 2,048  | 
+|  `PolicyName`  |  No  |  The name of the policy\. Type: String Minimum length: 1 Maximum length: 128  | 
+
+##### InstanceProfileList<a name="asff-resourcedetails-awsiamrole-instanceprofilelist"></a>
+
+The `InstanceProfileList` object contains a list of instance profiles that contain this role\.
+
+Each instance profile can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Arn`  |  No  |  The ARN of the instance profile\. Type: String  | 
+|  `CreateDate`  |  No  |  Indicates when the instance profile was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreateDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `InstanceProfileId`  |  No  |  The identifier of the instance profile\. Type: String Minimum length: 16 Maximum length: 128  | 
+|  `InstanceProfileName`  |  No  |  The name of the instance profile\. Type: String Minimum length: 1 Maximum length: 128  | 
+|  `Path`  |  No  |  The path to the instance profile\. Type: String Minimum length: 1 Maximum length: 512  | 
+|  `Roles`  |  No  |  The roles associated with the instance profile\. Type: Array of objects  | 
+
+Each role in `Roles` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Arn`  |  No  |  The ARN of the role\. Type: String  | 
+|  `AssumeRolePolicyDocument`  |  No  |  The policy that grants an entity permission to assume the role\. Type: String Minimum length: 1 Maximum length: 131,072  | 
+|  `CreateDate`  |  No  |  Indicates when the role was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"CreateDate": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `Path`  |  No  |  The path to the role\. Type: String Minimum length: 1 Maximum length: 512  | 
+|  `RoleId`  |  No  |  The identifier of the role\. Type: String Minimum length: 16 Maximum length: 128  | 
+|  `RoleName`  |  No  |  The name of the role\. Type: String Minimum length: 1 Maximum length: 64  | 
+
+##### PermissionsBoundary<a name="asff-resourcedetails-awsiamrole-permissionsboundary"></a>
+
+The `PermissionsBoundary` object provides information about the permissions boundary for the role\.
+
+`PermissionsBoundary` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `PermissionsBoundaryArn`  |  No  |  The ARN of the policy that is used to set the permissions boundary\. Type: String  | 
+|  `PermissionsBoundaryType`  |  No  |  The type of resource that is used to set the permissions boundary\. Type: String Valid values: `Policy`  | 
+
+##### RolePolicyList<a name="asff-resourcedetails-awsiamrole-rolepolicylist"></a>
+
+The `RolePolicy` List object contains the list of inline policies that are embedded in the role\.
+
+Each policy can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `PolicyName`  |  No  |  The name of the policy\. Type: String Minimum length: 1 Maximum length: 128  | 
 
 #### AwsIamUser<a name="asff-resourcedetails-awsiamuser"></a>
 
@@ -2746,7 +4402,7 @@ The `AwsKmsKey` object can have the following attributes\.
 |  `AWSAccountId`  |  No  |  The AWS account identifier of the account that owns the CMK\. Type: String  | 
 |  `CreationDate`  |  No  |  Indicates when the CMK was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
 |  `Description`  |  No  |  A description of the key\. Type: String  | 
-|  `KeyId`  |  Yes  |  The globally unique identifier for the CMK\. Type: String The minimum length is 1\. The maximum length is 2048\.  | 
+|  `KeyId`  |  Yes  |  The globally unique identifier for the CMK\. Type: String The minimum length is 1\. The maximum length is 2,048\.  | 
 |  `KeyManager`  |  No  |  The manager of the CMK\. CMKs in an AWS account are either customer managed or AWS managed\. Type: String Valid values: `AWS` \| `CUSTOMER`\.  | 
 |  `KeyState`  |  No  |  The state of the CMK\. Type: String Valid values: `Enabled` \| `Disabled` \| `PendingDeletion` \| `PendingImport` \| `Unavailable`  | 
 |  `Origin`  |  No  |  The source of the CMK's key material\. When this value is `AWS_KMS`, AWS KMS created the key material\. When this value is `EXTERNAL`, either the key material was imported from your existing key management infrastructure, or the CMK lacks key material\. When this value is `AWS_CLOUDHSM`, the key material was created in the AWS CloudHSM cluster that is associated with a custom key store\. Type: String Valid values: `AWS_KMS` \| `EXTERNAL` \| `AWS_CLOUDHSM`  | 
@@ -2760,24 +4416,24 @@ It can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  [`Code`](#asff-resourcedetails-awslambdafunction-code)  |  No  | An `AwsLambdaFunctionCode` object\.Type: Object | 
-|  `CodeSha256`  |  No  | The SHA256 hash of the function's deployment package\.Type: String | 
-|  [`DeadLetterConfig`](#asff-resourcedetails-awslambdafunction-deadletterconfig)  |  No  | The function's dead letter queue\.Type: Object | 
-|  [`Environment`](#asff-resourcedetails-awslambdafunction-environment)  |  No  | A function's environment variable settings\.Type: Object | 
-|  `FunctionName`  |  No  | The name of the function\.Type: String | 
-|  `Handler`  |  No  | The function that Lambda calls to begin running your function\.Type: String | 
-|  `KmsKeyArn`  |  No  | The AWS KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.Type: String | 
-|  `LastModified`  |  No  | The date and time that the function was last updated, in ISO\-8601 format \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.Type: String | 
-|  [`Layers`](#asff-resourcedetails-awslambdafunction-layers)  |  No  | The function's layers\.Type: Object | 
-|  `MasterArn`  |  No  | For Lambda@Edge functions, the ARN of the master function\.Type: String | 
-|  `MemorySize`  |  No  | The memory that is allocated to the function\.Type: Integer | 
-|  `RevisionId`  |  No  | The latest updated revision of the function or alias\.Type: String | 
-|  `Role`  |  No  | The function's execution role\.Type: String | 
-|  `Runtime`  |  No  | The runtime environment for the Lambda function\.Type: String | 
-|  `Timeout`  |  No  | The amount of time that Lambda allows a function to run before stopping it\.Type: Integer | 
-|  [`TracingConfig`](#asff-resourcedetails-awslambdafunction-tracingconfig)  |  No  | The function's AWS X\-Ray tracing configuration\.Type: Object | 
-|  `Version`  |  No  | The version of the Lambda function\.Type: String | 
-|  [`VpcConfig`](#asff-resourcedetails-awslambdafunction-vpcconfig)  |  No  | The function's networking configuration\.Type: Object | 
+|  [`Code`](#asff-resourcedetails-awslambdafunction-code)  |  No  |  An `AwsLambdaFunctionCode` object\. Type: Object  | 
+|  `CodeSha256`  |  No  |  The SHA256 hash of the function's deployment package\. Type: String  | 
+|  [`DeadLetterConfig`](#asff-resourcedetails-awslambdafunction-deadletterconfig)  |  No  |  The function's dead letter queue\. Type: Object  | 
+|  [`Environment`](#asff-resourcedetails-awslambdafunction-environment)  |  No  |  A function's environment variable settings\. Type: Object  | 
+|  `FunctionName`  |  No  |  The name of the function\. Type: String  | 
+|  `Handler`  |  No  |  The function that Lambda calls to begin running your function\. Type: String  | 
+|  `KmsKeyArn`  |  No  |  The AWS KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\. Type: String  | 
+|  `LastModified`  |  No  |  The date and time that the function was last updated, in ISO\-8601 format \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\. Type: String  | 
+|  [`Layers`](#asff-resourcedetails-awslambdafunction-layers)  |  No  |  The function's layers\. Type: Object  | 
+|  `MasterArn`  |  No  |  For Lambda@Edge functions, the ARN of the master function\. Type: String  | 
+|  `MemorySize`  |  No  |  The memory that is allocated to the function\. Type: Integer  | 
+|  `RevisionId`  |  No  |  The latest updated revision of the function or alias\. Type: String  | 
+|  `Role`  |  No  |  The function's execution role\. Type: String  | 
+|  `Runtime`  |  No  |  The runtime environment for the Lambda function\. Type: String  | 
+|  `Timeout`  |  No  |  The amount of time that Lambda allows a function to run before stopping it\. Type: Integer  | 
+|  [`TracingConfig`](#asff-resourcedetails-awslambdafunction-tracingconfig)  |  No  |  The function's AWS X\-Ray tracing configuration\. Type: Object  | 
+|  `Version`  |  No  |  The version of the Lambda function\. Type: String  | 
+|  [`VpcConfig`](#asff-resourcedetails-awslambdafunction-vpcconfig)  |  No  |  The function's networking configuration\. Type: Object  | 
 
 ##### Code<a name="asff-resourcedetails-awslambdafunction-code"></a>
 
@@ -2788,10 +4444,10 @@ The `Code` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `S3Bucket`  |  No  | An S3 bucket in the same AWS Region as your function\. The bucket can be in a different AWS account\.Type: String | 
-|  `S3Key`  |  No  | The Amazon S3 key of the deployment package\.Type: String | 
-|  `S3ObjectVersion`  |  No  | For versioned objects, the version of the deployment package object to use\.Type: String | 
-|  `ZipFile`  |  No  | The base64\-encoded contents of the deployment package\. AWS SDK and AWS CLI clients handle the encoding for you\.Type: String | 
+|  `S3Bucket`  |  No  |  An S3 bucket in the same AWS Region as your function\. The bucket can be in a different AWS account\. Type: String  | 
+|  `S3Key`  |  No  |  The Amazon S3 key of the deployment package\. Type: String  | 
+|  `S3ObjectVersion`  |  No  |  For versioned objects, the version of the deployment package object to use\. Type: String  | 
+|  `ZipFile`  |  No  |  The base64\-encoded contents of the deployment package\. AWS SDK and AWS CLI clients handle the encoding for you\. Type: String  | 
 
 ##### DeadLetterConfig<a name="asff-resourcedetails-awslambdafunction-deadletterconfig"></a>
 
@@ -2802,7 +4458,7 @@ The `DeadLetterConfig` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `TargetArn`  |  No  | The Amazon Resource Name \(ARN\) of the Amazon SQS queue or Amazon SNS topic containing the dead letter queue\.Type: String | 
+|  `TargetArn`  |  No  |  The Amazon Resource Name \(ARN\) of the Amazon SQS queue or Amazon SNS topic containing the dead letter queue\. Type: String  | 
 
 ##### Environment<a name="asff-resourcedetails-awslambdafunction-environment"></a>
 
@@ -2813,8 +4469,8 @@ The `Environment` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Variables`  |  No  | Environment variable key\-value pairs\.Type: String to string map | 
-|  `Error`  |  No  | Error messages for environment variables that couldn't be applied\.Type: Object | 
+|  `Variables`  |  No  |  Environment variable key\-value pairs\. Type: String to string map  | 
+|  `Error`  |  No  |  Error messages for environment variables that couldn't be applied\. Type: Object  | 
 
 The `Error` object can have the following attributes\.
 
@@ -2833,8 +4489,8 @@ Each layer object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Arn`  |  No  | The ARN of the function layer\.Type: String | 
-|  `CodeSize`  |  No  | The size of the layer archive in bytes\.Type: Integer | 
+|  `Arn`  |  No  |  The ARN of the function layer\. Type: String  | 
+|  `CodeSize`  |  No  |  The size of the layer archive in bytes\. Type: Integer  | 
 
 ##### TracingConfig<a name="asff-resourcedetails-awslambdafunction-tracingconfig"></a>
 
@@ -2845,7 +4501,7 @@ The `TracingConfig` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `Mode`  |  No  | The tracing mode\.Type: String | 
+|  `Mode`  |  No  |  The tracing mode\. Type: String  | 
 
 ##### VpcConfig<a name="asff-resourcedetails-awslambdafunction-vpcconfig"></a>
 
@@ -2994,7 +4650,7 @@ The `AwsRdsDbCluster` object can contain the following attributes\.
 |  `MultiAz`  |  No  |  Whether the DB cluster has instances in multiple Availability Zones\. Type: Boolean  | 
 |  `Port`  |  No  |  The port number on which the DB instances in the DB cluster accept connections\. Type: Number  | 
 |  `PreferredBackupWindow`  |  No  |  The range of time each day when automated backups are created, if automated backups are enabled\. Type: string Format: `HH:MM-HH:MM`  Example: <pre>"PreferredBackupWindow": "04:52-05:22"</pre>  | 
-|  `PreferredMaintenanceWindow`  |  No  |  The weekly time range during which system maintenance can occur, in Universal Coordinated Time \(UTC\)\. Type: String Format: `<day>:HH:MM-<day>:HH:MM` For the day values, use `mon`\|`tue`\|`wed`\|`thu`\|`fri`\|`sat`\|`sun` Example: <pre>"PreferredMaintenanceWindow": "sun:09:32-sun:10:02"</pre>  | 
+|  `PreferredMaintenanceWindow`  |  No  |  The weekly time range during which system maintenance can occur, in Universal Coordinated Time \(UTC\)\. Type: String Format: `<day>:HH:MM-<day>:HH:MM` For the day values, use `mon` \| `tue` \| `wed`\|`thu` \| `fri` \| `sat` \| `sun` Example: <pre>"PreferredMaintenanceWindow": "sun:09:32-sun:10:02"</pre>  | 
 |  `ReaderEndpoint`  |  No  |  The reader endpoint for the DB cluster\. Type: String  | 
 |  `ReadReplicaIdentifiers`  |  No  |  The identifiers of the read replicas that are associated with this DB cluster\. Type: Array of strings  | 
 |  `Status`  |  No  |  The current status of this DB cluster\. Type: String  | 
@@ -3296,7 +4952,7 @@ It can have the following attributes\.
 |  `PerformanceInsightsKmsKeyId`  |  No  |  The identifier of the AWS KMS key used to encrypt the Performance Insights data\. Type: String  | 
 |  `PerformanceInsightsRetentionPeriod`  |  No  |  The number of days to retain Performance Insights data\. Type: Number  | 
 |  `PreferredBackupWindow`  |  No  |  The range of time each day when automated backups are created, if automated backups are enabled\. Type: string Format: `HH:MM-HH:MM`  Example: <pre>"PreferredBackupWindow": "04:52-05:22"</pre>  | 
-|  `PreferredMaintenanceWindow`  |  No  |  The weekly time range during which system maintenance can occur, in Universal Coordinated Time \(UTC\)\. Type: String Format: `<day>:HH:MM-<day>:HH:MM` For the day values, use `mon`\|`tue`\|`wed`\|`thu`\|`fri`\|`sat`\|`sun` Example: <pre>"PreferredMaintenanceWindow": "sun:09:32-sun:10:02"</pre>  | 
+|  `PreferredMaintenanceWindow`  |  No  |  The weekly time range during which system maintenance can occur, in Universal Coordinated Time \(UTC\)\. Type: String Format: `<day>:HH:MM-<day>:HH:MM` For the day values, use `mon` \| `tue` \| `wed` \| `thu` \| `fri` \| `sat` \| `sun` Example: <pre>"PreferredMaintenanceWindow": "sun:09:32-sun:10:02"</pre>  | 
 |  [`ProcessorFeatures`](#asff-resourcedetails-awsrdsdbinstance-processorfeatures)  |  No  |  The number of CPU cores and the number of threads per core for the DB instance class of the DB instance\. Type: Array of objects  | 
 |  `PromotionTier`  |  No  |  The order in which to promote an Aurora replica to the primary instance after a failure of the existing primary instance\. Type: Number  | 
 |  `PubliclyAccessible`  |  No  |  Specifies the accessibility options for the DB instance\. A value of true specifies an internet\-facing instance with a publicly resolvable DNS name, which resolves to a public IP address\. A value of false specifies an internal instance with a DNS name that resolves to a private IP address\. Type: Boolean  | 
@@ -3562,6 +5218,429 @@ The `AwsRdsDbSnapshot` object contains details about an Amazon RDS DB cluster sn
 |  `Timezone`  |  No  |  The time zone of the DB snapshot\. Type: String  | 
 |  VpcId  |  No  |  The VPC ID associated with the DB snapshot\. Type: String  | 
 
+#### AwsRedshiftCluster<a name="asff-resourcedetails-awsredshiftcluster"></a>
+
+The `AwsRedshiftCluster` object contains details about an Amazon Redshift cluster\.
+
+**Example**
+
+```
+"AwsRedshiftCluster": {
+    "AllowVersionUpgrade": true,
+    "AutomatedSnapshotRetentionPeriod": 1,
+    "AvailabilityZone": "us-west-2d",
+    "ClusterAvailabilityStatus": "Unavailable",
+    "ClusterCreateTime": "2020-08-03T19:22:44.637Z",
+    "ClusterIdentifier": "redshift-cluster-1",
+    "ClusterNodes": [
+        {
+            "NodeRole": "LEADER",
+            "PrivateIPAddress": "192.0.2.108",
+            "PublicIPAddress": "198.51.100.29"
+        },
+        {
+            "NodeRole": "COMPUTE-0",
+            "PrivateIPAddress": "192.0.2.22",
+            "PublicIPAddress": "198.51.100.63"
+        },
+        {
+             "NodeRole": "COMPUTE-1",
+             "PrivateIPAddress": "192.0.2.224",
+             "PublicIPAddress": "198.51.100.226"
+        }
+        ],
+    "ClusterParameterGroups": [
+        { 
+            "ClusterParameterStatusList": [
+                {
+                    "ParameterName": "max_concurrency_scaling_clusters",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "enable_user_activity_logging",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "auto_analyze",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "query_group",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "datestyle",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "extra_float_digits",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "search_path",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "statement_timeout",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "wlm_json_configuration",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "require_ssl",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                },
+                {
+                    "ParameterName": "use_fips_ssl",
+                    "ParameterApplyStatus": "in-sync",
+                    "ParameterApplyErrorDescription": "parameterApplyErrorDescription"
+                }
+            ],
+            "ParameterApplyStatus": "in-sync",
+            "ParameterGroupName": "temp"
+        }
+    ], 
+    "ClusterPublicKey": "JalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY Amazon-Redshift",
+    "ClusterRevisionNumber": 17498,
+    "ClusterSecurityGroups": [
+        {
+            "ClusterSecurityGroupName": "default",
+            "Status": "active"
+        }
+    ],
+    "ClusterSnapshotCopyStatus": {
+        "DestinationRegion": "us-west-2",
+        "ManualSnapshotRetentionPeriod": -1,
+        "RetentionPeriod": 1,
+        "SnapshotCopyGrantName": "snapshotCopyGrantName"
+    },
+    "ClusterStatus": "available",
+    "ClusterSubnetGroupName": "default",
+    "ClusterVersion": "1.0",
+    "DBName": "dev",
+    "DeferredMaintenanceWindows": [
+        {
+            "DeferMaintenanceEndTime": "2020-10-07T20:34:01.000Z",
+            "DeferMaintenanceIdentifier": "deferMaintenanceIdentifier",
+            "DeferMaintenanceStartTime": "2020-09-07T20:34:01.000Z"
+        }
+     ],
+    "ElasticIpStatus": {
+        "ElasticIp": "203.0.113.29",
+        "Status": "active"
+    },
+    "ElasticResizeNumberOfNodeOptions": "4",  
+    "Encrypted": false,
+    "Endpoint": {
+        "Address": "redshift-cluster-1.example.us-west-2.redshift.amazonaws.com",
+        "Port": 5439
+    },
+    "EnhancedVpcRouting": false,
+    "ExpectedNextSnapshotScheduleTime": "2020-10-13T20:34:01.000Z",
+    "ExpectedNextSnapshotScheduleTimeStatus": "OnTrack",
+    "HsmStatus": {
+        "HsmClientCertificateIdentifier": "hsmClientCertificateIdentifier",
+        "HsmConfigurationIdentifier": "hsmConfigurationIdentifier",
+        "Status": "applying"
+    },
+    "IamRoles": [
+        {
+             "ApplyStatus": "in-sync",
+             "IamRoleArn": "arn:aws:iam::111122223333:role/RedshiftCopyUnload"   
+        }
+    ],
+    "KmsKeyId": "kmsKeyId",
+    "MaintenanceTrackName": "current",
+    "ManualSnapshotRetentionPeriod": -1,
+    "MasterUsername": "awsuser",
+    "NextMaintenanceWindowStartTime": "2020-08-09T13:00:00.000Z",
+    "NodeType": "dc2.large",
+    "NumberOfNodes": 2,
+    "PendingActions": [],
+    "PendingModifiedValues": {
+        "AutomatedSnapshotRetentionPeriod": 0,
+        "ClusterIdentifier": "clusterIdentifier",
+        "ClusterType": "clusterType",
+        "ClusterVersion": "clusterVersion",
+        "EncryptionType": "None",
+        "EnhancedVpcRouting": false,
+        "MaintenanceTrackName": "maintenanceTrackName",
+        "MasterUserPassword": "masterUserPassword",
+        "NodeType": "dc2.large",
+        "NumberOfNodes": 1,
+        "PubliclyAccessible": true
+    },
+    "PreferredMaintenanceWindow": "sun:13:00-sun:13:30",
+    "PubliclyAccessible": true,
+    "ResizeInfo": {
+        "AllowCancelResize": true,
+        "ResizeType": "ClassicResize"
+    },
+    "RestoreStatus": {
+        "CurrentRestoreRateInMegaBytesPerSecond": 15,
+        "ElapsedTimeInSeconds": 120,
+        "EstimatedTimeToCompletionInSeconds": 100,
+        "ProgressInMegaBytes": 10,
+        "SnapshotSizeInMegaBytes": 1500,
+        "Status": "restoring"
+    },
+    "SnapshotScheduleIdentifier": "snapshotScheduleIdentifier",
+    "SnapshotScheduleState": "ACTIVE",
+     "VpcId": "vpc-example",
+    "VpcSecurityGroups": [
+        {
+            "Status": "active",
+            "VpcSecurityGroupId": "sg-example"
+        }
+    ]
+}
+```
+
+`AwsRedshiftCluster` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AllowVersionUpgrade`  |  No  |  Indicates whether major version upgrades are applied automatically to the cluster during the maintenance window\. Type: Boolean  | 
+|  `AutomatedSnapshotRetentionPeriod`  |  No  |  The number of days that automatic cluster snapshots are retained\. Type: Number Format: Must be an integer  | 
+|  `AvailabilityZone`  |  No  |  The name of the Availability Zone in which the cluster is located\. Type: String  | 
+|  `ClusterAvailabilityStatus`  |  No  |  The availability status of the cluster for queries\. Possible values are the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html) Type: String Valid values: `Available` \| `Unavailable` \| `Maintenance` \| `Modifying` \| `Failed`  | 
+|  `ClusterCreateTime`  |  No  |  Indicates when the cluster was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"ClusterCreateTime": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `ClusterIdentifier`  |  No  |  The unique identifier of the cluster\. Type: String  | 
+|  [`ClusterNodes`](#asff-resourcedetails-awsredshiftcluster-clusternodes)  |  No  |  The nodes in the cluster\. Type: Array of objects  | 
+|  [`ClusterParameterGroups`](#asff-resourcedetails-awsredshiftcluster-clusterparametergroups)  |  No  |  The list of cluster parameter groups that are associated with this cluster\. Type: Array of objects  | 
+|  `ClusterPublicKey`  |  No  |  The public key for the cluster\. Type: String  | 
+|  `ClusterRevisionNumber`  |  No  |  The specific revision number of the database in the cluster\. Type: String  | 
+|  [`ClusterSecurityGroups`](#asff-resourcedetails-awsredshiftcluster-clustersecuritygroups)  |  No  |  A list of cluster security groups that are associated with the cluster\. Type: Array of objects  | 
+|  [`ClusterSnapshotCopyStatus`](#asff-resourcedetails-awsredshiftcluster-clustersnapshotcopystatus)  |  No  |  Information about the destination Region and retention period for the cross\-Region snapshot copy\. Type: Object  | 
+|  `ClusterStatus`  |  No  |  The current status of the cluster\. Type: String Valid values: `available` \| `available, prep-for-resize` \| `available, resize-cleanup` \|` cancelling-resize` \| `creating` \| `deleting` \| `final-snapshot` \| `hardware-failure` \| `incompatible-hsm` \|` incompatible-network` \| `incompatible-parameters` \| `incompatible-restore` \| `modifying` \| `paused` \| `rebooting` \| `renaming` \| `resizing` \| `rotating-keys` \| `storage-full` \| `updating-hsm`  | 
+|  `ClusterSubnetGroupName`  |  No  |  The name of the subnet group that is associated with the cluster\. This parameter is valid only when the cluster is in a VPC\. Type: String  | 
+|  `ClusterVersion`  |  No  |  The version ID of the Amazon Redshift engine that runs on the cluster\. Type: String  | 
+|  `DBName`  |  No  |  The name of the initial database that was created when the cluster was created\. The same name is returned for the life of the cluster\. If an initial database is not specified, a database named `devdev` is created by default\. Type: String  | 
+|  [`DeferredMaintenanceWindows`](#asff-resourcedetails-awsredshiftcluster-deferredmaintenancewindows)  |  No  |  List of time windows during which maintenance was deferred\. Type: Array of objects  | 
+|  [`ElasticIpStatus`](#asff-resourcedetails-awsredshiftcluster-elasticipstatus)  |  No  |  Information about the status of the Elastic IP \(EIP\) address\. Type: Object  | 
+|  `ElasticResizeNumberOfNodeOptions`  |  No  |  The number of nodes that you can resize the cluster to with the elastic resize method\. Type: String  | 
+|  `Encrypted`  |  No  |  Indicates whether the data in the cluster is encrypted at rest\. Type: Boolean  | 
+|  [`Endpoint`](#asff-resourcedetails-awsredshiftcluster-endpoint)  |  No  |  The connection endpoint\. Type: Object  | 
+|  `EnhancedVpcRouting`  |  No  |  Indicates whether to create the cluster with enhanced VPC routing enabled\. Type: Boolean  | 
+|  `ExpectedNextSnapshotScheduleTime`  |  No  |  Indicates when the next snapshot is expected to be taken\. The cluster must have a valid snapshot schedule and have backups enabled\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"ExpectedNextSnapshotScheduleTime": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `ExpectedNextSnapshotScheduleTimeStatus`  |  No  |  The status of the next expected snapshot\. Type: String Valid values: `OnTrack` \| `Pending`  | 
+|  [`HsmStatus`](#asff-resourcedetails-awsredshiftcluster-hsmstatus)  |  No  |  Information about whether the Amazon Redshift cluster finished applying any changes to hardware security module \(HSM\) settings that were specified in a modify cluster command\. Type: Object  | 
+|  [`IamRoles`](#asff-resourcedetails-awsredshiftcluster-iamroles)  |  No  |  A list of IAM roles that the cluster can use to access other AWS services\. Type: Array of objects  | 
+|  `KmsKeyId`  |  No  |  The identifier of the AWS KMS encryption key that is used to encrypt data in the cluster\. Type: String  | 
+|  `MaintenanceTrackName`  |  No  |  The name of the maintenance track for the cluster\. Type: String  | 
+|  `ManualSnapshotRetentionPeriod`  |  No  |  The default number of days to retain a manual snapshot\. If the value is \-1, the snapshot is retained indefinitely\. This setting doesn't change the retention period of existing snapshots\. Type: Number Valid values: Either \-1 or an integer between 1 and 3,653  | 
+|  `MasterUsername`  |  No  |  The master user name for the cluster\. This name is used to connect to the database that is specified in as the value of `DBName`\. Type: String  | 
+|  `NextMaintenanceWindowStartTime`  |  No  |  Indicates the start of the next maintenance window\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"NextMaintenanceWindowStartTime": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `NodeType`  |  No  |  The node type for the nodes in the cluster\. Type: String  | 
+|  `NumberOfNodes`  |  No  |  The number of compute nodes in the cluster\. Type: Number  | 
+|  `PendingActions`  |  No  |  A list of cluster operations that are waiting to start\. Type: Array of strings  | 
+|  [`PendingModifiedValues`](#asff-resourcedetails-awsredshiftcluster-pendingmodifiedvalues)  |  No  |  List of changes to the cluster that are currently pending\. Type: Object  | 
+|  `PreferredMaintenanceWindow`  |  No  |  The weekly time range, in Universal Coordinated Time \(UTC\), during which system maintenance can occur\. Type: String Format: `<day>:HH:MM-<day>:HH:MM` For the day values, use `mon` \| `tue` \| `wed` \| `thu` \| `fri` \| `sat` \| `sun` Example: <pre>"PreferredMaintenanceWindow": "sun:09:32-sun:10:02"</pre>  | 
+|  `PubliclyAccessible`  |  No  |  Whether the cluster can be accessed from a public network\. Type: Boolean  | 
+|  [`ResizeInfo`](#asff-resourcedetails-awsredshiftcluster-resizeinfo)  |  No  |  Information about the resize operation for the cluster\. Type: Object  | 
+|  [`RestoreStatus`](#asff-resourcedetails-awsredshiftcluster-restorestatus)  |  No  |  Information about the status of a cluster restore action\. Only applies to a cluster that was created by restoring a snapshot\. Type: Object  | 
+|  `SnapshotScheduleIdentifier`  |  No  |  A unique identifier for the cluster snapshot schedule\. Type: String  | 
+|  `SnapshotScheduleState`  |  No  |  The current state of the cluster snapshot schedule\. Type: String Valid values: `MODIFYING` \| `ACTIVE` \| `FAILED`  | 
+|  `VpcId`  |  No  |  The identifier of the VPC that the cluster is in, if the cluster is in a VPC\. Type: String  | 
+|  [`VpcSecurityGroups`](#asff-resourcedetails-awsredshiftcluster-vpcsecuritygroups)  |  No  |  The list of VPC security groups that the cluster belongs to, if the cluster is in a VPC\. Type: Array of objects  | 
+
+##### ClusterNodes<a name="asff-resourcedetails-awsredshiftcluster-clusternodes"></a>
+
+The `ClusterNodes` object contains the list of nodes in the cluster\.
+
+Each node can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `NodeRole`  |  No  |  The role of the node\. A node might be a leader node or a compute node\. Type: String  | 
+|  `PrivateIPAddress`  |  No  |  The private IP address of the node\. Type: String  | 
+|  `PublicIPAddress`  |  No  |  The public IP address of the node\. Type: String  | 
+
+##### ClusterParameterGroups<a name="asff-resourcedetails-awsredshiftcluster-clusterparametergroups"></a>
+
+The `ClusterParameterGroups` object contains the list of cluster parameter groups that are associated with this cluster\.
+
+Each parameter group can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ClusterParameterStatusList`  |  No  |  The list of parameter statuses\. Type: Array of objects  | 
+|  `ParameterApplyStatus`  |  No  |  The status of updates to the parameters\. Type: String  | 
+|  `ParameterGroupName`  |  No  |  The name of the parameter group\. Type: String  | 
+
+For each parameter status, `ClusterParameterStatusList` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ParameterApplyErrorDescription`  |  No  |  The error that prevented the parameter from being applied to the database\. Type: String  | 
+|  `ParameterApplyStatus`  |  No  |  The status of the parameter\. Indicates whether the parameter is in sync with the database, waiting for a cluster reboot, or encountered an error when it was applied\. Type: String Valid values: `in-sync` \| `pending-reboot` \| `applying` \| `invalid-parameter` \| `apply-deferred` \| `apply-error` \| `unknown-error`  | 
+|  `ParameterName`  |  No  |  The name of the parameter\. Type: String  | 
+
+##### ClusterSecurityGroups<a name="asff-resourcedetails-awsredshiftcluster-clustersecuritygroups"></a>
+
+The `ClusterSecurityGroups` object contains the list of security groups that are associated with the cluster\.
+
+Each security group can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ClusterSecurityGroupName`  |  No  |  The name of the cluster security group\. Type: String  | 
+|  `Status`  |  No  |  The status of the cluster security group\. Type: String  | 
+
+##### ClusterSnapshotCopyStatus<a name="asff-resourcedetails-awsredshiftcluster-clustersnapshotcopystatus"></a>
+
+The ClusterSnapshotCopyStatus object provides information about the destination Region and retention period for the cross\-Region snapshot copy\.
+
+`ClusterSnapshotCopyStatus` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DestinationRegion`  |  No  |  The destination Region that snapshots are automatically copied to when cross\-Region snapshot copy is enabled\. Type: String  | 
+|  `ManualSnapshotRetentionPeriod`  |  No  |  The number of days that manual snapshots are retained in the destination region after they are copied from a source region\. If the value is \-1, then the manual snapshot is retained indefinitely\. Type: Number Valid values: Either \-1 or an integer between 1 and 3,653  | 
+|  `RetentionPeriod`  |  No  |  The number of days to retain automated snapshots in the destination Region after they are copied from a source Region\. Type: Number  | 
+|  `SnapshotCopyGrantName`  |  No  |  The name of the snapshot copy grant\. Type: String  | 
+
+##### DeferredMaintenanceWindows<a name="asff-resourcedetails-awsredshiftcluster-deferredmaintenancewindows"></a>
+
+The `DeferredMaintenanceWindows` object contains a list of time windows during which maintenance was deferred\.
+
+Each time window can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `DeferMaintenanceEndTime`  |  No  |  The end of the time window for which maintenance was deferred\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"DeferMaintenanceEndTime": "2017-03-22T13:22:13.933Z"</pre>  | 
+|  `DeferMaintenanceIdentifier`  |  No  |  The identifier of the maintenance window\. Type: String  | 
+|  `DeferMaintenanceStartTime`  |  No  |  The start of the time window for which maintenance was deferred\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. Example: <pre>"ClusterCreateTime": "2017-03-23T13:22:13.933Z"</pre>  | 
+
+##### ElasticIpStatus<a name="asff-resourcedetails-awsredshiftcluster-elasticipstatus"></a>
+
+The `ElasticIpStatus` object contains information about the status of the elastic IP \(EIP\) address\.
+
+`ElasticIpStatus` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ElasticIp`  | No |  The elastic IP address for the cluster\. Type: String  | 
+| Status | No |  The status of the elastic IP address\. Type: String  | 
+
+##### Endpoint<a name="asff-resourcedetails-awsredshiftcluster-endpoint"></a>
+
+The `Endpoint` object describes the connection endpoint for the cluster\.
+
+`Endpoint` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Address`  |  No  |  The DNS address of the cluster\. Type: String  | 
+|  `Port`  |  No  |  The port that the database engine listens on\. Type: Number  | 
+
+##### HsmStatus<a name="asff-resourcedetails-awsredshiftcluster-hsmstatus"></a>
+
+The `HsmStatus` object provides information about whether the Amazon Redshift cluster finished applying any hardware changes to security module \(HSM\) settings that were specified in a modify cluster command\.
+
+`HsmStatus` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `HsmClientCertificateIdentifier`  |  No  |  The name of the HSM client certificate that the Amazon Redshift cluster uses to retrieve the data encryption keys that are stored in an HSM\. Type: String  | 
+|  `HsmConfigurationIdentifier`  |  No  |  The name of the HSM configuration that contains the information that the Amazon Redshift cluster can use to retrieve and store keys in an HSM\. Type: String  | 
+|  `Status`  |  No  |  Indicates whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command\. Type: String Valid values: `active` \| `applying`  | 
+
+##### IamRoles<a name="asff-resourcedetails-awsredshiftcluster-iamroles"></a>
+
+The `IamRoles` object contains a list of IAM roles that the cluster can use to access other AWS services\.
+
+Each role can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `ApplyStatus`  |  No  |  The status of the IAM role's association with the cluster\. Type: String Valid values: `in-sync` \| `adding` \| `removing`  | 
+|  `IamRoleArn`  |  No  |  The ARN of the IAM role\. Type: String  | 
+
+##### PendingModifiedValues<a name="asff-resourcedetails-awsredshiftcluster-pendingmodifiedvalues"></a>
+
+The `PendingModifiedValues` object contains a list of changes to the cluster that are currently pending\.
+
+`PendingModifiedValues` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AutomatedSnapshotRetentionPeriod`  |  No  |  The pending or in\-progress change to the automated snapshot retention period\. Type: String  | 
+|  `ClusterIdentifier`  |  No  |  The pending or in\-progress change to the identifier for the cluster\. Type: String  | 
+|  `ClusterType`  |  No  |  The pending or in\-progress change to the cluster type\. Type: String  | 
+|  `ClusterVersion`  |  No  |  The pending or in\-progress change to the service version\. Type: String  | 
+|  `EncryptionType`  |  No  |  The encryption type for a cluster\. Type: String  | 
+|  `EnhancedVpcRouting`  |  No  |  Indicates whether to create the cluster with enhanced VPC routing enabled\. Type: Boolean  | 
+|  `MaintenanceTrackName`  |  No  |  The name of the maintenance track that the cluster changes to during the next maintenance window\. Type: String  | 
+|  `MasterUserPassword`  |  No  |  The pending or in\-progress change to the master user password for the cluster\. Type: String  | 
+|  `NodeType`  |  No  |  The pending or in\-progress change to the cluster's node type\. Type: String  | 
+|  `NumberOfNodes`  |  No  |  The pending or in\-progress change to the number of nodes in the cluster\. Type: Number  | 
+|  `PubliclyAccessible`  |  No  |  The pending or in\-progress change to whether the cluster can be connected to from the public network\. Type: Boolean  | 
+
+##### ResizeInfo<a name="asff-resourcedetails-awsredshiftcluster-resizeinfo"></a>
+
+The `ResizeInfo` object contains information about the resize operation for the cluster\.
+
+`ResizeInfo` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `AllowCancelResize`  |  No  |  Indicates whether the resize operation can be canceled\. Type: Boolean  | 
+|  `ResizeType`  |  No  |  The type of resize operation\. Type: String Valid values: `ClassicResize`  | 
+
+##### RestoreStatus<a name="asff-resourcedetails-awsredshiftcluster-restorestatus"></a>
+
+The `RestoreStatus` object contains information about the status of a cluster restore action\. It only applies if the cluster was created by restoring a snapshot\.
+
+`RestoreStatus` can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `CurrentRestoreRateInMegaBytesPerSecond`  |  No  |  The number of megabytes per second being transferred from the backup storage\. Returns the average rate for a completed backup\. This field is only updated when you restore to DC2 and DS2 node types\. Type: Number  | 
+|  `ElapsedTimeInSeconds`  |  No  |  The amount of time an in\-progress restore has been running, or the amount of time it took a completed restore to finish\. This field is only updated when you restore to DC2 and DS2 node types\. Type: Number  | 
+|  `EstimatedTimeToCompletionInSeconds`  |  No  |  The estimate of the time remaining before the restore is complete\. Returns 0 for a completed restore\. This field is only updated when you restore to DC2 and DS2 node types\. Type: Number  | 
+|  `ProgressInMegaBytes`  |  No  |  The number of megabytes that were transferred from snapshot storage\. This field is only updated when you restore to DC2 and DS2 node types\. Type: Number  | 
+|  `SnapshotSizeInMegaBytes`  |  No  |  The size of the set of snapshot data that was used to restore the cluster\. This field is only updated when you restore to DC2 and DS2 node types\. Type: Number  | 
+|  `Status`  |  No  |  The status of the restore action\. Type: String Valid values: `starting` \| `restoring` \| `completed` \| `failed`  | 
+
+##### VpcSecurityGroups<a name="asff-resourcedetails-awsredshiftcluster-vpcsecuritygroups"></a>
+
+The `VpcSecurityGroups` object contains the list of VPC security groups that the cluster belongs to, if the cluster is in a VPC\.
+
+Each security group can have the following attributes\.
+
+
+|  Attribute  |  Required  |  Description  | 
+| --- | --- | --- | 
+|  `Status`  |  No  |  The status of the VPC security group\. Type: String  | 
+|  `VpcSecurityGroupId`  |  No  |  The identifier of the VPC security group\. Type: String  | 
+
 #### AwsS3Bucket<a name="asff-resourcedetails-awss3bucket"></a>
 
 The `AwsS3Bucket` object provides details about an Amazon S3 bucket\.
@@ -3573,7 +5652,7 @@ The `AwsS3Bucket` object provides details about an Amazon S3 bucket\.
 | --- | --- | --- | 
 |  `CreatedAt`  |  No  |  Indicates when the S3 bucket was created\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
 |  `OwnerId`  |  No  |  The canonical user ID of the owner of the Amazon S3 bucket\. Type: String \(64 characters max\)  | 
-|  `OwnerName`  |  No  | The display name of the owner of the Amazon S3 bucket\.Type: String \(128 characters max\) | 
+|  `OwnerName`  |  No  |  The display name of the owner of the Amazon S3 bucket\. Type: String \(128 characters max\)  | 
 |  `ServerSideEncryptionConfiguration`  |  No  |  The encryption rules that are applied to the S3 bucket\. Type: Object Consists of a `Rules` object, which contains the [`ApplyServerSideEncryptionByDefault`](#asff-resourcedetails-awss3bucket-applyserversideencryptionbydefault) object\.  Example: <pre>"ServerSideEncryptionConfiguration": {<br />  "Rules": [<br />    {<br />      "ApplyServerSideEncryptionByDefault": {<br />        "KMSMasterKeyID": "12345678-abcd-abcd-abcd-123456789012",<br />        "SSEAlgorithm": "aws.kms"<br />      }<br />    }<br />  ]<br />}</pre>  | 
 
 ##### ApplyServerSideEncryptionByDefault<a name="asff-resourcedetails-awss3bucket-applyserversideencryptionbydefault"></a>
@@ -3651,7 +5730,7 @@ The `AwsSecretsManagerSecret` object provides details about a Secrets Manager se
 |  `RotationLambdaArn`  |  No  |  The ARN of the Lambda function that rotates the secret\. Type: String  | 
 |  `RotationOccurredWithinFrequency`  |  No  |  Whether the rotation occurred within the specified rotation frequency\. Type: Boolean  | 
 |  `RotationRules`  |  No  |  Defines the rotation schedule for the secret\. Type: Object  | 
-|  `RotationRules.AutomaticallyAfterDays`  |  No  |  The number of days after the previous rotation to rotate the secret\. Type: Integer Minimum value: 1 Maximum value: 1000  | 
+|  `RotationRules.AutomaticallyAfterDays`  |  No  |  The number of days after the previous rotation to rotate the secret\. Type: Integer Minimum value: 1 Maximum value: 1,000  | 
 
 #### AwsSnsTopic<a name="asff-resourcedetails-awssnstopic"></a>
 
@@ -3662,10 +5741,10 @@ The `AwsSnsTopic` object contains details about an Amazon SNS topic\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `KmsMasterKeyId`  |  No  | The ID of an AWS managed customer master key \(CMK\) for Amazon SNS or a custom CMK\.Type: String | 
-|  `Subscription`  |  No  | List of subscription endpoints of an Amazon SNS topic\.Type: Array of objects | 
-|  `TopicName`  |  No  | The name of the topic\.Type: String | 
-|  `Owner`  |  No  | The subscription's owner\.Type: String | 
+|  `KmsMasterKeyId`  |  No  |  The ID of an AWS managed customer master key \(CMK\) for Amazon SNS or a custom CMK\. Type: String  | 
+|  `Subscription`  |  No  |  List of subscription endpoints of an Amazon SNS topic\. Type: Array of objects  | 
+|  `TopicName`  |  No  |  The name of the topic\. Type: String  | 
+|  `Owner`  |  No  |  The subscription's owner\. Type: String  | 
 
 ##### Subscription<a name="asff-resourcedetails-awssnstopic-subscription"></a>
 
@@ -3688,10 +5767,10 @@ The `AwsSqsQueue` object contains information about an Amazon SQS queue\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `KmsDataKeyReusePeriodSeconds`  |  No  | The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again\.Type: Integer | 
-|  `KmsMasterKeyId`  |  No  | The ID of an AWS managed customer master key \(CMK\) for Amazon SQS or a custom CMK\.Type: String | 
-|  `QueueName`  |  No  | The name of the new queue\.Type: String | 
-|  `DeadLetterTargetArn`  |  No  | The Amazon Resource Name \(ARN\) of the dead\-letter queue to which Amazon SQS moves messages after the value of `maxReceiveCount` is exceeded\.Type: String | 
+|  `KmsDataKeyReusePeriodSeconds`  |  No  |  The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again\. Type: Integer  | 
+|  `KmsMasterKeyId`  |  No  |  The ID of an AWS managed customer master key \(CMK\) for Amazon SQS or a custom CMK\. Type: String  | 
+|  `QueueName`  |  No  |  The name of the new queue\. Type: String  | 
+|  `DeadLetterTargetArn`  |  No  |  The Amazon Resource Name \(ARN\) of the dead\-letter queue to which Amazon SQS moves messages after the value of `maxReceiveCount` is exceeded\. Type: String  | 
 
 #### AwsWafWebAcl<a name="asff-resourcedetails-awswafwebacl"></a>
 
@@ -3794,10 +5873,10 @@ The `Container` object can have the following attributes\.
 
 |  Attribute  |  Required  |  Description  | 
 | --- | --- | --- | 
-|  `ImageId`  |  No  | The identifier of the image that is related to a finding\.Type: String \(128 characters max\) | 
-|  `ImageName`  |  No  | The name of the image that is related to a finding\.Type: String \(128 characters max\) | 
-|  `LaunchedAt`  |  No  | Indicates when the container was started\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\. | 
-|  `Name`  |  No  | The name of the container that is related to a finding\.Type: String \(128 characters max\) | 
+|  `ImageId`  |  No  |  The identifier of the image that is related to a finding\. Type: String \(128 characters max\)  | 
+|  `ImageName`  |  No  |  The name of the image that is related to a finding\. Type: String \(128 characters max\)  | 
+|  `LaunchedAt`  |  No  |  Indicates when the container was started\. Type: String Format: Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  | 
+|  `Name`  |  No  |  The name of the container that is related to a finding\. Type: String \(128 characters max\)  | 
 
 #### Other<a name="asff-resourcedetails-other"></a>
 

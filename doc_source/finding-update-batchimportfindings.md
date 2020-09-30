@@ -6,7 +6,7 @@ Customers, SIEMs, ticketing tools, and SOAR tools use [https://docs.aws.amazon.c
 
 AWS Security Hub can only accept finding updates for accounts that have Security Hub enabled\. The finding provider also must be enabled\. If Security Hub is disabled, or the finding provider integration is not enabled, then the findings are returned in the `FailedFindings` list, with an `InvalidAccess` error\.
 
-The payload for a [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) call cannot be larger than 6 MB\.
+For [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html), Security Hub accepts up to 100 findings per batch, up to 240 KB per finding, and up to 6 MB per batch\. The throttle rate limit is 10 TPS per account per Region, with a burst of 30 TPS\.
 
 ## Determining whether to create or update a finding<a name="batchimportfindings-create-or-update"></a>
 

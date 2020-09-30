@@ -1238,7 +1238,7 @@ After you identify the inactive accounts or unused credentials, use the followin
 
 **Resource:** IAM policy
 
-**AWS Config rule:** `iam_customer_policy_blocked_kms_actions`
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-customer-policy-blocked-kms-actions.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-customer-policy-blocked-kms-actions.html)
 
 **Parameters:** 
 + `kms:ReEncryptFrom, kms:Decrypt`
@@ -1286,7 +1286,7 @@ For more information, see [Using IAM policies with AWS KMS](https://docs.aws.ama
 + IAM user
 + IAM group
 
-**AWS Config rule:** `iam_inline_policy_blocked_kms_actions` 
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-inline-policy-blocked-kms-actions.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-inline-policy-blocked-kms-actions.html) 
 
 **Parameters:**
 + `kms:ReEncryptFrom, kms:Decrypt`
