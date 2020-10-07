@@ -13,5 +13,5 @@ To retrieve details for selected findings programmatically, you can use an API c
   **Example**
 
   ```
-  aws securityhub get-findings --filters '{"GeneratorId":[{"Value": "aws-foundational","Comparison":"PREFIX"},"WorkflowStatus": {"Value": "NEW","Comparison":"EQUALS"},"Confidence": [{"Gte": 85}]}' --sort-criteria '{"Field": "LastObservedAt","SortOrder": "desc"}' --page-size 5 --max-items 100
+  aws securityhub get-findings --filters '{"GeneratorId":[{"Value": "aws-foundational","Comparison":"PREFIX"}],"WorkflowStatus": [{"Value": "NEW","Comparison":"EQUALS"}],"Confidence": [{"Gte": 85}]}' --sort-criteria '{"Field": "LastObservedAt","SortOrder": "desc"}' --page-size 5 --max-items 100
   ```

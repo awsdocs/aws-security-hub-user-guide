@@ -1,16 +1,22 @@
 # Viewing the list of controls for a standard<a name="securityhub-standards-view-controls"></a>
 
-The **Security standards** page provides access to the supported security standards in AWS Security Hub\.
+The **Security standards** page displays the available security standards for AWS Security Hub\.
 
-For each enabled standard, you can view and filter the list of controls\.
+For each enabled standard, you can display a details page, which includes the list of controls in the standard\.
 
-From the controls list, you can perform the following actions:
+You can view and filter the list of controls, and perform the following actions:
 + [Enable or disable the control](securityhub-standards-enable-disable-controls.md)
 + [View the details for a control](securityhub-standards-control-details.md)\. The control details page includes the list of findings for the control\. See [Viewing and taking action on control findings](securityhub-control-manage-findings.md)\.
 
-## Displaying the controls for an enabled standard \(console\)<a name="securityhub-standards-display-control-list"></a>
+## Displaying the details page for an enabled standard \(console\)<a name="securityhub-standards-display-control-list"></a>
 
-From the **Security standards** page, you can display the list of controls that are associated with that standard\.
+From the **Security standards** page, you can display a details page for the standard\. You can only display details for an enabled standard\. You cannot display details for a disabled standard\.
+
+At the top of the details page is the overall score for the standard\. The overall score is the percentage of passed controls relative to the number of enabled controls that have data\.
+
+Next to the overall score is a chart that summarizes the control statuses\. The chart shows the percentage of failed and passed controls\. When you pause on the chart, the pop\-up displays the number of failed controls for each severity, the number of controls with a status of **Unknown**, and the number of passed controls\.
+
+At the bottom of the details page is the list of controls for the standard\. The control list is organized and sorted based on the current overall status of the control and the severity assigned to each control\.
 
 **To display the list of controls for an enabled standard**
 
@@ -18,32 +24,33 @@ From the **Security standards** page, you can display the list of controls that 
 
 1. In the Security Hub navigation pane, choose **Security standards**\.
 
-1. For the standard to display the controls for, choose **View results**\.
+1. For the standard that you want to display the details for, choose **View results**\.
 
-For each control, the controls page provides the following information:
-+ The control identifier and title
-+ Whether the control is enabled or disabled
+## Filtering and sorting the controls for an enabled standard<a name="securityhub-standards-filter-controls"></a>
+
+The control list for a standard uses tabs to provide built\-in filtering for the list based on the control status\. You can also filter the list based on the ID, title, and severity\.
+
+The **All enabled** tab lists all of the enabled controls for the standard\. By default, the list is sorted so that failed controls are at the top of the list\. This sort order calls attention to controls that need to be addressed\.
+
+The lists on the **Failed**, **Unknown**, **No data**, and **Passed** tabs are filtered to only include enabled controls with that status\.
+
+The **Disabled** tab contains the list of disabled controls\.
+
+For each control, the control list contains the following information:
 + The overall status of the control \(see [Determining the overall status of a control from its findings](securityhub-standards-results.md#securityhub-standards-results-status)\)
-+ The severity associated with the control
-+ The number of accounts that have findings in each finding status
++ The severity assigned to the control
++ The control identifier and title
++ The number of failed active findings and the total number of active findings\. If applicable, the **Failed checks** column also lists the number of findings with a status of **Unknown**\.
 
-## Filtering the list of controls<a name="securityhub-standards-filter-controls"></a>
+In addition to the built\-in filters on each tab, you can filter the lists using text in the following fields:
++ **Status**
++ **Severity**
++ **ID**
++ **Title**
 
-By default, the list of controls includes all of the controls for the selected standard\. You can filter the list based on the control identifier, description, related requirements, status, or severity\.
+You can sort each list using any of the columns\. By default, the **All checks** tab is sorted so that failed controls are at the top of the list\. This allows you to immediately focus on issues that require remediation\.
 
-**To filter the list of controls**
-
-1. To filter based on text in the identifier, description, or a related requirement, begin typing the text in the search box\.
-
-   The list is updated automatically to only include controls that contain the matching text\.
-
-1. To filter based on the control status, from the menu next to the search box, choose the status to include\.
-
-   For enabled controls, you can show all enabled controls or only show enabled controls that have a specific overall status \(**Passed**, **Failed**, or **Unknown**\)\.
-
-   You can also choose to only display disabled standards\.
-
-1. To filter based on the control severity, from the severity menu, choose the severity to include\.
+Within each status, and on the remaining tabs, the controls are sorted by default in descending order by severity\. In other words, critical controls are first, followed by high, then medium, then low severity controls\.
 
 ## Viewing the controls for an enabled standard \(Security Hub API, AWS CLI\)<a name="securityhub-standards-view-controls-api"></a>
 

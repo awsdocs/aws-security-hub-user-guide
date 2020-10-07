@@ -33,7 +33,7 @@ From the Security Hub console, you can add accounts to your list of member accou
    + To use a comma\-separated values \(\.csv\) file to add multiple accounts, first create the file\. The file must contain the account ID and email address for each account to add\.
 **Important**  
 In your `.csv` list, accounts must appear one per line\. The first line of the `.csv` file must contain the header\. In the header, the first column is **Account ID** and the second column is **Email**\.  
-Each subsequent line must contain a valid account ID and email address for the account to add\.  
+Each subsequent line must contain a valid account ID and email address for the account to add\. The email address should be the email address to contact about security issues in the account\.  
 Here is an example of a `.csv` file when viewed in a text editor\.  
 
      ```

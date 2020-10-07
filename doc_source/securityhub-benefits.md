@@ -14,5 +14,5 @@ Security Hub consolidates your security findings across accounts and provider pr
 This allows you to view your overall current security status to spot trends, identify potential issues, and take the necessary remediation steps\.
 
 **Ability to automate remediation of findings**  
-Security Hub supports integration with Amazon CloudWatch Events\. To automate remediation of specific findings, you can define custom actions to take when a finding is received\.  
+Security Hub supports integration with Amazon EventBridge\. To automate remediation of specific findings, you can define custom actions to take when a finding is received\.  
 For example, you can configure custom actions to send findings to a ticketing system or to an automated remediation system\.

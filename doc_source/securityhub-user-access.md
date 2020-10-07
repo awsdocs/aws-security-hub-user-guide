@@ -17,15 +17,10 @@ The following AWS managed policies, which you can attach to users in your accoun
 The following resource types are defined by this service and can be used in the `Resource` element of IAM permission policy statements\.
 
 
-| Resource Types | ARN | 
+|  Resource type  |  ARN  | 
 | --- | --- | 
-| <a name="actiontarget"></a>action\-target |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:action/custom/$\{Id\} | 
-|   hub  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:hub/default  | 
-|   insight  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:insight/$\{Company\}/$\{ProductId\}/$\{UniqueId\}  | 
-|   standard  |  arn:$\{Partition\}:securityhub:::ruleset/$\{StandardsName\}/v/$\{StandardsVersion\}  | 
-|   standards\-subscription  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:subscription/$\{StandardsName\}/v/$\{StandardsVersion\}  | 
-|   product\-subscription  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:product\-subscription/$\{Company\}/$\{ProductId\}  | 
-|   product  |  arn:$\{Partition\}:securityhub:$\{Region\}:$\{Account\}:product/$\{Company\}/$\{ProductId\}  | 
+|   hub  |  `arn:${Partition}:securityhub:${Region}:${Account}:hub/default`  | 
+|   product  |  `arn:${Partition}:securityhub:${Region}:${Account}:product/${Company}/${ProductId}`  | 
 
 ## Condition keys defined by Security Hub<a name="conditions"></a>
 
@@ -34,6 +29,7 @@ Security Hub defines the following condition keys that you can use in the `Condi
 You can use these keys to further refine the conditions under which the policy statement applies\.
 
 
-| Condition Keys | Description | Type | 
+|  Condition keys  |  Description  |  Type  | 
 | --- | --- | --- | 
-|   securityhub:TargetAccount  |  The ID of the AWS account associated with a finding\. In the AWS Security Finding Format, this field is called `AwsAccountId`\.  | String | 
+|   securityhub:TargetAccount  |  The ID of the AWS account associated with a finding\. In the AWS Security Finding Format \(ASFF\), this the `AwsAccountId` field\.  |  String  | 
+|  securityhub:ASFFSyntaxPath/$\{ASFFSyntaxPath\}  |  The path to an ASFF field for which to restrict updates from [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.  |  String  | 

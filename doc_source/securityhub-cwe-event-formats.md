@@ -1,10 +1,10 @@
-# CloudWatch Events formats for Security Hub<a name="securityhub-cwe-event-formats"></a>
+# EventBridge formats for Security Hub<a name="securityhub-cwe-event-formats"></a>
 
-The CloudWatch events for the **Security Hub Findings \- Imported**, **Security Findings \- Custom Action**, and **Security Hub Insight Results** event types use the following formats\.
+The EventBridge events for the **Security Hub Findings \- Imported**, **Security Findings \- Custom Action**, and **Security Hub Insight Results** event types use the following formats\.
 
 ## Security Hub Findings \- Imported<a name="securityhub-cwe-event-formats-findings-imported"></a>
 
-The CloudWatch event for the **Security Hub Findings \- Imported** event type is in the following format\.
+The EventBridge event for the **Security Hub Findings \- Imported** event type is in the following format\.
 
 ```
 {
@@ -28,7 +28,7 @@ For a complete list of parameters included in `AMAZON_FINDING_JSON`, see [AWS Se
 
 ## Security Hub Findings \- Custom Action<a name="securityhub-cwe-event-formats-findings-custom-action"></a>
 
-The CloudWatch event for the **Security Hub Findings \- Custom Action** event type is in the following format\.
+The EventBridge event for the **Security Hub Findings \- Custom Action** event type is in the following format\.
 
 ```
 {
@@ -54,7 +54,7 @@ For a complete list of parameters included in `AMAZON_FINDING_JSON`, see [AWS Se
 
 ## Security Hub Insight Results<a name="securityhub-cwe-event-formats-insight-results"></a>
 
-The CloudWatch Events event for the **Security Hub Insight Results** event type has the following format\.
+The EventBridge event for the **Security Hub Insight Results** event type has the following format\.
 
 ```
 { 

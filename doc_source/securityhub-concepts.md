@@ -32,12 +32,12 @@ A standardized format for the contents of findings that Security Hub aggregates 
 A safeguard or countermeasure prescribed for an information system or an organization designed to protect the confidentiality, integrity, and availability of its information and to meet a set of defined security requirements\. A security standard consists of controls\.
 
 **Custom action**  
-A Security Hub mechanism for sending selected findings to CloudWatch Events\. A custom action is created in Security Hub\. It is then linked to a CloudWatch Events rule\. The rule defines a specific action to take when a finding is received that is associated with the custom action ID\. Custom actions can be used, for example, to send a specific finding, or a small set of findings, to a response or remediation workflow\. For more information, see [Creating a custom action \(console\)](securityhub-cwe-custom-actions.md#securityhub-cwe-configure)\.
+A Security Hub mechanism for sending selected findings to EventBridge\. A custom action is created in Security Hub\. It is then linked to an EventBridge rule\. The rule defines a specific action to take when a finding is received that is associated with the custom action ID\. Custom actions can be used, for example, to send a specific finding, or a small set of findings, to a response or remediation workflow\. For more information, see [Creating a custom action \(console\)](securityhub-cwe-custom-actions.md#securityhub-cwe-configure)\.
 
 **Finding**  
 The observable record of a security check or security\-related detection\.  
 For more information about findings in Security Hub, see [Findings in AWS Security Hub](securityhub-findings.md)\.  
-Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\.
+Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in EventBridge that routes findings to your Amazon S3 bucket\.
 
 **Insight**  
 A collection of related findings defined by an aggregation statement and optional filters\. An insight identifies a security area that requires attention and intervention\. Security Hub offers several managed \(default\) insights that you can't modify\. You can also create custom Security Hub insights to track security issues that are unique to your AWS environment and usage\. For more information, see [Insights in AWS Security Hub](securityhub-insights.md)\.

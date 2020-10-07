@@ -1,8 +1,8 @@
-# Using custom actions to send findings and insight results to CloudWatch Events<a name="securityhub-cwe-custom-actions"></a>
+# Using custom actions to send findings and insight results to EventBridge<a name="securityhub-cwe-custom-actions"></a>
 
-To use Security Hub custom actions to send findings or insight results to CloudWatch Events, you first create the custom action in Security Hub\. Then define the rule in CloudWatch Events\.
+To use Security Hub custom actions to send findings or insight results to EventBridge, you first create the custom action in Security Hub\. Then define the rule in EventBridge\.
 
-The rule in CloudWatch Events uses the ARN from the custom action\.
+The rule in EventBridge uses the ARN from the custom action\.
 
 ## Creating a custom action \(console\)<a name="securityhub-cwe-configure"></a>
 
@@ -24,7 +24,7 @@ When you create a custom action, you specify the name, description, and a unique
 
 1. Choose **Create custom action**\.
 
-1. Make a note of the **Custom action ARN**\. You need to use the ARN when you create a rule to associate with this action in CloudWatch Events\.
+1. Make a note of the **Custom action ARN**\. You need to use the ARN when you create a rule to associate with this action in EventBridge\.
 
 ## Creating a custom action \(Security Hub API, AWS CLI\)<a name="securityhub-cwe-configure-api"></a>
 
@@ -44,23 +44,29 @@ To create a custom action, you can use an API call or the AWS Command Line Inter
   aws securityhub create-action-target --name "Send to remediation" --description "Action to send the finding for remediation tracking" --id "Remediation"
   ```
 
-## Defining a rule in CloudWatch Events<a name="securityhub-cwe-define-rule"></a>
+## Defining a rule in EventBridge<a name="securityhub-cwe-define-rule"></a>
 
-To process the custom action, you must create a corresponding rule in CloudWatch Events\. The rule definition includes the ARN of the custom action\.
+To process the custom action, you must create a corresponding rule in EventBridge\. The rule definition includes the ARN of the custom action\.
 
-**To define a rule in CloudWatch Events**
+The instructions provided here are for the EventBridge console\. When you use the console, EventBridge automatically creates the required resource\-based policy that enables EventBridge to write to CloudWatch Logs\.
 
-1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+You can also use the [https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutRule.html](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutRule.html) API operation of the EventBridge API\. However, if you use the EventBridge API, then you must create the resource\-based policy\. For details on the required policy, see [CloudWatch Logs permissions](https://docs.aws.amazon.com/eventbridge/latest/userguide/resource-based-policies-eventbridge.html#cloudwatchlogs-permissions) in the *Amazon EventBridge User Guide*\.
+
+**To define a rule in EventBridge**
+
+1. Open the Amazon EventBridge console at [https://console\.aws\.amazon\.com/events/](https://console.aws.amazon.com/events/)\.
 
 1. In the navigation pane, choose **Rules**\.
 
 1. Choose **Create rule**\.
 
-1. For **Event source**, confirm that **Event Pattern** is selected\.
+1. Enter a name and description for the rule\.
 
-1. Choose **Edit** for **Event Pattern Preview**\.
+1. For **Event source**, choose **Event Pattern**\.
 
-1. Copy one of the following example patterns, and paste it into the preview window\. Be sure to replace the existing brackets\.
+1. Choose **Custom pattern**\.
+
+1. Copy one of the following example patterns, and paste it into the **Event pattern** text area\. Be sure to replace the existing brackets\.
 
    For an event associated with a finding custom action \(**Security Hub Findings \- Custom Action** event type\), use the following format\. Replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
 
@@ -94,29 +100,23 @@ To process the custom action, you must create a corresponding rule in CloudWatch
    }
    ```
 
-1. Choose **Save** to close the window\.
+1. Choose **Save** to save the pattern\.
 
-1. Choose **Add target** and then select the target to invoke when this rule is matched\.
+1. Under **Select targets**, select and configure the target to invoke when this rule is matched\.
 
-1. Choose **Configure details**\.
+1. Choose **Create**\.
 
-1. Enter a name and description for the rule\.
-
-   To enable the rule now, for **State**, select **Enabled**\. To save the rule without enabling it, clear **Enabled**\.
-
-1. Choose **Create rule**\.
-
-After this rule is created in CloudWatch Events, when you perform a custom action on findings or insight results in your account, events are generated in CloudWatch Events\.
+After this rule is created in EventBridge, when you perform a custom action on findings or insight results in your account, events are generated in EventBridge\.
 
 ## Selecting a custom action for findings and insight results<a name="securityhub-cwe-send"></a>
 
-After you create your Security Hub custom actions and CloudWatch Events rules, you can send findings and insight results to CloudWatch Events for further management and processing\.
+After you create your Security Hub custom actions and EventBridge rules, you can send findings and insight results to EventBridge for further management and processing\.
 
-Events are sent to CloudWatch Events only in the account in which they are viewed\. If you view a finding using a master account, the event is sent to CloudWatch Events in the master account\.
+Events are sent to EventBridge only in the account in which they are viewed\. If you view a finding using a master account, the event is sent to EventBridge in the master account\.
 
 For AWS API calls to be effective, the implementations of target code must switch roles into member accounts\. This also means that the role you must switch into must be deployed to each member where action is needed\.
 
-**To send findings to CloudWatch Events**
+**To send findings to EventBridge**
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
@@ -126,18 +126,18 @@ For AWS API calls to be effective, the implementations of target code must switc
    + From **Integrations**, you can navigate to a list of findings generated by an enabled integration\. See [Viewing the findings from an integration](securityhub-integrations-managing.md#securityhub-integration-view-findings)\.
    + From **Insights**, you can navigate to a list of findings for an insight result\. See [Viewing and taking action on insight results and findings](securityhub-insights-view-take-action.md)\.
 
-1. Select the findings to send to CloudWatch Events\. You can select up to 20 findings at a time\.
+1. Select the findings to send to EventBridge\. You can select up to 20 findings at a time\.
 
-1. From **Actions**, choose the custom action that aligns with the CloudWatch Events rule to apply\.
+1. From **Actions**, choose the custom action that aligns with the EventBridge rule to apply\.
 
-**To send insight results to CloudWatch Events**
+**To send insight results to EventBridge**
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
 1. In the navigation pane, choose **Insights**\.
 
-1. On the **Insights** page, choose the insight that includes the results to send to CloudWatch Events\.
+1. On the **Insights** page, choose the insight that includes the results to send to EventBridge\.
 
-1. Select the insight results to send to CloudWatch Events\. You can select up to 20 results at a time\.
+1. Select the insight results to send to EventBridge\. You can select up to 20 results at a time\.
 
-1. From **Actions**, choose the custom action that aligns with the CloudWatch Events rule to apply\.
+1. From **Actions**, choose the custom action that aligns with the EventBridge rule to apply\.

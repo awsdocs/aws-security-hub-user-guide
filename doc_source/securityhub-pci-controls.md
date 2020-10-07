@@ -209,7 +209,7 @@ This control checks whether CloudTrail log file validation is enabled\.
 
 It does not check when configurations are altered\.
 
-To monitor and alert on log file changes, you can use CloudWatch Events or CloudWatch metric filters\.
+To monitor and alert on log file changes, you can use Amazon EventBridge or CloudWatch metric filters\.
 
 ### Related PCI DSS requirements<a name="pcidss-cloudtrail-3-requirements"></a>
 

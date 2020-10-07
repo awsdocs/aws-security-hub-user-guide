@@ -10,4 +10,5 @@ To save on the cost of AWS Config, you can disable recording of global resources
 If you disable these 1\.x controls and disable recording of global resources in a particular Region, you should also disable 2\.5\. This is because 2\.5 requires recording of global resources in order to pass\.
 
 **CIS AWS Foundations Benchmark 1\.1 and 3\.x controls**  
-If you have an SNS topic in a centralized account that is aligned to these control requirements, you can disable these controls in all accounts except for that centralized account\. Also, for a multi\-Region or organization CloudTrail trail, you can disable these controls in all accounts and Regions except where you receive CloudWatch logs in a log group\.
+If you have an SNS topic in a centralized account that is aligned to these control requirements, you can disable these controls in all accounts except for that centralized account\.  
+For a multi\-Region or organization CloudTrail trail, you can disable these controls, as well as 2\.4, in all accounts and Regions except where you receive CloudWatch logs in a log group\.

@@ -22,11 +22,15 @@ To display information about the resource, choose the resource identifier\.
 
 If you have permission to view the resource in its original service, then the resource identifier displays a link to the service\. For example, for an AWS user, the resource details provide a link to the view the user details in IAM\.
 
+Security Hub displays a message to notify you if the resource is in a different account\.
+
 ## Viewing the configuration timeline for a finding resource<a name="control-finding-config-timeline"></a>
 
 One avenue of investigation is the configuration timeline for the resource in AWS Config\.
 
 If you have permission to view the configuration timeline for the finding resource, then the finding list provides a link to the timeline\.
+
+Security Hub displays a message to notify you if the resource is in a different account\.
 
 **To navigate to the configuration timeline in AWS Config**
 
@@ -39,6 +43,8 @@ If you have permission to view the configuration timeline for the finding resour
 If the control is based on an AWS Config rule, then you might also want to view the details for the AWS Config rule\. The AWS Config rule information can help you to get a better understanding why a check passed or failed\.
 
 If you have permission to view the AWS Config rule for the control, then the finding list provides a link to the AWS Config rule in AWS Config\.
+
+Security Hub displays a message to notify you if the resource is in a different account\.
 
 **To navigate to the AWS Config rule**
 

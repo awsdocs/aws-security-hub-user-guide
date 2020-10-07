@@ -36,10 +36,10 @@ When a member account is disassociated from the master account, the master accou
 
 Security Hub continues to run in both accounts\.
 
-Custom settings or integrations that are defined for the master account are not applied to findings from the former member account\. For example, after the accounts are disassociated, you might have a custom action in the master account used as the event pattern in a CloudWatch Events rule\. However, this custom action cannot be used in the member account\.
+Custom settings or integrations that are defined for the master account are not applied to findings from the former member account\. For example, after the accounts are disassociated, you might have a custom action in the master account used as the event pattern in an Amazon EventBridge rule\. However, this custom action cannot be used in the member account\.
 
 ## AWS account deleted or suspended<a name="securityhub-effects-account-deletion"></a>
 
 When your AWS account is deleted or suspended, all Security Hub–related data for that account is deleted after 90 days\. The data cannot be retrieved after it is deleted\.
 
-To retain findings for more than 90 days, you can archive them\. You can also use a custom action with a CloudWatch Events rule to store findings in your Amazon S3 bucket\.
+To retain findings for more than 90 days, you can archive them\. You can also use a custom action with an EventBridge rule to store findings in your Amazon S3 bucket\.

@@ -34,12 +34,12 @@ In a statement to restrict access to [https://docs.aws.amazon.com/securityhub/1.
   + The finding includes a specific field\.
   + The finding includes a specific field value\.
 
-### Context keys<a name="batchupdatefindings-configure-access-context-keys"></a>
+### Condition keys<a name="batchupdatefindings-configure-access-context-keys"></a>
 
-These are the context keys for restricting access to [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+These are the condition keys for restricting access to [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
 **ASFF field**  
-The context key for an ASFF field is as follows\.  
+The condition key for an ASFF field is as follows\.  
 
 ```
 securityhub:ASFFSyntaxPath/<fieldName>

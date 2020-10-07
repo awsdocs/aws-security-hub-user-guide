@@ -37,7 +37,7 @@ If a link does not work, then for troubleshooting advice, see [Troubleshooting t
 
 **Amazon GuardDuty**  <a name="integration-amazon-guardduty"></a>
 GuardDuty sends findings to Security Hub for all of the supported finding types\.  
-New findings from GuardDuty are sent to Security Hub within 5 minutes\. Updates to findings are sent based on the **Updated findings** setting for CloudWatch Events in GuardDuty settings\.  
+New findings from GuardDuty are sent to Security Hub within 5 minutes\. Updates to findings are sent based on the **Updated findings** setting for Amazon EventBridge in GuardDuty settings\.  
 When you generate GuardDuty sample findings using the GuardDuty **Settings** page, Security Hub receives the sample findings and omits the prefix '\[Sample\]' in the finding type\. For example, the sample finding type in GuardDuty "\[SAMPLE\] Recon:IAMUser/ResourcePermissions" is displayed as "Recon:IAMUser/ResourcePermissions” in Security Hub\.  
 For more information about GuardDuty findings, see [Amazon GuardDuty findings](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html) in the *Amazon GuardDuty User Guide*\.
 
