@@ -19,7 +19,7 @@ The EventBridge event for the **Security Hub Findings \- Imported** event type i
       "arn:aws:securityhub:us-west-2::product/aws/macie/arn:aws:macie:us-west-2:111122223333:integtest/trigger/6294d71b927c41cbab915159a8f326a3/alert/f2893b211841"
    ],
    "detail":{
-      "findings”: [AMAZON_FINDING_JSON]
+      "findings": [AMAZON_FINDING_JSON]
    }
 }
 ```
