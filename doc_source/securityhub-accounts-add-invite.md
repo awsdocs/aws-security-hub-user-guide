@@ -31,16 +31,19 @@ From the Security Hub console, you can add accounts to your list of member accou
 
      To add more accounts, enter the account ID and then choose **Add** for each account\.
    + To use a comma\-separated values \(\.csv\) file to add multiple accounts, first create the file\. The file must contain the account ID and email address for each account to add\.
-**Important**  
-In your `.csv` list, accounts must appear one per line\. The first line of the `.csv` file must contain the header\. In the header, the first column is **Account ID** and the second column is **Email**\.  
-Each subsequent line must contain a valid account ID and email address for the account to add\. The email address should be the email address to contact about security issues in the account\.  
-Here is an example of a `.csv` file when viewed in a text editor\.  
+
+     In your `.csv` list, accounts must appear one per line\. The first line of the `.csv` file must contain the header\. In the header, the first column is **Account ID** and the second column is **Email**\.
+
+     Each subsequent line must contain a valid account ID and email address for the account to add\. The email address should be the email address to contact about security issues in the account\.
+
+     Here is an example of a `.csv` file when viewed in a text editor\.
 
      ```
      Account ID,Email
      111111111111,user@example.com
      ```
-In a spreadsheet program, the fields appear in separate columns\. The underlying format is still comma\-separated\.
+
+     In a spreadsheet program, the fields appear in separate columns\. The underlying format is still comma\-separated\. You must format the account IDs as non\-decimal numbers\. For example, the account ID 444455556666 cannot be formatted as 444455556666\.0\. Also make sure that the number formatting does not remove any leading zeros from the account ID\.
 
      To select the file, on the console, choose **Upload list \(\.csv\)**\.
 

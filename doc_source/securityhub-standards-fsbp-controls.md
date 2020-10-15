@@ -1157,15 +1157,11 @@ This control checks whether the account password policy for IAM users uses the f
 + `PasswordReusePrevention`: 24
 + `MaxPasswordAge`: 90
 
-We highly recommend that you do not generate and remove all access keys in your account\. Instead, the recommended best practice is to either create one or more IAM roles, or to use federation\. You can use these methods to allow your users to use their existing corporate credentials to log into the AWS Management Console and AWS CLI\.
+To access the AWS Management Console, IAM users need passwords\. As a best practice, Security Hub highly recommends that instead of creating IAM users, you use federation\. Federation allows users to use their existing corporate credentials to log into the AWS Management Console\. Use AWS Single Sign\-On \(AWS SSO\) to create or federate the user, and then assume an IAM role into an account\.
 
-Each approach has its use cases\. Federation is generally better for enterprises that have an existing central directory or plan to need more than the current limit IAM users\. Applications running outside of an AWS environment need access keys for programmatic access to AWS resources\.
+To learn more about identity providers and federation, see [Identity providers and federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html) in the *IAM User Guide*\. To learn more about AWS SSO, see the [https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
-However, if the resources that need programmatic access run inside AWS, the best practice is to use IAM roles\. Roles allow you to grant a resource access without hardcoding an access key ID and secret access key into the configuration\.
-
-To learn more about protecting your access keys and account, see [Best practices for managing AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html) in the *AWS General Reference*\. Also see the blog post[ Guidelines for protecting your AWS account while using programmatic access](http://aws.amazon.com/blogs/security/guidelines-for-protecting-your-aws-account-while-using-programmatic-access/)\.
-
-If you already have an access key, Security Hub recommends that you enforce the creation of strong user passwords\. When you create or change a password policy, the change is enforced immediately for new users\. It does not require existing users to change their passwords\.
+ If you need to use IAM users, Security Hub recommends that you enforce the creation of strong user passwords\. You can set a password policy on your AWS account to specify complexity requirements and mandatory rotation periods for passwords\. When you create or change a password policy, most of the password policy settings are enforced the next time users change their passwords\. Some of the settings are enforced immediately\. To learn more, see [Setting an account password policy for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) in the *IAM User Guide*\.
 
 ### Remediation<a name="iam-7-remediation"></a>
 
@@ -1893,17 +1889,16 @@ For more information, see the knowledge center article [What S3 bucket policy sh
 **Parameters:**
 
 Default parameters set by Security Hub: 
-+ `blacklistedactionpatterns`: `s3:DeleteBucketEncryption, s3:DeleteBucketPolicy, s3:PutBucketAcl, s3:PutBucketEncryption, s3:PutBucketPolicy, s3:PutObjectAcl`
++ `blacklistedactionpatterns`: `s3:DeleteBucketPolicy, s3:PutBucketAcl, s3:PutBucketPolicy, s3:PutEncryptionConfiguration, s3:PutObjectAcl`
 
 Customer provided parameters:
 + `blacklistedactionpatterns`\. This is a comma\-separated list of action patterns to deny\. For example, `s3:PutBucketPolicy and s3:DeleteObject`\.
 
 This control checks whether the S3 bucket policy prevents principals from other AWS accounts from performing denied actions on resources in the S3 bucket\. The control fails if the S3 bucket policy allows any of the following actions for a principal in another AWS account:
-+ `s3:DeleteBucketEncryption`
 + `s3:DeleteBucketPolicy`
 + `s3:PutBucketAcl`
-+ `s3:PutBucketEncryption`
 + `s3:PutBucketPolicy`
++ `s3:PutEncryptionConfiguration`
 + `s3:PutObjectAcl`
 
 Implementing least privilege access is fundamental to reducing security risk and the impact of errors or malicious intent\. If an S3 bucket policy allows access from external accounts, it could result in data exfiltration by an insider threat or an attacker\.
