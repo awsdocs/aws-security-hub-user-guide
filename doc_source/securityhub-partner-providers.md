@@ -5,7 +5,17 @@ AWS Security Hub is integrated with the following third\-party products\. For ea
 If applicable, the table also specifies the product ARN\. Integrations that send findings to Security Hub always have an ARN\.
 
 **Note**  
-Some integrations are not available in Africa \(Cape Town\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the console **Integrations** page\.
+Some integrations are not available in Africa \(Cape Town\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the console **Integrations** page\.  
+The China \(Beijing\) and China \(Ningxia\) Regions only support the following third\-party integrations:  
+FireEye Helix
+Helecloud
+IBM QRadar
+PagerDuty
+Palo Alto Networks Cortex XSOAR
+Palo Alto Networks VM\-Series
+RSA Archer
+Splunk Enterprise
+Splunk Phantom
 
 If you have a security solution and are interested in becoming a Security Hub partner, send an email to securityhub\-partners@amazon\.com\. In the message, provide your company name, product name, AWS Partner Network \(APN\) tier level, and contact information\. To become a Security Hub partner, you must be an APN Select Tier Partner or above\.
 
@@ -120,6 +130,10 @@ GuardiCore Centra provides flow visualization, micro\-segmentation, and breach d
 **Product ARN:** arn:aws:securityhub:*<REGION>*:324264561773:product/guardicore/aws\-infection\-monkey  
 Infection Monkey is an attack simulation tool designed to test networks against attackers\.
 
+**[Helecloud](https://helecloud.com/managed-security-and-compliance-services/) – Managed Security**  
+**Integration type:** Receive  
+HeleCloud is a Managed Services Provider, taking care of your AWS infrastructure so that you can focus on your core business\.
+
 **[IBM](https://www.ibm.com/security/security-intelligence/qradar/securing-the-cloud) – QRadar**  
 **Integration type:** Send and receive  
 arn:aws:securityhub:*<REGION>*:949680696695:product/ibm/qradar\-siem  
@@ -137,9 +151,9 @@ AWS users can use PagerDuty’s set of AWS integrations to scale their AWS and h
 When coupled with AWS Security Hub’s aggregated and organized security alerts, PagerDuty allows teams to automate their threat response process and quickly set up custom actions to prevent potential issues\.  
 PagerDuty users undertaking a cloud migration project can move quickly, while decreasing the impact of issues that occur throughout the migration lifecycle\.
 
-**[Palo Alto Networks](https://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – Demisto Enterprise AMI**  
+**[Palo Alto Networks](https://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – Cortex XSOAR**  
 **Integration type:** Receive  
-Demisto is a Security Orchestration, Automation, and Response \(SOAR\) platform that integrates with your entire security product stack to accelerate incident response and security operations\.
+Cortex XSOAR is a Security Orchestration, Automation, and Response \(SOAR\) platform that integrates with your entire security product stack to accelerate incident response and security operations\.
 
 **[Palo Alto Networks](https://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – RedLock**  
 **Integration type:** Send  
@@ -192,7 +206,7 @@ Splunk uses Amazon CloudWatch Events as a consumer of Security Hub findings\. Se
 
 **[Splunk](https://www.splunk.com/en_us/form/stay-afloat-using-aws-security-hub.html) – Splunk Phantom**  
 **Integration type:** Receive  
-With the Splunk Phantom App for AWS Security Hub, findings are sent to Phantom for automated context enrichment with additional threat intelligence information or to perform automated response actions\. 
+With the Splunk Phantom App for AWS Security Hub, findings are sent to Phantom for automated context enrichment with additional threat intelligence information or to perform automated response actions\.
 
 **[Sumo Logic](https://www.sumologic.com/application/aws-security-hub/) – Machine Data Analytics**  
 **Integration type:** Send  

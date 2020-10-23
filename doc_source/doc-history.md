@@ -4,6 +4,7 @@ The following table describes the updates to the documentation for AWS Security 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Security Hub launched in China \(Beijing\) and China \(Ningxia\)](#doc-history) | Security Hub is now available in the China \(Beijing\) and China \(Ningxia\) Regions\. | October 21, 2020 | 
 | [Revised format for ASFF attributes and third\-party integrations](#doc-history) | The lists of [ASFF attributes](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-attributes.html) and [partner integrations](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-partner-providers.html) now use a list\-based format instead of tables\. The ASFF syntax, attributes, and types taxonomy are now in separate topics\. | October 15, 2020 | 
 | [Redesigned standard details page](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-view-controls.html) | The standard details page for an enabled standard now displays a tabbed list of controls\. The tabs filter the control list based on the control status\. | October 7, 2020 | 
 | [Replaced CloudWatch Events with EventBridge](#doc-history) | Replaced references to Amazon CloudWatch Events with Amazon EventBridge\. | October 1, 2020 | 

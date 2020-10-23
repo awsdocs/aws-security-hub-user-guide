@@ -6,6 +6,9 @@ When you use Security Hub during the free trial, you are charged for usage of ot
 
 You are not charged for using Security Hub until your free trial ends\.
 
+**Note**  
+The Security Hub free trial is not supported in the China \(Beijing\) Region\.
+
 ## Viewing usage details and estimated cost<a name="usage-details"></a>
 
  Security Hub provides usage information, including an estimated 30\-day cost for using Security Hub\. The usage details include the time remaining for the free trial\. During the free trial, the usage information can help you to understand what the Security Hub cost will be after the free trial ends\.

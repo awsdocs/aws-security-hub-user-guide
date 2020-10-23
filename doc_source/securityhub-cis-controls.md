@@ -356,7 +356,11 @@ The root account is the most privileged user in an account\. MFA adds an extra l
 When you use virtual MFA for root accounts, Security Hub recommends that the device used is *not* a personal device\. Instead, use a dedicated mobile device \(tablet or phone\) that you manage to keep charged and secured independent of any individual personal devices\. This lessens the risks of losing access to the MFA due to device loss, device trade\-in, or if the individual owning the device is no longer employed at the company\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+China \(Beijing\)
+China \(Ningxia\)
+ AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="cis-1.13-remediation"></a>
 
@@ -391,7 +395,11 @@ For Level 2, Security Hub recommends that you protect the root account with a ha
 Using hardware MFA for many, many accounts might create a logistical device management issue\. If this occurs, consider implementing this Level 2 recommendation selectively to the highest security accounts\. You can then apply the Level 1 recommendation to the remaining accounts\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+China \(Beijing\)
+China \(Ningxia\)
+ AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="cis-1.14-remediation"></a>
 
@@ -631,18 +639,13 @@ Security Hub recommends that you enable file validation on all trails\. Enabling
 
 **AWS Config rules:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html), [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
 
-CloudTrail logs a record of every API call made in your account\. These log files are stored in an S3 bucket\. Security Hub recommends that the bucket policy, or access control list \(ACL\), applied to the S3 bucket that CloudTrail logs to prevents public access to the CloudTrail logs\. Allowing public access to CloudTrail log content might aid an adversary in identifying weaknesses in the affected account's use or configuration\.
+CloudTrail logs a record of every API call made in your account\. These log files are stored in an S3 bucket\. Security Hub recommends that the S3 bucket policy, or access control list \(ACL\), applied to the S3 bucket that CloudTrail logs to prevents public access to the CloudTrail logs\. Allowing public access to CloudTrail log content might aid an adversary in identifying weaknesses in the affected account's use or configuration\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you are using Security Hub in the US East \(N\. Virginia\) Region, and you are storing AWS CloudTrail logs in a bucket in the US West \(N\. California\) Region, Security Hub cannot find the bucket in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource cannot be located\.  
-Similarly, if you are aggregating logs from multiple accounts into a single bucket, the CIS check returns a warning finding for all accounts except the account that owns the bucket\. Failed findings are returned when the bucket is located in the account and region where the check is being performed and that bucket is publicly accessible\.
+To run this check, Security Hub first uses custom logic to look for the S3 bucket where your CloudTrail logs are stored\. It then uses the AWS Config managed rules to check that bucket is publicly accessible\.
 
-To run this check, Security Hub first uses custom logic to look for the bucket where your CloudTrail logs are stored\. It then uses the AWS Config managed rules to check that bucket is publicly accessible\.
+If you aggregate your logs into a single centralized S3 bucket, then Security Hub only runs the check against the account and Region where the centralized S3 bucket is located\. For other accounts and Regions, the control status is **No data**\.
 
-If Security Hub cannot discover the bucket because it is in a different account or region, a warning finding is generated\.
-
-If the bucket is discovered and is publicly accessible, the check generates a failed finding\.
+If the bucket is publicly accessible, the check generates a failed finding\.
 
 ### Remediation<a name="cis-2.3-remediation"></a>
 
@@ -765,15 +768,11 @@ Security Hub recommends that you enable bucket access logging on the CloudTrail 
 
 By enabling S3 bucket logging on target S3 buckets, you can capture all events that might affect objects in a target bucket\. Configuring logs to be placed in a separate bucket enables access to log information, which can be useful in security and incident response workflows\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you are using Security Hub in the US East \(N\. Virginia\) Region, and you are storing AWS CloudTrail logs in a bucket in the US West \(N\. California\) Region, Security Hub cannot find the bucket in the US West \(N\. California\) Region\. When this happens, the check returns a warning that the resource cannot be located\.  
-Similarly, if you are aggregating logs from multiple accounts into a single bucket, the CIS check returns a warning finding for all accounts except the account that owns the bucket\.  
-Failed findings are returned when the bucket is located in the account and region where the check is being performed and that bucket is publicly accessible\.
-
 To run this check, Security Hub first uses custom logic to look for the bucket where your CloudTrail logs are stored and then uses the AWS Config managed rule to check if logging is enabled\.
 
-If the bucket cannot be discovered because it is in a different account or region, a warning finding is generated\. If the bucket is discovered and is publicly accessible, the check generates a failed finding\.
+If you aggregate your logs into a single centralized S3 bucket, then Security Hub only runs the check against the account and Region where the centralized S3 bucket is located\. For other accounts and Regions, the control status is **No data**\.
+
+If the bucket is publicly accessible, the check generates a failed finding\.
 
 ### Remediation<a name="cis-2.6-remediation"></a>
 

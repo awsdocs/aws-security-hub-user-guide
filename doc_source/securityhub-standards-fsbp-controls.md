@@ -29,7 +29,11 @@ ACM does not automatically renew certificates that you import\. You must renew i
 For more information, see [Managed renewal](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) in the *AWS Certificate Manager User Guide*\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\) 
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Milan\)
 
 ### Remediation<a name="acm-1-remediation"></a>
 
@@ -843,6 +847,8 @@ It is highly recommended that you enable GuardDuty in all supported AWS Regions\
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
+China \(Beijing\)
+China \(Ningxia\)
 Europe \(Milan\)
 Middle East \(Bahrain\)
  AWS GovCloud \(US\-East\)
@@ -1109,7 +1115,11 @@ This control checks whether your AWS account is enabled to use a hardware multi\
 Virtual MFA might not provide the same level of security as hardware MFA devices\. We recommend that you use only a virtual MFA device while you wait for hardware purchase approval or for your hardware to arrive\. To learn more, see[ Enabling a virtual multi\-factor authentication \(MFA\) device \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html) in the *IAM User Guide*\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="iam-6-remediation"></a>
 
@@ -1337,6 +1347,9 @@ This control checks whether the Lambda function resource\-based policy prohibits
 
 The Lambda function should not be publicly accessible, as this may allow unintended access to your code stored in the function\.
 
+**Note**  
+This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regions\.
+
 ### Remediation<a name="lambda-1-remediation"></a>
 
 You can only update resource\-based policies for Lambda resources within the scope of the [https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html](https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) and [https://docs.aws.amazon.com/lambda/latest/dg/API_AddLayerVersionPermission.html](https://docs.aws.amazon.com/lambda/latest/dg/API_AddLayerVersionPermission.html) API operations\. You cannot author policies for your Lambda resources in JSON\. Neither can you use conditions that don't map to parameters for those actions using the AWS CLI or the SDK\. The following steps use the AWS CLI\.
@@ -1369,6 +1382,9 @@ This control checks that the Lambda function settings for runtimes match the exp
 [Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a runtime component is no longer supported for security updates, Lambda deprecates the runtime\. Even though you cannot create functions that use the deprecated runtime, the function is still available to process invocation events\. Make sure that your Lambda functions are current and do not use out\-of\-date runtime environments\.
 
 To learn more about the latest runtimes this control checks for all supported languages, see [AWS Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) in the *AWS Lambda Developer Guide*\.
+
+**Note**  
+This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regions\.
 
 ### Remediation<a name="lambda-2-remediation"></a>
 
@@ -1443,11 +1459,13 @@ Unless you intend for your RDS instance to be publicly accessible, the RDS insta
 
 1. Choose **Modify**\.
 
-1. Under **Network & Security**, choose **No** for **Public accessibility**\.
+1. Under **Connectivity**, expand **Additional connectivity configuration**\.
+
+1. Under **Public access**, choose **Not publicly accessible**\.
 
 1. Choose **Continue**\.
 
-1. Under **Scheduling of modifications** choose **Apply immediately**\.
+1. Under **Scheduling of modifications**, choose **Apply immediately**\.
 
 1. Choose **Modify DB Instance**\.
 
@@ -1596,7 +1614,11 @@ Enabling cluster deletion protection is an additional layer of protection agains
 When deletion protection is enabled, an RDS cluster cannot be deleted\. Before a deletion request can succeed, deletion protection must be disabled\.
 
 **Note**  
-This control is not supported in Middle East \(Bahrain\) or South America \(São Paulo\)\.
+This control is not supported in the following Regions\.  
+China \(Beijing\)
+China \(Ningxia\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)\.
 
 ### Remediation<a name="rds-7-remediation"></a>
 
@@ -1944,6 +1966,8 @@ You should also ensure that access to your SageMaker configuration is limited to
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
+China \(Beijing\)
+China \(Ningxia\)
 Europe \(Milan\)
  AWS GovCloud \(US\-East\)
 

@@ -6,6 +6,21 @@ To view the Regions that AWS Security Hub is available in, see [Security Hub Ser
 
 Some integrations are not available in all Regions\. If an integration is not supported, it is not listed on the **Integrations** page\.
 
+The China \(Beijing\) and China \(Ningxia\) Regions only support the following integrations with AWS services:
++ IAM Access Analyzer
++ Systems Manager Patch Manager
+
+The China \(Beijing\) and China \(Ningxia\) Regions only support the following third\-party integrations:
++ FireEye Helix
++ Helecloud
++ IBM QRadar
++ PagerDuty
++ Palo Alto Networks Cortex XSOAR
++ Palo Alto Networks VM\-Series
++ RSA Archer
++ Splunk Enterprise
++ Splunk Phantom
+
 ## Controls that are not supported in all Regions<a name="securityhub-regions-control-support"></a>
 
 The following Regions do not support all of the Security Hub controls\. For each Region, the list provides the controls that are not supported\.
@@ -57,6 +72,56 @@ The following controls are not supported in Africa \(Cape Town\)\.
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
 [\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)  
 [\[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT ](securityhub-standards-fsbp-controls.md#fsbp-ssm-3)
+
+### China \(Beijing\)<a name="securityhub-control-support-cnnorth1"></a>
+
+The following controls are not supported in China \(Beijing\)\.
+
+**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+[1\.13 – Ensure MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
+[1\.14 – Ensure hardware MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
+
+**[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
+[\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
+[\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-4)  
+[\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-5)  
+[\[PCI\.Lambda\.1\] Lambda functions should prohibit public access](securityhub-pci-controls.md#pcidss-lambda-1)  
+[\[PCI\.Lambda\.2\] Lambda functions should be in a VPC](securityhub-pci-controls.md#pcidss-lambda-2)  
+[\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
+[\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
+[\[IAM\.6\] Hardware MFA should be enabled for the root user](securityhub-standards-fsbp-controls.md#fsbp-iam-6)  
+[\[Lambda\.1\] Lambda functions should prohibit public access by other accounts](securityhub-standards-fsbp-controls.md#fsbp-lambda-1)  
+[\[Lambda\.2\] Lambda functions should use latest runtimes](securityhub-standards-fsbp-controls.md#fsbp-lambda-2)  
+[\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)  
+[\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)
+
+### China \(Ningxia\)<a name="securityhub-control-support-cnnorthwest1"></a>
+
+The following controls are not supported in China \(Ningxia\)\.
+
+**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+[1\.13 – Ensure MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
+[1\.14 – Ensure hardware MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
+
+**[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
+[\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
+[\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-4)  
+[\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-5)  
+[\[PCI\.Lambda\.1\] Lambda functions should prohibit public access](securityhub-pci-controls.md#pcidss-lambda-1)  
+[\[PCI\.Lambda\.2\] Lambda functions should be in a VPC](securityhub-pci-controls.md#pcidss-lambda-2)  
+[\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
+[\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
+[\[IAM\.6\] Hardware MFA should be enabled for the root user](securityhub-standards-fsbp-controls.md#fsbp-iam-6)  
+[\[Lambda\.1\] Lambda functions should prohibit public access by other accounts](securityhub-standards-fsbp-controls.md#fsbp-lambda-1)  
+[\[Lambda\.2\] Lambda functions should use latest runtimes](securityhub-standards-fsbp-controls.md#fsbp-lambda-2)  
+[\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)  
+[\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)
 
 ### Europe \(Milan\)<a name="securityhub-control-support-eusouth1"></a>
 

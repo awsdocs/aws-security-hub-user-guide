@@ -1102,6 +1102,8 @@ While GuardDuty can be effective against attacks that an intrusion detection sys
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
+China \(Beijing\)
+China \(Ningxia\)
 Europe \(Milan\)
 Middle East \(Bahrain\)
  AWS GovCloud \(US\-East\)
@@ -1307,7 +1309,11 @@ It does not check whether you are using virtual MFA\.
 To address PCI DSS requirement 8\.3\.1, you can choose between hardware MFA \(this control\) or virtual MFA \([\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](#pcidss-iam-5)\)\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+China \(Beijing\)
+China \(Ningxia\)
+ AWS GovCloud \(US\-East\) 
+AWS GovCloud \(US\-West\)
 
 ### Related PCI DSS requirements<a name="pcidss-iam-4-requirements"></a>
 
@@ -1353,7 +1359,11 @@ It does not check whether you are using hardware MFA\.
 To address PCI DSS requirement 8\.3\.1, you can choose between virtual MFA \(this control\) or hardware MFA \([\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](#pcidss-iam-4)\)\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in the following Regions\.  
+China \(Beijing\)
+China \(Ningxia\)
+ AWS GovCloud \(US\-East\) 
+AWS GovCloud \(US\-West\)
 
 ### Related PCI DSS requirements<a name="pcidss-iam-5-requirements"></a>
 
@@ -1584,6 +1594,9 @@ It does not check for access to the Lambda function by internal principals, such
 
 For more information about using resource\-based policies for AWS Lambda, see the [https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html)\.
 
+**Note**  
+This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regions\.
+
 ### Related PCI DSS requirements<a name="pcidss-lambda-1-requirements"></a>
 
 This control is related to the following PCI DSS requirements:
@@ -1667,6 +1680,9 @@ This control checks whether a Lambda function is in a VPC\.
 It does not evaluate the VPC subnet routing configuration to determine public reachability\. 
 
 Note that if Lambda@Edge is found in the account, then this control generates failed findings\. To prevent these findings, you can disable this control\.
+
+**Note**  
+This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regions\.
 
 ### Related PCI DSS requirements<a name="pcidss-lambda-2-requirements"></a>
 
@@ -2217,6 +2233,8 @@ You should also ensure that access to your SageMaker configuration is limited to
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
+China \(Beijing\)
+China \(Ningxia\)
 Europe \(Milan\)
  AWS GovCloud \(US\-East\)
 
