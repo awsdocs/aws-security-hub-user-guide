@@ -1001,7 +1001,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
    ```
-   {($.eventName="ConsoleLogin") && ($.additionalEventData.MFAUsed !="Yes")}
+   {($.eventName=ConsoleLogin) && ($.additionalEventData.MFAUsed !=Yes)}
    ```
 
 1. Choose **Assign Metric**\.
