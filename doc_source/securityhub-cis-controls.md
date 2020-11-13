@@ -923,37 +923,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.errorCode="*UnauthorizedOperation") || ($.errorCode="AccessDenied*")}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.errorCode="*UnauthorizedOperation") || ($.errorCode="AccessDenied*")}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.1\-UnauthorizedAPICalls**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.1\-UnauthorizedAPICalls**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.2 – Ensure a log metric filter and alarm exist for AWS Management Console sign\-in without MFA<a name="securityhub-cis-controls-3.2"></a>
 
@@ -992,37 +1030,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName="ConsoleLogin") && ($.additionalEventData.MFAUsed !="Yes")}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName="ConsoleLogin") && ($.additionalEventData.MFAUsed !="Yes")}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.2\-ConsoleSigninWithoutMFA**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.2\-ConsoleSigninWithoutMFA**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.3 – Ensure a log metric filter and alarm exist for usage of "root" account<a name="securityhub-cis-controls-3.3"></a>
 
@@ -1061,43 +1137,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**, then choose **Log groups**\. 
+1. In the navigation pane, choose **Log groups**\.
 
-1. Choose the log group where CloudTrail is logging\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. On the log group details page, choose ** Metric filters**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Choose **Create metric filter**\. 
+1. Under **Define pattern**, do the following:
 
-1. Copy the following pattern and then paste it into **Filter pattern**\.
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-   ```
-   {$.userIdentity.type="Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !="AwsServiceEvent"}
-   ```
+      ```
+      {$.userIdentity.type="Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !="AwsServiceEvent"}
+      ```
 
-1. Choose **Next**\.
+   1. Choose **Next**\.
 
-1. Enter the name of the new filter\. For example, **RootAccountUsage**\.
+1. Under **Assign metric**, do the following:
 
-1. Confirm that the value for **Metric namespace** is `LogMetrics`\. 
+   1. In Filter name, enter a name for your metric filter\.
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-1. In **Metric name**, enter the name of the metric\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
 
-1. In **Metric value**, enter **1**, and then choose **Next**\.
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
 
-1. Choose **Create metric filter**\. 
+   1. For **Metric value**, enter **1**\.
 
-1. Next, set up the notification\. Select the select the metric filter you just created, then choose **Create alarm**\.
+   1. Choose **Next**\.
 
-1. Enter the threshold for the alarm \(for example, **1**\), then choose **Next**\.
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. Under **Select an SNS topic**, for **Send notification to**, choose an email list, then choose **Next**\.
+1. In the navigation pane, choose **Alarms**\.
 
-1. Enter a **Name** and **Description** for the alarm, such as **RootAccountUsageAlarm**, then choose **Next**\. 
+1. Choose **Create Alarm**\.
 
-1. Choose **Create Alarm**\. 
+1. Under **Specify metric and conditions**, do the following:
+
+   1. Choose **Select metric**\.
+
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **RootAccountUsage**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.4 – Ensure a log metric filter and alarm exist for IAM policy changes<a name="securityhub-cis-controls-3.4"></a>
 
@@ -1136,37 +1244,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName=DeleteGroupPolicy) || ($.eventName=DeleteRolePolicy) || ($.eventName=DeleteUserPolicy) || ($.eventName=PutGroupPolicy) || ($.eventName=PutRolePolicy) || ($.eventName=PutUserPolicy) || ($.eventName=CreatePolicy) || ($.eventName=DeletePolicy) || ($.eventName=CreatePolicyVersion) || ($.eventName=DeletePolicyVersion) || ($.eventName=AttachRolePolicy) || ($.eventName=DetachRolePolicy) || ($.eventName=AttachUserPolicy) || ($.eventName=DetachUserPolicy) || ($.eventName=AttachGroupPolicy) || ($.eventName=DetachGroupPolicy)}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName=DeleteGroupPolicy) || ($.eventName=DeleteRolePolicy) || ($.eventName=DeleteUserPolicy) || ($.eventName=PutGroupPolicy) || ($.eventName=PutRolePolicy) || ($.eventName=PutUserPolicy) || ($.eventName=CreatePolicy) || ($.eventName=DeletePolicy) || ($.eventName=CreatePolicyVersion) || ($.eventName=DeletePolicyVersion) || ($.eventName=AttachRolePolicy) || ($.eventName=DetachRolePolicy) || ($.eventName=AttachUserPolicy) || ($.eventName=DetachUserPolicy) || ($.eventName=AttachGroupPolicy) || ($.eventName=DetachGroupPolicy)}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.4\-IAMPolicyChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.4\-IAMPolicyChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.5 – Ensure a log metric filter and alarm exist for CloudTrail configuration changes<a name="securityhub-cis-controls-3.5"></a>
 
@@ -1205,37 +1351,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName=CreateTrail) || ($.eventName=UpdateTrail) || ($.eventName=DeleteTrail) || ($.eventName=StartLogging) || ($.eventName=StopLogging)}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName=CreateTrail) || ($.eventName=UpdateTrail) || ($.eventName=DeleteTrail) || ($.eventName=StartLogging) || ($.eventName=StopLogging)}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.5\-CloudTrailChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.5\-CloudTrailChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.6 – Ensure a log metric filter and alarm exist for AWS Management Console authentication failures<a name="securityhub-cis-controls-3.6"></a>
 
@@ -1274,37 +1458,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName=ConsoleLogin) && ($.errorMessage="Failed authentication")}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName=ConsoleLogin) && ($.errorMessage="Failed authentication")}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.6\-ConsoleAuthenticationFailure**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.6\-ConsoleAuthenticationFailure**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.7 – Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs<a name="securityhub-cis-controls-3.7"></a>
 
@@ -1343,37 +1565,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventSource=kms.amazonaws.com) && (($.eventName=DisableKey) || ($.eventName=ScheduleKeyDeletion))}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventSource=kms.amazonaws.com) && (($.eventName=DisableKey) || ($.eventName=ScheduleKeyDeletion))}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.7\-DisableOrDeleteCMK**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.7\-DisableOrDeleteCMK**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.8 – Ensure a log metric filter and alarm exist for S3 bucket policy changes<a name="securityhub-cis-controls-3.8"></a>
 
@@ -1412,37 +1672,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventSource=s3.amazonaws.com) && (($.eventName=PutBucketAcl) || ($.eventName=PutBucketPolicy) || ($.eventName=PutBucketCors) || ($.eventName=PutBucketLifecycle) || ($.eventName=PutBucketReplication) || ($.eventName=DeleteBucketPolicy) || ($.eventName=DeleteBucketCors) || ($.eventName=DeleteBucketLifecycle) || ($.eventName=DeleteBucketReplication))}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventSource=s3.amazonaws.com) && (($.eventName=PutBucketAcl) || ($.eventName=PutBucketPolicy) || ($.eventName=PutBucketCors) || ($.eventName=PutBucketLifecycle) || ($.eventName=PutBucketReplication) || ($.eventName=DeleteBucketPolicy) || ($.eventName=DeleteBucketCors) || ($.eventName=DeleteBucketLifecycle) || ($.eventName=DeleteBucketReplication))}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.8\-S3BucketPolicyChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.8\-S3BucketPolicyChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.9 – Ensure a log metric filter and alarm exist for AWS Config configuration changes<a name="securityhub-cis-controls-3.9"></a>
 
@@ -1481,37 +1779,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventSource=config.amazonaws.com) && (($.eventName=StopConfigurationRecorder) || ($.eventName=DeleteDeliveryChannel) || ($.eventName=PutDeliveryChannel) || ($.eventName=PutConfigurationRecorder))}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventSource=config.amazonaws.com) && (($.eventName=StopConfigurationRecorder) || ($.eventName=DeleteDeliveryChannel) || ($.eventName=PutDeliveryChannel) || ($.eventName=PutConfigurationRecorder))}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.9\-AWSConfigChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.9\-AWSConfigChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.10 – Ensure a log metric filter and alarm exist for security group changes<a name="securityhub-cis-controls-3.10"></a>
 
@@ -1550,37 +1886,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName=AuthorizeSecurityGroupIngress) || ($.eventName=AuthorizeSecurityGroupEgress) || ($.eventName=RevokeSecurityGroupIngress) || ($.eventName=RevokeSecurityGroupEgress) || ($.eventName=CreateSecurityGroup) || ($.eventName=DeleteSecurityGroup)}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName=AuthorizeSecurityGroupIngress) || ($.eventName=AuthorizeSecurityGroupEgress) || ($.eventName=RevokeSecurityGroupIngress) || ($.eventName=RevokeSecurityGroupEgress) || ($.eventName=CreateSecurityGroup) || ($.eventName=DeleteSecurityGroup)}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.10\-SecurityGroupChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.10\-SecurityGroupChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.11 – Ensure a log metric filter and alarm exist for changes to Network Access Control Lists \(NACL\)<a name="securityhub-cis-controls-3.11"></a>
 
@@ -1619,37 +1993,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName=CreateNetworkAcl) || ($.eventName=CreateNetworkAclEntry) || ($.eventName=DeleteNetworkAcl) || ($.eventName=DeleteNetworkAclEntry) || ($.eventName=ReplaceNetworkAclEntry) || ($.eventName=ReplaceNetworkAclAssociation)}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName=CreateNetworkAcl) || ($.eventName=CreateNetworkAclEntry) || ($.eventName=DeleteNetworkAcl) || ($.eventName=DeleteNetworkAclEntry) || ($.eventName=ReplaceNetworkAclEntry) || ($.eventName=ReplaceNetworkAclAssociation)}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.11\-NetworkACLChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.11\-NetworkACLChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.12 – Ensure a log metric filter and alarm exist for changes to network gateways<a name="securityhub-cis-controls-3.12"></a>
 
@@ -1688,37 +2100,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName=CreateCustomerGateway) || ($.eventName=DeleteCustomerGateway) || ($.eventName=AttachInternetGateway) || ($.eventName=CreateInternetGateway) || ($.eventName=DeleteInternetGateway) || ($.eventName=DetachInternetGateway)}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName=CreateCustomerGateway) || ($.eventName=DeleteCustomerGateway) || ($.eventName=AttachInternetGateway) || ($.eventName=CreateInternetGateway) || ($.eventName=DeleteInternetGateway) || ($.eventName=DetachInternetGateway)}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.12\-NetworkGatewayChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.12\-NetworkGatewayChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.13 – Ensure a log metric filter and alarm exist for route table changes<a name="securityhub-cis-controls-3.13"></a>
 
@@ -1757,37 +2207,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName=CreateRoute) || ($.eventName=CreateRouteTable) || ($.eventName=ReplaceRoute) || ($.eventName=ReplaceRouteTableAssociation) || ($.eventName=DeleteRouteTable) || ($.eventName=DeleteRoute) || ($.eventName=DisassociateRouteTable)}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName=CreateRoute) || ($.eventName=CreateRouteTable) || ($.eventName=ReplaceRoute) || ($.eventName=ReplaceRouteTableAssociation) || ($.eventName=DeleteRouteTable) || ($.eventName=DeleteRoute) || ($.eventName=DisassociateRouteTable)}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.13\-RouteTableChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.13\-RouteTableChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 3\.14 – Ensure a log metric filter and alarm exist for VPC changes<a name="securityhub-cis-controls-3.14"></a>
 
@@ -1826,37 +2314,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {($.eventName=CreateVpc) || ($.eventName=DeleteVpc) || ($.eventName=ModifyVpcAttribute) || ($.eventName=AcceptVpcPeeringConnection) || ($.eventName=CreateVpcPeeringConnection) || ($.eventName=DeleteVpcPeeringConnection) || ($.eventName=RejectVpcPeeringConnection) || ($.eventName=AttachClassicLinkVpc) || ($.eventName=DetachClassicLinkVpc) || ($.eventName=DisableVpcClassicLink) || ($.eventName=EnableVpcClassicLink)}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {($.eventName=CreateVpc) || ($.eventName=DeleteVpc) || ($.eventName=ModifyVpcAttribute) || ($.eventName=AcceptVpcPeeringConnection) || ($.eventName=CreateVpcPeeringConnection) || ($.eventName=DeleteVpcPeeringConnection) || ($.eventName=RejectVpcPeeringConnection) || ($.eventName=AttachClassicLinkVpc) || ($.eventName=DetachClassicLinkVpc) || ($.eventName=DisableVpcClassicLink) || ($.eventName=EnableVpcClassicLink)}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In Filter name, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-3\.14\-VPCChanges**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm\. For example, **CIS\-3\.14\-VPCChanges**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 4\.1 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22<a name="securityhub-cis-controls-4.1"></a>
 

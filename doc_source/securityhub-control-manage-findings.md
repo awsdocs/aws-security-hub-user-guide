@@ -8,7 +8,7 @@ You can also use the AWS Security Hub API to retrieve a list of findings\. See [
 
 **Topics**
 + [Accommodating controls that have a high volume of findings](#control-finding-high-volume)
-+ [Filtering and sorting the control finding list](control-finding-list.md)
++ [Filtering, sorting, and downloading the control finding list](control-finding-list.md)
 + [Viewing details about a control finding and finding resource](control-finding-resource-details.md)
 + [Taking action on control findings](control-finding-take-action.md)
 

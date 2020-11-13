@@ -17,9 +17,11 @@ The China \(Beijing\) and China \(Ningxia\) Regions only support the following t
 + PagerDuty
 + Palo Alto Networks Cortex XSOAR
 + Palo Alto Networks VM\-Series
++ Prowler
 + RSA Archer
 + Splunk Enterprise
 + Splunk Phantom
++ ThreatModeler
 
 ## Controls that are not supported in all Regions<a name="securityhub-regions-control-support"></a>
 

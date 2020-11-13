@@ -47,10 +47,14 @@ To update existing findings, use the existing finding ID \(via the [https://docs
 
 You can use the following example custom product integrations as a guide to create your own custom solution\.
 
-AWS Fargate and Prowler  
-[Prowler](https://github.com/toniblyx/prowler) provides dozens of security configuration checks related to services such as Amazon Redshift, Amazon ElastiCache, Amazon API Gateway, and Amazon CloudFront\.  
-To learn more, see [Use AWS Fargate and Prowler to send security configuration findings about AWS services to Security Hub](http://aws.amazon.com/blogs/security/use-aws-fargate-prowler-send-security-configuration-findings-about-aws-services-security-hub/)\.
-
-Importing AWS Config rules  
+**Importing AWS Config rules**  
 You can use an AWS CloudFormation template to import AWS Config rules into Security Hub\.  
 To learn more, see [How to import AWS Config rules evaluations as findings in Security Hub](http://aws.amazon.com/blogs/security/how-to-import-aws-config-rules-evaluations-findings-security-hub/)\.
+
+**Sending findings from Chef InSpec scans to Security Hub**  
+You can create an AWS CloudFormation template that runs a [Chef InSpec](https://www.chef.io/products/chef-inspec/) compliance scan and then sends findings to Security Hub\.  
+For more details, see [Continuous compliance monitoring with Chef InSpec and AWS Security Hub](http://aws.amazon.com/blogs/security/continuous-compliance-monitoring-with-chef-inspec-and-aws-security-hub/)\.
+
+**Sending container vulnerabilities detected by Trivy to Security Hub**  
+You can create an AWS CloudFormation template that uses [AquaSecurity Trivy](https://github.com/aquasecurity/trivy) to scan containers for vulnerabilities, and then sends those vulnerability findings to Security Hub\.  
+For more details, see [How to build a CI/CD pipeline for container vulnerability scanning with Trivy andAWS Security Hub](http://aws.amazon.com/blogs/security/how-to-build-ci-cd-pipeline-container-vulnerability-scanning-trivy-and-aws-security-hub/)\.

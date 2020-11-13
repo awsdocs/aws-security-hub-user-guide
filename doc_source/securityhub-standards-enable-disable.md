@@ -53,7 +53,7 @@ On the **Security standards** page, each disabled standard includes an option to
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
-1. Confirm that you are using Security Hub in the Region in which you want to disable the standard\.
+1. Confirm that you are using Security Hub in the Region in which you want to enable the standard\.
 
 1. In the Security Hub navigation pane, choose **Security standards**\.
 

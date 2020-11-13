@@ -25,11 +25,13 @@ After you enable a security standard, Security Hub automatically creates the AWS
 For every control that uses an AWS Config service\-linked rule or rules, Security Hub creates instances of the required rules in your AWS environment\. These service\-linked rules are specific to Security Hub\. It creates these service\-linked rules even if other instances of the same rules already exist\.
 
 **Note**  
-For AWS Config managed rules, the quota is 150 rules per account per Region\. However, when you enable a security standard in Security Hub, the service\-linked AWS Config rules that are automatically created do not count towards that quota\. You can enable a security standard even if you already have 150 AWS Config managed rules in your account\.  
-For service\-linked rules such as the ones that Security Hub adds for security standards, the quota is 150 rules per account per Region\. This is in addition to the 150\-rule quota on AWS Config managed rules\.
+For AWS Config managed rules, the quota is 250 rules per account per Region\. However, when you enable a security standard in Security Hub, the service\-linked AWS Config rules that are automatically created do not count towards that quota\. You can enable a security standard even if you already have 250 AWS Config managed rules in your account\.  
+For service\-linked rules such as the ones that Security Hub adds for security standards, the quota is 250 rules per account per Region\. This is in addition to the 250\-rule quota on AWS Config managed rules\.
 
 For information about the specific AWS Config managed rules that Security Hub uses for each CIS AWS Foundations control, see [CIS AWS Foundations Benchmark controls](securityhub-cis-controls.md)\. For the list of required AWS Config resources for CIS AWS Foundations controls, see [AWS Config resources required for CIS controls](securityhub-standards-cis-config-resources.md)\.
 
 For information about the specific AWS Config managed rules that Security Hub uses for each Payment Card Industry Data Security Standard \(PCI DSS\) control, see [PCI DSS controls](securityhub-pci-controls.md)\. For the list of required AWS Config resources for PCI DSS controls, see [AWS Config resources required for PCI DSS controls](securityhub-standards-pci-config-resources.md)\.
+
+For information about the specific AWS Config managed rules that Security Hub uses for each Foundational Security Best Practices standard control, see [AWS Foundational Security Best Practices controls](securityhub-standards-fsbp-controls.md)\. For the list of required AWS Config resources for Foundational Security Best Practices controls, see [AWS Config resources required for AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)\.
 
 A security check can generate a finding that is based on an AWS Config rule\. In that case, the finding details include a **Rules** link to open the associated AWS Config rule\. To navigate to the AWS Config rule, you must also have an IAM permission in the selected account to navigate to AWS Config\.

@@ -68,7 +68,7 @@ You can also use the [https://docs.aws.amazon.com/eventbridge/latest/APIReferenc
 
 1. Copy one of the following example patterns, and paste it into the **Event pattern** text area\. Be sure to replace the existing brackets\.
 
-   For an event associated with a finding custom action \(**Security Hub Findings \- Custom Action** event type\), use the following format\. Replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
+   For an event associated with a finding custom action \(**Security Hub Findings \- Custom Action** event type\), use the following format\. In your event pattern, replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
 
    ```
    {
@@ -84,7 +84,7 @@ You can also use the [https://docs.aws.amazon.com/eventbridge/latest/APIReferenc
    }
    ```
 
-   For an event associated with an insight custom action \(**Security Hub Insight Results** event type\), use the following format\. Replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
+   For an event associated with an insight custom action \(**Security Hub Insight Results** event type\), use the following format\. In your event pattern, replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
 
    ```
    {

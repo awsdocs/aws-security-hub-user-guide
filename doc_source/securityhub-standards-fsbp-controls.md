@@ -1352,17 +1352,47 @@ This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regi
 
 ### Remediation<a name="lambda-1-remediation"></a>
 
-You can only update resource\-based policies for Lambda resources within the scope of the [https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html](https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html) and [https://docs.aws.amazon.com/lambda/latest/dg/API_AddLayerVersionPermission.html](https://docs.aws.amazon.com/lambda/latest/dg/API_AddLayerVersionPermission.html) API operations\. You cannot author policies for your Lambda resources in JSON\. Neither can you use conditions that don't map to parameters for those actions using the AWS CLI or the SDK\. The following steps use the AWS CLI\.
+If a Lambda function fails this control, it indicates that the resource\-based policy statement for the Lambda function allows public access\.
 
-**To create a private Lambda function**
+To remediate the issue, you must update the policy\. You can only update the resource\-based policy from the Lambda API\. These instructions use the console to review the policy and the AWS Command Line Interface to remove the permissions\.
 
-1. Get the ID of the statement from the output of `GetPolicy`\.
+**To view the resource\-based policy for a Lambda function**
 
-   1. From the AWS CLI, run `aws lambda get-policy --function-name yourfunctionname`\. This command returns the Lambda resource\-based policy string associated with the publicly accessible Lambda\.
+1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-   1. Copy the string value of the **Sid** field in the policy statement\.
+1. In the navigation pane, choose **Functions**\.
 
-1. From the AWS CLI, run `aws lambda remove-permission --function-name yourfunctionname --statement-id youridvalue`
+1. Choose the function\.
+
+1. Choose **Permissions**\. The resource\-based policy shows the permissions that are applied when another account or AWS service attempts to access the function\. 
+
+1. Examine the resource\-based policy\. Identify the policy statement that has `Principal` field values that make the policy public\. For example, allowing `*"*"*` or `{ "AWS": "*" }`\.
+
+   You cannot edit the policy from the console\. To remove permissions from the function, you use the `remove-permission` command from the AWS CLI\.
+
+   Note the value of the statement ID \(`Sid`\) for the statement that you want to remove\.
+
+To use the AWS CLI to remove permissions from a Lambda function, issue the [https://docs.aws.amazon.com/cli/latest/reference/lambda/remove-permission.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/remove-permission.html) command\.
+
+```
+$ aws lambda remove-permission --function-name <function-name> --statement-id <statement-id>
+```
+
+Replace `<function-name>` with the name of the Lambda function, and `<statement-id>` with the statement ID of the statement to remove\.
+
+**To verify that the permissions are updated**
+
+1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
+
+1. In the navigation pane, choose **Functions**\.
+
+1. Choose the function that you updated\.
+
+1. Choose **Permissions**\.
+
+   The resource\-based policy should be updated\. If there was only one statement in the policy, then the policy is empty\.
+
+For more information, see [Using resource\-based policies for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) in the *AWS Lambda Developer Guide*\.
 
 ## \[Lambda\.2\] Lambda functions should use latest runtimes<a name="fsbp-lambda-2"></a>
 
@@ -2095,7 +2125,7 @@ You can use the Systems Manager console to remediate this issue\.
 
 1. On the configuration screen, keep the default options\.
 
-1. Choose **Set up Systems Manager**\.
+1. Choose **Enable**\.
 
 To determine whether your instances support Systems Manager associations, see [Systems Manager prerequisites](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-prereqs.html) in the *AWS Systems Manager User Guide*\.
 

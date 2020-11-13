@@ -148,7 +148,7 @@ A finding provider can provide initial severity information for a finding, but c
 ```
 "Severity": {
     "Label": "CRITICAL",
-    "Original": 8.3
+    "Original": "8.3"
 }
 ```
 

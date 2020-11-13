@@ -74,7 +74,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Enabling new controls automatically](controls-auto-enable.md)
    + [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)
    + [Viewing and taking action on control findings](securityhub-control-manage-findings.md)
-      + [Filtering and sorting the control finding list](control-finding-list.md)
+      + [Filtering, sorting, and downloading the control finding list](control-finding-list.md)
       + [Viewing details about a control finding and finding resource](control-finding-resource-details.md)
       + [Taking action on control findings](control-finding-take-action.md)
    + [CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)

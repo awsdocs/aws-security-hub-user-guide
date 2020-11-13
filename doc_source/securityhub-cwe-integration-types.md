@@ -8,9 +8,9 @@ On the EventBridge dashboard for Security Hub, **All Events** includes all of th
 
  Security Hub automatically sends all findings to EventBridge as **Security Hub Findings \- Imported** events\. **Security Hub Findings \- Imported** events are triggered by updates from both [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) and [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
-You can define rules in EventBridge that automatically route findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\.
+You can define rules in EventBridge that automatically route findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\. The rules can include filters to only apply the rule if the finding has specific attribute values\.
 
-Use this method to automatically send all findings, or all findings with specific characteristics, to a response or remediation workflow\.
+You use this method to automatically send all findings, or all findings that have specific characteristics, to a response or remediation workflow\.
 
 See [Configuring an EventBridge rule for automatically sent findings](securityhub-cwe-all-findings.md)\.
 
@@ -20,9 +20,9 @@ Security Hub also sends findings associated with custom actions to EventBridge a
 
 This is useful for analysts working with the Security Hub console who want to send a specific finding, or a small set of findings, to a response or remediation workflow\. You can select a custom action for up to 20 findings at a time\. The set of findings is sent to EventBridge as a single EventBridge event\.
 
-When you create a custom action, you specify a custom action ID for the custom action\. You can use this ID to create an EventBridge rule that takes a specified action after receiving a finding that is associated with the custom action ID\.
+When you create a custom action, you specify a custom action ID for the custom action\. You can use this ID to create an EventBridge rule that takes a specified action after receiving a finding that is associated with that custom action ID\.
 
-See [Creating a custom action \(console\)](securityhub-cwe-custom-actions.md#securityhub-cwe-configure)\.
+See [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)\.
 
 For example, you can create a custom action in Security Hub called `send_to_ticketing`\. Then in EventBridge, you create a rule that is triggered when EventBridge receives a finding that includes the `send_to_ticketing` custom action ID\. The rule includes logic to send the finding to your ticketing system\. You can then select findings within Security Hub and use the custom action in Security Hub to manually send findings to your ticketing system\.
 
@@ -30,10 +30,10 @@ For examples of how to send Security Hub findings to EventBridge for further pro
 
 ## Insight results for custom actions \(Security Hub Insight Results\)<a name="securityhub-cwe-integration-types-insight-custom-action"></a>
 
-You can also use custom actions to send a set of insight results to EventBridge as **Security Hub Insight Results** events\. Insight results are the set of resources that are associated with an insight\. Note that when you send insight results to EventBridge, you are not sending the findings to EventBridge\. You are only sending the resource identifiers that are associated with the insight results\. You can send up to 100 resource identifiers at a time\.
+You can also use custom actions to send sets of insight results to EventBridge as **Security Hub Insight Results** events\. Insight results are the resources that match an insight\. Note that when you send insight results to EventBridge, you are not sending the findings to EventBridge\. You are only sending the resource identifiers that are associated with the insight results\. You can send up to 100 resource identifiers at a time\.
 
 Similar to custom actions for findings, you first create the custom action in Security Hub, and then create a rule in EventBridge\.
 
-See [Creating a custom action \(console\)](securityhub-cwe-custom-actions.md#securityhub-cwe-configure)\.
+See [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)\.
 
-For example, suppose you see a particular insight result of interest that you want to share with a colleague\. In that case, you can use custom actions to send that insight result to the colleague through a chat or ticketing system\.
+For example, suppose you see a particular insight result of interest that you want to share with a colleague\. In that case, you can use a custom action to send that insight result to the colleague through a chat or ticketing system\.

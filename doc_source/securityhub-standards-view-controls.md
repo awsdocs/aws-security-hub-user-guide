@@ -69,3 +69,13 @@ To display information about the controls for an enabled standard, you can use a
   ```
   aws securityhub describe-standards-controls --standards-subscription-arn "arn:aws:securityhub:us-east-1:123456789012:subscription/aws-foundational-security-best-practices/v/1.0.0"
   ```
+
+## Downloading the control list<a name="securityhub-standards-download-controls"></a>
+
+You can download the control list to a \.csv file\.
+
+If you filtered the control list, then the downloaded file only includes the controls that match the filter\.
+
+If you chose a specific control from the list, then the downloaded file only includes that control\.
+
+To download the control list or the currently selected control, choose **Download**\.

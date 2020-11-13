@@ -3,7 +3,7 @@
 The **Integrations** page in the AWS Management Console provides access to all of the available AWS and third\-party product integrations\. The AWS Security Hub API also provides operations to allow you to manage integrations\.
 
 **Note**  
-Some integrations are not available in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.
+Some integrations are not available in all Regions\. If an integration is not supported, it is not listed on the **Integrations** page\.
 
 ## Viewing and filtering the list of integrations \(console\)<a name="securityhub-integrations-view-filter"></a>
 
