@@ -8,7 +8,9 @@ If you decline the invitation, then your account is marked as **Resigned** on th
 
 You can only accept one invitation to be a member account\.
 
-Before you can accept or decline an invitation, you must enable Security Hub\. For information on how to enable Security Hub, see [Enabling Security Hub](securityhub-settingup.md#securityhub-enable)\.
+Before you can accept or decline an invitation, you must enable Security Hub\. For information on how to enable Security Hub, see [Enabling Security Hub manually](securityhub-enable.md)\.
+
+Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 
 ## Accepting an invitation \(console\)<a name="securityhub-accept-invitation-console"></a>
 

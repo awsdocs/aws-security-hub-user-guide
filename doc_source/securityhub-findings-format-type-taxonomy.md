@@ -45,6 +45,7 @@ TTPs stands for tactics, techniques, and procedures\. The TTP categories in the 
     + IT\-Grundschutz Controls \(Germany\)
     + GDPR Controls \(Europe\)
     + TISAX Controls \(Europe\)
+  + Patch Management
 + TTPs
   + Initial Access
   + Execution

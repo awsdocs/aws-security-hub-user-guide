@@ -1,14 +1,18 @@
-# Master and member accounts in AWS Security Hub<a name="securityhub-accounts"></a>
+# Managing master and member accounts<a name="securityhub-accounts"></a>
 
-You can invite other AWS accounts to enable AWS Security Hub and become associated with your AWS account\. If the owner of the account that you invite enables Security Hub and then accepts the invitation, your account is designated as the *master* Security Hub account\. The invited accounts become associated as *member* accounts\.
+An AWS Security Hub master account can view data from and manage configuration for its member accounts\. The Security Hub master\-member relationship is established differently based on whether the accounts belong to an organization in AWS Organizations\.
 
-When the invited account accepts the invitation, permission is granted to the master account to view the findings from the member account\. The master account can also perform actions on findings in a member account\.
+**Note**  
+The China \(Beijing\) and China \(Ningxia\) Regions do not support the integration with Organizations\.
+
+If you are integrated with Organizations, the organization management account designates the Security Hub administrator account, which becomes the master account\. See [Designating a Security Hub administrator account](designate-orgs-admin-account.md)\. The Security Hub administrator account automatically has access to all of the accounts in the organization\. The Security Hub administrator account determines which accounts in the organization to enable as member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)\. These member accounts cannot disassociate themselves from the Security Hub administrator account\.
+
+If you are not integrated with Organizations, member accounts accept an invitation from a master account\. A Security Hub administrator account for an organization can also invite member accounts that are not part of the organization\. See [Managing member accounts that are not in an organization](account-management-manual.md)\. Accounts that are added by invitation can disassociate themselves from their master account\.
 
 **Topics**
 + [Restrictions and recommendations](securityhub-account-restrictions-recommendations.md)
-+ [Adding and inviting member accounts](securityhub-accounts-add-invite.md)
-+ [Responding to an invitation to be a member account](securityhub-invitation-respond.md)
-+ [Disassociating member accounts](securityhub-disassociate-members.md)
-+ [Deleting member accounts](securityhub-delete-member-accounts.md)
-+ [Disassociating from your master account](securityhub-disassociate-from-master.md)
++ [Allowed actions for accounts](securityhub-accounts-allowed-actions.md)
++ [Designating a Security Hub administrator account](designate-orgs-admin-account.md)
++ [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)
++ [Managing member accounts that are not in an organization](account-management-manual.md)
 + [Effect of account actions on Security Hub data](securityhub-data-retention.md)

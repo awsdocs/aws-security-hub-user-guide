@@ -39,7 +39,7 @@ You can specify multiple actions using wildcards \(\*\)\. For example, to specif
 "Action": "securityhub:Get*"
 ```
 
-To see a list of Security Hub actions, see [Actions Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-actions-as-permissions) in the *IAM User Guide*\.
+To see a list of Security Hub actions, see [Actions defined by AWS Security Hub](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecurityhub.html#awssecurityhub-actions-as-permissions) in the *Service Authorization Reference*\.
 
 ### Resources<a name="security_iam_service-with-iam-id-based-policies-resources"></a>
 
@@ -55,7 +55,7 @@ For actions that don't support resource\-level permissions, such as listing oper
 
 For more information about the format of ARNs, see [Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\.
 
-To see a list of Security Hub resource types and their ARNs, see [Resources Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-resources-for-iam-policies) in the *IAM User Guide*\. To learn with which actions you can specify the ARN of each resource, see [Actions Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-actions-as-permissions)\.
+To see a list of Security Hub resource types and their ARNs, see [Resource types defined by AWS Security Hub](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecurityhub.html#awssecurityhub-resources-for-iam-policies) in the *Service Authorization Reference*\. To learn with which actions you can specify the ARN of each resource, see [Actions defined by AWS Security Hub](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecurityhub.html#awssecurityhub-actions-as-permissions)\.
 
 ### Condition keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 
@@ -75,7 +75,7 @@ Security Hub actions support the `securityhub:TargetAccount` condition key\.
 
 To control access to [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html), Security Hub supports the `securityhub.ASFFSyntaxPath` condition key\. For details on configuring access to [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html), see [Configuring access to BatchUpdateFindings](finding-update-batchupdatefindings.md#batchupdatefindings-configure-access)\.
 
-To see a list of Security Hub condition keys, see [Condition Keys for AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-policy-keys) in the *IAM User Guide*\. To learn with which actions and resources you can use a condition key, see [Actions Defined by AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awssecurityhub.html#awssecurityhub-actions-as-permissions)\.
+To see a list of Security Hub condition keys, see [Condition keys for AWS Security Hub](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecurityhub.html#awssecurityhub-policy-keys) in the *Service Authorization Reference*\. To learn with which actions and resources you can use a condition key, see [Actions defined by AWS Security Hub](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecurityhub.html#awssecurityhub-actions-as-permissions)\.
 
 ## Security Hub resource\-based policies \(Not supported\)<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
@@ -218,6 +218,6 @@ You can create a role that users in other accounts or people outside of your org
 To learn more, consult the following:
 + To learn whether Security Hub supports these features, see [How AWS Security Hub works with IAM](#security_iam_service-with-iam)\.
 + To learn how to provide access to your resources across AWS accounts that you own, see [Providing access to an IAM user in another AWS account that you own](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_aws-accounts.html) in the *IAM User Guide*\.
-+ To learn how to provide access to your resources to third\-party AWS accounts, see [Providing ccess to AWS accounts owned by third parties](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html) in the *IAM User Guide*\.
++ To learn how to provide access to your resources to third\-party AWS accounts, see [Providing access to AWS accounts owned by third parties](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html) in the *IAM User Guide*\.
 + To learn how to provide access through identity federation, see [Providing access to externally authenticated users \(identity federation\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_federated-users.html) in the *IAM User Guide*\.
 + To learn the difference between using roles and resource\-based policies for cross\-account access, see [How IAM roles differ from resource\-based policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\.

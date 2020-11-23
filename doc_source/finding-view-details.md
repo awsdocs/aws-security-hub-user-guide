@@ -13,7 +13,7 @@ From a finding list, you can display a details pane for a finding\.
 
 1. Choose the finding title\.
 
-At the top of the finding details pane contains overview information about the finding, including the account, severity, dates, and status\.
+At the top of the finding details pane contains overview information about the finding, including the account, severity, dates, and status\. If the account is an organization member account, then the information includes the account name\. For accounts that are invited manually, the information only includes the account ID\.
 
 **Types and Related Findings** contains information about the finding type\.
 

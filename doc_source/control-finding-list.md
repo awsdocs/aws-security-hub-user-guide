@@ -10,7 +10,7 @@ The lists on the **Failed**, **Unknown**, and **Passed** tabs are filtered based
 
 The **Suppressed** tab contains a list of active findings that have a workflow status of SUPPRESSED\.
 
-In addition to the built\-in filters on each tab, you can filter the lists using text in the following fields:
+In addition to the built\-in filters on each tab, you can filter the lists using values from the following fields:
 + Account ID
 + Workflow status
 + Compliance status
@@ -21,10 +21,10 @@ You can sort each list using any of the columns\.
 
 ## Downloading the control finding list<a name="control-finding-list-download"></a>
 
-You can download the control finding list to a \.csv file\.
+You can download the current page of the control finding list to a \.csv file\.
 
 If you filtered the finding list, then the download only includes the controls that match the filter\.
 
 If you selected specific findings from the list, then the download only includes the selected findings\.
 
-To download the list or the selected findings, choose **Download**\.
+To download the current page of the list or the selected findings, choose **Download**\.

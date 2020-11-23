@@ -18,7 +18,7 @@ On the** Finding JSON** panel, to download the `.json`, choose **Download**\.
 
 The **Resource** column contains the resource type and resource identifier\.
 
-To display information about the resource, choose the resource identifier\.
+To display information about the resource, choose the resource identifier\. For AWS accounts, if the account is an organization member account, then the information includes both the account ID and the account name\. For accounts that were invited manually, the information only includes the account ID\.
 
 If you have permission to view the resource in its original service, then the resource identifier displays a link to the service\. For example, for an AWS user, the resource details provide a link to the view the user details in IAM\.
 

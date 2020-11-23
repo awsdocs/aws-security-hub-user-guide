@@ -6,7 +6,7 @@ This topic describes the key concepts in AWS Security Hub to help you get starte
 A standard Amazon Web Services \(AWS\) account that contains your AWS resources\. You can sign in to AWS with your account and enable Security Hub\.  
 You can also invite other accounts to enable Security Hub and become associated with your account in Security Hub\. If your invitations are accepted, your account is designated as the Security Hub *master* account, and the added accounts are *member* accounts\. As the master account, you can view findings in your member accounts\.  
 An account cannot be both a Security Hub master account and a member account at the same time\. An account can accept only one membership invitation\. Accepting a membership invitation is optional\.  
-For more information, see [Master and member accounts in AWS Security Hub](securityhub-accounts.md)\.
+For more information, see [Managing master and member accounts](securityhub-accounts.md)\.
 
 **Archived finding**  
 A finding that has a `RecordState` set to `ARCHIVED`\.  

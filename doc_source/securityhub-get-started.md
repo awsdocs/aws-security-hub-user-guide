@@ -1,4 +1,4 @@
-# Getting started with Security Hub<a name="securityhub-get-started"></a>
+# How Security Hub works<a name="securityhub-get-started"></a>
 
 You can use Security Hub in the following ways:
 

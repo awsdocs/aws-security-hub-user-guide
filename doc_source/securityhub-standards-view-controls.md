@@ -42,7 +42,7 @@ For each control, the control list contains the following information:
 + The control identifier and title
 + The number of failed active findings and the total number of active findings\. If applicable, the **Failed checks** column also lists the number of findings with a status of **Unknown**\.
 
-In addition to the built\-in filters on each tab, you can filter the lists using text in the following fields:
+In addition to the built\-in filters on each tab, you can filter the lists using values from the following fields:
 + **Status**
 + **Severity**
 + **ID**
@@ -72,10 +72,10 @@ To display information about the controls for an enabled standard, you can use a
 
 ## Downloading the control list<a name="securityhub-standards-download-controls"></a>
 
-You can download the control list to a \.csv file\.
+You can download the current page of the control list to a \.csv file\.
 
 If you filtered the control list, then the downloaded file only includes the controls that match the filter\.
 
 If you chose a specific control from the list, then the downloaded file only includes that control\.
 
-To download the control list or the currently selected control, choose **Download**\.
+To download the current page of the control list or the currently selected control, choose **Download**\.

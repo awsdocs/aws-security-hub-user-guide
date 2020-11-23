@@ -168,7 +168,9 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "DeploymentId": "string",
                             "PercentTraffic": number,
                             "StageVariableOverrides": [
-                                "string": "string"
+                                {
+                                    "string": "string"
+                                }
                             ],
                             "UseStageCache": boolean
                         },
@@ -247,7 +249,11 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "ThrottlingRateLimit": number
                         },
                         "StageName": "string",
-                        "StageVariables": [ "string": "string" ]
+                        "StageVariables": [
+                            {
+                                "string": "string"
+                            }
+                        ]
                     },
                     "AwsAutoScalingAutoScalingGroup": {
                         "CreatedTime": "string",
@@ -266,8 +272,8 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "ResourceRecord": {
                                     "Name": "string",
                                     "Type": "string",
-                                    "Value": "string",
-                                }
+                                    "Value": "string"
+                                },
                                 "ValidationDomain": "string",
                                 "ValidationEmails": [ "string" ],
                                 "ValidationMethod": "string",
@@ -288,14 +294,14 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "KeyAlgorithm": "string",
                         "KeyUsages": [
                             {
-                                "Name": "string",
+                                "Name": "string"
                             }
                         ],
                         "NotAfter": "string",
                         "NotBefore": "string",
                         "Options": {
-                            "CertificateTransparencyLoggingPreference": "string",
-                        }
+                            "CertificateTransparencyLoggingPreference": "string"
+                        },
                         "RenewalEligibility": "string",
                         "RenewalSummary": {
                             "DomainValidationOptions": [
@@ -304,7 +310,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                     "ResourceRecord": {
                                         "Name": "string",
                                         "Type": "string",
-                                        "Value": "string",
+                                        "Value": "string"
                                     },
                                     "ValidationDomain": "string",
                                     "ValidationEmails": [ "string" ],
@@ -314,7 +320,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             ],
                             "RenewalStatus": "string",
                             "RenewalStatusReason": "string",
-                            "UpdatedAt": "string",
+                            "UpdatedAt": "string"
                         },
                         "Serial": "string",
                         "SignatureAlgorithm": "string",
@@ -361,7 +367,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 {
                                     "DomainName": "string",
                                     "Id": "string",
-                                    "OriginPath": "string"
+                                    "OriginPath": "string",
                                     "S3OriginConfig": {
                                         "OriginAccessIdentity": "string"
                                     }
@@ -419,7 +425,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "AttributeType": "string"
                             }
                         ],
-                        "BillingModeSummary" {
+                        "BillingModeSummary": {
                             "BillingMode": "string",
                             "LastUpdateToPayPerRequestDateTime": "string"
                         },
@@ -448,7 +454,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                     "NumberOfDecreasesToday": number,
                                     "ReadCapacityUnits": number,
                                     "WriteCapacityUnits": number
-                                },
+                                }
                             }
                         ],
                         "GlobalTableVersion": "string",
@@ -491,14 +497,15 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                         "IndexName": "string",
                                         "ProvisionedThroughputOverride": {
                                             "ReadCapacityUnits": number
+                                        }
                                     }
                                 ],
-                                "KmsMasterKeyId": "string"
+                                "KmsMasterKeyId": "string",
                                 "ProvisionedThroughputOverride": {
                                     "ReadCapacityUnits": number
                                 },
-                                "RegionName": "string"
-                                "ReplicaStatus": "string"
+                                "RegionName": "string",
+                                "ReplicaStatus": "string",
                                 "ReplicaStatusDescription": "string"
                             }
                         ],
@@ -552,7 +559,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "AttachTime": "string",
                             "DeleteOnTermination": boolean,
                             "DeviceIndex": number,
-                            "InstanceId": "string"
+                            "InstanceId": "string",
                             "InstanceOwnerId": "string",
                             "Status": "string"
                         },
@@ -617,13 +624,13 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                          "Attachments": [
                             {
                                 "AttachTime": "string",
-                                "DeleteOnTermination": Boolean,
+                                "DeleteOnTermination": boolean,
                                 "InstanceId": "string",
                                 "Status": "string"
                            }
                           ],
                           "CreateTime": "string",
-                          "Encrypted": Boolean,
+                          "Encrypted": boolean,
                           "KmsKeyId": "string",
                           "Size": number,
                           "SnapshotId": "string",
@@ -780,22 +787,22 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "VpcId": "string"
                     },
                     "AwsIamAccessKey": { 
-                        "AccessKeyId" "string",
+                        "AccessKeyId": "string",
                         "AccountId": "string",
                         "CreatedAt": "string",
                         "PrincipalId": "string",
                         "PrincipalName": "string",
                         "PrincipalType": "string",
                         "SessionContext": {
-                            Attributes": {
+                            "Attributes": {
                                 "CreationDate": "string",
                                 "MfaAuthenticated": boolean
                             },
                             "SessionIssuer": {
                                 "AccountId": "string",
                                 "Arn": "string",
-                                "PrincipalId"; "string",
-                                "Type: "string",
+                                "PrincipalId": "string",
+                                "Type": "string",
                                 "UserName": "string"
                             }
                         },
@@ -805,7 +812,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "AttachedManagedPolicies": [
                             {
                                 "PolicyArn": "string",
-                                "PolicyName": "string",
+                                "PolicyName": "string"
                             }
                         ],
                         "CreateDate": "string",
@@ -816,7 +823,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "PolicyName": "string"
                             }
                         ],
-                        "Path": "/"
+                        "Path": "string"
                     },
                     "AwsIamPolicy": {
                         "AttachmentCount": number,
@@ -834,7 +841,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                 "IsDefaultVersion": boolean,
                                 "VersionId": "string"
                             }
-                        ,
+                        ],
                         "UpdateDate": "string"
                     },
                     "AwsIamRole": {
@@ -842,7 +849,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "AttachedManagedPolicies": [
                             {
                                 "PolicyArn": "string",
-                                "PolicyName": "string",
+                                "PolicyName": "string"
                             }
                         ],
                         "CreateDate": "string",
@@ -872,7 +879,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "PermissionsBoundaryType": "string"
                         },
                         "RoleId": "string",
-                        "RoleName": "string"
+                        "RoleName": "string",
                         "RolePolicyList": [
                             {
                                 "PolicyName": "string"
@@ -892,7 +899,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "PermissionsBoundary": {
                             "PermissionsBoundaryArn": "string",
                             "PermissionsBoundaryType": "string"
-                        }.
+                        },
                         "UserId": "string",
                         "UserName": "string",
                         "UserPolicyList": [
@@ -904,22 +911,22 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                     "AwsKmsKey": {
                         "AWSAccountId": "string",
                         "CreationDate": "string",
-                        "Description": string,
+                        "Description": "string",
                         "KeyId": "string",
                         "KeyManager": "string",
                         "KeyState": "string",
                         "Origin": "string"
                     },
                     "AwsLambdaFunction": {
-                        "Code" {
+                        "Code": {
                             "S3Bucket": "string",
                             "S3Key": "string",
-                                    "S3ObjectVersion": "string",
-                                    "ZipFile": "string"
+                            "S3ObjectVersion": "string",
+                            "ZipFile": "string"
                          },
                          "CodeSha256": "string",
                          "DeadLetterConfig": {
-                              "TargetArn": "string",
+                              "TargetArn": "string"
                           },
                          "Environment": {
                             "Variables": {
@@ -1010,7 +1017,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "EngineVersion": "string",
                         "HostedZoneId": "string",
                         "HttpEndpointEnabled": boolean,
-                        "IamDatabaseAuthenticationEnabled": boolean
+                        "IamDatabaseAuthenticationEnabled": boolean,
                         "KmsKeyId": "string",
                         "MasterUsername": "string",
                         "MultiAz": boolean,
@@ -1091,7 +1098,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                                     "SubnetStatus": "string"
                                 }
                             ],
-                            "VpcId": "string",
+                            "VpcId": "string"
                         },
                         "DeletionProtection": boolean,
                         "Endpoint": {
@@ -1123,7 +1130,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "Port": number
                         },
                         "MasterUsername": "admin",
-                        "MaxAllocatedStorage": number.
+                        "MaxAllocatedStorage": number,
                         "MonitoringInterval": number,
                         "MonitoringRoleArn": "string",
                         "MultiAz": boolean,
@@ -1177,7 +1184,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "SecondaryAvailabilityZone": "string",
                         "StatusInfos": [
                             {
-                                "Message": "string"
+                                "Message": "string",
                                 "Normal": boolean,
                                 "Status": "string",
                                 "StatusType": "string"
@@ -1199,7 +1206,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "DbInstanceIdentifier": "string",
                         "DbiResourceId": "string",
                         "DbSnapshotIdentifier": "string",
-                         Encrypted": boolean,
+                        "Encrypted": boolean,
                         "Engine": "string",
                         "EngineVersion": "string",
                         "IamDatabaseAuthenticationEnabled": boolean,
@@ -1218,7 +1225,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "SourceRegion": "string",
                         "Status": "string",
                         "StorageType": "string",
-                         TdeCredentialArn": "string",
+                        "TdeCredentialArn": "string",
                         "Timezone": "string",
                         "VpcId": "string"
                     },
@@ -1291,7 +1298,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "HsmClientCertificateIdentifier": "string",
                             "HsmConfigurationIdentifier": "string",
                             "Status": "string"
-                        }
+                        },
                         "IamRoles": [
                             {
                                 "ApplyStatus": "string",
@@ -1323,7 +1330,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "PubliclyAccessible": boolean,
                         "ResizeInfo": {
                             "AllowCancelResize": boolean,
-                            "ResizeType": "string",
+                            "ResizeType": "string"
                         },
                         "RestoreStatus": {
                             "CurrentRestoreRateInMegaBytesPerSecond": number,
@@ -1331,7 +1338,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "EstimatedTimeToCompletionInSeconds": number,
                             "ProgressInMegaBytes": number,
                             "SnapshotSizeInMegaBytes": number,
-                            "Status": "string",
+                            "Status": "string"
                         },
                         "SnapshotScheduleIdentifier": "string",
                         "SnapshotScheduleState": "string",
@@ -1339,14 +1346,14 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "VpcSecurityGroups": [
                             {
                                 "Status": "string",
-                                "VpcSecurityGroupId": "string",
+                                "VpcSecurityGroupId": "string"
                             }
                         ]
                     },
                     "AwsS3Bucket": { 
                         "CreatedAt": "string",
                         "OwnerId": "string",
-                        "OwnerName": "string"
+                        "OwnerName": "string",
                         "ServerSideEncryptionConfiguration": {
                             "Rules": [
                                 {
@@ -1367,7 +1374,7 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "VersionId": "string"
                     },
                     "AwsSecretsManagerSecret": {
-                        "Deleted": Boolean,
+                        "Deleted": boolean,
                         "Description": "string",
                         "KmsKeyId": "string",
                         "Name": "string",
@@ -1459,42 +1466,42 @@ The following is the syntax of the complete finding JSON in the ASFF\.
         "UpdatedAt": "string",
         "UserDefinedFields": { 
             "string": "string" 
-		},
+        },
         "VerificationState": "string",
         "Workflow": {
             "Status": "string"
         },
-        "WorkflowState": "string"
-    },
-    "Vulnerabilities": [
-        {
-            "Cvss": [
-                {
-                    "BaseScore": number,
-                    "BaseVector": "string",
-                    "Version": "string"
-                },
-            ],
-            "Id": "string",
-            "ReferenceUrls":["string"],
-            "RelatedVulnerabilities": ["string"],
-            "Vendor": {
-                "Name": "string",
-                "Url":"string",
-                "VendorCreatedAt":"string",
-                "VendorSeverity":"string",
-                "VendorUpdatedAt":"string"
-            },
-            "VulnerablePackages": [
-                {
-                    "Architecture": "string",
-                    "Epoch": "string",
+        "WorkflowState": "string",
+        "Vulnerabilities": [
+            {
+                "Cvss": [
+                    {
+                        "BaseScore": number,
+                        "BaseVector": "string",
+                        "Version": "string"
+                    }
+                ],
+                "Id": "string",
+                "ReferenceUrls":["string"],
+                "RelatedVulnerabilities": ["string"],
+                "Vendor": {
                     "Name": "string",
-                    "Release": "string",
-                    "Version": "string"
-                }
-            ]
-        }
-    ]
+                    "Url":"string",
+                    "VendorCreatedAt":"string",
+                    "VendorSeverity":"string",
+                    "VendorUpdatedAt":"string"
+                },
+                "VulnerablePackages": [
+                    {
+                        "Architecture": "string",
+                        "Epoch": "string",
+                        "Name": "string",
+                        "Release": "string",
+                        "Version": "string"
+                    }
+                ]
+            }
+        ]
+    }
 ]
 ```

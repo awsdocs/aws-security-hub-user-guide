@@ -1,6 +1,8 @@
 # Disassociating from your master account<a name="securityhub-disassociate-from-master"></a>
 
-Member accounts can disassociate themselves from the master account\. If you disassociate from your master account, your account remains in the master account's member account in the list with a status of **Resigned**\. However, the master account does not receive any findings for your account\.
+Member accounts that were added by invitation can disassociate themselves from the master account\. Member accounts that are part of an organization cannot disassociate their accounts from the master account\.
+
+When you disassociate from your master account, your account remains in the master account's member list with a status of **Resigned**\. However, the master account does not receive any findings for your account\.
 
 After you disassociate yourself from the master account, you can accept the invitation again\.
 

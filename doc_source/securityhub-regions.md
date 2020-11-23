@@ -2,6 +2,10 @@
 
 To view the Regions that AWS Security Hub is available in, see [Security Hub Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/sechub.html)\.
 
+## AWS Organizations integration not supported in all Regions<a name="securityhub-regions-orgs-support"></a>
+
+The China \(Beijing\) and China \(Ningxia\) Regions do not support the Security Hub integration with Organizations\.
+
 ## Integrations not supported in all Regions<a name="securityhub-regions-integration-support"></a>
 
 Some integrations are not available in all Regions\. If an integration is not supported, it is not listed on the **Integrations** page\.

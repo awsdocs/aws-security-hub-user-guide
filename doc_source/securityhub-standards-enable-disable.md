@@ -9,6 +9,8 @@ When you disable a security standard, the following occurs:
 + No additional findings are generated for its controls\.
 + The related AWS Config rules that Security Hub created are removed\.
 
+Before you enable any security standards, make sure that you have enabled AWS Config and configured resource recording\. See [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
+
 When you enable a security standard, all of the controls for that standard are enabled by default\. You can then disable individual controls\. See [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)\.
 
 ## Disabling a security standard \(console\)<a name="securityhub-standard-disable-console"></a>
@@ -48,8 +50,6 @@ To disable a security standard, you can use an API call or the AWS Command Line 
 On the **Security standards** page, each disabled standard includes an option to enable the standard\.
 
 **To enable a security standard**
-
-1. Make sure that you have enabled AWS Config in the master account and all of the member accounts\. See [AWS Config requirements for running security checks](securityhub-standards-awsconfigrules.md)\.
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
