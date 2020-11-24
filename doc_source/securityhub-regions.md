@@ -15,6 +15,7 @@ The China \(Beijing\) and China \(Ningxia\) Regions only support the following i
 + Systems Manager Patch Manager
 
 The China \(Beijing\) and China \(Ningxia\) Regions only support the following third\-party integrations:
++ Cloud Custodian
 + FireEye Helix
 + Helecloud
 + IBM QRadar

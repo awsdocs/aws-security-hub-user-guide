@@ -7,6 +7,7 @@ If applicable, the table also specifies the product ARN\. Integrations that send
 **Note**  
 Some integrations are not available in Africa \(Cape Town\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the console **Integrations** page\.  
 The China \(Beijing\) and China \(Ningxia\) Regions only support the following third\-party integrations:  
+Cloud Custodian
 FireEye Helix
 Helecloud
 IBM QRadar
@@ -46,6 +47,12 @@ Get the right level of coverage: vulnerability and asset visibility, threat dete
 **Product ARN:** arn:aws:securityhub:*<REGION>*::product/aquasecurity/aquasecurity  
 Aqua Cloud Native Security Platform \(CSP\) provides full lifecycle security for container\-based and serverless applications, from your CI/CD pipeline to runtime production environments\.  
 [Partner documentation](https://github.com/aquasecurity/aws-security-hub-plugin)
+
+**[Aqua Security](https://github.com/aquasecurity/kube-bench/blob/master/README.md) – Kube\-bench**  
+**Integration type:** Send  
+**Product ARN:** arn:aws:securityhub:*<REGION>*::product/aqua\-security/kube\-bench  
+Kube\-bench is an open\-source tool that runs the Center for Internet Security \(CIS\) Kubernetes Benchmark against your environment\.  
+[Partner documentation](https://github.com/aquasecurity/kube-bench/blob/master/README.md)
 
 **[Armor](https://aws.amazon.com/marketplace/seller-profile?id=797425f4-6823-4cf6-82b5-634f9a9ec347) – Armor Anywhere**  
 **Integration type:** Send  

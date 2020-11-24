@@ -1,6 +1,6 @@
 # Schedule for running security checks<a name="securityhub-standards-schedule"></a>
 
-After you enable a security standard, AWS Security Hub begins to run all checks within two hours\. Most checks begin to run within 25 minutes\.
+After you enable a security standard, AWS Security Hub begins to run all checks within two hours\. Most checks begin to run within 25 minutes\. Until a control completes its first run of checks, its status is **No data**\.
 
 After the initial check, the schedule for each control can be either periodic or change triggered\.
 + Periodic checks run automatically within 12 hours after the most recent run\. You cannot change the periodicity\.

@@ -19,17 +19,19 @@ If `ID` does match an existing finding, then Security Hub checks the `UpdatedAt`
 ## Restricted fields for BatchImportFindings<a name="batchimportfindings-restricted-fields"></a>
 
 For an existing finding, finding providers cannot use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) to update the following fields and objects\. These fields can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
-+ `Confidence`
-+ `Criticality`
 + `Note`
 + `RelatedFindings`
-+ `Severity`
-+ `Types`
 + `UserDefinedFields`
 + `VerificationState`
 + `Workflow`
 
 Any content in those fields and objects is ignored\.
+
+For these fields, finding providers can only use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) to update the fields if they have not been updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
++ `Confidence`
++ `Criticality`
++ `Severity`
++ `Types`
 
 ## Using the batch\-import\-findings command from the AWS CLI<a name="batchimportfindings-command-line"></a>
 
