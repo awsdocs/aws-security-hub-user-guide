@@ -34,11 +34,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. Choose **Logs groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Find the log group that you made a note of in the previous procedure, click into it and switch to **Metric filters** tab\.
 
-1. Choose **Add Metric Filter**\.
+1. Click **Create metric filter** button\.
 
 1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
@@ -46,15 +46,17 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
    {$.userIdentity.type="Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !="AwsServiceEvent"}
    ```
 
-1. Choose **Assign Metric**\.
+1. Click **Next**\.
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+1. Add the filter name of your choice\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. In **Metric Namespace** section, type **LogMetrics** as namepace\.
 
    This ensures that all CIS Benchmark metrics are grouped together\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+1. Enter a name in the **Metric name** field and **Metric value** then click **Next**\.
+
+1. In last step, review the setting and click **Create metric filter**\.
 
    The filter is created, and its details appear\.
 
