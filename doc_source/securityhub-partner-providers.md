@@ -140,19 +140,19 @@ FireEye Helix is a cloud\-hosted security operations platform that allows organi
 **Integration type:** Send  
 **Product ARN:** arn:aws:securityhub:*<REGION>*::product/forcepoint/forcepoint\-casb  
 Forcepoint CASB allows you to discover cloud application use, analyze risk, and enforce appropriate controls for SaaS and custom applications\.  
-[Partner documentation](https://s3-euw2-integrationguides-p-public.s3.eu-west-1.amazonaws.com/Forcepoint+CASB+and+AWS+Security+Hub+-+Integration+Guide.pdf)
+[Partner documentation](https://frcpnt.com/casb-securityhub)
 
 **[Forcepoint](https://www.forcepoint.com/platform/technology-partners/securing-your-amazon-web-services-aws-workloads) – Forcepoint DLP**  
 **Integration type:** Send  
 **Product ARN:** arn:aws:securityhub:*<REGION>*::product/forcepoint/forcepoint\-dlp  
 Forcepoint DLP addresses human\-centric risk with visibility and control everywhere your people work and everywhere your data resides\.  
-[Partner documentation](https://www.websense.com/content/support/library/bus_dev_integrations/dlp/Forcepoint DLP and AWS Security Hub - Integration Guide.pdf)
+[Partner documentation](https://frcpnt.com/dlp-securityhub)
 
 **[Forcepoint](https://www.forcepoint.com/platform/technology-partners/securing-your-amazon-web-services-aws-workloads) – Forcepoint NGFW**  
 **Integration type:** Send  
 **Product ARN:** arn:aws:securityhub:*<REGION>*::product/forcepoint/forcepoint\-ngfw  
 Forcepoint NGFW lets you connect your AWS environment into your enterprise network with the scalability, protection, and insights needed to manage your network and respond to threats\.  
-[Partner documentation](https://s3-euw2-integrationguides-p-public.s3.eu-west-1.amazonaws.com/Forcepoint+NGFW+and+AWS+Security+Hub+-+Integration+Guide.pdf)
+[Partner documentation](https://frcpnt.com/ngfw-securityhub)
 
 **[GuardiCore](https://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Centra 4\.0**  
 **Integration type:** Send  
@@ -243,10 +243,10 @@ Rapid7 InsightVM provides vulnerability management for modern environments, allo
 RSA Archer IT & Security Risk Management allows you to determine which assets are critical to your business, establish and communicate security policies and standards, detect and respond to attacks, identify and remediate security deficiencies, and establish clear IT risk management best practices\.  
 [Partner documentation](https://community.rsa.com/docs/DOC-111898)
 
-**[ServiceNow](https://blogs.servicenow.com/2019/servicenow-brings-security-automation-to-the-cloud-with-aws.html) – ITSM**  
-**Integration type:** Receive  
-The ServiceNow Security Hub integration allows security findings from Security Hub to be viewed within ServiceNow ITSM\.  
-[Partner documentation](https://community.servicenow.com/community?id=community_article&sys_id=41434973dbc2330411762183ca96196d)
+**[ServiceNow](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/integrations-servicenow.html) – ITSM**  
+**Integration type:** Send and receive  
+The ServiceNow Security Hub integration allows security findings from Security Hub to be viewed within the ServiceNow ITSM\. You can also configure ServiceNow to automatically create an incident or problem when it receives a finding from Security Hub\.  
+Any updates to these incidents and problems result in updates to the findings in Security Hub\.
 
 **[Slack](https://github.com/aws-samples/aws-securityhub-to-slack) – Slack**  
 **Integration type:** Receive  

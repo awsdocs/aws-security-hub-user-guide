@@ -20,7 +20,6 @@ If `ID` does match an existing finding, then Security Hub checks the `UpdatedAt`
 
 For an existing finding, finding providers cannot use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) to update the following fields and objects\. These fields can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 + `Note`
-+ `RelatedFindings`
 + `UserDefinedFields`
 + `VerificationState`
 + `Workflow`
@@ -30,6 +29,7 @@ Any content in those fields and objects is ignored\.
 For these fields, finding providers can only use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) to update the fields if they have not been updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 + `Confidence`
 + `Criticality`
++ `RelatedFindings`
 + `Severity`
 + `Types`
 

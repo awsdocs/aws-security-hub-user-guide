@@ -34,37 +34,75 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. Choose **Logs**\.
+1. In the navigation pane, choose **Log groups**\.
 
-1. Find the log group that you made a note of in the previous procedure and then choose the value in the **Metric Filters** column\.
+1. Select the check box for the log group that you made a note of in the previous procedure\.
 
-1. Choose **Add Metric Filter**\.
+1. From **Actions**, choose **Create Metric Filter**\.
 
-1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
+1. Under **Define pattern**, do the following:
 
-   ```
-   {$.userIdentity.type="Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !="AwsServiceEvent"}
-   ```
+   1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
-1. Choose **Assign Metric**\.
+      ```
+      {$.userIdentity.type="Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType !="AwsServiceEvent"}
+      ```
 
-1. \(Optional\) Update the filter name to a name of your choice\.
+   1. Choose **Next**\.
 
-1. Confirm that the value for **Metric Namespace** is **LogMetrics**\.
+1. Under **Assign Metric**, do the following:
 
-   This ensures that all CIS Benchmark metrics are grouped together\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
-1. Enter a name in the **Metric Name** field and then choose **Create Filter**\.
+   1. For **Metric Namespace**, enter **LogMetrics**\.
 
-   The filter is created, and its details appear\.
+      If you use the same namespace for all of your CIS log metric filters, then all CIS Benchmark metrics are grouped together\.
+
+   1. For **Metric Name**, enter a name for the metric\. Remember the name of the metric\. You will need to select the metric when you create the alarm\.
+
+   1. For **Metric value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+
+1. In the navigation pane, choose **Alarms**\.
 
 1. Choose **Create Alarm**\.
 
-1. Under **Alarm details**, enter a **Name** and **Description** for the alarm, such as **CIS\-1\.1\-RootAccountUsage**\.
+1. Under **Specify metric and conditions**, do the following:
 
-1. Under **Actions**, for **Send notification to**, choose **Enter list** and then enter the name of the topic that you created in the previous procedure\.
+   1. Choose **Select metric**\.
 
-1. Choose **Create Alarm**\.
+   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+
+   1. Choose **Metrics with no dimensions**\.
+
+   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
+
+   1. Under **Metric**, leave the default values\.
+
+   1. Under **Conditions**, for **Threshold**, choose **Static**\.
+
+   1. For **Define the alarm condition**, choose **Greater/Equal**\.
+
+   1. For **Define the threshold value**, enter **1**\.
+
+   1. Choose **Next**\.
+
+1. Under **Configure actions**, do the following:
+
+   1. Under **Alarm state trigger**, choose **In alarm**\.
+
+   1. Under **Select an SNS topic**, choose **Select an existing SNS topic**\.
+
+   1. For **Send a notification to**, enter the name of the SNS topic that you created in the previous procedure\.
+
+   1. Choose **Next**\.
+
+1. Under **Add name and description**, enter a **Name** and **Description** for the alarm, such as **CIS\-1\.1\-RootAccountUsage**\. Then choose **Next**\.
+
+1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
 ## 1\.2 – Ensure multi\-factor authentication \(MFA\) is enabled for all IAM users that have a console password<a name="securityhub-cis-controls-1.2"></a>
 
@@ -941,7 +979,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1048,7 +1086,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1155,7 +1193,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1262,7 +1300,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1369,7 +1407,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1476,7 +1514,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1583,7 +1621,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1690,7 +1728,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1797,7 +1835,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -1904,7 +1942,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -2011,7 +2049,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -2118,7 +2156,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -2225,7 +2263,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 
@@ -2332,7 +2370,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Assign metric**, do the following:
 
-   1. In Filter name, enter a name for your metric filter\.
+   1. In **Filter name**, enter a name for your metric filter\.
 
    1. For **Metric namespace**, enter **LogMetrics**\.
 

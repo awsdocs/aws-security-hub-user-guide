@@ -397,7 +397,7 @@ Finding providers can update the record state\. Security Hub also automatically 
 **[`RelatedFindings`](#asff-relatedfindings)**  
 Optional  
 A list of related findings\.   
-A finding provider can provide an initial list of related findings, but cannot update the list after that\. The list of related findings can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.  
+A finding provider can provide an initial list of related findings\. Finding providers can update the list only if it has not been updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. After `RelatedFindings` is updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html), it cannot be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.  
 **Type:** Array of up to 10 `RelatedFinding` objects  
 **Example**  
 
@@ -1230,7 +1230,7 @@ Indicates when the process was terminated\.
 
 The `RelatedFindings` object provides a list of findings that are related to the current finding\.
 
-A finding provider can provide an initial list of related findings, but cannot update it after that\. `RelatedFindings` can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+A finding provider can provide an initial list of related findings\. Finding providers can update the list only if it has not been updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. After `RelatedFindings` is updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html), it cannot be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.
 
 **Example**
 

@@ -8,6 +8,16 @@ Security Hub recommends that you enable resource recording in AWS Config before 
 
 Security Hub does not manage AWS Config for you\. If you already have AWS Config enabled, you can continue to configure its settings through the AWS Config console or APIs\.
 
+If you enable AWS Config after you enable a standard, Security Hub still creates the AWS Config rules, but only if you enable AWS Config within 31 days after you enable the standard\. If you do not enable AWS Config within 31 days, then you must disable and re\-enable the standard after you enable AWS Config\.
+
+After you enable a standard, Security Hub tries to create the AWS Config rules up to six times during the 31 days\.
++ On the day you enable the standard
++ The day after you enable the standard
++ Three days after you enable the standard
++ Seven days after you enable the standard
++ 15 days after you enable the standard
++ 31 days after you enable the standard
+
 ## How to enable AWS Config<a name="config-how-to-enable"></a>
 
 If you do not have AWS Config enabled, you can enable it manually using the console or API\. See [Getting started with AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\.

@@ -31,7 +31,7 @@ In the current release, Security Hub offers the following managed insights:
 |  18\. AWS resources that are associated with malware  |  Resource ID  |  Type starts with one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-managed-insights.html) Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 
 |  19\. AWS resources associated with cryptocurrency issues  |  Resource ID  |  Type starts with one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-managed-insights.html) Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 
 |  20\. AWS resources with unauthorized access attempts  |  Resource ID  |  Type starts with one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-managed-insights.html) Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 
-|  21\. Threat Intel indicators with the most hits in the last week  |   |  Created within the last 7 days  | 
+|  21\. Threat Intel indicators with the most hits in the last week  |    |  Created within the last 7 days  | 
 |  22\. Top accounts by counts of findings  |  AWS account ID  |  Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 
 |  23\. Top products by counts of findings  |  Product ARN  |  Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 
 |  24\. Severity by counts of findings  |  Severity label  |  Record state is `ACTIVE` Workflow status is `NEW` or `NOTIFIED`  | 

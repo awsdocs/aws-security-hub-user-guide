@@ -62,7 +62,7 @@ You can also use the [https://docs.aws.amazon.com/eventbridge/latest/APIReferenc
    To match multiple values, provide a comma\-separated list\.
 
    ```
-   "<attribute name>": [ "<value1>", "<value2>
+   "<attribute name>": [ "<value1>", "<value2>"]
    ```
 
    For example, to only apply the rule to findings that come from Amazon Inspector, add the following filter\.

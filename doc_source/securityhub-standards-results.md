@@ -65,7 +65,7 @@ The following table maps the difficulty to exploit and the likelihood of comprom
 
 |  |  |  |  |  | 
 | --- |--- |--- |--- |--- |
-|   |  **Compromise highly likely**  |  **Compromise likely**  |  **Compromise unlikely**  |  **Compromise highly unlikely**  | 
+|    |  **Compromise highly likely**  |  **Compromise likely**  |  **Compromise unlikely**  |  **Compromise highly unlikely**  | 
 |  **Very easy to exploit**  |  Critical  |  Critical  |  High  |  Medium  | 
 |  **Somewhat easy to exploit**  |  Critical  |  High  |  Medium  |  Medium  | 
 |  **Somewhat difficult to exploit**  |  High  |  Medium  |  Medium  |  Low  | 
