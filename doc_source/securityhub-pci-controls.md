@@ -1160,7 +1160,7 @@ No access keys should be created for the root user\. Doing so might violate the 
 
 ### Remediation<a name="pcidss-iam-1-remediation"></a>
 
-**To deactivate or delete access keys**
+**To delete access keys**
 
 1. Log in to your account using the root user credentials\.
 
@@ -1170,9 +1170,9 @@ No access keys should be created for the root user\. Doing so might violate the 
 
 1. Choose **Access keys \(access key ID and secret access key\)**\. 
 
-1. For any existing keys, do one of the following:
-   + To prevent the key from being used to authenticate the account, choose **Make Inactive**\. 
-   + To permanently delete the key, choose **Delete** and then choose **Yes**\. You can't recover deleted keys\.
+1. To permanently delete the key, choose **Delete** and then choose **Yes**\. You cannot recover deleted keys\.
+
+1. If there is more than one root user access key, then repeat steps 4 and 5 for each key\.
 
 ## \[PCI\.IAM\.2\] IAM users should not have IAM policies attached<a name="pcidss-iam-2"></a>
 

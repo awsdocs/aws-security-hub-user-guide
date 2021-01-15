@@ -8,9 +8,9 @@ Security Hub also provides a script in GitHub that allows you to enable multiple
 
 The IAM identity \(user, role, or group\) that you use to enable Security Hub must have the required permissions\.
 
-Accounts that are managed using AWS Organizations have Security Hub enabled automatically\. The required permissions also are handled automatically\.
+If you enable the integration with AWS Organizations, then accounts in your organization have Security Hub enabled automatically\. The required permissions also are handled automatically\.
 
-Accounts that are not part of an organization must enable Security Hub manually\. The IAM identity \(user, role, or group\) that you use to enable Security Hub must have the required permissions\.
+Accounts that are not managed using Organizations must enable Security Hub manually\. The IAM identity \(user, role, or group\) that you use to enable Security Hub must have the required permissions\.
 
 To grant the permissions required to enable Security Hub, attach the following policy to an IAM user, group, or role\.
 

@@ -5,7 +5,11 @@ For findings, the workflow status tracks the progress of your investigation into
 The workflow status has the following values:
 
 `NEW`  
-The initial state of a finding before you review it\.
+The initial state of a finding before you review it\.  
+Security Hub also resets the workflow status from either `NOTIFIED` or `RESOLVED` to `NEW` in the following cases:  
++ An archived finding is made active\.
++ The compliance status changes from `PASSED` to either `WARNING`, `FAILED`, or `NOT_AVAILABLE`\.
+These changes imply that additional investigation is required\.
 
 `NOTIFIED`  
 Indicates that you notified the resource owner about the security issue\. You can use this status when you are not the resource owner, and you need intervention from the resource owner in order to resolve a security issue\.

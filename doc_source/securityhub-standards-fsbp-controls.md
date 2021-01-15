@@ -91,6 +91,194 @@ To remediate, update your Auto Scaling groups to use Elastic Load Balancing heal
 
 For more information on using a load balancer with an Auto Scaling group, see the [https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)\.
 
+## \[CloudFront\.1\] CloudFront distributions should have a default root object configured<a name="fsbp-cloudfront-1"></a>
+
+**Category:** Protect > Secure access management > Resources not publicly accessible
+
+**Severity:** Critical
+
+**Resource:** Distribution
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-default-root-object-configured.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-default-root-object-configured.html)
+
+**Parameters:** None
+
+This control checks whether an Amazon CloudFront distribution is configured to return a specific object that is the default root object\. The control fails if the CloudFront distribution does not have a default root object configured\.
+
+A user might sometimes request the distribution’s root URL instead of an object in the distribution\. When this happens, specifying a default root object can help you to avoid exposing the contents of your web distribution\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
+US East \(Ohio\)
+US West \(N\. California\)
+US West \(Oregon\)
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\-Local\)
+Asia Pacific \(Seoul\)
+Asia Pacific \(Singapore\)
+Asia Pacific \(Sydney\)
+Asia Pacific \(Tokyo\)
+Canada \(Central\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Frankfurt\)
+Europe \(Ireland\)
+Europe \(London\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="cloudfront-1-remediation"></a>
+
+For detailed instructions on how to specify a default root object for your distribution, see [How to specify a default root object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html#DefaultRootObjectHowToDefine) in the *Amazon CloudFront Developer Guide*\.
+
+## \[CloudFront\.2\] CloudFront distributions should have origin access identity enabled<a name="fsbp-cloudfront-2"></a>
+
+**Category:** Protect > Secure access management > Resource policy configuration
+
+**Severity:** Medium
+
+**Resource:** Distribution
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-access-identity-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-access-identity-enabled.html)
+
+**Parameters:** None
+
+This control checks whether an Amazon CloudFront distribution with Amazon S3 Origin type has Origin Access Identity \(OAI\) configured\. The control fails if OAI is not configured\.
+
+CloudFront OAI prevents users from accessing S3 bucket content directly\. When users access an S3 bucket directly, they effectively bypass the CloudFront distribution and any permissions that are applied to the underlying S3 bucket content\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
+US East \(Ohio\)
+US West \(N\. California\)
+US West \(Oregon\)
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\-Local\)
+Asia Pacific \(Seoul\)
+Asia Pacific \(Singapore\)
+Asia Pacific \(Sydney\)
+Asia Pacific \(Tokyo\)
+Canada \(Central\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Frankfurt\)
+Europe \(Ireland\)
+Europe \(London\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="cloudfront-2-remediation"></a>
+
+For detailed remediation instructions, see [Creating a CloudFront OAI and adding it to your distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#private-content-creating-oai) in the *Amazon CloudFront Developer Guide*\.
+
+## \[CloudFront\.3\] CloudFront distributions should require encryption in transit<a name="fsbp-cloudfront-3"></a>
+
+**Category:** Protect > Data Protection > Encryption of data in transit
+
+**Severity:** Medium
+
+**Resource:** Distribution
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-viewer-policy-https.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-viewer-policy-https.html)
+
+**Parameters:** None
+
+This control checks whether an Amazon CloudFront distribution requires viewers to use HTTPS directly or whether it uses redirection\. The control fails if `ViewerProtocolPolicy` is set to `allow-all` for `defaultCacheBehavior` or for `cacheBehaviors`\.
+
+HTTPS \(TLS\) can be used to help prevent potential attackers from using person\-in\-the\-middle or similar attacks to eavesdrop on or manipulate network traffic\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Encrypting data in transit can affect performance\. You should test your application with this feature to understand the performance profile and the impact of TLS\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
+US East \(Ohio\)
+US West \(N\. California\)
+US West \(Oregon\)
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\-Local\)
+Asia Pacific \(Seoul\)
+Asia Pacific \(Singapore\)
+Asia Pacific \(Sydney\)
+Asia Pacific \(Tokyo\)
+Canada \(Central\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Frankfurt\)
+Europe \(Ireland\)
+Europe \(London\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="cloudfront-3-remediation"></a>
+
+For detailed remediation instructions, see [Requiring HTTPS for communication between viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*\.
+
+## \[CloudFront\.4\] CloudFront distributions should have origin failover configured<a name="fsbp-cloudfront-4"></a>
+
+**Category:** Recover > Resilience > High availability
+
+**Severity:** Low
+
+**Resource:** Distribution
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-failover-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-failover-enabled.html)
+
+**Parameters:** None
+
+This control checks whether an Amazon CloudFront distribution is configured with an origin group that has two or more origins\.
+
+CloudFront origin failover can increase availability\. Origin failover automatically redirects traffic to a secondary origin if the primary origin is unavailable or if it returns specific HTTP response status codes\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
+US East \(Ohio\)
+US West \(N\. California\)
+US West \(Oregon\)
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\-Local\)
+Asia Pacific \(Seoul\)
+Asia Pacific \(Singapore\)
+Asia Pacific \(Sydney\)
+Asia Pacific \(Tokyo\)
+Canada \(Central\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Frankfurt\)
+Europe \(Ireland\)
+Europe \(London\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="cloudfront-4-remediation"></a>
+
+For detailed remediation instructions, see [Creating an origin group](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html#concept_origin_groups.creating) in the *Amazon CloudFront Developer Guide*\.
+
 ## \[CloudTrail\.1\] CloudTrail should be enabled and configured with at least one multi\-Region trail<a name="fsbp-cloudtrail-1"></a>
 
 **Category:** Identify > Logging
@@ -411,6 +599,79 @@ Note that you cannot change the public access setting once a replication instanc
 
 For more information, see the section on [Creating a replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.Creating) in the *AWS Database Migration Service User Guide*\.
 
+## \[DynamoDB\.1\] DynamoDB tables should automatically scale capacity with demand<a name="fsbp-dynamodb-1"></a>
+
+**Category:** Recover > Resilience > High availability
+
+**Severity:** Medium
+
+**Resource:** Table
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-autoscaling-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-autoscaling-enabled.html)
+
+**Parameters:** None
+
+This control checks whether an Amazon DynamoDB table can scale its read and write capacity as needed\. This control passes if the table uses either on\-demand capacity mode or provisioned mode with auto scaling configured\. Scaling capacity with demand avoids throttling exceptions, which helps to maintain availability of your applications\.
+
+DynamoDB tables in on\-demand capacity mode are only limited by the DynamoDB throughput default table quotas\. To raise these quotas, you can file a support ticket through [https://aws\.amazon\.com/support](http://aws.amazon.com/support)\.
+
+DynamoDB tables in provisioned mode with auto scaling adjust the provisioned throughput capacity dynamically in response to traffic patterns\. For additional information on DynamoDB request throttling, see [Request throttling and burst capacity](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ProvisionedThroughput.Throttling) in the *Amazon DynamoDB Developer Guide*\.
+
+**Note**  
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+
+### Remediation<a name="dynamodb-1-remediation"></a>
+
+For detailed instructions on enabling DynamoDB auto scaling on existing tables in capacity mode, see [Enabling DynamoDB auto scaling on existing tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AutoScaling.Console.html#AutoScaling.Console.ExistingTable) in the*Amazon DynamoDB Developer Guide*\.
+
+## \[DynamoDB\.2\] DynamoDB tables should have point\-in\-time recovery enabled<a name="fsbp-dynamodb-2"></a>
+
+**Category:** Recover > Resilience > Backups enabled
+
+**Severity:** Medium
+
+**Resource:** Table
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-pitr-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-pitr-enabled.html)
+
+**Parameters:** None
+
+This control checks whether point\-in\-time recovery \(PITR\) is enabled for an Amazon DynamoDB table\.
+
+Backups help you to recover more quickly from a security incident\. They also strengthen the resilience of your systems\. DynamoDB point\-in\-time recovery automates backups for DynamoDB tables\. It reduces the time to recover from accidental delete or write operations\. DynamoDB tables that have PITR enabled can be restored to any point in time in the last 35 days\.
+
+### Remediation<a name="dynamodb-2-remediation"></a>
+
+**To enable DynamoDB point\-in\-time recovery for an existing table**
+
+1. Open the DynamoDB console at [https://console\.aws\.amazon\.com/dynamodb/](https://console.aws.amazon.com/dynamodb/)\.
+
+1. Choose the table that you want to work with, and then choose **Backups**\. 
+
+1. In the **Point\-in\-time Recovery** section, under **Status**, choose **Enable**\.
+
+1. Choose **Enable** again to confirm the change\.
+
+## \[DynamoDB\.3\] DynamoDB Accelerator \(DAX\) clusters should be encrypted at rest<a name="fsbp-dynamodb-3"></a>
+
+**Category:** Protect > Data Protection > Encryption of data at rest 
+
+**Severity:** Medium
+
+**Resource:** Cluster
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dax-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dax-encryption-enabled.html)
+
+**Parameters:** None
+
+This control checks whether a DAX cluster is encrypted at rest\. 
+
+Encrypting data at rest reduces the risk of data stored on disk being accessed by a user not authenticated to AWS\. The encryption adds another set of access controls to limit the ability of unauthorized users to access to the data\. For example, API permissions are required to decrypt the data before it can be read\.
+
+### Remediation<a name="dynamodb-3-remediation"></a>
+
+You cannot enable or disable encryption at rest after a cluster is created\. You must re\-create the cluster in order to enable encryption at rest\. For detailed instructions on how to create a DAX cluster with encryption at rest enabled, see[ Enabling encryption at rest using the AWS Management Console](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAXEncryptionAtRest.html#dax.encryption.tutorial-console) in the *Amazon DynamoDB Developer Guide*\.
+
 ## \[EC2\.1\] Amazon EBS snapshots should not be public, determined by the ability to be restorable by anyone<a name="fsbp-ec2-1"></a>
 
 **Category:** Protect > Secure network configuration
@@ -667,7 +928,7 @@ You can use the Amazon EC2 console to enable default encryption for Amazon EBS v
 
 This control checks whether your EC2 instance metadata version is configured with Instance Metadata Service Version 2 \(IMDSv2\)\. The control passes if `HttpTokens` is set to required for IMDSv2\. The control fails if `HttpTokens` is set to `optional`\.
 
-You use instance metadata to configure or manage the running instance\. The IMDS provides access to temporary, frequently rotated credentials\. These credentials remove the need to hard\-code or distribute sensitive credentials to instances manually or programmatically\. The IMDS is attached locally to every EC2 instance\. It runs on a special "link local" IP address of 169\.254\.169\.254\. This IP address is only accessible by software that runs on the instance\.
+You use instance metadata to configure or manage the running instance\. The IMDS provides access to temporary, frequently rotated credentials\. These credentials remove the need to hard code or distribute sensitive credentials to instances manually or programmatically\. The IMDS is attached locally to every EC2 instance\. It runs on a special "link local" IP address of 169\.254\.169\.254\. This IP address is only accessible by software that runs on the instance\.
 
 Version 2 of the IMDS adds new protections for the following types of vulnerabilities\. These vulnerabilities could be used to try to access the IMDS\.
 + Open website application firewalls
@@ -700,7 +961,7 @@ To require the use of IMDSv2 on a new instance when you launch it, follow the in
 
 If your software uses IMDSv1, you can reconfigure your software to use IMDSv2\. For details, see [Transitioning to using Instance Metadata Service Version 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-## \[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS<a name="fsbp-efs-1"></a>
+## \[EFS\.1\] Amazon EFS should be configured to encrypt file data at rest using AWS KMS<a name="fsbp-efs-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data at rest
 
@@ -726,6 +987,120 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 ### Remediation<a name="efs-1-remediation"></a>
 
 For details on how to encrypt a new Amazon EFS file system, see [Encrypting data at rest](https://docs.aws.amazon.com/efs/latest/ug/encryption-at-rest.html) in the *Amazon Elastic File System User Guide*\.
+
+## \[ELB\.3\] Classic Load Balancer listeners should be configured with HTTPS or TLS termination<a name="fsbp-elb-3"></a>
+
+**Category:** Protect > Data Protection > Encryption of data in transit 
+
+**Severity:** Medium
+
+**Resource:** ELB load balancer
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-tls-https-listeners-only.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-tls-https-listeners-only.html)
+
+**Parameters:** None
+
+This control checks whether your Classic Load Balancer listeners are configured with HTTPS or TLS protocol for front\-end \(client to load balancer\) connections\. The control is applicable if a Classic Load Balancer has listeners\. If your Classic Load Balancer does not have a listener configured, then the control does not report any findings\.
+
+The control passes if the Classic Load Balancer listeners are configured with TLS or HTTPS for front\-end connections\.
+
+The control fails if the listener is not configured with TLS or HTTPS for front\-end connections\.
+
+Before you start to use a load balancer, you must add one or more listeners\. A listener is a process that uses the configured protocol and port to check for connection requests\. Listeners can support both HTTP and HTTPS/TLS protocols\. You should always use an HTTPS or TLS listener, so that the load balancer does the work of encryption and decryption in transit\.
+
+### Remediation<a name="elb-3-remediation"></a>
+
+**To change all noncompliant listeners to TLS/HTTP listeners**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, choose **Load Balancers**\. Then choose your Classic Load Balancer\.
+
+1. Choose the **Listeners** tab, and then choose **Edit**\.
+
+1. For all listeners where Load Balancer Protocol is not set to HTTPS or SSL, change the setting to HTTPS or SSL\.
+
+1. For all modified listeners, under **SSL Certificate**, choose **Change**\.
+
+1. For all modified listeners, select **Choose a certificate from ACM**\.
+
+1. Select the certificate from the **Certificates** drop\-down list\. Then choose **Save**\.
+
+1. After you update all of the listeners, choose **Save**\.
+
+## \[ELB\.4\] Application load balancers should be configured to drop HTTP headers<a name="fsbp-elb-4"></a>
+
+**Category:** Protect > Network Security
+
+**Severity:** Medium
+
+**Resource type:** ELB load balancer
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-http-drop-invalid-header-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-http-drop-invalid-header-enabled.html)
+
+**Parameters:** None
+
+This control evaluates AWS Application Load Balancers \(ALB\) to ensure they are configured to drop invalid HTTP headers\. The control fails if the value of `routing.http.drop_invalid_header_fields.enabled` is set to `false`\.
+
+By default, ALBs are not configured to drop invalid HTTP header values\. Removing these header values prevents HTTP desync attacks\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\-Local\)
+Europe \(Milan\)
+
+### Remediation<a name="elb-4-remediation"></a>
+
+**To configure the load balancer to drop invalid header fields**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, choose **Load balancers**\.
+
+1. Choose an Application Load Balancer\.
+
+1. From **Actions**, choose **Edit attributes**\.
+
+1. Under **Drop Invalid Header Fields**, choose **Enable**\.
+
+1. Choose **Save**\.
+
+## \[ELB\.5\] Application and Classic Load Balancers logging should be enabled<a name="fsbp-elb-5"></a>
+
+**Category:** Logging
+
+**Severity:** Medium
+
+**Resource:** ELB load balancer
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-logging-enabled.html)
+
+**Parameters:** None
+
+This control checks whether the Application Load Balancer and the Classic Load Balancer have logging enabled\. The control fails if `access_logs.s3.enabled` is `false`\.
+
+Elastic Load Balancing provides access logs that capture detailed information about requests sent to your load balancer\. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses\. You can use these access logs to analyze traffic patterns and to troubleshoot issues\. 
+
+To learn more, see [Access logs for your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html) in *User Guide for Classic Load Balancers*\.
+
+### Remediation<a name="elb-5-remediation"></a>
+
+**To enable access logs**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, choose **Load balancers**\. 
+
+1. Choose an Application Load Balancer\.
+
+1. From **Actions**, choose **Edit attributes**\.
+
+1. Under **Access logs**, choose **Enable**\.
+
+1. Enter your S3 location\. This location can exist or it can be created for you\. If you do not specify a prefix, the access logs are stored in the root of the S3 bucket\.
+
+1. Choose **Save**\.
 
 ## \[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS<a name="fsbp-elbv2-1"></a>
 
@@ -1037,7 +1412,7 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 **Parameters:** None
 
-This control checks whether the root user access key is available\. 
+This control checks whether the root user access key is present\. 
 
 The root account is the most privileged user in an AWS account\. AWS access keys provide programmatic access to a given account\.
 
@@ -1048,7 +1423,7 @@ This control is not supported in Africa \(Cape Town\)\.
 
 ### Remediation<a name="iam-4-remediation"></a>
 
-**To deactivate or delete access keys**
+**To delete access keys**
 
 1. Log in to your account using the AWS account root user credentials\.
 
@@ -1058,9 +1433,9 @@ This control is not supported in Africa \(Cape Town\)\.
 
 1. Choose **Access keys \(access key ID and secret access key\)**\. 
 
-1. For any existing keys, do one of the following:
-   + To prevent the key from being used to authenticate the account, choose **Make Inactive**\.
-   + To permanently delete the key, choose **Delete** and then choose **Yes**\. You cannot recover deleted keys\.
+1. To permanently delete the key, choose **Delete** and then choose **Yes**\. You cannot recover deleted keys\.
+
+1. If there is more than one root user access key, then repeat steps 4 and 5 for each key\.
 
 ## \[IAM\.5\] MFA should be enabled for all IAM users that have a console password<a name="fsbp-iam-5"></a>
 
@@ -1154,18 +1529,14 @@ AWS GovCloud \(US\-West\)\.
 + `RequireLowercaseCharacters`: `true`
 + `RequireSymbols`: `true`
 + `RequireNumbers`: `true`
-+ `MinimumPasswordLength`: 14
-+ `PasswordReusePrevention`: 24
-+ `MaxPasswordAge`: 90
++ `MinimumPasswordLength`: `8`
 
 This control checks whether the account password policy for IAM users uses the following recommended configurations\.
 + `RequireUppercaseCharacters`: `true`
 + `RequireLowercaseCharacters`: `true`
 + `RequireSymbols`: `true`
 + `RequireNumbers`: `true`
-+ `MinimumPasswordLength`: 14
-+ `PasswordReusePrevention`: 24
-+ `MaxPasswordAge`: 90
++ `MinimumPasswordLength`: `8`
 
 To access the AWS Management Console, IAM users need passwords\. As a best practice, Security Hub highly recommends that instead of creating IAM users, you use federation\. Federation allows users to use their existing corporate credentials to log into the AWS Management Console\. Use AWS Single Sign\-On \(AWS SSO\) to create or federate the user, and then assume an IAM role into an account\.
 
@@ -1181,8 +1552,6 @@ To learn more about identity providers and federation, see [Identity providers a
 
 1. Choose **Account settings**\.
 
-1. Select **Prevent password reuse**\. For **Number of passwords to remember**, enter **24**\.
-
 1. Select **Requires at least one uppercase letter**\.
 
 1. Select **Requires at least one lowercase letter**\.
@@ -1191,9 +1560,7 @@ To learn more about identity providers and federation, see [Identity providers a
 
 1. Select **Requires at least one number**\.
 
-1. For **Minimum password length**, enter **14**\.
-
-1. Choose **Enable password expiration**\. For **Password expiration period \(in days\)**, enter **90**\. 
+1. For **Minimum password length**, enter **8**\.
 
 1. Choose **Apply password policy**\.
 
@@ -1331,7 +1698,7 @@ To remediate this issue, you modify the inline policy to restrict access to the 
 
 For more information, see [Using IAM policies with AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html) in the *AWS Key Management Service Developer Guide*\.
 
-## \[Lambda\.1\] Lambda functions should prohibit public access by other accounts<a name="fsbp-lambda-1"></a>
+## \[Lambda\.1\] Lambda function policies should prohibit public access<a name="fsbp-lambda-1"></a>
 
 **Category:** Protect > Secure network configuration
 
@@ -1501,7 +1868,7 @@ Unless you intend for your RDS instance to be publicly accessible, the RDS insta
 
 For more information, see [Working with a DB instance in a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html) in the *Amazon RDS User Guide*\.
 
-## \[RDS\.3\] RDS DB instances should have encryption at\-rest enabled<a name="fsbp-rds-3"></a>
+## \[RDS\.3\] RDS DB instances should have encryption at rest enabled<a name="fsbp-rds-3"></a>
 
 **Category:** Protect > Data protection > Encryption of data at rest
 
@@ -1703,6 +2070,355 @@ While deletion protection is enabled, an RDS DB instance cannot be deleted\. Bef
 1. Under **Scheduling of modifications**, choose when to apply modifications\. The options are **Apply during the next scheduled maintenance window** or **Apply immediately**\.
 
 1. Choose **Modify DB Instance**\.
+
+## \[RDS\.9\] Database logging should be enabled<a name="fsbp-rds-9"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource:** DBInstance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-logging-enabled.html)
+
+**Parameters:**
++  Customer provided parameters:
+  + \[Optional\] `additionalLogs`: Semi\-colon separated `'<Engine>: <comma-separated-logs>'`
+
+This control checks whether the following logs of Amazon RDS are enabled and sent to CloudWatch Logs:
++ Oracle: \(Alert, Audit, Trace, Listener\)
++ PostgreSQL: \(Postgresql, Upgrade\)
++ MySQL: \(Audit, Error, General, SlowQuery\)
++ MariaDB: \(Audit, Error, General, SlowQuery\)
++ SQL Server: \(Error, Agent\)
++ Aurora: \(Audit, Error, General, SlowQuery\)
++ Aurora\-MySQL: \(Audit, Error, General, SlowQuery\)
++ Aurora\-PostgreSQL: \(Postgresql, Upgrade\)\.
+
+RDS databases should have relevant logs enabled\. Database logging provides detailed records of requests made to RDS\. Database logs can assist with security and access audits and can help to diagnose availability issues\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)  
+Asia Pacific \(Osaka\-Local\)  
+China \(Ningxia\)  
+Europe \(Milan\)
+
+### Remediation<a name="rds-9-remediation"></a>
+
+Logging options are contained in the DB parameter group associated with the RDS DB cluster or instance\. To enable logging when the default parameter group for the database engine is used, you must create a new DB parameter group that has the required parameter values\. You must then associate the customer DB parameter group with the DB cluster or instance\.
+
+To enable and publish MariaDB, MySQL, or PostgreSQL logs to CloudWatch Logs from the AWS Management Console, set the following parameters in a custom DB Parameter Group:
+
+
+|  Database engine  |  Parameters  | 
+| --- | --- | 
+|  MariaDB  |  `general_log=1` `slow_query_log=1` `log_output = FILE` MariaDB also requires a custom options group, explained below\.  | 
+|  MySQL  |  `general_log=1` `slow_query_log=1` `log_output = FILE`  | 
+|  PostgreSQL  |  `log_statement=all` `log_min_duration_statement=minimum query duration (ms) to log`  | 
+
+**To create a custom DB parameter group**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Parameter groups**\.
+
+1. Choose **Create parameter group**\. The **Create parameter group** window appears\. 
+
+1. In the **Parameter group** family list, choose a DB parameter group family\. 
+
+1. In the **Type** list, choose **DB Parameter Group**\.
+
+1. In **Group name**, enter the name of the new DB parameter group\.
+
+1. In **Description**, enter a description for the new DB parameter group\. 
+
+1. Choose **Create**\.
+
+**To create a new option group for MariaDB logging by using the console**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Option groups**\. 
+
+1. Choose **Create group**\. 
+
+1. In the **Create option group** window, do the following: 
+
+   1. For **Name**, type a name for the option group that is unique within your AWS account\. The name can contain only letters, digits, and hyphens\.
+
+   1. For **Description**, type a brief description of the option group\. The description is used for display purposes\.
+
+   1. For **Engine**, choose the DB engine that you want\. 
+
+   1. For **Major engine version**, choose the major version of the DB engine that you want\.
+
+1. To continue, choose **Create**\. 
+
+1. Choose the name of the option group you just created\.
+
+1. Choose **Add option**\.
+
+1. Choose **MARIADB\_AUDIT\_PLUGIN** from the** Option name** list\.
+
+1. Set `SERVER_AUDIT_EVENTS` to `CONNECT, QUERY, TABLE, QUERY_DDL, QUERY_DML, QUERY_DCL`\.
+
+1. Choose **Add option**\.
+
+**To publish SQL Server DB, Oracle DB, or PostgreSQL logs to CloudWatch Logs from the AWS Management Console**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the DB instance that you want to modify\. 
+
+1. Choose **Modify**\.
+
+1. Under **Log exports**, choose all of the log files to start publishing to CloudWatch Logs\.
+
+   **Log exports** is available only for database engine versions that support publishing to CloudWatch Logs\.
+
+1. Choose **Continue**\. Then on the summary page, choose** Modify DB Instance**\.
+
+**To apply a new DB parameter group or DB options group to an RDS DB instance**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the DB instance that you want to modify\. 
+
+1. Choose **Modify**\. The **Modify DB Instance** page appears\. 
+
+1. Under **Database options**, change the DB parameter group and DB options group as needed\.
+
+1. When you finish you changes, choose **Continue**\. Check the summary of modifications\. 
+
+1. \(Optional\) Choose **Apply immediately** to apply the changes immediately\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately setting](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.ApplyImmediately) in the *Amazon RDS User Guide*\. 
+
+1. Choose **Modify DB Instance** to save your changes\. 
+
+## \[RDS\.10\] IAM authentication should be configured for RDS instances<a name="fsbp-rds-10"></a>
+
+**Category:** Protect > Secure Access Management > Passwordless authentication
+
+**Severity:** Medium
+
+**Resource:** DBInstance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-iam-authentication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-iam-authentication-enabled.html)
+
+**Parameters:** None
+
+This control checks whether an RDS DB instance has IAM database authentication enabled\.
+
+IAM database authentication allows authentication to database instances with an authentication token instead of a password\. Network traffic to and from the database is encrypted using SSL\. For more information, see [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon Aurora User Guide*\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)  
+Asia Pacific \(Hong Kong\)  
+Asia Pacific \(Osaka\-Local\)  
+China \(Beijing\)  
+China \(Ningxia\)
+
+### Remediation<a name="rds-10-remediation"></a>
+
+**To enable IAM authentication for an existing DB instance**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Choose **Databases**\.
+
+1. Select the DB instance to modify\.
+
+1. Choose **Modify**\. 
+
+1. Under **Database options**, choose **Enable IAM DB authentication**\.
+
+1. Choose **Continue**\.
+
+1. Under **Scheduling of modifications**, choose when to apply modifications\. The options are **Apply during the next scheduled maintenance window** or **Apply immediately**\.
+
+1. For clusters, choose **Modify DB Instance**\.
+
+## \[RDS\.11\] RDS instances should have automatic backups enabled<a name="fsbp-rds-11"></a>
+
+**Category:** Recover > Resilience > Backups enabled 
+
+**Severity:** Medium
+
+**Resource:** DBInstance
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/db-instance-backup-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/db-instance-backup-enabled.html)
+
+**Parameters:**
++ Default parameter set by Security Hub: `retentionPeriod = 7`
++ Customer provided parameter: \[Optional\] `retentionPeriod = integer 1-35`
+
+This control checks whether RDS DB instances have automated backups enabled and whether the backup retention period is greater than or equal to seven\. Optionally, you can supply a `retentionPeriod` to compare against\. The control passes if all of the following are true:
++ Backups are enabled\.
++ The backup retention period is greater than or equal to `retentionPeriod`\.
++ The retention period is greater than or equal to seven\.
+
+Backups help you to recover more quickly from a security incident\. They also strengthen the resilience of your systems\. Amazon RDS provides an easy way to configure daily full instance volume snapshots\. This control checks that backups are enabled and retained for at least seven days\. For more details on Amazon RDS automated backups, see [Working with backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html) in the *Amazon RDS User Guide*\.
+
+### Remediation<a name="rds-11-remediation"></a>
+
+**To enable automated backups immediately**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the DB instance that you want to modify, then choose **Modify**\. The **Modify DB Instance** page appears\.
+
+1. For **Backup Retention Period**, choose a positive nonzero value, for example 30 days\.
+
+1. Choose **Continue**\.
+
+1. Under **Scheduling of modifications**, choose when to apply modifications\. The options are **Apply during the next scheduled maintenance window** or **Apply immediately**\.
+
+1. On the confirmation page, choose **Modify DB Instance** to save your changes and enable automated backups\.
+
+For more information on enabling Amazon RDS automated backups, see [Enabling automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.Enabling) in the *Amazon RDS User Guide*\.
+
+## \[Redshift\.1\] Amazon Redshift clusters should prohibit public access<a name="fsbp-redshift-1"></a>
+
+**Category:** Protect > Secure network configuration > Resources not publicly accessible
+
+**Severity:** Critical
+
+**Resource:** Cluster
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html)
+
+**Parameters:** None 
+
+This control checks whether Amazon Redshift clusters are publicly accessible\. It evaluates the `PubliclyAccessible` field in the cluster configuration item\. 
+
+The `PubliclyAccessible` attribute of the Amazon Redshift cluster configuration indicates whether the cluster is publicly accessible\. When the cluster is configured with `PubliclyAccessible` set to `true`, it is an Internet\-facing instance that has a publicly resolvable DNS name, which resolves to a public IP address\.
+
+When the cluster is not publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address\. Unless you intend for your cluster to be publicly accessible, the cluster should not be configured with `PubliclyAccessible` set to `true`\.
+
+### Remediation<a name="redshift-1-remediation"></a>
+
+**To disable public access to an Amazon Redshift cluster**
+
+1. Open the Amazon Redshift console at [https://console\.aws\.amazon\.com/redshift/](https://console.aws.amazon.com/redshift/)\.
+
+1. In the navigation menu, choose **Clusters**, then choose the name of the cluster with the security group to modify\.
+
+1. Choose **Actions**, then choose **Modify publicly accessible setting**\.
+
+1. Under **Allow instances and devices outside the VPC to connect to your database through the cluster endpoint**, choose **No**\.
+
+1. Choose **Confirm**\.
+
+## \[Redshift\.2\] Connections to Amazon Redshift clusters should be encrypted in transit<a name="fsbp-redshift-2"></a>
+
+**Category:** Protect > Data Protection > Encryption of data in transit 
+
+**Severity:** Medium
+
+**Resource:** Cluster
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-require-tls-ssl.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-require-tls-ssl.html)
+
+**Parameters:** None
+
+This control checks whether connections to Amazon Redshift clusters are required to use encryption in transit\. The check fails if the Amazon Redshift cluster parameter `require_SSL` is not set to 1\.
+
+TLS can be used to help prevent potential attackers from using person\-in\-the\-middle or similar attacks to eavesdrop on or manipulate network traffic\. Only encrypted connections over TLS should be allowed\. Encrypting data in transit can affect performance\. You should test your application with this feature to understand the performance profile and the impact of TLS\. 
+
+**Note**  
+This control is not supported in Europe \(Milan\)\.
+
+### Remediation<a name="redshift-2-remediation"></a>
+
+**To modify a parameter group**
+
+1. Open the Amazon Redshift console at [https://console\.aws\.amazon\.com/redshift/](https://console.aws.amazon.com/redshift/)\.
+
+1. In the navigation menu, choose **Config**, then choose **Workload management** to display the **Workload management** page\. 
+
+1. Choose the parameter group that you want to modify\. 
+
+1. Choose **Parameters**\.
+
+1. Choose **Edit parameters** then set `require_ssl` to 1\.
+
+1. Enter your changes and then choose **Save**\.
+
+## \[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled<a name="fsbp-redshift-3"></a>
+
+**Category:** Recover > Resilience > Backups enabled 
+
+**Severity:** Medium
+
+**Resource:** Cluster
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-backup-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-backup-enabled.html)
+
+**Parameters:**
++ Default parameter set by Security Hub: `MinRetentionPeriod = 7`
+
+This control checks whether Amazon Redshift clusters have automated snapshots enabled\. It also checks whether the snapshot retention period is greater than or equal to seven\.
+
+Backups help you to recover more quickly from a security incident\. They strengthen the resilience of your systems\. Amazon Redshift takes periodic snapshots by default\. This control checks whether automatic snapshots are enabled and retained for at least seven days\. For more details on Amazon Redshift automated snapshots, see [Automated snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html#about-automated-snapshots) in the *Amazon Redshift Cluster Management Guide*\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\-Local\)
+Asia Pacific \(Sydney\)
+China \(Ningxia\)
+Europe \(Milan\)
+
+### Remediation<a name="redshift-3-remediation"></a>
+
+**To modify the snapshot retention period**
+
+1. Open the Amazon Redshift console at [https://console\.aws\.amazon\.com/redshift/](https://console.aws.amazon.com/redshift/)\.
+
+1. In the navigation menu, choose **Clusters**, then choose the name of the cluster to modify\.
+
+1. Choose **Edit**\.
+
+1. Under **Backup**, set **Snapshot retention** to a value of 7 or greater\.
+
+1. Choose **Modify Cluster**\.
+
+## \[Redshift\.6\] Amazon Redshift should have automatic upgrades to major versions enabled<a name="fsbp-redshift-6"></a>
+
+**Category:** Detect > Vulnerability and patch management
+
+**Severity:** Medium
+
+**Resource:** Cluster
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-maintenancesettings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-maintenancesettings-check.html)
+
+**Parameters:**
++ Default parameter set by Security Hub:` allowVersionUpgrade = true`
+
+This control checks whether automatic major version upgrades are enabled for the Amazon Redshift cluster\.
+
+Enabling automatic major version upgrades ensures that the latest major version updates to Amazon Redshift clusters are installed during the maintenance window\. These updates might include security patches and bug fixes\. Keeping up\-to\-date with patch installation is an important step in securing systems\.
+
+**Note**  
+This control is not supported in Middle East \(Bahrain\)\.
+
+### Remediation<a name="redshift-6-remediation"></a>
+
+To remediate this finding from the AWS CLI, use the Amazon Redshift `modify-cluster` command to set the `--allow-version-upgrade` attribute\.
+
+```
+aws redshift modify-cluster --cluster-identifier clustername --allow-version-upgrade
+```
+
+Where `clustername` is the name of your Amazon Redshift cluster\.
 
 ## \[S3\.1\] S3 Block Public Access setting should be enabled<a name="fsbp-s3-1"></a>
 
@@ -1940,7 +2656,7 @@ For more information, see the knowledge center article [What S3 bucket policy sh
 
 **Parameters:**
 
-Default parameters set by Security Hub: 
+Default parameter set by Security Hub: 
 + `blacklistedactionpatterns`: `s3:DeleteBucketPolicy, s3:PutBucketAcl, s3:PutBucketPolicy, s3:PutEncryptionConfiguration, s3:PutObjectAcl`
 
 Customer provided parameters:
@@ -2094,6 +2810,40 @@ If the automatic rotation fails, then Secrets Manager might have encountered err
 To rotate secrets in Secrets Manager, you use a Lambda function that defines how to interact with the database or service that owns the secret\. 
 
 For help on how to diagnose and fix common errors related to secrets rotation, see [Troubleshooting AWS Secrets Manager rotation of secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot_rotation.html) in the *AWS Secrets Manager User Guide*\.
+
+## \[SNS\.1\] SNS topics should be encrypted at rest using AWS KMS<a name="fsbp-sns-1"></a>
+
+**Category:** Protect > Data Protection > Encryption of data at rest 
+
+**Severity:** Medium
+
+**Resource:** Amazon SNS Topic
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sns-encrypted-kms.html](https://docs.aws.amazon.com/config/latest/developerguide/sns-encrypted-kms.html)
+
+**Parameters:** None
+
+This control checks whether an SNS topic is encrypted at rest using AWS KMS\.
+
+Encrypting data at rest reduces the risk of data stored on disk being accessed by a user not authenticated to AWS\. It also adds another set of access controls to limit the ability of unauthorized users to access the data\. For example, API permissions are required to decrypt the data before it can be read\. SNS topics should be encrypted at\-rest for an added layer of security\. For more information, see [Encryption at rest](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html) in the *Amazon Simple Notification Service Developer Guide*\.
+
+### Remediation<a name="sns-1-remediation"></a>
+
+**To encrypt an unencrypted SNS topic**
+
+1. Open the Amazon SNS console at [https://console\.aws\.amazon\.com/sns/v3/home](https://console.aws.amazon.com/sns/v3/home)\.
+
+1. In the navigation pane, choose **Topics**\.
+
+1. Choose the name of the topic to encrypt\.
+
+1. Choose **Edit**\.
+
+1. Under **Encryption**, choose **Enable Encryption**\.
+
+1. Choose the KMS key to use to encrypt the topic\.
+
+1. Choose **Save changes**\.
 
 ## \[SSM\.1\] EC2 instances should be managed by AWS Systems Manager<a name="fsbp-ssm-1"></a>
 

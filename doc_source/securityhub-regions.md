@@ -32,6 +32,36 @@ The China \(Beijing\) and China \(Ningxia\) Regions only support the following t
 
 The following Regions do not support all of the Security Hub controls\. For each Region, the list provides the controls that are not supported\.
 
+### US East \(Ohio\)<a name="securityhub-control-support-useast2"></a>
+
+The following controls are not supported in US East \(Ohio\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### US West \(N\. California\)<a name="securityhub-control-support-uswest1"></a>
+
+The following controls are not supported in US West \(N\. California\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### US West \(Oregon\)<a name="securityhub-control-support-uswest2"></a>
+
+The following controls are not supported in US West \(Oregon\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
 ### Africa \(Cape Town\)<a name="securityhub-control-support-afsouth1"></a>
 
 The following controls are not supported in Africa \(Cape Town\)\.
@@ -61,6 +91,10 @@ The following controls are not supported in Africa \(Cape Town\)\.
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
 [\[DMS\.1\] Database Migration Service replication instances should not be public](securityhub-standards-fsbp-controls.md#fsbp-dms-1)  
@@ -68,17 +102,107 @@ The following controls are not supported in Africa \(Cape Town\)\.
 [\[EC2\.3\] Attached EBS volumes should be encrypted at\-rest](securityhub-standards-fsbp-controls.md#fsbp-ec2-3)  
 [\[EC2\.4\] Stopped EC2 instances should be removed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-ec2-4)  
 [\[EC2\.8\] EC2 instances should use IMDSv2](securityhub-standards-fsbp-controls.md#fsbp-ec2-8)  
-[\[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
+[\[EFS\.1\] Amazon EFS should be configured to encrypt file data at rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
+[\[ELB\.4\] Application load balancers should be configured to drop HTTP headers](securityhub-standards-fsbp-controls.md#fsbp-elb-4)  
 [\[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-standards-fsbp-controls.md#fsbp-elbv2-1)  
 [\[EMR\.1\] Amazon EMR cluster master nodes should not have public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-emr-1)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](securityhub-standards-fsbp-controls.md#fsbp-iam-3)  
 [\[IAM\.4\] IAM root user access key should not exist](securityhub-standards-fsbp-controls.md#fsbp-iam-4)  
 [\[RDS\.1\] RDS snapshots should be private](securityhub-standards-fsbp-controls.md#fsbp-rds-1)  
+[\[RDS\.9\] Database logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-9)  
+[\[RDS\.10\] IAM authentication should be configured for RDS instances](securityhub-standards-fsbp-controls.md#fsbp-rds-10)  
+[\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)  
 [\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
 [\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)  
 [\[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT ](securityhub-standards-fsbp-controls.md#fsbp-ssm-3)
+
+### Asia Pacific \(Hong Kong\)<a name="securityhub-control-support-apeast1"></a>
+
+The following controls are not supported in Asia Pacific \(Hong Kong\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
+[\[RDS\.10\] IAM authentication should be configured for RDS instances](securityhub-standards-fsbp-controls.md#fsbp-rds-10)
+
+### Asia Pacific \(Mumbai\)<a name="securityhub-control-support-apsouth1"></a>
+
+The following controls are not supported in Asia Pacific \(Mumbai\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### Asia Pacific \(Osaka\-Local\)<a name="securityhub-control-support-apnortheast3"></a>
+
+The following controls are not supported in Asia Pacific \(Osaka\-Local\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
+[\[ELB\.4\] Application load balancers should be configured to drop HTTP headers](securityhub-standards-fsbp-controls.md#fsbp-elb-4)  
+[\[RDS\.9\] Database logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-9)  
+[\[RDS\.10\] IAM authentication should be configured for RDS instances](securityhub-standards-fsbp-controls.md#fsbp-rds-10)  
+[\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)
+
+### Asia Pacific \(Seoul\)<a name="securityhub-control-support-apnortheast2"></a>
+
+The following controls are not supported in Asia Pacific \(Seoul\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### Asia Pacific \(Singapore\)<a name="securityhub-control-support-apsoutheast1"></a>
+
+The following controls are not supported in Asia Pacific \(Singapore\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### Asia Pacific \(Sydney\)<a name="securityhub-control-support-apsoutheast2"></a>
+
+The following controls are not supported in Asia Pacific \(Sydney\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
+[\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)
+
+### Asia Pacific \(Tokyo\)<a name="securityhub-control-support-apnortheast1"></a>
+
+The following controls are not supported in Asia Pacific \(Tokyo\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### Canada \(Central\)<a name="securityhub-control-support-cacentral1"></a>
+
+The following controls are not supported in Canada \(Central\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
 
 ### China \(Beijing\)<a name="securityhub-control-support-cnnorth1"></a>
 
@@ -98,11 +222,16 @@ The following controls are not supported in China \(Beijing\)\.
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.6\] Hardware MFA should be enabled for the root user](securityhub-standards-fsbp-controls.md#fsbp-iam-6)  
-[\[Lambda\.1\] Lambda functions should prohibit public access by other accounts](securityhub-standards-fsbp-controls.md#fsbp-lambda-1)  
+[\[Lambda\.1\] Lambda function policies should prohibit public access](securityhub-standards-fsbp-controls.md#fsbp-lambda-1)  
 [\[Lambda\.2\] Lambda functions should use latest runtimes](securityhub-standards-fsbp-controls.md#fsbp-lambda-2)  
 [\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)  
+[\[RDS\.10\] IAM authentication should be configured for RDS instances](securityhub-standards-fsbp-controls.md#fsbp-rds-10)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)
 
 ### China \(Ningxia\)<a name="securityhub-control-support-cnnorthwest1"></a>
@@ -123,12 +252,49 @@ The following controls are not supported in China \(Ningxia\)\.
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.6\] Hardware MFA should be enabled for the root user](securityhub-standards-fsbp-controls.md#fsbp-iam-6)  
-[\[Lambda\.1\] Lambda functions should prohibit public access by other accounts](securityhub-standards-fsbp-controls.md#fsbp-lambda-1)  
+[\[Lambda\.1\] Lambda function policies should prohibit public access](securityhub-standards-fsbp-controls.md#fsbp-lambda-1)  
 [\[Lambda\.2\] Lambda functions should use latest runtimes](securityhub-standards-fsbp-controls.md#fsbp-lambda-2)  
 [\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)  
+[\[RDS\.9\] Database logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-9)  
+[\[RDS\.10\] IAM authentication should be configured for RDS instances](securityhub-standards-fsbp-controls.md#fsbp-rds-10)  
+[\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)
+
+### Europe \(Frankfurt\)<a name="securityhub-control-support-eucentral1"></a>
+
+The following controls are not supported in Europe \(Frankfurt\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### Europe \(Ireland\)<a name="securityhub-control-support-euwest1"></a>
+
+The following controls are not supported in Europe \(Ireland\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### Europe \(London\)<a name="securityhub-control-support-euwest2"></a>
+
+The following controls are not supported in Europe \(London\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
 
 ### Europe \(Milan\)<a name="securityhub-control-support-eusouth1"></a>
 
@@ -158,6 +324,10 @@ The following controls are not supported in Europe \(Milan\)\.
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
 [\[DMS\.1\] Database Migration Service replication instances should not be public](securityhub-standards-fsbp-controls.md#fsbp-dms-1)  
@@ -165,16 +335,40 @@ The following controls are not supported in Europe \(Milan\)\.
 [\[EC2\.3\] Attached EBS volumes should be encrypted at\-rest](securityhub-standards-fsbp-controls.md#fsbp-ec2-3)  
 [\[EC2\.4\] Stopped EC2 instances should be removed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-ec2-4)  
 [\[EC2\.8\] EC2 instances should use IMDSv2](securityhub-standards-fsbp-controls.md#fsbp-ec2-8)  
-[\[EFS\.1\] Amazon EFS should be configured to encrypt file data at\-rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
+[\[EFS\.1\] Amazon EFS should be configured to encrypt file data at rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
+[\[ELB\.4\] Application load balancers should be configured to drop HTTP headers](securityhub-standards-fsbp-controls.md#fsbp-elb-4)  
 [\[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-standards-fsbp-controls.md#fsbp-elbv2-1)  
 [\[EMR\.1\] Amazon EMR cluster master nodes should not have public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-emr-1)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](securityhub-standards-fsbp-controls.md#fsbp-iam-3)  
 [\[RDS\.1\] RDS snapshots should be private](securityhub-standards-fsbp-controls.md#fsbp-rds-1)  
+[\[RDS\.9\] Database logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-9)  
+[\[Redshift\.2\] Connections to Amazon Redshift clusters should be encrypted in transit](securityhub-standards-fsbp-controls.md#fsbp-redshift-2)  
+[\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)  
 [\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
 [\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)  
 [\[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT ](securityhub-standards-fsbp-controls.md#fsbp-ssm-3)
+
+### Europe \(Paris\)<a name="securityhub-control-support-euwest3"></a>
+
+The following controls are not supported in Europe \(Paris\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
+
+### Europe \(Stockholm\)<a name="securityhub-control-support-eunorth1"></a>
+
+The following controls are not supported in Europe \(Stockholm\)\.
+
+**[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)
 
 ### Middle East \(Bahrain\)<a name="securityhub-control-support-mesouth1"></a>
 
@@ -185,8 +379,13 @@ The following controls are not supported in Middle East \(Bahrain\)\.
 [\[PCI\.S3\.6\] S3 Block Public Access setting should be enabled](securityhub-pci-controls.md#pcidss-s3-6)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)  
+[\[Redshift\.6\] Amazon Redshift should have automatic upgrades to major versions enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-6)  
 [\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)
 
@@ -195,6 +394,10 @@ The following controls are not supported in Middle East \(Bahrain\)\.
 The following controls are not supported in South America \(São Paulo\)\.
 
 [AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)
 
 ### AWS GovCloud \(US\-East\)<a name="securityhub-control-support-govuseast1"></a>
@@ -206,16 +409,26 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [1\.14 – Ensure hardware MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
 [\[PCI\.CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-pci-controls.md#pcidss-codebuild-2)  
+[\[DynamoDB\.1\] DynamoDB tables should automatically scale capacity with demand](securityhub-standards-fsbp-controls.md#fsbp-dynamodb-1)  
 [\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
 [\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-4)  
 [\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-5)  
 [\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
+[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
+[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
+[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
+[\[DynamoDB\.1\] DynamoDB tables should automatically scale capacity with demand](securityhub-standards-fsbp-controls.md#fsbp-dynamodb-1)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.6\] Hardware MFA should be enabled for the root user](securityhub-standards-fsbp-controls.md#fsbp-iam-6)
 

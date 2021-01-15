@@ -21,11 +21,7 @@ The Security Hub free trial is not supported in the China \(Beijing\) Region\.
 
 1. On the **Settings** page, choose **Usage**\.
 
-The estimated monthly cost is based on your Security Hub usage for findings and security checks projected over a 30\-day period\.
-
-If you are using Security Hub from a master account, the estimated monthly cost includes the costs associated with all of the member accounts\.
-
-If you are using Security Hub from a member account, the estimated monthly cost is only for the member account\.
+The estimated monthly cost is based on your account's Security Hub usage for findings and security checks projected over a 30\-day period\.
 
 The estimated monthly cost is for only the current Region\. It is not for all Regions in which Security Hub is enabled\.
 

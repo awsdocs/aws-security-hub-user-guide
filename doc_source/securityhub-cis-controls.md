@@ -369,7 +369,7 @@ This control is not supported in Africa \(Cape Town\)\.
 
 ### Remediation<a name="cis-1.12-remediation"></a>
 
-**To deactivate or delete access keys**
+**To delete access keys**
 
 1. Log in to your account using the root credentials\.
 
@@ -379,9 +379,9 @@ This control is not supported in Africa \(Cape Town\)\.
 
 1. Choose **Access keys \(access key ID and secret access key\)**\.
 
-1. For any existing keys, do one of the following:
-   + Choose **Make Inactive** to prevent the key from being used to authenticate the account\.
-   + Choose **Delete** and then choose **Yes** to permanently delete the key\. You can't recover deleted keys\.
+1. To permanently delete the key, choose **Delete** and then choose **Yes**\. You cannot recover deleted keys\.
+
+1. If there is more than one root user access key, then repeat steps 4 and 5 for each key\.
 
 ## 1\.13 – Ensure MFA is enabled for the "root" account<a name="securityhub-cis-controls-1.13"></a>
 

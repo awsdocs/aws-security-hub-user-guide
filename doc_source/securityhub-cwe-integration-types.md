@@ -8,6 +8,8 @@ On the EventBridge dashboard for Security Hub, **All Events** includes all of th
 
  Security Hub automatically sends all findings to EventBridge as **Security Hub Findings \- Imported** events\. **Security Hub Findings \- Imported** events are triggered by updates from both [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) and [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
+For master accounts, the event feed in EventBridge includes events for findings from both their account and from their member accounts\.
+
 You can define rules in EventBridge that automatically route findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\. The rules can include filters to only apply the rule if the finding has specific attribute values\.
 
 You use this method to automatically send all findings, or all findings that have specific characteristics, to a response or remediation workflow\.
