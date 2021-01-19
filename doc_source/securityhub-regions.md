@@ -409,13 +409,8 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [1\.14 – Ensure hardware MFA is enabled for the "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
-[\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
-[\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
-[\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
-[\[CloudFront\.4\] CloudFront distributions should have origin failover configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-4)  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
 [\[PCI\.CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-pci-controls.md#pcidss-codebuild-2)  
-[\[DynamoDB\.1\] DynamoDB tables should automatically scale capacity with demand](securityhub-standards-fsbp-controls.md#fsbp-dynamodb-1)  
 [\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
 [\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-4)  
 [\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-5)  
