@@ -9,7 +9,7 @@ An account cannot be both a Security Hub master account and a member account at 
 For more information, see [Managing master and member accounts](securityhub-accounts.md)\.
 
 **Archived finding**  
-A finding that has a `RecordState` set to `ARCHIVED`\.  
+A finding that has a `RecordState` set to `ARCHIVED`\. Archiving a finding indicates that the finding provider believes that the finding is no longer relevant\. The record state is separate from the workflow status, which tracks the status of an investigation into a finding\.  
 Finding providers can use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) operation of the Security Hub API to archive findings that they created\. Security Hub automatically archives findings for controls if the associated resource is deleted, based on one of the following criteria\.  
 + The finding was not updated in three days\.
 + The associated AWS Config evaluation returned `NOT_APPLICABLE`\.

@@ -60,8 +60,8 @@ aws securityhub batch-import-findings --findings '
         ],
         "SchemaVersion": "2018-10-08",
         "Severity": {
-            "Normalized": 0,
-            "Product": 0
+            "Label": INFORMATIONAL,
+            "Original": 0
         },
         "Title": "CloudTrail trail vulnerability",
         "Types": [

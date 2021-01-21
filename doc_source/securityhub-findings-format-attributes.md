@@ -1,6 +1,6 @@
 # ASFF attributes<a name="securityhub-findings-format-attributes"></a>
 
-Listed below are the attributes and objects for the ASFF\. For objects, to see the details for the object attributes and subfields, choose the object name\.
+Listed below are the attributes and objects for the AWS Security Finding Format \(ASFF\)\. For objects, to see the details for the object attributes and subfields, choose the object name\.
 
 ## Required attributes<a name="asff-required-attributes"></a>
 
@@ -140,7 +140,7 @@ In the current release, the AWS Security Finding Format schema version is `2018-
 [`Severity`](#asff-severity)  
 Required  
 A finding's severity\.  
-The finding must have either `Label` or `Normalized` populated\. `Label` is the preferred attribute\. If neither attribute is populated, then the finding is invalid\.  
+The finding must have either `Label` or `Normalized` populated\. `Label` is the preferred attribute\. `Normalized` is no longer relevant\. Security Hub populates `Normalized` but does not otherwise use it\. If neither attribute is populated, then the finding is invalid\.  
 A finding provider can provide initial severity information\. Finding providers can update severity information only if it has not been updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. After the severity is updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html), it cannot be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.  
 **Type:** Object  
 **Example**  
@@ -189,6 +189,11 @@ Findings are deleted 90 days after the most recent update or 90 days after the c
 **Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
 
 ## Other top\-level attributes<a name="asff-top-level-attributes"></a>
+
+**[`Action`](#asff-action)**  
+Optional  
+Provides details about an action that was detected for the finding\.  
+**Type:** Object
 
 **[`Compliance`](#asff-compliance)**  
 Optional  
@@ -488,7 +493,7 @@ Optional
 Provides information about the status of the investigation into a finding\.  
 The workflow status is not intended for finding providers\. The workflow status can only be updated using `BatchUpdateFindings`\. Customers can also update it from the console\. See [Setting the workflow status for findings](finding-workflow-status.md)\.  
 Type: Object  
-Example:  
+**Example**  
 
 ```
 Workflow: {
@@ -515,6 +520,381 @@ The workflow state of a finding\. Findings products can provide the value of `NE
 ```
 "WorkflowState": "NEW"
 ```
+
+## Action<a name="asff-action"></a>
+
+The `Action` object provides details about an action that were detected for the finding\. The action can be one of the following:
++ A remote IP address issued an AWS API call
++ A DNS request was received
++ A remote IP address attempted to connect to an EC2 instance
++ A remote IP address attempted a port probe on an EC2 instance
+
+**Example**
+
+```
+"Action": {
+    "ActionType": "PORT_PROBE",
+    "PortProbeAction": {
+        "PortProbeDetails": [
+            {
+                "LocalPortDetails": {
+                    "Port": 80,
+                    "PortName": "HTTP"
+                  },
+                "LocalIpDetails": {
+                     "IpAddressV4": "192.0.2.0"
+                 },
+                "RemoteIpDetails": {
+                    "Country": {
+                        "CountryName": "Example Country"
+                    },
+                    "City": {
+                        "CityName": "Example City"
+                    },
+                   "GeoLocation": {
+                       "Lon": 0,
+                       "Lat": 0
+                   },
+                   "Organization": {
+                       "AsnOrg": "ExampleASO",
+                       "Org": "ExampleOrg",
+                       "Isp": "ExampleISP",
+                       "Asn": 64496
+                   }
+                }
+            }
+        ],
+        "Blocked": false
+    }
+}
+```
+
+`Action` can have the following attributes\.
+
+  
+`ActionType`  
+Optional  
+The type of action that was detected\. The action type determines which of the other objects is provided in the `Action` object\.  
+**Type:** String  
+**Valid values:** `NETWORK_CONNECTION` \| `AWS_API_CALL` \| `DNS_REQUEST` \| `PORT_PROBE`
+
+[`AwsApiCallAction`](#asff-action-awsapicallaction)  
+Optional  
+Included if `ActionType` is `AWS_API_CALL`\.  
+Provides details about the API call that was detected\.  
+**Type:** Object
+
+[`DnsRequestAction`](#asff-action-dnsrequestaction)  
+Optional  
+Included if `ActionType` is `DNS_REQUEST`\.  
+Provides details about the DNS request that was detected\.  
+**Type: **Object
+
+[`NetworkConnectionAction`](#asff-action-networkconnectionaction)  
+Optional  
+Included if `ActionType` is `NETWORK_CONNECTION`\.  
+Provides details about the network connection that was detected\.  
+**Type:** Object
+
+[`PortProbeAction`](#asff-action-portprobeaction)  
+Optional  
+Included if `ActionType` is `PORT_PROBE`\.  
+Provides details about the port probe that was detected\.  
+**Type:** Object
+
+### AwsApiCallAction<a name="asff-action-awsapicallaction"></a>
+
+`AwsApiCallAction` is provided if `ActionType` is `AWS_API_CALL`\. It provides details about the API call that was detected\.
+
+`AwsApiCallAction` can have the following attributes\.
+
+`AffectedResources`  
+Optional  
+Identifies the resources that were affected by the API call\.  
+**Type:** Map of key\-value pairs
+
+`Api`  
+Optional  
+The name of the API method that was issued\.  
+**Type:** String
+
+`CallerType`  
+Optional  
+Indicates whether the API call originated from a remote IP address or from a DNS domain\.  
+**Type:** String  
+**Valid values:** `domain` \| `remoteIp`
+
+[`DomainDetails`](#asff-action-awsapicallaction-domaindetails)  
+Optional  
+Provided if `CallerType` is `domain`\. Provides information about the DNS domain that the API call originated from\.  
+Type: Object
+
+`FirstSeen`  
+Optional  
+Indicates when the API call was first observed\.  
+**Type:** String  
+**Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
+
+`LastSeen`  
+Optional  
+Indicates when the API call was most recently observed\.  
+**Type:** String  
+**Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
+
+[`RemoteIpDetails`](#asff-action-remoteipdetails)  
+Optional  
+Provided if `CallerType` is `remoteIp`\. Provides information about the remote IP address that the API call originated from\.  
+**Type:** Object
+
+`ServiceName`  
+Optional  
+The name of the AWS service that the API method belongs to\.  
+**Type:** String
+
+#### DomainDetails<a name="asff-action-awsapicallaction-domaindetails"></a>
+
+`DomainDetails` is provided if `AwsApiCallAction.CallerType` is `domain`\. It provides information about the DNS domain that issued the API call\.
+
+`DomainDetails` can have the following attributes\.
+
+`Domain`  
+Optional  
+The name of the DNS domain that issued the API call\.  
+**Type:** String
+
+### DnsRequestAction<a name="asff-action-dnsrequestaction"></a>
+
+`DnsRequestAction` is provided if `ActionType` is `DNS_REQUEST`\. It provides details about the DNS request that was detected\.
+
+`DnsRequestAction` can have the following attributes\.
+
+`Blocked`  
+Optional  
+Indicates whether the DNS request was blocked\.  
+**Type:** Boolean
+
+`Domain`  
+Optional  
+The DNS domain associated with the DNS request\.  
+**Type:** String
+
+`Protocol`  
+Optional  
+The protocol that was used for the DNS request\.  
+**Type:** String
+
+### NetworkConnectionAction<a name="asff-action-networkconnectionaction"></a>
+
+`NetworkConnectionAction` is provided if `ActionType` is `NETWORK_CONNECTION`\. It provides details about the attempted network connection that was detected\.
+
+`NetworkConnectionAction` can have the following attributes\.
+
+`Blocked`  
+Optional  
+Indicates whether the network connection attempt was blocked\.  
+**Type:** Boolean
+
+`ConnectionDirection`  
+Optional  
+The direction of the network connection request\.  
+**Type:** String  
+**Valid values:** `IN` \| `OUT`
+
+[`LocalPortDetails`](#asff-action-localportdetails)  
+Optional  
+Information about the port on the EC2 instance\.  
+**Type:** Object
+
+`Protocol`  
+Optional  
+The protocol used to make the network connection request\.  
+**Type:** String
+
+[`RemoteIpDetails`](#asff-action-remoteipdetails)  
+Optional  
+Information about the remote IP address that issued the network connection request\.  
+**Type:** Object
+
+[`RemotePortDetails`](#asff-action-networkconnectionaction-remoteportdetails)  
+Optional  
+Information about the port on the remote IP address\.  
+**Type:** Object
+
+#### RemotePortDetails<a name="asff-action-networkconnectionaction-remoteportdetails"></a>
+
+`RemotePortDetails` provides information about the remote port that was involved in the attempted network connection\.
+
+`RemotePortDetails` can have the following attributes
+
+`Port`  
+Optional  
+The number of the port\.  
+**Type:** Integer
+
+`PortName`  
+Optional  
+The port name of the remote connection\.  
+Type: String
+
+### PortProbeAction<a name="asff-action-portprobeaction"></a>
+
+`PortProbeAction` is provided if `ActionType` is `PORT_PROBE`\. It provides details about the attempted port probe that was detected\.
+
+`PortProbeAction` can have the following attributes\.
+
+`Blocked`  
+Optional  
+Whether the port probe was blocked\.  
+**Type:** Boolean
+
+[`PortProbeDetails`](#asff-action-portprobeaction-portprobedetails)  
+Optional  
+Information about the ports affected by the port probe\.  
+**Type:** Array of objects
+
+#### PortProbeDetails<a name="asff-action-portprobeaction-portprobedetails"></a>
+
+`PortProbeDetails` contains a list of port scans that were part of the port probe\. For each scan, `PortProbeDetails` provides information about the local IP address and port that were scanned, and the remote IP address that the scan originated from\.
+
+`PortProbeDetails` can have the following attributes\.
+
+`LocalIpDetails`  
+Optional  
+Provides information about the IP address where the scanned port is located\.  
+**Type:** Object
+
+[`LocalPortDetails`](#asff-action-localportdetails)  
+Optional  
+Provides information about the port that was scanned\.  
+**Type:** Object
+
+[`RemoteIpDetails`](#asff-action-remoteipdetails)  
+Optional  
+Provides information about the remote IP address that performed the scan\.  
+**Type:** Object
+
+`LocalIpDetails` can have the following attributes\.
+
+`IpAddressV4`  
+Optional  
+The IP address\.  
+**Type:** String
+
+### LocalPortDetails<a name="asff-action-localportdetails"></a>
+
+For `NetworkConnectionAction` and `PortProbeDetails`, `LocalPortDetails` provides information about the local port that was involved in the action\.
+
+`LocalPortDetails` can have the following attributes\.
+
+`Port`  
+Optional  
+The number of the port\.  
+**Type:** Integer
+
+`PortName`  
+Optional  
+The port name of the local connection\.  
+**Type:** String
+
+### RemoteIpDetails<a name="asff-action-remoteipdetails"></a>
+
+In the details for `AwsApiCallAction`, `NetworkConnectionAction`, and `PortProbeAction`, the `RemoteIpDetails` object provides information about the remote IP address that was involved in the action\.
+
+`RemoteIpDetails` can have the following attributes\.
+
+[`City`](#asff-action-remoteipdetails-city)  
+Optional  
+The city where the remote IP address is located\.  
+**Type:** Object
+
+[`Country`](#asff-action-remoteipdetails-country)  
+Optional  
+The country where the remote IP address is located\.  
+**Type:** Object
+
+[`Geolocation`](#asff-action-remoteipdetails-geolocation)  
+Optional  
+The coordinates of the location of the remote IP address\.  
+**Type:** Object
+
+`IpAddressV4`  
+Optional  
+The IP address\.  
+**Type:** String
+
+[`Organization`](#asff-action-remoteipdetails-organization)  
+Optional  
+The internet service provider \(ISP\) organization associated with the remote IP address\.  
+**Type:** Object
+
+#### City<a name="asff-action-remoteipdetails-city"></a>
+
+`City` contains information about the city where the remote IP address is located\.
+
+`City` can have the following attributes\.
+
+`CityName`  
+Optional  
+The name of the city where the remote IP address is located\.  
+**Type:** String
+
+#### Country<a name="asff-action-remoteipdetails-country"></a>
+
+`Country` identifies the country where the remote IP address is located\.
+
+`Country` can have the following attributes\.
+
+`CountryCode`  
+Optional  
+The 2\-letter ISO 3166 country code for the country where the remote IP address is located\.  
+**Type:** String
+
+`CountryName`  
+Optional  
+The name of the country where the remote IP address is located\.  
+**Type:** String
+
+#### Geolocation<a name="asff-action-remoteipdetails-geolocation"></a>
+
+`Geolocation` provides the latitude and longitude coordinates of the remote IP address location\.
+
+`Geolocation` can have the following attributes\.
+
+`Lat`  
+Optional  
+The latitude of the location of the remote IP address\.  
+**Type:** Double
+
+`Lon`  
+Optional  
+The longitude of the location of the remote IP address\.  
+**Type:** Double
+
+#### Organization<a name="asff-action-remoteipdetails-organization"></a>
+
+`Organization` identifies the ISP organization associated with the remote IP address\.
+
+`Organization` can have the following attributes\.
+
+`Asn`  
+Optional  
+The Autonomous System Number \(ASN\) of the internet provider of the remote IP address\.  
+**Type:** String
+
+`AsnOrg`  
+Optional  
+The name of the organization that registered the ASN\.  
+**Type:** String
+
+`Isp`  
+Optional  
+The ISP information for the internet provider\.  
+**Type:** String
+
+`Org`  
+Optional  
+The name of the internet provider\.  
+**Type:** String
 
 ## Compliance<a name="asff-compliance"></a>
 
@@ -811,7 +1191,7 @@ The source media access control \(MAC\) address of network\-related information 
 Optional  
 The source port of network\-related information about a finding\.  
 **Type:** Number  
-**Valid values:** Rrange of 0–65535  
+**Valid values:** Range of 0–65535  
 **Example**  
 
 ```
@@ -1410,6 +1790,7 @@ Security Hub provides a set of available subfields for its supported resource ty
 + [`AwsSecretsManagerSecret`](#asff-resourcedetails-awssecretsmanagersecret)
 + [`AwsSnsTopic`](#asff-resourcedetails-awssnstopic)
 + [`AwsSqsQueue`](#asff-resourcedetails-awssqsqueue)
++ [`AwsSsmPatchCompliance`](#asff-resourcedetails-awsssmpatchcompliance)
 + [`AwsWafWebAcl`](#asff-resourcedetails-awswafwebacl)
 + [`Container`](#asff-resourcedetails-container)
 For example, if the resource is an S3 bucket, then set the resource `Type` to `AwsS3Bucket`, and provide the resource details in the `AwsS3Bucket` subfield\.  
@@ -1574,7 +1955,7 @@ Supported values are as follows\. If a type has a corresponding subfield, then t
 + [`AwsSnsTopic`](#asff-resourcedetails-awssnstopic)
 + [`AwsSqsQueue`](#asff-resourcedetails-awssqsqueue)
 + `AwsSsmAssociationCompliance`
-+ `AwsSsmPatchCompliance`
++ [`AwsSsmPatchCompliance`](#asff-resourcedetails-awsssmpatchcompliance)
 + [`AwsWafWebAcl`](#asff-resourcedetails-awswafwebacl)
 + [`Container`](#asff-resourcedetails-container)
 + [`Other`](#asff-resourcedetails-other)
@@ -3140,7 +3521,7 @@ The type of repository that contains the source code to be built\.
 **Valid values:**  
 + `BITBUCKET` ‐ The source code is in a Bitbucket repository\.
 
-  `CODECOMMIT` ‐ The source code is in aCodeCommit repository\.
+  `CODECOMMIT` ‐ The source code is in a CodeCommit repository\.
 
   `CODEPIPELINE` ‐ The source code settings are specified in the source action of a pipeline in CodePipeline\.
 
@@ -3925,9 +4306,29 @@ Optional
 Information about the network interface attachment\.  
 **Type:** Object
 
+**[`Ipv6Addresses`](#asff-resourcedetails-awsec2networkinterface-ipv6addresses)**  
+Optional  
+The IPv6 addresses associated with the network interface\.  
+**Type:** Array of objects
+
 **`NetworkInterfaceId`**  
 Optional  
 The ID of the network interface\.  
+**Type:** String
+
+**[`PrivateIpAddresses`](#asff-resourcedetails-awsec2networkinterface-privateipaddresses)**  
+Optional  
+The private IPv4 addresses associated with the network interface\.  
+**Type:** Array of objects
+
+**`PublicDnsName`**  
+Optional  
+The public DNS name of the network interface\.  
+**Type:** String
+
+**`PublicIp`**  
+Optional  
+The address of the Elastic IP address bound to the network interface\.  
 **Type:** String
 
 **[`SecurityGroups`](#asff-resourcedetails-awsec2networkinterface-securitygroups)**  
@@ -3982,6 +4383,31 @@ Optional
 The attachment state\.  
 **Type:** String  
 **Valid values:** `attaching` \| `attached` \| `detaching` \| `detached`
+
+#### Ipv6Addresses<a name="asff-resourcedetails-awsec2networkinterface-ipv6addresses"></a>
+
+`Ipv6Addresses` lists the IPV6 addresses that are associated with the network interface\. Each IPV6 address can have the following attributes\.
+
+`Ipv6Address`  
+Optional  
+The IPV6 address\.  
+**Type:** String
+
+#### `PrivateIpAddresses`<a name="asff-resourcedetails-awsec2networkinterface-privateipaddresses"></a>
+
+`PrivateIpAddresses` contains the list of private IPv4 addresses that are associated with the network interface\.
+
+Each private IPv4 address can have the following attributes\.
+
+`PrivateDnsName`  
+Optional  
+The private DNS name for the IP address\.  
+**Type:** String
+
+`PrivateIpAddress`  
+Optional  
+The IP address\.  
+**Type:** String
 
 #### SecurityGroups<a name="asff-resourcedetails-awsec2networkinterface-securitygroups"></a>
 
@@ -7913,7 +8339,7 @@ If an initial database is not specified, a database named `devdev` is created by
 
 **[`DeferredMaintenanceWindows`](#asff-resourcedetails-awsredshiftcluster-deferredmaintenancewindows)**  
 Optional  
-List of time windows during which maintenance was deferred\.  
+List of time spans, or time windows, during which maintenance was deferred\.  
 **Type:** Array of objects
 
 **[`ElasticIpStatus`](#asff-resourcedetails-awsredshiftcluster-elasticipstatus)**  
@@ -8159,7 +8585,7 @@ The destination Region that snapshots are automatically copied to when cross\-Re
 
 **`ManualSnapshotRetentionPeriod`**  
 Optional  
-The number of days that manual snapshots are retained in the destination region after they are copied from a source region\.  
+The number of days that manual snapshots are retained in the destination Region after they are copied from a source Region\.  
 If the value is \-1, then the manual snapshot is retained indefinitely\.  
 **Type:** Number  
 **Valid values:** Either \-1 or an integer between 1 and 3,653
@@ -8209,18 +8635,18 @@ The start of the time window for which maintenance was deferred\.
 
 #### ElasticIpStatus<a name="asff-resourcedetails-awsredshiftcluster-elasticipstatus"></a>
 
-The `ElasticIpStatus` object contains information about the status of the elastic IP \(EIP\) address\.
+The `ElasticIpStatus` object contains information about the status of the Elastic IP \(EIP\) address\.
 
 `ElasticIpStatus` can have the following attributes\.
 
 **`ElasticIp`**  
 Optional  
-The elastic IP address for the cluster\.  
+The Elastic IP address for the cluster\.  
 **Type:** String
 
 **`Status`**  
 Optional  
-The status of the elastic IP address\.  
+The status of the Elastic IP address\.  
 **Type:** String
 
 #### Endpoint<a name="asff-resourcedetails-awsredshiftcluster-endpoint"></a>
@@ -8667,6 +9093,138 @@ Optional
 The Amazon Resource Name \(ARN\) of the dead\-letter queue to which Amazon SQS moves messages after the value of `maxReceiveCount` is exceeded\.  
 **Type:** String
 
+### AwsSsmPatchCompliance<a name="asff-resourcedetails-awsssmpatchcompliance"></a>
+
+The `AwsSsmPatchCompliance` object provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance\.
+
+**Example**
+
+```
+AwsSsmPatchCompliance: {
+    "Patch": {
+        "ComplianceSummary": {
+            "ComplianceType": "Patch",
+            "CompliantCriticalCount": 0,
+            "CompliantHighCount": 0,
+            "CompliantInformationalCount": 0,
+            "CompliantLowCount": 0,
+            "CompliantMediumCount": 0,
+            "CompliantUnspecifiedCount": 461,
+            "ExecutionType": "Command",
+            "NonCompliantCriticalCount": 0,
+            "NonCompliantHighCount": 0,
+            "NonCompliantInformationalCount": 0,
+            "NonCompliantLowCount": 0,
+            "NonCompliantMediumCount": 0,
+            "NonCompliantUnspecifiedCount": 0,
+            "OverallSeverity": "UNSPECIFIED",
+            "PatchBaselineId": "pb-0c5b2769ef7cbe587",
+            "PatchGroup": "ExamplePatchGroup",
+            "Status": "COMPLIANT"
+        }
+    }
+}
+```
+
+The `AwsSsmPatchCompliance` contains a `Patch` object\. The `Patch` object contains the `ComplianceSummary` object, which contains the compliance status information\.
+
+`ComplianceSummary` can have the following attributes:
+
+`ComplianceType`  
+Optional  
+The type of resource for which the compliance was determined\.  
+For `AwsSsmPatchCompliance`, `ComplianceType` is `Patch`\.  
+**Type:** String
+
+`CompliantCriticalCount`  
+Optional  
+For the patches that are compliant, the number that have a severity of `CRITICAL`\.  
+**Type:** String 
+
+`CompliantHighCount`  
+Optional  
+For the patches that are compliant, the number that have a severity of `HIGH`\.  
+**Type:** Integer
+
+`CompliantInformationalCount`  
+Optional  
+For the patches that are compliant, the number that have a severity of `INFORMATIONAL`\.  
+**Type:** Integer
+
+`CompliantLowCount`  
+Optional  
+For the patches that are compliant, the number that have a severity of `LOW`\.  
+**Type:** Integer
+
+`CompliantMediumCount`  
+Optional  
+For the patches that are compliant, the number that have a severity of `MEDIUM`\.  
+**Type:** Integer
+
+`CompliantUnspecifiedCount`  
+Optional  
+For the patches that are compliant, the number that have a severity of `UNSPECIFIED`\.  
+**Type:** Integer
+
+`ExecutionType`  
+Optional  
+The type of execution that was used determine compliance\.  
+**Type:** String  
+**Maximum length:** 50  
+**Valid values:** `Command`
+
+`NonCompliantCriticalCount`  
+Optional  
+For the patch items that are noncompliant, the number of items that have a severity of `CRITICAL`\.  
+**Type:** Integer
+
+`NonCompliantHighCount`  
+Optional  
+For the patches that are noncompliant, the number that have a severity of `HIGH`\.  
+**Type:** Integer
+
+`NonCompliantInformationalCount`  
+Optional  
+For the patches that are noncompliant, the number that have a severity of `INFORMATIONAL`\.  
+**Type:** Integer
+
+`NonCompliantLowCount`  
+Optional  
+For the patches that are noncompliant, the number that have a severity of `LOW`\.  
+**Type:** Integer
+
+`NonCompliantMediumCount`  
+Optional  
+For the patches that are noncompliant, the number that have a severity of `MEDIUM`\.  
+**Type:** Integer
+
+`NonCompliantUnspecifiedCount`  
+Optional  
+For the patches that are noncompliant, the number that have a severity of `UNSPECIFIED`\.  
+**Type:** Integer
+
+`OverallSeverity`  
+Optional  
+The highest severity for the patches\.  
+**Type:** String  
+**Valid values:** `CRITICAL`\| `HIGH` \| `MEDIUM` \| `LOW` \| `INFORMATIONAL` \| `UNSPECIFIED`
+
+`PatchBaselineId`  
+Optional  
+The identifier of the patch baseline\. The patch baseline lists the patches that are approved for installation\.  
+**Type:** String
+
+`PatchGroup`  
+Optional  
+The identifier of the patch group for which compliance was determined\. A patch group uses tags to group EC2 instances that should have the same patch compliance\.  
+**Type:** String
+
+`Status`  
+Optional  
+The current patch compliance status\.  
+**Type:** String  
+**Valid values:** `COMPLIANT` \| `NON_COMPLIANT` \| `UNSPECIFIED_DATA`
+
 ### AwsWafWebAcl<a name="asff-resourcedetails-awswafwebacl"></a>
 
 The `AwsWafWebAcl` object provides details about an AWS WAF web ACL\.
@@ -8863,7 +9421,7 @@ A finding provider can provide initial severity information\. Finding providers 
 
 The finding severity does not consider the criticality of the involved assets or the underlying resource\. Criticality is defined as the level of importance of the resources that are associated with the finding\. For example, a resource that is associated with a mission critical application versus one that is associated with nonproduction testing\. To capture information about resource criticality, use the `Criticality` field\.
 
-The finding must have either `Label` or `Normalized` populated\. If neither attribute is populated, then the finding is invalid\. `Label` is the preferred attribute\.
+The finding must have either `Label` or `Normalized` populated\. `Label` is the preferred attribute\. Security Hub populates `Normalized`, but does not otherwise use it\. If neither attribute is populated, then the finding is invalid\.
 
 The `Severity` object can have the following attributes\.
 
@@ -8878,14 +9436,14 @@ At a high level, the `Label` values can be interpreted as follows\.
 + `MEDIUM` – The issue must be addressed but not urgently\.
 + `HIGH` – The issue must be addressed as a priority\.
 + `CRITICAL` – The issue must be remediated immediately to avoid it escalating\.
+For guidance on how to set the value of `Label`, see [Guidance for assigning severity \(AWS services and partners\)](#asff-severity-guidance)\.
 
 **`Normalized` \(To be deprecated\)**  
 Optional  
+This attribute is no longer relevant\. Security Hub populates `Normalized`, but does not otherwise use it\. Instead of `Normalized`, provide `Label`\.  
 The normalized severity of a finding\.  
-We plan to deprecate this attribute\. Instead of `Normalized`, provide `Label`\.  
 **Type:** Integer  
-The value of `Normalized` must be an integer between 0 and 100\. Zero means that no severity applies, and 100 means that the finding has the maximum possible severity\.  
-For guidance on setting the value of `Normalized`, see [Guidance for assigning the normalized severity \(AWS services and partners\)](#asff-severity-normalized-guidance)\.
+The value of `Normalized` must be an integer between 0 and 100\. Zero means that no severity applies, and 100 means that the finding has the maximum possible severity\.
 
 **`Original`**  
 Optional  
@@ -8900,9 +9458,38 @@ This is deprecated in favor of `Original`\.
 **Type:** Number  
 **Format:** Single\-precision 32\-bit IEEE 754 floating point number, restricted to finite values
 
+### Guidance for assigning severity \(AWS services and partners\)<a name="asff-severity-guidance"></a>
+
+For findings generated by AWS services and third\-party partner products, the severity is based on the following\.
++ **Most severe** – Findings that are associated with actual data loss or denial of service
++ **Second\-most severe** – Findings that are associated with an active compromise but that do not indicate that data loss or other negative effects have occurred
++ **Third\-most severe** – Findings that are associated with issues that indicate potential for a future compromise
+
+We recommend that you use the following guidance when translating findings' native severity scores to the value of ` Severity.Label` for the ASFF\.
++ Informational findings\. For example, a finding for a passed check or a sensitive data identification\.
+
+  Suggested severity: `INFORMATIONAL`
++ Findings that are associated with issues that could result in future compromises\. For example, vulnerabilities, configuration weaknesses, exposed passwords\.
+
+  This generally aligns to the `Software and Configuration Checks` namespace under a finding's type\.
+
+  Suggested severity: `LOW`
++ Findings that are associated with issues that indicate an active compromise, but no indication that an adversary completed their objectives\. For example, malware activity, hacking activity, or unusual behavior detection\.
+
+  This generally aligns to the `Threat Detections and Unusual Behavior` namespaces under a finding's type\.
+
+  Suggested severity: `MEDIUM`
++ Findings that indicate that an adversary completed their objectives, such as active data loss or compromise or a denial of service\.
+
+  This generally aligns to the `Effects` namespace under a finding's type\.
+
+  Suggested severity: `HIGH` or `CRITICAL`
+
 ### How Security Hub maps Label and Normalized values<a name="asff-severity-map-normalized-label"></a>
 
 If a [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) request for a new finding only provides `Label` or only provides `Normalized`, then Security Hub automatically populates the value of the other field\.
+
+`Label` is the preferred attribute\. Security Hub populates `Normalized`, but does not otherwise use it\.
 
 Security Hub does not make any automatic updates based on changes from [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
@@ -8927,33 +9514,6 @@ If [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFind
 |  `MEDIUM`  |  40  | 
 |  `HIGH`  |  70  | 
 |  `CRITICAL`  |  90  | 
-
-### Guidance for assigning the normalized severity \(AWS services and partners\)<a name="asff-severity-normalized-guidance"></a>
-
-For findings generated by AWS services and third\-party partner products, the severity is based on the following\.
-+ **Most severe** – Findings that are associated with actual data loss or denial of service
-+ **Second\-most severe** – Findings that are associated with an active compromise but that do not indicate that data loss or other negative effects have occurred
-+ **Third\-most severe** – Findings that are associated with issues that indicate potential for a future compromise
-
-We recommend that you use the following guidance when translating findings' native severity scores to a normalized severity for the ASFF\.
-+ Informational findings\. For example, a finding for a passed check or a sensitive data identification\.
-
-  Suggested score: 0
-+ Findings that are associated with issues that could result in future compromises\. For example, vulnerabilities, configuration weaknesses, exposed passwords\.
-
-  This generally aligns to the `Software and Configuration Checks` namespace under a finding's type\.
-
-  Suggested score: 1–39 \(Low\)
-+ Findings that are associated with issues that indicate an active compromise, but no indication that an adversary completed their objectives\. For example, malware activity, hacking activity, or unusual behavior detection\.
-
-  This generally aligns to the `Threat Detections and Unusual Behavior` namespaces under a finding's type\.
-
-  Suggested score: 40–69 \(Medium\)
-+ Findings that indicate that an adversary completed their objectives, such as active data loss or compromise or a denial of service\.
-
-  This generally aligns to the `Effects` namespace under a finding's type\.
-
-  Suggested score: 70–100 \(High or Critical\)
 
 ## ThreatIntelIndicators<a name="asff-threatintelindicators"></a>
 

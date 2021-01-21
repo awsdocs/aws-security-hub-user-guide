@@ -154,12 +154,12 @@ Forcepoint DLP addresses human\-centric risk with visibility and control everywh
 Forcepoint NGFW lets you connect your AWS environment into your enterprise network with the scalability, protection, and insights needed to manage your network and respond to threats\.  
 [Partner documentation](https://frcpnt.com/ngfw-securityhub)
 
-**[GuardiCore](https://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Centra 4\.0**  
+**[Guardicore](https://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Centra 4\.0**  
 **Integration type:** Send  
 **Product ARN:** arn:aws:securityhub:*<REGION>*:324264561773:product/guardicore/guardicore  
-GuardiCore Centra provides flow visualization, micro\-segmentation, and breach detection for workloads in modern data centers and clouds\.
+Guardicore Centra provides flow visualization, micro\-segmentation, and breach detection for workloads in modern data centers and clouds\.
 
-**[GuardiCore](https://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Infection Monkey**  
+**[Guardicore](https://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Infection Monkey**  
 **Integration type:** Send  
 **Product ARN:** arn:aws:securityhub:*<REGION>*:324264561773:product/guardicore/aws\-infection\-monkey  
 Infection Monkey is an attack simulation tool designed to test networks against attackers\.  
@@ -223,9 +223,9 @@ Prowler is an open source security tool to perform AWS checks related to securit
 Qualys Vulnerability Management \(VM\) continuously scans and identifies vulnerabilities, protecting your assets\.  
 [Partner documentation](https://qualys-secure.force.com/discussions/s/article/000005831)
 
-**[Rackspace](https://www.rackspace.com/managed-aws/capabilities/security) – Cloud Native Security**  
+**[Rackspace Technology](https://www.rackspace.com/managed-aws/capabilities/security) – Cloud Native Security**  
 **Integration type:** Receive  
-Managed security services on top of native AWS security products for 24x7x365 monitoring by Rackspace SOC, advanced analysis, and threat remediation\.
+Rackspace Technology provides managed security services on top of native AWS security products for 24x7x365 monitoring by Rackspace SOC, advanced analysis, and threat remediation\.
 
 **[Rapid7](https://www.rapid7.com/partners/technology-partners/amazon-web-services/) – InsightConnect**  
 **Integration type:** Receive  

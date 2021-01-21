@@ -1,11 +1,119 @@
 # ASFF syntax<a name="securityhub-findings-format-syntax"></a>
 
-The following is the syntax of the complete finding JSON in the ASFF\.
+The following is the syntax of the complete finding JSON in the AWS Security Finding Format \(ASFF\)\.
 
 ```
 "Findings": [ 
     {
-        "AwsAccountId": "string",
+        "Action": {
+            "ActionType": "string",
+            "AwsApiCallAction": {
+                "AffectedResources": {
+                    "string": "string" 
+                },
+                "Api": "string",
+                "CallerType": "string",
+                "DomainDetails": {
+                    "Domain": "string"
+                },
+                "FirstSeen": "string",
+                "LastSeen": "string",
+                "RemoteIpDetails": {
+                    "City": {
+                        "CityName": "string"
+                    },
+                    "Country": {
+                        "CountryCode": "string",
+                        "CountryName": "string"
+                    },
+                    "IpAddressV4": "string",
+                    "Geolocation": {
+                        "Lat": number,
+                        "Lon": number
+                    },
+                    "Organization": {
+                        "Asn": number,
+                        "AsnOrg": "string",
+                        "Isp": "string",
+                        "Org": "string"
+                    }
+                },
+                "ServiceName": "string"   
+            },
+            "DnsRequestAction": {
+                "Blocked": boolean,
+                "Domain": "string",
+                "Protocol": "string"
+            },
+            "NetworkConnectionAction": {
+                "Blocked": boolean,
+                "ConnectionDirection": "string",
+                "LocalPortDetails": {
+                    "Port": number,
+                    "PortName": "string"
+                },
+                "Protocol": "string",
+                "RemoteIpDetails": {
+                    "City": {
+                        "CityName": "string"
+                    },
+                    "Country": {
+                        "CountryCode": "string",
+                        "CountryName": "string"
+                    },
+                    "IpAddressV4": "string",
+                    "Geolocation": {
+                        "Lat": number,
+                        "Lon": number
+                    },
+                    "Organization": {
+                        "Asn": number,
+                        "AsnOrg": "string",
+                        "Isp": "string",
+                        "Org": "string"
+                    }
+                },
+                "RemotePortDetails": {
+                    "Port": number,
+                    "PortName": "string"
+                }
+            },
+            "PortProbeAction": {
+                "Blocked": boolean,
+                "PortProbeDetails": [
+                    {
+                        "LocalIpDetails": {
+                            "IpAddressV4": "string"
+                        },
+                        "LocalPortDetails": {
+                            "Port": number,
+                            "PortName": "string"
+                        },
+                        "RemoteIpDetails": {
+                            "City": {
+                                "CityName": "string"
+                            },
+                            "Country": {
+                                "CountryCode": "string"
+                                "CountryName": "string"
+                            },
+                            "GeoLocation": {
+                                "Lat": number,
+                                "Lon": number
+                            },
+                            "IpAddressV4": "string",
+                            "Organization": {
+                                 "Asn": number,
+                                 "AsnOrg": "string",
+                                 "Isp": "string",
+                                 "Org": "string"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+       "AwsAccountId": "string",
         "Compliance": { 
             "RelatedRequirements": ["string"],
             "Status": "string",
@@ -563,13 +671,26 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                             "InstanceOwnerId": "string",
                             "Status": "string"
                         },
+                        "Ipv6Addresses": [
+                            {
+                                "Ipv6Address": "string"
+                            }
+                        ],
+                        "NetworkInterfaceId": "string",
+                        "PrivateIpAddresses": [
+                            {
+                                "PrivateDnsName": "string",
+                                "PrivateIpAddress": "string"
+                            }
+                        ],
+                        "PublicDnsName": "string",
+                        "PublicIp": "string",
                         "SecurityGroups": [
                             {
                                 "GroupId": "string",
                                 "GroupName": "string"
                             }
                         ],
-                        "NetworkInterfaceId": "string",
                         "SourceDestCheck": boolean
                     },
                     "AwsEc2SecurityGroup": {
@@ -1383,6 +1504,30 @@ The following is the syntax of the complete finding JSON in the ASFF\.
                         "RotationOccurredWithinFrequency": boolean,
                         "RotationRules": {
                             "AutomaticallyAfterDays": integer
+                        }
+                    },
+                    "AwsSsmPatchCompliance": {
+                        "Patch": {
+                            "ComplianceSummary": {
+                                "ComplianceType": "string",
+                                "CompliantCriticalCount": integer,
+                                "CompliantHighCount": integer,
+                                "CompliantInformationalCount": integer,
+                                "CompliantLowCount": integer,
+                                "CompliantMediumCount": integer,
+                                "CompliantUnspecifiedCount": integer,
+                                "ExecutionType": "string",
+                                "NonCompliantCriticalCount": integer,
+                                "NonCompliantHighCount": integer,
+                                "NonCompliantInformationalCount": integer,
+                                "NonCompliantLowCount": integer,
+                                "NonCompliantMediumCount": integer,
+                                "NonCompliantUnspecifiedCount": integer,
+                                "OverallSeverity": "string",
+                                "PatchBaselineId": "string",
+                                "PatchGroup": "string",
+                                "Status": "string"
+                            }
                         }
                     },
                     "AwsSnsTopic": {

@@ -10,6 +10,8 @@ The insight results consist of a grouped list of the results for the insight\. F
 
 The results list is sorted from most to fewest matching findings\.
 
+Note that Security Hub can only display 100 results\. If there are more than 100 grouping values, you only see the first 100\.
+
 In addition to the results list, the insight results display a set of charts summarizing the number of matching findings for the following attributes\.
 + **Severity label** – Number of findings for each severity label
 + **AWS account ID** – Top five account IDs for the matching findings

@@ -67,6 +67,8 @@ When you group the findings, the list of findings is replaced with a list of val
 
 For example, if you group the findings by AWS account ID, you see a list of account identifiers, with the number of matching findings for each account\.
 
+Note that Security Hub can only display 100 values\. If there are more than 100 grouping values, you only see the first 100\.
+
 When you choose an attribute value, the list of matching findings for that value is displayed\.
 
 **To group the findings in a findings list**
