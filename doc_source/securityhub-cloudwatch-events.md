@@ -8,7 +8,7 @@ With Amazon EventBridge, you can automate your AWS services and respond automati
 + Notifying an Amazon SNS topic or an Amazon SQS queue
 + Sending a finding to a third\-party ticketing, chat, SIEM, or incident response and management tool
 
-Security Hub automatically sends all findings to EventBridge as EventBridge events\. You can also create custom actions that allow you to send selected findings and insight results to EventBridge\.
+Security Hub automatically sends all new findings and all updates to existing findings to EventBridge as EventBridge events\. You can also create custom actions that allow you to send selected findings and insight results to EventBridge\.
 
 You then configure EventBridge rules to respond to each type of event\.
 

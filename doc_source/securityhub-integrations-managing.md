@@ -36,11 +36,17 @@ You can filter the list by entering text from the following fields\.
 To view information about product integrations, you can use an API call or the AWS Command Line Interface\. You can display information about all product integrations, or information about the product integrations that you have enabled\.
 
 **To view information about all available product integrations \(Security Hub API, AWS CLI\)**
-+ **Security Hub API ** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeProducts.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeProducts.html) operation\.
-+ **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/describe-products.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/describe-products.html) command\.
++ **Security Hub API ** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeProducts.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeProducts.html) operation\. To identify a specific product integration to return, use the `ProductArn` parameter to provide the integration ARN\.
++ **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/describe-products.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/describe-products.html) command\. To identify a specific product integration to return, provide the integration ARN\.
 
   ```
-  aws securityhub describe-products
+  aws securityhub describe-products --product-arn "<integrationARN>"
+  ```
+
+  **Example**
+
+  ```
+  aws securityhub describe-products --product-arn "arn:aws:securityhub:us-east-1::product/3coresec/3coresec"
   ```
 
 **To view information about product integrations you have enabled \(Security Hub API, AWS CLI\)**

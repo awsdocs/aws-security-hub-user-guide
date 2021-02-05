@@ -2,6 +2,8 @@
 
 [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) is used to update information related to a customer's processing of findings from finding providers\. It can be used by a customer or by a SIEM, ticketing, incident management, or SOAR tool that works on behalf of a customer\. [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) cannot be used to create new findings\. It can be used to update up to 100 findings at a time\.
 
+Whenever Security Hub receives a [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) request to update a finding, it automatically generates a **Security Hub Findings \- Imported** event in Amazon EventBridge\. See [Automated response and remediation](securityhub-cloudwatch-events.md)\.
+
 [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) does not change the `UpdatedAt` field for the finding\. `UpdatedAt` only reflects the most recent update from the finding provider\.
 
 ## Available fields for BatchUpdateFindings<a name="batchupdatefindings-fields"></a>

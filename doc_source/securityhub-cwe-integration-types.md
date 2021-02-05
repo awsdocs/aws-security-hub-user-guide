@@ -6,7 +6,9 @@ On the EventBridge dashboard for Security Hub, **All Events** includes all of th
 
 ## All findings \(Security Hub Findings \- Imported\)<a name="securityhub-cwe-integration-types-all-findings"></a>
 
- Security Hub automatically sends all findings to EventBridge as **Security Hub Findings \- Imported** events\. **Security Hub Findings \- Imported** events are triggered by updates from both [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) and [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+ Security Hub automatically sends all new findings and all updates to existing findings to EventBridge as **Security Hub Findings \- Imported** events\.
+
+Every [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) and [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) request triggers a **Security Hub Findings \- Imported** event\.
 
 For master accounts, the event feed in EventBridge includes events for findings from both their account and from their member accounts\.
 

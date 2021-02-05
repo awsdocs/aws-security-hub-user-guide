@@ -14,6 +14,29 @@ Security Hub administrator account is the master account, and it selects the mem
 
 Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 
+## Required permissions to designate a Security Hub administrator account<a name="designate-admin-permissions"></a>
+
+To designate a Security Hub administrator account, the organization management account must have permission for the `EnableOrganizationAdminAccount` action in Security Hub, and for the following actions in Organizations:
++ `EnableAWSServiceAccess`
++ `RegisterDelegatedAdministrator`
++ `DescribeOrganization`
+
+To grant these permissions, add the following to the relevant IAM policy:
+
+```
+{
+    "Sid": "Permissions to designate a Security Hub administrator account",
+    "Effect": "Allow",
+    "Action": [
+        "securityhub:EnableOrganizationAdminAccount",
+        "organizations:EnableAWSServiceAccess",
+        "organizations:RegisterDelegatedAdministrator",
+        "organizations:DescribeOrganization"
+    ],
+    "Resource": "*"
+}
+```
+
 ## Designating a Security Hub administrator account \(console\)<a name="designate-admin-console"></a>
 
 The organization management account can use the Security Hub console to designate the Security Hub administrator account\.

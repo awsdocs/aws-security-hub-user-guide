@@ -618,7 +618,8 @@ DynamoDB tables in on\-demand capacity mode are only limited by the DynamoDB thr
 DynamoDB tables in provisioned mode with auto scaling adjust the provisioned throughput capacity dynamically in response to traffic patterns\. For additional information on DynamoDB request throttling, see [Request throttling and burst capacity](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ProvisionedThroughput.Throttling) in the *Amazon DynamoDB Developer Guide*\.
 
 **Note**  
-This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.
+This control is not supported in AWS GovCloud \(US\-East\) or AWS GovCloud \(US\-West\)\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="dynamodb-1-remediation"></a>
 
@@ -639,6 +640,9 @@ For detailed instructions on enabling DynamoDB auto scaling on existing tables i
 This control checks whether point\-in\-time recovery \(PITR\) is enabled for an Amazon DynamoDB table\.
 
 Backups help you to recover more quickly from a security incident\. They also strengthen the resilience of your systems\. DynamoDB point\-in\-time recovery automates backups for DynamoDB tables\. It reduces the time to recover from accidental delete or write operations\. DynamoDB tables that have PITR enabled can be restored to any point in time in the last 35 days\.
+
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="dynamodb-2-remediation"></a>
 
@@ -667,6 +671,9 @@ Backups help you to recover more quickly from a security incident\. They also st
 This control checks whether a DAX cluster is encrypted at rest\. 
 
 Encrypting data at rest reduces the risk of data stored on disk being accessed by a user not authenticated to AWS\. The encryption adds another set of access controls to limit the ability of unauthorized users to access to the data\. For example, API permissions are required to decrypt the data before it can be read\.
+
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="dynamodb-3-remediation"></a>
 
@@ -711,7 +718,7 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 **Category:** Protect > Secure network configuration
 
-**Severity:** Medium 
+**Severity:** High 
 
 **Resource:** EC2 security group
 
@@ -1008,6 +1015,9 @@ The control fails if the listener is not configured with TLS or HTTPS for front\
 
 Before you start to use a load balancer, you must add one or more listeners\. A listener is a process that uses the configured protocol and port to check for connection requests\. Listeners can support both HTTP and HTTPS/TLS protocols\. You should always use an HTTPS or TLS listener, so that the load balancer does the work of encryption and decryption in transit\.
 
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
 ### Remediation<a name="elb-3-remediation"></a>
 
 **To change all noncompliant listeners to TLS/HTTP listeners**
@@ -1049,6 +1059,7 @@ This control is not supported in the following Regions:
 Africa \(Cape Town\)
 Asia Pacific \(Osaka\-Local\)
 Europe \(Milan\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="elb-4-remediation"></a>
 
@@ -1083,6 +1094,9 @@ This control checks whether the Application Load Balancer and the Classic Load B
 Elastic Load Balancing provides access logs that capture detailed information about requests sent to your load balancer\. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses\. You can use these access logs to analyze traffic patterns and to troubleshoot issues\. 
 
 To learn more, see [Access logs for your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html) in *User Guide for Classic Load Balancers*\.
+
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="elb-5-remediation"></a>
 
@@ -1733,7 +1747,7 @@ To remediate the issue, you must update the policy\. You can only update the res
 
 1. Choose **Permissions**\. The resource\-based policy shows the permissions that are applied when another account or AWS service attempts to access the function\. 
 
-1. Examine the resource\-based policy\. Identify the policy statement that has `Principal` field values that make the policy public\. For example, allowing `*"*"*` or `{ "AWS": "*" }`\.
+1. Examine the resource\-based policy\. Identify the policy statement that has `Principal` field values that make the policy public\. For example, allowing `"*"` or `{ "AWS": "*" }`\.
 
    You cannot edit the policy from the console\. To remove permissions from the function, you use the `remove-permission` command from the AWS CLI\.
 
@@ -1801,6 +1815,8 @@ For more information on supported runtimes and deprecation schedules, see the [R
 
 This control checks whether Amazon RDS snapshots are public\.
 
+This control is intended for RDS instances\. It can also return findings for snapshots of Aurora DB instances, Neptune DB instances, and Amazon DocumentDB clusters, even though they are not evaluated for public accessibility\. If these findings are not useful, you can suppress them\.
+
 RDS snapshots are used to back up the data on your RDS instances at a specific point in time\. They can be used to restore previous states of RDS instances\.
 
 An RDS snapshot must not be public unless intended\. If you share an unencrypted manual snapshot as public, this makes the snapshot available to all AWS accounts\. This may result in unintended data exposure of your RDS instance\.
@@ -1842,6 +1858,8 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 This control checks whether Amazon RDS instances are publicly accessible by evaluating the `PubliclyAccessible` field in the instance configuration item\.
 
+Neptune DB instances and Amazon DocumentDB clusters do not have the `PubliclyAccessible` flag and cannot be evaluated\. However, this control can still generate findings for these resources\. You can suppress these findings\.
+
 The `PubliclyAccessible` value in the RDS instance configuration indicates whether the DB instance is publicly accessible\. When the DB instance is configured with `PubliclyAccessible`, it is an Internet\-facing instance with a publicly resolvable DNS name, which resolves to a public IP address\. When the DB instance isn't publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address\.
 
 Unless you intend for your RDS instance to be publicly accessible, the RDS instance should not be configured with `PubliclyAccessible` value\. Doing so might allow unnecessary traffic to your database instance\.
@@ -1882,6 +1900,8 @@ For more information, see [Working with a DB instance in a VPC](https://docs.aws
 
 This control checks whether storage encryption is enabled for your Amazon RDS DB instances\.
 
+This control is intended for RDS DB instances\. However, it can also generate findings for Aurora DB instances, Neptune DB instances, and Amazon DocumentDB clusters\. If these findings are not useful, then you can suppress them\.
+
 For an added layer of security for your sensitive data in RDS DB instances, you should configure your RDS DB instances to be encrypted at rest\. To encrypt your RDS DB instances and snapshots at rest, enable the encryption option for your RDS DB instances\. Data that is encrypted at rest includes the underlying storage for DB instances, its automated backups, read replicas, and snapshots\. 
 
 RDS encrypted DB instances use the open standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your RDS DB instances\. After your data is encrypted, Amazon RDS handles authentication of access and decryption of your data transparently with a minimal impact on performance\. You do not need to modify your database client applications to use encryption\. 
@@ -1905,6 +1925,8 @@ For information about encrypting DB instances in Amazon RDS, see [Encrypting Ama
 **Parameters:** None
 
 This control checks whether RDS DB snapshots are encrypted\.
+
+This control is intended for RDS DB instances\. However, it can also generate findings for snapshots of Aurora DB instances, Neptune DB instances, and Amazon DocumentDB clusters\. If these findings are not useful, then you can suppress them\.
 
 Encrypting data at rest reduces the risk that an unauthenticated user gets access to data that is stored on disk\. Data in RDS snapshots should be encrypted at rest for an added layer of security\.
 
@@ -2006,6 +2028,8 @@ For detailed instructions on how to enable Enhanced Monitoring for your DB insta
 
 This control checks whether RDS clusters have deletion protection enabled\. 
 
+This control is intended for RDS DB instances\. However, it can also generate findings for Aurora DB instances, Neptune DB instances, and Amazon DocumentDB clusters\. If these findings are not useful, then you can suppress them\.
+
 Enabling cluster deletion protection is an additional layer of protection against accidental database deletion or deletion by an unauthorized entity\.
 
 When deletion protection is enabled, an RDS cluster cannot be deleted\. Before a deletion request can succeed, deletion protection must be disabled\.
@@ -2102,7 +2126,8 @@ This control is not supported in the following Regions:
 Africa \(Cape Town\)  
 Asia Pacific \(Osaka\-Local\)  
 China \(Ningxia\)  
-Europe \(Milan\)
+Europe \(Milan\)  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-9-remediation"></a>
 
@@ -2221,7 +2246,8 @@ Africa \(Cape Town\)
 Asia Pacific \(Hong Kong\)  
 Asia Pacific \(Osaka\-Local\)  
 China \(Beijing\)  
-China \(Ningxia\)
+China \(Ningxia\)  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-10-remediation"></a>
 
@@ -2264,6 +2290,32 @@ This control checks whether RDS DB instances have automated backups enabled and 
 
 Backups help you to recover more quickly from a security incident\. They also strengthen the resilience of your systems\. Amazon RDS provides an easy way to configure daily full instance volume snapshots\. This control checks that backups are enabled and retained for at least seven days\. For more details on Amazon RDS automated backups, see [Working with backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html) in the *Amazon RDS User Guide*\.
 
+**Note**  
+This control is only supported in US East \(N\. Virginia\) and Europe \(Frankfurt\)\. It is not supported in the following Regions:  
+US East \(Ohio\)
+US West \(N\. California\)
+US West \(Oregon\)
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\-Local\)
+Asia Pacific \(Seoul\)
+Asia Pacific \(Singapore\)
+Asia Pacific \(Sydney\)
+Asia Pacific \(Tokyo\)
+Canada \(Central\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Ireland\)
+Europe \(London\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
 ### Remediation<a name="rds-11-remediation"></a>
 
 **To enable automated backups immediately**
@@ -2302,6 +2354,9 @@ The `PubliclyAccessible` attribute of the Amazon Redshift cluster configuration 
 
 When the cluster is not publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address\. Unless you intend for your cluster to be publicly accessible, the cluster should not be configured with `PubliclyAccessible` set to `true`\.
 
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
 ### Remediation<a name="redshift-1-remediation"></a>
 
 **To disable public access to an Amazon Redshift cluster**
@@ -2333,7 +2388,8 @@ This control checks whether connections to Amazon Redshift clusters are required
 TLS can be used to help prevent potential attackers from using person\-in\-the\-middle or similar attacks to eavesdrop on or manipulate network traffic\. Only encrypted connections over TLS should be allowed\. Encrypting data in transit can affect performance\. You should test your application with this feature to understand the performance profile and the impact of TLS\. 
 
 **Note**  
-This control is not supported in Europe \(Milan\)\.
+This control is not supported in Europe \(Milan\)\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="redshift-2-remediation"></a>
 
@@ -2375,6 +2431,7 @@ Asia Pacific \(Osaka\-Local\)
 Asia Pacific \(Sydney\)
 China \(Ningxia\)
 Europe \(Milan\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="redshift-3-remediation"></a>
 
@@ -2408,7 +2465,8 @@ This control checks whether automatic major version upgrades are enabled for the
 Enabling automatic major version upgrades ensures that the latest major version updates to Amazon Redshift clusters are installed during the maintenance window\. These updates might include security patches and bug fixes\. Keeping up\-to\-date with patch installation is an important step in securing systems\.
 
 **Note**  
-This control is not supported in Middle East \(Bahrain\)\.
+This control is not supported in Middle East \(Bahrain\)\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="redshift-6-remediation"></a>
 
@@ -2827,6 +2885,9 @@ This control checks whether an SNS topic is encrypted at rest using AWS KMS\.
 
 Encrypting data at rest reduces the risk of data stored on disk being accessed by a user not authenticated to AWS\. It also adds another set of access controls to limit the ability of unauthorized users to access the data\. For example, API permissions are required to decrypt the data before it can be read\. SNS topics should be encrypted at\-rest for an added layer of security\. For more information, see [Encryption at rest](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
 ### Remediation<a name="sns-1-remediation"></a>
 
 **To encrypt an unencrypted SNS topic**
@@ -2883,7 +2944,7 @@ To determine whether your instances support Systems Manager associations, see [S
 
 **Category:** Detect > Detection services 
 
-**Severity:** Medium
+**Severity:** High
 
 **Resource:** SSM patch compliance
 

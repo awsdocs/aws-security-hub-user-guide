@@ -4,6 +4,8 @@ Finding providers use the [https://docs.aws.amazon.com/securityhub/1.0/APIRefere
 
 Customers, SIEMs, ticketing tools, and SOAR tools use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to make updates related to their processing of findings from finding providers\. See [Using BatchUpdateFindings to update a finding](finding-update-batchupdatefindings.md)\.
 
+Whenever Security Hub receives a [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) request to either create or update a finding, it automatically generates a **Security Hub Findings \- Imported** event in Amazon EventBridge\. See [Automated response and remediation](securityhub-cloudwatch-events.md)\.
+
 AWS Security Hub can only accept finding updates for accounts that have Security Hub enabled\. The finding provider also must be enabled\. If Security Hub is disabled, or the finding provider integration is not enabled, then the findings are returned in the `FailedFindings` list, with an `InvalidAccess` error\.
 
 For [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html), Security Hub accepts up to 100 findings per batch, up to 240 KB per finding, and up to 6 MB per batch\. The throttle rate limit is 10 TPS per account per Region, with a burst of 30 TPS\.

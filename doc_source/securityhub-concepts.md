@@ -39,6 +39,10 @@ The observable record of a security check or security\-related detection\.
 For more information about findings in Security Hub, see [Findings in AWS Security Hub](securityhub-findings.md)\.  
 Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in EventBridge that routes findings to your Amazon S3 bucket\.
 
+**Finding ingestion**  
+The import of findings into Security Hub from other AWS services and from third\-party partner providers\.  
+Finding ingestion events include both new findings and updates to existing findings\.
+
 **Insight**  
 A collection of related findings defined by an aggregation statement and optional filters\. An insight identifies a security area that requires attention and intervention\. Security Hub offers several managed \(default\) insights that you can't modify\. You can also create custom Security Hub insights to track security issues that are unique to your AWS environment and usage\. For more information, see [Insights in AWS Security Hub](securityhub-insights.md)\.
 

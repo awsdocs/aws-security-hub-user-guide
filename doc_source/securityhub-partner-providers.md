@@ -111,6 +111,13 @@ A SaaS platform that delivers verifiable cloud network security, advanced IAM pr
 Cloud Custodian enables users to be well managed in the cloud\. The simple YAML DSL allows easily defined rules to enable a well\-managed cloud infrastructure that's both secure and cost optimized\.  
 [Partner documentation](https://cloudcustodian.io/docs/aws/topics/securityhub.html)
 
+**[Cloud Storage Security](https://cloudstoragesec.com/) – Antivirus for Amazon S3**  
+**Integration type:** Send  
+**Product ARN:** arn:aws:securityhub:*<REGION>*::product/cloud\-storage\-security/antivirus\-for\-amazon\-s3  
+Cloud Storage Security provides cloud native anti\-malware and antivirus scanning for Amazon S3 objects\.  
+Antivirus for Amazon S3 offers real time and scheduled scans of objects and files in Amazon S3 for malware and threats\. It provides visibility and remediation for problem and infected files\.  
+[Partner documentation](https://help.cloudstoragesec.com/console-overview/console-settings/#send-scan-result-findings-to-aws-security-hub)
+
 **[cloudtamer\.io](https://www.cloudtamer.io/partners/aws/) – cloudtamer\.io**  
 **Integration type:** Send and receive  
 **Product ARN:** arn:aws:securityhub:*<REGION>*::product/cloudtamerio/cloudtamerio  

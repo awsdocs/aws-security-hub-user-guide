@@ -192,7 +192,7 @@ Findings are deleted 90 days after the most recent update or 90 days after the c
 
 **[`Action`](#asff-action)**  
 Optional  
-Provides details about an action that was detected for the finding\.  
+Provides details about an action that affects or that was taken on a resource\.  
 **Type:** Object
 
 **[`Compliance`](#asff-compliance)**  
@@ -523,7 +523,7 @@ The workflow state of a finding\. Findings products can provide the value of `NE
 
 ## Action<a name="asff-action"></a>
 
-The `Action` object provides details about an action that were detected for the finding\. The action can be one of the following:
+The `Action` object provides details about an action that affects or that was taken on a resource\. The action can be one of the following:
 + A remote IP address issued an AWS API call
 + A DNS request was received
 + A remote IP address attempted to connect to an EC2 instance

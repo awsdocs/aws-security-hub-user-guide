@@ -6,6 +6,8 @@ Master and member accounts have access to the following Security Hub actions\. I
 
 A dash \(–\) indicates that the account cannot perform the action\.
 
+This table reflects the default permissions for master and member accounts\. You can use custom IAM policies to further restrict access to Security Hub features and functions\. For guidance and examples, see the blog post[ Aligning IAM policies to user personas for AWS Security Hub](http://aws.amazon.com/blogs/security/aligning-iam-policies-to-user-personas-for-aws-security-hub/)\.
+
 
 |  Action  |  Security Hub administrator \(Organization\)  |  Master account \(Invitation\)  |  Member \(Organization\)  |  Member \(Invitation\)  | 
 | --- | --- | --- | --- | --- | 

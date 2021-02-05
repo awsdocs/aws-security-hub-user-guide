@@ -566,7 +566,7 @@ The administrator of the specified account can grant permission to assume this r
 
 ## 1\.22 – Ensure IAM policies that allow full "\*:\*" administrative privileges are not created<a name="securityhub-cis-controls-1.22"></a>
 
-**Severity:** Critical
+**Severity:** High
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
 
@@ -868,7 +868,7 @@ You might need to modify the policy for CloudTrail to successfully interact with
 
 ## 2\.8 – Ensure rotation for customer\-created CMKs is enabled<a name="securityhub-cis-controls-2.8"></a>
 
-**Severity:** High
+**Severity:** Medium
 
 **AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
@@ -993,21 +993,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, for **Statistic**, choose **Average**\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1100,21 +1094,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1207,21 +1195,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1314,21 +1296,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, for **Statistic**, choose **Average**\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1421,21 +1397,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1528,21 +1498,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1635,21 +1599,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1742,21 +1700,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, for **Statistic**, choose **Average**\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1849,21 +1801,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -1956,21 +1902,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -2063,21 +2003,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -2170,21 +2104,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, leave the default values\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -2277,21 +2205,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, for **Statistic**, choose **Average**\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -2384,21 +2306,15 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. Choose the **Metric filters** tab, then choose the metric filter that you just created\.
+
+   To choose the metric filter, select the check box at the upper right\.
 
 1. Choose **Create Alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
 
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
+   1. Under **Metric**, for **Statistic**, choose **Average**\. For more information about the available statistics, see [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
