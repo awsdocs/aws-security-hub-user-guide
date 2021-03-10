@@ -1,6 +1,6 @@
 # Managing member accounts that are not in an organization<a name="account-management-manual"></a>
 
-AWS Security Hub also supports a manual invitation process\. This process is only used for accounts that do not belong to an organization in AWS Organizations\. You might not use AWS Organizations, or you might have accounts that are not part of the organization\. For example, you might not include a test account in your organization\.
+AWS Security Hub also supports a manual invitation process\. This process is intended for accounts that do not belong to an organization in AWS Organizations\. You might not use AWS Organizations, or you might have accounts that are not part of the organization\. For example, you might not include a test account in your organization\.
 
 On the **Accounts** tab of the **Settings** page, accounts that are not part of an organization have **Type** set to **By invitation**\.
 

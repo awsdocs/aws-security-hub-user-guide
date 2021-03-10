@@ -4,7 +4,7 @@ For the CIS AWS Foundations standard, Security Hub supports the following contro
 
 ## 1\.1 – Avoid the use of the "root" account<a name="securityhub-standards-cis-controls-1.1"></a>
 
-**Severity:** Critical
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -605,6 +605,8 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 + Ensuring that a multi\-Region trail exists ensures that Global Service Logging is enabled for a trail by default to capture recording of events generated on AWS global services
 + For a multi\-Region trail, ensuring that management events configured for all type of Read/Writes ensures recording of management operations that are performed on all resources in an AWS account
 
+By default, CloudTrail trails that are created using the AWS Management Console are multi\-Region trails\.
+
 ### Remediation<a name="cis-2.1-remediation"></a>
 
 **To create a new trail in CloudTrail**
@@ -616,8 +618,6 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 1. Choose **Trails** and then choose **Create trail**\.
 
 1. Enter a name for the trail\.
-
-1. For **Apply trail to all regions**, choose **Yes**\.
 
 1. Under **Storage location**, do one of the following:
    + To create a new S3 bucket for CloudTrail logs, choose **Yes** next to **Create a new S3 bucket** and then enter a name for the bucket\.
@@ -636,8 +636,6 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 1. Choose the name of the trail in the **Name** column\.
 
 1. Choose the pencil icon for the **Trail settings**\.
-
-1. For **Apply trail to all regions**, choose **Yes** and then choose **Save**\.
 
 1. Choose the pencil icon for the **Management events**\.
 
@@ -667,9 +665,11 @@ Security Hub recommends that you enable file validation on all trails\. Enabling
 
 1. Choose the name of a trail to edit in the **Name** column\.
 
-1. Choose the pencil icon for the **Storage location**\.
+1. Under **General details**, choose **Edit**\.
 
-1. For **Enable log file validation**, choose **Yes** and then choose **Save**\.
+1. Under **Additional settings**, for **Log file validation**, select **Enabled**\.
+
+1. Choose **Save**\.
 
 ## 2\.3 – Ensure the S3 bucket CloudTrail logs to is not publicly accessible<a name="securityhub-cis-controls-2.3"></a>
 
@@ -728,26 +728,22 @@ Sending CloudTrail logs to CloudWatch Logs facilitates real\-time and historic a
 
 1. Choose a trail that there is no value for in the **CloudWatch Logs Log group** column\.
 
-1. Scroll down to the **CloudWatch Logs** section and then choose **Configure**\.
+1. Scroll down to the **CloudWatch Logs** section and then choose **Edit**\.
 
-1. In the **New or existing log group** field, do one of the following:
+1. Select the **Enabled** check box\.
+
+1. For **Log group** field, do one of the following:
    + To use the default log group, keep the name as is\.
-   + To use an existing log group, enter the name of the log group to use\.
-   + To create a new log group, enter a name for the log group to create\.
+   + To use an existing log group, choose **Existing** and then enter the name of the log group to use\.
+   + To create a new log group, choose **New** and then enter a name for the log group to create\.
 
-1. Choose **Continue**\.
+1. For **IAM role**, do one of the following:
+   + To use an existing role, choose **Existing** and then choose the role from the drop\-down list\.
+   + To create a new role, choose **New** and then enter a name for the role to create\. The new role is assigned a policy that grants the necessary permissions\.
 
-1. Do one of the following:
-   + To use the default IAM role, go to the next step\.
-   + To specify the role to use, choose **View Details**\.
+     To view the permissions granted to the role, expand the **Policy document**\.
 
-     1. For **IAM role**, do one of the following:
-       + Choose the **CloudTrail\_CloudWatchLogs\_role** and then select the policy to use in the **Policy Name** drop\-down list\.
-       + Choose **Create a new IAM Role** and then enter a name for the role to create\.
-
-         A role is created and assigned a policy that grants the necessary permissions\.
-
-1. Choose **Allow**\.
+1. Choose **Save changes**\.
 
 For more information, see [Configuring CloudWatch Logs monitoring with the console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/send-cloudtrail-events-to-cloudwatch-logs.html#send-cloudtrail-events-to-cloudwatch-logs-console) in the *AWS CloudTrail User Guide*\.
 
@@ -926,7 +922,7 @@ Security Hub recommends that you enable flow logging for packet rejects for VPCs
 
 ## 3\.1 – Ensure a log metric filter and alarm exist for unauthorized API calls<a name="securityhub-cis-controls-3.1"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1027,7 +1023,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.2 – Ensure a log metric filter and alarm exist for AWS Management Console sign\-in without MFA<a name="securityhub-cis-controls-3.2"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1128,7 +1124,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.3 – Ensure a log metric filter and alarm exist for usage of "root" account<a name="securityhub-cis-controls-3.3"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1229,7 +1225,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.4 – Ensure a log metric filter and alarm exist for IAM policy changes<a name="securityhub-cis-controls-3.4"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1330,7 +1326,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.5 – Ensure a log metric filter and alarm exist for CloudTrail configuration changes<a name="securityhub-cis-controls-3.5"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1431,7 +1427,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.6 – Ensure a log metric filter and alarm exist for AWS Management Console authentication failures<a name="securityhub-cis-controls-3.6"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1532,7 +1528,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.7 – Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs<a name="securityhub-cis-controls-3.7"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1633,7 +1629,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.8 – Ensure a log metric filter and alarm exist for S3 bucket policy changes<a name="securityhub-cis-controls-3.8"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1734,7 +1730,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.9 – Ensure a log metric filter and alarm exist for AWS Config configuration changes<a name="securityhub-cis-controls-3.9"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1835,7 +1831,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.10 – Ensure a log metric filter and alarm exist for security group changes<a name="securityhub-cis-controls-3.10"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -1936,7 +1932,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.11 – Ensure a log metric filter and alarm exist for changes to Network Access Control Lists \(NACL\)<a name="securityhub-cis-controls-3.11"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -2037,7 +2033,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.12 – Ensure a log metric filter and alarm exist for changes to network gateways<a name="securityhub-cis-controls-3.12"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -2138,7 +2134,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.13 – Ensure a log metric filter and alarm exist for route table changes<a name="securityhub-cis-controls-3.13"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -2239,7 +2235,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 ## 3\.14 – Ensure a log metric filter and alarm exist for VPC changes<a name="securityhub-cis-controls-3.14"></a>
 
-**Severity:** Medium
+**Severity:** Low
 
 **AWS Config** rule: None
 
@@ -2402,7 +2398,7 @@ Perform the following steps for each security group associated with a VPC\.
 
 ## 4\.3 – Ensure the default security group of every VPC restricts all traffic<a name="securityhub-cis-controls-4.3"></a>
 
-**Severity:** Medium
+**Severity:** High
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
 

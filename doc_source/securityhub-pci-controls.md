@@ -78,17 +78,17 @@ These are methods used to render PAN unreadable\.
 
 1. Choose the trail to update\.
 
-1. Under **Storage** location, to edit the settings, choose the pencil icon\.
+1. Under **General details**, choose **Edit**\.
 
-1. For **Encrypt log files with SSE\-KMS**, choose **Yes**\.
+1. For **Log file SSE\-KMS encryption**, select **Enabled**\.
 
-1. For **Create a new KMS key**, do one of the following: 
-   + To create a key, choose **Yes** and then in **KMS key**, enter an alias for the key\. The key is created in the same Region as the S3 bucket\.
-   + To use an existing key, choose **No** and then from **KMS key**, select the key\. 
+1. Under **AWS KMS customer managed CMK**, do one of the following: 
+   + To create a key, choose **New**\. Then in **AWS KMS alias**, enter an alias for the key\. The key is created in the same Region as the S3 bucket\.
+   + To use an existing key, choose **Existing** and then from **AWS KMS alias**, select the key\. 
 
      The AWS KMS key and S3 bucket must be in the same Region\.
 
-1. Choose **Save**\.
+1. Choose **Save changes**\.
 
 You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information on encrypting CloudTrail log files with AWS KMS managed keys \(SSE\-KMS\), see the [https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console)\.
 
@@ -175,8 +175,6 @@ You can find the identity of the resource in the `eventSource` section of the Cl
 
    As a best practice, use a name that quickly identifies the purpose of the trail\. In this case, you're creating a trail that logs management events\.
 
-1. For **Apply trail to all regions**, keep the default **Yes**\.
-
 1. In **Management Events**, make sure **Read/Write events** is set to **All**\.
 
 1. In **Data Events**, do not make any changes\. This trail will not log any data events\. 
@@ -235,9 +233,9 @@ This is a method that helps to ensure file\-integrity monitoring or change\-dete
 
 1. In the **Name** column, choose the name of a trail to edit\.
 
-1. Choose the pencil icon for the **Storage location**\.
+1. Under **General details**, choose **Edit**\.
 
-1. For **Enable log file validation**, choose **Yes**\.
+1. Under **Additional settings**, for **Log file validation**, select **Enabled**\.
 
 1. Choose **Save**\. 
 
@@ -275,30 +273,24 @@ CloudWatch Logs is a native way to promptly back up audit trail files\.
 
 1. Choose a trail that there is no value for in the **CloudWatch Logs Log group** column\. 
 
-1. Scroll down to the **CloudWatch Logs** section and then choose **Configure**\. 
+1. Scroll down to the **CloudWatch Logs** section and then choose **Edit**\. 
 
-1. For **New or existing log group**, do one of the following:
+1. For **Log group** field, do one of the following:
    + To use the default log group, keep the name as is\.
-   + To use an existing log group, enter the name of the log group to use\.
-   + To create a new log group, enter a name for the log group to create\.
+   + To use an existing log group, choose **Existing** and then enter the name of the log group to use\.
+   + To create a new log group, choose **New** and then enter a name for the log group to create\.
 
 1. Choose **Continue**\.
 
-1. You can either use the default IAM role, or specify a role\.
+1. For **IAM role**, do one of the following:
+   + To use an existing role, choose **Existing** and then choose the role from the drop\-down list\.
+   + To create a new role, choose **New** and then enter a name for the role to create\.
 
-   To use the default IAM role, go to the next step\.
+     The new role is assigned a policy that grants the necessary permissions\.
 
-   To specify the role to use:
+   To view the permissions granted to the role, expand the **Policy document**\.
 
-   1. Choose **View Details**\.
-
-   1. For **IAM role**, do one of the following: 
-      + Choose the **CloudTrail\_CloudWatchLogs\_role** and then from **Policy Name**, choose the policy to use\.
-      + Choose **Create a new IAM Role** and then enter the name of the role to create\.
-
-        The new role is assigned a policy that grants the necessary permissions\.
-
-1. Choose **Allow**\. 
+1. Choose **Save changes**\. 
 
 For more information about configuring CloudWatch Logs monitoring with the console, see the [https://docs.aws.amazon.com/awscloudtrail/latest/userguide/send-cloudtrail-events-to-cloudwatch-logs.html#send-cloudtrail-events-to-cloudwatch-logs-console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/send-cloudtrail-events-to-cloudwatch-logs.html#send-cloudtrail-events-to-cloudwatch-logs-console)\.
 
@@ -1119,13 +1111,7 @@ GuardDuty can help to meet requirement 11\.4 by monitoring traffic at the perime
 
 To remediate this issue, you enable GuardDuty\.
 
-**To enable GuardDuty**
-
-1. Open the GuardDuty console at [https://console\.aws\.amazon\.com/guardduty/](https://console.aws.amazon.com/guardduty/)\.
-
-1. Choose **Get Started**\.
-
-1. Choose **Enable GuardDuty**\.
+For details on how to enable GuardDuty, including how to use AWS Organizations to manage multiple accounts, see [Getting started with GuardDuty](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_settingup.html) in the *Amazon GuardDuty User Guide*\.
 
 ## \[PCI\.IAM\.1\] IAM root user access key should not exist<a name="pcidss-iam-1"></a>
 
