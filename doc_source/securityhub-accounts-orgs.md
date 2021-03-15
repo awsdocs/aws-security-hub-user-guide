@@ -5,6 +5,10 @@ For organization accounts, the Security Hub administrator account can perform th
 + Automatically enable new organization accounts as they are added to the organization\.
 + Disassociate accounts that belong to the organization\. They cannot delete organization accounts\. 
 
+To grant the required permissions for the Security Hub administrator account to manage the organization accounts, attach the following managed policies to the principal\.
++ [`AWSSecurityHubFullAccess`](security-iam-awsmanpol.md#security-iam-awsmanpol-awssecurityhubfullaccess)
++ [`AWSSecurityHubOrganizationsAccess`](security-iam-awsmanpol.md#security-iam-awsmanpol-awssecurityhuborganizationsaccess)
+
 For the Security Hub administrator account, the **Accounts** page displays a message that contains an **Enable** option\. The message displays if the Security Hub administrator account has not enabled the option to automatically enable new organization accounts\.
 
 When you choose **Enable**, Security Hub performs the following actions:

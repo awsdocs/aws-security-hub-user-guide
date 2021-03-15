@@ -12,30 +12,7 @@ If you enable the integration with AWS Organizations, then accounts in your orga
 
 Accounts that are not managed using Organizations must enable Security Hub manually\. The IAM identity \(user, role, or group\) that you use to enable Security Hub must have the required permissions\.
 
-To grant the permissions required to enable Security Hub, attach the following policy to an IAM user, group, or role\.
-
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "securityhub:*",
-            "Resource": "*"    
-        },
-        {
-            "Effect": "Allow",
-            "Action": "iam:CreateServiceLinkedRole",
-            "Resource": "*",
-            "Condition": {
-                "StringLike": {
-                    "iam:AWSServiceName": "securityhub.amazonaws.com"
-                }
-            }
-        }
-    ]
-}
-```
+To grant the permissions required to enable Security Hub, attach the Security Hub managed policy [`AWSSecurityHubFullAccess`](security-iam-awsmanpol.md#security-iam-awsmanpol-awssecurityhubfullaccess) to an IAM user, group, or role\.
 
 ## Enabling Security Hub \(console\)<a name="securityhub-enable-console"></a>
 
@@ -94,4 +71,4 @@ There is a corresponding script to disable Security Hub across accounts and Regi
 The readme file provides details on how to use the script\. It includes the following information:
 + How to add the required IAM policy to the accounts
 + How to configure the execution environment
-+ How to execute the script
++ How to run the script

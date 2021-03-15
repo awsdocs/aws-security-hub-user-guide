@@ -10,6 +10,8 @@ This documentation helps you understand how to apply the shared responsibility m
 
 **Topics**
 + [Data protection in AWS Security Hub](data-protection.md)
-+ [Identity and access management for AWS Security Hub](security-iam.md)
++ [AWS Identity and Access Management for AWS Security Hub](security-iam.md)
++ [Using service\-linked roles for AWS Security Hub](using-service-linked-roles.md)
++ [AWS managed policies for AWS Security Hub](security-iam-awsmanpol.md)
 + [Compliance validation for AWS Security Hub](SERVICENAME-compliance.md)
 + [Infrastructure security in AWS Security Hub](infrastructure-security.md)
