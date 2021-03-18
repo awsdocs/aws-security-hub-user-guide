@@ -1,6 +1,6 @@
 # ASFF syntax<a name="securityhub-findings-format-syntax"></a>
 
-The following is the syntax of the complete finding JSON in the AWS Security Finding Format \(ASFF\)\.
+The following is the complete JSON syntax for the AWS Security Finding Format \(ASFF\)\.
 
 ```
 "Findings": [ 
@@ -128,6 +128,21 @@ The following is the syntax of the complete finding JSON in the AWS Security Fin
         "CreatedAt": "string",
         "Criticality": number,
         "Description": "string",
+        "FindingProviderFields": {
+            "Confidence": number,
+            "Criticality": number,
+            "RelatedFindings":[
+                {
+                    "ProductArn": "string", 
+                    "Id": "string" 
+                }
+            ],
+            "Severity": {
+                "Label": "string", 
+                "Original": "string"
+            },
+            "Types": [ "string" ]
+        },
         "FirstObservedAt": "string",
         "GeneratorId": "string",
         "Id": "string",
@@ -250,6 +265,130 @@ The following is the syntax of the complete finding JSON in the AWS Security Fin
         },
         "Resources": [ 
             { 
+                "DataClassification": {
+                    "DetailedResultsLocation": "string",
+                    "Result": {
+                        "AdditionalOccurrences": boolean,
+                        "CustomDataIdentifiers": {
+                            "Detections": [
+                                {
+                                    "Arn": "string",
+                                    "Count": integer,
+                                    "Name": "string",
+                                    "Occurrences": {
+                                        "Cells": [
+                                            {
+                                                "CellReference": "string",
+                                                "Column": integer,
+                                                "ColumnName": "string",
+                                                "Row": integer
+                                            }
+                                        ],
+                                        "LineRanges": [
+                                            {
+                                                "End": integer,
+                                                "Start": integer,
+                                                "StartColumn": integer
+                                             }
+                                         ],
+                                        "OffsetRanges": [
+                                            {
+                                                "End": integer,
+                                                "Start": integer,
+                                                "StartColumn": integer
+                                            }
+                                        ],
+                                        "Pages": [
+                                            {
+                                                "LineRange": {
+                                                    "End": integer,
+                                                    "Start": integer,
+                                                    "StartColumn": integer
+                                                },
+                                                "OffsetRange": {
+                                                    "End": integer,
+                                                    "Start": integer,
+                                                    "StartColumn": integer
+                                                },
+                                                "PageNumber": integer
+                                            }
+                                        ],
+                                        "Records": [
+                                            {
+                                               "JsonPath": "string",
+                                               "RecordIndex": integer
+                                            }
+                                        ],
+                                    }
+                                }
+                            ],
+                            "TotalCount": integer
+                        },
+                        "MimeType": "string",
+                        "SensitiveData": [
+                            {
+                                "Category": "string",
+                                "Detections": [
+                                    {
+                                        "Count": integer,
+                                        "Occurrences": {
+                                            "Cells": [
+                                                {
+                                                    "CellReference": "string",
+                                                    "Column": integer,
+                                                    "ColumnName": "string",
+                                                    "Row": integer
+                                                }
+                                            ],
+                                            "LineRanges": [
+                                                {
+                                                    "End": integer,
+                                                    "Start": integer,
+                                                    "StartColumn": integer
+                                                }
+                                            ],
+                                            "OffsetRanges": [
+                                                {
+                                                    "End": integer,
+                                                    "Start": integer,
+                                                    "StartColumn": integer
+                                                }
+                                            ],
+                                            "Pages": [
+                                                {
+                                                    "LineRange": {
+                                                        "End": integer,
+                                                        "Start": integer,
+                                                        "StartColumn": integer
+                                                    },
+                                                    "OffsetRange": {
+                                                        "End": integer,
+                                                        "Start": integer,
+                                                        "StartColumn": integer
+                                                    },
+                                                    "PageNumber": integer
+                                                }
+                                            ],
+                                            "Records": [
+                                                {
+                                                    "JsonPath": "string",
+                                                    "RecordIndex": integer
+                                                }
+                                            ]
+                                        },
+                                        "Type": "string"
+                                    }
+                                ],
+                                "TotalCount": integer
+                            }
+                        ],
+                        "SizeClassified": integer,
+                        "Status": {
+                            "Code": "string",
+                            "Reason": "string"
+                        }
+                    }
+                },
                 "Details": { 
                     "AwsApiGatewayRestApi": {
                         "ApiKeySource": "string",
@@ -1471,10 +1610,22 @@ The following is the syntax of the complete finding JSON in the AWS Security Fin
                             }
                         ]
                     },
+                    "AwsS3AccountPublicAccessBlock": {
+                        "BlockPublicAcls": boolean,
+                        "BlockPublicPolicy": boolean,
+                        "IgnorePublicAcls": boolean,
+                        "RestrictPublicBuckets": boolean
+                    },
                     "AwsS3Bucket": { 
                         "CreatedAt": "string",
                         "OwnerId": "string",
                         "OwnerName": "string",
+                        "PublicAccessBlockConfiguration": {
+                            "BlockPublicAcls": boolean,
+                            "BlockPublicPolicy": boolean,
+                            "IgnorePublicAcls": boolean,
+                            "RestrictPublicBuckets": boolean
+                        },
                         "ServerSideEncryptionConfiguration": {
                             "Rules": [
                                 {

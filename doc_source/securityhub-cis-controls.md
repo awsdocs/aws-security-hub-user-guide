@@ -6,7 +6,7 @@ For the CIS AWS Foundations standard, Security Hub supports the following contro
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 The root account has unrestricted access to all resources in the AWS account\. We highly recommend that you avoid using this account\. The root account is the most privileged account\. Minimizing the use of this account and adopting the principle of least privilege for access management reduces the risk of accidental changes and unintended disclosure of highly privileged credentials\.
 
@@ -165,7 +165,7 @@ After you identify the inactive accounts or unused credentials, use the followin
 
 **Severity:** Medium
 
-**AWS Config managed rule:** [https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html](https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html](https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html)
 
 Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS\. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface \(AWS CLI\), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services\.
 
@@ -751,7 +751,7 @@ For more information, see [Configuring CloudWatch Logs monitoring with the conso
 
 **Severity:** Medium
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 AWS Config is a web service that performs configuration management of supported AWS resources in your account and delivers log files to you\. The recorded information includes the configuration item \(AWS resource\), relationships between configuration items \(AWS resources\), and any configuration changes between resources\.
 
@@ -866,7 +866,7 @@ You might need to modify the policy for CloudTrail to successfully interact with
 
 **Severity:** Medium
 
-**AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
 AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the CMK\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\.
 
@@ -924,7 +924,7 @@ Security Hub recommends that you enable flow logging for packet rejects for VPCs
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1025,7 +1025,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1126,7 +1126,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1227,7 +1227,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1328,7 +1328,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1429,7 +1429,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1530,7 +1530,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1631,7 +1631,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1732,7 +1732,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
@@ -1833,7 +1833,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Security groups are a stateful packet filter that controls ingress and egress traffic in a VPC\.
 
@@ -1934,7 +1934,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. NACLs are used as a stateless packet filter to control ingress and egress traffic for subnets in a VPC\.
 
@@ -2035,7 +2035,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Network gateways are required to send and receive traffic to a destination outside a VPC\.
 
@@ -2136,7 +2136,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Routing tables route network traffic between subnets and to network gateways\.
 
@@ -2237,7 +2237,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 **Severity:** Low
 
-**AWS Config** rule: None
+**AWS Config rule:** None
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. You can have more than one VPC in an account, and you can create a peer connection between two VPCs, enabling network traffic to route between VPCs\.
 

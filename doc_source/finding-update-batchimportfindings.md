@@ -18,22 +18,63 @@ If `ID` does match an existing finding, then Security Hub checks the `UpdatedAt`
 + If `UpdatedAt` on the update occurs before `UpdatedAt` on the existing finding, then the update is ignored\.
 + If `UpdatedAt` on the update occurs after `UpdatedAt` on the existing finding, then the existing finding is updated\.
 
-## Restricted fields for BatchImportFindings<a name="batchimportfindings-restricted-fields"></a>
+## Restricted attributes for BatchImportFindings<a name="batchimportfindings-restricted-fields"></a>
 
-For an existing finding, finding providers cannot use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) to update the following fields and objects\. These fields can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+For an existing finding, finding providers cannot use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) to update the following attributes and objects\. These attributes can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 + `Note`
 + `UserDefinedFields`
 + `VerificationState`
 + `Workflow`
 
-Any content in those fields and objects is ignored\.
+Security Hub ignores any content in [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) for those attributes and objects\. Customers, or other providers acting on their behalf, use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update them\.
 
-For these fields, finding providers can only use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) to update the fields if they have not been updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+## Using FindingProviderFields<a name="batchimportfindings-findingproviderfields"></a>
+
+Finding providers also should not use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) to update the following attributes\.
 + `Confidence`
 + `Criticality`
 + `RelatedFindings`
 + `Severity`
 + `Types`
+
+Instead, finding providers use the [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields) object to provide values for these attributes\.
+
+**Example**
+
+```
+"FindingProviderFields": {
+    "Confidence": 42,
+    "Criticality": 99,
+    "RelatedFindings":[
+      { 
+        "ProductArn": "arn:aws:securityhub:us-west-2::product/aws/guardduty", 
+        "Id": "123e4567-e89b-12d3-a456-426655440000" 
+      }
+    ],
+    "Severity": {
+        "Label": "MEDIUM", 
+        "Original": "MEDIUM"
+    },
+    "Types": [ "Software and Configuration Checks/Vulnerabilities/CVE" ]
+}
+```
+
+For [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) requests, Security Hub handles values in the top\-level attributes and in [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields) as follows\.
+
+**\(Preferred\) [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for an attribute in [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields), but does not provide a value for the corresponding top\-level attribute\.**  
+For example, [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides `FindingProviderFields.Confidence`, but does not provide `Confidence`\. This is the preferred option for [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) requests\.  
+Security Hub updates the value of the attribute in [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields)\.  
+It replicates the value to the top\-level attribute only if the attribute was not already updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+
+**[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for a top\-level attribute, but does not provide a value for the corresponding attribute in [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields)\.**  
+For example, [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides `Confidence`, but does not provide `FindingProviderFields.Confidence`\.  
+Security Hub uses the value to update the attribute in [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields)\. It overwrites any existing value\.  
+Security Hub updates the top\-level attribute only if the attribute was not already updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+
+**[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for both a top\-level attribute and the corresponding attribute in [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields)\.**  
+For example, [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides both `Confidence` and `FindingProviderFields.Confidence`\.  
+For a new finding, Security Hub uses the value in [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields) to populate both the top\-level attribute and the corresponding attribute in [`FindingProviderFields`](securityhub-findings-format-attributes.md#asff-findingproviderfields)\. It does not use the provided top\-level attribute value\.  
+For an existing finding, Security Hub uses both values\. However, it updates the top\-level attribute value only if the attribute was not already updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
 ## Using the batch\-import\-findings command from the AWS CLI<a name="batchimportfindings-command-line"></a>
 
@@ -49,6 +90,15 @@ aws securityhub batch-import-findings --findings '
         "AwsAccountId": "123456789012",
         "CreatedAt": "2019-08-07T17:05:54.832Z",
         "Description": "Vulnerability in a CloudTrail trail",
+        "FindingProviderFields": {
+            "Severity": {
+                "Label": INFORMATIONAL,
+                "Original": 0
+            },
+            "Types": [
+                "Software and Configuration Checks/Vulnerabilities/CVE"
+            ]
+        },
         "GeneratorId": "TestGeneratorId",
         "Id": "Id1",
         "ProductArn": "arn:aws:securityhub:us-west-1:123456789012:product/123456789012/default",
@@ -61,14 +111,7 @@ aws securityhub batch-import-findings --findings '
             }
         ],
         "SchemaVersion": "2018-10-08",
-        "Severity": {
-            "Label": INFORMATIONAL,
-            "Original": 0
-        },
         "Title": "CloudTrail trail vulnerability",
-        "Types": [
-            "Software and Configuration Checks/Vulnerabilities/CVE"
-        ],
         "UpdatedAt": "2020-06-02T16:05:54.832Z"
     }]'
 ```
