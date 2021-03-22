@@ -11,6 +11,7 @@ If you are not integrated with Organizations, member accounts accept an invitati
 
 **Topics**
 + [Restrictions and recommendations](securityhub-account-restrictions-recommendations.md)
++ [Making the transition to AWS Organizations for account management](accounts-transition-to-orgs.md)
 + [Allowed actions for accounts](securityhub-accounts-allowed-actions.md)
 + [Designating a Security Hub administrator account](designate-orgs-admin-account.md)
 + [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)

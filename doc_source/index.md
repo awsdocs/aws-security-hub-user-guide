@@ -37,6 +37,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Infrastructure security in AWS Security Hub](infrastructure-security.md)
 + [Managing master and member accounts](securityhub-accounts.md)
    + [Restrictions and recommendations](securityhub-account-restrictions-recommendations.md)
+   + [Making the transition to AWS Organizations for account management](accounts-transition-to-orgs.md)
    + [Allowed actions for accounts](securityhub-accounts-allowed-actions.md)
    + [Designating a Security Hub administrator account](designate-orgs-admin-account.md)
    + [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)
