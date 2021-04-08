@@ -145,19 +145,19 @@ FireEye Helix is a cloud\-hosted security operations platform that allows organi
 
 **[Forcepoint](https://www.forcepoint.com/platform/technology-partners/securing-your-amazon-web-services-aws-workloads) – Forcepoint CASB**  
 **Integration type:** Send  
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-casb`  
+**Product ARN:** `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-casb`  
 Forcepoint CASB allows you to discover cloud application use, analyze risk, and enforce appropriate controls for SaaS and custom applications\.  
 [Partner documentation](https://frcpnt.com/casb-securityhub)
 
 **[Forcepoint](https://www.forcepoint.com/platform/technology-partners/securing-your-amazon-web-services-aws-workloads) – Forcepoint DLP**  
 **Integration type:** Send  
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-dlp`  
+**Product ARN:** `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-dlp`  
 Forcepoint DLP addresses human\-centric risk with visibility and control everywhere your people work and everywhere your data resides\.  
 [Partner documentation](https://frcpnt.com/dlp-securityhub)
 
 **[Forcepoint](https://www.forcepoint.com/platform/technology-partners/securing-your-amazon-web-services-aws-workloads) – Forcepoint NGFW**  
 **Integration type:** Send  
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-ngfw`  
+**Product ARN:** `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-ngfw`  
 Forcepoint NGFW lets you connect your AWS environment into your enterprise network with the scalability, protection, and insights needed to manage your network and respond to threats\.  
 [Partner documentation](https://frcpnt.com/ngfw-securityhub)
 
@@ -215,7 +215,7 @@ Protects your AWS deployment with cloud security analytics, advanced threat dete
 
 **[Palo Alto Networks](https://github.com/PaloAltoNetworks/pan_aws_security_hub) – VM\-Series**  
 **Integration type:** Receive  
-Palo Alto VM\-Series integration with AWS Security Hub collects threat intelligence and sends it to the VM\-Series Next\-gen firewall as an automatic security policy update that blocks malicious \(IP address\) activity\.  
+Palo Alto VM\-Series integration with Security Hub collects threat intelligence and sends it to the VM\-Series Next\-gen firewall as an automatic security policy update that blocks malicious \(IP address\) activity\.  
 [Partner documentation](https://github.com/PaloAltoNetworks/pan_aws_security_hub)
 
 **[Prowler](https://github.com/toniblyx/prowler/#security-hub-integration)**  

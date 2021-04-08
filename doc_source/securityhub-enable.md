@@ -38,7 +38,7 @@ When you enable Security Hub from the console, you also have the option to enabl
 
 To enable Security Hub, you can use an API call or the AWS Command Line Interface\.
 
-**To enable Security Hub \(Security Hub API, AWS CLI\)**
+**To enable Security Hub \(Security HubAPI, AWS CLI\)**
 + **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_EnableSecurityHub.html) operation\. When you enable Security Hub from the API, it automatically enables these security standards\.
   + CIS AWS Foundations Benchmark
   + AWS Foundational Security Best Practices Standard

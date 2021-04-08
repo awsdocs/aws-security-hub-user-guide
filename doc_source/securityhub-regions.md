@@ -11,6 +11,7 @@ The China \(Beijing\) and China \(Ningxia\) Regions do not support the Security 
 Some integrations are not available in all Regions\. If an integration is not supported, it is not listed on the **Integrations** page\.
 
 The China \(Beijing\) and China \(Ningxia\) Regions only support the following integrations with AWS services:
++ Amazon GuardDuty
 + IAM Access Analyzer
 + Systems Manager Patch Manager
 

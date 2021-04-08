@@ -4,7 +4,10 @@ Security Hub supports integrations with several AWS services\.
 
 **Note**  
 Some integrations are not available in Africa \(Cape Town\), Asia Pacific \(Hong Kong\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.  
-The China \(Beijing\) and China \(Ningxia\) Regions only support the integrations with IAM Access Analyzer and Systems Manager Patch Manager\.
+The China \(Beijing\) and China \(Ningxia\) Regions only support the integrations with the following services:  
+Amazon GuardDuty
+IAM Access Analyzer
+Systems Manager Patch Manager
 
 For these services, the integration allows the service to send findings to Security Hub:
 + [AWS Firewall Manager](#integration-aws-firewall-manager)
@@ -19,8 +22,8 @@ Security Hub also supports integrations with [AWS Audit Manager](#integration-aw
 Here are the details about each AWS service integration\.
 
 **AWS Audit Manager**  <a name="integration-aws-audit-manager"></a>
-Security Hub sends findings to AWS Audit Manager for controls from the PCI DSS and Foundational Security Best Practices standards\. These findings help Audit Manager users to prepare for audits\.  
-To learn more about Audit Manager, see the [https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html](https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html)\.
+Security Hub sends control findings to Audit Manager\. These findings help Audit Manager users to prepare for audits\.  
+To learn more about Audit Manager, see the [https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html](https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html)\. [AWS Security Hub checks supported by AWS Audit Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html) lists the controls for which Security Hub sends findings to Audit Manager\.
 
 **Amazon Detective**  <a name="integration-amazon-detective"></a>
 Detective automatically collects log data from your AWS resources and uses machine learning, statistical analysis, and graph theory to help you visualize and conduct faster and more efficient security investigations\.  
@@ -39,20 +42,20 @@ To learn more about Firewall Manager, see the [https://docs.aws.amazon.com/waf/l
 GuardDuty sends findings to Security Hub for all of the supported finding types\.  
 New findings from GuardDuty are sent to Security Hub within 5 minutes\. Updates to findings are sent based on the **Updated findings** setting for Amazon EventBridge in GuardDuty settings\.  
 When you generate GuardDuty sample findings using the GuardDuty **Settings** page, Security Hub receives the sample findings and omits the prefix '\[Sample\]' in the finding type\. For example, the sample finding type in GuardDuty "\[SAMPLE\] Recon:IAMUser/ResourcePermissions" is displayed as "Recon:IAMUser/ResourcePermissions” in Security Hub\.  
-For more information about GuardDuty findings, see [Amazon GuardDuty findings](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html) in the *Amazon GuardDuty User Guide*\.
+For more information about the GuardDuty integration, see [Integration with AWS Security Hub](https://docs.aws.amazon.com/guardduty/latest/ug/securityhub-integration.html) in the *Amazon GuardDuty User Guide*\.
 
 **IAM Access Analyzer**  <a name="integration-iam-access-analyzer"></a>
 With IAM Access Analyzer, all findings are sent to Security Hub\.  
 IAM Access Analyzer uses logic\-based reasoning to analyze resource\-based policies that are applied to supported resources in your account\. IAM Access Analyzer generates a finding when it detects a policy statement that allows an external principal access to a resource in your account\.  
-To learn more, see [What is IAM Access Analyzer?](https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html) in the *IAM User Guide*\.
+To learn more, see [Integration with AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-securityhub-integration.html) in the *IAM User Guide*\.
 
 **Amazon Inspector**  <a name="integration-amazon-inspector"></a>
 Amazon Inspector sends Amazon Inspector findings to Security Hub that are generated through assessment runs for all supported rules packages\.  
-For more information about Amazon Inspector rules packages and rules, see [Amazon Inspector rules packages and rules](https://docs.aws.amazon.com/inspector/latest/userguide/inspector_rule-packages.html) in the *Amazon Inspector User Guide*\.
+For more information about the integration, see [Integration with AWS Security Hub](https://docs.aws.amazon.com/inspector/latest/userguide/securityhub-integration.html) in the *Amazon Inspector User Guide*\.
 
 **Amazon Macie**  <a name="integration-amazon-macie"></a>
-A finding from Macie can indicate that there is a policy violation, or that sensitive data, such as personal identifying information \(PII\) and intellectual property, is present in the data that your organization stores in Amazon S3\. Macie only sends policy violation findings to Security Hub\.  
-For more information, see [Amazon Macie findings](https://docs.aws.amazon.com/macie/latest/user/findings.html) in the *Amazon Macie User Guide*\.  
+A finding from Macie can indicate that there is a policy violation, or that sensitive data, such as personal identifying information \(PII\) and intellectual property, is present in the data that your organization stores in Amazon S3\.  
+By default, Macie only sends policy violation findings to Security Hub\. You can also configure the integration to send sensitive data findings to Security Hub\. For more information, see [Amazon Macie integration with AWS Security Hub](https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html) in the *Amazon Macie User Guide*\.  
 Security Hub can also receive findings from Macie Classic\. Macie Classic sends basic and custom findings to Macie from the **S3 bucket properties** and **S3 objects** indices\. Macie Classic does not send data classifications, or findings from the **CloudTrail data** index\.  
 For more information, see [Locating and analyzing Macie Classic alerts](https://docs.aws.amazon.com/macie/latest/userguide/macie-alerts.html#macie-alert-working-locate) in the *Amazon Macie Classic User Guide*\.
 

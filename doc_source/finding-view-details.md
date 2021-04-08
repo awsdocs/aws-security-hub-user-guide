@@ -21,6 +21,8 @@ At the top of the finding details pane contains overview information about the f
 
 **Remediation** displays for control findings\. It provides a link to the instructions for remediating the issue that triggered the finding\.
 
+**Finding Provider Fields** displays the values from the finding provider for confidence, criticality, related findings, severity, and finding type\.
+
 From the finding details pane, you can view more details and add field values to the filter\.
 + To display the complete JSON for the finding, choose the finding ID\. From **Finding JSON**, you can download the finding JSON to a file\.
 + To add a field value to the finding list filter, choose the search icon next to the field\.

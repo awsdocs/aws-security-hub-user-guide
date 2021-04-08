@@ -954,7 +954,7 @@ You use instance metadata to configure or manage the running instance\. The IMDS
 Version 2 of the IMDS adds new protections for the following types of vulnerabilities\. These vulnerabilities could be used to try to access the IMDS\.
 + Open website application firewalls
 + Open reverse proxies
-+ Service\-side request forgery \(SSRF\) vulnerabilities
++ Server\-side request forgery \(SSRF\) vulnerabilities
 + Open Layer 3 firewalls and network address translation \(NAT\)
 
 Security Hub recommends that you configure your EC2 instances with IMDSv2\.
@@ -2060,9 +2060,9 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html)
 
 **Parameters:** 
-+ `runtime`: `nodejs12.x, nodejs10.x, python3.8, python3.7, python3.6, python2.7, ruby2.5, ruby2.7, java11, java8,go1.x, dotnetcore2.1, dotnetcore3.1`
++ `runtime`: `nodejs14.x`, `nodejs12.x, nodejs10.x, python3.8, python3.7, python3.6, python2.7, ruby2.5, ruby2.7, java11, java8,go1.x, dotnetcore2.1, dotnetcore3.1`
 
-This control checks that the Lambda function settings for runtimes match the expected values set for the latest runtimes for each supported language\. This control checks for the following runtimes: `nodejs12.x`, `nodejs10.x`, `python3.8`, `python3.7`, `python3.6`, `ruby2.5`, `ruby2.7`,`java11`, `java8`, `go1.x`, `dotnetcore2.1`, `dotnetcore3.1`
+This control checks that the Lambda function settings for runtimes match the expected values set for the latest runtimes for each supported language\. This control checks for the following runtimes: `nodejs14.x`, `nodejs12.x`, `nodejs10.x`, `python3.8`, `python3.7`, `python3.6`, `ruby2.5`, `ruby2.7`,`java11`, `java8`, `go1.x`, `dotnetcore2.1`, `dotnetcore3.1`
 
 [Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a runtime component is no longer supported for security updates, Lambda deprecates the runtime\. Even though you cannot create functions that use the deprecated runtime, the function is still available to process invocation events\. Make sure that your Lambda functions are current and do not use out\-of\-date runtime environments\.
 
