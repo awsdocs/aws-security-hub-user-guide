@@ -67,7 +67,7 @@ You must configure permissions to allow an IAM entity \(such as a user, group, o
 The `AWSServiceRoleForSecurityHub` service\-linked role is automatically created when you enable Security Hub for the first time or enable Security Hub in a supported Region where you previously didn't have it enabled\. You can also create the `AWSServiceRoleForSecurityHub` service\-linked role manually using the IAM console, the IAM CLI, or the IAM API\. 
 
 **Important**  
-The service\-linked role that is created for the Security Hub master account doesn't apply to the Security Hub member accounts\.
+The service\-linked role that is created for the Security Hub administrator account doesn't apply to the Security Hub member accounts\.
 
 For more information about creating the role manually, see [Creating a service\-linked role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role) in the *IAM User Guide*\.
 

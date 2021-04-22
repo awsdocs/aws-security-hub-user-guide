@@ -12,7 +12,7 @@ Additionally, AWS supports managed policies for job functions that span multiple
 
 You can attach the `AWSSecurityHubFullAccess` policy to your IAM identities\.
 
-This policy grants administrative permissions that allow a principal full access to all Security Hub actions\. This policy must be attached to a principal before they enable Security Hub manually for their account\. For example, principals with these permissions can both view and update the status of findings\. They can configure custom insights, and enable integrations\. They can enable and disable standards and controls\. Principals for a master account can also manage member accounts\.
+This policy grants administrative permissions that allow a principal full access to all Security Hub actions\. This policy must be attached to a principal before they enable Security Hub manually for their account\. For example, principals with these permissions can both view and update the status of findings\. They can configure custom insights, and enable integrations\. They can enable and disable standards and controls\. Principals for an administrator account can also manage member accounts\.
 
 **Permissions details**
 

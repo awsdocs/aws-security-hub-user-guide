@@ -2,7 +2,7 @@
 
 If you do not automatically enable new organization accounts, then you can enable those accounts manually\. You must also manually enable accounts that you disassociated\.
 
-You cannot enable an account if it is already a member account for a different master account\.
+You cannot enable an account if it is already a member account for a different administrator account\.
 
 When you enable an organization account, Security Hub is enabled automatically for that account\. The account does not receive an invitation\.
 

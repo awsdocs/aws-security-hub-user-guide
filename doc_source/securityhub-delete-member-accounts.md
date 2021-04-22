@@ -1,6 +1,6 @@
 # Deleting member accounts<a name="securityhub-delete-member-accounts"></a>
 
-As a master account, you can delete member accounts that were added by invitation\. Before you can delete an enabled account, you must disassociate it\.
+As an administrator account, you can delete member accounts that were added by invitation\. Before you can delete an enabled account, you must disassociate it\.
 
 When you delete a member account, it is completely removed from the list\. To restore the account's membership, you must add it and invite it as if it were a completely new member account\.
 

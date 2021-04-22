@@ -4,9 +4,10 @@ This topic describes the key concepts in AWS Security Hub to help you get starte
 
 **Account**  
 A standard Amazon Web Services \(AWS\) account that contains your AWS resources\. You can sign in to AWS with your account and enable Security Hub\.  
-You can also invite other accounts to enable Security Hub and become associated with your account in Security Hub\. If your invitations are accepted, your account is designated as the Security Hub *master* account, and the added accounts are *member* accounts\. As the master account, you can view findings in your member accounts\.  
-An account cannot be both a Security Hub master account and a member account at the same time\. An account can accept only one membership invitation\. Accepting a membership invitation is optional\.  
-For more information, see [Managing master and member accounts](securityhub-accounts.md)\.
+An account can also invite other accounts to enable Security Hub and become associated with that account in Security Hub\. Accepting a membership invitation is optional\. If the invitations are accepted, the account becomes a Security Hub *administrator* account, and the added accounts are *member* accounts\. As the administrator account, you can view findings in your member accounts\.  
+If you are enrolled in AWS Organizations, then your organization designates a Security Hub administrator account for the organization\. The administrator account can enable other organization accounts as member accounts\.  
+An account cannot be both a Security Hub administrator account and a member account at the same time\. An account can only have one administrator account\.  
+For more information, see [Managing administrator and member accounts](securityhub-accounts.md)\.
 
 **Archived finding**  
 A finding that has a `RecordState` set to `ARCHIVED`\. Archiving a finding indicates that the finding provider believes that the finding is no longer relevant\. The record state is separate from the workflow status, which tracks the status of an investigation into a finding\.  

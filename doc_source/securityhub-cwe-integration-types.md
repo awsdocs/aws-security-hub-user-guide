@@ -10,7 +10,7 @@ On the EventBridge dashboard for Security Hub, **All Events** includes all of th
 
 Every [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) and [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) request triggers a **Security Hub Findings \- Imported** event\.
 
-For master accounts, the event feed in EventBridge includes events for findings from both their account and from their member accounts\.
+For administrator accounts, the event feed in EventBridge includes events for findings from both their account and from their member accounts\.
 
 You can define rules in EventBridge that automatically route findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\. The rules can include filters to only apply the rule if the finding has specific attribute values\.
 

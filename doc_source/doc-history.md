@@ -4,6 +4,9 @@ The following table describes the updates to the documentation for AWS Security 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [New type for product integrations](#doc-history) | A new integration type, `UPDATE_FINDINGS_IN_SECURITY_HUB`, indicates that a product integration updates findings that it receives from Security Hub\. | April 22, 2021 | 
+| [Changed "master account" to "administrator account"](#doc-history) | The term "master account" is changed to "administrator account\." The term is also changed in the Security Hub console and API\. | April 22, 2021 | 
+| [Updated APIGateway\.1 to replace HTTP with Websocket](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-apigateway-1) | Updated the title, description, and remediation for APIGateway\.1\. The control now checks for Websocket API execution logging instead of for HTTP API execution logging\. | April 9, 2021 | 
 | [Amazon GuardDuty integration now supported in Beijing and Ningxia](#doc-history) | The Security Hub integration with GuardDuty is now supported in the China \(Beijing\) and China \(Ningxia\) Regions\. | April 5, 2021 | 
 | [Added nodejs14\.x to the supported runtimes for Lambda\.2 control](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-lambda-2) | The Lambda\.2 control in the Foundational Security Best Practices standard now supports the `nodejs14.x` runtime\. | March 30, 2021 | 
 | [Security Hub launched in Asia Pacific \(Osaka\)](#doc-history) | Security Hub is now available in the Asia Pacific \(Osaka\) Region\. | March 29, 2021 | 

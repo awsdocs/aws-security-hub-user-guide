@@ -1,16 +1,16 @@
 # Designating a Security Hub administrator account<a name="designate-orgs-admin-account"></a>
 
-The AWS Security Hub administrator account manages Security Hub membership for an organization\.
+The delegated AWS Security Hub administrator account manages Security Hub membership for an organization\.
 
-The organization management account designates the Security Hub administrator account for the organization\. The organization management account can designate any account in the organization\. However, Security Hub recommends that the organization management account does not designate itself as the Security Hub administrator account\. The users who have access to the organization management account to manage billing are likely to be different from the users who need access to Security Hub for security management\.
+The organization management account designates the Security Hub administrator account for the organization\. The organization management account can designate any account in the organization\. However, Security Hub recommends that the organization management account does not designate itself as the administrator account\. The users who have access to the organization management account to manage billing are likely to be different from the users who need access to Security Hub for security management\.
 
-If you have a master account in place from the manual invitation process, then Security Hub recommends that you designate that account as the Security Hub administrator account for your organization\. Member accounts can only be associated with a single master account\. The Security Hub administrator account cannot enable member accounts that belong to another master account\.
+If you have an administrator account in place from the manual invitation process, then Security Hub recommends that you designate that account as the Security Hub administrator account for your organization\. Member accounts can only be associated with a single administrator account\. The administrator account for the organization cannot enable member accounts that belong to another administrator account\.
 
-The Security Hub administrator account must be the same in each Region\. However, the organization management account must designate that same Security Hub administrator account separately in each Region\.
+The delegated administrator account must be the same in each Region\. However, the organization management account must designate that same Security Hub administrator account separately in each Region\.
 
-The organization management account can also remove the currently designated Security Hub administrator account\. When the organization management account uses the console to remove the Security Hub administrator account in one Region, it is automatically removed in all Regions\. The Security Hub API only removes the Security Hub administrator account from the Region where the API call or command is issued\. To remove the Security Hub administrator account from all Regions, you can use the Organizations API\.
+The organization management account can also remove the current delegated Security Hub administrator account\. When the organization management account uses the console to remove the administrator account in one Region, it is automatically removed in all Regions\. The Security Hub API only removes the administrator account from the Region where the API call or command is issued\. To remove the administrator account from all Regions, you can use the Organizations API\.
 
-Security Hub administrator account is the master account, and it selects the member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md) and [Managing member accounts that are not in an organization](account-management-manual.md)\.
+The administrator account it selects the member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md) and [Managing member accounts that are not in an organization](account-management-manual.md)\.
 
 Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 
@@ -54,7 +54,7 @@ If you have Security Hub enabled, then you can also designate the Security Hub a
 
 1. In the Security Hub navigation pane, choose **Settings**\. Then choose **General**\.
 
-1. If a Security Hub is currently assigned, then before you can designate a new account, you must remove the current account\.
+1. If a Security Hub administrator account is currently assigned, then before you can designate a new account, you must remove the current account\.
 
    Under **Delegated Administrator**, to remove the current account, choose **Remove**\.
 

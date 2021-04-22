@@ -53,7 +53,7 @@ Email\-validated certificates are automatically renewed up to 825 days after the
 **By notification in your AWS Personal Health Dashboard**  
 ACM sends notifications to your Personal Health Dashboard to notify you that one or more domain names in the certificate require validation before the certificate can be renewed\. ACM sends these notifications when your certificate is 45 days, 30 days, 15 days, 7 days, 3 days, and 1 day from expiration\. These notifications are informational only\.
 
-## \[APIGateway\.1\] API Gateway REST and HTTP API logging should be enabled<a name="fsbp-apigateway-1"></a>
+## \[APIGateway\.1\] API Gateway REST and Websocket API logging should be enabled<a name="fsbp-apigateway-1"></a>
 
 **Category:** Identify > Logging
 
@@ -65,11 +65,9 @@ ACM sends notifications to your Personal Health Dashboard to notify you that one
 
 **Parameters:** None
 
-This control checks whether all methods of an Amazon API Gateway REST or HTTP API stage have logging enabled\. The control fails if logging is not enabled for all methods of a stage or if `loggingLevel` is neither `ERROR` nor `INFO`\.
+This control checks whether all stages of an Amazon API Gateway REST or Websocket API have logging enabled\. The control fails if logging is not enabled for all methods of a stage or if `loggingLevel` is neither `ERROR` nor `INFO`\.
 
-API Gateway REST or HTTP API stages should have relevant logs enabled\. API Gateway REST API execution logging provides detailed records of requests made to API Gateway REST API stages\. The stages include API integration backend responses, Lambda authorizer responses, and the `requestId` for AWS integration endpoints\.
-
-HTTP API access logs include information about requests made to the HTTP API\. The information includes the IP address of the caller, the method of the request, the time of the request, and the HTTP status code response\. Logs can assist with security and access audits, power additional threat detections, and aid in diagnosing availability issues\.
+API Gateway REST or Websocket API stages should have relevant logs enabled\. API Gateway REST and Websocket API execution logging provides detailed records of requests made to API Gateway REST and Websocket API stages\. The stages include API integration backend responses, Lambda authorizer responses, and the `requestId` for AWS integration endpoints\.
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -78,7 +76,7 @@ Europe \(Milan\)
 
 ### Remediation<a name="apigateway1-remediation"></a>
 
-To enable logging for REST APIs, see [Set up CloudWatch API logging using the API Gateway console](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html#set-up-access-logging-using-console) in the *API Gateway Developer Guide*\. To enable logging for HTTP APIs, see [Enabling logging for a stage](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-logging.html#http-api-enable-logging.console) in the *API Gateway Developer Guide*\.
+To enable logging for REST and Websocket APIs, see [Set up CloudWatch API logging using the API Gateway console](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html#set-up-access-logging-using-console) in the *API Gateway Developer Guide*\.
 
 ## \[AutoScaling\.1\] Auto Scaling groups associated with a load balancer should use load balancer health checks<a name="fsbp-autoscaling-1"></a>
 
@@ -567,15 +565,15 @@ To learn more, see [Getting started with AWS Config](https://docs.aws.amazon.com
 
    1. Under **Resource types to record**, choose **Record all resources supported in this region** and **Include global resources \(e\.g\. AWS IAM resources\)**\. 
 
+   1. Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or **Choose a role from your account** and then choose the role to use\.
+
    1. Under **Amazon S3 bucket**, specify the bucket to use or create a bucket and optionally include a prefix\. 
 
    1. Under **Amazon SNS topic**, choose an Amazon SNS topic from your account or create one\. For more information about Amazon SNS, see the [https://docs.aws.amazon.com/sns/latest/gsg/](https://docs.aws.amazon.com/sns/latest/gsg/)\. 
 
-   1. Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or **Choose a role from your account** and then choose the role to use\.
-
 1. Choose **Next**\.
 
-1. On the **AWS Config rules** page, choose **Skip**\. 
+1. On the **AWS Config rules** page, choose **Next**\. 
 
 1. Choose **Confirm**\.
 
@@ -2696,6 +2694,10 @@ This control checks whether the following Amazon S3 public access block settings
 + `blockPublicPolicy`: `true`
 + `blockPublicAcls`: `true`
 + `restrictPublicBuckets`: `true`
+
+The control passes if all of the public access block settings are set to `true`\.
+
+The control fails if any of the settings are set to `false`, or if any of the settings are not configured\. When the settings do not have a value, the AWS Config rule cannot complete its evaluation\.
 
 Amazon S3 public access block is designed to provide controls across an entire AWS account or at the individual S3 bucket level to ensure that objects never have public access\. Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\.
 

@@ -4,12 +4,12 @@ To disable AWS Security Hub, you can use the Security Hub console or the Securit
 
 You cannot disable Security Hub in the following cases:
 + Your account is the designated Security Hub administrator account for an organization\.
-+ Your account is a Security Hub master account by invitation, and you have member accounts that are enabled\. Before you can disable Security Hub, you must disassociate all of your member accounts\. See [Disassociating member accounts](securityhub-disassociate-members.md)\.
-+ Your account is a member account\. Before you can disable Security Hub, your account must be disassociated from your master account\.
++ Your account is a Security Hub administrator account by invitation, and you have member accounts that are enabled\. Before you can disable Security Hub, you must disassociate all of your member accounts\. See [Disassociating member accounts](securityhub-disassociate-members.md)\.
++ Your account is a member account\. Before you can disable Security Hub, your account must be disassociated from your administrator account\.
 
-  For an organization account, only the Security Hub administrator account can disassociate member accounts\. See [Disassociating member accounts from your organization](accounts-orgs-disassociate.md)\.
+  For an organization account, only the administrator account can disassociate member accounts\. See [Disassociating member accounts from your organization](accounts-orgs-disassociate.md)\.
 
-  For manually invited accounts, either the master account or the member account can disassociate the member account\. See [Disassociating member accounts](securityhub-disassociate-members.md) or [Disassociating from your master account](securityhub-disassociate-from-master.md)\.
+  For manually invited accounts, either the administrator account or the member account can disassociate the member account\. See [Disassociating member accounts](securityhub-disassociate-members.md) or [Disassociating from your administrator account](securityhub-disassociate-from-admin.md)\.
 
 When you disable Security Hub for an account, it is disabled only in the current Region\. No new findings are processed for the account in that Region\.
 

@@ -92,7 +92,7 @@ The following controls are not supported in Africa \(Cape Town\)\.
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
-[\[APIGateway\.1\] API Gateway REST and HTTP API logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-1)  
+[\[APIGateway\.1\] API Gateway REST and Websocket API logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-1)  
 [\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
 [\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
 [\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  
@@ -330,7 +330,7 @@ The following controls are not supported in Europe \(Milan\)\.
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
 [\[ACM\.1\] Imported ACM certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
-[\[APIGateway\.1\] API Gateway REST and HTTP API logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-1)  
+[\[APIGateway\.1\] API Gateway REST and Websocket API logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-1)  
 [\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
 [\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
 [\[CloudFront\.3\] CloudFront distributions should require encryption in transit](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-3)  

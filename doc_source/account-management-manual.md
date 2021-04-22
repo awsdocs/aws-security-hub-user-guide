@@ -4,11 +4,11 @@ AWS Security Hub also supports a manual invitation process\. This process is int
 
 On the **Accounts** tab of the **Settings** page, accounts that are not part of an organization have **Type** set to **By invitation**\.
 
-If you do not use Organizations at all, then an account becomes a master account when a member account accepts an invitation\.
+If you do not use Organizations at all, then an account becomes an administrator account when a member account accepts an invitation\.
 
 **Topics**
 + [Adding and inviting member accounts](securityhub-accounts-add-invite.md)
 + [Responding to an invitation to be a member account](securityhub-invitation-respond.md)
 + [Disassociating member accounts](securityhub-disassociate-members.md)
 + [Deleting member accounts](securityhub-delete-member-accounts.md)
-+ [Disassociating from your master account](securityhub-disassociate-from-master.md)
++ [Disassociating from your administrator account](securityhub-disassociate-from-admin.md)

@@ -1,6 +1,9 @@
 # Available third\-party partner product integrations<a name="securityhub-partner-providers"></a>
 
-AWS Security Hub is integrated with the following third\-party products\. For each provider, the table indicates whether the product sends findings to Security Hub, receives findings from Security Hub, or both\.
+AWS Security Hub is integrated with the following third\-party products\. For each provider, the table indicates how the integration interacts with findings\. An integration can perform the following actions:
++ Send findings that it generates to Security Hub\.
++ Receive findings from Security Hub\.
++ Update findings in Security Hub\. Integrations that receive findings from Security Hub might also update those findings\.
 
 If applicable, the table also specifies the product ARN\. Integrations that send findings to Security Hub always have an ARN\.
 
@@ -257,7 +260,7 @@ SecureCloudDB is a cloud native database security tool that provides comprehensi
 [Partner documentation](https://help.secureclouddb.com/guide/aws/security_hub.html)
 
 **[ServiceNow](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/integrations-servicenow.html) – ITSM**  
-**Integration type:** Send and receive  
+**Integration type:** Receive and update  
 The ServiceNow Security Hub integration allows security findings from Security Hub to be viewed within the ServiceNow ITSM\. You can also configure ServiceNow to automatically create an incident or problem when it receives a finding from Security Hub\.  
 Any updates to these incidents and problems result in updates to the findings in Security Hub\.
 

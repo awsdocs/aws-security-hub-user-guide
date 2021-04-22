@@ -2160,6 +2160,10 @@ This control checks whether the following public access block settings are confi
 + `blockPublicAcls`: `true`
 + `restrictPublicBuckets`: `true`
 
+The control passes if all of the public access block settings are set to `true`\.
+
+The control fails if any of the settings are set to `false`, or if any of the settings are not configured\. When the settings do not have a value, the AWS Config rule cannot complete its evaluation\.
+
 As an AWS best practice, S3 buckets should block public access\. Unless you explicitly require everyone on the internet to be able to access your S3 bucket, you should ensure that your S3 bucket is not publicly accessible\.
 
 **Note**  

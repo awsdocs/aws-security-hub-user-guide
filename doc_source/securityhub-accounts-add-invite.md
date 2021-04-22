@@ -1,16 +1,16 @@
 # Adding and inviting member accounts<a name="securityhub-accounts-add-invite"></a>
 
-Your account becomes an AWS Security Hub master account when an account that you invite accepts your invitation\.
+Your account becomes an AWS Security Hub administrator account when an account that you invite accepts your invitation\.
 
 When you accept an invitation from another account, your account becomes a member account\.
 
-If your account is a master account, you cannot accept an invitation to become a member account\.
+If your account is an administrator account, you cannot accept an invitation to become a member account\.
 
 Adding a member account consists of the following steps:
 
-1. The master account adds the member account to their list of member accounts\.
+1. The administrator account adds the member account to their list of member accounts\.
 
-1. The master account sends an invitation to the member account\.
+1. The administrator account sends an invitation to the member account\.
 
 1. The member account accepts the invitation\. 
 
@@ -79,7 +79,7 @@ After you add the member accounts, you send an invitation to the member account\
 
 ## Adding member accounts \(Security Hub API, AWS CLI\)<a name="securityhub-add-accounts-api-cli"></a>
 
-To add member accounts, you can use an API call or the AWS Command Line Interface\. You must use the master account credentials\. Only the master account can perform this action\.
+To add member accounts, you can use an API call or the AWS Command Line Interface\. You must use the administrator account credentials\. Only the administrator account can perform this action\.
 
 **To add member accounts \(Security Hub API, AWS CLI\)**
 + **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateMembers.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateMembers.html) operation\. For each member account to add, you must provide the AWS account ID\.
@@ -97,7 +97,7 @@ To add member accounts, you can use an API call or the AWS Command Line Interfac
 
 ## Inviting member accounts \(Security Hub API, AWS CLI\)<a name="securityhub-invite-accounts-api-cli"></a>
 
-To invite accounts that you added, you can use an API call or the AWS Command Line Interface\. You use the same API operation or AWS CLI command to resend invitations to member accounts that you disassociated\. You must use the master account credentials\. Only the master account can perform this action\.
+To invite accounts that you added, you can use an API call or the AWS Command Line Interface\. You use the same API operation or AWS CLI command to resend invitations to member accounts that you disassociated\. You must use the administrator account credentials\. Only the administrator account can perform this action\.
 
 **To invite member accounts \(Security Hub API, AWS CLI\)**
 + **Security Hub API **– Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_InviteMembers.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_InviteMembers.html) operation\. For each account to invite, you must provide the AWS account ID\.

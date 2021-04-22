@@ -114,7 +114,7 @@ After this rule is created in EventBridge, when you perform a custom action on f
 
 After you create your Security Hub custom actions and EventBridge rules, you can send findings and insight results to EventBridge for further management and processing\.
 
-Events are sent to EventBridge only in the account in which they are viewed\. If you view a finding using a master account, the event is sent to EventBridge in the master account\.
+Events are sent to EventBridge only in the account in which they are viewed\. If you view a finding using an administrator account, the event is sent to EventBridge in the administrator account\.
 
 For AWS API calls to be effective, the implementations of target code must switch roles into member accounts\. This also means that the role you must switch into must be deployed to each member where action is needed\.
 

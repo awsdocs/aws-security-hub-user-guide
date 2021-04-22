@@ -4,9 +4,9 @@ If you are integrated with AWS Organizations, accounts that belong to the organi
 
 The organization management account designates the Security Hub administrator account\. The Security Hub administrator account then has Security Hub enabled automatically\. The organization management account does not need to enable Security Hub\. See [Designating a Security Hub administrator account](designate-orgs-admin-account.md)\.
 
-The Security Hub administrator account acts as a Security Hub master account, and chooses the organization accounts to enable as member accounts\. Those accounts also have Security Hub enabled automatically\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)\.
+The Security Hub administrator account chooses the organization accounts to enable as member accounts\. Those accounts also have Security Hub enabled automatically\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)\.
 
-An account that is not part of an organization must enable Security Hub manually\. The Security Hub master\-member relationship is then established through manual invitations that the master account sends to the member accounts\. See [Managing member accounts that are not in an organization](account-management-manual.md)\.
+An account that is not part of an organization must enable Security Hub manually\. The Security Hub administrator\-member relationship is then established through manual invitations that the administrator account sends to the member accounts\. See [Managing member accounts that are not in an organization](account-management-manual.md)\.
 
 For both types of enablement, you need to enable AWS Config, which is needed for the security checks against security controls\. See [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 

@@ -2,7 +2,7 @@
 
 To stop receiving and viewing findings from an enabled member account, you can disassociate the member account\. You must disassociate a member account before you can delete it\.
 
-When you disassociate a member account, it remains in your list of member accounts with a status of **Removed \(Disassociated\)**\. Your account is removed from the master account information for the member account\.
+When you disassociate a member account, it remains in your list of member accounts with a status of **Removed \(Disassociated\)**\. Your account is removed from the administrator account information for the member account\.
 
 To resume receiving findings for the account, you can resend the invitation\. To remove the member account entirely, you can delete the member account\.
 

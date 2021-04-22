@@ -17,7 +17,9 @@ For these services, the integration allows the service to send findings to Secur
 + [Amazon Macie](#integration-amazon-macie)
 + [AWS Systems Manager Patch Manager](#patch-manager)
 
-Security Hub also supports integrations with [AWS Audit Manager](#integration-aws-audit-manager) and [Amazon Detective](#integration-amazon-detective)\. The Audit Manager integration allows Security Hub to send control\-based findings to Audit Manager\. The Detective integration allows you to pivot from Security Hub to Detective to investigate a GuardDuty finding\.
+The integration with [Audit Manager](#integration-aws-audit-manager) allows Security Hub to send findings to those services\.
+
+The [Detective integration](#integration-amazon-detective) allows you to pivot from Security Hub to Detective to investigate a GuardDuty finding\. 
 
 Here are the details about each AWS service integration\.
 

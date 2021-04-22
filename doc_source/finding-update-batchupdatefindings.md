@@ -8,7 +8,7 @@ Whenever Security Hub receives a [https://docs.aws.amazon.com/securityhub/1.0/AP
 
 ## Available fields for BatchUpdateFindings<a name="batchupdatefindings-fields"></a>
 
-Master accounts can use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update findings for their account or for their member accounts\. Member accounts can use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update findings for their account\.
+Administrator accounts can use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update findings for their account or for their member accounts\. Member accounts can use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update findings for their account\.
 
 Customers can only use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update the following fields and objects\.
 + `Confidence`
@@ -21,7 +21,7 @@ Customers can only use [https://docs.aws.amazon.com/securityhub/1.0/APIReference
 + `VerificationState`
 + `Workflow`
 
-By default, master and member accounts have access to all of the above fields and field values\. Security Hub also provides context keys to allow you to restrict access to fields and field values\.
+By default, administrator and member accounts have access to all of the above fields and field values\. Security Hub also provides context keys to allow you to restrict access to fields and field values\.
 
 For example, you might only allow member accounts to set `Workflow.Status` to `RESOLVED`\. Or you might not want to allow member accounts to change `Severity.Label`\.
 
