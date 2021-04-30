@@ -22,7 +22,7 @@ When you create a custom action, you specify the name, description, and a unique
 
    The **Name** must be fewer than 20 characters\.
 
-   The **Custom action ID** must be unique per AWS account\.
+   The **Custom action ID** must be unique for each AWS account\.
 
 1. Choose **Create custom action**\.
 
@@ -50,6 +50,37 @@ To create a custom action, you can use an API call or the AWS Command Line Inter
 
 To process the custom action, you must create a corresponding rule in EventBridge\. The rule definition includes the ARN of the custom action\.
 
+The event pattern for a **Security Hub Findings \- Custom Action** event has the following format:
+
+```
+{
+  "source": [
+    "aws.securityhub"
+  ],
+  "detail-type": [
+    "Security Hub Findings - Custom Action"
+  ],
+  "resources": [ "<custom action ARN>" ]
+  ]
+}
+```
+
+The event pattern for a **Security Hub Insight Results** event has the following format:
+
+```
+{
+  "source": [
+    "aws.securityhub"
+  ],
+  "detail-type": [
+    "Security Hub Insight Results"
+  ],
+  "resources": [ "<custom action ARN>" ]
+}
+```
+
+In both formats, `<custom action ARN>` is the ARN of a custom action\. You can configure a rule that applies to more than one custom action\.
+
 The instructions provided here are for the EventBridge console\. When you use the console, EventBridge automatically creates the required resource\-based policy that enables EventBridge to write to CloudWatch Logs\.
 
 You can also use the [https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutRule.html](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutRule.html) API operation of the EventBridge API\. However, if you use the EventBridge API, then you must create the resource\-based policy\. For details on the required policy, see [CloudWatch Logs permissions](https://docs.aws.amazon.com/eventbridge/latest/userguide/resource-based-policies-eventbridge.html#cloudwatchlogs-permissions) in the *Amazon EventBridge User Guide*\.
@@ -66,45 +97,25 @@ You can also use the [https://docs.aws.amazon.com/eventbridge/latest/APIReferenc
 
 1. For **Event source**, choose **Event Pattern**\.
 
-1. Choose **Custom pattern**\.
+1. For **Event matching** pattern, choose **Pre\-defined pattern by service**\.
 
-1. Copy one of the following example patterns, and paste it into the **Event pattern** text area\. Be sure to replace the existing brackets\.
+1. For **Service provider**, choose **AWS**\.
 
-   For an event associated with a finding custom action \(**Security Hub Findings \- Custom Action** event type\), use the following format\. In your event pattern, replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
+1. For **Service name**, choose **Security Hub**\.
 
-   ```
-   {
-     "source": [
-       "aws.securityhub"
-     ],
-     "detail-type": [
-       "Security Hub Findings - Custom Action"
-     ],
-     "resources": [
-       "arn:aws:securityhub:us-west-2:123456789012:action/custom/test-action1"
-     ]
-   }
-   ```
+1. For **Event type**, to create a rule to apply when you send findings to a custom action, choose **Security Hub Findings \- Custom Action**\.
 
-   For an event associated with an insight custom action \(**Security Hub Insight Results** event type\), use the following format\. In your event pattern, replace the placeholder ARN with the **Custom Action ARN** for the custom action you created\.
+   To create a rule to apply when you send insight results to a custom action, choose **Security Hub Insight Results**\.
 
-   ```
-   {
-     "source": [
-       "aws.securityhub"
-     ],
-     "detail-type": [
-       "Security Hub Insight Results"
-     ],
-     "resources": [
-       "arn:aws:securityhub:us-west-2:123456789012:action/custom/test-action1"
-     ]
-   }
-   ```
+1. For each custom action that this rule applies to, perform the following steps:
 
-1. Choose **Save** to save the pattern\.
+   1. Choose **Specific custom action**\.
 
-1. Under **Select targets**, select and configure the target to invoke when this rule is matched\.
+   1. To add a custom action ARN, enter the ARN in the field, and then choose **Add**\.
+
+   1. To remove a custom action ARN, choose **Remove** for that value\.
+
+1. Under **Select targets**, choose and configure the target to invoke when this rule is matched\.
 
 1. Choose **Create**\.
 
@@ -116,7 +127,7 @@ After you create your Security Hub custom actions and EventBridge rules, you can
 
 Events are sent to EventBridge only in the account in which they are viewed\. If you view a finding using an administrator account, the event is sent to EventBridge in the administrator account\.
 
-For AWS API calls to be effective, the implementations of target code must switch roles into member accounts\. This also means that the role you must switch into must be deployed to each member where action is needed\.
+For AWS API calls to be effective, the implementations of target code must switch roles into member accounts\. This also means that the role you switch into must be deployed to each member where action is needed\.
 
 **To send findings to EventBridge**
 

@@ -42,6 +42,9 @@ To accept an invitation to be a member account, you can use an API call or the A
   aws securityhub accept-administrator-invitation --administrator-id 123456789012 --invitation-id 7ab938c5d52d7904ad09f9e7c20cc4eb
   ```
 
+**Note**  
+The Security Hub console continues to use `AcceptInvitation`\. It will eventually change to use `AcceptAdministratorInvitation`\. Any IAM policies that specifically control access to this function must continue to use `AcceptInvitation`\. You should also add `AcceptAdministratorInvitation` to your policies to ensure that the correct permissions are in place after the console begins to use `AcceptAdministratorInvitation`\.
+
 ## Declining an invitation \(console\)<a name="securityhub-decline-invitation-console"></a>
 
 You can decline an invitation to be a member account\. When you decline an invitation, your account is marked as **Resigned** on the administrator account's list of member accounts\.

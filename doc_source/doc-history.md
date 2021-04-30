@@ -4,6 +4,8 @@ The following table describes the updates to the documentation for AWS Security 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Added console fields to provide filter values for Amazon EventBridge rules](#doc-history) | The new predefined filter patterns for Security Hub EventBridge rules provide console fields that you can use to specify filter values\. | April 30, 2021 | 
+| [Added the integration with AWS Systems Manager Explorer and OpsCenter](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-internal-providers.html) | Security Hub now supports an integration with Systems Manager Explorer and OpsCenter\. The integration receives findings from Security Hub and updates those findings in Security Hub\. | April 27, 2021 | 
 | [New type for product integrations](#doc-history) | A new integration type, `UPDATE_FINDINGS_IN_SECURITY_HUB`, indicates that a product integration updates findings that it receives from Security Hub\. | April 22, 2021 | 
 | [Changed "master account" to "administrator account"](#doc-history) | The term "master account" is changed to "administrator account\." The term is also changed in the Security Hub console and API\. | April 22, 2021 | 
 | [Updated APIGateway\.1 to replace HTTP with Websocket](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-apigateway-1) | Updated the title, description, and remediation for APIGateway\.1\. The control now checks for Websocket API execution logging instead of for HTTP API execution logging\. | April 9, 2021 | 

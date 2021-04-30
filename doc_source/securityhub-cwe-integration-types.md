@@ -12,7 +12,7 @@ Every [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportF
 
 For administrator accounts, the event feed in EventBridge includes events for findings from both their account and from their member accounts\.
 
-You can define rules in EventBridge that automatically route findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\. The rules can include filters to only apply the rule if the finding has specific attribute values\.
+You can define rules in EventBridge that automatically route findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\. The rules can include filters that only apply the rule if the finding has specific attribute values\.
 
 You use this method to automatically send all findings, or all findings that have specific characteristics, to a response or remediation workflow\.
 
@@ -20,11 +20,11 @@ See [Configuring an EventBridge rule for automatically sent findings](securityhu
 
 ## Findings for custom actions \(Security Hub Findings \- Custom Action\)<a name="securityhub-cwe-integration-types-finding-custom-action"></a>
 
-Security Hub also sends findings associated with custom actions to EventBridge as **Security Hub Findings \- Custom Action** events\.
+Security Hub also sends findings that are associated with custom actions to EventBridge as **Security Hub Findings \- Custom Action** events\.
 
 This is useful for analysts working with the Security Hub console who want to send a specific finding, or a small set of findings, to a response or remediation workflow\. You can select a custom action for up to 20 findings at a time\. The set of findings is sent to EventBridge as a single EventBridge event\.
 
-When you create a custom action, you specify a custom action ID for the custom action\. You can use this ID to create an EventBridge rule that takes a specified action after receiving a finding that is associated with that custom action ID\.
+When you create a custom action, you assign it a custom action ID\. You can use this ID to create an EventBridge rule that takes a specified action after receiving a finding that is associated with that custom action ID\.
 
 See [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)\.
 

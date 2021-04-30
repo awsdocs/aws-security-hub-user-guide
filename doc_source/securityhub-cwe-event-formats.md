@@ -1,8 +1,8 @@
-# EventBridge formats for Security Hub<a name="securityhub-cwe-event-formats"></a>
+# EventBridge event formats for Security Hub<a name="securityhub-cwe-event-formats"></a>
 
-The **Security Hub Findings \- Imported**, **Security Findings \- Custom Action**, and **Security Hub Insight Results** event types use the following event and event pattern formats\.
+The **Security Hub Findings \- Imported**, **Security Findings \- Custom Action**, and **Security Hub Insight Results** event types use the following event formats\.
 
-The event format is the format used when Security Hub sends an event to EventBridge\. The event pattern format is part of the EventBridge rule configuration\.
+The event format is the format that is used when Security Hub sends an event to EventBridge\.
 
 ## Security Hub Findings \- Imported<a name="securityhub-cwe-event-formats-findings-imported"></a>
 
@@ -22,37 +22,17 @@ The event format is the format used when Security Hub sends an event to EventBri
    ],
    "detail":{
       "findings": {
-         <finding JSON>
+         <finding content>
        }
    }
 }
 ```
 
-`<finding JSON>` is the JSON of the finding that is sent by the event\.
+`<finding content>` is the content, in JSON format, of the finding that is sent by the event\.
 
 For a complete list of finding attributes, see [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\.
 
-The event pattern for EventBridge rules that are triggered by these events uses the following format\.
-
-```
-{
-  "source": [
-    "aws.securityhub"
-  ],
-  "detail-type": [
-    "Security Hub Findings - Imported"
-  ],
-  "detail": {
-    "findings": {
-      <attribute filter values>
-    }
-  }
-}
-```
-
-`<attribute filter values>` are the attribute values that must be present in order for the rule to be applied\. The filters are optional\.
-
-See [Configuring an EventBridge rule for automatically sent findings](securityhub-cwe-all-findings.md)\.
+For information about how to configure EventBridge rules that are triggered by these events, see [Configuring an EventBridge rule for automatically sent findings](securityhub-cwe-all-findings.md)\.
 
 ## Security Hub Findings \- Custom Action<a name="securityhub-cwe-event-formats-findings-custom-action"></a>
 
@@ -74,35 +54,17 @@ See [Configuring an EventBridge rule for automatically sent findings](securityhu
     "actionName":"custom-action-name",
     "actionDescription": "description of the action",
     "findings": {
-        <finding JSON>
+        <finding content>
     }
   }
 }
 ```
 
-`<finding JSON>` is the JSON of the finding that is sent by the event\.
+`<finding content>` is the content, in JSON format, of the finding that is sent by the event\.
 
 For a complete list of finding attributes, see [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\.
 
-The event pattern for EventBridge rules that are triggered by these events uses the following format\.
-
-```
-{
-  "source": [
-    "aws.securityhub"
-  ],
-  "detail-type": [
-    "Security Hub Findings - Custom Action"
-  ],
-  "resources": [
-    "<custom action ARN>"
-  ]
-}
-```
-
-*`<custom action ARN>`* is the ARN of the custom action you created in Security Hub\.
-
-See [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)\.
+For information about how to configure EventBridge rules that are triggered by these events, see [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)\.
 
 ## Security Hub Insight Results<a name="securityhub-cwe-event-formats-insight-results"></a>
 
@@ -135,22 +97,4 @@ See [Using custom actions to send findings and insight results to EventBridge](s
 }
 ```
 
-The event pattern for EventBridge rules that are triggered by these events uses the following format\.
-
-```
-{
-  "source": [
-    "aws.securityhub"
-  ],
-  "detail-type": [
-    "Security Hub Insight Results"
-  ],
-  "resources": [
-    "<custom action ARN>"
-  ]
-}
-```
-
-`<custom action ARN>` is the ARN of the custom action that you created in Security Hub\.
-
-See [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)\.
+For information about how to create an EventBridge rule that is triggered by these events, see [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)\.

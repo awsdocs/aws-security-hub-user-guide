@@ -106,7 +106,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Logging AWS Security Hub API calls with AWS CloudTrail](securityhub-ct.md)
 + [Automated response and remediation](securityhub-cloudwatch-events.md)
    + [Types of Security Hub integration with EventBridge](securityhub-cwe-integration-types.md)
-   + [EventBridge formats for Security Hub](securityhub-cwe-event-formats.md)
+   + [EventBridge event formats for Security Hub](securityhub-cwe-event-formats.md)
    + [Configuring an EventBridge rule for automatically sent findings](securityhub-cwe-all-findings.md)
    + [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)
 + [Disabling AWS Security Hub](securityhub-disable.md)

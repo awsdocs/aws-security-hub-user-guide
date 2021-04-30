@@ -1,11 +1,11 @@
 # Available third\-party partner product integrations<a name="securityhub-partner-providers"></a>
 
-AWS Security Hub is integrated with the following third\-party products\. For each provider, the table indicates how the integration interacts with findings\. An integration can perform the following actions:
+AWS Security Hub is integrated with the following third\-party products\. For each provider, the list indicates how the integration interacts with findings\. An integration can perform the following actions:
 + Send findings that it generates to Security Hub\.
 + Receive findings from Security Hub\.
 + Update findings in Security Hub\. Integrations that receive findings from Security Hub might also update those findings\.
 
-If applicable, the table also specifies the product ARN\. Integrations that send findings to Security Hub always have an ARN\.
+If applicable, the list also specifies the product ARN\. Integrations that send findings to Security Hub always have an ARN\.
 
 **Note**  
 Some integrations are not available in Africa \(Cape Town\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the console **Integrations** page\.  
@@ -23,7 +23,11 @@ Splunk Enterprise
 Splunk Phantom
 ThreatModeler
 
-If you have a security solution and are interested in becoming a Security Hub partner, send an email to securityhub\-partners@amazon\.com\. In the message, provide your company name, product name, AWS Partner Network \(APN\) tier level, and contact information\. To become a Security Hub partner, you must be an APN Select Tier Partner or above\.
+If you have a security solution and are interested in becoming a Security Hub partner, send an email to securityhub\-partners@amazon\.com\. In the message, provide your company name, product name, AWS Partner Network \(APN\) tier level, and contact information\.
+
+To become a Security Hub partner, you must meet one of the following criteria:
++ You are an AWS Select Tier Partner or above\.
++ You have joined the [AWS ISV Partner Path](http://aws.amazon.com/partners/isv/), and the product that you use for Security Hub integration has completed an [AWS Foundational Technical Review \(FTR\)](http://aws.amazon.com/partners/foundational-technical-review/)\. The product is then granted a "Reviewed by AWS" badge\.
 
 To get started, read through the [https://docs.aws.amazon.com/securityhub/latest/partnerguide/integration-overview.html](https://docs.aws.amazon.com/securityhub/latest/partnerguide/integration-overview.html)\. After you review the onboarding information, you can begin to work on your product manifest\.
 

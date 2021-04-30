@@ -17,7 +17,7 @@ For these services, the integration allows the service to send findings to Secur
 + [Amazon Macie](#integration-amazon-macie)
 + [AWS Systems Manager Patch Manager](#patch-manager)
 
-The integration with [Audit Manager](#integration-aws-audit-manager) allows Security Hub to send findings to those services\.
+The integrations with [Audit Manager](#integration-aws-audit-manager) and with [Systems Manager Explorer and OpsCenter](#integration-ssm-explorer-opscenter) allow Security Hub to send findings to those services\. Explorer and OpsCenter also update findings in Security Hub\.
 
 The [Detective integration](#integration-amazon-detective) allows you to pivot from Security Hub to Detective to investigate a GuardDuty finding\. 
 
@@ -60,6 +60,12 @@ A finding from Macie can indicate that there is a policy violation, or that sens
 By default, Macie only sends policy violation findings to Security Hub\. You can also configure the integration to send sensitive data findings to Security Hub\. For more information, see [Amazon Macie integration with AWS Security Hub](https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html) in the *Amazon Macie User Guide*\.  
 Security Hub can also receive findings from Macie Classic\. Macie Classic sends basic and custom findings to Macie from the **S3 bucket properties** and **S3 objects** indices\. Macie Classic does not send data classifications, or findings from the **CloudTrail data** index\.  
 For more information, see [Locating and analyzing Macie Classic alerts](https://docs.aws.amazon.com/macie/latest/userguide/macie-alerts.html#macie-alert-working-locate) in the *Amazon Macie Classic User Guide*\.
+
+**AWS Systems Manager Explorer and OpsCenter**  <a name="integration-ssm-explorer-opscenter"></a>
+AWS Systems Manager Explorer and OpsCenter receive findings from Security Hub, and update those findings in Security Hub\.  
+Explorer provides you with a customizable dashboard, providing key insights and analysis into the operational health and performance of your AWS environment\.  
+OpsCenter provides you with a central location to view, investigate, and resolve operational work items\.  
+For more information about Explorer and OpsCenter, see [Operations management](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-ops-center.html) in the *AWS Systems Manager User Guide*\.
 
 **AWS Systems Manager Patch Manager**  <a name="patch-manager"></a>
 AWS Systems Manager Patch Manager sends findings to Security Hub when instances in a customer's fleet go out of compliance with their patch compliance standard\.  

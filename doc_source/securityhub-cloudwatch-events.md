@@ -1,6 +1,6 @@
 # Automated response and remediation<a name="securityhub-cloudwatch-events"></a>
 
-With Amazon EventBridge, you can automate your AWS services and respond automatically to system events such as application availability issues or resource changes\. Events from AWS services are delivered to EventBridge in near\-real time\. You can write simple rules to indicate which events you are interested in and what automated actions to take when an event matches a rule\. The actions that can be automatically triggered include the following:
+With Amazon EventBridge, you can automate your AWS services to respond automatically to system events such as application availability issues or resource changes\. Events from AWS services are delivered to EventBridge in near\-real time\. You can write simple rules to indicate which events you are interested in and what automated actions to take when an event matches a rule\. The actions that can be automatically triggered include the following:
 + Invoking an AWS Lambda function
 + Invoking the Amazon EC2 run command
 + Relaying the event to Amazon Kinesis Data Streams
@@ -22,6 +22,6 @@ A set of templates for cross\-account automated response and remediation is also
 
 **Topics**
 + [Types of Security Hub integration with EventBridge](securityhub-cwe-integration-types.md)
-+ [EventBridge formats for Security Hub](securityhub-cwe-event-formats.md)
++ [EventBridge event formats for Security Hub](securityhub-cwe-event-formats.md)
 + [Configuring an EventBridge rule for automatically sent findings](securityhub-cwe-all-findings.md)
 + [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)
