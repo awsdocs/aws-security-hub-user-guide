@@ -1,6 +1,6 @@
 # ASFF attributes<a name="securityhub-findings-format-attributes"></a>
 
-Listed below are the attributes and objects for the AWS Security Finding Format \(ASFF\)\. To see the details for an object's attributes and structure, choose the object name\.
+The following list shows the attributes and objects for the AWS Security Finding Format \(ASFF\)\. To see the details for an object's attributes and structure, choose the object name\.
 
 ## Required attributes<a name="asff-required-attributes"></a>
 
@@ -21,7 +21,7 @@ The AWS account ID that the finding applies to\.
 Required  
 Indicates when the potential security issue captured by a finding was created\.  
 The `CreatedAt` timestamp reflects the time when the finding record was created\. Consequently, it can differ from the `FirstObservedAt` timestamp, which reflects the time when the event or vulnerability was first observed\.  
-This timestamp *must* be provided on the first generation of the finding and *can't* be changed upon subsequent updates to the finding\.  
+This timestamp must be provided on the first generation of the finding and cannot be changed upon subsequent updates to the finding\.  
 **Type:** String  
 **Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  
 **Example**  
@@ -64,7 +64,7 @@ The finding ID must comply with the following constraints:
 + The ID must only contain characters from the unreserved characters set defined in section [2\.3 of RFC\-3986 Uniform Resource Identifier \(URI\): Generic Syntax](https://tools.ietf.org/html/rfc3986#section-2.3)\.
 + For services outside of AWS, the ID *cannot* be prefixed with the literal string "`arn:`"\.
 + For AWS services, the ID *must* be the ARN of the finding if one is available\. Otherwise, you can use any other unique identifier\.
-These constraints are expected to hold within a findings product, but are not required to hold across findings products\.  
+These constraints are expected to hold within a finding product but are not required to hold across finding products\.  
 **Example**  
 
 ```
@@ -93,7 +93,8 @@ Example:
 [`Resources`](#asff-resources)  
 Required  
 A set of resource data types that describe the resources that the finding refers to\.  
-**Type:** Array of up to 32 resource objects  
+**Type:** Array of resource objects  
+**Maximum number of objects:** 32  
 **Example**  
 
 ```
@@ -140,7 +141,7 @@ In the current release, the AWS Security Finding Format schema version is `2018-
 [`Severity`](#asff-severity)  
 Required  
 A finding's severity\.  
-The finding must have either `Label` or `Normalized` populated\. `Label` is the preferred attribute\. `Normalized` is no longer relevant\. Security Hub populates `Normalized` but does not otherwise use it\. If neither attribute is populated, then the finding is invalid\.  
+The finding must have either `Label` or `Normalized` populated\. `Label` is the preferred attribute\. `Normalized` is no longer relevant\. Security Hub populates the `Normalized` attribute but does not otherwise use it\. If neither attribute is populated, then the finding is invalid\.  
 `Severity` should only be updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.  
 To provide severity information, finding providers should use the `Severity` object under [`FindingProviderFields`](#asff-findingproviderfields)\. See [Using FindingProviderFields](finding-update-batchimportfindings.md#batchimportfindings-findingproviderfields)\.  
 **Type:** Object  
@@ -164,14 +165,15 @@ Required
 One or more finding types in the format of `namespace/category/classifier` that classify a finding\.  
 `Types` should only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.  
 Finding providers who want to provide a value for `Types` should use the `Types` attribute under [`FindingProviderFields`](#asff-findingproviderfields)\. See [Using FindingProviderFields](finding-update-batchimportfindings.md#batchimportfindings-findingproviderfields)\.  
-**Type:** Array of 50 strings maximum  
-+ `namespace` *must* be a value from the predefined set of namespace values\.
+**Type:** Array of strings  
+**Maximum number of strings:** 50  
++ `namespace` must be a value from the predefined set of namespace values\.
 
   Valid values: `Software and Configuration Checks` \| `TTPs` \| `Effects` \| `Unusual Behaviors` \| `Sensitive Data Identifications`
-+ `category` *might* be any value, but it is *recommended* that finding products use categories from the finding type taxonomy in [Types taxonomy for ASFF](securityhub-findings-format-type-taxonomy.md)\.
-+ `classifier` *might* be any value, but it is *recommended* that finding providers use the identifier verbatim defined by published standards whenever possible\.
++ `category` might be any value, but it is recommended that finding products use categories from the finding type taxonomy in [Types taxonomy for ASFF](securityhub-findings-format-type-taxonomy.md)\.
++ `classifier` might be any value, but it is recommended that finding providers use the identifier exactly as defined by published standards whenever possible\.
 Namespaces are required for all finding types, but categories and classifiers are optional\. If you specify a classifier, you must also specify a category\.  
-The '`/`' character is reserved and must *not* be used in a category or classifier\. Escaping the '`/`' character is not supported\.  
+The '`/`' character is reserved and must not be used in a category or classifier\. Escaping the '`/`' character is not supported\.  
 **Example**  
 
 ```
@@ -184,7 +186,7 @@ The '`/`' character is reserved and must *not* be used in a category or classifi
 Required  
 Indicates when the finding provider last updated the finding record\.  
 This timestamp reflects the time when the finding record was last or most recently updated\. Consequently, it can differ from the `LastObservedAt` timestamp, which reflects when the event or vulnerability was last or most recently observed\.  
-When you update the finding record, you must update this timestamp to the current timestamp\. Upon creation of a finding record, the `CreatedAt` and `UpdatedAt` timestamps must be the same timestamp\. After an update to the finding record, the value of this field must be greater than all of the previous values that it contained\.  
+When you update the finding record, you must update this timestamp to the current timestamp\. Upon creation of a finding record, the `CreatedAt` and `UpdatedAt` timestamps must be the same\. After an update to the finding record, the value of this field must be greater than all of the previous values that it contained\.  
 Note that `UpdatedAt` is not updated by changes from [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It is only updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.  
 Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in CloudWatch Events that routes findings to your Amazon S3 bucket\.  
 **Type:** String  
@@ -221,8 +223,10 @@ Optional
 A finding's confidence\. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify\.  
 `Confidence` should only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.  
 Finding providers who want to provide a value for `Confidence` should use the `Confidence` attribute under [`FindingProviderFields`](#asff-findingproviderfields)\. See [Using FindingProviderFields](finding-update-batchimportfindings.md#batchimportfindings-findingproviderfields)\.  
-**Type:** Integer \(range 0–100\)  
-Confidence is scored on a 0–100 basis using a ratio scale, where 0 means zero\-percent confidence and 100 means 100\-percent confidence\.  
+**Type:** Integer  
+**Minimum value:** 0  
+**Maximum value:** 100  
+Confidence is scored on a 0–100 basis using a ratio scale, where 0 means 0\-percent confidence and 100 means 100\-percent confidence\.  
 However, a data exfiltration detection based on a statistical deviation of network traffic has a much lower confidence because an actual exfiltration hasn't been verified\.  
 **Example**  
 
@@ -235,19 +239,21 @@ Optional
 The level of importance that is assigned to the resources that are associated with the finding\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\.   
 `Criticality` should only be updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It should not be updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.  
 Finding providers who want to provide a value for `Criticality` should use the `Criticality` attribute under [`FindingProviderFields`](#asff-findingproviderfields)\. See [Using FindingProviderFields](finding-update-batchimportfindings.md#batchimportfindings-findingproviderfields)\.  
-**Type:** Integer \(range 0–100\)  
+**Type:** Integer  
+**Minimum value:** 0  
+**Maximum value:** 100  
 Criticality is scored on a 0–100 basis, using a ratio scale that supports only full integers\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\.  
 At a high level, when assessing criticality, you need to consider the following:  
 + Which findings impact resources that are more critical than other resources?
 + How much more critical are those resources compared to other resources?
 For each resource, consider the following:  
-+ Does the impacted resource contain sensitive data \(for example, an S3 bucket with PII\)? 
-+ Does the impacted resource enable an adversary to deepen their access or extend their capabilities to carry out additional malicious activity \(for example, a compromised sysadmin account\)?
++ Does the affected resource contain sensitive data \(for example, an S3 bucket with PII\)? 
++ Does the affected resource enable an adversary to deepen their access or extend their capabilities to carry out additional malicious activity \(for example, a compromised sysadmin account\)?
 + Is the resource a business\-critical asset \(for example, a key business system that if compromised could have significant revenue impact\)?
 You can use the following guidelines:  
 + A resource powering mission\-critical systems or containing highly sensitive data can be scored in the 75–100 range\.
 + A resource powering important \(but not critical systems\) or containing moderately important data can be scored in the 25–75 range\.
-+ A resource powering non\-important systems or containing non\-sensitive data *should* be scored in the 0–24 range\.
++ A resource powering unimportant systems or containing nonsensitive data should be scored in the 0–24 range\.
 **Example**  
 
 ```
@@ -289,7 +295,7 @@ For details on how Security Hub handles updates from [https://docs.aws.amazon.co
 Optional  
 Indicates when the potential security issue captured by a finding was first observed\.  
 This timestamp reflects the time of when the event or vulnerability was first observed\. Consequently, it can differ from the `CreatedAt` timestamp, which reflects the time this finding record was created\.   
-This timestamp should be immutable between updates of the finding record, but can be updated if a more accurate timestamp is determined\.  
+This timestamp should be immutable between updates of the finding record but can be updated if a more accurate timestamp is determined\.  
 **Type: **String  
 **Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  
 **Example**  
@@ -300,8 +306,8 @@ This timestamp should be immutable between updates of the finding record, but ca
 
 **`LastObservedAt`**  
 Optional  
-Indicates when the potential security issue captured by a finding was most recently observed by the security findings product\.  
-This timestamp reflects the time of when the event or vulnerability was last or most recently observed\. Consequently, it can differ from the `UpdatedAt` timestamp, which reflects when this finding record was last or most recently updated\.   
+Indicates when the potential security issue that was captured by a finding was most recently observed by the security findings product\.  
+This timestamp reflects the time when the event or vulnerability was last or most recently observed\. Consequently, it can differ from the `UpdatedAt` timestamp, which reflects when this finding record was last or most recently updated\.   
 You can provide this timestamp, but it isn't required upon the first observation\. If you provide the field in this case, the timestamp should be the same as the `FirstObservedAt` timestamp\. You should update this field to reflect the last or most recently observed timestamp each time a finding is observed\.  
 **Type:** String  
 **Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.  
@@ -314,8 +320,9 @@ You can provide this timestamp, but it isn't required upon the first observation
 **[`Malware`](#asff-malware)**  
 Optional  
 A list of malware related to a finding\.  
-**Type:** Array of up to five malware objects  
-Example:  
+**Type:** Array of malware objects  
+**Maximum number of objects:** 5  
+**Example**  
 
 ```
 "Malware": [
@@ -402,11 +409,12 @@ Example:
 Optional  
 A data type where security findings products can include additional solution\-specific details that are not part of the defined AWS Security Finding Format\.  
 For findings generated by Security Hub controls, `ProductFields` includes information about the control\. See [Control\-related information in the ASFF](securityhub-standards-results.md#securityhub-standards-results-asff)\.  
-**Type:** Map of up to 50 key\-value pairs  
+**Type:** Map of key\-value pairs  
+**Maximum number of pairs:** 50  
 This field should not contain redundant data and must not contain data that conflicts with AWS Security Finding Format fields\.  
 The "`aws/`" prefix represents a reserved namespace for AWS products and services only and must not be submitted with findings from partner products\.  
 Although not required, products should format field names as `company-id/product-id/field-name`, where the `company-id` and `product-id` match those supplied in the `ProductArn` of the finding\.  
-Field names can include alphanumeric characters, white space, and the following symbols: \_ \. / = \+ \\ \- @  
+Field names can include the following characters: the following characters: A\-Z, a\-z, 0\-9, blank spaces, and \. : \+ \\ = @ \_ / \- \(hyphen\)\.  
 **Example**  
 
 ```
@@ -425,7 +433,7 @@ Field names can include alphanumeric characters, white space, and the following 
 Optional  
 The record state of a finding\.   
 By default, when initially generated by a service, findings are considered `ACTIVE`\.  
-The `ARCHIVED` state indicates that a finding should be hidden from view\. Archived findings are not immediately deleted\. You can search, review, and report against them\.  
+The `ARCHIVED` state indicates that a finding should be hidden from view\. Archived findings are not immediately deleted\. You can search, review, and report on them\.  
 Finding providers can update the record state\. Security Hub also automatically archives control\-based findings if the associated resource is deleted, the resource does not exist, or the control is disabled\.  
 If the record state changes from `ARCHIVED` to `ACTIVE`, and the workflow status of the finding is either `NOTIFIED` or `RESOLVED`, then Security Hub automatically sets the workflow status to `NEW`\.  
 **Type:** Enum  
@@ -441,7 +449,8 @@ Optional
 A list of related findings\.   
 `RelatedFindings` should only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\. It should not be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.  
 To provide a list of related findings, finding providers should use the `RelatedFindings` object under [`FindingProviderFields`](#asff-findingproviderfields)\. See [Using FindingProviderFields](finding-update-batchimportfindings.md#batchimportfindings-findingproviderfields)\.  
-**Type:** Array of up to 10 `RelatedFinding` objects  
+**Type:** Array of `RelatedFinding` objects  
+**Maximum number of objects:** 10  
 **Example**  
 
 ```
@@ -476,7 +485,8 @@ A URL that links to a page about the current finding in the finding product\.
 **[`ThreatIntelIndicators`](#asff-threatintelindicators)**  
 Optional  
 Threat intelligence details that are related to a finding\.  
-**Type:** Array of up to five threat intelligence indicator objects  
+**Type:** Array of threat intelligence indicator objects  
+**Maximum number of objects:** 5  
 **Example**  
 
 ```
@@ -494,10 +504,11 @@ Threat intelligence details that are related to a finding\.
 
 **`UserDefinedFields`**  
 Optional  
-A list of name\-value string pairs that are associated with the finding\. These are custom, user\-defined fields that are added to a finding\. These fields can be generated automatically via your specific configuration\.  
-Findings products must *not* use this field for data that the product generates\. Instead, findings products can use the `ProductFields` field for data that does not map to any standard AWS Security Finding Format field\.  
+A list of name\-value string pairs that are associated with the finding\. These are custom, user\-defined fields that are added to a finding\. These fields can be generated automatically through your specific configuration\.  
+Findings products must not use this field for data that the product generates\. Instead, findings products can use the `ProductFields` field for data that does not map to any standard AWS Security Finding Format field\.  
 These fields can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.  
-**Type:** Map of up to 50 key\-value pairs  
+**Type:** Map of key\-value pairs  
+**Maximum number of pairs:** 50  
 **Format:** The key name can only contain letters, numbers, and the following special characters: \-\_=\+@\./:  
 **Example**  
 
@@ -514,10 +525,10 @@ The veracity of a finding\. Findings products can provide the value of `UNKNOWN`
 A finding provider can provide an initial value for this attribute, but cannot update it after that\. This attribute can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.  
 **Type:** Enum  
 **Valid values:**  
-+ `UNKNOWN` – The default disposition of a security finding unless a user changes it
-+ `TRUE_POSITIVE` – A user sets this value if the security finding has been confirmed
-+ `FALSE_POSITIVE` – A user sets this value if the security finding has been determined to be a false alarm
-+ `BENIGN_POSITIVE` – A user sets this value as a special case of `TRUE_POSITIVE` where the finding doesn't pose any threat, is expected, or both
++ `UNKNOWN` – This is the default disposition of a security finding unless a user changes it\.
++ `TRUE_POSITIVE` – A user sets this value if the security finding has been confirmed\.
++ `FALSE_POSITIVE` – A user sets this value if the security finding has been determined to be a false alarm\.
++ `BENIGN_POSITIVE` – A user sets this value as a special case of `TRUE_POSITIVE` where the finding doesn't pose any threat, is expected, or both\.
 
 **[`Vulnerabilities`](#asff-vulnerabilities)**  
 Optional  
@@ -546,10 +557,10 @@ The workflow state of a finding\. Findings products can provide the value of `NE
 + `NEW` – This can be associated with findings in the `Active` record state\. This is the default workflow state for any new finding\.
 + `ASSIGNED` – This can be associated with findings in the `Active` record state\. The finding has been acknowledged and given to someone to review or address\.
 + `IN_PROGRESS` – This can be associated with findings in the `Active` record state\. Team members are actively working on the finding\.
-+ `RESOLVED` – This can be associated with findings in the `Archived` record state\. This differs from `DEFERRED` findings in that if the finding were to occur again \(be updated by the native service\) *or* any new finding matching this, the finding appears to customers as an active, new finding\.
-+ `DEFERRED` – This can be associated with findings in the `Archived` record state, and it means that any additional findings that match this finding aren't shown for a set amount of time or indefinitely\.
++ `RESOLVED` – This can be associated with findings in the `Archived` record state\. This differs from `DEFERRED` findings\. If the finding were to occur again \(be updated by the native service\) or any new finding matching this, the finding appears to customers as an active, new finding\.
++ `DEFERRED` – This can be associated with findings in the `Archived` record state\. It means that any additional findings that match this finding aren't shown for a set amount of time or indefinitely\.
 
-  Either the customer doesn't consider the finding to be applicable, *or* it's a known issue that they don't want to include in the active dataset\.
+  Either the customer doesn't consider the finding to be applicable, or it's a known issue that they don't want to include in the active dataset\.
 + `DUPLICATE` – This can be associated with findings in the `Archived` record state\. It means that the finding is a duplicate of another finding\.
 **Example**  
 
@@ -560,10 +571,10 @@ The workflow state of a finding\. Findings products can provide the value of `NE
 ## Action<a name="asff-action"></a>
 
 The `Action` object provides details about an action that affects or that was taken on a resource\. The action can be one of the following:
-+ A remote IP address issued an AWS API call
-+ A DNS request was received
-+ A remote IP address attempted to connect to an EC2 instance
-+ A remote IP address attempted a port probe on an EC2 instance
++ A remote IP address issued an AWS API call\.
++ A DNS request was received\.
++ A remote IP address attempted to connect to an EC2 instance\.
++ A remote IP address attempted a port probe on an EC2 instance\.
 
 **Example**
 
@@ -684,7 +695,7 @@ Provided if `CallerType` is `remoteIp`\. Provides information about the remote I
 
 `ServiceName`  
 Optional  
-The name of the AWS service that the API method belongs to\.  
+The name of the AWS service that the API call belongs to\.  
 **Type:** String
 
 #### DomainDetails<a name="asff-action-awsapicallaction-domaindetails"></a>
@@ -711,7 +722,7 @@ Indicates whether the DNS request was blocked\.
 
 `Domain`  
 Optional  
-The DNS domain associated with the DNS request\.  
+The DNS domain that is associated with the DNS request\.  
 **Type:** String
 
 `Protocol`  
@@ -760,7 +771,7 @@ Information about the port on the remote IP address\.
 
 `RemotePortDetails` provides information about the remote port that was involved in the attempted network connection\.
 
-`RemotePortDetails` can have the following attributes
+`RemotePortDetails` can have the following attributes\.
 
 `Port`  
 Optional  
@@ -790,7 +801,7 @@ Information about the ports affected by the port probe\.
 
 #### PortProbeDetails<a name="asff-action-portprobeaction-portprobedetails"></a>
 
-`PortProbeDetails` contains a list of port scans that were part of the port probe\. For each scan, `PortProbeDetails` provides information about the local IP address and port that were scanned, and the remote IP address that the scan originated from\.
+`PortProbeDetails` contains a list of port scans that were part of the port probe\. For each scan, `PortProbeDetails` provides information about the local IP address and port that were scanned as well as the remote IP address that the scan originated from\.
 
 `PortProbeDetails` can have the following attributes\.
 
@@ -860,7 +871,7 @@ The IP address\.
 
 [`Organization`](#asff-action-remoteipdetails-organization)  
 Optional  
-The internet service provider \(ISP\) organization associated with the remote IP address\.  
+The internet service provider \(ISP\) organization that is associated with the remote IP address\.  
 **Type:** Object
 
 #### City<a name="asff-action-remoteipdetails-city"></a>
@@ -908,7 +919,7 @@ The longitude of the location of the remote IP address\.
 
 #### Organization<a name="asff-action-remoteipdetails-organization"></a>
 
-`Organization` identifies the ISP organization associated with the remote IP address\.
+`Organization` identifies the ISP organization that is associated with the remote IP address\.
 
 `Organization` can have the following attributes\.
 
@@ -967,7 +978,7 @@ The result of a security check\.
 **Valid values:**  
 + `PASSED` – Security check passed for all evaluated resources\. If` Compliance.Status` is `PASSED`, then Security Hub automatically sets `Workflow.Status` to `RESOLVED`\.
 
-  If `Compliance.Status` for a finding changes from `PASSED` to either `FAILED`, `WARNING`, or `NOT_AVAILABLE`, and `Workflow.Status` was either `NOTIFIED` or `RESOLVED`, then Security Hub automatically sets `Workflow.Status` to `NEW`\.
+  If `Compliance.Status` for a finding changes from `PASSED` to `FAILED`, `WARNING`, or `NOT_AVAILABLE`, and `Workflow.Status` was either `NOTIFIED` or `RESOLVED`, then Security Hub automatically sets `Workflow.Status` to `NEW`\.
 + `WARNING` – Some information is missing, or this check is not supported given your configuration\.
 + `FAILED` – Security check failed for at least one evaluated resource\.
 + `NOT_AVAILABLE` – Check could not be performed due to a service outage or API error\. The `NOT_AVAILABLE` status can also indicate that the result of the AWS Config evaluation was `NOT_APPLICABLE`\. In that case, after 3 days, Security Hub automatically archives the finding\.
@@ -1052,18 +1063,21 @@ For details on how Security Hub handles updates from [https://docs.aws.amazon.co
 Optional  
 A finding's confidence\. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify\.  
 **Type:** Integer \(range 0–100\)  
-`Confidence` is scored on a 0–100 basis using a ratio scale, where 0 means zero\-percent confidence and 100 means 100\-percent confidence\.
+`Confidence` is scored on a 0–100 basis using a ratio scale, where 0 means 0\-percent confidence and 100 means 100\-percent confidence\.
 
 `Criticality`  
 Optional  
 The level of importance that is assigned to the resources that are associated with the finding\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\.  
-**Type:** Integer \(range 0–100\)  
+**Type:** Integer  
+**Minimum value:** 0  
+**Maximum value:** 100  
 `Criticality` is scored on a 0–100 basis, using a ratio scale that supports only full integers\. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources\.
 
 [`RelatedFindings`](#asff-relatedfindings)  
 Optional  
 A list of related findings\.  
-**Type:** Array of up to 10 `RelatedFinding` objects
+**Type:** Array of `RelatedFinding` objects  
+**Maximum number of objects:** 10
 
 `Severity`  
 Required  
@@ -1075,11 +1089,12 @@ For details on the available values for `Label` and `Origin`, and guidance on ho
 `Types`  
 Required  
 One or more finding types in the format of *namespace/category/classifier* that classify a finding\.  
-**Type:** Array of 50 strings maximum
+**Type:** Array of strings  
+**Maximum number of strings:** 50
 
 ## Malware<a name="asff-malware"></a>
 
-The `Malware` object provides a list of malware related to a finding\. It is an array that can contain up to five malware objects\.
+The `Malware` object provides a list of malware that is related to a finding\. It is an array that can contain up to five malware objects\.
 
 **Example**
 
@@ -1109,7 +1124,7 @@ The name of the malware that was observed\.
 
 **`Path`**  
 Optional  
-The filesystem path of the malware that was observed\.   
+The file path of the malware that was observed\.   
 **Type:** String  
 **Maximum length:** 512  
 **Example**  
@@ -1464,7 +1479,7 @@ For an open port range, the end of the range\.
 
 The `Note` object adds a user\-defined note to the finding\.
 
-A finding provider can provide an initial note for a finding, but cannot add notes after that\. A note can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
+A finding provider can provide an initial note for a finding but cannot add notes after that\. A note can only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
 **Example**
 
@@ -1863,10 +1878,13 @@ Security Hub provides a set of available objects for its supported resource type
 + [`AwsDynamoDbTable`](#asff-resourcedetails-awsdynamodbtable)
 + [`AwsEc2Eip`](#asff-resourcedetails-awsec2eip)
 + [`AwsEc2Instance`](#asff-resourcedetails-awsec2instance)
++ [`AwsEc2NetworkAcl`](#asff-resourcedetails-awsec2networkacl)
 + [`AwsEc2NetworkInterface`](#asff-resourcedetails-awsec2networkinterface)
 + [`AwsEc2SecurityGroup`](#asff-resourcedetails-awsec2securitygroup)
++ [`AwsEc2Subnet`](#asff-resourcedetails-awsec2subnet)
 + [`AwsEc2Volume`](#asff-resourcedetails-awsec2volume)
 + [`AwsEc2Vpc`](#asff-resourcedetails-awsec2vpc)
++ [`AwsElasticBeanstalkEnvironment`](#asff-resourcedetails-awselasticbeanstalkenvironment)
 + [`AwsElasticsearchDomain`](#asff-resourcedetails-awselasticsearchdomain)
 + [`AwsElbLoadBalancer`](#asff-resourcedetails-awselbloadbalancer)
 + [`AwsElbv2LoadBalancer`](#asff-resourcedetails-awselbv2loadbalancer)
@@ -1892,10 +1910,10 @@ Security Hub provides a set of available objects for its supported resource type
 + [`AwsSsmPatchCompliance`](#asff-resourcedetails-awsssmpatchcompliance)
 + [`AwsWafWebAcl`](#asff-resourcedetails-awswafwebacl)
 + [`Container`](#asff-resourcedetails-container)
-For example, if the resource is an S3 bucket, then set the resource `Type` to `AwsS3Bucket`, and provide the resource details in the `AwsS3Bucket` subfield\.  
+For example, if the resource is an S3 bucket, then set the resource `Type` to `AwsS3Bucket` and provide the resource details in the `AwsS3Bucket` subfield\.  
 The [`Other`](#asff-resourcedetails-other) subfield allows you to provide custom fields and values\. You use the `Other` subfield in the following cases\.  
 + The resource type \(the value of the resource `Type`\) does not have a corresponding subfield\. To provide details for the resource, you use the `Other` details subfield\.
-+ The subfield for the resource type does not include all of the fields you want to populate\. In this case, use the subfield for the resource type to populate the available fields\. Use the `Other` subfield to populate the fields that are not in the type\-specific subfield\.
++ The subfield for the resource type does not include all of the fields that you want to populate\. In this case, use the subfield for the resource type to populate the available fields\. Use the `Other` subfield to populate the fields that are not in the type\-specific subfield\.
 + The resource type is not one of the provided types\. In this case, set the resource `Type` to `Other`, and use the `Other` details subfield to populate the details\.
 **Type:** Object  
 **Example**  
@@ -1975,7 +1993,7 @@ A list of AWS tags that are associated with a resource at the time the finding w
 **Maximum length per value:** 256  
 The following basic restrictions apply to tags:  
 + You can provide only tags that actually exist on an AWS resource in this field\. To provide data for a resource type that isn't defined in the AWS Security Finding Format, use the `Other` details subfield\.
-+ Values are limited to alphanumeric characters, white space, \+, \-, =, \., \_, :, /, and @\.
++ Values are limited to the following characters: A\-Z, a\-z, 0\-9, blank spaces, and \. : \+ = @ \_ / \- \(hyphen\)\.
 + Values are limited to the AWS tag value length of 256 characters max\.
 **Example**  
 
@@ -2018,9 +2036,11 @@ Supported values are as follows\. If a type has a corresponding subfield, then t
 + [`AwsDynamoDbTable`](#asff-resourcedetails-awsdynamodbtable)
 + [`AwsEc2Eip`](#asff-resourcedetails-awsec2eip)
 + [`AwsEc2Instance`](#asff-resourcedetails-awsec2instance)
++ [`AwsEc2NetworkAcl`](#asff-resourcedetails-awsec2networkacl)
 + [`AwsEc2NetworkInterface`](#asff-resourcedetails-awsec2networkinterface)
 + [`AwsEc2SecurityGroup`](#asff-resourcedetails-awsec2securitygroup)
 + `AwsEc2Snapshot`
++ [`AwsEc2Subnet`](#asff-resourcedetails-awsec2subnet)
 + [`AwsEc2Volume`](#asff-resourcedetails-awsec2volume)
 + [`AwsEc2Vpc`](#asff-resourcedetails-awsec2vpc)
 + `AwsEcsService`
@@ -2028,6 +2048,7 @@ Supported values are as follows\. If a type has a corresponding subfield, then t
 + `AwsEfsFileSystem`
 + `AwsEksCluster`
 + `AwsElastiCacheCacheCluster`
++ [`AwsElasticBeanstalkEnvironment`](#asff-resourcedetails-awselasticbeanstalkenvironment)
 + [`AwsElasticsearchDomain`](#asff-resourcedetails-awselasticsearchdomain)
 + [`AwsElbLoadBalancer`](#asff-resourcedetails-awselbloadbalancer)``
 + [`AwsElbv2LoadBalancer`](#asff-resourcedetails-awselbv2loadbalancer)
@@ -2181,7 +2202,7 @@ Optional
 The details about the sensitive data that was detected on the resource\.  
 **Type:** Object
 
-### Result<a name="asff-resources-dataclassification-result"></a>
+#### Result<a name="asff-resources-dataclassification-result"></a>
 
 The `Result` object contains the details about the sensitive data that was detected on the resource\.
 
@@ -2204,9 +2225,9 @@ The type of content that the finding applies to\.
 **Required format:** Must be a MIME type\.  
 **Examples**  
 + `application/gzip`, for a GNU Gzip compressed archive file
-+ `application/pdf`, for an Adobe Portable Document Format \(PDF\) file
++ `application/pdf`, for an Adobe Portable Document Format \(`.pdf`\) file
 
-`SensitiveData`  
+[`SensitiveData`](#asff-resources-dataclassification-sensitivedata)  
 Optional  
 Provides details about sensitive data that was identified based on built\-in configuration\.  
 **Type:** Object
@@ -2231,7 +2252,7 @@ Optional
 A longer description of the current status of the sensitive data detection\.  
 **Type:** String
 
-### CustomDataIdentifiers<a name="asff-resources-dataclassification-customdataidentifiers"></a>
+#### CustomDataIdentifiers<a name="asff-resources-dataclassification-customdataidentifiers"></a>
 
 `CustomDataIdentifiers` contains instances of sensitive data that were detected by user\-defined identifiers\.
 
@@ -2247,7 +2268,7 @@ Optional
 The total number of occurrences of sensitive data\.  
 **Type:** Integer
 
-### SensitiveData<a name="asff-resources-dataclassification-sensitivedata"></a>
+#### SensitiveData<a name="asff-resources-dataclassification-sensitivedata"></a>
 
 `SensitiveData` contains detected instances of sensitive data that are based on built\-in identifiers\.
 
@@ -2266,7 +2287,7 @@ Optional
 The total number of occurrences of sensitive data\.  
 **Type:** Integer
 
-### Detections<a name="asff-resources-dataclassification-detections"></a>
+#### Detections<a name="asff-resources-dataclassification-detections"></a>
 
 `Detections` contains the details of the sensitive data that was detected\.
 
@@ -2292,10 +2313,10 @@ The name of the custom identifier that detected the sensitive data\.
 `Occurrences`  
 Optional  
 Details about the sensitive data that was detected\. `Occurrences` can contain the following objects\. Each of these objects contains an array of objects\.  
-+ [`Cells`](#asff-resources-dataclassification-cells) – Contains occurrences of sensitive data detected in Microsoft Excel files, comma\-separated value \(CSV\) files, or tab\-separated value \(TSV\) files
-+ [`LineRanges`](#asff-resources-dataclassification-lineranges) – Contains occurrences of sensitive data detected in non\-binary text files or Microsoft Word files
++ [`Cells`](#asff-resources-dataclassification-cells) – Contains occurrences of sensitive data detected in Microsoft Excel files, comma\-separated value \(`.csv`\) files, or tab\-separated value \(`.tsv`\) files
++ [`LineRanges`](#asff-resources-dataclassification-lineranges) – Contains occurrences of sensitive data detected in nonbinary text files or Microsoft Word files
 + [`OffsetRanges`](#asff-resources-dataclassification-offsetranges) – Contains occurrences of sensitive data detected in binary text files
-+ [`Pages`](#asff-resources-dataclassification-pages) – Contains occurrences of sensitive data detected in Adobe Portable Document Format \(PDF\) files
++ [`Pages`](#asff-resources-dataclassification-pages) – Contains occurrences of sensitive data detected in Adobe Portable Document Format \(`.pdf`\) files
 + [`Records`](#asff-resources-dataclassification-records) – Contains occurrences of sensitive data detected in an Apache Avro object container or an Apache Parquet file
 **Type:** Object
 
@@ -2305,9 +2326,9 @@ The type of sensitive data that was detected\. For example, the type might indic
 `Type` is only provided in `Detections` instances under `SensitiveData` \. `Detections` instances under `CustomDataIdentifiers` do not have the `Type` attribute\.  
 **Type:** String
 
-### Cells<a name="asff-resources-dataclassification-cells"></a>
+#### Cells<a name="asff-resources-dataclassification-cells"></a>
 
-`Cells` contains occurrences of sensitive data detected in Microsoft Excel workbooks, comma\-separated value \(CSV\) files, or tab\-separated value \(TSV\) files\.
+`Cells` contains occurrences of sensitive data detected in Microsoft Excel workbooks, comma\-separated value \(`.csv`\) files, or tab\-separated value \(`.tsv`\) files\.
 
 For each occurrence, `Cells` identifies the cell that contains the sensitive data\.
 
@@ -2316,7 +2337,7 @@ Each occurrence can contain the following attributes\.
 `CellReference`  
 Optional  
 For a Microsoft Excel workbook, provides the location of the cell, as an absolute cell reference, that contains the data\. For example, Sheet2\!C5 for cell C5 on Sheet2\.  
-This attribute is null for CSV and TSV files\.  
+This attribute is null for `.csv` and `.tsv` files\.  
 **Type:** String
 
 `Column`  
@@ -2334,9 +2355,9 @@ Optional
 The row number of the row that contains the data\.  
 **Type:** Integer
 
-### LineRanges<a name="asff-resources-dataclassification-lineranges"></a>
+#### LineRanges<a name="asff-resources-dataclassification-lineranges"></a>
 
-`LineRanges` contains occurrences of sensitive data detected in a non\-binary text file or a Microsoft Word file\. Non\-binary text files include files such as HTML, XML, JSON, and TXT files\.
+`LineRanges` contains occurrences of sensitive data detected in a nonbinary text file or a Microsoft Word file\. Nonbinary text files include files such as `.html`, `.xml`, `.json`, and `.txt` files\.
 
 For each occurrence, `LineRanges` provides the location of the sensitive data\. The location includes the line where the data is located and the position of the data on that line\.
 
@@ -2357,7 +2378,7 @@ Optional
 In the line where the sensitive data begins, the column within the line where the sensitive data starts\.  
 **Type:** Integer
 
-### OffsetRanges<a name="asff-resources-dataclassification-offsetranges"></a>
+#### OffsetRanges<a name="asff-resources-dataclassification-offsetranges"></a>
 
 `OffsetRanges` contains occurrences of sensitive data detected in a binary text file\.
 
@@ -2380,9 +2401,9 @@ Optional
 The column where the sensitive data begins\.  
 **Type:** Integer
 
-### Pages<a name="asff-resources-dataclassification-pages"></a>
+#### Pages<a name="asff-resources-dataclassification-pages"></a>
 
-`Pages` provides occurrences of sensitive data in an Adobe Portable Document Format \(PDF\) file\.
+`Pages` provides occurrences of sensitive data in an Adobe Portable Document Format \(`.pdf`\) file\.
 
 For each occurrence, `Pages` identifies the page that contains the data, and provides the position of the data on the page\. The position can be identified using either line numbers or numbers of characters\.
 
@@ -2433,7 +2454,7 @@ Optional
 The page number of the page that contains the sensitive data\.  
 **Type:** Integer
 
-### Records<a name="asff-resources-dataclassification-records"></a>
+#### Records<a name="asff-resources-dataclassification-records"></a>
 
 `Records` identifies occurrences of sensitive data in an Apache Avro object container or an Apache Parquet file\.
 
@@ -2690,11 +2711,11 @@ Indicates whether active tracing with AWS X\-Ray is enabled for the stage\.
 **`Variables`**  
 Optional  
 A map that defines the stage variables for the stage\.  
-Variable names can have alphanumeric and underscore characters\.  
+Variable names can have the following characters: A\-Z, a\-z, 0\-9, and \_ \(underscore\)\.  
 Variable values can contain the following characters:  
 + Uppercase and lowercase letters
 + Numbers
-+ Special characters \-\.\_\~:/?\#&=,
++ Special characters \. \_ \~ : / ? \# & = , \- \(hyphen\)
 **Type:** Map of strings
 
 **`WebAclArn`**  
@@ -2803,7 +2824,7 @@ Indicates whether authorization is required for a cache invalidation request\.
 
 `ResourcePath`  
 Optional  
-The resource path for this method\. Forward slashes \(/\) are encoded as \~1 \. The initial slash must include a forward slash\.  
+The resource path for this method\. Forward slashes \(/\) are encoded as \~1\. The initial slash must include a forward slash\.  
 For example, the path value `/resource/subresource` must be encoded as `/~1resource~1subresource`\.  
 To specify the root path, use only a slash \(/\)\. You can use an asterisk \(\*\) as a wildcard to apply method settings to multiple methods\.  
 **Type:** String
@@ -2811,7 +2832,7 @@ To specify the root path, use only a slash \(/\)\. You can use an asterisk \(\*\
 `ThrottlingBurstLimit`  
 Optional  
 The throttling burst limit for the method\.  
-**Type:** Number \(Integer\)
+**Type:** Number \(integer\)
 
 `ThrottlingRateLimit`  
 Optional  
@@ -2874,12 +2895,12 @@ The identifier of the API\.
 
 **`ApiKeySelectionExpression`**  
 Optional  
-An API key selection expression\. Supported only for WebSocket APIs\.  
+An API key selection expression\. Supported only for WebSocket API calls\.  
 **Type:** String
 
 **[`CorsConfiguration`](#asff-resourcedetails-awsapigatewayv2api-corsconfiguration)**  
 Optional  
-A cross\-origin resource sharing \(CORS\) configuration\. Supported only for HTTP APIs\.  
+A cross\-origin resource sharing \(CORS\) configuration\. Supported only for HTTP API calls\.  
 **Type:** Object
 
 **`CreatedDate`**  
@@ -2912,8 +2933,8 @@ The API protocol for the API\.
 **`RouteSelectionExpression`**  
 Optional  
 The route selection expression for the API\.  
-For HTTP APIs, must be `${request.method} ${request.path}`\. This is the default value for HTTP APIs\.  
-For WebSocket APIs, there is no default value\.  
+For HTTP API calls, must be `${request.method} ${request.path}`\. This is the default value for HTTP API calls\.  
+For WebSocket API calls, there is no default value\.  
 **Type:** String
 
 **`Version`**  
@@ -2923,7 +2944,7 @@ Type: String
 
 #### CorsConfiguration<a name="asff-resourcedetails-awsapigatewayv2api-corsconfiguration"></a>
 
-The `CorsConfiguration` object contains the cross\-origin resource sharing \(CORS\) configuration for the API\. CORS is only supported for HTTP APIs\.
+The `CorsConfiguration` object contains the cross\-origin resource sharing \(CORS\) configuration for the API\. CORS is only supported for HTTP API calls\.
 
 `CorsConfiguration` can have the following attributes\.
 
@@ -3069,12 +3090,12 @@ The name of the stage\.
 **`StageVariables`**  
 Optional  
 A map that defines the stage variables for the stage\.  
-Variable names can have alphanumeric and underscore characters\.  
-Variable values can contain the following characters:  
+Variable names can have the following characters: A\-Z, a\-z, 0\-9, and \_ \(underscore\)\.  
+**Type:** Map of strings  
+**Valid values:**  
 + Uppercase and lowercase letters
 + Numbers
-+ Special characters \-\.\_\~:/?\#&=,
-**Type:** Map of strings
++ Special characters \. \_ \~ : / ? \# & = , \- \(hyphen\)
 
 #### AccessLogSettings<a name="asff-resourcedetails-awsapigatewayv2stage-accesslogsettings"></a>
 
@@ -3102,7 +3123,7 @@ These objects can have the following attributes\.
 
 `DataTraceEnabled`  
 Optional  
-Indicates whether data trace logging is enabled\. Data trace logging affects the log entries that are pushed to CloudWatch Logs\. Supported only for WebSocket APIs\.  
+Indicates whether data trace logging is enabled\. Data trace logging affects the log entries that are pushed to CloudWatch Logs\. Supported only for WebSocket API calls\.  
 **Type:** Boolean
 
 `DetailedMetricsEnabled`  
@@ -3112,7 +3133,7 @@ Indicates whether detailed metrics are enabled\.
 
 `LoggingLevel`  
 Optional  
-The logging level\. The logging level affects the log entries that are pushed to CloudWatch Logs\. Supported only for WebSocket APIs\.  
+The logging level\. The logging level affects the log entries that are pushed to CloudWatch Logs\. Supported only for WebSocket API calls\.  
 If the logging level is `ERROR`, then the logs only include error\-level entries\.  
 If the logging level is `INFO`, then the logs include both `ERROR` events and extra informational events\.  
 **Type:** String  
@@ -3174,7 +3195,7 @@ The name of the launch configuration\.
 Optional  
 The list of load balancers that are associated with the group\.  
 **Type:** Array of strings  
-Each load balancer name is limited to 255 characters\.
+**Maximum length per string:** 255 characters
 
 ### AwsCertificateManagerCertificate<a name="asff-resourcedetails-awscertificatemanagercertificate"></a>
 
@@ -3292,7 +3313,7 @@ Only provided if the certificate type is `AMAZON_ISSUED`\.
 
 **[`ExtendedKeyUsages`](#asff-resourcedetails-awscertificatemanagercertificate-extendedkeyusages)**  
 Optional  
-Contains a list of Extended Key Usage X\.509 v3 extension objects\. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier \(OID\)\.  
+Contains a list of extended key usage X\.509 v3 extension objects\. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier \(OID\)\.  
 **Type:** Array of objects
 
 **`FailureReason`**  
@@ -3573,7 +3594,7 @@ The default cache behavior for the configuration\.
 
 **`DefaultRootObject`**  
 Optional  
-The object that CloudFront sends in response to requests from the origin \(for example, index\.html\) when a viewer requests the root URL for the distribution \(http://www\.example\.com\) instead of an object in your distribution \(http://www\.example\.com/product\-description\.html\)\.   
+The object that CloudFront sends in response to requests from the origin when a viewer requests the root URL for the distribution instead of an object in your distribution\. For example, in response to a request from index\.html, the viewer requests http://www\.example\.com instead of http://www\.example\.com/product\-description\.html\.  
 **Type:** String
 
 **`DomainName`**  
@@ -3995,7 +4016,7 @@ Information about the location of the source code to be built\.
 + For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, `location` should not be specified\. If it is specified, CodePipeline ignores it\. This is because CodePipeline uses the settings in a pipeline's source action instead of this value\.
 + For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec file \(for example, `https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name` \)\.
 + For source code in an S3 input bucket, one of the following\.
-  + The path to the ZIP file that contains the source code \(for example, `bucket-name/path/to/object-name.zip`\)\.
+  + The path to the `.zip` file that contains the source code \(for example, `bucket-name/path/to/object-name.zip`\)\.
   + The path to the folder that contains the source code \(for example, `bucket-name/path/to/source-code/folder/`\)\.
 + For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec file\.
 + For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec file\.
@@ -4036,7 +4057,7 @@ A list of one or more security group IDs in your Amazon VPC\.
 Optional  
 A list of one or more subnet IDs in your Amazon VPC\.  
 **Type:** Array of strings  
-**Array members:** Maximum number of 16 items  
+**Maximum number of strings:** 16  
 **Minimum length per item:** 1
 
 **`VpcId`**  
@@ -4757,6 +4778,166 @@ The identifier of the VPC where the instance was launched\.
 **Type:** String  
 **Maximum length:** 32
 
+### AwsEc2NetworkAcl<a name="asff-resourcedetails-awsec2networkacl"></a>
+
+The `AwsEc2NetworkAcl` object contains details about an Amazon EC2 network access control list \(ACL\)\.
+
+**Example**
+
+```
+AwsEc2NetworkAcl: {
+    "IsDefault": false,
+    "NetworkAclId": "acl-1234567890abcdef0",
+    "OwnerId": "123456789012",
+    "VpcId": "vpc-1234abcd",
+    "Associations": [{
+        "NetworkAclAssociationId": "aclassoc-abcd1234",
+        "NetworkAclId": "acl-021345abcdef6789",
+        "SubnetId": "subnet-abcd1234"
+   }],
+   "Entries": [{
+        "CidrBlock": "10.24.34.0/23",
+        "Egress": true,
+        "IcmpTypeCode": {
+            "Code": 10,
+            "Type": 30
+        },
+        "Ipv6CidrBlock": "2001:DB8::/32",
+        "PortRange": {
+            "From": 20,
+            "To": 40
+        },
+        "Protocol": "tcp",
+        "RuleAction": "allow",
+        "RuleNumber": 100
+   }]
+}
+```
+
+`AwsEc2NetworkAcl` can have the following attributes\.
+
+[`Associations`](#asff-resourcedetails-awsec2networkacl-associations)  
+Optional  
+Associations between the network ACL and subnets\.  
+**Type:** Array of objects
+
+[`Entries`](#asff-resourcedetails-awsec2networkacl-entries)  
+Optional  
+The set of rules in the network ACL\.  
+**Type:** Array of objects
+
+`IsDefault`  
+Optional  
+Whether this is the default network ACL for the VPC\.  
+**Type:** Boolean
+
+`NetworkAclId`  
+Optional  
+The identifier of the network ACL\.  
+**Type:** String
+
+`OwnerId`  
+Optional  
+The identifier of the AWS account that owns the network ACL\.  
+**Type:** String
+
+`VpcId`  
+Optional  
+The identifier of the VPC for the network ACL\.  
+**Type:** String
+
+#### Associations<a name="asff-resourcedetails-awsec2networkacl-associations"></a>
+
+The `Associations` object contains the associations between the network ACL and subnets\.
+
+Each association can have the following attributes\.
+
+`NetworkAclAssociationId`  
+Optional  
+The identifier of the association between the network ACL and the subnet\.  
+**Type:** String
+
+`NetworkAclId`  
+Optional  
+The identifier of the network ACL\.  
+**Type:** String
+
+`SubnetId`  
+Optional  
+The identifier of the subnet that is associated with the network ACL\.  
+**Type:** String
+
+#### Entries<a name="asff-resourcedetails-awsec2networkacl-entries"></a>
+
+The `Entries` object contains the rules for the network ACL\. Each rule allows or denies access based on the IP address, traffic direction, port, and protocol\.
+
+Each rule can have the following attributes\.
+
+`CidrBlock`  
+Optional  
+The IPV4 network range for which to deny or allow access\.  
+**Type:** String  
+**Format:** Uses CIDR notation
+
+`Egress`  
+Optional  
+Whether the rule is an egress rule\. An egress rule is a rule that applies to traffic that leaves the subnet\.  
+**Type:** Boolean
+
+`IcmpTypeCode`  
+Optional  
+The Internet Control Message Protocol \(ICMP\) type and code for which to deny or allow access\.  
+**Type:** Object
+
+`IcmpTypeCode.Code`  
+Optional  
+The ICMP code for which to deny or allow access\.  
+To deny or allow all codes, use the value `-1`\.  
+**Type:** Number
+
+`IcmpTypeCode.Type`  
+Optional  
+The ICMP type for which to deny or allow access\.  
+To deny or allow all types, use the value `-1`\.  
+**Type:** Number
+
+`Ipv6CidrBlock`  
+The IPV6 network range for which to deny or allow access\.  
+**Type:** String  
+**Format:** Uses CIDR notation
+
+`PortRange`  
+Optional  
+For TCP or UDP protocols, the range of ports that the rule applies to\.  
+**Type:** Object
+
+`PortRange.From`  
+Optional  
+The first port in the port range\.  
+**Type:** Number
+
+`PortRange.To`  
+Optional  
+The last port in the port range\.  
+**Type:** Number
+
+`Protocol`  
+Optional  
+The protocol that the rule applies to\.  
+To deny or allow access to all protocols, use the value `-1`\.  
+**Type:** String
+
+`RuleAction`  
+Optional  
+Whether the rule is used to allow access or deny access\.  
+**Type:** String  
+**Valid values:** `allow` \| `deny`
+
+`RuleNumber`  
+Optional  
+The rule number\. The rules are processed in order by their number\.  
+**Type:** Number
+
 ### AwsEc2NetworkInterface<a name="asff-resourcedetails-awsec2networkinterface"></a>
 
 The `AwsEc2NetworkInterface` object provides information about an Amazon EC2 network interface\.
@@ -4794,7 +4975,7 @@ Information about the network interface attachment\.
 
 **[`Ipv6Addresses`](#asff-resourcedetails-awsec2networkinterface-ipv6addresses)**  
 Optional  
-The IPv6 addresses associated with the network interface\.  
+The IPv6 addresses that are associated with the network interface\.  
 **Type:** Array of objects
 
 **`NetworkInterfaceId`**  
@@ -4804,7 +4985,7 @@ The ID of the network interface\.
 
 **[`PrivateIpAddresses`](#asff-resourcedetails-awsec2networkinterface-privateipaddresses)**  
 Optional  
-The private IPv4 addresses associated with the network interface\.  
+The private IPv4 addresses that are associated with the network interface\.  
 **Type:** Array of objects
 
 **`PublicDnsName`**  
@@ -4993,7 +5174,7 @@ Each IP permission object can have the following attributes\.
 
 **`FromPort`**  
 Optional  
-The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number\.  
+The start of the port range for the TCP and UDP protocols or an ICMP/ICMPv6 type number\.  
 A value of `-1` indicates all ICMP/ICMPv6 types\. If you specify all ICMP/ICMPv6 types, you must specify all codes\.  
 **Type:** Integer
 
@@ -5057,6 +5238,126 @@ The ID of an AWS account\.
 For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response\. If the referenced security group is deleted, this value is not returned\.  
 \[Amazon EC2\-Classic\] Required when adding or removing rules that reference a security group in another AWS account\.  
 **Type:** String
+
+### AwsEc2Subnet<a name="asff-resourcedetails-awsec2subnet"></a>
+
+The `AwsEc2Subnet` object provides information about a subnet in Amazon EC2\.
+
+**Example**
+
+```
+AwsEc2Subnet: {
+    "AssignIpv6AddressOnCreation": false,
+    "AvailabilityZone": "us-west-2c",
+    "AvailabilityZoneId": "usw2-az3",
+    "AvailableIpAddressCount": 8185,
+    "CidrBlock": "10.0.0.0/24",
+    "DefaultForAz": false,
+    "MapPublicIpOnLaunch": false,
+    "OwnerId": "123456789012",
+    "State": "available",
+    "SubnetArn": "arn:aws:ec2:us-west-2:123456789012:subnet/subnet-d5436c93",
+    "SubnetId": "subnet-d5436c93",
+    "VpcId": "vpc-153ade70",
+    "Ipv6CidrBlockAssociationSet": [{
+        "AssociationId": "subnet-cidr-assoc-EXAMPLE",
+        "Ipv6CidrBlock": "2001:DB8::/32",
+        "CidrBlockState": "associated"
+   }]
+}
+```
+
+`AWSEc2Subnet` can have the following attributes\.
+
+`AssignIpv6AddressOnCreation`  
+Optional  
+Whether to assign an IPV6 address to a network interface that is created in this subnet\.  
+**Type:** Boolean
+
+`AvailabilityZone`  
+Optional  
+The Availability Zone for the subnet\.  
+**Type:** String
+
+`AvailabilityZoneId`  
+Optional  
+The identifier of the Availability Zone for the subnet\.  
+**Type:** String
+
+`AvailableIpAddressCount`  
+Optional  
+The number of available IPV4 addresses in the subnet\. Does not include addresses for stopped instances\.  
+**Type:** Number
+
+`CidrBlock`  
+Optional  
+The IPV4 CIDR block that is assigned to the subnet\.  
+**Type:** String  
+**Format:** Uses CIDR notation
+
+`DefaultForAz`  
+Optional  
+Whether this subnet is the default subnet for the Availability Zone\.  
+**Type:** Boolean
+
+[`Ipv6CidrBlockAssociationSet`](#asff-resourcedetails-awsec2subnet-ipv6cidrblockassociationset)  
+Optional  
+The IPV6 CIDR blocks associated with the subnet\.  
+**Type:** Array of objects
+
+`MapPublicIpOnLaunch`  
+Optional  
+Whether instances in this subnet receive a public IP address\.  
+**Type:** Boolean
+
+`OwnerId`  
+Optional  
+The identifier of the AWS account that owns the subnet\.  
+**Type:** String
+
+`State`  
+Optional  
+The current state of the subnet\.  
+**Type:** String  
+**Valid values:** `pending` \| `available`
+
+`SubnetArn`  
+Optional  
+The ARN of the subnet\.  
+**Type:** String
+
+`SubnetId`  
+Optional  
+The identifier of the subnet\.  
+**Type:** String
+
+`VpcId`  
+Optional  
+The identifier of the VPC that contains the subnet\.  
+**Type:** String
+
+#### Ipv6CidrBlockAssociationSet<a name="asff-resourcedetails-awsec2subnet-ipv6cidrblockassociationset"></a>
+
+`Ipv6CidrBlockAssociationSet` contains information about the IPV6 CIDR blocks that are associated with the subnet\.
+
+Each CIDR block can have the following attributes\.
+
+`AssociationId`  
+Optional  
+The identifier of the association\.  
+**Type:** String
+
+`Ipv6CidrBlock`  
+Optional  
+The IPV6 CIDR block\.  
+**Type:** String  
+**Format:** Uses CIDR notation
+
+`CidrBlockState`  
+Optional  
+The state of the IPV6 CIDR block\.  
+**Type:** String  
+**Valid values:** `associating` \| `associated` \| `disassociating` \| `disassociated` \| `failing` \| `failed`
 
 ### AwsEc2Volume<a name="asff-resourcedetails-awsec2volume"></a>
 
@@ -5247,6 +5548,224 @@ Optional
 The IPv6 CIDR block\.  
 **Type:** CIDR IPV6
 
+### AwsElasticBeanstalkEnvironment<a name="asff-resourcedetails-awselasticbeanstalkenvironment"></a>
+
+The `AwsElasticBeanstalkEnvironment` object contains details about an AWS Elastic Beanstalk environment\.
+
+**Example**
+
+```
+"AwsElasticBeanstalkEnvironment": {
+    "ApplicationName": "MyApplication",
+    "Cname": "myexampleapp-env.devo-2.elasticbeanstalk-internal.com",
+    "DateCreated": "2021-04-30T01:38:01.090Z",
+    "DateUpdated": "2021-04-30T01:38:01.090Z",
+    "Description": "Example description of my awesome application",
+    "EndpointUrl": "eb-dv-e-p-AWSEBLoa-abcdef01234567890-021345abcdef6789.us-east-1.elb.amazonaws.com",
+    "EnvironmentArn": "arn:aws:elasticbeanstalk:us-east-1:123456789012:environment/MyApplication/myapplication-env",
+    "EnvironmentId": "e-abcd1234",
+    "EnvironmentLinks": [
+        {
+            "EnvironmentName": "myexampleapp-env",
+            "LinkName": "myapplicationLink"
+        }
+    ],
+    "EnvironmentName": "myapplication-env",
+    "OptionSettings": [
+        {
+            "Namespace": "aws:elasticbeanstalk:command",
+            "OptionName": "BatchSize",
+            "Value": "100"
+        },
+        {
+            "Namespace": "aws:elasticbeanstalk:command",
+            "OptionName": "Timeout",
+            "Value": "600"
+        },
+        {
+            "Namespace": "aws:elasticbeanstalk:command",
+            "OptionName": "BatchSizeType",
+            "Value": "Percentage"
+        },
+        {
+            "Namespace": "aws:elasticbeanstalk:command",
+            "OptionName": "IgnoreHealthCheck",
+            "Value": "false"
+        },
+        {
+            "Namespace": "aws:elasticbeanstalk:application",
+            "OptionName": "Application Healthcheck URL",
+            "Value": "TCP:80"
+        }
+    ],
+    "PlatformArn": "arn:aws:elasticbeanstalk:us-east-1::platform/Tomcat 8 with Java 8 running on 64bit Amazon Linux/2.7.7",
+    "SolutionStackName": "64bit Amazon Linux 2017.09 v2.7.7 running Tomcat 8 Java 8",
+    "Status": "Ready",
+    "Tier": {
+        "Name": "WebServer"
+       "Type": "Standard"
+       "Version": "1.0"
+    },
+    "VersionLabel": "Sample Application"
+}
+```
+
+`AwsElasticBeanstalkEnvironment` can have the following attributes\.
+
+`ApplicationName`  
+Optional  
+The name of the application that is associated with the environment\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 100
+
+`Cname`  
+Optional  
+The URL to the CNAME for this environment\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+`DateCreated`  
+Optional  
+The creation date for this environment\.  
+**Type:** String  
+**Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
+
+`DateUpdated`  
+Optional  
+The date when this environment was last modified\.  
+**Type:** String  
+**Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
+
+`Description`  
+Optional  
+A description of the environment\.  
+**Type:** String
+
+`EndpointUrl`  
+Optional  
+For load\-balanced, autoscaling environments, the URL to the load balancer\. For single\-instance environments, the IP address of the instance\.  
+**Type:** String
+
+`EnvironmentArn`  
+Optional  
+The ARN of the environment\.  
+**Type:** String
+
+`EnvironmentId`  
+Optional  
+The identifier of the environment\.  
+**Type:** String
+
+[`EnvironmentLinks`](#asff-resourcedetails-awselasticbeanstalkenvironment-environmentlinks)  
+Optional  
+Links to other environments that are in the same group\.  
+**Type:** Array of objects
+
+`EnvironmentName`  
+Optional  
+The name of the environment\.  
+**Type:** String
+
+[`OptionSettings`](#asff-resourcedetails-awselasticbeanstalkenvironment-optionsettings)  
+Optional  
+The configuration setting for the environment\.  
+**Type:** Array of objects
+
+`PlatformArn`  
+Optional  
+The ARN of the platform version for the environment\.  
+**Type:** String
+
+`SolutionStackName`  
+Optional  
+The name of the solution stack that is deployed with the environment\.  
+**Type:** String
+
+`Status`  
+Optional  
+The current operational status of the environment\.  
+**Type:** String  
+**Valid values:** `Aborting` \| `Launching` \| `Updating` \| `LinkingFrom` \| `LinkingTo` \| `Ready` \| `Terminating` \| `Terminated`
+
+[`Tier`](#asff-resourcedetails-awselasticbeanstalkenvironment-tier)  
+Optional  
+The tier of the environment\.  
+**Type:** Object
+
+`VersionLabel`  
+Optional  
+The application version of the environment\.  
+**Type:** String
+
+#### EnvironmentLinks<a name="asff-resourcedetails-awselasticbeanstalkenvironment-environmentlinks"></a>
+
+The `EnvironmentLinks` object contains information about links to other environments that are in the same group\.
+
+Each environment link can have the following attributes\.
+
+`EnvironmentName`  
+Optional  
+The name of the linked environment\.  
+**Type:** String
+
+`LinkName`  
+Optional  
+The name of the environment link\.  
+**Type:** String
+
+#### OptionSettings<a name="asff-resourcedetails-awselasticbeanstalkenvironment-optionsettings"></a>
+
+The `OptionSettings` object contains the configuration option settings for the environment\. For more information about setting configuration options in Elastic Beanstalk, see [Configuration options](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in the AWS Elastic Beanstalk Developer Guide\.
+
+Each setting is provided in an object that has the following attributes:
+
+`Namespace`  
+Optional  
+Used to identify the resource that the configuration option is associated with\.  
+**Type:** String
+
+`OptionName`  
+Optional  
+The name of the option\.  
+**Type:** String
+
+`ResourceName`  
+Optional  
+The resource name for the configuration setting\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 256
+
+`Value`  
+Optional  
+The value of the configuration setting\.  
+**Type:** String
+
+#### Tier<a name="asff-resourcedetails-awselasticbeanstalkenvironment-tier"></a>
+
+The `Tier` object contains information about the tier of the environment\.
+
+Tier can have the following attributes\.
+
+`Name`  
+Optional  
+The name of the environment tier\.  
+**Type:** String  
+**Valid values:** `WebServer` \| `Worker`
+
+`Type`  
+Optional  
+The type of environment tier\.  
+**Type:** String  
+**Valid values:** `Standard` \| `SQS/HTTP`
+
+`Version`  
+Optional  
+The version of the environment tier\.  
+**Type:** String
+
 ### AwsElasticSearchDomain<a name="asff-resourcedetails-awselasticsearchdomain"></a>
 
 The `AwsElasticSearchDomain` object provides details about an Elasticsearch domain\.
@@ -5322,8 +5841,9 @@ Unique identifier for an Amazon ES domain\.
 Optional  
 Name of an Amazon ES domain\.  
 Domain names are unique across all domains owned by the same account within an AWS Region\.  
-Domain names must start with a lowercase letter and must be between 3 and 28 characters\.  
-Valid characters are a\-z \(lowercase only\), 0\-9, and – \(hyphen\)\.  
+**Minimum length:** 3 characters  
+**Maximum length:** 28 characters  
+**Valid values:** Begin with a lowercase letter and use a\-z \(lowercase only\), 0\-9, and – \(hyphen\)  
 **Type:** String
 
 **`Endpoint`**  
@@ -5382,7 +5902,7 @@ The list of Availability Zones that are associated with the VPC subnets\.
 
 **`SecurityGroupIds`**  
 Optional  
-The list of security group IDs that are associated with the VPC endpoints for the domain  
+The list of security group IDs that are associated with the VPC endpoints for the domain\.  
 **Type:** Array of strings\.
 
 **`SubnetIds`**  
@@ -5824,7 +6344,7 @@ Each policy can have the following attributes\.
 
 **`CookieName`**  
 Optional  
-The name of the application cookie used for stickiness\.  
+The name of the application cookie that is used for stickiness\.  
 **Type:** String
 
 **`PolicyName`**  
@@ -6713,7 +7233,8 @@ A description of the key\.
 Required  
 The globally unique identifier for the CMK\.  
 **Type:** String  
-The minimum length is 1\. The maximum length is 2,048\.
+**Minimum length:** 1  
+**Maximum length:** 2,048
 
 **`KeyManager`**  
 Optional  
@@ -6765,7 +7286,7 @@ A function's environment variable settings\.
 **`FunctionName`**  
 Optional  
 The name of the function\.  
-Type: String
+**Type:** String
 
 **`Handler`**  
 Optional  
@@ -6883,7 +7404,7 @@ Environment variable key\-value pairs\.
 **`Error`**  
 Optional  
 Error messages for environment variables that couldn't be applied\.  
-Type: Object
+**Type:** Object
 
 The `Error` object can have the following attributes\.
 
@@ -7656,7 +8177,7 @@ The `AwsRdsDbInstance` object provides details about an Amazon RDS DB instance\.
 }
 ```
 
-It can have the following attributes\.
+The `AwsRdsDbInstance` object can have the following attributes\.
 
 **`AllocatedStorage`**  
 Optional  
@@ -7738,7 +8259,7 @@ The meaning of this parameter differs according to the database that engine you 
 Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created\. This same name is returned for the life of the DB instance\.  
 **Type:** String  
 **Oracle**  
-Contains the Oracle System ID \(SID\) of the created DB instance\. Not shown when the returned parameters do not apply to an Oracle DB instance\.  
+Contains the Oracle System Identifier \(SID\) of the created DB instance\. Not shown when the returned parameters do not apply to an Oracle DB instance\.  
 **Type:** String
 
 **[`DbParameterGroups`](#asff-resourcedetails-awsrdsdbinstance-dbparametergroups)**  
@@ -7808,7 +8329,7 @@ Indicates when the DB instance was created\.
 
 **`Iops`**  
 Optional  
-Specifies the provisioned IOPS \(I/O operations per second\) for this DB instance\.  
+Specifies the Provisioned IOPS \(I/O operations per second\) for this DB instance\.  
 **Type:** Number
 
 **`KmsKeyId`**  
@@ -7889,7 +8410,7 @@ The number of days to retain Performance Insights data\.
 
 **`PreferredBackupWindow`**  
 Optional  
-The range of time each day when automated backups are created, if automated backups are enabled\.  
+The range of time each day during which automated backups are created, if automated backups are enabled\.  
 **Type:** string  
 **Format:** `HH:MM-HH:MM`   
 **Example**  
@@ -7934,7 +8455,7 @@ List of identifiers of Aurora DB clusters to which the RDS DB instance is replic
 
 **`ReadReplicaDBInstanceIdentifiers`**  
 Optional  
-List of identifiers of the read replicas associated with this DB instance\.  
+List of identifiers of the read replicas that are associated with this DB instance\.  
 **Type:** Array of strings
 
 **`ReadReplicaSourceDBInstanceIdentifier`**  
@@ -8101,7 +8622,7 @@ The name of the IAM role to use when making API calls to the Directory Service\.
 
 **`Status`**  
 Optional  
-The status of the Active Directory Domain membership for the DB instance\.  
+The status of the Active Directory domain membership for the DB instance\.  
 **Type:** String
 
 #### Endpoint<a name="asff-resourcedetails-awsrdsdbinstance-endpoint"></a>
@@ -8205,7 +8726,7 @@ The new engine version for the DB instance\.
 
 **`Iops`**  
 Optional  
-The new provisioned IOPS value for the DB instance\.  
+The new Provisioned IOPS value for the DB instance\.  
 **Type:** Number
 
 **`LicenseModel`**  
@@ -8414,7 +8935,7 @@ Specifies the time in Coordinated Universal Time \(UTC\) when the DB instance, f
 
 **`Iops`**  
 Optional  
-The provisioned IOPS \(I/O operations per second\) value of the DB instance at the time of the snapshot\.  
+The Provisioned IOPS \(I/O operations per second\) value of the DB instance at the time of the snapshot\.  
 **Type:** Number
 
 **`KmsKeyId`**  
@@ -8516,7 +9037,7 @@ The status of this DB snapshot\.
 
 **`StorageType`**  
 Optional  
-The storage type associated with DB snapshot\.  
+The storage type that is associated with DB snapshot\.  
 **Type:** String  
 **Valid values:** `standard` \| `gp2` \| `io1`
 
@@ -9060,7 +9581,7 @@ The status of the cluster security group\.
 
 #### ClusterSnapshotCopyStatus<a name="asff-resourcedetails-awsredshiftcluster-clustersnapshotcopystatus"></a>
 
-The ClusterSnapshotCopyStatus object provides information about the destination Region and retention period for the cross\-Region snapshot copy\.
+The `ClusterSnapshotCopyStatus` object provides information about the destination Region and retention period for the cross\-Region snapshot copy\.
 
 `ClusterSnapshotCopyStatus` can have the following attributes\.
 
@@ -9282,7 +9803,7 @@ This field is only updated when you restore to DC2 and DS2 node types\.
 
 **`ElapsedTimeInSeconds`**  
 Optional  
-The amount of time an in\-progress restore has been running, or the amount of time it took a completed restore to finish\.  
+The amount of time an in\-progress restore has been running or the amount of time it took a completed restore to finish\.  
 This field is only updated when you restore to DC2 and DS2 node types\.  
 **Type:** Number
 
@@ -9541,7 +10062,7 @@ The user\-provided description of the secret\.
 
 **`KmsKeyId`**  
 Optional  
-The ARN, Key ID, or alias of the AWS KMS customer master key \(CMK\) used to encrypt the `SecretString` or `SecretBinary` values for versions of this secret\.  
+The ARN, key ID, or alias of the AWS KMS customer master key \(CMK\) that is used to encrypt the `SecretString` or `SecretBinary` values for versions of this secret\.  
 **Type:** String
 
 **`Name`**  
@@ -9597,7 +10118,7 @@ List of subscription endpoints of an Amazon SNS topic\.
 **`TopicName`**  
 Optional  
 The name of the topic\.  
-Type: String
+**Type:** String
 
 **`Owner`**  
 Optional  
@@ -9886,8 +10407,8 @@ Each action can have the following attributes\.
 **`Type`**  
 Optional  
 Specifies how you want AWS WAF to respond to requests that match the settings in a rule\.  
-+ `ALLOW` ‐ AWS WAF allows requests
-+ `BLOCK` ‐ AWS WAF blocks requests
++ `ALLOW` ‐ AWS WAF allows requests\.
++ `BLOCK` ‐ AWS WAF blocks requests\.
 + `COUNT` ‐ AWS WAF increments a counter of the requests that match all of the conditions in the rule\. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL\. You cannot specify `COUNT` for the default action for a web ACL\.
 **Type:** String  
 **Valid values:** `BLOCK` \| `ALLOW` \| `COUNT`
@@ -9957,7 +10478,7 @@ The name of the container that is related to a finding\.
 
 The `Other` subfield allows you to provide custom fields and values\. You use the `Other` subfield in the following cases\.
 + The resource type does not have a corresponding subfield\. To provide details for the resource, you use the `Other` subfield\.
-+ The subfield for the resource type does not include all of the fields you want to populate\. In this case, use the subfield for the resource type to populate the available fields\. Use the `Other` subfield to populate the fields that are not in the type\-specific subfield\.
++ The subfield for the resource type does not include all of the fields that you want to populate\. In this case, use the subfield for the resource type to populate the available fields\. Use the `Other` subfield to populate the fields that are not in the type\-specific subfield\.
 + The resource type is not one of the provided types\. In this case, you set `Resource.Type` to `Other`, and use the `Other` subfield to populate the details\.
 
 **Type:** Map of up to 50 key\-value pairs
@@ -9988,12 +10509,12 @@ At a high level, the `Label` values can be interpreted as follows\.
 + `LOW` – The issue does not require action on its own\.
 + `MEDIUM` – The issue must be addressed but not urgently\.
 + `HIGH` – The issue must be addressed as a priority\.
-+ `CRITICAL` – The issue must be remediated immediately to avoid it escalating\.
++ `CRITICAL` – The issue must be remediated immediately to prevent it from escalating\.
 For guidance on how to set the value of `Label`, see [Guidance for assigning severity \(AWS services and partners\)](#asff-severity-guidance)\.
 
 **`Normalized` \(To be deprecated\)**  
 Optional  
-This attribute is no longer relevant\. Security Hub populates `Normalized`, but does not otherwise use it\. Instead of `Normalized`, provide `Label`\.  
+This attribute is no longer relevant\. Security Hub populates the `Normalized` attribute, but does not otherwise use it\. Instead of `Normalized`, use `Label`\.  
 The normalized severity of a finding\.  
 **Type:** Integer  
 The value of `Normalized` must be an integer between 0 and 100\. Zero means that no severity applies, and 100 means that the finding has the maximum possible severity\.
@@ -10313,6 +10834,6 @@ The status of the investigation into the finding\.
   Security Hub also resets `WorkFlow.Status` from `NOTIFIED` or `RESOLVED` to `NEW` in the following cases:
   + `RecordState` changes from `ARCHIVED` to `ACTIVE`\.
   + `Compliance.Status` changes from `PASSED` to either `WARNING`, `FAILED`, or `NOT_AVAILABLE`\.
-+ `NOTIFIED` – Indicates that you notified the resource owner about the security issue\. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner\.
++ `NOTIFIED` – Indicates that you notified the resource owner about the security issue\. Used when the initial reviewer is not the resource owner and needs intervention from the resource owner\.
 + `RESOLVED` – The finding was reviewed and remediated and is now considered resolved\. For findings from controls, if `Compliance.Status` is passed, then Security Hub automatically sets` Workflow.Status` to `RESOLVED`\.
 + `SUPPRESSED` – The finding will not be reviewed again and will not be acted upon\.

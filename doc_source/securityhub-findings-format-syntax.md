@@ -800,6 +800,37 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "Type": "string",
                         "VpcId": "string"
                     },
+                    "AwsEc2NetworkAcl": {
+                        "Associations": [
+                            {
+                                "NetworkAclAssociationId": "string",
+                                "NetworkAclId": "string",
+                                "SubnetId": "string"
+                           }
+                        ],
+                        "Entries": [
+                            {
+                                "CidrBlock": "string",
+                                "Egress": boolean,
+                                "IcmpTypeCode": {
+                                    "Code": number,
+                                    "Type": number
+                                },
+                                "Ipv6CidrBlock": "string",
+                                "PortRange": {
+                                    "From": number,
+                                    "To": number
+                                },
+                                "Protocol": "string",
+                                "RuleAction": "string",
+                                "RuleNumber": number
+                           }
+                        ],
+                        "IsDefault": boolean,
+                        "NetworkAclId": "string",
+                        "OwnerId": "string",
+                        "VpcId": "string"
+                    },
                     "AwsEc2NetworkInterface": {
                         "Attachment": {
                             "AttachmentId": "string",
@@ -880,6 +911,27 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "OwnerId": "string",
                         "VpcId": "string"
                     },
+                    "AwsEc2Subnet": {
+                        "AssignIpv6AddressOnCreation": boolean,
+                        "AvailabilityZone": "string",
+                        "AvailabilityZoneId": "string",
+                        "AvailableIpAddressCount": number,
+                        "CidrBlock": "string",
+                        "DefaultForAz": boolean,
+                        "Ipv6CidrBlockAssociationSet": [
+                            {
+                                "AssociationId": "string",
+                                "Ipv6CidrBlock": "string",
+                                "CidrBlockState": "string"
+                            }
+                        ],
+                        "MapPublicIpOnLaunch": boolean,
+                        "OwnerId": "string",
+                        "State": "string",
+                        "SubnetArn": "string",
+                        "SubnetId": "string",
+                        "VpcId": "string"
+                    },
                     "AwsEc2Volume": {
                          "Attachments": [
                             {
@@ -913,6 +965,40 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                            }
                         ],
                         "State": "string"
+                    },
+                    "AwsElasticBeanstalkEnvironment": {
+                        "ApplicationName": "string",
+                        "Cname": "string",
+                        "DateCreated": "string",
+                        "DateUpdated": "string",
+                        "Description": "string",
+                        "EndpointUrl": "string",
+                        "EnvironmentArn": "string",
+                        "EnvironmentId": "string",
+                        "EnvironmentLinks": [
+                            {
+                                "EnvironmentName": "string",
+                                "LinkName": "string"
+                            }
+                        ],
+                        "EnvironmentName": "string",
+                        "OptionSettings": [
+                            {
+                                "Namespace": "string",
+                                "OptionName": "string",
+                                "ResourceName": "string",        
+                                "Value": "string"
+                            }
+                        ],
+                        "PlatformArn": "string",
+                        "SolutionStackName": "string",
+                        "Status": "string",
+                        "Tier": {
+                            "Name": "string",
+                            "Type": "string",
+                            "Version": "string"
+                        },
+                        "VersionLabel": "string"
                     },
                     "AwsElasticSearchDomain": {
                         "AccessPolicies": "string",
