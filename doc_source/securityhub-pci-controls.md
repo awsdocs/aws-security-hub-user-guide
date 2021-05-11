@@ -1079,7 +1079,7 @@ Encryption of data at rest requires Amazon ES 5\.1 or later\. For more informati
 
 ## \[PCI\.GuardDuty\.1\] GuardDuty should be enabled<a name="pcidss-guardduty-1"></a>
 
-**Severity:** Medium
+**Severity:** High
 
 **Resource:** AwsAccount
 

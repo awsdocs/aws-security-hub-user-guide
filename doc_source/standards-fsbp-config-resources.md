@@ -4,7 +4,7 @@ For AWS Security Hub to accurately report findings for all of the AWS Foundation
 
 **Note**  
 In Regions where a control is not available, the corresponding resource is not available in AWS Config\.
-+ ACM Certificate
++ ACM certificate
 + Amazon EBS volume
 + Application Load Balancer
 + Amazon EFS file system
