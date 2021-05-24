@@ -24,11 +24,13 @@ Security Hub continues to run in both accounts\.
 
 Custom settings or integrations that are defined for the administrator account are not applied to findings from the former member account\. For example, after the accounts are disassociated, you might have a custom action in the administrator account used as the event pattern in an Amazon EventBridge rule\. However, this custom action cannot be used in the member account\.
 
-## Member account leaves the organization<a name="securityhub-effects-member-leaves-org"></a>
+## Member account is removed from an organization<a name="securityhub-effects-member-leaves-org"></a>
 
-If a member account leaves the organization, the account still has Security Hub enabled, but it is no longer a member account\.
+When a member account is removed from an organization, the administrator account loses permission to view findings in the member account\.
 
-The administrator account no longer sees the account in the **Accounts** list and can no longer see the account's findings\.
+Security Hub continues to run in both accounts\.
+
+In the **Accounts** list for the administrator account, the account has a status of **Disassociated**\.
 
 ## AWS account deleted or suspended<a name="securityhub-effects-account-deletion"></a>
 

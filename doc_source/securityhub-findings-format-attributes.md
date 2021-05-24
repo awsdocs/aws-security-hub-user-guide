@@ -335,9 +335,10 @@ A list of malware related to a finding\.
 ]
 ```
 
-**[`Network`](#asff-network)**  
+**[`Network`](#asff-network) \(Deprecated\)**  
 Optional  
 The details of network\-related information about a finding\.  
+This object is deprecated\. To provide this data, either map the data to a resource in `Resources`, or use the `Action` object\.  
 **Type:** Object  
 **Example**  
 
@@ -548,7 +549,7 @@ Workflow: {
 }
 ```
 
-**`WorkflowState` \(deprecated\)**  
+**`WorkflowState` \(Deprecated\)**  
 Optional  
 This field is being deprecated in favor of the `Status` field of the `Workflow` object\.  
 The workflow state of a finding\. Findings products can provide the value of `NEW` for this field\. A findings product can provide a value for this field if there is a meaningful analog in the findings product's system\.  
@@ -1155,9 +1156,11 @@ The type of the malware that was observed\.
 "Type": "COIN_MINER"
 ```
 
-## Network<a name="asff-network"></a>
+## Network \(Deprecated\)<a name="asff-network"></a>
 
 The details of network\-related information about a finding\.
+
+This object is deprecated\. To provide this data, you can either map it to a resource in `Resources`, or use the `Action` object\.
 
 **Example**
 

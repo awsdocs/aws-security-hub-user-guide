@@ -307,6 +307,12 @@ Sumo Logic is a secure, machine data analytics platform that enables DevSecOps t
 Cloud Workload Protection provides complete protection for your Amazon EC2 instances with antimalware, intrusion prevention, and file integrity monitoring\.  
 [Partner documentation](https://help.symantec.com/cs/scwp/SCWP/v130271667_v111037498/Intergration-with-AWS-Security-Hub/?locale=EN_US&sku=CWP_COMPUTE)
 
+**[Sysdig](https://cloudsec.sysdig.com/aws/) – Sysdig Secure for cloud**  
+**Integration type:** Send  
+**Product ARN:** arn:aws:securityhub:*<REGION>*::product/sysdig/sysdig\-secure\-for\-cloud  
+Sysdig Secure for cloud supports asset discovery, risk management, Cloud Security Posture Management \(CSPM\), compliance, automatic vulnerability scanning for Amazon Elastic Container Registry \(ECR\) and Fargate, and threat detection based on CloudTrail\. You can deploy all of these as a single security platform\.  
+[Partner documentation](https://cloudsec.sysdig.com/aws/security_hub)
+
 **[Tenable](https://www.tenable.com/) – Tenable\.io**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:422820575223:product/tenable/tenable-io`  

@@ -309,6 +309,7 @@ This control checks whether the GitHub or Bitbucket source repository URL contai
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
 Europe \(Milan\)
  AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
@@ -358,6 +359,7 @@ This control checks whether the project contains environment variables `AWS_ACCE
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
 Europe \(Milan\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
@@ -593,7 +595,10 @@ A private replication instance has a private IP address that you cannot access o
 You should also ensure that access to your AWS DMS instance configuration is limited to only authorized users\. To do this, restrict users’ IAM permissions to modify AWS DMS settings and resources\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Related PCI DSS requirements<a name="pcidss-dms-1-requirements"></a>
 
@@ -649,7 +654,10 @@ This control checks whether Amazon Elastic Block Store snapshots are not publicl
 You should also ensure that permission to change Amazon EBS configurations are restricted to authorized AWS accounts only\. Learn more about managing Amazon EBS snapshot permissions in the [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html)\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Related PCI DSS requirements<a name="pcidss-ec2-1-requirements"></a>
 
@@ -766,7 +774,10 @@ For more information about working with security groups in Amazon VPC, see the [
 This control helps you maintain an accurate asset inventory of needed security groups in your cardholder data environment \(CDE\)\. It does so by checking that security groups are attached to Amazon EC2 instances or to an ENI\. A failed finding indicates you may have unused Amazon EC2 security groups\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Related PCI DSS requirements<a name="pcidss-ec2-3-requirements"></a>
 
@@ -852,7 +863,10 @@ It does not evaluate outbound traffic\.
 Note that security groups are stateful\. If you send a request from your instance, the response traffic for that request is allowed to flow in regardless of inbound security group rules\. Responses to allowed inbound traffic are allowed to flow out regardless of outbound rules\. To learn more about security groups, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Related PCI DSS requirements<a name="pcidss-ec2-5-requirements"></a>
 
@@ -963,7 +977,10 @@ Before you start to use your Application Load Balancer, you must add one or more
 To learn more, see [Listeners for your Application Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) in *User Guide for Application Load Balancers*\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Related PCI DSS requirements<a name="pcidss-elbv2-1-requirements"></a>
 
@@ -1015,6 +1032,9 @@ This AWS control also does not check whether the Amazon ES resource\-based polic
 
 You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
 
+**Note**  
+This control is not supported in Asia Pacific \(Osaka\)\.
+
 ### Related PCI DSS requirements<a name="pcidss-es-1-requirements"></a>
 
 This control is related to the following PCI DSS requirements:
@@ -1060,6 +1080,9 @@ See the information on migrating from public access to VPC access in the [https:
 
 This control checks whether Amazon ES domains have encryption at rest configuration enabled\.
 
+**Note**  
+This control is not supported in Asia Pacific \(Osaka\)\.
+
 ### Related PCI DSS requirements<a name="pcidss-es-2-requirements"></a>
 
 This control is related to the following PCI DSS requirements:
@@ -1094,6 +1117,7 @@ While GuardDuty can be effective against attacks that an intrusion detection sys
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
 China \(Beijing\)
 China \(Ningxia\)
 Europe \(Milan\)
@@ -1126,7 +1150,7 @@ For details on how to enable GuardDuty, including how to use AWS Organizations t
 This control checks whether user access keys exist for the root user\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\)\.
+This control is not supported in Africa \(Cape Town\) or Asia Pacific \(Osaka\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-iam-1-requirements"></a>
 
@@ -1581,7 +1605,10 @@ It does not check for access to the Lambda function by internal principals, such
 For more information about using resource\-based policies for AWS Lambda, see the [https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html)\.
 
 **Note**  
-This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regions\.
+This control is not supported in the following Regions\.  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
 
 ### Related PCI DSS requirements<a name="pcidss-lambda-1-requirements"></a>
 
@@ -1668,7 +1695,10 @@ It does not evaluate the VPC subnet routing configuration to determine public re
 Note that if Lambda@Edge is found in the account, then this control generates failed findings\. To prevent these findings, you can disable this control\.
 
 **Note**  
-This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regions\.
+This control is not supported in the following Regions\.  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
 
 ### Related PCI DSS requirements<a name="pcidss-lambda-2-requirements"></a>
 
@@ -1725,7 +1755,10 @@ To learn more about sharing DB snapshots in Amazon RDS, see the [https://docs.aw
 Note that if the configuration is changed to allow public access, the AWS Config rule may not be able to detect the change for up to 12 hours\. Until the AWS Config rule detects the change, the check passes even though the configuration violates the rule\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Related PCI DSS requirements<a name="pcidss-rds-1-requirements"></a>
 
@@ -1838,6 +1871,9 @@ For more information about working with a DB Instance in a VPC, see the [https:/
 **Parameters:** None
 
 This control checks whether Amazon Redshift clusters are publicly accessible by evaluating the `publiclyAccessible` field in the cluster configuration item\.
+
+**Note**  
+This control is not supported in Asia Pacific \(Osaka\)\.
 
 ### Related PCI DSS requirements<a name="pcidss-redshift-1-requirements"></a>
 
@@ -2167,7 +2203,10 @@ The control fails if any of the settings are set to `false`, or if any of the se
 As an AWS best practice, S3 buckets should block public access\. Unless you explicitly require everyone on the internet to be able to access your S3 bucket, you should ensure that your S3 bucket is not publicly accessible\.
 
 **Note**  
-This control is not supported in Europe \(Milan\) or Middle East \(Bahrain\)\.
+This control is not supported in the following Regions\.  
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
+Middle East \(Bahrain\)
 
 ### Related PCI DSS requirements<a name="pcidss-s3-6-requirements"></a>
 
@@ -2223,6 +2262,7 @@ You should also ensure that access to your SageMaker configuration is limited to
 **Note**  
 This control is not supported in the following Regions\.  
 Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
 China \(Beijing\)
 China \(Ningxia\)
 Europe \(Milan\)
@@ -2290,7 +2330,10 @@ It also does not validate whether the patches applied were classified as securit
 You should create patching groups with the appropriate baseline settings and ensure in\-scope systems are managed by those patch groups in Systems Manager\. For more information about patch groups, see the [https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-patch-group-tagging.html](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-patch-group-tagging.html)\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Related PCI DSS requirements<a name="pcidss-ssm-1-requirements"></a>
 
@@ -2344,7 +2387,10 @@ After you create one or more State Manager associations, compliance status infor
 You must configure your in\-scope EC2 instances for Systems Manager association\. You must also configure the patch baseline for the security rating of the vendor of patches, and set the autoapproval date to meet PCI DSS 3\.2\.1 requirement 6\.2\. For additional guidance on how to create an association, see [Create an association](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc.html) in the *AWS Systems Manager User Guide*\. For additional information on working with patching in Systems Manager, see [AWS Systems Manager Patch Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-patch.html) in the *AWS Systems Manager User Guide*\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Related PCI DSS requirements<a name="pcidss-ssm-2-requirements"></a>
 

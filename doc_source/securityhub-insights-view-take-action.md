@@ -6,11 +6,13 @@ From the **Insights** console page, you can view and take action on the results 
 
 ## Viewing and taking action on insight results \(console\)<a name="securityhub-insight-results-console"></a>
 
-The insight results consist of a grouped list of the results for the insight\. For example, if the insight is grouped by resource ID, then the insight results are the list of resource IDs\. Each item in the results list indicates the number of matching findings for that item\.
+The insight results consist of a grouped list of the results for the insight\. For example, if the insight is grouped by resource identifiers, then the insight results are the list of resource identifiers\. Each item in the results list indicates the number of matching findings for that item\.
+
+Note that if the findings are grouped by resource identifier or resource type, then the results include all of the resources in the matching findings\. This includes resources that have a different type from the resource type specified in the filter criteria\. For example, an insight identifies findings that are associated with S3 buckets\. If a matching finding contains both an S3 bucket resource and an IAM access key resource, then the insight results list both of those resources\.
 
 The results list is sorted from most to fewest matching findings\.
 
-Note that Security Hub can only display 100 results\. If there are more than 100 grouping values, you only see the first 100\.
+Security Hub can only display 100 results\. If there are more than 100 grouping values, you only see the first 100\.
 
 In addition to the results list, the insight results display a set of charts summarizing the number of matching findings for the following attributes\.
 + **Severity label** – Number of findings for each severity label

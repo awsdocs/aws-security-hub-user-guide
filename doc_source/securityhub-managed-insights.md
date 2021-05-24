@@ -6,6 +6,8 @@ You cannot edit or delete Security Hub managed insights\. You can [view and take
 
 As with all insights, a managed insight only returns results if you have enabled product integrations or security standards that can produce matching findings\.
 
+For insights that are grouped by resource identifier, the results include the identifiers of all of the resources in the matching findings\. This includes resources that have a different type from the resource type in the filter criteria\. For example, insight 2 identifies findings that are associated with S3 buckets\. If a matching finding contains both an S3 bucket resource and an IAM access key resource, then the insight results include both resources\.
+
 In the current release, Security Hub offers the following managed insights:
 
 **1\. AWS resources with the most findings**  

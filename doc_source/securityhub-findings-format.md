@@ -25,7 +25,7 @@ AWS Security Hub consumes, aggregates, organizes, and prioritizes findings from 
     + [StatusReasons](securityhub-findings-format-attributes.md#asff-compliance-statusreasons)
   + [FindingProviderFields](securityhub-findings-format-attributes.md#asff-findingproviderfields)
   + [Malware](securityhub-findings-format-attributes.md#asff-malware)
-  + [Network](securityhub-findings-format-attributes.md#asff-network)
+  + [Network \(Deprecated\)](securityhub-findings-format-attributes.md#asff-network)
     + [OpenPortRange](securityhub-findings-format-attributes.md#asff-network-openportrange)
   + [NetworkPath](securityhub-findings-format-attributes.md#asff-networkpath)
     + [Egress](securityhub-findings-format-attributes.md#asff-networkpath-egress)

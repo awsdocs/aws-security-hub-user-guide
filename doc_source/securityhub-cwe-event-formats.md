@@ -53,14 +53,16 @@ For information about how to configure EventBridge rules that are triggered by t
   "detail": {
     "actionName":"custom-action-name",
     "actionDescription": "description of the action",
-    "findings": {
+    "findings": [
+      {
         <finding content>
-    }
+      }
+    ]
   }
 }
 ```
 
-`<finding content>` is the content, in JSON format, of the finding that is sent by the event\.
+`<finding content>` is the content, in JSON format, of a finding that is sent by the event\.
 
 For a complete list of finding attributes, see [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\.
 

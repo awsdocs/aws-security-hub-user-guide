@@ -365,7 +365,7 @@ The root account is the most privileged user in an AWS account\. AWS Access Keys
 Security Hub recommends that all access keys be associated with the root account be removed\. Removing access keys associated with the root account limits vectors that the account can be compromised by\. Removing the root access keys also encourages the creation and use of role\-based accounts that are least privileged\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\)\.
+This control is not supported in Africa \(Cape Town\) or Asia Pacific \(Osaka\)\.
 
 ### Remediation<a name="cis-1.12-remediation"></a>
 
@@ -522,7 +522,10 @@ AWS provides a support center that can be used for incident notification and res
 Create an IAM role to allow authorized users to manage incidents with AWS Support\. By implementing least privilege for access control, an IAM role will require an appropriate IAM policy to allow support center access in order to manage incidents with AWS Support\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+ Europe \(Milan\)
 
 ### Remediation<a name="cis-1.20-remediation"></a>
 
@@ -2345,7 +2348,10 @@ Security groups provide stateful filtering of ingress and egress network traffic
 Security Hub recommends that no security group allow unrestricted ingress access to port 22\. Removing unfettered connectivity to remote console services, such as SSH, reduces a server's exposure to risk\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Remediation<a name="cis-4.1-remediation"></a>
 
@@ -2376,7 +2382,10 @@ Security groups provide stateful filtering of ingress and egress network traffic
 Security Hub recommends that no security group allow unrestricted ingress access to port 3389\. Removing unfettered connectivity to remote console services, such as RDP, reduces a server's exposure to risk\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in the following Regions\.  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
 
 ### Remediation<a name="cis-4.2-remediation"></a>
 
