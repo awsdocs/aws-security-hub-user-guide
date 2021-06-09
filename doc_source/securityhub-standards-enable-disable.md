@@ -9,6 +9,10 @@ When you disable a security standard, the following occurs:
 + No additional findings are generated for its controls\.
 + The related AWS Config rules that Security Hub created are removed\.
 
+  This normally occurs within a few minutes after you disable the standard, but might take longer\.
+
+  If the first request to delete the AWS Config rules fails, then Security Hub retries every 12 hours\. However, if you disabled Security Hub or you do not have any other standards enabled, then Security Hub cannot retry the request, meaning that it cannot delete the AWS Config rules\. If this occurs, and you need to have AWS Config rules removed, contact AWS Support\.
+
 Before you enable any security standards, make sure that you have enabled AWS Config and configured resource recording\. See [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 
 When you enable a security standard, all of the controls for that standard are enabled by default\. You can then disable individual controls\. See [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)\.

@@ -2377,6 +2377,8 @@ Perform the following steps for each security group associated with a VPC\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/restricted-common-ports.html](https://docs.aws.amazon.com/config/latest/developerguide/restricted-common-ports.html)
 
+The name of the associated AWS Config managed rule is` restricted-common-ports`\. However, the rule that is created uses the name `restricted-rdp`\.
+
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
 Security Hub recommends that no security group allow unrestricted ingress access to port 3389\. Removing unfettered connectivity to remote console services, such as RDP, reduces a server's exposure to risk\.

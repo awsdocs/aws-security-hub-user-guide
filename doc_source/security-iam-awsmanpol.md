@@ -129,6 +129,63 @@ This policy includes the following permissions\.
 }
 ```
 
+## AWS managed policy: AWSSecurityHubServiceRolePolicy<a name="security-iam-awsmanpol-awssecurityhubservicerolepolicy"></a>
+
+You can't attach `AWSSecurityHubServiceRolePolicy` to your IAM entities\. This policy is attached to a service\-linked role that allows Security Hub to perform actions on your behalf\. For more information, see [Using service\-linked roles for AWS Security Hub](using-service-linked-roles.md)\.
+
+This policy grants administrative permissions that allow the service\-linked role to perform the security checks for Security Hub controls\.
+
+**Permissions details**
+
+This policy includes permissions to do the following:
++ `cloudtrail` – Retrieve information about CloudTrail trails\.
++ `cloudwatch` – Retrieve the current CloudWatch alarms\.
++ `logs` – Retrieve the metric filters for CloudWatch logs\.
++ `sns` – Retrieve the list of subscriptions to an SNS topic\.
++ `config` – Retrieve information about configuration recorders, resources, and AWS Config rules\. Also allows the service\-linked role to create and delete AWS Config rules\.
++ `iam` – Get and credential reports for accounts\.
++ `organizations` – Retrieve account information for an organization\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [ 
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:DescribeTrails",
+                "cloudtrail:GetTrailStatus",
+                "cloudtrail:GetEventSelectors",
+                "cloudwatch:DescribeAlarms",
+                "logs:DescribeMetricFilters",
+                "sns:ListSubscriptionsByTopic",
+                "config:DescribeConfigurationRecorders",
+                "config:DescribeConfigurationRecorderStatus",
+                "config:DescribeConfigRules",
+                "config:BatchGetResourceConfig",
+                "config:SelectResourceConfig",
+                "iam:GenerateCredentialReport",
+                "iam:GetCredentialReport",
+                "organizations:ListAccounts",
+                "organizations:DescribeAccount",
+                "organizations:DescribeOrganization"
+            ],
+            "Resource": "*"
+        }
+        {
+            "Effect": "Allow",
+            "Action": [
+                "config:PutConfigRule",
+                "config:DeleteConfigRule",
+                "config:GetComplianceDetailsByConfigRule",
+                "config:DescribeConfigRuleEvaluationStatus"
+            ],
+            "Resource": "arn:aws:config:*:*:config-rule/aws-service-rule/*securityhub*"
+        }
+    ]
+}
+```
+
 ## Security Hub updates to AWS managed policies<a name="security-iam-awsmanpol-updates"></a>
 
 View details about updates to AWS managed policies for Security Hub since this service began tracking these changes\. For automatic alerts about changes to this page, subscribe to the RSS feed on the Security Hub [Document history](doc-history.md) page\.
@@ -142,5 +199,6 @@ View details about updates to AWS managed policies for Security Hub since this s
 
 | Change | Description | Date | 
 | --- | --- | --- | 
+|  [AWSSecurityHubServiceRolePolicy](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Added to the list of managed policies  |  Added information about the managed policy `AWSSecurityHubServiceRolePolicy`, which is used by the Security Hub service\-linked role\.  | June 11, 2021 | 
 |  [AWSSecurityHubOrganizationsAccess ](#security-iam-awsmanpol-awssecurityhuborganizationsaccess) – New policy  |  Security Hub added a new policy that grants permissions that are needed for the Security Hub integration with Organizations\.  | March 15, 2021 | 
 |  Security Hub started tracking changes  |  Security Hub started tracking changes for its AWS managed policies\.  | March 15, 2021 | 

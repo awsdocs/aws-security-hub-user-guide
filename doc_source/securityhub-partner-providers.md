@@ -61,12 +61,18 @@ Aqua Cloud Native Security Platform \(CSP\) provides full lifecycle security for
 Kube\-bench is an open\-source tool that runs the Center for Internet Security \(CIS\) Kubernetes Benchmark against your environment\.  
 [Partner documentation](https://github.com/aquasecurity/kube-bench/blob/master/README.md)
 
-**[Armor](https://aws.amazon.com/marketplace/seller-profile?id=797425f4-6823-4cf6-82b5-634f9a9ec347) – Armor Anywhere**  
+**[Armor](http://aws.amazon.com/marketplace/seller-profile?id=797425f4-6823-4cf6-82b5-634f9a9ec347) – Armor Anywhere**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:679703615338:product/armordefense/armoranywhere`  
 Armor Anywhere delivers managed security and compliance for AWS\.
 
-**[Atlassian](https://www.atlassian.com/software/opsgenie) – Ops Genie**  
+**[Atlassian](https://www.atlassian.com/software/jira/service-management) \- Jira Service Management**  
+**Integration type:** Receive and update  
+The AWS Service Management Connector for Jira sends findings from Security Hub to Jira\. Jira issues are created based on the findings\. When the Jira issues are updated, the corresponding findings are updated in Security Hub\.  
+For an overview of the integration and how it works, watch the video [AWS Security Hub – Bidirectional integration with Atlassian Jira Service Management](https://www.youtube.com/watch?v=uEKwu0M8S3M)\.  
+[Partner documentation](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/integrations-jiraservicedesk.html)
+
+**[Atlassian](https://www.atlassian.com/software/opsgenie) – Opsgenie**  
 **Integration type:** Receive  
 Opsgenie is a modern incident management solution for operating always\-on services, empowering dev and ops teams to plan for service disruptions and stay in control during incidents\.  
 Integrating with Security Hub ensures that mission critical security\-related incidents are routed to the appropriate teams for immediate resolution\.  
@@ -78,7 +84,7 @@ Integrating with Security Hub ensures that mission critical security\-related in
 AttackIQ Platform emulates real adversarial behavior aligned with the MITRE ATT&CK Framework to help validate and improve your overall security posture\.  
 [Partner documentation](https://github.com/AttackIQ/attackiq.github.io)
 
-**[Barracuda Networks](https://aws.amazon.com/marketplace/pp/B07KF2X7QJ) – Cloud Security Guardian**  
+**[Barracuda Networks](http://aws.amazon.com/marketplace/pp/B07KF2X7QJ) – Cloud Security Guardian**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:151784055945:product/barracuda/cloudsecurityguardian`  
 Barracuda Cloud Security Sentry helps organizations stay secure while building applications in, and moving workloads to, the public cloud\.
@@ -101,13 +107,13 @@ Blue Hexagon is a real time threat detection platform\. It uses deep learning pr
 C2VS is a customizable compliance solution designed to automatically identify your application\-specific misconfigurations and their root cause\.  
 [Partner documentation](https://www.capitissolutions.com/security-hub-configuration/)
 
-**[Checkpoint](https://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f) – CloudGuard IaaS**  
+**[Checkpoint](http://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f) – CloudGuard IaaS**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:758245563457:product/checkpoint/cloudguard-iaas`  
 Check Point CloudGuard easily extends comprehensive threat prevention security to AWS while protecting assets in the cloud\.  
 [Partner documentation](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk140412)
 
-**[Checkpoint](https://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f) – Dome9 Arc**  
+**[Checkpoint](http://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f) – Dome9 Arc**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:634729597623:product/checkpoint/dome9-arc`  
 A SaaS platform that delivers verifiable cloud network security, advanced IAM protection, and comprehensive compliance and governance\.
@@ -130,7 +136,7 @@ Antivirus for Amazon S3 offers real time and scheduled scans of objects and file
 **Product ARN:** `arn:aws:securityhub:<REGION>::product/cloudtamerio/cloudtamerio`  
 cloudtamer\.io is a complete cloud governance solution for AWS\. cloudtamer\.io gives stakeholders visibility into cloud operations and helps cloud users manage accounts, control budget and cost, and ensure continuous compliance\.
 
-**[CrowdStrike](https://aws.amazon.com/marketplace/seller-profile?id=f4fb055a-5333-4b6e-8d8b-a4143ad7f6c7) – CrowdStrike Falcon**  
+**[CrowdStrike](http://aws.amazon.com/marketplace/seller-profile?id=f4fb055a-5333-4b6e-8d8b-a4143ad7f6c7) – CrowdStrike Falcon**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:517716713836:product/crowdstrike/crowdstrike-falcon`  
 CrowdStrike Falcon's single lightweight sensor unifies next\-generation antivirus, endpoint detection and response, and 24/7 managed hunting through the cloud\.
@@ -168,12 +174,12 @@ Forcepoint DLP addresses human\-centric risk with visibility and control everywh
 Forcepoint NGFW lets you connect your AWS environment into your enterprise network with the scalability, protection, and insights needed to manage your network and respond to threats\.  
 [Partner documentation](https://frcpnt.com/ngfw-securityhub)
 
-**[Guardicore](https://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Centra 4\.0**  
+**[Guardicore](http://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Centra 4\.0**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:324264561773:product/guardicore/guardicore`  
 Guardicore Centra provides flow visualization, micro\-segmentation, and breach detection for workloads in modern data centers and clouds\.
 
-**[Guardicore](https://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Infection Monkey**  
+**[Guardicore](http://aws.amazon.com/marketplace/seller-profile?id=21127457-7622-49be-81a6-4cb5dd77a088) – Infection Monkey**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:324264561773:product/guardicore/aws-infection-monkey`  
 Infection Monkey is an attack simulation tool designed to test networks against attackers\.  
@@ -195,7 +201,18 @@ IBM QRadar SIEM provides security teams with the ability to quickly and accurate
 McAfee MVISION Cloud for Amazon Web Services is a comprehensive monitoring, auditing, and remediation solution for your AWS environment\.  
 [Partner documentation](https://www.skyhighnetworks.com/cloud-security-blog/enhancing-aws-security-hub-with-mcafee-mvision-cloud/)
 
-**[PagerDuty](https://aws.amazon.com/marketplace/pp/B07HH6FNLP?qid=1559677378881&sr=0-3&ref_=srh_res_product_title) – PagerDuty**  
+**[MicroFocus](http://aws.amazon.com/marketplace/pp/B07RM918H7) – MicroFocus Arcsight**  
+**Integration type:** Receive  
+ArcSight accelerates effective threat detection and response in real time, integrating event correlation and supervised and unsupervised analytics with response automation and orchestration\.  
+[Partner documentation](https://community.microfocus.com/cyberres/productdocs/w/connector-documentation/2768/smartconnector-for-amazon-web-services-security-hub)
+
+**[NETSCOUT](http://aws.amazon.com/marketplace/pp/prodview-reujxcu2cv3f4?qid=1608874215786&sr=0-1&ref_=srh_res_product_title) – NETSCOUT Cyber Investigator**  
+**Integration type:** Send  
+**Product ARN:** `arn:aws:securityhub:us-east-1::product/netscout/netscout-cyber-investigator`  
+NETSCOUT Cyber Investigator is an enterprise\-wide network threat, risk investigation, and forensic analysis platform that helps to reduce the impact of cyber threats on businesses\.  
+[Partner documentation](https://www.netscout.com/solutions/cyber-investigator-aws)
+
+**[PagerDuty](http://aws.amazon.com/marketplace/pp/prodview-5sf6wkximaixc?ref_=srh_res_product_title) – PagerDuty**  
 **Integration type:** Receive  
 PagerDuty's digital operations management platform empowers teams to proactively mitigate customer\-impacting issues by automatically turning any signal into the right insight and action\.  
 AWS users can use PagerDuty’s set of AWS integrations to scale their AWS and hybrid environments with confidence\.  
@@ -203,18 +220,18 @@ When coupled with AWS Security Hub’s aggregated and organized security alerts,
 PagerDuty users undertaking a cloud migration project can move quickly, while decreasing the impact of issues that occur throughout the migration lifecycle\.  
 [Partner documentation](https://support.pagerduty.com/docs/aws-security-hub-integration-guide-pagerduty)
 
-**[Palo Alto Networks](https://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – Cortex XSOAR**  
+**[Palo Alto Networks](http://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – Cortex XSOAR**  
 **Integration type:** Receive  
 Cortex XSOAR is a Security Orchestration, Automation, and Response \(SOAR\) platform that integrates with your entire security product stack to accelerate incident response and security operations\.  
 [Partner documentation](https://xsoar.pan.dev/docs/reference/integrations/aws---security-hub)
 
-**[Palo Alto Networks](https://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – Prisma Cloud Compute**  
+**[Palo Alto Networks](http://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – Prisma Cloud Compute**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:496947949261:product/twistlock/twistlock-enterprise`  
 Prisma Cloud Compute is a cloud native cybersecurity platform that protects VMs, containers, and serverless platforms\.  
 [Partner documentation](https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin-compute/alerts/aws_security_hub.html)
 
-**[Palo Alto Networks](https://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – Prisma Cloud Enterprise**  
+**[Palo Alto Networks](http://aws.amazon.com/marketplace/seller-profile?id=0ed48363-5064-4d47-b41b-a53f7c937314) – Prisma Cloud Enterprise**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:188619942792:product/paloaltonetworks/redlock`  
 Protects your AWS deployment with cloud security analytics, advanced threat detection, and compliance monitoring\.  
@@ -257,7 +274,7 @@ Rapid7 InsightVM provides vulnerability management for modern environments, allo
 RSA Archer IT & Security Risk Management allows you to determine which assets are critical to your business, establish and communicate security policies and standards, detect and respond to attacks, identify and remediate security deficiencies, and establish clear IT risk management best practices\.  
 [Partner documentation](https://community.rsa.com/docs/DOC-111898)
 
-**[SecureCloudDB](https://aws.amazon.com/marketplace/pp/B08P2HR2Z7) – SecureCloudDB**  
+**[SecureCloudDB](http://aws.amazon.com/marketplace/pp/B08P2HR2Z7) – SecureCloudDB**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>::product/secureclouddb/secureclouddb`  
 SecureCloudDB is a cloud native database security tool that provides comprehensive visibility of internal and external security postures and activity\. It flags security violations and provides remediation on exploitable database vulnerabilities\.  
@@ -266,7 +283,8 @@ SecureCloudDB is a cloud native database security tool that provides comprehensi
 **[ServiceNow](https://docs.aws.amazon.com/servicecatalog/latest/adminguide/integrations-servicenow.html) – ITSM**  
 **Integration type:** Receive and update  
 The ServiceNow Security Hub integration allows security findings from Security Hub to be viewed within the ServiceNow ITSM\. You can also configure ServiceNow to automatically create an incident or problem when it receives a finding from Security Hub\.  
-Any updates to these incidents and problems result in updates to the findings in Security Hub\.
+Any updates to these incidents and problems result in updates to the findings in Security Hub\.  
+For an overview of the integration and how it works, watch the video [AWS Security Hub \- Bidirectional integration with ServiceNow ITSM](https://www.youtube.com/watch?v=OYTi0sjEggE)\.
 
 **[Slack](https://github.com/aws-samples/aws-securityhub-to-slack) – Slack**  
 **Integration type:** Receive  
@@ -290,7 +308,7 @@ Splunk uses Amazon CloudWatch Events as a consumer of Security Hub findings\. Se
 With the Splunk Phantom App for AWS Security Hub, findings are sent to Phantom for automated context enrichment with additional threat intelligence information or to perform automated response actions\.  
 [Partner documentation](https://splunkphantom.s3.amazonaws.com/phantom-sechub-setup.html)
 
-**[StackRox](https://aws.amazon.com/marketplace/pp/B07RP4B4P1) – StackRox Kubernetes Security**  
+**[StackRox](http://aws.amazon.com/marketplace/pp/B07RP4B4P1) – StackRox Kubernetes Security**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>::product/stackrox/kubernetes-security`  
 StackRox helps enterprises secure their container and Kubernetes deployments at scale by enforcing their compliance and security policies across the entire container life cycle – build, deploy, and run\.

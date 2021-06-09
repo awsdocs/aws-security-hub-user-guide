@@ -57,11 +57,10 @@ The identifier for the solution\-specific component \(a discrete unit of logic\)
 Required  
 The product\-specific identifier for a finding\.  
 **Type:** String or ARN  
-**Maximum length:** 512  
+**Maximum length:** 512 for string values, 2048 for ARN values  
 The finding ID must comply with the following constraints:  
 + The ID must be globally unique within the product\. To enforce uniqueness, you can incorporate the public AWS Region name and account ID in the identifier\.
 + You *cannot* recycle identifiers regardless of whether the previous finding no longer exists\.
-+ The ID must only contain characters from the unreserved characters set defined in section [2\.3 of RFC\-3986 Uniform Resource Identifier \(URI\): Generic Syntax](https://tools.ietf.org/html/rfc3986#section-2.3)\.
 + For services outside of AWS, the ID *cannot* be prefixed with the literal string "`arn:`"\.
 + For AWS services, the ID *must* be the ARN of the finding if one is available\. Otherwise, you can use any other unique identifier\.
 These constraints are expected to hold within a finding product but are not required to hold across finding products\.  
@@ -1834,7 +1833,7 @@ It contains an array of up to 32 resource objects\.
     "Id": "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0",
     "Partition": "aws",
     "Region": "us-west-2",
-    "ResourceRole": "TARGET",
+    "ResourceRole": "Target",
     "Tags": {
       "billingCode": "Lotus-1-2-3",
       "needsPatching": "true"
@@ -1984,9 +1983,9 @@ The canonical AWS external Region name where this resource is located\.
 
 **`ResourceRole`**  
 Optional  
-Identifies the role of the resource in the finding\. A resource is either the target of the finding activity,  
+Identifies the role of the resource in the finding\. A resource is either the target of the finding activity or the actor that performed the activity\.  
 **Type:** String  
-**Valid values:** `ACTOR` \| `TARGET`
+**Valid values:** `Actor` \| `Target`
 
 **`Tags`**  
 Optional  
@@ -6026,12 +6025,12 @@ Information about the configuration of the EC2 instances\.
 
 **`CanonicalHostedZoneName`**  
 Optional  
-The name of the Amazon Route 53 hosted zone for the load balancer\.  
+The name of the Amazon Route 53 hosted zone for the load balancer\.  
 **Type:** String
 
 **`CanonicalHostedZoneNameID`**  
 Optional  
-The ID of the Amazon Route 53 hosted zone for the load balancer\.  
+The ID of the Amazon Route 53 hosted zone for the load balancer\.  
 **Type:** String
 
 **`CreatedTime`**  
@@ -6398,7 +6397,7 @@ The Availability Zones for the load balancer\.
 
 **`CanonicalHostedZoneId`**  
 Optional  
-The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\.  
+The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\.  
 **Type:** String
 
 **`CreatedTime`**  
@@ -6526,6 +6525,11 @@ Information about the session that the key was used for\.
 Optional  
 The status of the IAM access key that is related to a finding\. Valid values are `ACTIVE` and `INACTIVE`\.  
 **Type:** Enum
+
+**`UserName`**  
+This attribute is deprecated\. Instead, use `PrincipalName`\.  
+The name of the IAM user that the key is assigned to\.  
+**Type:** String
 
 #### SessionContext<a name="asff-resourcedetails-awsiamaccesskey-sessioncontext"></a>
 
@@ -7729,7 +7733,7 @@ The version number of the database engine to use\.
 
 **`HostedZoneId`**  
 Optional  
-Specifies the identifier that Amazon Route 53 assigns when you create a hosted zone\.  
+Specifies the identifier that Amazon Route 53 assigns when you create a hosted zone\.  
 **Type:** String
 
 **`HttpEndpointEnabled`**  
@@ -8641,7 +8645,7 @@ Specifies the DNS address of the DB instance\.
 
 **`HostedZoneId`**  
 Optional  
-Specifies the ID that Amazon Route 53 assigns when you create a hosted zone\.  
+Specifies the ID that Amazon Route 53 assigns when you create a hosted zone\.  
 **Type:** String
 
 **`Port`**  
@@ -8662,7 +8666,7 @@ Specifies the DNS address of the DB instance\.
 
 **`HostedZoneId`**  
 Optional  
-The ID that Amazon Route 53 assigns when you create a hosted zone\.  
+The ID that Amazon Route 53 assigns when you create a hosted zone\.  
 **Type:** String
 
 **`Port`**  

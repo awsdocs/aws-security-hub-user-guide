@@ -51,7 +51,7 @@ For more information, see [\(Optional\) Configure email for your domain](https:/
 Email\-validated certificates are automatically renewed up to 825 days after their last manual validation date\. After 825 days, to proceed with the renewal, the domain owner or an authorized representative must manually revalidate ownership of the domain\. To avoid this issue, Security Hub recommends that you create a new certificate and use DNS validation if possible\. If they are properly configured, DNS\-validated certificates are revalidated indefinitely\.
 
 **By notification in your AWS Personal Health Dashboard**  
-ACM sends notifications to your Personal Health Dashboard to notify you that one or more domain names in the certificate require validation before the certificate can be renewed\. ACM sends these notifications when your certificate is 45 days, 30 days, 15 days, 7 days, 3 days, and 1 day from expiration\. These notifications are informational only\.
+ACM sends notifications to your AWS Personal Health Dashboard to notify you that one or more domain names in the certificate require validation before the certificate can be renewed\. ACM sends these notifications when your certificate is 45 days, 30 days, 15 days, 7 days, 3 days, and 1 day from expiration\. These notifications are informational only\.
 
 ## \[APIGateway\.1\] API Gateway REST and WebSocket API logging should be enabled<a name="fsbp-apigateway-1"></a>
 
@@ -101,7 +101,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="apigateway-2-remediation"></a>
 
@@ -130,7 +129,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="apigateway-3-remediation"></a>
 
@@ -493,9 +491,6 @@ Security Hub recommends that you enable file validation on all trails\. Log file
 
 For more information, see [Enabling validation and validating files](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html#cloudtrail-log-file-validation-intro-enabling-and-using) in the *AWS CloudTrail User Guide*\.
 
-**Note**  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
-
 ### Remediation<a name="cloudtrail-4-remediation"></a>
 
 To remediate this issue, update your CloudTrail trail to enable log file validation\.
@@ -544,9 +539,6 @@ For a trail that is enabled in all Regions in an account, CloudTrail sends log f
 Security Hub recommends that you send CloudTrail logs to CloudWatch Logs\. Note that this recommendation is intended to ensure that account activity is captured, monitored, and has appropriately alarms\. You can use CloudWatch Logs to set this up with your AWS services\. This recommendation does not preclude the use of a different solution\.
 
 Sending CloudTrail logs to CloudWatch Logs facilitates real\-time and historic activity logging based on user, API, resource, and IP address\. You can use this approach to establish alarms and notifications for anomalous or sensitivity account activity\.
-
-**Note**  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="cloudtrail-5-remediation"></a>
 
@@ -1299,7 +1291,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="ec2-15-remediation"></a>
 
@@ -1342,7 +1333,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="ec2-16-remediation"></a>
 
@@ -1445,7 +1435,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="elasticbeanstalk-1-remediation"></a>
 
@@ -1474,7 +1463,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="elasticbeanstalk-2-remediation"></a>
 
@@ -2385,7 +2373,7 @@ Replace `<function-name>` with the name of the Lambda function, and `<statement-
 
 For more information, see [Using resource\-based policies for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) in the *AWS Lambda Developer Guide*\.
 
-## \[Lambda\.2\] Lambda functions should use latest runtimes<a name="fsbp-lambda-2"></a>
+## \[Lambda\.2\] Lambda functions should use supported runtimes<a name="fsbp-lambda-2"></a>
 
 **Category:** Protect > Secure development
 
@@ -2396,13 +2384,13 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html)
 
 **Parameters:** 
-+ `runtime`: `nodejs14.x, nodejs12.x, nodejs10.x, python3.8, python3.7, python3.6, ruby2.7, ruby2.5, java11, java8, go1.x, dotnetcore3.1, dotnetcore2.1`
++ `runtime`: `nodejs14.x, nodejs12.x, nodejs10.x, python3.8, python3.7, python3.6, ruby2.7, ruby2.5, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnetcore2.1`
 
-This control checks that the Lambda function settings for runtimes match the expected values set for the latest runtimes for each supported language\. This control checks for the following runtimes: `nodejs14.x`, `nodejs12.x`, `nodejs10.x`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `ruby2.5`,`java11`, `java8`, `go1.x`, `dotnetcore3.1`, `dotnetcore2.1`
+This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks for the following runtimes: `nodejs14.x`, `nodejs12.x`, `nodejs10.x`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `ruby2.5`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, `dotnetcore2.1`
 
 [Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a runtime component is no longer supported for security updates, Lambda deprecates the runtime\. Even though you cannot create functions that use the deprecated runtime, the function is still available to process invocation events\. Make sure that your Lambda functions are current and do not use out\-of\-date runtime environments\.
 
-To learn more about the latest runtimes this control checks for all supported languages, see [AWS Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) in the *AWS Lambda Developer Guide*\.
+To learn more about the supported runtimes that this control checks for the supported languages, see [AWS Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) in the *AWS Lambda Developer Guide*\.
 
 **Note**  
 This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regions\.
@@ -2433,8 +2421,7 @@ A dead\-letter queue allows you to look back at errors or failed requests to you
 From a security perspective, it is important to understand why your function failed and to ensure that your function does not drop data or compromise data security as a result\. For example, if your function cannot communicate to an underlying resource, that could be a symptom of a denial of service \(DoS\) attack elsewhere in the network\.
 
 **Note**  
-This control is not supported in the Asia Pacific \(Osaka\) orChina \(Ningxia\) Regions\.  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+This control is not supported in the Asia Pacific \(Osaka\) orChina \(Ningxia\) Regions\.
 
 ### Remediation<a name="lambda-4-remediation"></a>
 
@@ -2960,7 +2947,6 @@ Middle East \(Bahrain\)
 South America \(São Paulo\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-12-remediation"></a>
 
@@ -3007,7 +2993,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-13-remediation"></a>
 
@@ -3060,7 +3045,6 @@ Middle East \(Bahrain\)
 South America \(São Paulo\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-14-remediation"></a>
 
@@ -3231,7 +3215,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="redshift-7-remediation"></a>
 
@@ -3662,7 +3645,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="secretsmanager-3-remediation"></a>
 
@@ -3712,7 +3694,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="secretsmanager-4-remediation"></a>
 
@@ -3945,7 +3926,6 @@ Middle East \(Bahrain\)
 South America \(São Paulo\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="waf-1-remediation"></a>
 

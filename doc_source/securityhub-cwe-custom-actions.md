@@ -61,7 +61,6 @@ The event pattern for a **Security Hub Findings \- Custom Action** event has the
     "Security Hub Findings - Custom Action"
   ],
   "resources": [ "<custom action ARN>" ]
-  ]
 }
 ```
 

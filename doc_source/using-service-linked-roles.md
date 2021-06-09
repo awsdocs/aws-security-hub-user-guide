@@ -17,25 +17,7 @@ Security Hub uses the service\-linked role named `AWSServiceRoleForSecurityHub`\
 The `AWSServiceRoleForSecurityHub` service\-linked role trusts the following services to assume the role:
 + `securityhub.amazonaws.com`
 
-The role permissions policy allows Security Hub to complete the following actions on the specified resources:
-+ Action: `cloudtrail:DescribeTrails` 
-+ Action: `cloudtrail:GetTrailStatus` 
-+ Action: `cloudtrail:GetEventSelectors` 
-+ Action: `cloudwatch:DescribeAlarms` 
-+ Action: `logs:DescribeMetricFilters` 
-+ Action: `sns:ListSubscriptionsByTopic` 
-+ Action: `config:DescribeConfigurationRecorders` 
-+ Action: `config:DescribeConfigurationRecorderStatus` 
-+ Action: `config:DescribeConfigRules` 
-+ Action: `config:BatchGetResourceConfig` 
-+ Resources: `*` 
-
-And:
-+ Action: `config:PutConfigRule`
-+ Action: `config:DeleteConfigRule`
-+ Action: `config:GetComplianceDetailsByConfigRule`
-+ Action: `config:DescribeConfigRuleEvaluationStatus`
-+ Resources: `arn:aws:config:*:*:config-rule/aws-service-rule/*securityhub*`
+The `AWSServiceRoleForSecurityHub` service\-linked role uses the managed policy [`AWSSecurityHubServiceRolePolicy`](security-iam-awsmanpol.md#security-iam-awsmanpol-awssecurityhubservicerolepolicy)\.
 
 You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\. For the `AWSServiceRoleForSecurityHub` service\-linked role to be successfully created, the IAM identity that you use Security Hub with must have the required permissions\. To grant the required permissions, attach the following policy to this IAM user, group, or role\.
 
