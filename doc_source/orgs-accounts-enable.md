@@ -4,6 +4,8 @@ If you do not automatically enable new organization accounts, then you can enabl
 
 You cannot enable an account if it is already a member account for a different administrator account\.
 
+You also cannot enable an account that is currently suspended\. If you try to enable a suspended account, the account status changes to **Account Suspended**\.
+
 When you enable an organization account, Security Hub is enabled automatically for that account\. The account does not receive an invitation\.
 
 Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.

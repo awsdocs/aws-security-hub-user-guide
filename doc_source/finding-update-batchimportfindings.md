@@ -15,7 +15,7 @@ For [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFin
 To determine whether to create or update a finding, Security Hub checks the `ID` field\. If the value of `ID` does not match an existing finding, then a new finding is created\.
 
 If `ID` does match an existing finding, then Security Hub checks the `UpdatedAt` field for the update\.
-+ If `UpdatedAt` on the update occurs before `UpdatedAt` on the existing finding, then the update is ignored\.
++ If `UpdatedAt` on the update matches or occurs before `UpdatedAt` on the existing finding, then the update is ignored\.
 + If `UpdatedAt` on the update occurs after `UpdatedAt` on the existing finding, then the existing finding is updated\.
 
 ## Restricted attributes for BatchImportFindings<a name="batchimportfindings-restricted-fields"></a>

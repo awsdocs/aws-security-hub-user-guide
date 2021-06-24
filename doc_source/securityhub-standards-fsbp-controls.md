@@ -7,6 +7,8 @@ The AWS Foundational Security Best Practices standard contains the following con
 + The required AWS Config rule, and any specific parameter values set by AWS Security Hub
 + Remediation steps
 
+Note that gaps in the control numbers indicate controls that are not yet released\.
+
 ## \[ACM\.1\] Imported ACM certificates should be renewed after a specified time period<a name="fsbp-acm-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data in transit
@@ -509,7 +511,7 @@ To remediate this issue, update your CloudTrail trail to enable log file validat
 
 1. Choose **Save changes**\.
 
-For more information, see [Validating CloudTrail log file integrity](https://docs.aws.amazon.com/https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html) in the *AWS CloudTrail User Guide*\.
+For more information, see [Validating CloudTrail log file integrity](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html) in the *AWS CloudTrail User Guide*\.
 
 ## \[CloudTrail\.5\] Ensure CloudTrail trails are integrated with Amazon CloudWatch Logs<a name="fsbp-cloudtrail-5"></a>
 
@@ -1926,7 +1928,7 @@ For more information about adding users to groups, see [Adding and removing user
 
 This control checks whether the active access keys are rotated within 90 days\.
 
-We highly recommend that you do not generate and remove all access keys in your account\. Instead, the recommended best practice is to either create one or more IAM roles or to use [federation](https://aws.amazon.com/identity/federation/)\. You can use these methods to allow your users to use their existing corporate credentials to log into the AWS Management Console and AWS CLI\.
+We highly recommend that you do not generate and remove all access keys in your account\. Instead, the recommended best practice is to either create one or more IAM roles or to use [federation](http://aws.amazon.com/identity/federation/)\. You can use these methods to allow your users to use their existing corporate credentials to log into the AWS Management Console and AWS CLI\.
 
 Each approach has its use cases\. Federation is generally better for enterprises that have an existing central directory or plan to need more than the current limit IAM users\. Applications that run outside of an AWS environment need access keys for programmatic access to AWS resources\.
 
@@ -3030,7 +3032,9 @@ You can enable minor version upgrades for a DB instance from the Amazon RDS cons
 
 This control checks whether Amazon Aurora clusters have backtracking enabled\.
 
-Backups help you to recover more quickly from a security incident\. They also strengthens the resilience of your systems\. Aurora backtracking reduces the time to recover a database to a point in time\. It does not require a database restore to do so\. For more information, see [Backtracking an Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html) in the *Amazon Aurora User Guide*\.
+Backups help you to recover more quickly from a security incident\. They also strengthens the resilience of your systems\. Aurora backtracking reduces the time to recover a database to a point in time\. It does not require a database restore to do so\.
+
+For more information about backtracking in Aurora, see [Backtracking an Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html) in the *Amazon Aurora User Guide*\.
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -3048,7 +3052,11 @@ AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="rds-14-remediation"></a>
 
-For detailed instructions to enable Aurora backtracking, see [Configuring backtrack with the console when modifying a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html#AuroraMySQL.Managing.Backtrack.Configuring) in the *Amazon Aurora User Guide*\.
+For detailed instructions on how to enable Aurora backtracking, see [Configuring backtracking](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html#AuroraMySQL.Managing.Backtrack.Configuring) in the *Amazon Aurora User Guide*\.
+
+Note that you cannot enable backtracking on an existing cluster\. Instead, you can create a clone that has backtracking enabled\. For more information about the limitations of Aurora backtracking, see the list of limitations in [Overview of backtracking](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html)\.
+
+For information about pricing for backtracking, see the [Aurora pricing page](http://aws.amazon.com/rds/aurora/pricing/)\.
 
 ## \[Redshift\.1\] Amazon Redshift clusters should prohibit public access<a name="fsbp-redshift-1"></a>
 

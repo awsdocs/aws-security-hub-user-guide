@@ -193,7 +193,7 @@ HeleCloud is a Managed Services Provider, taking care of your AWS infrastructure
 **Integration type:** Receive  
 **Product ARN:** `arn:aws:securityhub:<REGION>:949680696695:product/ibm/qradar-siem`  
 IBM QRadar SIEM provides security teams with the ability to quickly and accurately detect, prioritize, investigate, and respond to threats\.  
-[Partner documentation](https://www.ibm.com/support/knowledgecenter/SS42VS_DSM/com.ibm.dsm.doc/t_dsm_guide_Amazon_AWS_sh_Amazon_Web_Services.html?cp=SS42VS_7.3.1)
+[Partner documentation](https://www.ibm.com/docs/en/qradar-common?topic=configuration-integrating-aws-security-hub)
 
 **[McAfee](https://www.skyhighnetworks.com/mvision-cloud-for-amazon-web-services-aws-security-hub/) – MVISION Cloud for AWS**  
 **Integration type:** Send  

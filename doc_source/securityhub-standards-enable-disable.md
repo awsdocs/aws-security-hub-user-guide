@@ -17,6 +17,8 @@ Before you enable any security standards, make sure that you have enabled AWS Co
 
 When you enable a security standard, all of the controls for that standard are enabled by default\. You can then disable individual controls\. See [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)\.
 
+When a standard is first enabled, Security Hub cannot calculate the initial aggregated security score until the standard status is `READY`\. After that, the initial security score is available within 24 hours\. To see the current status of the standard, use the `GetEnabledStandards` API operation\.
+
 ## Disabling a security standard \(console\)<a name="securityhub-standard-disable-console"></a>
 
 On the **Security standards** page, each enabled standard includes an option to disable the standard\.
@@ -53,7 +55,9 @@ To disable a security standard, you can use an API call or the AWS Command Line 
 
 On the **Security standards** page, each disabled standard includes an option to enable the standard\.
 
-**To enable a security standard**
+**To enable a security standard \(console\)**
+
+ß
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 

@@ -27,6 +27,10 @@ From the Security Hub console, you can disable controls from the control list on
 
 1. For the standard that you want to disable a control for, choose **View results**\.
 
+1. If you are an administrator account, choose **Enabled for this account**\.
+
+   Other accounts can enable controls from any tab other than the **Disabled** tab\.
+
 1. Do one of the following:
    + In the control list, choose the control to disable\. Then choose **Disable**\.
    + Choose the control title\. Then on the control details page, choose **Disable**\.
@@ -57,6 +61,8 @@ To disable a control, you can use an API call or the AWS Command Line Interface\
 
 On the standard details page, the disabled controls are displayed on the **Disabled** tab\.
 
+For administrator accounts, the **Disabled** tab contains an aggregated list across accounts\. The disabled controls for the individual administrator account are displayed on the **Disabled for this account** tab\.
+
 You can enable a control from the controls list on the **Disabled** tab, or from the control details page\.
 
 **To enable a disabled control \(console\)**
@@ -69,10 +75,14 @@ You can enable a control from the controls list on the **Disabled** tab, or from
 
 1. For the standard that you want to enable the control for, choose **View results**\.
 
-1. To display the list of disabled controls, choose **Disabled**\.
+1. Display the list of disabled controls\.
+
+   For a member account or a standalone account, choose **Disabled**\.
+
+   For an administrator account, choose **Disabled for this account**\.
 
 1. Do one of the following:
-   + In the control list on the **Disabled** tab, choose the control to enable\. Then choose **Enable**\.
+   + In the control list on the **Disabled** or **Disabled for this account** tab, choose the control to enable\. Then choose **Enable**\.
    + Choose a control title\. Then on the control details page, choose **Enable**\.
 
 ## Enabling a control \(Security Hub API, AWS CLI\)<a name="securityhub-standard-control-enable-api"></a>

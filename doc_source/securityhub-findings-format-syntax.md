@@ -94,7 +94,7 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                                 "CityName": "string"
                             },
                             "Country": {
-                                "CountryCode": "string"
+                                "CountryCode": "string",
                                 "CountryName": "string"
                             },
                             "GeoLocation": {
@@ -318,7 +318,7 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                                                "JsonPath": "string",
                                                "RecordIndex": integer
                                             }
-                                        ],
+                                        ]
                                     }
                                 }
                             ],
@@ -476,6 +476,7 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         },
                         "ApiGatewayManaged": boolean,
                         "AutoDeploy": boolean,
+                        "ClientCertificateId": "string",
                         "CreatedDate": "string",
                         "DefaultRouteSettings": {
                             "DataTraceEnabled": boolean,
@@ -796,6 +797,11 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "IpV6Addresses": [ "string" ],
                         "KeyName": "string",
                         "LaunchedAt": "string",
+                        "NetworkInterfaces": [
+                            {
+                                "NetworkInterfaceId": "string"
+                            }
+                        ],
                         "SubnetId": "string",
                         "Type": "string",
                         "VpcId": "string"
@@ -966,6 +972,238 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         ],
                         "State": "string"
                     },
+                    "AwsEcsCluster": {
+                        "CapacityProviders": ["string"],
+                        "ClusterSettings": [
+                            {
+                                "Name": "string",
+                                "Value": "string"
+                            }
+                        ],
+                        "Configuration": {
+                            "ExecuteCommandConfiguration": {
+                                "KmsKeyId": "string",
+                                "LogConfiguration": {
+                                    "CloudWatchEncryptionEnabled": boolean,
+                                    "CloudWatchLogGroupName": "string",
+                                    "S3BucketName": "string",
+                                    "S3EncryptionEnabled": boolean,
+                                    "S3KeyPrefix": "string"
+                                },
+                                "Logging": "string"
+                            }
+                        },
+                        "DefaultCapacityProviderStrategy": [
+                            {
+                                "Base": number,
+                                "CapacityProvider": "string",
+                                "Weight": number
+                            }
+                        ]
+                    },
+                    "AwsEcsTaskDefinition": {
+                        "ContainerDefinitions": [
+                            {
+                                "Command": ["string"],
+                                "Cpu": number,
+                                "DependsOn": [
+                                    {
+                                        "Condition": "string",
+                                        "ContainerName": "string"
+                                    }
+                                ],
+                                "DisableNetworking": boolean,
+                                "DnsSearchDomains": ["string"],
+                                "DnsServers": ["string"],
+                                "DockerLabels": {"string": "string"},
+                                "DockerSecurityOptions": ["string"],
+                                "EntryPoint": ["string"],
+                                "Environment": [
+                                    {
+                                        "Name": "string",
+                                        "Value": "string"
+                                    }
+                                ],
+                                "EnvironmentFiles": [
+                                    {
+                                        "Type": "string",
+                                        "Value": "string"
+                                    }
+                                ],
+                                "Essential": boolean,
+                                "ExtraHosts": [
+                                    {
+                                        "Hostname": "string",
+                                        "IpAddress": "string"
+                                    }
+                                ],
+                                "FirelensConfiguration": {
+                                    "Options": {"string": "string"},
+                                    "Type": "string"
+                                },
+                                "HealthCheck": {
+                                    "Command": ["string"],
+                                    "Interval": number,
+                                    "Retries": number,
+                                    "StartPeriod": number,
+                                    "Timeout": number
+                                },
+                                "Hostname": "string",
+                                "Image": "string",
+                                "Interactive": boolean,
+                                "Links": ["string"],
+                                "LinuxParameters": {
+                                    "Capabilities": {
+                                        "Add": ["string"],
+                                        "Drop": ["string"]
+                                    },
+                                    "Devices": [
+                                        {
+                                            "ContainerPath": "string",
+                                            "HostPath": "string",
+                                            "Permissions": ["string"]
+                                        }
+                                    ],
+                                    "InitProcessEnabled": boolean,
+                                    "MaxSwap": number,
+                                    "SharedMemorySize": number,
+                                    "Swappiness": number,
+                                    "Tmpfs": [
+                                        {
+                                            "ContainerPath": "string",
+                                            "MountOptions": ["string"],
+                                            "Size": number
+                                        }
+                                    ]
+                                },
+                                "LogConfiguration": {
+                                    "LogDriver": "string",
+                                    "Options": {"string": "string"},
+                                    "SecretOptions": [
+                                        {
+                                            "Name": "string",
+                                            "ValueFrom": "string"
+                                        }
+                                    ]
+                                },
+                                "Memory": number,
+                                "MemoryReservation": number,
+                                "MountPoints": [
+                                    {
+                                        "ContainerPath": "string",
+                                        "ReadOnly": boolean,
+                                        "SourceVolume": "string"
+                                    }
+                                ],
+                                "Name": "string",
+                                "PortMappings": [
+                                    {
+                                        "ContainerPort": number,
+                                        "HostPort": number,
+                                        "Protocol": "string"
+                                    }
+                                ],
+                                "Privileged": boolean,
+                                "PseudoTerminal": boolean,
+                                "ReadonlyRootFilesystem": boolean,
+                                "RepositoryCredentials": {
+                                    "CredentialsParameter": "string"
+                                },
+                                "ResourceRequirements": [
+                                    {
+                                        "Type": "string",
+                                        "Value": "string"
+                                    }
+                                ],
+                                "Secrets": [
+                                    {
+                                        "Name": "string",
+                                        "ValueFrom": "string"
+                                    }
+                                ],
+                                "StartTimeout": number,
+                                "StopTimeout": number,
+                                "SystemControls": [
+                                    {
+                                        "Namespace": "string",
+                                        "Value": "string"
+                                    }
+                                ],
+                                "Ulimits": [
+                                    {
+                                        "HardLimit": number,
+                                        "Name": "string",
+                                        "SoftLimit": number
+                                    }
+                                ],
+                                "User": "string",
+                                "VolumesFrom": [
+                                    {
+                                        "ReadOnly": boolean,
+                                        "SourceContainer": "string"
+                                    }
+                                ],
+                                "WorkingDirectory": "string"
+                            }
+                        ],
+                        "Cpu": "string",
+                        "ExecutionRoleArn": "string",
+                        "Family": "string",
+                        "InferenceAccelerators": [
+                            {
+                                "DeviceName": "string",
+                                "DeviceType": "string"
+                            }
+                        ],
+                        "IpcMode": "string",
+                        "Memory": "string",
+                        "NetworkMode": "string",
+                        "PidMode": "string",
+                        "PlacementConstraints": [
+                            {
+                                "Expression": "string",
+                                "Type": "string"
+                            }
+                        ],
+                        "ProxyConfiguration": {
+                            "ContainerName": "string",
+                            "ProxyConfigurationProperties": [
+                                {
+                                    "Name": "string",
+                                    "Value": "string"
+                                }
+                            ],
+                            "Type": "string"
+                        },
+                        "RequiresCompatibilities": ["string"],
+                        "TaskRoleArn": "string",
+                        "Status": "string",
+                        "Volumes": [
+                            {
+                                "DockerVolumeConfiguration": {
+                                    "Autoprovision": boolean,
+                                    "Driver": "string",
+                                    "DriverOpts": {"string": "string"},
+                                    "Labels": {"string": "string"},
+                                    "Scope": "string"
+                                },
+                                "EfsVolumeConfiguration": {
+                                    "AuthorizationConfig": {
+                                        "AccessPointId": "string",
+                                        "Iam": "string"
+                                    },
+                                    "FilesystemId": "string",
+                                    "RootDirectory": "string",
+                                    "TransitEncryption": "string",
+                                    "TransitEncryptionPort": number
+                                },
+                                "Host": {
+                                    "SourcePath": "string"
+                                },
+                                "Name": "string"
+                            }
+                        ]
+                    },
                     "AwsElasticBeanstalkEnvironment": {
                         "ApplicationName": "string",
                         "Cname": "string",
@@ -1019,8 +1257,27 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                             "Enabled": boolean,
                             "KmsKeyId": "string"
                         },
+                        "LogPublishingOptions": {
+                            "IndexSlowLogs": {
+                                "CloudWatchLogsLogGroupArn": "string",
+                                "Enabled": boolean
+                            },
+                            "SearchSlowLogs": {
+                                "CloudWatchLogsLogGroupArn": "string",
+                                "Enabled": boolean
+                            }
+                        },
                         "NodeToNodeEncryptionOptions": {
                             "Enabled": boolean
+                        },
+                        "ServiceSoftwareOptions": {
+                            "AutomatedUpdateDate": "string",
+                            "Cancellable": boolean,
+                            "CurrentVersion": "string",
+                            "Description": "string",
+                            "NewVersion": "string",
+                            "UpdateAvailable": boolean,
+                            "UpdateStatus": "string"
                         },
                         "VPCOptions": {
                             "AvailabilityZones": [
@@ -1702,7 +1959,54 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "IgnorePublicAcls": boolean,
                         "RestrictPublicBuckets": boolean
                     },
-                    "AwsS3Bucket": { 
+                    "AwsS3Bucket": {
+                        "BucketLifecycleConfiguration": {
+                            "Rules": [
+                                {
+                                    "AbortIncompleteMultipartUpload": {
+                                        "DaysAfterInitiation": number
+                                    },
+                                    "ExpirationDate": "string",
+                                    "ExpirationInDays": number,
+                                    "ExpiredObjectDeleteMarker": boolean,
+                                    "Filter": {
+                                        "Predicate": {
+                                            "Operands": [
+                                                {
+                                                    "Prefix": "string",
+                                                    "Type": "string"
+                                                },
+                                                {
+                                                    "Tag": {
+                                                        "Key": "string",
+                                                        "Value": "string"
+                                                    },
+                                                    "Type": "string"
+                                                }
+                                            ],
+                                            "Type": "string"
+                                        }
+                                    },
+                                    "Id": "string",
+                                    "NoncurrentVersionExpirationInDays": number,
+                                    "NoncurrentVersionTransitions": [
+                                       {
+                                           "Days": number,
+                                           "StorageClass": "string"
+                                       }
+                                    ],
+                                    "Prefix": "string",
+                                    "Status": "string",
+                                    "Transitions": [
+                                        {
+                                            "Date": "string",
+                                            "Days": number,
+                                            "StorageClass": "string"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
                         "CreatedAt": "string",
                         "OwnerId": "string",
                         "OwnerName": "string",

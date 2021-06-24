@@ -32,8 +32,20 @@ Security Hub continues to run in both accounts\.
 
 In the **Accounts** list for the administrator account, the account has a status of **Disassociated**\.
 
-## AWS account deleted or suspended<a name="securityhub-effects-account-deletion"></a>
+## Account is suspended<a name="securityhub-effects-account-suspended"></a>
 
-When an AWS account is deleted or suspended, all Security Hub related data for that account is deleted after 90 days\. The data cannot be retrieved after it is deleted\.
+When an account is suspended in AWS, the account loses permission to view their findings in Security Hub\. No new findings are generated for that account\. The administrator account for a suspended account can view the existing account findings\.
+
+For an organization account, the member account status can also change to **Account Suspended**\. This happens if the account is suspended at the same time that the administrator account attempts to enable the account\. The administrator account for an **Account Suspended** account cannot view findings for that account\.
+
+Otherwise, the suspended status does not affect the member account status\.
+
+After 90 days, the account is either terminated or reactivated\. When the account is reactivated, its Security Hub permissions are restored\. If the member account status is **Account Suspended**, the administrator account must enable the account manually\.
+
+## Account is terminated<a name="securityhub-effects-account-deletion"></a>
+
+When an AWS account is terminated, all Security Hub data for that account is deleted after 90 days\.
+
+The data cannot be retrieved after it is deleted\.
 
 To retain findings for more than 90 days, you can archive them\. You can also use a custom action with an EventBridge rule to store findings in an Amazon S3 bucket\.

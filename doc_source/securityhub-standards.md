@@ -12,13 +12,7 @@ Security Hub provides controls for the following standards\.
 For information on Security Hub pricing for security checks, see [Security Hub pricing](http://aws.amazon.com/security-hub/pricing/)\.
 
 **Topics**
-+ [How AWS Security Hub generates findings from security checks](securityhub-controls-finding-generation.md)
-+ [Disabling or enabling a security standard](securityhub-standards-enable-disable.md)
-+ [Viewing the list of controls for a standard](securityhub-standards-view-controls.md)
-+ [Viewing details for a control](securityhub-standards-control-details.md)
-+ [Enabling new controls automatically](controls-auto-enable.md)
-+ [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)
-+ [Viewing and taking action on control findings](securityhub-control-manage-findings.md)
-+ [CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)
-+ [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)
-+ [AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)
++ [How AWS Security Hub runs and uses security checks](securityhub-controls-finding-generation.md)
++ [Viewing and managing security standards](standards-view-manage.md)
++ [Viewing and managing controls](controls-view-manage.md)
++ [Available security standards in AWS Security Hub](standards-available.md)

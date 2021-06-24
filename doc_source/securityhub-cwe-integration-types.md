@@ -6,7 +6,7 @@ On the EventBridge dashboard for Security Hub, **All Events** includes all of th
 
 ## All findings \(Security Hub Findings \- Imported\)<a name="securityhub-cwe-integration-types-all-findings"></a>
 
- Security Hub automatically sends all new findings and all updates to existing findings to EventBridge as **Security Hub Findings \- Imported** events\.
+ Security Hub automatically sends all new findings and all updates to existing findings to EventBridge as **Security Hub Findings \- Imported** events\. Each **Security Hub Findings \- Imported** event contains a single finding\.
 
 Every [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) and [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) request triggers a **Security Hub Findings \- Imported** event\.
 
@@ -22,7 +22,7 @@ See [Configuring an EventBridge rule for automatically sent findings](securityhu
 
 Security Hub also sends findings that are associated with custom actions to EventBridge as **Security Hub Findings \- Custom Action** events\.
 
-This is useful for analysts working with the Security Hub console who want to send a specific finding, or a small set of findings, to a response or remediation workflow\. You can select a custom action for up to 20 findings at a time\. The set of findings is sent to EventBridge as a single EventBridge event\.
+This is useful for analysts working with the Security Hub console who want to send a specific finding, or a small set of findings, to a response or remediation workflow\. You can select a custom action for up to 20 findings at a time\. All of the selected findings are sent to EventBridge as a single EventBridge event\.
 
 When you create a custom action, you assign it a custom action ID\. You can use this ID to create an EventBridge rule that takes a specified action after receiving a finding that is associated with that custom action ID\.
 
