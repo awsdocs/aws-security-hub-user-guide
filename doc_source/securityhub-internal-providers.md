@@ -3,11 +3,9 @@
 Security Hub supports integrations with several AWS services\.
 
 **Note**  
-Some integrations are not available in Africa \(Cape Town\), Asia Pacific \(Hong Kong\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the **Integrations** page\.  
-The China \(Beijing\) and China \(Ningxia\) Regions only support the integrations with the following services:  
-Amazon GuardDuty
-IAM Access Analyzer
-Systems Manager Patch Manager
+Some integrations are not available in Africa \(Cape Town\), Asia Pacific \(Hong Kong\), China \(Beijing\), China \(Ningxia\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\.  
+If an integration is not supported, it is not listed on the **Integrations** page\.  
+See also [Integrations that are supported in China \(Beijing\) and China \(Ningxia\)](securityhub-regions.md#securityhub-regions-integration-support-china) and [Integrations that are supported in AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)](securityhub-regions.md#securityhub-regions-integration-support-govcloud)\.
 
 For these services, the integration allows the service to send findings to Security Hub:
 + [AWS Firewall Manager](#integration-aws-firewall-manager)
@@ -17,7 +15,12 @@ For these services, the integration allows the service to send findings to Secur
 + [Amazon Macie](#integration-amazon-macie)
 + [AWS Systems Manager Patch Manager](#patch-manager)
 
-The integrations with [Audit Manager](#integration-aws-audit-manager) and with [Systems Manager Explorer and OpsCenter](#integration-ssm-explorer-opscenter) allow Security Hub to send findings to those services\. Explorer and OpsCenter also update findings in Security Hub\.
+The following integrations allow Security Hub to send findings to those services:
++ [Audit Manager](#integration-aws-audit-manager)
++ [AWS Chatbot](#integration-chatbot)
++ [Systems Manager Explorer and OpsCenter](#integration-ssm-explorer-opscenter)
+
+Explorer and OpsCenter also update findings in Security Hub\.
 
 The [Detective integration](#integration-amazon-detective) allows you to pivot from Security Hub to Detective to investigate a GuardDuty finding\. 
 
@@ -26,6 +29,11 @@ Here are the details about each AWS service integration\.
 **AWS Audit Manager**  <a name="integration-aws-audit-manager"></a>
 Security Hub sends control findings to Audit Manager\. These findings help Audit Manager users to prepare for audits\.  
 To learn more about Audit Manager, see the [https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html](https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html)\. [AWS Security Hub checks supported by AWS Audit Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html) lists the controls for which Security Hub sends findings to Audit Manager\.
+
+**AWS Chatbot**  <a name="integration-chatbot"></a>
+AWS Chatbot is an interactive agent that helps you to monitor and interact with your AWS resources in your Slack channels and Amazon Chime chat rooms\.  
+Security Hub sends findings to AWS Chatbot\.  
+To learn more about the AWS Chatbot integration with Security Hub, see the [Security Hub integration overview](https://docs.aws.amazon.com/chatbot/latest/adminguide/related-services.html#security-hub) in the *AWS Chatbot Administrator Guide*\.
 
 **Amazon Detective**  <a name="integration-amazon-detective"></a>
 Detective automatically collects log data from your AWS resources and uses machine learning, statistical analysis, and graph theory to help you visualize and conduct faster and more efficient security investigations\.  

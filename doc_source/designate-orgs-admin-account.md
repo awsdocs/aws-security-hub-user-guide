@@ -10,7 +10,7 @@ The delegated administrator account must be the same in each Region\. However, t
 
 The organization management account can also remove the current delegated Security Hub administrator account\. When the organization management account uses the console to remove the administrator account in one Region, it is automatically removed in all Regions\. The Security Hub API only removes the administrator account from the Region where the API call or command is issued\. To remove the administrator account from all Regions, you can use the Organizations API\.
 
-The administrator account it selects the member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md) and [Managing member accounts that are not in an organization](account-management-manual.md)\.
+The administrator account selects the member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md) and [Managing member accounts that are not in an organization](account-management-manual.md)\.
 
 Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 

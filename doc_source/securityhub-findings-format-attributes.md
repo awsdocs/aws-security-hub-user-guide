@@ -5222,6 +5222,11 @@ Optional
 The ranges of IP addresses\.  
 **Type:** Array of IP range objects
 
+**`Ipv6Ranges`**  
+Optional  
+The ranges of IPv6 addresses\.  
+**Type:** Array of IPv6 range objects
+
 **`PrefixListIds`**  
 Optional  
 \[VPC only\] The prefix list IDs for an AWS service\. With outbound rules, this is the AWS service to access through a VPC endpoint from instances that are associated with the security group\.  
@@ -5248,6 +5253,14 @@ To specify a single IPv4 address, use the /32 prefix length\.
 To specify a single IPv6 address, use the /128 prefix length\.  
 **Type:** String
 
+Each entry in the `Ipv6Ranges` array can have the following attributes\.
+
+`CidrIpv6`  
+Optional  
+The IPv6 CIDR range\.  
+You can specify either a CIDR range or a source security group, but not both\.  
+To specify a single IPv6 address, use the /128 prefix length\.
+
 Each entry in the `PrefixListIds` array can have the following attributes\.
 
 **`PrefixListId`**  
@@ -5262,11 +5275,29 @@ Optional
 The ID of the security group\.  
 **Type:** String
 
+**`GroupName`**  
+Optional  
+The name of the security group\.  
+**Type:** String
+
+**`PeeringStatus`**  
+Optional  
+The status of a VPC peering connection, if applicable\.  
+**Type:** String
+
 **`UserId`**  
 Optional  
 The ID of an AWS account\.  
 For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response\. If the referenced security group is deleted, this value is not returned\.  
 \[Amazon EC2\-Classic\] Required when adding or removing rules that reference a security group in another AWS account\.  
+**Type:** String
+
+**`VpcId`**  
+The identifier of the VPC for the referenced security group, if applicable\.  
+**Type:** String
+
+**`VpcPeeringConnectionId`**  
+The identifier of the VPC peering connection, if applicable\.  
 **Type:** String
 
 ### AwsEc2Subnet<a name="asff-resourcedetails-awsec2subnet"></a>

@@ -2419,7 +2419,7 @@ You can edit an association to specify a new name, schedule, severity level, or 
 
 1. Note the name of the association that has an **Association status **of **Failed**\. This is the association that you need to investigate\. You need to use the association name in the next step\.
 
-1. In the navigation pane, under **Node Management**, choose **State Manager**\. Search for the association name, then select the association\.
+1. In the navigation pane,under **Node Management**, choose **State Manager**\. Search for the association name, then select the association\.
 
    After you determine the issue, edit the failed association to correct the problem\. For information on how to edit an association, see [Edit an association](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc-edit.html)\.
 

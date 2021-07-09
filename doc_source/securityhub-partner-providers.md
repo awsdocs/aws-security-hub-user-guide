@@ -8,20 +8,9 @@ AWS Security Hub is integrated with the following third\-party products\. For ea
 If applicable, the list also specifies the product ARN\. Integrations that send findings to Security Hub always have an ARN\.
 
 **Note**  
-Some integrations are not available in Africa \(Cape Town\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\. If an integration is not supported, it is not listed on the console **Integrations** page\.  
-The China \(Beijing\) and China \(Ningxia\) Regions only support the following third\-party integrations:  
-Cloud Custodian
-FireEye Helix
-Helecloud
-IBM QRadar
-PagerDuty
-Palo Alto Networks Cortex XSOAR
-Palo Alto Networks VM\-Series
-Prowler
-RSA Archer
-Splunk Enterprise
-Splunk Phantom
-ThreatModeler
+Some integrations are not available in Africa \(Cape Town\), China \(Beijing\), China \(Ningxia\), Europe \(Milan\), AWS GovCloud \(US\-East\), or AWS GovCloud \(US\-West\)\.  
+If an integration is not supported, it is not listed on the console **Integrations** page  
+See also [Integrations that are supported in China \(Beijing\) and China \(Ningxia\)](securityhub-regions.md#securityhub-regions-integration-support-china) and [Integrations that are supported in AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)](securityhub-regions.md#securityhub-regions-integration-support-govcloud)\.
 
 If you have a security solution and are interested in becoming a Security Hub partner, send an email to securityhub\-partners@amazon\.com\. In the message, provide your company name, product name, AWS Partner Network \(APN\) tier level, and contact information\.
 

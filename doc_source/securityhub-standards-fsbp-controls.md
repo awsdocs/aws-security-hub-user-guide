@@ -136,6 +136,35 @@ AWS GovCloud \(US\-West\)
 
 For detailed instructions on how to enable X\-Ray active tracing for API Gateway REST API operations, see [Amazon API Gateway active tracing support for AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/xray-services-apigateway.html) in the *AWS X\-Ray Developer Guide*\. 
 
+## \[APIGateway\.4\] API Gateway should be associated with an AWS WAF web ACL<a name="fsbp-apigateway-4"></a>
+
+**Category:** Protect > Protective services
+
+**Severity:** Medium
+
+**Resource:** `AWS::ApiGateway::Stage`
+
+**AWS Configrule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-associated-with-waf.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-associated-with-waf.html)
+
+**Parameters:** None
+
+This control checks whether an API Gateway stage uses an AWS WAF web access control list \(ACL\)\. This control fails if an AWS WAF web ACL is not attached to a REST API Gateway stage\.
+
+AWS WAF is a web application firewall that helps protect web applications and APIs from attacks\. It enables you to configure an ACL, which is a set of rules that allow, block, or count web requests based on customizable web security rules and conditions that you define\. Ensure that your API Gateway stage is associated with an AWS WAF web ACL to help protect it from malicious attacks\.
+
+**Note**  
+This control is not supported in the following Regions:  
+ Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="apigateway-4-remediation"></a>
+
+For information on how to use the API Gateway console to associate an AWS WAF Regional web ACL with an existing API Gateway API stage, see [Using AWS WAF to protect your APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-aws-waf.html) in the *API Gateway Developer Guide*\.
+
 ## \[AutoScaling\.1\] Auto Scaling groups associated with a load balancer should use load balancer health checks<a name="fsbp-autoscaling-1"></a>
 
 **Category:** Identify > Inventory
@@ -361,6 +390,106 @@ AWS GovCloud \(US\-West\)
 ### Remediation<a name="cloudfront-4-remediation"></a>
 
 For detailed remediation instructions, see [Creating an origin group](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html#concept_origin_groups.creating) in the *Amazon CloudFront Developer Guide*\.
+
+## \[CloudFront\.5\] CloudFront distributions should have logging enabled<a name="fsbp-cloudfront-5"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource:** `AWS::CloudFront::Distribution`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-accesslogs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-accesslogs-enabled.html)
+
+**Parameters:**
++ `S3BucketName` \(Optional\) – The S3 bucket to send the logs to
+
+This control checks whether server access logging is enabled on CloudFront distributions\. The control fails if access logging is not enabled for a distribution\.
+
+CloudFront access logs provide detailed information about every user request that CloudFront receives\. Each log contains information such as the date and time the request was received, the IP address of the viewer that made the request, the source of the request, and the port number of the request from the viewer\.
+
+These logs are useful for applications such as security and access audits and forensics investigation\. For additional guidance on how to analyze access logs, see [Querying Amazon CloudFront logs](https://docs.aws.amazon.com/athena/latest/ug/cloudfront-logs.html) in the *Amazon Athena User Guide*\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
+US East \(Ohio\)
+US West \(N\. California\)
+US West \(Oregon\)
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\)
+Asia Pacific \(Seoul\)
+Asia Pacific \(Singapore\)
+Asia Pacific \(Sydney\)
+Asia Pacific \(Tokyo\)
+Canada \(Central\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Frankfurt\)
+Europe \(Ireland\)
+Europe \(London\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="cloudfront-5-remediation"></a>
+
+For information on how to configure access logging for a CloudFront distribution, see [Configuring and using standard logs \(access logs\)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) in the *Amazon CloudFront Developer Guide*\.
+
+## \[CloudFront\.6\] CloudFront distributions should have AWS WAF enabled<a name="fsbp-cloudfront-6"></a>
+
+**Category:** Protect > Protective services
+
+**Severity:** Medium
+
+**Resource:** `AWS::CloudFront::Distribution`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-associated-with-waf.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-associated-with-waf.html)
+
+**Parameters:**
++ `wafWebAclIds` \(Optional\) \- A comma\-separated list of web ACL IDs \(for AWS WAF\) or web ACL ARNs \(for AWS WAFv2\)\.
+
+This control checks whether CloudFront distributions are associated with either AWS WAF or AWS WAFv2 web ACLs\. The control fails if the distribution is not associated with a web ACL\.
+
+AWS WAF is a web application firewall that helps protect web applications and APIs from attacks\. It allows you to configure a set of rules, called a web access control list \(web ACL\), that allow, block, or count web requests based on customizable web security rules and conditions that you define\. Ensure your CloudFront distribution is associated with an AWS WAF web ACL to help protect it from malicious attacks\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
+US East \(Ohio\)
+US West \(N\. California\)
+US West \(Oregon\)
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\)
+Asia Pacific \(Seoul\)
+Asia Pacific \(Singapore\)
+Asia Pacific \(Sydney\)
+Asia Pacific \(Tokyo\)
+Canada \(Central\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Frankfurt\)
+Europe \(Ireland\)
+Europe \(London\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="cloudfront-6-remediation"></a>
+
+For information on how to associate a web ACL with a CloudFront distribution, see [Using AWS WAF to control access to your content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-awswaf.html) in the *Amazon CloudFront Developer Guide*\.
 
 ## \[CloudTrail\.1\] CloudTrail should be enabled and configured with at least one multi\-Region trail<a name="fsbp-cloudtrail-1"></a>
 
@@ -1340,6 +1469,109 @@ AWS GovCloud \(US\-West\)
 
 For instructions on how to delete an unused network ACL, see [Deleting a network ACL](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#DeleteNetworkACL) in the *Amazon VPC User Guide*\.
 
+## \[EC2\.17\] EC2 instances should not use multiple ENIs<a name="fsbp-ec2-17"></a>
+
+**Category:** Network security 
+
+**Severity:** Low
+
+**Resource:** `AWS::EC2::Instance`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-multiple-eni-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-multiple-eni-check.html)
+
+**Parameters:**
++ `Adapterids` \(Optional\) – A list of network interface IDs that are attached to EC2 instances
+
+This control checks whether an EC2 instance uses multiple Elastic Network Interfaces \(ENIs\) or Elastic Fabric Adapters \(EFAs\)\. This control passes if a single network adapter is used\. The control includes an optional parameter list to identify the allowed ENIs\.
+
+Multiple ENIs can cause dual\-homed instances, meaning instances that have multiple subnets\. This can add network security complexity and introduce unintended network paths and access\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="ec2-17-remediation"></a>
+
+To remediate this issue, detach the additional ENIs\.
+
+**To detach a network interface**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. Under **Network & Security**, choose **Network Interfaces**\.
+
+1. Filter the list by the noncompliant instance IDs to see the associated ENIs\.
+
+1. Select the ENIs that you want to remove\.
+
+1. From the **Actions** menu, choose **Detach**\.
+
+1. If you see the prompt **Are you sure that you want to detach the following network interface?**, choose **Detach**\.
+
+## \[EC2\.18\] Security groups should only allow unrestricted incoming traffic for authorized ports<a name="fsbp-ec2-18"></a>
+
+**Category:** Protect > Secure network configuration > Security group configuration
+
+**Severity:** High
+
+**Resource:** `AWS::EC2::SecurityGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-sg-open-only-to-authorized-ports.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-sg-open-only-to-authorized-ports.html)
+
+**Parameters:**
++ `authorizedTcpPorts` \(Optional\) – Comma\-separated list of ports to which to allow unrestricted access\. For example: `'80, 443'`\. For this rule, the default values for `authorizedTcpPorts` are 80 and 443\.
+
+This control checks whether the security groups that are in use allow unrestricted incoming traffic\. Optionally the rule checks whether the port numbers are listed in the `authorizedTcpPorts` parameter\.
++ If the security group rule port number allows unrestricted incoming traffic, but the port number is specified in `authorizedTcpPorts`, then the control passes\. The default value for `authorizedTcpPorts` is `80, 443`\.
++ If the security group rule port number allows unrestricted incoming traffic, but the port number is not specified in `authorizedTcpPorts` input parameter, then the control fails\.
++ If the parameter is not used, then the control fails for any security group that has an unrestricted inbound rule\.
+
+Security groups provide stateful filtering of ingress and egress network traffic to AWS\. Security group rules should follow the principal of least privileged access\. Unrestricted access \(IP address with a /0 suffix\) increases the opportunity for malicious activity such as hacking, denial\-of\-service attacks, and loss of data\.
+
+Unless a port is specifically allowed, the port should deny unrestricted access\.
+
+**Note**  
+This control is not supported in Asia Pacific \(Osaka\)\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="ecs-18-remediation"></a>
+
+For information on how to modify a security group, see [Add, remove, or update rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules) in the *Amazon VPC User Guide*\.
+
+## \[ECS\.1\] Amazon ECS task definitions should have secure networking modes and user definitions<a name="fsbp-ecs-1"></a>
+
+**Category:** Protect > Secure access management
+
+**Severity:** High
+
+**Resource:** `AWS::ECS::TaskDefinition`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-user-for-host-mode-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-user-for-host-mode-check.html)
+
+**Parameters:** None
+
+This control checks whether an Amazon ECS task definition that has host networking mode also has 'privileged' or 'user' container definitions\. The control fails for task definitions that have host network mode and container definitions where privileged=false or is empty and user=root or is empty\.
+
+If a task definition has elevated privileges, it is because the customer has specifically opted in to that configuration\. This control checks for unexpected privilege escalation when a task definition has host networking enabled but the customer has not opted in to elevated privileges\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="ecs-1-remediation"></a>
+
+For information on how to update a task definition, see [Updating a task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-task-definition.html) in the *Amazon Elastic Container Service Developer Guide*\.
+
+Note that when you update a task definition, it does not update running tasks that were launched from the previous task definition\. To update a running task, you must redeploy the task with the new task definition\.
+
 ## \[EFS\.1\] Amazon EFS should be configured to encrypt file data at rest using AWS KMS<a name="fsbp-efs-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data at rest
@@ -1702,7 +1934,7 @@ After launch, you cannot manually disassociate a public IPv4 address from your i
 
 To remediate this finding, you need to create a new cluster in VPC private subnet\. For information on how to launch a cluster in into a VPC private subnet, see [Launch clusters into a VPC](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-vpc-launching-job-flows.html) in the *Amazon EMR Management Guide*\.
 
-## \[ES\.1\] Elasticsearch domains should have encryption at\-rest enabled<a name="fsbp-es-1"></a>
+## \[ES\.1\] Elasticsearch domains should have encryption at rest enabled<a name="fsbp-es-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data at rest
 
@@ -1714,11 +1946,11 @@ To remediate this finding, you need to create a new cluster in VPC private subne
 
 **Parameters:** None
 
-This control checks whether Amazon Elasticsearch Service \(Amazon ES\) domains have encryption at rest configuration enabled\. The check fails if encryption at rest is not enabled\.
+This control checks whether Amazon Elasticsearch Service \(Amazon ES\) domains have encryption\-at\-rest configuration enabled\. The check fails if encryption at rest is not enabled\.
 
 For an added layer of security for your sensitive data in Elasticsearch, you should configure your Elasticsearch to be encrypted at rest\. Elasticsearch domains offer encryption of data at rest\. The feature uses AWS KMS to store and manage your encryption keys\. To perform the encryption, it uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
 
-To learn more about Elasticsearch encryption at\-rest, see [Encryption of data at rest for Amazon Elasticsearch Service](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html) in the *Amazon Elasticsearch Service Developer Guide*\.
+To learn more about Elasticsearch encryption at rest, see [Encryption of data at rest for Amazon Elasticsearch Service](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html) in the *Amazon Elasticsearch Service Developer Guide*\.
 
 **Note**  
 Certain instance types, such as t\.small and t\.medium, do not support encryption of data at rest\. For details, see [Supported instance types](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-supported-instance-types.html) in the *Amazon Elasticsearch Service Developer Guide*\.
@@ -1781,6 +2013,35 @@ Europe \(Milan\)
 ### Remediation<a name="es-3-remediation"></a>
 
 Node\-to\-node encryption can only be enabled on a new domain\. To remediate this finding, first [create a new domain](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains) with the **Node\-to\-node encryption** check box selected\. Then follow [Using a snapshot to migrate data](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-version-migration.html#snapshot-based-migration) to migrate your data to the new domain\.
+
+## \[ES\.4\] Amazon Elasticsearch Service domain error logging to CloudWatch Logs should be enabled<a name="fsbp-es-4"></a>
+
+**Category:** Identify \- Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::Elasticsearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-logs-to-cloudwatch.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-logs-to-cloudwatch.html)
+
+**Parameters:**
++ `logtype = 'error'`
+
+This control checks whether Amazon ES domains are configured to send error logs to CloudWatch Logs\.
+
+You should enable error logs for Amazon ES domains and send those logs to CloudWatch Logs for retention and response\. Domain error logs can assist with security and access audits, and can help to diagnose availability issues\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="es-4-remediation"></a>
+
+For information on how to enable log publishing, see [Enabling log publishing \(console\)](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createdomain-configure-slow-logs.html#es-createdomain-configure-slow-logs-console) in the *Amazon Elasticsearch Service Developer Guide*\.
 
 ## \[GuardDuty\.1\] GuardDuty should be enabled<a name="fsbp-guardduty-1"></a>
 
@@ -2189,6 +2450,67 @@ After you identify the inactive accounts or unused credentials, use the followin
 1. Choose** Security credentials**\.
 
 1. For each sign\-in credential and access key that hasn't been used in at least 90 days, choose **Make inactive**\.
+
+## \[IAM\.21\] IAM customer managed policies that you create should not allow wildcard actions for services<a name="fsbp-iam-21"></a>
+
+**Category:** Detect > Secure access management 
+
+**Severity:** Low
+
+**Resource:** IAM Policy
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html)
+
+**Parameters:** None
+
+This control checks whether the IAM identity\-based policies that you create have Allow statements that use the \* wildcard to grant permissions for all actions on any service\. The control fails if any policy statement includes `"Effect": "Allow"` with `"Action": "Service:*"`\.
+
+For example, the following statement in a policy results in a failed finding\.
+
+```
+"Statement": [
+{
+  "Sid": "EC2-Wildcard",
+  "Effect": "Allow",
+  "Action": "ec2:*",
+  "Resource": "*"
+}
+```
+
+This control only applies to customer managed IAM policies\. It does not apply to IAM policies that are managed by AWS\.
+
+When you assign permissions to AWS services, it is important to scope the allowed IAM actions in your IAM policies\. You should restrict IAM actions to only those actions that are needed\. This helps you to provision least privilege permissions\. Overly permissive policies might lead to privilege escalation if the policies are attached to an IAM principal that might not require the permission\.
+
+In some cases, you might want to allow IAM actions that have a similar prefix, such as `DescribeFlowLogs` and `DescribeAvailabilityZones`\. In these authorized cases, you can add a suffixed wildcard to the common prefix\. For example, `ec2:Describe*`\.
+
+This control passes if you use a prefixed IAM action with a suffixed wildcard\. For example, the following statement in a policy results in a passed finding\.
+
+```
+"Statement": [
+{
+  "Sid": "EC2-Wildcard",
+  "Effect": "Allow",
+  "Action": "ec2:Describe*",
+  "Resource": "*"
+}
+```
+
+When you group related IAM actions in this way, you can also avoid exceeding the IAM policy size limits\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="iam-21-remediation"></a>
+
+To remediate this issue, update your IAM policies so that they do not allow full "\*" administrative privileges\.
+
+For details on how to edit an IAM policy, see [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\.
 
 ## \[KMS\.1\] IAM customer managed policies should not allow decryption actions on all KMS keys<a name="fsbp-kms-1"></a>
 
@@ -3058,6 +3380,53 @@ Note that you cannot enable backtracking on an existing cluster\. Instead, you c
 
 For information about pricing for backtracking, see the [Aurora pricing page](http://aws.amazon.com/rds/aurora/pricing/)\.
 
+## \[RDS\.15\] RDS DB clusters should be configured for multiple Availability Zones<a name="fsbp-rds-15"></a>
+
+**Category:** Recover > Resilience > High availability
+
+**Severity:** Medium
+
+**Resource type:** `DBCluster`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-multi-az-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-multi-az-enabled.html)
+
+**Parameters:** None
+
+This control checks whether high availability is enabled for your RDS DB clusters\.
+
+RDS DB clusters should be configured for multiple Availability Zones to ensure availability of the data that is stored\. Deployment to multiple Availability Zones allows for automated failover in the event of an Availability Zone availability issue and during regular RDS maintenance events\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-15-remediation"></a>
+
+To remediate this control, configure your DB cluster for multiple Availability Zones\.
+
+**To enable multi\-AZ for a DB cluster**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the DB instance to modify\. 
+
+1. Choose **Modify**\. The **Modify DB Instance** page appears\.
+
+1. Under **Instance Specifications**, set **Multi\-AZ deployment** to **Yes**\.
+
+1. Choose **Continue** and check the summary of modifications\.
+
+1. \(Optional\) Choose **Apply immediately** to apply the changes immediately\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately setting](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.ApplyImmediately) in the *Amazon RDS User Guide*\.
+
+   On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance**\.
+
 ## \[Redshift\.1\] Amazon Redshift clusters should prohibit public access<a name="fsbp-redshift-1"></a>
 
 **Category:** Protect > Secure network configuration > Resources not publicly accessible
@@ -3507,6 +3876,42 @@ To remediate this issue, edit the S3 bucket policy to remove the permissions\.
    + Remove the permitted denied actions from the statements
 
 1. Choose **Save**\.
+
+## \[S3\.8\] S3 Block Public Access setting should be enabled at the bucket level<a name="fsbp-s3-8"></a>
+
+**Category:** Protect > Secure access management > Access control
+
+**Severity:** High
+
+**Resource:** AWS::S3::Bucket
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html)
+
+**Parameters:**
++ `excludedPublicBuckets` \(Optional\) – A comma\-separated list of known allowed public S3 bucket names\.
+
+This control checks whether S3 buckets have bucket\-level public access blocks applied\. This control fails is if any of the following settings are set to `false`:
++ `ignorePublicAcls`
++ `blockPublicPolicy`
++ `blockPublicAcls`
++ `restrictPublicBuckets`
+
+Block Public Access at the S3 bucket level provides controls to ensure that objects never have public access\. Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\.
+
+Unless you intend to have your S3 buckets publicly accessible, you should configure the bucket level Amazon S3 Block Public Access feature\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="s3-8-remediation"></a>
+
+For information on how to remove public access at a bucket level, see [Blocking public access to your Amazon S3 storage](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon S3 User Guide*\.
 
 ## \[SageMaker\.1\] SageMaker notebook instances should not have direct internet access<a name="fsbp-sagemaker-1"></a>
 

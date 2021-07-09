@@ -16,7 +16,7 @@ To run this check, Security Hub uses custom logic to perform the exact audit ste
 
 ### Remediation<a name="cis-1.1-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\. These are the same steps to remediate findings for [3\.3 – Ensure a log metric filter and alarm exist for usage of "root" account ](#securityhub-cis-controls-3.3)\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -26,9 +26,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -36,7 +38,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -623,10 +625,24 @@ By default, CloudTrail trails that are created using the AWS Management Console 
 1. Enter a name for the trail\.
 
 1. Under **Storage location**, do one of the following:
-   + To create a new S3 bucket for CloudTrail logs, choose **Yes** next to **Create a new S3 bucket** and then enter a name for the bucket\.
-   + Choose **No** next to **Create a new S3 bucket** and then select the bucket to use\.
+   + To create a new S3 bucket for CloudTrail logs, choose **Create new S3 bucket** and then enter a name for the bucket\.
+   + Choose **Use existing S3 bucket** and then select the bucket to use\.
 
-1. Choose **Additional settings** and, for **Enable log file validation**, choose **Yes** to pass [2\.2\. – Ensure CloudTrail log file validation is enabled ](#securityhub-cis-controls-2.2) \.
+1. Choose **Additional settings** and, for **Log file validation**, choose **Enabled** to pass [2\.2\. – Ensure CloudTrail log file validation is enabled ](#securityhub-cis-controls-2.2) \.
+
+1. To pass [2\.4 – Ensure CloudTrail trails are integrated with Amazon CloudWatch Logs](#securityhub-cis-controls-2.4), you must enable CloudWatch Logs\.
+
+   1. Under CloudWatch Logs, select the **Enabled** check box\.
+
+   1. For **Log group**, do one of the following:
+      + To use an existing log group, choose **Existing** and then enter the name of the log group to use\.
+      + To create a new log group, choose **New** and then enter a name for the log group to create\.
+
+   1. For **IAM role**, do one of the following:
+      + To use an existing role, choose **Existing** and then choose the role from the drop\-down list\.
+      + To create a new role, choose **New** and then enter a name for the role to create\. The new role is assigned a policy that grants the necessary permissions\.
+
+        To view the permissions granted to the role, expand the **Policy document**\.
 
 1. Choose **Create**\.
 
@@ -638,15 +654,15 @@ By default, CloudTrail trails that are created using the AWS Management Console 
 
 1. Choose the name of the trail in the **Name** column\.
 
-1. Choose the pencil icon for the **Trail settings**\.
+1. Update the trail configuration as needed\.
 
-1. Choose the pencil icon for the **Management events**\.
+   To update the configuration in a particular section, do the following:
 
-1. Select **All** for **Read/Write events**, then choose **Save**\.
+   1. Choose **Edit** for that section\.
 
-1. Choose the pencil icon for the **Storage location**\.
+   1. Make the required updates to the configuration\.
 
-1. Choose **Yes** for **Enable log file validation** to pass check 2\.2, then choose **Save**\.
+   1. Choose **Save changes**\.
 
 ## 2\.2\. – Ensure CloudTrail log file validation is enabled<a name="securityhub-cis-controls-2.2"></a>
 
@@ -735,8 +751,7 @@ Sending CloudTrail logs to CloudWatch Logs facilitates real\-time and historic a
 
 1. Select the **Enabled** check box\.
 
-1. For **Log group** field, do one of the following:
-   + To use the default log group, keep the name as is\.
+1. For **Log group**, do one of the following:
    + To use an existing log group, choose **Existing** and then enter the name of the log group to use\.
    + To create a new log group, choose **New** and then enter a name for the log group to create\.
 
@@ -942,7 +957,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.1-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -952,9 +967,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -962,7 +979,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1043,7 +1060,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.2-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1053,9 +1070,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1063,7 +1082,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1144,7 +1163,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.3-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1154,9 +1173,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1164,7 +1185,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1245,7 +1266,9 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.4-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
+
+Note that the alarm checks for specific API operations by name\. One of these operations is `DeletePolicy`\. The alarm does not check that the call was issued from IAM\. Because of this, the alarm also is triggered when Auto Scaling calls `DeletePolicy`\.
 
 **To create an Amazon SNS topic**
 
@@ -1255,9 +1278,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1265,7 +1290,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1346,7 +1371,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.5-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1356,9 +1381,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1366,7 +1393,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1447,7 +1474,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.6-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1457,9 +1484,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1467,7 +1496,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1548,7 +1577,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.7-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1558,9 +1587,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1568,7 +1599,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1649,7 +1680,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.8-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1659,9 +1690,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1669,7 +1702,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1750,7 +1783,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.9-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1760,9 +1793,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1770,7 +1805,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1851,7 +1886,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.10-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1861,9 +1896,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1871,7 +1908,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -1952,7 +1989,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.11-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -1962,9 +1999,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -1972,7 +2011,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -2053,7 +2092,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.12-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -2063,9 +2102,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -2073,7 +2114,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -2154,7 +2195,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.13-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **To create an Amazon SNS topic**
 
@@ -2164,9 +2205,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -2174,7 +2217,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 
@@ -2255,7 +2298,7 @@ When this happens, the check returns a warning that the resource can’t be loca
 
 ### Remediation<a name="cis-3.14-remediation"></a>
 
-The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
+The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
 **Create an Amazon SNS topic**
 
@@ -2265,9 +2308,11 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
    Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
-1. Set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
+Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
-   Make a note of the associated log group name\.
+Make a note of the name of the CloudWatch Logs log group that you associate with the CloudTrail trail\. You create the metric filter for that log group\.
+
+Finally, create the metric filter and alarm\.
 
 **To create a metric filter and alarm**
 
@@ -2275,7 +2320,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a metr
 
 1. In the navigation pane, choose **Log groups**\.
 
-1. Select the check box for the log group that you made a note of in the previous procedure\.
+1. Select the check box for the CloudWatch Logs log group that is associated with the CloudTrail trail that you created\.
 
 1. From **Actions**, choose **Create Metric Filter**\.
 

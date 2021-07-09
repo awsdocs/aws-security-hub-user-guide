@@ -881,14 +881,23 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                                         "CidrIp": "string"
                                     }
                                 ],
+                                "Ipv6Ranges": [
+                                    {
+                                        "CidrIpv6": "string"
+                                    }
+                                ],                                
                                 "PrefixListIds": [
                                     {"PrefixListId": "string"}
                                 ],
                                 "ToPort": number,
                                 "UserIdGroupPairs": [
                                     {
+                                        "GroupId": "string",
+                                        "GroupName": "string",
+                                        "PeeringStatus": "string",
                                         "UserId": "string",
-                                        "GroupId": "string"
+                                        "VpcId": "string",
+                                        "VpcPeeringConnectionId": "string"
                                     }
                                 ]
                             }
@@ -902,14 +911,23 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                                         "CidrIp": "string"
                                     }
                                 ],
+                                "Ipv6Ranges": [
+                                    {
+                                        "CidrIpv6": "string"
+                                    }
+                                ],                                
                                 "PrefixListIds": [
                                     {"PrefixListId": "string"}
                                 ],
                                 "ToPort": number,
                                 "UserIdGroupPairs": [
                                     {
+                                        "GroupId": "string",
+                                        "GroupName": "string",
+                                        "PeeringStatus": "string",
                                         "UserId": "string",
-                                        "GroupId": "string"
+                                        "VpcId": "string",
+                                        "VpcPeeringConnectionId": "string"
                                     }
                                 ]
                             }

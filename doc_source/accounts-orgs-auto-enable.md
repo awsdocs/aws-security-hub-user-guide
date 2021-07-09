@@ -1,12 +1,12 @@
 # Automatically enabling new organization accounts<a name="accounts-orgs-auto-enable"></a>
 
-The Security Hub administrator account can configure Security Hub to automatically add new organization accounts as member accounts\.
+The Security Hub administrator account can configure Security Hub to automatically enable new organization accounts as member accounts\.
 
-By default, new accounts are not enabled as member accounts\. Their status is **Not a member**\.
+When new accounts are added to your organization, they are added to the list on the **Accounts** page\. For organization accounts, **Type** is **By organization**\.
 
-If you enable new organization accounts as member accounts, then when new accounts are added to your organization, they are automatically added to the list on the **Accounts** page\. For organization accounts, **Type** is **By organization**\.
+By default, the new accounts are not enabled as member accounts\. Their status is **Not a member**\.
 
-When you enable the automatic enablement setting, Security Hub begins to enable new accounts as they are added to the organization\. It does not enable existing organization accounts that are not yet enabled\. Security Hub also cannot automatically enable accounts that already belong to another administrator account\.
+When you enable the automatic enablement setting, Security Hub begins to enable new accounts as member accounts when they are added to the organization\. It does not enable existing organization accounts that are not yet enabled\. Security Hub also cannot automatically enable accounts that already belong to another administrator account\.
 
 Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 
