@@ -3827,7 +3827,7 @@ To remediate this issue, install the required patches on your noncompliant insta
 
 1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/](https://console.aws.amazon.com/systems-manager/)\.
 
-1. Under **Instances & Nodes**, choose **Run Command** and then choose **Run command**\.
+1. Under **Node Management**, choose **Run Command** and then choose **Run command**\.
 
 1. Choose the button next to **AWS\-RunPatchBaseline**\.
 
@@ -3874,7 +3874,7 @@ You can edit an association to specify a new name, schedule, severity level, or 
 
 1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/](https://console.aws.amazon.com/systems-manager/)\.
 
-1. In the navigation pane, under **Instances & Nodes**, choose **Managed Instances**\.
+1. In the navigation pane, under **Node Management**, choose **Fleet Manager**\.
 
 1. Choose the instance ID that has an **Association status** of **Failed**\.
 
@@ -3884,7 +3884,7 @@ You can edit an association to specify a new name, schedule, severity level, or 
 
 1. Note the name of the association that has an **Association status** of **Failed**\. This is the association that you need to investigate\. You need to use the association name in the next step\.
 
-1. In the navigation pane, under **Instances & Nodes**, choose **State Manager**\. Search for the association name, then select the association\.
+1. In the navigation pane, under **Node Management**, choose **State Manager**\. Search for the association name, then select the association\.
 
 1. After you determine the issue, edit the failed association to correct the problem\. For information on how to edit an association, see [Edit an association](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc-edit.html)\.
 
