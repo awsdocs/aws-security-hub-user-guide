@@ -163,6 +163,7 @@ This policy includes permissions to do the following:
                 "config:DescribeConfigurationRecorderStatus",
                 "config:DescribeConfigRules",
                 "config:BatchGetResourceConfig",
+                "config:PutEvaluations",
                 "config:SelectResourceConfig",
                 "iam:GenerateCredentialReport",
                 "iam:GetCredentialReport",
@@ -178,8 +179,7 @@ This policy includes permissions to do the following:
                 "config:PutConfigRule",
                 "config:DeleteConfigRule",
                 "config:GetComplianceDetailsByConfigRule",
-                "config:DescribeConfigRuleEvaluationStatus",
-                "config:PutEvaluations"
+                "config:DescribeConfigRuleEvaluationStatus"
             ],
             "Resource": "arn:aws:config:*:*:config-rule/aws-service-rule/*securityhub*"
         }
@@ -200,6 +200,7 @@ View details about updates to AWS managed policies for Security Hub since this s
 
 | Change | Description | Date | 
 | --- | --- | --- | 
+|  [AWSSecurityHubServiceRolePolicy](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Update to an existing policy  |  Security Hub moved the existing `config:PutEvaluations` permission to a different statement within the policy\. The `config:PutEvaluations` permission is now applied to all resources\.  | July 14, 2021 | 
 |  [AWSSecurityHubServiceRolePolicy](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Update to an existing policy  |  Security Hub added a new permission to allow the service\-linked role to deliver evaluation results to AWS Config\.  | June 29, 2021 | 
 |  [AWSSecurityHubServiceRolePolicy](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Added to the list of managed policies  |  Added information about the managed policy `AWSSecurityHubServiceRolePolicy`, which is used by the Security Hub service\-linked role\.  | June 11, 2021 | 
 |  [AWSSecurityHubOrganizationsAccess ](#security-iam-awsmanpol-awssecurityhuborganizationsaccess) – New policy  |  Security Hub added a new policy that grants permissions that are needed for the Security Hub integration with Organizations\.  | March 15, 2021 | 

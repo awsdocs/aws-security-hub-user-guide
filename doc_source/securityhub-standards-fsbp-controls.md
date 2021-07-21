@@ -165,6 +165,53 @@ This control is still in the release process\. It might not yet be available in 
 
 For information on how to use the API Gateway console to associate an AWS WAF Regional web ACL with an existing API Gateway API stage, see [Using AWS WAF to protect your APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-aws-waf.html) in the *API Gateway Developer Guide*\.
 
+## \[APIGateway\.5\] API Gateway REST API cache data should be encrypted at rest<a name="fsbp-apigateway-5"></a>
+
+**Category:** Protect > Data protection > Encryption of data at rest
+
+**Severity:** Medium
+
+**Resource:** Stage \(v1\)
+
+AWS Config rule: `api-gw-cache-encrypted` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether all methods in API Gateway REST API stages that have cache enabled are encrypted\. The control fails if any method in an API Gateway REST API stage is configured to cache and the cache is not encrypted\.
+
+Encrypting data at rest reduces the risk of data stored on disk being accessed by a user not authenticated to AWS\. It adds another set of access controls to limit unauthorized users ability access the data\. For example, API permissions are required to decrypt the data before it can be read\.
+
+API Gateway REST API caches should be encrypted at rest for an added layer of security\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="apigateway-5-remediation"></a>
+
+To remediate this control, configure the stage to encrypt the cache data\.
+
+**To configure API caching for a given stage**
+
+1. Open the API Gateway console at [https://console\.aws\.amazon\.com/apigateway/](https://console.aws.amazon.com/apigateway/)\. 
+
+1. Choose the API\.
+
+1. Choose **Stages**\.
+
+1. In the **Stages** list for the API, choose the stage to add caching to\.
+
+1. Choose **Settings**\.
+
+1. Choose **Enable API cache**\.
+
+1. Update the desired settings, then select **Encrypt cache data**\.
+
+1. Choose **Save Changes**\.
+
 ## \[AutoScaling\.1\] Auto Scaling groups associated with a load balancer should use load balancer health checks<a name="fsbp-autoscaling-1"></a>
 
 **Category:** Identify > Inventory
@@ -1541,6 +1588,48 @@ This control is still in the release process\. It might not yet be available in 
 
 For information on how to modify a security group, see [Add, remove, or update rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules) in the *Amazon VPC User Guide*\.
 
+## \[EC2\.19\] Security groups should not allow unrestricted access to ports with high risk<a name="fsbp-ec2-19"></a>
+
+**Category:** Protect > Restricted network access
+
+**Severity:** Medium 
+
+**Resource:** `AWS::EC2::SecurityGroup`
+
+**AWS Config rule:** `vpc-sg-restricted-common-ports` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether unrestricted incoming traffic for the security groups is accessible to the specified ports that have the highest risk\. This control passes when none of the rules in a security group allow ingress traffic from 0\.0\.0\.0/0 for those ports\.
+
+Unrestricted access \(0\.0\.0\.0/0\) increases opportunities for malicious activity, such as hacking, denial\-of\-service attacks, and loss of data\.
+
+Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\. No security group should allow unrestricted ingress access to the following ports:
++ 3389 \(RDP\)
++ 20, 21 \(FTP\)
++ 22 \(SSH\)
++ 23 \(Telnet\)
++ 110 \(POP3\)
++ 143 \(IMAP\)
++ 3306 \(mySQL\)
++ 8080 \(proxy\)
++ 1433, 1434 \(MSSQL\)
++ 9200 or 9300 \(Elasticsearch\)
++ 5601 \(Kibana\)
++ 25 \(SMTP\)
++ 445 \(CIFS\)
++ 135 \(RPC\)
++ 4333 \(ahsp\)
++ 5432 \(postgresql\)
++ 5500 \(fcp\-addr\-srvr1\) 
+
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="ec2-19-remediation"></a>
+
+For information on how to delete rules from a security group, see [Delete rules from a security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#deleting-security-group-rule) in the *Amazon EC2 User Guide for Linux Instances*\.
+
 ## \[ECS\.1\] Amazon ECS task definitions should have secure networking modes and user definitions<a name="fsbp-ecs-1"></a>
 
 **Category:** Protect > Secure access management
@@ -1571,6 +1660,40 @@ This control is still in the release process\. It might not yet be available in 
 For information on how to update a task definition, see [Updating a task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-task-definition.html) in the *Amazon Elastic Container Service Developer Guide*\.
 
 Note that when you update a task definition, it does not update running tasks that were launched from the previous task definition\. To update a running task, you must redeploy the task with the new task definition\.
+
+## \[ECS\.2\] Amazon ECS services should not have public IP addresses assigned to them automatically<a name="fsbp-ecs-2"></a>
+
+**Category:** Protect > Secure network configuration > Resources not publicly accessible
+
+**Severity:** High
+
+**Resource:** `AWS::ECS::Service`
+
+**AWS Configrule:**` ecs-service-assign-public-ip-disabled` \(Custom rule developed by Security Hub\)
+
+**Parameters:**
++ `exemptEcsServiceArns` \(Optional\)\. Security Hub does not populate this parameter\. Comma\-separated list of ARNs of Amazon ECS services that are exempt from this rule\.
+
+  This rule is `COMPLIANT` if an Amazon ECS service has `AssignPublicIP` set to `ENABLED` and is specified in this parameter list\.
+
+  This rule is `NON_COMPLIANT` if an Amazon ECS service has `AssignPublicIP` set to `ENABLED` and is not specified in this parameter list\.
+
+This control checks whether Amazon ECS services are configured to automatically assign public IP addresses\. This control fails if `AssignPublicIP` is `ENABLED`\. This control passes if `AssignPublicIP` is `DISABLED`\.
+
+A public IP address is an IP address that is reachable from the internet\. If you launch your Amazon ECS instances with a public IP address, then your Amazon ECS instances are reachable from the internet\. Amazon ECS services should not be publicly accessible, as this may allow unintended access to your container application servers\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="ecs-2-remediation"></a>
+
+To disable automatic public IP assignment, see [To configure VPC and security group settings for your service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-configure-network.html) in the *Amazon Elastic Container Service Developer Guide*\.
 
 ## \[EFS\.1\] Amazon EFS should be configured to encrypt file data at rest using AWS KMS<a name="fsbp-efs-1"></a>
 
@@ -1860,6 +1983,30 @@ To enable deletion protection from the console
 
 To learn more, see [Deletion protection](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#deletion-protection) in *User Guide for Application Load Balancers*\.
 
+## \[ELB\.7\] Classic Load Balancers should have connection draining enabled<a name="fsbp-elb-7"></a>
+
+**Category:** Recover > Resilience
+
+**Severity:** Medium
+
+**Resource:** `AWS::ElasticLoadBalancing::LoadBalancer`
+
+**AWS Configrule:** `elb-connection-draining-enabled` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether Classic Load Balancers have connection draining enabled\.
+
+Enabling connection draining on Classic Load Balancers ensures that the load balancer stops sending requests to instances that are de\-registering or unhealthy\. It keeps the existing connections open\. This is particularly useful for instances in Auto Scaling groups, to ensure that connections aren’t severed abruptly\.
+
+**Note**  
+This control is not supported in the Asia Pacific \(Osaka\) Region\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="elb-7-remediation"></a>
+
+To enable connection draining on Classic Load Balancers, following the steps in [Configure connection draining for your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html) in *User Guide for Classic Load Balancers*\.
+
 ## \[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS<a name="fsbp-elbv2-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data in transit
@@ -2042,6 +2189,145 @@ This control is still in the release process\. It might not yet be available in 
 ### Remediation<a name="es-4-remediation"></a>
 
 For information on how to enable log publishing, see [Enabling log publishing \(console\)](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createdomain-configure-slow-logs.html#es-createdomain-configure-slow-logs-console) in the *Amazon Elasticsearch Service Developer Guide*\.
+
+## \[ES\.5\] Elasticsearch domains should have audit logging enabled<a name="fsbp-es-5"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource:** `AWS::Elasticsearch::Domain`
+
+**AWS Config rule:** `elasticsearch-audit-logging-enabled` \(Custom rule developed by Security Hub\)
+
+**Parameters:**
++ `cloudWatchLogsLogGroupArnList` \(Optional\)\. Security Hub does not populate this parameter\. Comma\-separated list of CloudWatch Logs log groups that should be configured for audit logs\.
+
+  This rule is `NON_COMPLIANT` if the CloudWatch Logs log group of the Elasticsearch domain is not specified in this parameter list\.
+
+This control checks whether Elasticsearch domains have audit logging enabled\. This control fails if an Elasticsearch domain does not have audit logging enabled\. 
+
+Audit logs are highly customizable\. They allow you to track user activity on your Elasticsearch clusters, including authentication successes and failures, requests to Elasticsearch, index changes, and incoming search queries\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="es-5-remediation"></a>
+
+For detailed instructions on enabling audit logs, see [Enabling audit logs](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/audit-logs.html#audit-log-enabling) in the *Amazon Elasticsearch Service Developer Guide*\.
+
+## \[ES\.6\] Elasticsearch domains should have at least three data nodes<a name="fsbp-es-6"></a>
+
+**Category:** Recover > Resilience > High availability
+
+**Severity:** Medium
+
+**Resource:** `AWS::Elasticsearch::Domain`
+
+**AWS Config rule:** `elasticsearch-data-node-fault-tolerance` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether Elasticsearch domains are configured with at least three data nodes and `zoneAwarenessEnabled` is `true`\.
+
+An Elasticsearch domain requires at least three data nodes for high availability and fault\-tolerance\. Deploying an Elasticsearch domain with at least three data nodes ensures cluster operations if a node fails\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="es-6-remediation"></a>
+
+**To modify the number of data nodes in an Amazon ES domain**
+
+1. Open the Amazon Elasticsearch Service console at [https://console\.aws\.amazon\.com/es/](https://console.aws.amazon.com/es/)\.
+
+1. Under **My domains**, choose the name of the domain to edit\.
+
+1. Choose **Edit domain**\.
+
+1. Under **Data nodes**, set **Number of nodes** to a number greater than or equal to three\.
+
+   For three Availability Zone deployments, set to a multiple of three to ensure equal distribution across Availability Zones\.
+
+1. Choose **Submit**\.
+
+## \[ES\.7\] Elasticsearch domains should be configured with at least three dedicated master nodes<a name="fsbp-es-7"></a>
+
+**Category:** Recover > Resilience > High availability
+
+**Severity:** Medium
+
+**Resource:** `AWS::Elasticsearch::Domain`
+
+**AWS Configrule:** `elasticsearch-primary-node-fault-tolerance` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether Elasticsearch domains are configured with at least three dedicated master nodes\. This control fails if the domain does not use dedicated master nodes\. This control passes if Elasticsearch domains have five dedicated master nodes\. However, using more than three master nodes might be unnecessary to mitigate the availability risk, and will result in additional cost\.
+
+An Elasticsearch domain requires at least three dedicated master nodes for high availability and fault\-tolerance\. Dedicated master node resources can be strained during data node blue/green deployments because there are additional nodes to manage\. Deploying an Elasticsearch domain with at least three dedicated master nodes ensures sufficient master node resource capacity and cluster operations if a node fails\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="es-7-remediation"></a>
+
+**To modify the number of dedicated master nodes in an Elasticsearch domain**
+
+1. Open the Amazon Elasticsearch Service console at [https://console\.aws\.amazon\.com/es/](https://console.aws.amazon.com/es/)\.
+
+1. Under **My domains**, choose the name of the domain to edit\.
+
+1. Choose **Edit domain**\.
+
+1. Under **Dedicated master nodes**, set **Instance type** to the desired instance type\.
+
+1. Set **Number of master nodes** equal to three or greater\.
+
+1. Choose **Submit**\.
+
+## \[ES\.8\] Connections to Elasticsearch domains should be encrypted using TLS 1\.2<a name="fsbp-es-8"></a>
+
+**Category:** Protect > Data protection > Encryption of data in transit
+
+**Severity:** Medium
+
+**Resource:** `AWS::Elasticsearch::Domain`
+
+**AWS Config rule:** `elasticsearch-https-required` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether connections to Elasticsearch domains are required to use TLS 1\.2\. The check fails if the Elasticsearch domain `TLSSecurityPolicy` is not Policy\-Min\-TLS\-1\-2\-2019\-07\.
+
+HTTPS \(TLS\) can be used to help prevent potential attackers from using person\-in\-the\-middle or similar attacks to eavesdrop on or manipulate network traffic\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Encrypting data in transit can affect performance\. You should test your application with this feature to understand the performance profile and the impact of TLS\. TLS 1\.2 provides several security enhancements over previous versions of TLS\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="es-8-remediation"></a>
+
+To enable TLS encryption, use the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-actions-updateelasticsearchdomainconfig](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-actions-updateelasticsearchdomainconfig) API operation to configure the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-datatypes-domainendpointoptions](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-datatypes-domainendpointoptions) in order to set the `TLSSecurityPolicy`\. For more information, see the *Amazon Elasticsearch Service Developer Guide*\.
 
 ## \[GuardDuty\.1\] GuardDuty should be enabled<a name="fsbp-guardduty-1"></a>
 
@@ -3427,6 +3713,356 @@ To remediate this control, configure your DB cluster for multiple Availability Z
 
    On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance**\.
 
+## \[RDS\.16\] RDS DB clusters should be configured to copy tags to snapshots<a name="fsbp-rds-16"></a>
+
+**Category:** Identify > Inventory
+
+**Severity:** Low
+
+**Resource:** DBCluster
+
+**AWS Config rule:** `rds-cluster-copy-tags-to-snapshots-enabled` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether RDS DB clusters are configured to copy all tags to snapshots when the snapshots are created\.
+
+Identification and inventory of your IT assets is a crucial aspect of governance and security\. You need to have visibility of all your RDS DB clusters so that you can assess their security posture and take action on potential areas of weakness\. Snapshots should be tagged in the same way as their parent RDS database clusters\. Enabling this setting ensures that snapshots inherit the tags of their parent database clusters\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-16-remediation"></a>
+
+**To enable automatic tag copying to snapshots for a DB cluster**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Choose **Databases**\.
+
+1. Select the DB cluster to modify\.
+
+1. Choose **Modify**\.
+
+1. Under **Backup**, select **Copy tags to snapshots**\.
+
+1. Choose **Continue**\.
+
+1. Under **Scheduling of modifications**, choose when to apply modifications\. You can choose either **Apply during the next scheduled maintenance window** or **Apply immediately**\.
+
+## \[RDS\.17\] RDS DB instances should be configured to copy tags to snapshots<a name="fsbp-rds-17"></a>
+
+**Category:** Identify > Inventory
+
+**Severity:** Low
+
+**Resource:** `DBInstance`
+
+**AWS Config rule:** `rds-instance-copy-tags-to-snapshots-enabled` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether RDS DB instances are configured to copy all tags to snapshots when the snapshots are created\.
+
+Identification and inventory of your IT assets is a crucial aspect of governance and security\. You need to have visibility of all your RDS DB instances so that you can assess their security posture and take action on potential areas of weakness\. Snapshots should be tagged in the same way as their parent RDS database instances\. Enabling this setting ensures that snapshots inherit the tags of their parent database instances\.
+
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-17-remediation"></a>
+
+**To enable automatic tag copying to snapshots for a DB instance**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Choose **Databases**\.
+
+1. Select the DB instance to modify\.
+
+1. Choose **Modify**\.
+
+1. Under **Backup**, select **Copy tags to snapshots**\.
+
+1. Choose **Continue**\.
+
+1. Under **Scheduling of modifications**, choose when to apply modifications\. You can choose either** Apply during the next scheduled maintenance window** or **Apply immediately**\.
+
+## \[RDS\.18\] RDS instances should be deployed in a VPC<a name="fsbp-rds-18"></a>
+
+**Category:** Protect > Secure network configuration > Resources within VPC 
+
+**Severity:** High
+
+**Resource:** `DBInstance`
+
+**AWS Config rule:** `rds-deployed-in-vpc` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether an RDS instance is deployed in a VPC \(EC2\-VPC\)\.
+
+VPCs provide a number of network controls to secure access to RDS resources\. These controls include VPC Endpoints, network ACLs, and security groups\. To take advantage of these controls, we recommend that you move EC2\-Classic RDS instances to EC2\-VPC\.
+
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-18-remediation"></a>
+
+For detailed instructions on how to move RDS instances to VPC, see [Updating the VPC for a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html#USER_VPC.VPC2VPC) in the *Amazon RDS User Guide*\.
+
+## \[RDS\.19\] An RDS event notifications subscription should be configured for critical cluster events<a name="fsbp-rds-19"></a>
+
+**Category:** Detect > Detection services > Application monitoring
+
+**Severity:** Low
+
+**Resource:** `AWS::RDS::EventSubscription`
+
+**AWS Config rule:** `rds-cluster-event-notifications-configured` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether an Amazon RDS event subscription exists that has notifications enabled for the following source type, event category key\-value pairs\.
+
+```
+DBCluster: ["maintenance","failure"]
+```
+
+RDS event notifications uses Amazon SNS to make you aware of changes in the availability or configuration of your RDS resources\. These notifications allow for rapid response\. For additional information about RDS event notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide*\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+Middle East \(Bahrain\)
+South America \(São Paulo\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-19-remediation"></a>
+
+**To subscribe to RDS cluster event notifications**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Event subscriptions**\.
+
+1. Under **Event subscriptions**, choose **Create event subscription**\.
+
+1. In the **Create event subscription** dialog, do the following: 
+
+   1. For **Name**, enter a name for the event notification subscription\. 
+
+   1. For **Send notifications to**, choose an existing Amazon SNS ARN for an SNS topic\. To use a new topic, choose **create topic** to enter the name of a topic and a list of recipients\. 
+
+   1. For **Source type**, choose **Clusters**\.
+
+   1. Under **Instances to include**, select **All clusters**\.
+
+   1. Under **Event categories to include**, select **Specific event categories**\. The control also passes if you select **All event categories**\.
+
+   1. Select **maintenance** and **failure**\.
+
+   1. Choose **Create**\.
+
+## \[RDS\.20\] An RDS event notifications subscription should be configured for critical database instance events<a name="fsbp-rds-20"></a>
+
+**Category:** Detect > Detection services > Application monitoring
+
+**Severity:** Low
+
+**Resource:** `AWS::RDS::EventSubscription`
+
+**AWS Config rule:** `rds-instance-event-notifications-configured` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether an Amazon RDS event subscription exists with notifications enabled for the following source type, event category key\-value pairs\.
+
+```
+DBInstance: ["maintenance","configuration change","failure"]
+```
+
+RDS event notifications use Amazon SNS to make you aware of changes in the availability or configuration of your RDS resources\. These notifications allow for rapid response\. For additional information about RDS event notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide*\.
+
+**Note**  
+This control is not supported in the Asia Pacific \(Osaka\) Region\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-20-remediation"></a>
+
+**To subscribe to RDS instance event notifications**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Event subscriptions**\. 
+
+1. Under **Event subscriptions**, choose **Create event subscription**\.
+
+1. In the **Create event subscription** dialog, do the following: 
+
+   1. For **Name**, enter a name for the event notification subscription\. 
+
+   1. For **Send notifications to**, choose an existing Amazon SNS ARN for an SNS topic\. To use a new topic, choose **create topic** to enter the name of a topic and a list of recipients\. 
+
+   1. For **Source type**, choose **Instances**\.
+
+   1. Under **Instances to include**, select **All instances**\.
+
+   1. Under **Event categories to include**, select **Specific event categories**\. The control also passes if you select **All event categories**\.
+
+   1. Select **maintenance**, **configuration change**, and **failure**\.
+
+   1. Choose **Create**\.
+
+## \[RDS\.21\] An RDS event notifications subscription should be configured for critical database parameter group events<a name="fsbp-rds-21"></a>
+
+**Category:** Detect > Detection services > Application monitoring
+
+**Severity:** Low
+
+**Resource:** `AWS::RDS::EventSubscription`
+
+**AWS Config rule:** `rds-pg-event-notifications-configured` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether an Amazon RDS event subscription exists with notifications enabled for the following source type, event category key\-value pairs\.
+
+```
+DBParameterGroup: ["configuration change"]
+```
+
+RDS event notifications use Amazon SNS to make you aware of changes in the availability or configuration of your RDS resources\. These notifications allow for rapid response\. For additional information about RDS event notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide*\.
+
+**Note**  
+This control is not supported in the Asia Pacific \(Osaka\) Region\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-21-remediation"></a>
+
+**To subscribe to RDS database parameter group event notifications**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Event subscriptions**\. 
+
+1. Under **Event subscriptions**, choose **Create event subscription**\.
+
+1. In the **Create event subscription** dialog, do the following: 
+
+   1. For **Name**, enter a name for the event notification subscription\. 
+
+   1. For **Send notifications to**, choose an existing Amazon SNS ARN for an SNS topic\. To use a new topic, choose **create topic** to enter the name of a topic and a list of recipients\. 
+
+   1. For **Source type**, choose **Parameter groups**\.
+
+   1. Under **Instances to include**, select **All parameter groups**\.
+
+   1. Under **Event categories to include**, select **Specific event categories**\. The control also passes if you select **All event categories**\.
+
+   1. Select **configuration change**\.
+
+   1. Choose **Create**\.
+
+## \[RDS\.22\] An RDS event notifications subscription should be configured for critical database security group events<a name="fsbp-rds-22"></a>
+
+**Category:** Detect > Detection Services > Application monitoring
+
+**Severity:** Low
+
+**Resource:** `AWS::RDS::EventSubscription`
+
+**AWS Config rule:** `rds-sg-event-notifications-configured` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether an Amazon RDS event subscription exists with notifications enabled for the following source type, event category key\-value pairs\.
+
+```
+DBSecurityGroup: ["configuration change","failure"]
+```
+
+RDS event notifications use Amazon SNS to make you aware of changes in the availability or configuration of your RDS resources\. These notifications allow for a rapid response\. For additional information about RDS event notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide*\.
+
+**Note**  
+This control is not supported in the Asia Pacific \(Osaka\) Region\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-22-remediation"></a>
+
+**To subscribe to RDS database security group event notifications**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Event subscriptions**\. 
+
+1. Under **Event subscriptions**, choose **Create event subscription**\.
+
+1. In the **Create event subscription** dialog, do the following: 
+
+   1. For **Name**, enter a name for the event notification subscription\. 
+
+   1. For **Send notifications to**, choose an existing Amazon SNS ARN for an SNS topic\. To use a new topic, choose** create topic** to enter the name of a topic and a list of recipients\. 
+
+   1. For **Source type**, choose **Security groups**\.
+
+   1. Under **Instances to include**, select **All security groups**\.
+
+   1. Under **Event categories to include**, select **Specific event categories**\. The control also passes if you select **All event categories**\.
+
+   1. Select **configuration change** and **failure**\.
+
+   1. Choose **Create**\.
+
+## \[RDS\.23\] RDS databases and clusters should not use a database engine default port<a name="fsbp-rds-23"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Low
+
+**Resource:** `DBInstance`
+
+**AWS Config rule:** `rds-no-default-ports` \(Custom rule developed by Security Hub\)
+
+**Parameters:** None
+
+This control checks whether the RDS cluster or instance uses a port other than the default port of the database engine\.
+
+If you use a known port to deploy an RDS cluster or instance, an attacker can guess information about the cluster or instance\. The attacker can use this information in conjunction with other information to connect to an RDS cluster or instance or gain additional information about your application\.
+
+When you change the port, you must also update the existing connection strings that were used to connect to the old port\. You should also check the security group of the DB instance to ensure that it includes an ingress rule that allows connectivity on the new port\.
+
+**Note**  
+This control is not supported in the Asia Pacific \(Osaka\) Region\.  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="rds-23-remediation"></a>
+
+**To modify the default port of an existing DB instance**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Choose **Databases**\.
+
+1. Select the DB instance to modify
+
+1. Choose **Modify**\.
+
+1. Under **Database options**, change **Database port** to a non\-default value\.
+
+1. Choose **Continue**\.
+
+1. Under **Scheduling of modifications**, choose when to apply modifications\. You can choose either **Apply during the next scheduled maintenance window** or **Apply immediately**\.
+
+1. For clusters, choose **Modify cluster**\. For instances, choose **Modify DB Instance**\.
+
 ## \[Redshift\.1\] Amazon Redshift clusters should prohibit public access<a name="fsbp-redshift-1"></a>
 
 **Category:** Protect > Secure network configuration > Resources not publicly accessible
@@ -3538,6 +4174,42 @@ To remediate this issue, update the snapshot retention period to at least 7\.
 1. Under **Backup**, set **Snapshot retention** to a value of 7 or greater\.
 
 1. Choose **Modify Cluster**\.
+
+## \[Redshift\.4\] Amazon Redshift clusters should have audit logging enabled<a name="fsbp-redshift-4"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource:** Cluster
+
+**AWS Config rule:** `redshift-cluster-audit-logging-enabled` \(Custom rule developed by Security Hub\)
+
+**Parameters:**
++ `loggingEnabled = true`
+
+This control checks whether an Amazon Redshift cluster has audit logging enabled\.
+
+Amazon Redshift audit logging provides additional information about connections and user activities in your cluster\. This data can be stored and secured in Amazon S3 and can be helpful in security audits and investigations\. For more information, see [Database audit logging](https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html) in the *Amazon Redshift Cluster Management Guide*\.
+
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="redshift-4-remediation"></a>
+
+**To enable cluster audit logging**
+
+1. Open the Amazon Redshift console at [https://console\.aws\.amazon\.com/redshift/](https://console.aws.amazon.com/redshift/)\.
+
+1. In the navigation menu, choose **Clusters**, then choose the name of the cluster to modify\.
+
+1. Choose **Maintenance and monitoring**\.
+
+1. Under **Audit logging**, choose **Edit**\.
+
+1. Set **Enable audit logging** to **yes**, then enter the log destination bucket details\.
+
+1. Choose **Confirm**\.
 
 ## \[Redshift\.6\] Amazon Redshift should have automatic upgrades to major versions enabled<a name="fsbp-redshift-6"></a>
 
@@ -4167,6 +4839,34 @@ To remediate this issue, update your SNS topic to enable encryption\.
 1. Choose the KMS key to use to encrypt the topic\.
 
 1. Choose **Save changes**\.
+
+## \[SQS\.1\] Amazon SQS queues should be encrypted at rest<a name="fsbp-sqs-1"></a>
+
+**Category:** Protect > Data protection > Encryption of data at rest
+
+**Severity:** Medium
+
+**Resource:** `AWS::SQS::Queue`
+
+**AWS Config rule:** `sqs-queue-encrypted` \(Custom rule developed by Security Hub\)
+
+**Parameters:**
++ `KmsKeyAliasList` \(Optional\)\. Security Hub does not populate this parameter\. Comma\-separated list of customer\-managed AWS KMS key aliases that are used to encrypt queues\.
+
+  For example: "`alias/myKey`"\.
+
+  This rule is `NON_COMPLIANT` if the key used to encrypt a queue is not specified in this parameter list\.
+
+This control checks whether Amazon SQS queues are encrypted at rest\.
+
+Server\-side encryption \(SSE\) allows you to transmit sensitive data in encrypted queues\. To protect the content of messages in queues, SSE uses keys managed in AWS KMS\. For more information, see [Encryption at rest](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html) in the *Amazon Simple Queue Service Developer Guide*\.
+
+**Note**  
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="sqs-1-remediation"></a>
+
+For information about managing SSE using the AWS Management Console, see[ Configuring server\-side encryption \(SSE\) for a queue \(console\)](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html) in the *Amazon Simple Queue Service Developer Guide*\.
 
 ## \[SSM\.1\] EC2 instances should be managed by AWS Systems Manager<a name="fsbp-ssm-1"></a>
 

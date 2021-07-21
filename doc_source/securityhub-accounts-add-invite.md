@@ -86,7 +86,7 @@ To add member accounts, you can use an API call or the AWS Command Line Interfac
 + **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-members.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-members.html) command\.
 
   ```
-  aws securityhub create-members --account-details [{"AccountId": <accountID1>"}]
+  aws securityhub create-members --account-details '[{"AccountId": "<accountID1>"}]'
   ```
 
   **Example**

@@ -42,10 +42,15 @@ Otherwise, the suspended status does not affect the member account status\.
 
 After 90 days, the account is either terminated or reactivated\. When the account is reactivated, its Security Hub permissions are restored\. If the member account status is **Account Suspended**, the administrator account must enable the account manually\.
 
-## Account is terminated<a name="securityhub-effects-account-deletion"></a>
+## Account is closed<a name="securityhub-effects-account-deletion"></a>
 
-When an AWS account is terminated, all Security Hub data for that account is deleted after 90 days\.
+When an AWS account is closed, Security Hub responds to the closure as follows\.
 
-The data cannot be retrieved after it is deleted\.
+ AWS retains the policy data for the account for 90 days from the effective date of the administrator account closure\. At the end of the 90 day period, AWS permanently deletes all policy data for the account\. 
++  To retain findings for more than 90 days, you can archive the policies\. You can also use a custom action with an EventBridge rule to store the findings in an S3 bucket\. 
++  As long as AWS retains the policy data, when you reopen the closed account, AWS reassigns the account as the service administrator and recovers the service policy data for the account\. 
++  For more information, see [Closing an account](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html)\. 
 
-To retain findings for more than 90 days, you can archive them\. You can also use a custom action with an EventBridge rule to store findings in an Amazon S3 bucket\.
+**Important**  
+ For customers in the AWS GovCloud \(US\) Regions:   
+ Before closing your account, back up and then delete your policy data and other account resources\. You will no longer have access to them after you close the account\. 

@@ -8,7 +8,3 @@ This control deals with using AWS KMS to encrypt CloudTrail trail logs\. If you 
 **CIS AWS Foundations Benchmark 1\.2\-1\.14, 1\.16, 1\.20, 1\.22, and 2\.5 controls**  
 To save on the cost of AWS Config, you can disable recording of global resources in all but one Region, and then disable these controls that deal with global resources in all Regions except for the Region that runs global recording\.  
 If you disable these 1\.x controls and disable recording of global resources in a particular Region, you should also disable 2\.5\. This is because 2\.5 requires recording of global resources in order to pass\.
-
-**CIS AWS Foundations Benchmark 1\.1 and 3\.x controls**  
-If you have an SNS topic in a centralized account that is aligned to these control requirements, you can disable these controls in all accounts except for that centralized account\.  
-For a multi\-Region or organization CloudTrail trail, you can disable these controls, as well as 2\.4, in all accounts and Regions except where you receive CloudWatch logs in a log group\.
