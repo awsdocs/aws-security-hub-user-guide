@@ -200,8 +200,8 @@ View details about updates to AWS managed policies for Security Hub since this s
 
 | Change | Description | Date | 
 | --- | --- | --- | 
-|  [AWSSecurityHubServiceRolePolicy](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Update to an existing policy  |  Security Hub moved the existing `config:PutEvaluations` permission to a different statement within the policy\. The `config:PutEvaluations` permission is now applied to all resources\.  | July 14, 2021 | 
-|  [AWSSecurityHubServiceRolePolicy](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Update to an existing policy  |  Security Hub added a new permission to allow the service\-linked role to deliver evaluation results to AWS Config\.  | June 29, 2021 | 
-|  [AWSSecurityHubServiceRolePolicy](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Added to the list of managed policies  |  Added information about the managed policy `AWSSecurityHubServiceRolePolicy`, which is used by the Security Hub service\-linked role\.  | June 11, 2021 | 
-|  [AWSSecurityHubOrganizationsAccess ](#security-iam-awsmanpol-awssecurityhuborganizationsaccess) – New policy  |  Security Hub added a new policy that grants permissions that are needed for the Security Hub integration with Organizations\.  | March 15, 2021 | 
+|  `AWSSecurityHubServiceRolePolicy` – Update to an existing policy  |  Security Hub moved the existing `config:PutEvaluations` permission to a different statement within the policy\. The `config:PutEvaluations` permission is now applied to all resources\.  | July 14, 2021 | 
+|  [`AWSSecurityHubServiceRolePolicy`](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Update to an existing policy  |  Security Hub added a new permission to allow the service\-linked role to deliver evaluation results to AWS Config\.  | June 29, 2021 | 
+|  [`AWSSecurityHubServiceRolePolicy`](#security-iam-awsmanpol-awssecurityhubservicerolepolicy) – Added to the list of managed policies  |  Added information about the managed policy `AWSSecurityHubServiceRolePolicy`, which is used by the Security Hub service\-linked role\.  | June 11, 2021 | 
+|  [`AWSSecurityHubOrganizationsAccess` ](#security-iam-awsmanpol-awssecurityhuborganizationsaccess) – New policy  |  Security Hub added a new policy that grants permissions that are needed for the Security Hub integration with Organizations\.  | March 15, 2021 | 
 |  Security Hub started tracking changes  |  Security Hub started tracking changes for its AWS managed policies\.  | March 15, 2021 | 

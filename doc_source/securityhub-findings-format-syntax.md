@@ -113,7 +113,8 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                 ]
             }
         },
-       "AwsAccountId": "string",
+        "AwsAccountId": "string",
+        "CompanyName": "string",
         "Compliance": { 
             "RelatedRequirements": ["string"],
             "Status": "string",
@@ -250,7 +251,9 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
         "ProductFields": { 
             "string": "string" 
         },
+        "ProductName": "string",
         "RecordState": "string",
+        "Region": "string",
         "RelatedFindings": [ 
             { 
                 "Id": "string",
@@ -1019,6 +1022,75 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                             }
                         ]
                     },
+                    "AwsEcsService": {
+                        "CapacityProviderStrategy": [
+                            {
+                                "Base": number,
+                                "CapacityProvider": "string",
+                                "Weight": number
+                            }
+                        ],
+                        "Cluster": "string",
+                        "DeploymentConfiguration": {
+                            "DeploymentCircuitBreaker": {
+                                "Enable": boolean,
+                                "Rollback": boolean
+                            },
+                            "MaximumPercent": number,
+                            "MinimumHealthyPercent": number
+                        },
+                        "DeploymentController": {
+                            "Type": "string"
+                        },
+                        "DesiredCount": number,
+                        "EnableEcsManagedTags": boolean,
+                        "EnableExecuteCommand": boolean,
+                        "HealthCheckGracePeriodSeconds": number,
+                        "LaunchType": "string",
+                        "LoadBalancers": [
+                            {
+                                "ContainerName": "string",
+                                "ContainerPort": number,
+                                "LoadBalancerName": "string",
+                                "TargetGroupArn": "string"
+                            }
+                        ],
+                        "Name": "string",
+                        "NetworkConfiguration": {
+                            "AwsVpcConfiguration": {
+                                "AssignPublicIp": "string",
+                                "SecurityGroups": ["string"],
+                                "Subnets": ["string"]
+                            }
+                        },
+                        "PlacementConstraints": [
+                            {
+                                "Expression": "string",
+                                "Type": "string"
+                            }
+                        ],
+                        "PlacementStrategies": [
+                            {
+                                "Field": "string",
+                                "Type": "string"
+                            }
+                        ],
+                        "PlatformVersion": "string",
+                        "PropagateTags": "string",
+                        "Role": "string",
+                        "SchedulingStrategy": "string",
+                        "ServiceArn": "string",
+                        "ServiceName": "string",
+                        "ServiceRegistries": [
+                            {
+                                "ContainerName": "string",
+                                "ContainerPort": number,
+                                "Port": number,
+                                "RegistryArn": "string"
+                            }
+                        ],
+                        "TaskDefinition": "string"
+                    },                    
                     "AwsEcsTaskDefinition": {
                         "ContainerDefinitions": [
                             {
@@ -1266,9 +1338,20 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                                 "string": "string"
                             }
                         },
-                         "DomainEndpointOptions": {
+                        "DomainEndpointOptions": {
                             "EnforceHTTPS": boolean,
                             "TLSSecurityPolicy": "string"
+                        },
+                        "ElasticsearchClusterConfig": {
+                            "DedicatedMasterCount": number,
+                            "DedicatedMasterEnabled": boolean,
+                            "DedicatedMasterType": "string",
+                            "InstanceCount": number,
+                            "InstanceType": "string",
+                            "ZoneAwarenessConfig": {
+                                "AvailabilityZoneCount": number
+                            },
+                            "ZoneAwarenessEnabled": boolean
                         },
                         "ElasticsearchVersion": "string",
                         "EncryptionAtRestOptions": {
@@ -1276,6 +1359,10 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                             "KmsKeyId": "string"
                         },
                         "LogPublishingOptions": {
+                            "AuditLogs": {
+                                "CloudWatchLogsLogGroupArn": "string",
+                                "Enabled": boolean
+                            },
                             "IndexSlowLogs": {
                                 "CloudWatchLogsLogGroupArn": "string",
                                 "Enabled": boolean
@@ -1849,6 +1936,18 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "TdeCredentialArn": "string",
                         "Timezone": "string",
                         "VpcId": "string"
+                    },
+                    "AwsRdsEventSubscription": {
+                        "CustomerAwsId": "string",
+                        "CustSubscriptionId": "string",
+                        "Enabled": boolean,
+                        "EventCategoriesList": ["string"],
+                        "EventSubscriptionArn": "string",
+                        "SnsTopicArn": "string",
+                        "SourceIdsList": ["string"],
+                        "SourceType": "string",
+                        "Status": "string",
+                        "SubscriptionCreationTime": "string"
                     },
                     "AwsRedshiftCluster": {
                         "AllowVersionUpgrade": boolean,

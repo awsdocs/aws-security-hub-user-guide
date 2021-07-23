@@ -2,6 +2,8 @@
 
 To retrieve details for selected findings programmatically, you can use an API call or the AWS Command Line Interface\.
 
+Note that when you filter by `CompanyName` or `ProductName`, Security Hub uses the values that are in `ProductFields`\. It does not use the top\-level `CompanyName` and `ProductName` fields\.
+
 **To retrieve a list of findings \(Security Hub API, AWS CLI\)**
 + Security Hub API – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html) API operation\.
 + AWS CLI – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/get-findings.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/get-findings.html) command\.

@@ -31,6 +31,8 @@ However, Security Hub applies OR logic to filters that use the same attribute bu
 
 1. In the menu, under **Filters**, choose a filter\.
 
+   Note that when you filter by **Company name** or **Product name**, Security Hub uses the top\-level `CompanyName` and `ProductName` fields\. The API uses the values that are in `ProductFields`\.
+
 1. Choose the filter match type\.
 
    For a string filter, you can choose from the following comparison options:
