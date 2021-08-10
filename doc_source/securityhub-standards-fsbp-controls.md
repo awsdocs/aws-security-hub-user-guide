@@ -159,7 +159,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="apigateway-4-remediation"></a>
 
@@ -483,7 +482,6 @@ Middle East \(Bahrain\)
 South America \(São Paulo\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="cloudfront-5-remediation"></a>
 
@@ -532,7 +530,6 @@ Middle East \(Bahrain\)
 South America \(São Paulo\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="cloudfront-6-remediation"></a>
 
@@ -1538,7 +1535,6 @@ This control is not supported in the following Regions:
 Asia Pacific \(Osaka\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="ec2-17-remediation"></a>
 
@@ -1581,8 +1577,7 @@ Security groups provide stateful filtering of ingress and egress network traffic
 Unless a port is specifically allowed, the port should deny unrestricted access\.
 
 **Note**  
-This control is not supported in Asia Pacific \(Osaka\)\.  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+This control is not supported in Asia Pacific \(Osaka\)\.
 
 ### Remediation<a name="ecs-18-remediation"></a>
 
@@ -1653,7 +1648,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="ecs-1-remediation"></a>
 
@@ -2184,7 +2178,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="es-4-remediation"></a>
 
@@ -2790,7 +2783,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="iam-21-remediation"></a>
 
@@ -2934,6 +2926,8 @@ For detailed remediation instructions to cancel a scheduled KMS CMK deletion, se
 
 This control checks whether the Lambda function resource\-based policy prohibits public access outside of your account\.
 
+The control also fails if a Lambda function is invoked from Amazon S3 and the policy does not include a condition for `AWS:SourceAccount`\.
+
 The Lambda function should not be publicly accessible, as this may allow unintended access to your code stored in the function\.
 
 **Note**  
@@ -2943,7 +2937,9 @@ This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regi
 
 If a Lambda function fails this control, it indicates that the resource\-based policy statement for the Lambda function allows public access\.
 
-To remediate the issue, you must update the policy\. You can only update the resource\-based policy from the Lambda API\. These instructions use the console to review the policy and the AWS Command Line Interface to remove the permissions\.
+To remediate the issue, you must update the policy to remove the permissions or to add the `AWS:SourceAccount` condition\. You can only update the resource\-based policy from the Lambda API\.
+
+The following instructions use the console to review the policy and the AWS Command Line Interface to remove the permissions\.
 
 **To view the resource\-based policy for a Lambda function**
 
@@ -3691,7 +3687,6 @@ Middle East \(Bahrain\)
 South America \(São Paulo\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-15-remediation"></a>
 
@@ -4579,7 +4574,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="s3-8-remediation"></a>
 
@@ -4719,7 +4713,7 @@ For help on how to diagnose and fix common errors related to secrets rotation, s
 
 **Parameters:** None
 
-This control checks whether your secrets have been accessed within a specified number of days\. The default value is 90 days\. If a secret was accessed even once within the defined number of days, this control fails\.
+This control checks whether your secrets have been accessed within a specified number of days\. The default value is 90 days\. If a secret was not accessed within the defined number of days, this control fails\.
 
 Deleting unused secrets is as important as rotating secrets\. Unused secrets can be abused by their former users, who no longer need access to these secrets\. Also, as more users get access to a secret, someone might have mishandled and leaked it to an unauthorized entity, which increases the risk of abuse\. Deleting unused secrets helps revoke secret access from users who no longer need it\. It also helps to reduce the cost of using Secrets Manager\. Therefore, it is essential to routinely delete unused secrets\.
 

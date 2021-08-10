@@ -92,8 +92,8 @@ aws securityhub batch-import-findings --findings '
         "Description": "Vulnerability in a CloudTrail trail",
         "FindingProviderFields": {
             "Severity": {
-                "Label": INFORMATIONAL,
-                "Original": 0
+                "Label": "INFORMATIONAL",
+                "Original": "0"
             },
             "Types": [
                 "Software and Configuration Checks/Vulnerabilities/CVE"

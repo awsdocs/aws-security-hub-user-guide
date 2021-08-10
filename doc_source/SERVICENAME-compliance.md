@@ -1,6 +1,6 @@
 # Compliance validation for AWS Security Hub<a name="SERVICENAME-compliance"></a>
 
-Third\-party auditors assess the security and compliance of AWS Security Hub as part of multiple AWS compliance programs\. Security Hub is SOC, ISO, PCI, and HIPAA certified\.
+Third\-party auditors assess the security and compliance of AWS Security Hub as part of multiple AWS compliance programs\. These include SOC, PCI, FedRAMP, HIPAA, and others\.
 
 For a list of AWS services in scope of specific compliance programs, see [AWS Services in Scope by Compliance Program](http://aws.amazon.com/compliance/services-in-scope/)\. For general information, see [AWS Compliance Programs](http://aws.amazon.com/compliance/programs/)\.
 

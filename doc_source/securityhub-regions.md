@@ -74,6 +74,7 @@ The AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions only support
 The AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions only support the following [third\-party integrations](securityhub-partner-providers.md):
 + Atlassian Jira Service Manager
 + Atlassian OpsGenie
++ Caveonix Cloud
 + Cloud Custodian
 + Cloud Storage Security Antivirus for Amazon S3
 + cloudtamer\.io

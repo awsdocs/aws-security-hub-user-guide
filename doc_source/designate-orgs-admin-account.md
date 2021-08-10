@@ -2,15 +2,17 @@
 
 The delegated AWS Security Hub administrator account manages Security Hub membership for an organization\.
 
-The organization management account designates the Security Hub administrator account for the organization\. The organization management account can designate any account in the organization\. However, Security Hub recommends that the organization management account does not designate itself as the administrator account\. The users who have access to the organization management account to manage billing are likely to be different from the users who need access to Security Hub for security management\.
+The organization management account designates the Security Hub administrator account for the organization\. The administrator account selects the member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md) and [Managing member accounts that are not in an organization](account-management-manual.md)\.
+
+![\[Diagram that shows how the organization management account designates an organization account as the delegated administrator for Security Hub. The delegated administrator becomes a Security Hub administrator account.\]](http://docs.aws.amazon.com/securityhub/latest/userguide/images/diagram_account_delegation.png)
+
+The organization management account can designate any account in the organization\. However, Security Hub recommends that the organization management account does not designate itself as the administrator account\. The users who have access to the organization management account to manage billing are likely to be different from the users who need access to Security Hub for security management\.
 
 If you have an administrator account in place from the manual invitation process, then Security Hub recommends that you designate that account as the Security Hub administrator account for your organization\. Member accounts can only be associated with a single administrator account\. The administrator account for the organization cannot enable member accounts that belong to another administrator account\.
 
 The delegated administrator account must be the same in each Region\. However, the organization management account must designate that same Security Hub administrator account separately in each Region\.
 
 The organization management account can also remove the current delegated Security Hub administrator account\. When the organization management account uses the console to remove the administrator account in one Region, it is automatically removed in all Regions\. The Security Hub API only removes the administrator account from the Region where the API call or command is issued\. To remove the administrator account from all Regions, you can use the Organizations API\.
-
-The administrator account selects the member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md) and [Managing member accounts that are not in an organization](account-management-manual.md)\.
 
 Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 
