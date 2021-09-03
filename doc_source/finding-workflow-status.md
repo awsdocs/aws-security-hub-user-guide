@@ -1,6 +1,6 @@
 # Setting the workflow status for findings<a name="finding-workflow-status"></a>
 
-For findings, the workflow status tracks the progress of your investigation into a finding\.
+For findings, the workflow status tracks the progress of your investigation into a finding\. The workflow status is specific to an individual finding\. It does not affect the generation of new findings\. For example, setting the workflow status to `SUPPRESSED` or `RESOLVED` does not prevent a new finding for the same issue\.
 
 The workflow status has the following values:
 
@@ -15,7 +15,7 @@ These changes imply that additional investigation is required\.
 Indicates that you notified the resource owner about the security issue\. You can use this status when you are not the resource owner, and you need intervention from the resource owner in order to resolve a security issue\.
 
 `SUPPRESSED`  
-The finding will not be reviewed again and will not be acted upon\.
+Indicates that you reviewed the finding and do not believe that any action is needed\. The finding is no longer updated\.
 
 `RESOLVED`  
 The finding was reviewed and remediated and is now considered resolved\.  

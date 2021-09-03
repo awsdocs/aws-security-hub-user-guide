@@ -14,6 +14,16 @@ As a best practice, use your root credentials only when required to [ perform ac
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.3 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+
 ### Remediation<a name="cis-1.1-remediation"></a>
 
 The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
@@ -842,7 +852,7 @@ If the bucket is publicly accessible, the check generates a failed finding\.
 
 1. Choose **Save**\.
 
-## 2\.7 – Ensure CloudTrail logs are encrypted at rest using AWS KMS CMKs<a name="securityhub-cis-controls-2.7"></a>
+## 2\.7 – Ensure CloudTrail logs are encrypted at rest using AWS KMS keys<a name="securityhub-cis-controls-2.7"></a>
 
 **Severity:** Medium
 
@@ -850,11 +860,11 @@ If the bucket is publicly accessible, the check generates a failed finding\.
 
 CloudTrail is a web service that records AWS API calls for an account and makes those logs available to users and resources in accordance with IAM policies\. AWS Key Management Service \(AWS KMS\) is a managed service that helps create and control the encryption keys used to encrypt account data, and uses hardware security modules \(HSMs\) to protect the security of encryption keys\.
 
-You can configure CloudTrail logs to leverage server\-side encryption \(SSE\) and AWS KMS customer\-created master keys \(CMKs\) to further protect CloudTrail logs\.
+You can configure CloudTrail logs to leverage server\-side encryption \(SSE\) and KMS keys to further protect CloudTrail logs\.
 
 Security Hub recommends that you configure CloudTrail to use SSE\-KMS\.
 
-Configuring CloudTrail to use SSE\-KMS provides additional confidentiality controls on log data because a given user must have S3 read permission on the corresponding log bucket and must be granted decrypt permission by the CMK policy\.
+Configuring CloudTrail to use SSE\-KMS provides additional confidentiality controls on log data because a given user must have S3 read permission on the corresponding log bucket and must be granted decrypt permission by the KMS key policy\.
 
 ### Remediation<a name="cis-2.7-remediation"></a>
 
@@ -878,21 +888,21 @@ The AWS KMS key and S3 bucket must be in the same Region\.
 
 1. Choose **Save**\.
 
-You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail log files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
+You might need to modify the policy for CloudTrail to successfully interact with your KMS key\. For more information, see [Encrypting CloudTrail log files with AWS KMS–Managed Keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console) in the *AWS CloudTrail User Guide*\.
 
-## 2\.8 – Ensure rotation for customer\-created CMKs is enabled<a name="securityhub-cis-controls-2.8"></a>
+## 2\.8 – Ensure rotation for customer\-created KMS keys is enabled<a name="securityhub-cis-controls-2.8"></a>
 
 **Severity:** Medium
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
-AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the CMK\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\.
+AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the KMS key\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\.
 
-Security Hub recommends that you enable CMK key rotation\. Rotating encryption keys helps reduce the potential impact of a compromised key because data encrypted with a new key can't be accessed with a previous key that might have been exposed\.
+Security Hub recommends that you enable KMS key key rotation\. Rotating encryption keys helps reduce the potential impact of a compromised key because data encrypted with a new key can't be accessed with a previous key that might have been exposed\.
 
 ### Remediation<a name="cis-2.8-remediation"></a>
 
-**To enable CMK rotation**
+**To enable KMS key rotation**
 
 1. Open the AWS KMS console at [https://console\.aws\.amazon\.com/kms](https://console.aws.amazon.com/kms)\.
 
@@ -904,7 +914,7 @@ Security Hub recommends that you enable CMK key rotation\. Rotating encryption k
 
 1. Choose **Key rotation**\.
 
-1. Select **Automatically rotate this CMK every year** and then choose **Save**\.
+1. Select **Automatically rotate this KMS key every year** and then choose **Save**\.
 
 ## 2\.9 – Ensure VPC flow logging is enabled in all VPCs<a name="securityhub-cis-controls-2.9"></a>
 
@@ -950,10 +960,15 @@ Security Hub recommends that you create a metric filter and alarm unauthorized A
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.1 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.1-remediation"></a>
 
@@ -1053,10 +1068,15 @@ Security Hub recommends that you create a metric filter and alarm console logins
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.2 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.2-remediation"></a>
 
@@ -1156,10 +1176,15 @@ Security Hub recommends that you create a metric filter and alarm for root login
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.3 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.3-remediation"></a>
 
@@ -1259,10 +1284,15 @@ Security Hub recommends that you create a metric filter and alarm for changes ma
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.4 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.4-remediation"></a>
 
@@ -1364,10 +1394,15 @@ Security Hub recommends that you create a metric filter and alarm for changes to
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.5 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.5-remediation"></a>
 
@@ -1467,10 +1502,15 @@ Security Hub recommends that you create a metric filter and alarm for failed con
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.6 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.6-remediation"></a>
 
@@ -1558,7 +1598,7 @@ Finally, create the metric filter and alarm\.
 
 1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
-## 3\.7 – Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs<a name="securityhub-cis-controls-3.7"></a>
+## 3\.7 – Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer managed keys<a name="securityhub-cis-controls-3.7"></a>
 
 **Severity:** Low
 
@@ -1566,14 +1606,19 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm for customer\-created CMKs that have changed state to disabled or scheduled deletion\. Data encrypted with disabled or deleted keys is no longer accessible\.
+Security Hub recommends that you create a metric filter and alarm for customer managed keys that have changed state to disabled or scheduled deletion\. Data encrypted with disabled or deleted keys is no longer accessible\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.7 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.7-remediation"></a>
 
@@ -1673,10 +1718,15 @@ Security Hub recommends that you create a metric filter and alarm for changes to
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.8 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.8-remediation"></a>
 
@@ -1776,10 +1826,15 @@ Security Hub recommends that you create a metric filter and alarm for changes to
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.9 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.9-remediation"></a>
 
@@ -1879,10 +1934,15 @@ Security Hub recommends that you create a metric filter and alarm for changes to
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.10 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.10-remediation"></a>
 
@@ -1982,10 +2042,15 @@ Security Hub recommends that you create a metric filter and alarm for changes to
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.11 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.11-remediation"></a>
 
@@ -2085,10 +2150,15 @@ Security Hub recommends that you create a metric filter and alarm for changes to
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.12 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.12-remediation"></a>
 
@@ -2188,10 +2258,15 @@ Security Hub recommends that you create a metric filter and alarm for changes to
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.13 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.13-remediation"></a>
 
@@ -2291,10 +2366,15 @@ Security Hub recommends that you create a metric filter and alarm for changes to
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.14 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
-**Important**  
-Security Hub supports CIS AWS Foundations checks only on resources in the same Region and owned by the same account as the one in which Security Hub is enabled\.  
-For example, if you enable Security Hub in the US East \(N\. Virginia\) Region, but you create CloudWatch alarms or SNS topics in the US West \(N\. California\) Region, Security Hub running in the US East \(N\. Virginia\) Region can’t locate the CloudWatch alarms or SNS topics in the US West \(N\. California\) Region\.  
-When this happens, the check returns a warning that the resource can’t be located\. A Failed finding is generated only when a resource is successfully located but is not compliant with CIS requirements for the control\.
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.14-remediation"></a>
 
@@ -2465,9 +2545,9 @@ Security Hub recommends that the default security group restrict all traffic\.
 Update the default security group for the default VPC in every Region to comply\. Any new VPCs automatically contain a default security group that you need to remediate to comply with this recommendation\.
 
 **Note**  
-When implementing this recommendation, you can use VPC flow logging, enabled for [2\.9 – Ensure VPC flow logging is enabled in all VPCs ](#securityhub-cis-controls-2.9), to determine the least\-privilege port access required by systems to work properly because it can log all packet acceptances and rejections occurring under the current security groups\.
+When implementing this recommendation, you can use VPC flow logging, enabled for [2\.9 – Ensure VPC flow logging is enabled in all VPCs ](#securityhub-cis-controls-2.9), to determine the least\-privilege port access that systems require to work properly\. VPC flow logging can log all packet acceptances and rejections that occur under the current security groups\.
 
-Configuring all VPC default security groups to restrict all traffic encourages least\-privilege security group development and mindful placement of AWS resources into security groups, which in turn reduces the exposure of those resources\.
+Configuring all VPC default security groups to restrict all traffic encourages least\-privilege security group development and mindful placement of AWS resources into security groups\. This in turn reduces the exposure of those resources\.
 
 ### Remediation<a name="cis-4.3-remediation"></a>
 

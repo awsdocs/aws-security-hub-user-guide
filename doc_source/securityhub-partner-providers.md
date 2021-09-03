@@ -100,7 +100,8 @@ C2VS is a customizable compliance solution designed to automatically identify yo
   
 **Integration type:** Send and receive  
 **Product ARN:** `arn:aws:securityhub:<REGION>::product/caveonix/caveonix-cloud`  
-Caveonix Cloud is a SaaS risk mitigation platform that delivers automated compliance and hybrid\-cloud security posture management for comprehensive workload protection\.
+Caveonix Cloud is a SaaS risk mitigation platform that delivers automated compliance and hybrid\-cloud security posture management for comprehensive workload protection\.  
+[Partner documentation](https://www.caveonix.com/support/aws-security-hub)
 
 **[http://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f](http://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f) – CloudGuard IaaS**  
 **Integration type:** Send  

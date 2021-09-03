@@ -22,7 +22,7 @@ See [Configuring an EventBridge rule for automatically sent findings](securityhu
 
 Security Hub also sends findings that are associated with custom actions to EventBridge as **Security Hub Findings \- Custom Action** events\.
 
-This is useful for analysts working with the Security Hub console who want to send a specific finding, or a small set of findings, to a response or remediation workflow\. You can select a custom action for up to 20 findings at a time\. All of the selected findings are sent to EventBridge as a single EventBridge event\.
+This is useful for analysts working with the Security Hub console who want to send a specific finding, or a small set of findings, to a response or remediation workflow\. You can select a custom action for up to 20 findings at a time\. Each finding is sent to EventBridge as a separate EventBridge event\.
 
 When you create a custom action, you assign it a custom action ID\. You can use this ID to create an EventBridge rule that takes a specified action after receiving a finding that is associated with that custom action ID\.
 

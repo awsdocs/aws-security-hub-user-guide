@@ -513,6 +513,43 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "LaunchConfigurationName": "string",
                         "LoadBalancerNames": ["string"]
                     },
+                    "AwsAutoScalingLaunchConfiguration": {
+                        "AssociatePublicIpAddress": boolean,
+                        "BlockDeviceMappings": [
+                            {
+                                "DeviceName": "string",
+                                "Ebs": {
+                                    "DeleteOnTermination": boolean,
+                                    "Encrypted": boolean,
+                                    "Iops": number,
+                                    "SnapshotId": "string",
+                                    "VolumeSize": number,
+                                    "VolumeType": "string"
+                                },
+                                "NoDevice": boolean,
+                                "VirtualName": "string"
+                            }
+                        ],
+                        "ClassicLinkVpcId": "string",
+                        "ClassicLinkVpcSecurityGroups": [ "string" ],
+                        "CreatedTime": "string",
+                        "EbsOptimized": boolean,
+                        "IamInstanceProfile": "string",
+                        },
+                        "ImageId": "string",
+                        "InstanceMonitoring": {
+                            "Enabled": boolean
+                        },
+                        "InstanceType": "string",
+                        "KernelId": "string",
+                        "KeyName": "string",
+                        "LaunchConfigurationName": "string",
+                        "PlacementTenancy": "string",
+                        "RamdiskId": "string",
+                        "SecurityGroups": [ "string" ],
+                        "SpotPrice": "string",
+                        "UserData": "string"
+                    },
                     "AwsCertificateManagerCertificate": {
                         "CertificateAuthorityArn": "string",
                         "CreatedAt": "string",
@@ -993,6 +1030,63 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         ],
                         "State": "string"
                     },
+                    "AwsEc2VpnConnection": {
+                        "Category": "string",
+                        "CustomerGatewayConfiguration": "string",
+                        "CustomerGatewayId": "string",
+                        "Options": {
+                            "StaticRoutesOnly": boolean,
+                            "TunnelOptions": [
+                                {
+                                    "DpdTimeoutSeconds": number,
+                                    "IkeVersions": [ "string" ],
+                                    "OutsideIpAddress": "string",
+                                    "Phase1DhGroupNumbers": [ number ],
+                                    "Phase1EncryptionAlgorithms": [ "string" ],
+                                    "Phase1IntegrityAlgorithms": [ "string" ],
+                                    "Phase1LifetimeSeconds": number,
+                                    "Phase2DhGroupNumbers": [ number ],
+                                    "Phase2EncryptionAlgorithms": [ "string" ],
+                                    "Phase2IntegrityAlgorithms": [ "string" ],
+                                    "Phase2LifetimeSeconds": number,
+                                    "PreSharedKey": "string",
+                                    "RekeyFuzzPercentage": number,
+                                    "RekeyMarginTimeSeconds": number,
+                                    "ReplayWindowSize": number,
+                                    "TunnelInsideCidr": "string"
+                                }
+                            ]
+                        },
+                        "Routes": [
+                            {
+                                "DestinationCidrBlock": "string",
+                                "State": "string",
+                            }
+                        ],
+                        "State": "string",
+                        "TransitGatewayId": "string",
+                        "Type": "string",
+                        "VgwTelemetry": [
+                            {
+                                "AcceptedRouteCount": number,
+                                "CertificateArn": "string",
+                                "LastStatusChange": "string",
+                                "OutsideIpAddress": "string",
+                                "Status": "string",
+                                "StatusMessage": "string"
+                            }
+                        ],
+                        "VpnConnectionId": "string",
+                        "VpnGatewayId": "string"
+                    },
+                    "AwsEcrContainerImage": {
+                        "Architecture": "string",
+                        "ImageDigest": "string",
+                        "ImagePublishedAt": "string",
+                        "ImageTags": [ "string" ],
+                        "RegistryId": "string",
+                        "RepositoryName": "string"
+                     },
                     "AwsEcsCluster": {
                         "CapacityProviders": ["string"],
                         "ClusterSettings": [
@@ -1622,6 +1716,7 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "Description": "string",
                         "KeyId": "string",
                         "KeyManager": "string",
+                        "KeyRotationStatus": boolean,
                         "KeyState": "string",
                         "Origin": "string"
                     },
@@ -2077,6 +2172,7 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "RestrictPublicBuckets": boolean
                     },
                     "AwsS3Bucket": {
+                        "AccessControlList": "string",
                         "BucketLifecycleConfiguration": {
                             "Rules": [
                                 {
@@ -2121,6 +2217,52 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                                             "StorageClass": "string"
                                         }
                                     ]
+                                }
+                            ]
+                        },
+                        "BucketLoggingConfiguration": {
+                            "DestinationBucketName": "string",
+                            "LogFilePrefix": "string"
+                        },
+                        "BucketNotificationConfiguration": {
+                             "Configurations": [
+                                 {
+                                     "Destination": "string",
+                                     "Events": ["string"],
+                                     "Filter": {
+                                         "S3KeyFilter": {
+                                             "FilterRules": [
+                                                 {
+                                                     "Name": "string",
+                                                     "Value": "string"
+                                                 }
+                                              ]
+                                         }
+                                     },
+                                     "Type": "string"
+                               }
+                            ]
+                        },
+                        "BucketWebsiteConfiguration": {
+                            "ErrorDocument": "string",
+                            "IndexDocumentSuffix" : "string",
+                            "RedirectAllRequestsTo": {
+                                "HostName": "string",
+                                "Protocol": "string"
+                            },
+                            "RoutingRules": [
+                                {
+                                    "Condition": {
+                                        "HttpErrorCodeReturnedEquals": "string",
+                                        "KeyPrefixEquals": "string"
+                                     },
+                                     "Redirect": {
+                                         "HostName": "string",
+                                         "HttpRedirectCode": "string",
+                                         "Protocol": "string",
+                                         "ReplaceKeyPrefixWith": "string",
+                                         "ReplaceKeyWith": "string"
+                                     }
                                 }
                             ]
                         },
@@ -2279,8 +2421,15 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
             {
                 "Cvss": [
                     {
+                        "Adjustments": [
+                            {
+                                "Metric": "string",
+                                "Reason": "string"
+                            }
+                        ],
                         "BaseScore": number,
                         "BaseVector": "string",
+                        "Source": "string",
                         "Version": "string"
                     }
                 ],
@@ -2298,7 +2447,9 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                     {
                         "Architecture": "string",
                         "Epoch": "string",
+                        "FilePath": "string",
                         "Name": "string",
+                        "PackageManager": "string",
                         "Release": "string",
                         "Version": "string"
                     }

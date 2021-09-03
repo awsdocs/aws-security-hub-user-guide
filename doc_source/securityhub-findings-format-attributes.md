@@ -1901,6 +1901,7 @@ Security Hub provides a set of available objects for its supported resource type
 + [`AwsApiGatewayV2Api`](#asff-resourcedetails-awsapigatewayv2api)
 + [`AwsApiGatewayV2Stage`](#asff-resourcedetails-awsapigatewayv2stage)
 + [`AwsAutoscalingAutoscalingGroup`](#asff-resourcedetails-awsautoscalingautoscalinggroup)
++ [`AwsAutoscalingLaunchConfiguration`](#asff-resourcedetails-awsautoscalinglaunchconfiguration)
 + [`AwsCertificateManagerCertificate`](#asff-resourcedetails-awscertificatemanagercertificate)
 + [`AwsCloudFrontDistribution`](#asff-resourcedetails-awscloudfrontdistribution)
 + [`AwsCloudTrailTrail`](#asff-resourcedetails-awscloudtrailtrail)
@@ -1914,6 +1915,8 @@ Security Hub provides a set of available objects for its supported resource type
 + [`AwsEc2Subnet`](#asff-resourcedetails-awsec2subnet)
 + [`AwsEc2Volume`](#asff-resourcedetails-awsec2volume)
 + [`AwsEc2Vpc`](#asff-resourcedetails-awsec2vpc)
++ [`AwsEc2VpnConnection`](#asff-resourcedetails-awsec2vpnconnection)
++ [`AwsEcrContainerImage`](#asff-resourcedetails-awsecrcontainerimage)
 + [`AwsEcsCluster`](#asff-resourcedetails-awsecscluster)
 + [`AwsEcsService`](#asff-resourcedetails-awsecsservice)
 + [`AwsEcsTaskDefinition`](#asff-resourcedetails-awsecstaskdefinition)
@@ -2054,6 +2057,7 @@ Supported values are as follows\. If a type has a corresponding subfield, then t
 + [`AwsApiGatewayV2Stage`](#asff-resourcedetails-awsapigatewayv2stage)
 + `AwsAppStreamFleet`
 + [`AwsAutoscalingAutoscalingGroup`](#asff-resourcedetails-awsautoscalingautoscalinggroup)
++ [`AwsAutoscalingLaunchConfiguration`](#asff-resourcedetails-awsautoscalinglaunchconfiguration)
 + [`AwsCertificateManagerCertificate`](#asff-resourcedetails-awscertificatemanagercertificate)
 + `AwsCloudFormationStack`
 + [`AwsCloudFrontDistribution`](#asff-resourcedetails-awscloudfrontdistribution)
@@ -2077,6 +2081,8 @@ Supported values are as follows\. If a type has a corresponding subfield, then t
 + [`AwsEc2Subnet`](#asff-resourcedetails-awsec2subnet)
 + [`AwsEc2Volume`](#asff-resourcedetails-awsec2volume)
 + [`AwsEc2Vpc`](#asff-resourcedetails-awsec2vpc)
++ [`AwsEc2VpnConnection`](#asff-resourcedetails-awsec2vpnconnection)
++ [`AwsEcrContainerImage`](#asff-resourcedetails-awsecrcontainerimage)
 + [`AwsEcsCluster`](#asff-resourcedetails-awsecscluster)
 + [`AwsEcsService`](#asff-resourcedetails-awsecsservice)
 + [`AwsEcsTaskDefinition`](#asff-resourcedetails-awsecstaskdefinition)
@@ -3238,6 +3244,272 @@ The list of load balancers that are associated with the group\.
 **Type:** Array of strings  
 **Maximum length per string:** 255 characters
 
+### AwsAutoScalingLaunchConfiguration<a name="asff-resourcedetails-awsautoscalinglaunchconfiguration"></a>
+
+The `AwsAutoScalingLaunchConfiguration` object provides details about a launch configuration\.
+
+**Example**
+
+```
+AwsAutoScalingLaunchConfiguration: {
+    "LaunchConfigurationName": "newtest",
+    "ImageId": "ami-058a3739b02263842",
+    "KeyName": "55hundredinstance",
+    "SecurityGroups": [ "sg-01fce87ad6e019725" ],
+    "ClassicLinkVpcSecurityGroups": [],
+    "UserData": "...Base64-Encoded user data..."
+    "InstanceType": "a1.metal",
+    "KernelId": "",
+    "RamdiskId": "ari-a51cf9cc",
+    "BlockDeviceMappings": [
+        {
+            "DeviceName": "/dev/sdh",
+            "Ebs": {
+                "VolumeSize": 30,
+                "VolumeType": "gp2",
+                "DeleteOnTermination": false,
+                "Encrypted": true,
+                "SnapshotId": "snap-ffaa1e69",
+                "VirtualName": "ephemeral1"
+            }
+        },
+        {
+            "DeviceName": "/dev/sdb",
+            "NoDevice": true
+        },
+        {
+            "DeviceName": "/dev/sda1",
+            "Ebs": {
+                "SnapshotId": "snap-02420cd3d2dea1bc0",
+                "VolumeSize": 8,
+                "VolumeType": "gp2",
+                "DeleteOnTermination": true,
+                "Encrypted": false
+            }
+        },
+        {
+            "DeviceName": "/dev/sdi",
+            "Ebs": {
+                "VolumeSize": 20,
+                "VolumeType": "gp2",
+                "DeleteOnTermination": false,
+                "Encrypted": true
+            }
+        },
+        {
+            "DeviceName": "/dev/sdc",
+            "NoDevice": true
+        }
+    ],
+    "InstanceMonitoring": {
+        "Enabled": false
+    },
+    "CreatedTime": 1620842933453,
+    "EbsOptimized": false,
+    "AssociatePublicIpAddress": true,
+    "SpotPrice": "0.045"
+}
+```
+
+`AwsAutoScalingLaunchConfiguration` can have the following attributes\.
+
+**`AssociatePublicIpAddress`**  
+Optional  
+For Auto Scaling groups that run in a VPC, specifies whether to assign a public IP address to the group's instances\.  
+**Type:** Boolean
+
+**[`BlockDeviceMappings`](#asff-resourcedetails-awsautoscalinglaunchconfiguration-blockdevicemappings)**  
+Optional  
+Specifies the block devices for the instance\.  
+**Type:** Array of objects
+
+**`ClassicLinkVpcId`**  
+Optional  
+The identifier of a ClassicLink\-enabled VPC that EC2\-Classic instances are linked to\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**`ClassicLinkVpcSecurityGroups`**  
+Optional  
+The identifiers of one or more security groups for the VPC that is specified in `ClassicLinkVPCId`\.  
+**Type:** Array of strings
+
+**`CreatedTime`**  
+Optional  
+The creation date and time for the launch configuration\.  
+**Type:** String  
+**Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
+
+**`EbsOptimized`**  
+Optional  
+Whether the launch configuration is optimized for Amazon EBS I/O\.  
+**Type:** Boolean
+
+**`IamInstanceProfile`**  
+Optional  
+The name or the ARN of the instance profile associated with the IAM role for the instance\. The instance profile contains the IAM role\.  
+**Type:** String
+
+**`ImageId`**  
+Optional  
+The identifier of the Amazon Machine Image \(AMI\) that is used to launch EC2 instances\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**`InstanceMonitoring`**  
+Optional  
+Indicates the type of monitoring for instances in the group\.  
+**Type:** Object
+
+**`InstanceMonitoring.Enabled`**  
+Optional  
+If set to `true`, then instances in the group launch with detailed monitoring\.  
+If set to `false`, then instances in the group launch with basic monitoring\.  
+**Type:** Boolean
+
+**`InstanceType`**  
+Optional  
+The instance type for the instances\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**`KernelId`**  
+Optional  
+The identifier of the kernel associated with the AMI\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**`KeyName`**  
+Optional  
+The name of the key pair\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**`LaunchConfigurationName`**  
+Optional  
+The name of the launch configuration\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**`PlacementTenancy`**  
+Optional  
+The tenancy of the instance\. An instance with `dedicated` tenancy runs on isolated, single\-tenant hardware and can only be launched into a VPC\.  
+**Type:** String  
+**Allowed values:** `default` \| `dedicated`
+
+**`RamdiskId`**  
+Optional  
+The identifier of the RAM disk associated with the AMI\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**`SecurityGroups`**  
+Optional  
+The security groups to assign to the instances in the Auto Scaling group\.  
+**Type:** Array of strings
+
+**`SpotPrice`**  
+Optional  
+The maximum hourly price to be paid for any Spot Instance that is launched to fulfill the request\.   
+**Type:** String
+
+**`UserData`**  
+Optional  
+The user data to make available to the launched EC2 instances\. Must be base64\-encoded text\.  
+**Type:** String  
+**Maximum length:** 21847
+
+#### BlockDeviceMappings<a name="asff-resourcedetails-awsautoscalinglaunchconfiguration-blockdevicemappings"></a>
+
+The `BlockDeviceMappings` object specifies the block devices for the instance\.
+
+Each block device can have the following attributes\.
+
+**`DeviceName`**  
+Optional  
+The device name that is exposed to the EC2 instance\. For example, `/dev/sdh` or `xvdh`\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**[`Ebs`](#asff-resourcedetails-awsautoscalinglaunchconfiguration-blockdevicemappings-ebs)**  
+Optional  
+Parameters that are used to automatically set up Amazon EBS volumes when an instance is launched\.  
+You can provide either `Ebs` or `VirtualName`, but not both\.  
+**Type:** Object
+
+**`NoDevice`**  
+Optional  
+Whether to suppress the device that is included in the block device mapping of the AMI\.  
+If `NoDevice` is true, then you cannot provide `Ebs`\.  
+**Type:** Boolean
+
+**`VirtualName`**  
+Optional  
+The name of the virtual device \(for example, `ephemeral0`\)\.  
+You can provide either `VirtualName` or `Ebs`, but not both\.  
+**Type: **String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+##### Ebs<a name="asff-resourcedetails-awsautoscalinglaunchconfiguration-blockdevicemappings-ebs"></a>
+
+The `Ebs` object contains parameters that are used to automatically set up Amazon EBS volumes when an instance is launched\.
+
+`Ebs` can have the following attributes\.
+
+**`DeleteOnTermination`**  
+Optional  
+Whether to delete the volume when the instance is terminated\.  
+**Type:** Boolean
+
+**`Encrypted`**  
+Optional  
+Whether to encrypt the volume\.  
+**Type:** Boolean
+
+**`Iops`**  
+Optional  
+The number of input/output \(I/O\) operations per second \(IOPS\) to provision for the volume\.  
+Only supported for `gp3` or `io1` volumes\. Required for `io1` volumes\. Not used with `standard`, `gp2`, `st1`, or `sc1` volumes\.  
+**Type:** Integer  
+**Allowed values:**  
++ `gp3`: 3,000\-16,000
++  `io1`: 100\-64,000
+
+**`SnapshotId`**  
+Optional  
+The snapshot ID of the volume to use\.  
+You must specify either `VolumeSize` or `SnapshotId`\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 255
+
+**`VolumeSize`**  
+Optional  
+The volume size, in GiBs\. The following are the supported volumes sizes for each volume type:  
++ `gp2` and `gp3`: 1\-16,384
++ `io1`: 4\-16,384
++ `st1` and `sc1`: 125\-16,384
++ `standard`: 1\-1,024
+You must specify either `SnapshotId` or `VolumeSize`\. If you specify both `SnapshotId` and `VolumeSize`, the volume size must be equal or greater than the size of the snapshot\.  
+**Type:** Integer  
+**Minimum value:** 1  
+**Maximum value:** 16384
+
+**`VolumeType`**  
+Optional  
+The volume type\.  
+**Type:** String  
+**Valid values:** `standard` \| `io1` \| `gp2` \| `st1` \| `sc1` \| `gp3`
+
 ### AwsCertificateManagerCertificate<a name="asff-resourcedetails-awscertificatemanagercertificate"></a>
 
 The `AwsCertificateManagerCertificate` object provides details about an AWS Certificate Manager \(ACM\) certificate\.
@@ -3956,9 +4228,9 @@ The `AwsCodeBuildProject` object can have the following attributes\.
 
 **`EncryptionKey`**  
 Optional  
-The AWS KMS customer master key \(CMK\) to be used for encrypting the build output artifacts\.  
+The AWS KMS key to be used for encrypting the build output artifacts\.  
 You can use a cross\-account KMS key to encrypt the build output artifacts if your service role has permission to that key\.
-You can specify either the ARN of the CMK or, if available, the CMK alias \(using the format *alias*/*alias\-name*\)\.  
+You can specify either the ARN of the KMS key or, if available, the KMS key alias \(using the format *alias*/*alias\-name*\)\.  
 Type: String  
 Minimum length: 1
 
@@ -4208,7 +4480,7 @@ The `AwsDynamoDbTable` object provides details about a DynamoDB table\.
                     }
                 }
             ],
-            "KmsMasterKeyId" : "KmsMasterKeyId"
+            "KmsMasterKeyId" : "KmsKeyId"
             "ProvisionedThroughputOverride": {
                 "ReadCapacityUnits": 10
             },
@@ -4566,7 +4838,7 @@ Replica\-specific configuration for the provisioned throughput for the index\.
 
 **`KmsMasterKeyID`**  
 Optional  
-The identifier of the AWS KMS customer master key \(CMK\) that will be used for AWS KMS encryption for the replica\.  
+The identifier of the AWS KMS key that will be used for AWS KMS encryption for the replica\.  
 **Type:** String
 
 **`ProvisionedThroughputOverride`**  
@@ -4651,7 +4923,7 @@ If the key is inaccessible, the date and time when DynamoDB detected that the ke
 
 **`KmsMasterKeyArn`**  
 Optional  
-The ARN of the AWS KMS customer master key \(CMK\) that is used for the AWS KMS encryption\.  
+The ARN of the KMS key that is used for the AWS KMS encryption\.  
 **Type:** String
 
 **`SseType`**  
@@ -5492,7 +5764,7 @@ Whether the volume is encrypted\.
 
 **`KmsKeyId`**  
 Optional  
-The ARN of the AWS KMS customer master key \(CMK\) that was used to protect the volume encryption key for the volume\.  
+The ARN of the AWS KMS key that was used to protect the volume encryption key for the volume\.  
 **Type:** String
 
 **`Size`**  
@@ -5635,6 +5907,336 @@ Information about the state of the CIDR block\.
 Optional  
 The IPv6 CIDR block\.  
 **Type:** CIDR IPV6
+
+### AwsEc2VpnConnection<a name="asff-resourcedetails-awsec2vpnconnection"></a>
+
+The `AwsEc2VpnConnection` object provides details about an Amazon EC2 VPN connection\.
+
+**Example**
+
+```
+"AwsEc2VpnConnection": {
+    "VpnConnectionId": "vpn-205e4f41",
+    "State": "available",
+    "CustomerGatewayConfiguration": "",
+    "CustomerGatewayId": "cgw-5699703f",
+    "Type": "ipsec.1",
+    "VpnGatewayId": "vgw-2ccb2245",
+    "Category": "VPN"
+    "TransitGatewayId": "tgw-09b6f3a659e2b5elf", 
+    "VgwTelemetry": [
+        {
+            "OutsideIpAddress": "92.0.2.11",
+            "Status": "DOWN",
+            "LastStatusChange": "2016-11-11T23:09:32.000Z",
+            "StatusMessage": "IPSEC IS DOWN",
+            "AcceptedRouteCount": 0
+        },
+        {
+            "OutsideIpAddress": "92.0.2.12",
+            "Status": "DOWN",
+            "LastStatusChange": "2016-11-11T23:10:51.000Z",
+            "StatusMessage": "IPSEC IS DOWN",
+            "AcceptedRouteCount": 0
+        }
+    ],
+    "Routes": [{
+        "DestinationCidrBlock": "10.24.34.0/24",
+        "State": "available"
+   }],
+    "Options": {
+        "StaticRoutesOnly": true
+        "TunnelOptions": [{
+            "DpdTimeoutSeconds": 30,
+            "IkeVersions": ["ikev1", "ikev2"],
+            "Phase1DhGroupNumbers": [14, 15, 16, 17, 18},
+            "Phase1EncryptionAlgorithms": ["AES128", "AES256"],
+            "Phase1IntegrityAlgorithms": ["SHA1", "SHA2-256"],
+            "Phase1LifetimeSeconds": 28800,
+            "Phase2DhGroupNumbers": [14, 15, 16, 17, 18],
+            "Phase2EncryptionAlgorithms": ["AES128", "AES256"],
+            "Phase2IntegrityAlgorithms": ["SHA1", "SHA2-256"],
+            "Phase2LifetimeSeconds": 28800,
+            "PreSharedKey": "RltXC3REhTw1RAdiM2s1uMfkkSDLyGJoe1QEWeGxqkQ=",
+            "RekeyFuzzPercentage": 100,
+            "RekeyMarginTimeSeconds": 540,
+            "ReplayWindowSize": 1024,
+            "TunnelInsideCidr": "10.24.34.0/23"
+        }]
+   }
+}
+```
+
+`AwsEc2VpnConnection` can have the following attributes\.
+
+**`Category`**  
+Optional  
+The category of the VPN connection\. VPN indicates an AWS VPN connection\. VPN\-Classic indicates an AWS Classic VPN connection\.  
+**Type:** String  
+**Valid values:** `VPN` \| `VPN-Classic`
+
+**`CustomerGatewayConfiguration`**  
+Optional  
+The configuration information for the VPN connection's customer gateway, in the native XML format\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 131072
+
+**`CustomerGatewayId`**  
+Optional  
+The identifier of the customer gateway that is at your end of the VPN connection\.  
+**Type:** String
+
+**[`Options`](#asff-resourcedetails-awsec2vpnconnection-options)**  
+Optional  
+The VPN connection options\.  
+**Type:** Object
+
+**[`Routes`](#asff-resourcedetails-awsec2vpnconnection-routes)**  
+Optional  
+The static routes that are associated with the VPN connection\.  
+**Type:** Array of objects
+
+**`State`**  
+Optional  
+The current state of the VPN connection\.  
+**Type:** String  
+**Valid values:** `pending` \| `available` \| `deleting` \| `deleted`
+
+**`TransitGatewayId`**  
+Optional  
+The identifier of the transit gateway that is associated with the VPN connection\.  
+**Type:** String
+
+**`Type`**  
+Optional  
+The type of VPN connection\.  
+**Type:** String  
+**Valid values:** `ipsec.1`
+
+**[`VgwTelemetry`](#asff-resourcedetails-awsec2vpnconnection-vgwtelemetry)**  
+Optional  
+Information about the VPN tunnel\.  
+**Type:** Array of objects
+
+**`VpnConnectionId`**  
+Optional  
+The identifier of the VPN connection\.  
+**Type:** string
+
+**`VpnGatewayId`**  
+Optional  
+The identifier of the virtual private gateway that is at the AWS side of the VPN connection\.  
+**Type:** String
+
+#### Options<a name="asff-resourcedetails-awsec2vpnconnection-options"></a>
+
+The `Options` object provides the VPN connection options\.
+
+`Options` can have the following attributes\.
+
+**`StaticRoutesOnly`**  
+Optional  
+Whether the VPN connection uses static routes only\.  
+**Type:** Boolean
+
+**`TunnelOptions`**  
+Optional  
+The VPN tunnel options  
+**Type:** Array of objects
+
+Each object in `TunnelOptions` can have the following attributes
+
+**`DpdTimeoutSeconds`**  
+Optional  
+The number of seconds after which a Dead Peer Detection \(DPD\) timeout occurs\.  
+**Type:** Integer
+
+**`IkeVersions`**  
+Optional  
+The Internet Key Exchange \(IKE\) versions that are permitted for the VPN tunnel\.  
+**Type:** Array of strings
+
+**`OutsideIpAddress`**  
+Optional  
+The external IP address of the VPN tunnel\.  
+**Type:** String
+
+**`Phase1DhGroupNumbers`**  
+Optional  
+The permitted Diffie\-Hellman group numbers for the VPN tunnel for phase 1 IKE negotiations\.  
+**Type:** Array of numbers
+
+**`Phase1EncryptionAlgorithms`**  
+Optional  
+The permitted encryption algorithms for the VPN tunnel for phase 1 IKE negotiations\.  
+**Type:** Array of strings
+
+**`Phase1IntegrityAlgorithms`**  
+Optional  
+The permitted integrity algorithms for the VPN tunnel for phase 1 IKE negotiations\.  
+**Type:** Array of strings
+
+**`Phase1LifetimeSeconds`**  
+Optional  
+The lifetime for phase 1 of the IKE negotiation, in seconds\.  
+**Type:** Integer
+
+**`Phase2DhGroupNumbers`**  
+Optional  
+The permitted Diffie\-Hellman group numbers for the VPN tunnel for phase 2 IKE negotiations\.  
+**Type:** Array of numbers
+
+**`Phase2EncryptionAlgorithms`**  
+Optional  
+The permitted encryption algorithms for the VPN tunnel for phase 2 IKE negotiations\.  
+**Type:** Array of strings
+
+**`Phase2IntegrityAlgorithms`**  
+Optional  
+The permitted integrity algorithms for the VPN tunnel for phase 2 IKE negotiations\.  
+**Type:** Array of strings
+
+**`Phase2LifetimeSeconds`**  
+Optional  
+The lifetime for phase 2 of the IKE negotiation, in seconds\.  
+**Type:** Integer
+
+**`PreSharedKey`**  
+Optional  
+The preshared key to establish initial authentication between the virtual private gateway and the customer gateway\.  
+**Type:** String
+
+**`RekeyFuzzPercentage`**  
+Optional  
+The percentage of the rekey window, which is determined by `RekeyMarginTimeSeconds` during which the rekey time is randomly selected\.  
+**Type:** Integer
+
+**`RekeyMarginTimeSeconds`**  
+Optional  
+The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey\.  
+**Type:** Integer
+
+**`ReplayWindowSize`**  
+Optional  
+The number of packets in an IKE replay window\.  
+**Type:** Integer
+
+**`TunnelInsideCidr`**  
+Optional  
+The range of inside IPv4 addresses for the tunnel\.  
+**Type:** String
+
+#### Routes<a name="asff-resourcedetails-awsec2vpnconnection-routes"></a>
+
+The `Routes` object contains information about the static routes associated with the VPN connection\.
+
+Each route can have the following attributes:
+
+**`DestinationCidrBlock`**  
+Optional  
+The CIDR block associated with the local subnet of the customer data center\.  
+**Type:** String
+
+**`State`**  
+Optional  
+The current state of the static route\.  
+**Type:** String  
+**Valid values:** `pending` \| `available` \| `deleting` \| `deleted`
+
+#### VgwTelementry<a name="asff-resourcedetails-awsec2vpnconnection-vgwtelemetry"></a>
+
+The `Vg2Telementry` object contains information about the VPN tunnel\.
+
+Each entry in `Vg2Telementry` can have the following attributes\.
+
+**`AcceptedRouteCount`**  
+Optional  
+The number of accepted routes\.  
+**Type:** Integer
+
+**`CertificateArn`**  
+Optional  
+The ARN of the VPN tunnel endpoint certificate\.  
+**Type:** String
+
+**`LastStatusChange`**  
+Optional  
+The date and time of the last change in status\.  
+**Type:** String  
+**Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
+
+**`OutsideIpAddress`**  
+Optional  
+The Internet\-routable IP address of the virtual private gateway's outside interface\.  
+**Type:** String
+
+**`Status`**  
+Optional  
+The status of the VPN tunnel\.  
+**Type:** String  
+**Valid values:** `UP` \| `DOWN`
+
+**`StatusMessage`**  
+Optional  
+If an error occurs, a description of the error\.  
+**Type:** String
+
+### AwsEcrContainerImage<a name="asff-resourcedetails-awsecrcontainerimage"></a>
+
+The `AwsEcrContainerImage` object provides information about an Amazon ECR image\.
+
+**Example**
+
+```
+"AwsEcrContainerImage": {
+    "RegistryId": "123456789012",
+    "RepositoryName": "repository-name",
+    "Architecture": "amd64"
+    "ImageDigest": "sha256:a568e5c7a953fbeaa2904ac83401f93e4a076972dc1bae527832f5349cd2fb10",
+    "ImageTags": ["00000000-0000-0000-0000-000000000000"],
+    "ImagePublishedAt": "2019-10-01T20:06:12Z"
+}
+```
+
+`AwsEcrContainerImage` can have the following attributes\.
+
+**`Architecture`**  
+Optional  
+The architecture of the image\.  
+**Type:** String  
+**Valid values:** `i386` \| `x86_64` \| `arm64`
+
+**`ImageDigest`**  
+Optional  
+The sha256 digest of the image manifest\.  
+**Type:** String
+
+**`ImagePublishedAt`**  
+Optional  
+The date and time when the image was pushed to the repository\.  
+**Type:** String  
+**Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
+
+**`ImageTags`**  
+Optional  
+The list of tags that are associated with the image\.  
+**Type:** Array of strings  
+**Maximum length per item:** 128  
+**Minimum number of items:** 1  
+**Maximum number of items: **300
+
+**`RegistryId`**  
+Optional  
+The AWS account identifier that is associated with the registry that the image belongs to\.  
+**Type:** String
+
+**`RepositoryName`**  
+Optional  
+The name of the repository that the image belongs to\.  
+**Type:** String  
+**Minimum length:** 2  
+**Maximum length:** 256
 
 ### AwsEcsCluster<a name="asff-resourcedetails-awsecscluster"></a>
 
@@ -7366,7 +7968,7 @@ It can have the following attributes\.
 
 **`AccessPolicies`**  
 Optional  
-IAM policy document specifying the access policies for the new Amazon ES domain\.  
+IAM policy document specifying the access policies for the Elasticsearch domain\.  
 **Type:** String
 
 **[`DomainEndpointOptions`](#asff-resourcedetails-awselasticsearchdomain-domainendpointoptions)**  
@@ -7441,12 +8043,12 @@ It can have the following attributes\.
 
 **`DomainId`**  
 Optional  
-Unique identifier for an Amazon ES domain\.  
+Unique identifier for an Elasticsearch domain\.  
 **Type:** String
 
 **`DomainName`**  
 Optional  
-Name of an Amazon ES domain\.  
+Name of an Elasticsearch domain\.  
 Domain names are unique across all domains owned by the same account within an AWS Region\.  
 **Minimum length:** 3 characters  
 **Maximum length:** 28 characters  
@@ -7455,13 +8057,13 @@ Domain names are unique across all domains owned by the same account within an A
 
 **`Endpoint`**  
 Optional  
-Domain\-specific endpoint used to submit index, search, and data upload requests to an Amazon ES domain\.  
+Domain\-specific endpoint used to submit index, search, and data upload requests to an Elasticsearch domain\.  
 The endpoint is a service URL\.  
 **Type:** String
 
 **`Endpoints`**  
 Optional  
-The key\-value pair that exists if the Amazon ES domain uses VPC endpoints\.  
+The key\-value pair that exists if the Elasticsearch domain uses VPC endpoints\.  
 **Type:** Map of key\-value pairs  
 **Example**  
 
@@ -8934,18 +9536,18 @@ The name of the policy\.
 
 ### AwsKmsKey<a name="asff-resourcedetails-awskmskey"></a>
 
-The `AwsKmsKey` object provides details about an AWS KMS customer master key \(CMK\)\.
+The `AwsKmsKey` object provides details about an AWS KMS key\.
 
 The `AwsKmsKey` object can have the following attributes\.
 
 **`AWSAccountId`**  
 Optional  
-The AWS account identifier of the account that owns the CMK\.  
+The AWS account identifier of the account that owns the KMS key\.  
 **Type:** String
 
 **`CreationDate`**  
 Optional  
-Indicates when the CMK was created\.  
+Indicates when the KMS key was created\.  
 **Type:** String  
 **Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
 
@@ -8956,28 +9558,33 @@ A description of the key\.
 
 **`KeyId`**  
 Required  
-The globally unique identifier for the CMK\.  
+The globally unique identifier for the KMS key\.  
 **Type:** String  
 **Minimum length:** 1  
 **Maximum length:** 2,048
 
 **`KeyManager`**  
 Optional  
-The manager of the CMK\. CMKs in an AWS account are either customer managed or AWS managed\.  
+The manager of the KMS key\. KMS keys in an AWS account are either customer managed or AWS managed\.  
 **Type:** String  
 **Valid values:** `AWS` \| `CUSTOMER`\.
 
+**`KeyRotationStatus`**  
+Optional  
+Whether the key has key rotation enabled\.  
+**Type:** Boolean
+
 **`KeyState`**  
 Optional  
-The state of the CMK\.  
+The state of the KMS key\.  
 **Type:** String  
 **Valid values:** `Enabled` \| `Disabled` \| `PendingDeletion` \| `PendingImport` \| `Unavailable`
 
 **`Origin`**  
 Optional  
-The source of the CMK's key material\.  
+The source of the KMS key material\.  
 When this value is `AWS_KMS`, AWS KMS created the key material\.  
-When this value is `EXTERNAL`, either the key material was imported from your existing key management infrastructure, or the CMK lacks key material\.  
+When this value is `EXTERNAL`, either the key material was imported from your existing key management infrastructure, or the KMS key lacks key material\.  
 When this value is `AWS_CLOUDHSM`, the key material was created in the AWS CloudHSM cluster that is associated with a custom key store\.  
 **Type:** String  
 **Valid values:** `AWS_KMS` \| `EXTERNAL` \| `AWS_CLOUDHSM`
@@ -9020,7 +9627,7 @@ The function that Lambda calls to begin running your function\.
 
 **`KmsKeyArn`**  
 Optional  
-The AWS KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
+The AWS KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed key\.  
 **Type:** String
 
 **`LastModified`**  
@@ -11769,9 +12376,29 @@ The `AwsS3Bucket` object provides details about an Amazon S3 bucket\.
 
 `AwsS3Bucket` can have the following attributes\.
 
+**`AccessControlList`**  
+Optional  
+The access control list for the S3 bucket\.  
+**Type:** String
+
 **[`BucketLifecycleConfiguration`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration)**  
 Optional  
 The lifecycle configuration for objects in the S3 bucket\.  
+**Type:** Object
+
+**[`BucketLoggingConfiguration`](#asff-resourcedetails-awss3bucket-bucketloggingconfiguration)**  
+Optional  
+The logging configuration for the S3 bucket\.  
+**Type:** Object
+
+**[`BucketNotificationConfiguration`](#asff-resourcedetails-awss3bucket-bucketnotificationconfiguration)**  
+Optional  
+The notification configuration for the S3 bucket\.  
+**Type:** Object
+
+**[`BucketWebsiteConfiguration`](#asff-resourcedetails-awss3bucket-bucketwebsiteconfiguration)**  
+Optional  
+The website configuration parameters for the S3 bucket\.  
 **Type:** Object
 
 **`CreatedAt`**  
@@ -11809,62 +12436,62 @@ The `BucketLifecycleConfiguration` object contains the lifecycle configuration f
 
 Each rule in the `Rules` object can have the following attributes\.
 
-[`AbortIncompleteMultipartUpload`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration-abortincompletemultipartupload)  
+**[`AbortIncompleteMultipartUpload`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration-abortincompletemultipartupload)**  
 Optional  
 How Amazon S3 responds when a multipart upload is incomplete\. Specifically, provides a number of days before Amazon S3 cancels the entire upload\.  
 **Type:** Object
 
-`ExpirationDate`  
+**`ExpirationDate`**  
 Optional  
 The date when objects are moved or deleted\.  
 **Type:** String  
 **Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
 
-`ExpirationInDays`  
+**`ExpirationInDays`**  
 Optional  
 The length in days of the lifetime for objects that are subject to the rule\.  
 **Type:** Integer  
 **Valid values:** Must be a non\-zero positive integer\.
 
-`ExpiredObjectDeleteMarker`  
+**`ExpiredObjectDeleteMarker`**  
 Optional  
 Whether Amazon S3 removes a delete marker that has no noncurrent versions\. If set to `true`, the delete marker is expired\. If set to `false`, the policy takes no action\.  
 If you provide `ExpiredObjectDeleteMarker`, you cannot provide `ExpirationInDays` or `ExpirationDate`\.  
 **Type:** Boolean
 
-[`Filter`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration-filter)  
+**[`Filter`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration-filter)**  
 Optional  
 Identifies the objects that a rule applies to\.  
 **Type:** Object
 
-`Id`  
+**`Id`**  
 Optional  
 The unique identifier of the rule\.  
 **Type:** String  
 **Maximum length:** 255 characters
 
-`NoncurrentVersionExpirationInDays`  
+**`NoncurrentVersionExpirationInDays`**  
 Optional  
 The number of days that an object is noncurrent before Amazon S3 can perform the associated action\.  
 **Type:** Number
 
-[`NoncurrentVersionTransitions`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration-noncurrentversiontransitions)  
+**[`NoncurrentVersionTransitions`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration-noncurrentversiontransitions)**  
 Optional  
 Transition rules that describe when noncurrent objects transition to a specified storage class\.  
 **Type:** Array of objects
 
-`Prefix`  
+**`Prefix`**  
 Optional  
 A prefix that identifies one or more objects that the rule applies to\.  
 **Type:** String
 
-`Status`  
+**`Status`**  
 Optional  
 The current status of the rule\. Indicates whether the rule is currently being applied\.  
 **Type:** String  
 **Valid values:** `Enabled` \| `Disabled`
 
-[`Transitions`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration-transitions)  
+**[`Transitions`](#asff-resourcedetails-awss3bucket-bucketlifecycleconfiguration-transitions)**  
 Optional  
 Transition rules that indicate when objects transition to a specified storage class\.  
 **Type:** Array of objects
@@ -11875,7 +12502,7 @@ The `AbortIncompleteMultipartUpload` object provides information about what Amaz
 
 `AbortIncompleteMultipartUpload` can have the following attributes\.
 
-`DaysAfterInitiation`  
+**`DaysAfterInitiation`**  
 Optional  
 The number of days after which Amazon S3 cancels an incomplete multipart upload\.  
 **Type:** Number
@@ -11888,12 +12515,12 @@ The `Filter` object contains a `Predicate` object\.
 
 The `Predicate` object has the following attributes\.
 
-`Operands`  
+**`Operands`**  
 Optional  
 The values to use for the filter\.  
 **Type:** Array of objects\.
 
-`Type`  
+**`Type`**  
 Optional  
 Indicates whether to use `AND` or `OR` to join the operands\.  
 **Type:** String  
@@ -11903,7 +12530,7 @@ In the `Operands` object, an operand can be either a prefix operand or a tag ope
 
 All operands have a `Type` attribute\.
 
-`Type`  
+**`Type`**  
 Optional  
 The type of filter value\.  
 **Type:** String  
@@ -11911,19 +12538,19 @@ The type of filter value\.
 
 A prefix operand also has the following attributes\.
 
-`Prefix`  
+**`Prefix`**  
 Optional  
 Prefix text for matching objects\.  
 **Type:** String
 
 A tag operand also contains a `Tag` object\. The `Tag` object identifies a tag key and value that is assigned to a matching object\.
 
-`Key`  
+**`Key`**  
 Optional  
 The tag key\.  
 **Type:** String
 
-`Value`  
+**`Value`**  
 Optional  
 The tag value\.  
 **Type:** String
@@ -11934,12 +12561,12 @@ The `NoncurrentVersionTransitions` object contains a list of transition rules th
 
 Each rule can have the following attributes\.
 
-`Days`  
+**`Days`**  
 Optional  
 The number of days that an object is noncurrent before Amazon S3 can perform the associated action\.  
 **Type:** Number
 
-`StorageClass`  
+**`StorageClass`**  
 Optional  
 The class of storage to change the object to after the object is noncurrent for the specified number of days\.  
 **Type:** String  
@@ -11953,22 +12580,187 @@ Each rule can be based either on an exact date or a number of days\.
 
 Each rule can have the following attributes\.
 
-`Date`  
+**`Date`**  
 Optional  
 Provides a date on which to transition objects to the specified storage class\. If you provide `Date`, you cannot provide `Days`\.  
 **Type:** String  
 **Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
 
-`Days`  
+**`Days`**  
 Optional  
 The number of days after which to transition the object to the specified storage class\. If you provide `Days`, you cannot provide `Date`\.  
 **Type:** Number
 
-`StorageClass`  
+**`StorageClass`**  
 Optional  
 The storage class to transition the object to\.  
 **Type:** String  
 **Valid values:** `GLACIER` \| `STANDARD_IA` \|` ONEZONE_IA` \| `INTELLIGENT_TIERING` \| `DEEP_ARCHIVE`
+
+#### BucketLoggingConfiguration<a name="asff-resourcedetails-awss3bucket-bucketloggingconfiguration"></a>
+
+The `BucketLoggingConfiguration` object provides information about logging for the S3 bucket\.
+
+`BucketLoggingConfiguration` can have the following attributes\.
+
+**DestinationBucketName**  
+Optional  
+The name of the S3 bucket where log files for the S3 bucket are stored\.  
+**Type:** String
+
+**`LogFilePrefix`**  
+Optional  
+The prefix added to log files for the S3 bucket\.  
+**Type:** String
+
+#### BucketNotificationConfiguration<a name="asff-resourcedetails-awss3bucket-bucketnotificationconfiguration"></a>
+
+The `BucketNotificationConfiguration` object contains the notification configuration for the S3 bucket\.
+
+`BucketNotificationConfiguration` contains a `Configurations` array of objects\.
+
+Each object in `Configurations` can have the following attributes\.
+
+**`Destination`**  
+Optional  
+The ARN of the Lambda function, Amazon SQS queue, or Amazon SNS topic that generates the notification\.  
+**Type:** String
+
+**`Events`**  
+Optional  
+The list of events that trigger a notification\.  
+**Type:** Array of strings
+
+**[`Filter`](#asff-resourcedetails-awss3bucket-bucketnotificationconfiguration-filter)**  
+Optional  
+The filters that determine which S3 buckets generate notifications\.  
+**Type:** Object
+
+**`Type`**  
+Optional  
+Indicates the type of notification\. Notifications can be generated using Lambda functions, Amazon SQS queues or Amazon SNS topics\.  
+**Type:** String  
+**Valid values:** `LambdaConfiguration` \| `QueueConfiguration` \| `TopicConfiguration`
+
+##### Filter<a name="asff-resourcedetails-awss3bucket-bucketnotificationconfiguration-filter"></a>
+
+The `Filter` object contains filtering information for the notifications\. The filtering is based on Amazon S3 key names\.
+
+Filter contains an `S3KeyFilter` object\. `S3KeyFilter` contains a `FilterRules` array of objects\.
+
+Each filter rule in `FilterRules` can have the following attributes\.
+
+**`Name`**  
+Optional  
+Indicates whether the filter is based on the prefix or suffix of the Amazon S3 key\.  
+**Type:** String  
+**Valid values:** `prefix` \| `suffix`
+
+**`Value`**  
+Optional  
+The filter value\.  
+**Type:** String
+
+#### BucketWebsiteConfiguration<a name="asff-resourcedetails-awss3bucket-bucketwebsiteconfiguration"></a>
+
+The `BucketWebsiteConfiguration` object contains website parameters for the S3 bucket\.
+
+`BucketWebsiteConfiguration` can have the following attributes\.
+
+**`ErrorDocument`**  
+Optional  
+The name of the error document for the website\.  
+**Type:** String
+
+**`IndexDocumentSuffix`**  
+Optional  
+The name of the index document for the website\.  
+**Type:** String
+
+**[`RedirectAllRequestsTo`](#asff-resourcedetails-awss3bucket-bucketwebsiteconfiguration-redirectallrequeststo)**  
+Optional  
+The redirect behavior for requests to the website\.  
+**Type:** Object
+
+**[`RoutingRules`](#asff-resourcedetails-awss3bucket-bucketwebsiteconfiguration-routingrules)**  
+Optional  
+The rules for applying redirects for requests to the website\.  
+**Type:** Array of objects
+
+##### RedirectAllRequestsTo<a name="asff-resourcedetails-awss3bucket-bucketwebsiteconfiguration-redirectallrequeststo"></a>
+
+The `RedirectAllRequestsTo` object specifies the redirect behavior for requests to the website\.
+
+`RedirectAllRequestsTo` can have the following attributes\.
+
+**`Hostname`**  
+Optional  
+The name of the host to redirect requests to\.  
+**Type:** String
+
+**`Protocol`**  
+Optional  
+The protocol to use when redirecting requests\. By default, uses the same protocol as the original request\.  
+**Type:** String  
+**Valid values:** `http` \| `https`
+
+##### RoutingRules<a name="asff-resourcedetails-awss3bucket-bucketwebsiteconfiguration-routingrules"></a>
+
+The `RoutingRules` array of objects contains the rules for redirecting requests to the website\.
+
+Each routing rule can have the following attributes:
+
+**`Condition`**  
+Optional  
+Provides the condition that must be met in order to apply the routing rule\.  
+**Type:** Object
+
+**`Redirect`**  
+Optional  
+Provides the rules to redirect the request if the condition in `Condition` is met\.  
+**Type:** Object
+
+`Condition` can specify an HTTP error code, a key prefix value, or both\. If both are specified, then the request is redirected only if it matches both conditions\. `Condition` can have the following attributes\.
+
+**`HttpErrorCodeReturnedEquals`**  
+Optional  
+Indicates to redirect the request if the HTTP error code matches this value\.  
+**Type:** String
+
+**`KeyPrefixEquals`**  
+Optional  
+Indicates to redirect the request if the key prefix matches this value\.  
+**Type:** String
+
+`Redirect` can have the following attributes
+
+**`Hostname`**  
+Optional  
+The host name to use in the redirect request\.  
+**Type:** String
+
+**`HttpRedirectCode`**  
+Optional  
+The HTTP redirect code to use in the response\.  
+**Type:** String
+
+**`Protocol`**  
+Optional  
+The protocol to use to redirect the request\. By default, uses the protocol from the original request\.  
+**Type:** String  
+**Valid values:** `http` \| `https`
+
+**`ReplaceKeyPrefixWith`**  
+Optional  
+The object key prefix to use in the redirect request\.  
+Cannot be provided if `ReplaceKeyWith` is present\.  
+**Type:** String
+
+**`ReplaceKeyWith`**  
+Optional  
+The specific object key to use in the redirect request\.  
+Cannot be provided if `ReplaceKeyPrefixWith` is present\.  
+**Type:** String
 
 #### PublicAccessBlockConfiguration<a name="asff-resourcedetails-awss3bucket-publicaccessblockconfiguration"></a>
 
@@ -11976,22 +12768,22 @@ The storage class to transition the object to\.
 
 `PublicAccessBlockConfiguration` can have the following attributes\.
 
-`BlockPublicAcls`  
+**`BlockPublicAcls`**  
 Optional  
 Indicates whether to reject calls to update an S3 bucket if the calls include a public access control list \(ACL\)\.  
 **Type:** Boolean
 
-`BlockPublicPolicy`  
+**`BlockPublicPolicy`**  
 Optional  
 Indicates whether to reject calls to update the access policy for an S3 bucket or access point if the policy allows public access\.  
 **Type:** Boolean
 
-`IgnorePublicAcls`  
+**`IgnorePublicAcls`**  
 Optional  
 Indicates whether Amazon S3 ignores public ACLs that are associated with an S3 bucket\.  
 **Type:** Boolean
 
-`RestrictPublicBuckets`  
+**`RestrictPublicBuckets`**  
 Optional  
 Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account\.  
 **Type:** Boolean
@@ -12058,7 +12850,7 @@ If the object is stored using server\-side encryption, the value of the server\-
 
 **`SSEKMSKeyId`**  
 Optional  
-The identifier of the AWS Key Management Service\) symmetric customer managed customer master key \(CMK\) that was used for the object\.  
+The identifier of the symmetric customer managed key that was used for the object\.  
 **Type:** String
 
 **`VersionId`**  
@@ -12102,7 +12894,7 @@ The user\-provided description of the secret\.
 
 **`KmsKeyId`**  
 Optional  
-The ARN, key ID, or alias of the AWS KMS customer master key \(CMK\) that is used to encrypt the `SecretString` or `SecretBinary` values for versions of this secret\.  
+The ARN, key ID, or alias of the AWS KMS key that is used to encrypt the `SecretString` or `SecretBinary` values for versions of this secret\.  
 **Type:** String
 
 **`Name`**  
@@ -12147,7 +12939,7 @@ The `AwsSnsTopic` object contains details about an Amazon SNS topic\.
 
 **`KmsMasterKeyId`**  
 Optional  
-The ID of an AWS managed customer master key \(CMK\) for Amazon SNS or a custom CMK\.  
+The ID of an AWS managed key for Amazon SNS or a customer managed key\.  
 **Type:** String
 
 **`Subscription`**  
@@ -12194,7 +12986,7 @@ The length of time, in seconds, for which Amazon SQS can reuse a data key to enc
 
 **`KmsMasterKeyId`**  
 Optional  
-The ID of an AWS managed customer master key \(CMK\) for Amazon SQS or a custom CMK\.  
+The ID of an AWS managed key for Amazon SQS or a custom KMS key\.  
 **Type:** String
 
 **`QueueName`**  
@@ -12204,7 +12996,7 @@ The name of the new queue\.
 
 **`DeadLetterTargetArn`**  
 Optional  
-The Amazon Resource Name \(ARN\) of the dead\-letter queue to which Amazon SQS moves messages after the value of `maxReceiveCount` is exceeded\.  
+The ARN of the dead\-letter queue to which Amazon SQS moves messages after the value of `maxReceiveCount` is exceeded\.  
 **Type:** String
 
 ### AwsSsmPatchCompliance<a name="asff-resourcedetails-awsssmpatchcompliance"></a>
@@ -12773,6 +13565,10 @@ The `Cvss` object provides a list of CVSS scores for the vulnerability\.
 
 Each `CVSS` score can have the following attributes\.
 
+**[`Adjustments`](#asff-vulnerabilities-cvss-adjustments)**  
+Optional  
+**Type:** Array of objects
+
 **`BaseScore`**  
 Optional  
 The base CVSS score\.  
@@ -12783,10 +13579,31 @@ Optional
 The base scoring vector for the CVSS score\.  
 **Type:** String
 
+**`Source`**  
+Optional  
+The origin of the original CVSS score and vector\.  
+**Type:** String
+
 **`Version`**  
 Optional  
 The version of CVSS for the CVSS score\.  
 **Type:** String
+
+#### Adjustments<a name="asff-vulnerabilities-cvss-adjustments"></a>
+
+`Adjustments` can have the following attributes\.
+
+**`Metric`**  
+Optional  
+The metric to adjust\.  
+Type: String
+
+**`Reason`**  
+Optional  
+The reason for the adjustment\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 512
 
 ### Vendor<a name="asff-vulnerabilities-vendor"></a>
 
@@ -12839,9 +13656,19 @@ Optional
 The epoch for the vulnerable package\.  
 **Type:** String
 
+**`FilePath`**  
+Optional  
+The file system path to the package manager inventory file\.  
+**Type:** String
+
 **`Name`**  
 Optional  
 The name of the vulnerable package\.  
+**Type:** String
+
+**`PackageManager`**  
+Optional  
+The source of the package\.  
 **Type:** String
 
 **`Release`**  
@@ -12866,7 +13693,7 @@ The workflow status can only be updated using [https://docs.aws.amazon.com/secur
 
 **`Status`**  
 Optional  
-The status of the investigation into the finding\.  
+The status of your investigation into the finding\. The workflow status is specific to an individual finding\. It does not affect the generation of new findings\. For example, setting the workflow status to `SUPPRESSED` or `RESOLVED` does not prevent a new finding for the same issue\.  
 **Type:** Enum  
 **Valid values:** `NEW` \| `NOTIFIED` \| `RESOLVED` \| `SUPPRESSED`  
 + `NEW` – The initial state of a finding, before it is reviewed\.
@@ -12876,4 +13703,4 @@ The status of the investigation into the finding\.
   + `Compliance.Status` changes from `PASSED` to either `WARNING`, `FAILED`, or `NOT_AVAILABLE`\.
 + `NOTIFIED` – Indicates that you notified the resource owner about the security issue\. Used when the initial reviewer is not the resource owner and needs intervention from the resource owner\.
 + `RESOLVED` – The finding was reviewed and remediated and is now considered resolved\. For findings from controls, if `Compliance.Status` is passed, then Security Hub automatically sets` Workflow.Status` to `RESOLVED`\.
-+ `SUPPRESSED` – The finding will not be reviewed again and will not be acted upon\.
++ `SUPPRESSED` – Indicates that you reviewed the finding and do not believe that any action is needed\. The finding is no longer updated\.

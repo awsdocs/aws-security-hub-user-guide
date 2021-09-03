@@ -11,9 +11,9 @@ For more information, see [Managing administrator and member accounts](securityh
 
 **Archived finding**  
 A finding that has a `RecordState` set to `ARCHIVED`\. Archiving a finding indicates that the finding provider believes that the finding is no longer relevant\. The record state is separate from the workflow status, which tracks the status of an investigation into a finding\.  
-Finding providers can use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) operation of the Security Hub API to archive findings that they created\. Security Hub automatically archives findings for controls if the associated resource is deleted, based on one of the following criteria\.  
-+ The finding was not updated in three days\.
-+ The associated AWS Config evaluation returned `NOT_APPLICABLE`\.
+Finding providers can use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) operation of the Security Hub API to archive findings that they created\. Security Hub automatically archives findings for controls if the control is disabled or the associated resource is deleted, based on one of the following criteria\.  
++ The finding is not updated in three days\.
++ The associated AWS Config evaluation returns `NOT_APPLICABLE`\.
 By default, archived findings are excluded from findings lists in the Security Hub console\. You can update the filter to include archived findings\.  
 The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html) operation of the Security Hub API returns both active and archived findings\. You can include a filter for the record state\.  
 

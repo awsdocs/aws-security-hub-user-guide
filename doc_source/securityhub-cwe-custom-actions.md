@@ -142,6 +142,8 @@ For AWS API calls to be effective, the implementations of target code must switc
 
 1. From **Actions**, choose the custom action that aligns with the EventBridge rule to apply\.
 
+   Security Hub sends a separate **Security Hub Findings \- Custom Action** event for each finding\.
+
 **To send insight results to EventBridge**
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.

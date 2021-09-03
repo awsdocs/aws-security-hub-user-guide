@@ -15,7 +15,7 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 **Severity:** Medium
 
-**Resource:** ACM certificate
+**Resource type:** ACM certificate
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html](https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html)
 
@@ -24,11 +24,9 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 This control checks whether ACM certificates in your account are marked for expiration within 30 days\. It checks both imported certificates and certificates provided by AWS Certificate Manager\.
 
-Certificates provided by ACM are automatically renewed\. If you're using certificates provided by ACM, you do not need to rotate SSL/TLS certificates\. ACM manages certificate renewals for you\.
+ACM can automatically renew certificates that use DNS validation\. For certificates that use email validation, you must respond to a domain validation email\. ACM also does not automatically renew certificates that you import\. You must renew imported certificates manually\.
 
-ACM does not automatically renew certificates that you import\. You must renew imported certificates manually\.
-
-For more information, see [Managed renewal](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) in the *AWS Certificate Manager User Guide*\.
+For more information about managed renewal for ACM certificates, see [Managed renewal for ACM certificates](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) in the *AWS Certificate Manager User Guide*\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -39,21 +37,16 @@ Europe \(Milan\)
 
 ### Remediation<a name="acm-1-remediation"></a>
 
-ACM provides managed renewal for your Amazon issued SSL/TLS certificates\. This includes both public and private certificates issued by using ACM\. If possible, ACM renews your certificates automatically with no action required from you\. A certificate is eligible for renewal if it is associated with another AWS service, such as Elastic Load Balancing or Amazon CloudFront\. It can also be renewed if it has been exported since being issued or last renewed\.
+ACM provides managed renewal for your Amazon\-issued SSL/TLS certificates\. This means that ACM either renews your certificates automatically \(if you use DNS validation\), or it sends you email notices when the certificate expiration approaches\. These services are provided for both public and private ACM certificates\.
 
-If ACM cannot automatically validate one or more domain names in a certificate, ACM notifies the domain owner that the domain must be validated manually\. A domain can require manual validation for the following reasons\.
-+ ACM cannot establish an HTTPS connection with the domain\.
-+ The certificate that is returned in the response to the HTTPS requests does not match the one that ACM is renewing\.
+**For domains validated by email**  
+When a certificate is 45 days from expiration, ACM sends to the domain owner an email for each domain name\. To validate the domains and complete the renewal, you must respond to the email notifications\.  
+For more information, see [Renewal for domains validated by email](https://docs.aws.amazon.com/acm/latest/userguide/email-renewal-validation.html) in the *AWS Certificate Manager User Guide*\.
 
-When a certificate is 45 days from expiration and one or more domain names in the certificate requires manual validation, ACM notifies the domain owner:
-
-**By email \(for email\-validated certificates\)**  
-If the certificate was last validated by email, ACM sends to the domain owner an email for each domain name that requires manual validation\. To ensure that this email can be received, the domain owner must correctly configure email for each domain\.  
-For more information, see [\(Optional\) Configure email for your domain](https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html)\. The email contains a link that performs the validation\. This link expires after 72 hours\. If necessary, you can use the ACM console, AWS CLI, or API to request that ACM resend the domain validation email\. For more information, see [Request a domain validation email for certificate renewal](https://docs.aws.amazon.com/acm/latest/userguide/request-domain-validation-email-for-renewal.html)\.  
-Email\-validated certificates are automatically renewed up to 825 days after their last manual validation date\. After 825 days, to proceed with the renewal, the domain owner or an authorized representative must manually revalidate ownership of the domain\. To avoid this issue, Security Hub recommends that you create a new certificate and use DNS validation if possible\. If they are properly configured, DNS\-validated certificates are revalidated indefinitely\.
-
-**By notification in your AWS Personal Health Dashboard**  
-ACM sends notifications to your AWS Personal Health Dashboard to notify you that one or more domain names in the certificate require validation before the certificate can be renewed\. ACM sends these notifications when your certificate is 45 days, 30 days, 15 days, 7 days, 3 days, and 1 day from expiration\. These notifications are informational only\.
+**For domains validated by DNS**  
+ACM automatically renews certificates that use DNS validation\. 60 days before the expiration, ACM verifies that the certificate can be renewed\.  
+If it cannot validate a domain name, then ACM sends a notification that manual validation is required\. It sends these notifications 45 days, 30 days, 7 days, and 1 day before the expiration\.  
+For more information, see [Renewal for domains validated by DNS](https://docs.aws.amazon.com/acm/latest/userguide/dns-renewal-validation.html) in the *AWS Certificate Manager User Guide*\.
 
 ## \[APIGateway\.1\] API Gateway REST and WebSocket API logging should be enabled<a name="fsbp-apigateway-1"></a>
 
@@ -61,7 +54,7 @@ ACM sends notifications to your AWS Personal Health Dashboard to notify you that
 
 **Severity:** Medium
 
-**Resource:** Stage \(v1\), Stage \(v2\)
+**Resource type:** `AWS::ApiGateway::Stage`, `AWS::ApiGatewayV2::Stage`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-execution-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-execution-logging-enabled.html)
 
@@ -86,7 +79,7 @@ To enable logging for REST and WebSocket API operations, see [Set up CloudWatch 
 
 **Severity:** Medium
 
-**Resource type:** Stage \(v1\)
+**Resource type:** `AWS::ApiGateway::Stage`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-ssl-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-ssl-enabled.html)
 
@@ -114,7 +107,7 @@ For detailed instructions on how to generate and configure API Gateway REST API 
 
 **Severity:** Low
 
-**Resource type:** Stage \(v1\)
+**Resource type:** `AWS::ApiGateway::Stage`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-xray-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-xray-enabled.html)
 
@@ -142,7 +135,7 @@ For detailed instructions on how to enable X\-Ray active tracing for API Gateway
 
 **Severity:** Medium
 
-**Resource:** `AWS::ApiGateway::Stage`
+**Resource type:** `AWS::ApiGateway::Stage`
 
 **AWS Configrule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-associated-with-waf.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-associated-with-waf.html)
 
@@ -170,7 +163,7 @@ For information on how to use the API Gateway console to associate an AWS WAF Re
 
 **Severity:** Medium
 
-**Resource:** Stage \(v1\)
+**Resource type:** `AWS::ApiGateway::Stage`
 
 AWS Config rule: `api-gw-cache-encrypted` \(Custom rule developed by Security Hub\)
 
@@ -181,13 +174,6 @@ This control checks whether all methods in API Gateway REST API stages that have
 Encrypting data at rest reduces the risk of data stored on disk being accessed by a user not authenticated to AWS\. It adds another set of access controls to limit unauthorized users ability access the data\. For example, API permissions are required to decrypt the data before it can be read\.
 
 API Gateway REST API caches should be encrypted at rest for an added layer of security\.
-
-**Note**  
-This control is not supported in the following Regions:  
-Africa \(Cape Town\)
-Asia Pacific \(Osaka\)
-Europe \(Milan\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="apigateway-5-remediation"></a>
 
@@ -217,7 +203,7 @@ To remediate this control, configure the stage to encrypt the cache data\.
 
 **Severity:** Low
 
-**Resource type:** AutoScaling AutoScalingGroup
+**Resource type:** `AWS::AutoScaling::AutoScalingGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html)
 
@@ -255,7 +241,7 @@ For more information on using a load balancer with an Auto Scaling group, see th
 
 **Severity:** Critical
 
-**Resource:** Distribution
+**Resource type:** `AWS::CloudFront::Distribution`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-default-root-object-configured.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-default-root-object-configured.html)
 
@@ -302,7 +288,7 @@ For detailed instructions on how to specify a default root object for your distr
 
 **Severity:** Medium
 
-**Resource:** Distribution
+**Resource type:** `AWS::CloudFront::Distribution`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-access-identity-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-access-identity-enabled.html)
 
@@ -349,7 +335,7 @@ For detailed remediation instructions, see [Creating a CloudFront OAI and adding
 
 **Severity:** Medium
 
-**Resource:** Distribution
+**Resource type:** `AWS::CloudFront::Distribution`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-viewer-policy-https.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-viewer-policy-https.html)
 
@@ -396,7 +382,7 @@ For detailed remediation instructions, see [Requiring HTTPS for communication be
 
 **Severity:** Low
 
-**Resource:** Distribution
+**Resource type:** `AWS::CloudFront::Distribution`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-failover-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-failover-enabled.html)
 
@@ -443,7 +429,7 @@ For detailed remediation instructions, see [Creating an origin group](https://do
 
 **Severity:** Medium
 
-**Resource:** `AWS::CloudFront::Distribution`
+**Resource type:** `AWS::CloudFront::Distribution`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-accesslogs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-accesslogs-enabled.html)
 
@@ -493,7 +479,7 @@ For information on how to configure access logging for a CloudFront distribution
 
 **Severity:** Medium
 
-**Resource:** `AWS::CloudFront::Distribution`
+**Resource type:** `AWS::CloudFront::Distribution`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-associated-with-waf.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-associated-with-waf.html)
 
@@ -541,7 +527,7 @@ For information on how to associate a web ACL with a CloudFront distribution, se
 
 **Severity:** High
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html)
 
@@ -610,13 +596,13 @@ To remediate this issue, create a new multi\-Region trail in CloudTrail\.
 
 **Severity:** Medium
 
-**Resource:** CloudTrail trail
+**Resource type:** `AWS::CloudTrail::Trail`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
 
 **Parameters:** None
 
-This control checks whether CloudTrail is configured to use the server\-side encryption \(SSE\) AWS Key Management Service customer master key \(CMK\) encryption\. The check passes if the `KmsKeyId` is defined\.
+This control checks whether CloudTrail is configured to use the server\-side encryption \(SSE\) AWS KMS key encryption\. The check passes if the `KmsKeyId` is defined\.
 
 For an added layer of security for your sensitive CloudTrail log files, you should use [server\-side encryption with AWS KMS–managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) for your CloudTrail log files for encryption at rest\. Note that by default, the log files delivered by CloudTrail to your buckets are encrypted by [Amazon server\-side encryption with Amazon S3\-managed encryption keys \(SSE\-S3\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\. 
 
@@ -644,7 +630,7 @@ To remediate this issue, update your trail to enable SSE\-KMS encryption for the
 
 1. Choose **Save**\.
 
-   You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information, see [Encrypting CloudTrail log files with AWS KMS–managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html) in the *AWS CloudTrail User Guide*\.
+   You might need to modify the policy for CloudTrail to successfully interact with your KMS key\. For more information, see [Encrypting CloudTrail log files with AWS KMS–managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html) in the *AWS CloudTrail User Guide*\.
 
 ## \[CloudTrail\.4\] Ensure CloudTrail log file validation is enabled<a name="fsbp-cloudtrail-4"></a>
 
@@ -752,7 +738,7 @@ For more information, see [Configuring CloudWatch Logs monitoring with the conso
 
 **Severity:** Critical
 
-**Resource:** CodeBuild project
+**Resource type:** `AWS::CodeBuild::Project`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html)
 
@@ -799,7 +785,7 @@ For more information, refer to [CodeBuild use case\-based samples](https://docs.
 
 **Severity:** Critical
 
-**Resource:** CodeBuild project
+**Resource type:** `AWS::CodeBuild::Project`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html)
 
@@ -872,7 +858,7 @@ For more information, see [Environment variables in build environments](https://
 
 **Severity:** Medium
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** None
 
@@ -928,7 +914,7 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 **Severity:** Critical
 
-**Resource:** DMS:ReplicationInstance
+**Resource type:** `AWS::DMS::ReplicationInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html](https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html)
 
@@ -967,7 +953,7 @@ For more information, see the section on [Creating a replication instance](https
 
 **Severity:** Medium
 
-**Resource:** Table
+**Resource type:** `AWS::DynamoDB::Table`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-autoscaling-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-autoscaling-enabled.html)
 
@@ -992,7 +978,7 @@ For detailed instructions on enabling DynamoDB automatic scaling on existing tab
 
 **Severity:** Medium
 
-**Resource:** Table
+**Resource type:** `AWS::DynamoDB::Table`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-pitr-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-pitr-enabled.html)
 
@@ -1022,7 +1008,7 @@ To remediate this issue, add point\-in\-time recovery to your DynamoDB table\.
 
 **Severity:** Medium
 
-**Resource:** Cluster
+**Resource type:** `AWS::DAX::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dax-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dax-encryption-enabled.html)
 
@@ -1042,7 +1028,7 @@ You cannot enable or disable encryption at rest after a cluster is created\. You
 
 **Severity:** Critical 
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html)
 
@@ -1079,7 +1065,7 @@ To remediate this issue, update your EBS snapshot to make it private instead of 
 
 **Severity:** High 
 
-**Resource:** EC2 security group
+**Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
 
@@ -1131,7 +1117,7 @@ For more information, see [Working with security groups](https://docs.aws.amazon
 
 **Severity:** Medium
 
-**Resource:** EC2 volume
+**Resource type:** `AWS::EC2::Volume`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/encrypted-volumes.html](https://docs.aws.amazon.com/config/latest/developerguide/encrypted-volumes.html)
 
@@ -1139,7 +1125,7 @@ For more information, see [Working with security groups](https://docs.aws.amazon
 
 This control checks whether the EBS volumes that are in an attached state are encrypted\. To pass this check, EBS volumes must be in use and encrypted\. If the EBS volume is not attached, then it is not subject to this check\.
 
-For an added layer of security of your sensitive data in EBS volumes, you should enable EBS encryption at rest\. Amazon EBS encryption offers a straightforward encryption solution for your EBS resources that doesn't require you to build, maintain, and secure your own key management infrastructure\. It uses AWS KMS customer master keys \(CMK\) when creating encrypted volumes and snapshots\.
+For an added layer of security of your sensitive data in EBS volumes, you should enable EBS encryption at rest\. Amazon EBS encryption offers a straightforward encryption solution for your EBS resources that doesn't require you to build, maintain, and secure your own key management infrastructure\. It uses KMS keys when creating encrypted volumes and snapshots\.
 
 To learn more about Amazon EBS encryption, see [Amazon EBS encryption](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
@@ -1150,7 +1136,7 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 There is no direct way to encrypt an existing unencrypted volume or snapshot\. You can only encrypt a new volume or snapshot when you create it\.
 
-If you enabled encryption by default, Amazon EBS encrypts the resulting new volume or snapshot using your default key for Amazon EBS encryption\. Even if you have not enabled encryption by default, you can enable encryption when you create an individual volume or snapshot\. In both cases, you can override the default key for Amazon EBS encryption and choose a symmetric customer managed CMK\.
+If you enabled encryption by default, Amazon EBS encrypts the resulting new volume or snapshot using your default key for Amazon EBS encryption\. Even if you have not enabled encryption by default, you can enable encryption when you create an individual volume or snapshot\. In both cases, you can override the default key for Amazon EBS encryption and choose a symmetric customer managed key\.
 
 For more information, see [Creating an Amazon EBS volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html) and [Copying an Amazon EBS snapshot](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
@@ -1160,7 +1146,7 @@ For more information, see [Creating an Amazon EBS volume](https://docs.aws.amazo
 
 **Severity:** Medium
 
-**Resource:** EC2 Instance
+**Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-stopped-instance.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-stopped-instance.html)
 
@@ -1205,7 +1191,7 @@ To learn more about terminating instances, see [Terminating an instance](https:/
 
 **Severity:** Medium
 
-**Resource:** EC2 VPC
+**Resource type:** `AWS::EC2::VPC`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
 
@@ -1250,7 +1236,7 @@ To remediate this issue, enable VPC flow logging\.
 
 **Severity:** Medium
 
-**Resource type:** AWS Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-ebs-encryption-by-default.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-ebs-encryption-by-default.html)
 
@@ -1276,7 +1262,7 @@ You can use the Amazon EC2 console to enable default encryption for Amazon EBS v
 
 1. Choose **Manage**\.
 
-1. Select **Enable**\. You can keep the AWS managed CMK with the alias `alias/aws/ebs` created on your behalf as the default encryption key, or choose a symmetric customer managed CMK\.
+1. Select **Enable**\. You can keep the AWS managed key with the alias `alias/aws/ebs` created on your behalf as the default encryption key, or choose a symmetric customer managed key\.
 
 1. Choose **Update EBS encryption**\.
 
@@ -1286,7 +1272,7 @@ You can use the Amazon EC2 console to enable default encryption for Amazon EBS v
 
 **Severity:** High
 
-**Resource type:** EC2 Instance 
+**Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-imdsv2-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-imdsv2-check.html)
 
@@ -1333,7 +1319,7 @@ If your software uses IMDSv1, you can reconfigure your software to use IMDSv2\. 
 
 **Severity:** High
 
-**Resource:** EC2 instance
+**Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-no-public-ip.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-no-public-ip.html)
 
@@ -1379,7 +1365,7 @@ If your EC2 instance is associated with an Elastic IP address, then your EC2 ins
 
 **Severity:** Medium
 
-**Resource:** EC2 VPC
+**Resource type:** `AWS::EC2::VPC`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/service-vpc-endpoint-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/service-vpc-endpoint-enabled.html)
 
@@ -1449,7 +1435,7 @@ For more details on creating a VPC endpoint policy, see [Amazon EC2 and interfac
 
 **Severity:** Medium
 
-**Resource type:** Amazon EC2 subnet
+**Resource type:** `AWS::EC2::Subnet`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/subnet-auto-assign-public-ip-disabled.html](https://docs.aws.amazon.com/config/latest/developerguide/subnet-auto-assign-public-ip-disabled.html)
 
@@ -1519,7 +1505,7 @@ For instructions on how to delete an unused network ACL, see [Deleting a network
 
 **Severity:** Low
 
-**Resource:** `AWS::EC2::Instance`
+**Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-multiple-eni-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-multiple-eni-check.html)
 
@@ -1529,6 +1515,8 @@ For instructions on how to delete an unused network ACL, see [Deleting a network
 This control checks whether an EC2 instance uses multiple Elastic Network Interfaces \(ENIs\) or Elastic Fabric Adapters \(EFAs\)\. This control passes if a single network adapter is used\. The control includes an optional parameter list to identify the allowed ENIs\.
 
 Multiple ENIs can cause dual\-homed instances, meaning instances that have multiple subnets\. This can add network security complexity and introduce unintended network paths and access\.
+
+This control also fails if an Amazon EKS cluster that belongs to an Amazon EKS cluster has more than one ENI\. If you need to use EC2 instances that have multiple ENIs as part of an Amazon EKS cluster, you can suppress those findings\.
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -1560,7 +1548,7 @@ To remediate this issue, detach the additional ENIs\.
 
 **Severity:** High
 
-**Resource:** `AWS::EC2::SecurityGroup`
+**Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-sg-open-only-to-authorized-ports.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-sg-open-only-to-authorized-ports.html)
 
@@ -1589,7 +1577,7 @@ For information on how to modify a security group, see [Add, remove, or update r
 
 **Severity:** Medium 
 
-**Resource:** `AWS::EC2::SecurityGroup`
+**Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** `vpc-sg-restricted-common-ports` \(Custom rule developed by Security Hub\)
 
@@ -1618,9 +1606,6 @@ Security groups provide stateful filtering of ingress and egress network traffic
 + 5432 \(postgresql\)
 + 5500 \(fcp\-addr\-srvr1\) 
 
-**Note**  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
-
 ### Remediation<a name="ec2-19-remediation"></a>
 
 For information on how to delete rules from a security group, see [Delete rules from a security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#deleting-security-group-rule) in the *Amazon EC2 User Guide for Linux Instances*\.
@@ -1631,13 +1616,13 @@ For information on how to delete rules from a security group, see [Delete rules 
 
 **Severity:** High
 
-**Resource:** `AWS::ECS::TaskDefinition`
+**Resource type:** `AWS::ECS::TaskDefinition`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-user-for-host-mode-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-user-for-host-mode-check.html)
 
 **Parameters:** None
 
-This control checks whether an Amazon ECS task definition that has host networking mode also has 'privileged' or 'user' container definitions\. The control fails for task definitions that have host network mode and container definitions where privileged=false or is empty and user=root or is empty\.
+This control checks whether an Amazon ECS task definition that has host networking mode also has `privileged` or `user` container definitions\. The control fails for task definitions that have host network mode and container definitions where `privileged=false` or is empty and `user=root` or is empty\.
 
 If a task definition has elevated privileges, it is because the customer has specifically opted in to that configuration\. This control checks for unexpected privilege escalation when a task definition has host networking enabled but the customer has not opted in to elevated privileges\.
 
@@ -1661,7 +1646,7 @@ Note that when you update a task definition, it does not update running tasks th
 
 **Severity:** High
 
-**Resource:** `AWS::ECS::Service`
+**Resource type:** `AWS::ECS::Service`
 
 **AWS Configrule:**` ecs-service-assign-public-ip-disabled` \(Custom rule developed by Security Hub\)
 
@@ -1677,13 +1662,7 @@ This control checks whether Amazon ECS services are configured to automatically 
 A public IP address is an IP address that is reachable from the internet\. If you launch your Amazon ECS instances with a public IP address, then your Amazon ECS instances are reachable from the internet\. Amazon ECS services should not be publicly accessible, as this may allow unintended access to your container application servers\.
 
 **Note**  
-This control is not supported in the following Regions:  
-Asia Pacific \(Osaka\)
-China \(Beijing\)
-China \(Ningxia\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+This control is not supported in the Asia Pacific \(Osaka\) Region\.
 
 ### Remediation<a name="ecs-2-remediation"></a>
 
@@ -1695,7 +1674,7 @@ To disable automatic public IP assignment, see [To configure VPC and security gr
 
 **Severity:** Medium
 
-**Resource:** EFS file system
+**Resource type:** `AWS::EFS::FileSystem`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/efs-encrypted-check.html](https://docs.aws.amazon.com/config/latest/developerguide/efs-encrypted-check.html)
 
@@ -1722,7 +1701,7 @@ For details on how to encrypt a new Amazon EFS file system, see [Encrypting data
 
 **Severity:** Medium
 
-**Resource type:** EFS FileSystem
+**Resource type:** `AWS::EFS::FileSystem`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/efs-in-backup-plan.html](https://docs.aws.amazon.com/config/latest/developerguide/efs-in-backup-plan.html)
 
@@ -1765,7 +1744,7 @@ To learn more, visit [Using AWS Backup with Amazon EFS](https://docs.aws.amazon.
 
 **Severity:** Low
 
-**Resource type:** Environment
+**Resource type:** `AWS::ElasticBeanstalk::Environment`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/beanstalk-enhanced-health-reporting-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/beanstalk-enhanced-health-reporting-enabled.html)
 
@@ -1797,7 +1776,7 @@ For instructions on how to enable enhanced health reporting, see [Enabling enhan
 
 **Severity:** High
 
-**Resource type:** Environment
+**Resource type:** `AWS::ElasticBeanstalk::Environment`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elastic-beanstalk-managed-updates-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elastic-beanstalk-managed-updates-enabled.html)
 
@@ -1825,7 +1804,7 @@ For instructions on how to enable managed platform updates, see [To configure ma
 
 **Severity:** Medium
 
-**Resource:** ELB load balancer
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-tls-https-listeners-only.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-tls-https-listeners-only.html)
 
@@ -1867,7 +1846,7 @@ To remediate this issue, update your listeners to use the TLS or HTTPS protocol\
 
 **Severity:** Medium
 
-**Resource type:** ELB load balancer
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-http-drop-invalid-header-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-http-drop-invalid-header-enabled.html)
 
@@ -1907,7 +1886,7 @@ To remediate this issue, configure your load balancer to drop invalid header fie
 
 **Severity:** Medium
 
-**Resource:** ELB load balancer
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-logging-enabled.html)
 
@@ -1945,7 +1924,7 @@ To remediate this issue, update your load balancers to enable logging\.
 
 **Severity:** Medium
 
-**Resource:** Elbv2 load balancer
+**Resource type:** `AWS::ElasticLoadBalancingV2::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-deletion-protection-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-deletion-protection-enabled.html)
 
@@ -1983,7 +1962,7 @@ To learn more, see [Deletion protection](https://docs.aws.amazon.com/elasticload
 
 **Severity:** Medium
 
-**Resource:** `AWS::ElasticLoadBalancing::LoadBalancer`
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
 
 **AWS Configrule:** `elb-connection-draining-enabled` \(Custom rule developed by Security Hub\)
 
@@ -1992,10 +1971,6 @@ To learn more, see [Deletion protection](https://docs.aws.amazon.com/elasticload
 This control checks whether Classic Load Balancers have connection draining enabled\.
 
 Enabling connection draining on Classic Load Balancers ensures that the load balancer stops sending requests to instances that are de\-registering or unhealthy\. It keeps the existing connections open\. This is particularly useful for instances in Auto Scaling groups, to ensure that connections aren’t severed abruptly\.
-
-**Note**  
-This control is not supported in the Asia Pacific \(Osaka\) Region\.  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="elb-7-remediation"></a>
 
@@ -2007,7 +1982,7 @@ To enable connection draining on Classic Load Balancers, following the steps in 
 
 **Severity:** Medium
 
-**Resource:** Elbv2 load balancer
+**Resource type:** `AWS::ElasticLoadBalancingV2::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-http-to-https-redirection-check.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-http-to-https-redirection-check.html)
 
@@ -2050,7 +2025,7 @@ To remediate this issue, update your load balancers to redirect HTTP requests\.
 
 **Severity:** High
 
-**Resource type:** EMR:Cluster
+**Resource type:** `AWS::EMR::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/emr-master-no-public-ip.html](https://docs.aws.amazon.com/config/latest/developerguide/emr-master-no-public-ip.html)
 
@@ -2081,20 +2056,20 @@ To remediate this finding, you need to create a new cluster in VPC private subne
 
 **Severity:** Medium
 
-**Resource:** Elasticsearch domain
+**Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html)
 
 **Parameters:** None
 
-This control checks whether Amazon Elasticsearch Service \(Amazon ES\) domains have encryption\-at\-rest configuration enabled\. The check fails if encryption at rest is not enabled\.
+This control checks whether Elasticsearch domains have encryption at rest configuration enabled\. The check fails if encryption at rest is not enabled\.
 
 For an added layer of security for your sensitive data in Elasticsearch, you should configure your Elasticsearch to be encrypted at rest\. Elasticsearch domains offer encryption of data at rest\. The feature uses AWS KMS to store and manage your encryption keys\. To perform the encryption, it uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
 
 To learn more about Elasticsearch encryption at rest, see [Encryption of data at rest for Amazon Elasticsearch Service](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html) in the *Amazon Elasticsearch Service Developer Guide*\.
 
 **Note**  
-Certain instance types, such as t\.small and t\.medium, do not support encryption of data at rest\. For details, see [Supported instance types](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-supported-instance-types.html) in the *Amazon Elasticsearch Service Developer Guide*\.
+Certain instance types, such as `t.small` and `t.medium`, do not support encryption of data at rest\. For details, see [Supported instance types](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-supported-instance-types.html) in the *Amazon Elasticsearch Service Developer Guide*\.
 
 ### Remediation<a name="es-1-remediation"></a>
 
@@ -2104,21 +2079,21 @@ To enable the feature, you must create another domain and migrate your data\. Fo
 
 Encryption of data at rest requires Amazon ES 5\.1 or later\. For more information about encrypting data at rest for Amazon ES, see the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html)\.
 
-## \[ES\.2\] Amazon Elasticsearch Service domains should be in a VPC<a name="fsbp-es-2"></a>
+## \[ES\.2\] Elasticsearch domains should be in a VPC<a name="fsbp-es-2"></a>
 
 **Category:** Protect > Secure network configuration > Resources within VPC 
 
 **Severity:** Critical
 
-**Resource type:** Elasticsearch domain
+**Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html)
 
 **Parameters:** None
 
-This control checks whether Amazon Elasticsearch Service domains are in a VPC\. It does not evaluate the VPC subnet routing configuration to determine public access\. You should ensure that Amazon ES domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-ac-types-resource) in the *Amazon Elasticsearch Service Developer Guide*\. You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
+This control checks whether Elasticsearch domains are in a VPC\. It does not evaluate the VPC subnet routing configuration to determine public access\. You should ensure that Elasticsearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-ac-types-resource) in the *Amazon Elasticsearch Service Developer Guide*\. You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
 
-Amazon ES domains deployed within a VPC can communicate with VPC resources over the private AWS network, without the need to traverse the public internet\. This configuration increases the security posture by limiting access to the data in transit\. VPCs provide a number of network controls to secure access to Amazon ES domains, including network ACL and security groups\. Security Hub recommends that you migrate public Amazon ES domains to VPCs to take advantage of these controls\.
+Elasticsearch domains deployed within a VPC can communicate with VPC resources over the private AWS network, without the need to traverse the public internet\. This configuration increases the security posture by limiting access to the data in transit\. VPCs provide a number of network controls to secure access to Elasticsearch domains, including network ACL and security groups\. Security Hub recommends that you migrate public Elasticsearch domains to VPCs to take advantage of these controls\.
 
 ### Remediation<a name="es-2-remediation"></a>
 
@@ -2126,21 +2101,21 @@ If you create a domain with a public endpoint, you cannot later place it within 
 
 See [Migrating from public access to VPC access](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-migrating-public-to-vpc) in the *Amazon Elasticsearch Service Developer Guide*\.
 
-## \[ES\.3\] Amazon Elasticsearch Service domains should encrypt data sent between nodes<a name="fsbp-es-3"></a>
+## \[ES\.3\] Elasticsearch domains should encrypt data sent between nodes<a name="fsbp-es-3"></a>
 
 **Category:** Protect > Data protection > Encryption of data in transit 
 
 **Severity:** Medium
 
-**Resource type:** Elasticsearch domain
+**Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-node-to-node-encryption-check.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-node-to-node-encryption-check.html)
 
 **Parameters:** None
 
-This control checks whether Amazon ES domains have node\-to\-node encryption enabled\.
+This control checks whether Elasticsearch domains have node\-to\-node encryption enabled\.
 
-HTTPS \(TLS\) can be used to help prevent potential attackers from eavesdropping on or manipulating network traffic using person\-in\-the\-middle or similar attacks\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Enabling node\-to\-node encryption for Amazon ES domains ensures that intra\-cluster communications are encrypted in transit\.
+HTTPS \(TLS\) can be used to help prevent potential attackers from eavesdropping on or manipulating network traffic using person\-in\-the\-middle or similar attacks\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Enabling node\-to\-node encryption for Elasticsearch domains ensures that intra\-cluster communications are encrypted in transit\.
 
 There can be a performance penalty associated with this configuration\. You should be aware of and test the performance trade\-off before enabling this option\. 
 
@@ -2155,7 +2130,7 @@ Europe \(Milan\)
 
 Node\-to\-node encryption can only be enabled on a new domain\. To remediate this finding, first [create a new domain](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains) with the **Node\-to\-node encryption** check box selected\. Then follow [Using a snapshot to migrate data](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-version-migration.html#snapshot-based-migration) to migrate your data to the new domain\.
 
-## \[ES\.4\] Amazon Elasticsearch Service domain error logging to CloudWatch Logs should be enabled<a name="fsbp-es-4"></a>
+## \[ES\.4\] Elasticsearch domain error logging to CloudWatch Logs should be enabled<a name="fsbp-es-4"></a>
 
 **Category:** Identify \- Logging
 
@@ -2168,9 +2143,9 @@ Node\-to\-node encryption can only be enabled on a new domain\. To remediate thi
 **Parameters:**
 + `logtype = 'error'`
 
-This control checks whether Amazon ES domains are configured to send error logs to CloudWatch Logs\.
+This control checks whether Elasticsearch domains are configured to send error logs to CloudWatch Logs\.
 
-You should enable error logs for Amazon ES domains and send those logs to CloudWatch Logs for retention and response\. Domain error logs can assist with security and access audits, and can help to diagnose availability issues\.
+You should enable error logs for Elasticsearch domains and send those logs to CloudWatch Logs for retention and response\. Domain error logs can assist with security and access audits, and can help to diagnose availability issues\.
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -2189,7 +2164,7 @@ For information on how to enable log publishing, see [Enabling log publishing \(
 
 **Severity:** Medium
 
-**Resource:** `AWS::Elasticsearch::Domain`
+**Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** `elasticsearch-audit-logging-enabled` \(Custom rule developed by Security Hub\)
 
@@ -2202,14 +2177,6 @@ This control checks whether Elasticsearch domains have audit logging enabled\. T
 
 Audit logs are highly customizable\. They allow you to track user activity on your Elasticsearch clusters, including authentication successes and failures, requests to Elasticsearch, index changes, and incoming search queries\.
 
-**Note**  
-This control is not supported in the following Regions:  
-China \(Beijing\)
-China \(Ningxia\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
-
 ### Remediation<a name="es-5-remediation"></a>
 
 For detailed instructions on enabling audit logs, see [Enabling audit logs](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/audit-logs.html#audit-log-enabling) in the *Amazon Elasticsearch Service Developer Guide*\.
@@ -2220,7 +2187,7 @@ For detailed instructions on enabling audit logs, see [Enabling audit logs](http
 
 **Severity:** Medium
 
-**Resource:** `AWS::Elasticsearch::Domain`
+**Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** `elasticsearch-data-node-fault-tolerance` \(Custom rule developed by Security Hub\)
 
@@ -2230,17 +2197,9 @@ This control checks whether Elasticsearch domains are configured with at least t
 
 An Elasticsearch domain requires at least three data nodes for high availability and fault\-tolerance\. Deploying an Elasticsearch domain with at least three data nodes ensures cluster operations if a node fails\.
 
-**Note**  
-This control is not supported in the following Regions:  
-China \(Beijing\)
-China \(Ningxia\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
-
 ### Remediation<a name="es-6-remediation"></a>
 
-**To modify the number of data nodes in an Amazon ES domain**
+**To modify the number of data nodes in an Elasticsearch domain**
 
 1. Open the Amazon Elasticsearch Service console at [https://console\.aws\.amazon\.com/es/](https://console.aws.amazon.com/es/)\.
 
@@ -2260,7 +2219,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Medium
 
-**Resource:** `AWS::Elasticsearch::Domain`
+**Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Configrule:** `elasticsearch-primary-node-fault-tolerance` \(Custom rule developed by Security Hub\)
 
@@ -2269,14 +2228,6 @@ This control is still in the release process\. It might not yet be available in 
 This control checks whether Elasticsearch domains are configured with at least three dedicated master nodes\. This control fails if the domain does not use dedicated master nodes\. This control passes if Elasticsearch domains have five dedicated master nodes\. However, using more than three master nodes might be unnecessary to mitigate the availability risk, and will result in additional cost\.
 
 An Elasticsearch domain requires at least three dedicated master nodes for high availability and fault\-tolerance\. Dedicated master node resources can be strained during data node blue/green deployments because there are additional nodes to manage\. Deploying an Elasticsearch domain with at least three dedicated master nodes ensures sufficient master node resource capacity and cluster operations if a node fails\.
-
-**Note**  
-This control is not supported in the following Regions:  
-China \(Beijing\)
-China \(Ningxia\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="es-7-remediation"></a>
 
@@ -2300,7 +2251,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Medium
 
-**Resource:** `AWS::Elasticsearch::Domain`
+**Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** `elasticsearch-https-required` \(Custom rule developed by Security Hub\)
 
@@ -2309,14 +2260,6 @@ This control is still in the release process\. It might not yet be available in 
 This control checks whether connections to Elasticsearch domains are required to use TLS 1\.2\. The check fails if the Elasticsearch domain `TLSSecurityPolicy` is not Policy\-Min\-TLS\-1\-2\-2019\-07\.
 
 HTTPS \(TLS\) can be used to help prevent potential attackers from using person\-in\-the\-middle or similar attacks to eavesdrop on or manipulate network traffic\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Encrypting data in transit can affect performance\. You should test your application with this feature to understand the performance profile and the impact of TLS\. TLS 1\.2 provides several security enhancements over previous versions of TLS\.
-
-**Note**  
-This control is not supported in the following Regions:  
-China \(Beijing\)
-China \(Ningxia\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="es-8-remediation"></a>
 
@@ -2328,7 +2271,7 @@ To enable TLS encryption, use the [https://docs.aws.amazon.com/elasticsearch-ser
 
 **Severity:** High
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/guardduty-enabled-centralized.html](https://docs.aws.amazon.com/config/latest/developerguide/guardduty-enabled-centralized.html)
 
@@ -2359,7 +2302,7 @@ For details on how to enable GuardDuty, including how to use AWS Organizations t
 
 **Severity:** High
 
-**Resource:** IAM policy
+**Resource type:** `AWS::IAM::Policy`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
 
@@ -2399,7 +2342,7 @@ Confirm that the user that you detached the policy from can still access AWS ser
 
 **Severity:** Low
 
-**Resource:** IAM user
+**Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
 
@@ -2408,6 +2351,8 @@ Confirm that the user that you detached the policy from can still access AWS ser
 This control checks that none of your IAM users have policies attached\. Instead, IAM users must inherit permissions from IAM groups or roles\.
 
 By default, IAM users, groups, and roles have no access to AWS resources\. IAM policies grant privileges to users, groups, or roles\. We recommend that you apply IAM policies directly to groups and roles but not to users\. Assigning privileges at the group or role level reduces the complexity of access management as the number of users grows\. Reducing access management complexity might in turn reduce the opportunity for a principal to inadvertently receive or retain excessive privileges\. 
+
+Note that this control also generates failed findings for IAM users that are created by Amazon Simple Email Service \(Amazon SES\)\. Amazon SES generates users that have inline policies attached\. You can suppress these findings\.
 
 ### Remediation<a name="iam-2-remediation"></a>
 
@@ -2459,7 +2404,7 @@ For more information about adding users to groups, see [Adding and removing user
 
 **Severity:** Medium 
 
-**Resource:** IAM user
+**Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html](https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html)
 
@@ -2525,7 +2470,7 @@ To remediate this issue, replace any keys that are older than 90 days\.
 
 **Severity:** Critical 
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
 
@@ -2564,7 +2509,7 @@ To remediate this issue, delete the root user access key\.
 
 **Severity:** Medium
 
-**Resource:** IAM user
+**Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html](https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html)
 
@@ -2602,7 +2547,7 @@ To learn how to delegate MFA setup to users, see the blog post [How to delegate 
 
 **Severity:** Critical
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
@@ -2645,7 +2590,7 @@ To remediate this issue, add hardware\-based MFA to the root account\.
 
 **Severity:** Medium
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
@@ -2697,7 +2642,7 @@ To remediate this issue, update your password policy to use the recommended conf
 
 **Severity:** Medium 
 
-**Resource:** IAM User
+**Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
 
@@ -2736,7 +2681,7 @@ After you identify the inactive accounts or unused credentials, use the followin
 
 **Severity:** Low
 
-**Resource:** IAM Policy
+**Resource type:** `AWS::IAM::Policy`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html)
 
@@ -2796,7 +2741,7 @@ For details on how to edit an IAM policy, see [Editing IAM policies](https://doc
 
 **Severity:** Medium
 
-**Resource:** IAM policy
+**Resource type:** `AWS::IAM::Policy`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-customer-policy-blocked-kms-actions.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-customer-policy-blocked-kms-actions.html)
 
@@ -2807,7 +2752,7 @@ Checks whether the default version of IAM customer managed policies allow princi
 
 This control fails if the `kms:Decrypt` or `kms:ReEncryptFrom` actions are allowed on all KMS keys\. The control evaluates both attached and unattached customer managed policies\. It does not check inline policies or AWS managed policies\.
 
-With AWS KMS, you control who can use your customer master keys \(CMKs\) and gain access to your encrypted data\. IAM policies define which actions an identity \(user, group, or role\) can perform on which resources\. Following security best practices, AWS recommends that you allow least privilege\. In other words, you should grant to identities only the `kms:Decrypt` or `kms:ReEncryptFrom` permissions and only for the keys that are required to perform a task\. Otherwise, the user might use keys that are not appropriate for your data\.
+With AWS KMS, you control who can use your KMS keys and gain access to your encrypted data\. IAM policies define which actions an identity \(user, group, or role\) can perform on which resources\. Following security best practices, AWS recommends that you allow least privilege\. In other words, you should grant to identities only the `kms:Decrypt` or `kms:ReEncryptFrom` permissions and only for the keys that are required to perform a task\. Otherwise, the user might use keys that are not appropriate for your data\.
 
 Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data\. Then design policies that allow users to use only those keys\. For example, do not allow `kms:Decrypt` permission on all KMS keys\. Instead, allow `kms:Decrypt` only on keys in a particular Region for your account\. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data\.
 
@@ -2841,10 +2786,10 @@ For more information, see [Using IAM policies with AWS KMS](https://docs.aws.ama
 
 **Severity:** Medium
 
-**Resource:**
-+ IAM role
-+ IAM user
-+ IAM group
+**Resource type:**
++ `AWS::IAM::Role`
++ `AWS::IAM::User`
++ `AWS::IAM::Group`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-inline-policy-blocked-kms-actions.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-inline-policy-blocked-kms-actions.html) 
 
@@ -2855,7 +2800,7 @@ Checks whether the inline policies that are embedded in your IAM identities \(ro
 
 This control fails if `kms:Decrypt` or `kms:ReEncryptFrom` actions are allowed on all KMS keys in an inline policy\. 
 
-With AWS KMS, you control who can use your customer master keys \(CMKs\) and gain access to your encrypted data\. IAM policies define which actions an identity \(user, group, or role\) can perform on which resources\. Following security best practices, AWS recommends that you allow least privilege\. In other words, you should grant to identities only the permissions they need and only for keys that are required to perform a task\. Otherwise, the user might use keys that are not appropriate for your data\.
+With AWS KMS, you control who can use your KMS keys and gain access to your encrypted data\. IAM policies define which actions an identity \(user, group, or role\) can perform on which resources\. Following security best practices, AWS recommends that you allow least privilege\. In other words, you should grant to identities only the permissions they need and only for keys that are required to perform a task\. Otherwise, the user might use keys that are not appropriate for your data\.
 
 Instead of granting permission for all keys, determine the minimum set of keys that users need to access encrypted data\. Then design policies that allow the users to use only those keys\. For example, do not allow `kms:Decrypt` permission on all KMS keys\. Instead, allow them only on keys in a particular Region for your account\. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data\.
 
@@ -2891,26 +2836,26 @@ For more information, see [Using IAM policies with AWS KMS](https://docs.aws.ama
 
 **Severity:** Critical
 
-**Resource type:** KMS key
+**Resource type:** `AWS::KMS::Key`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/kms-cmk-not-scheduled-for-deletion.html](https://docs.aws.amazon.com/config/latest/developerguide/kms-cmk-not-scheduled-for-deletion.html)
 
 **Parameters:** None
 
-This control checks whether AWS KMS customer managed keys \(CMK\) are scheduled for deletion\. The control fails if a CMK is scheduled for deletion\.
+This control checks whether KMS keys are scheduled for deletion\. The control fails if a KMS key is scheduled for deletion\.
 
-CMKs cannot be recovered once deleted\. Data encrypted under a KMS CMK is also permanently unrecoverable if the CMK is deleted\. If meaningful data has been encrypted under a CMK scheduled for deletion, consider decrypting the data or re\-encrypting the data under a new CMK unless you are intentionally performing a *cryptographic erasure*\.
+KMS keys cannot be recovered once deleted\. Data encrypted under a KMS key is also permanently unrecoverable if the KMS key is deleted\. If meaningful data has been encrypted under a KMS key scheduled for deletion, consider decrypting the data or re\-encrypting the data under a new KMS key unless you are intentionally performing a *cryptographic erasure*\.
 
-When a CMK is scheduled for deletion, a mandatory waiting period is enforced to allow time to reverse the deletion, if it was scheduled in error\. The default waiting period is 30 days, but it can be reduced to as short as 7 days when the KMS CMK is scheduled for deletion\. During the waiting period, the scheduled deletion can be canceled and the KMS CMK will not be deleted\.
+When a KMS key is scheduled for deletion, a mandatory waiting period is enforced to allow time to reverse the deletion, if it was scheduled in error\. The default waiting period is 30 days, but it can be reduced to as short as 7 days when the KMS key is scheduled for deletion\. During the waiting period, the scheduled deletion can be canceled and the KMS key will not be deleted\.
 
-For additional information regarding deleting CMKs, see [Deleting customer master keys](https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html) in the *AWS Key Management Service Developer Guide*\.
+For additional information regarding deleting KMS keys, see [Deleting KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html) in the *AWS Key Management Service Developer Guide*\.
 
 **Note**  
-This control is not supported in the Europe \(Milan\) Region\.
+This control is not supported in the Asia Pacific \(Osaka\) and Europe \(Milan\) Regions\.
 
 ### Remediation<a name="kms-3-remediation"></a>
 
-For detailed remediation instructions to cancel a scheduled KMS CMK deletion, see **To cancel key deletion** under [Scheduling and canceling key deletion \(console\)](https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion) in the AWS Key Management Service Developer Guide\. 
+For detailed remediation instructions to cancel a scheduled KMS key deletion, see **To cancel key deletion** under [Scheduling and canceling key deletion \(console\)](https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion) in the AWS Key Management Service Developer Guide\. 
 
 ## \[Lambda\.1\] Lambda function policies should prohibit public access<a name="fsbp-lambda-1"></a>
 
@@ -2918,7 +2863,7 @@ For detailed remediation instructions to cancel a scheduled KMS CMK deletion, se
 
 **Severity:** Critical
 
-**Resource:** Lambda function
+**Resource type:** `AWS::Lambda::Function`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html)
 
@@ -2985,7 +2930,7 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 
 **Severity:** Medium
 
-**Resource:** Lambda function
+**Resource type:** `AWS::Lambda::Function`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html)
 
@@ -3005,7 +2950,10 @@ This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regi
 
 For more information on supported runtimes and deprecation schedules, see the [Runtime support policy](https://docs.aws.amazon.com/lambda/latest/dg/runtime-support-policy.html) section of the *AWS Lambda Developer Guide*\. When you migrate your runtimes to the latest version, follow the syntax and guidance from the publishers of the language\.
 
-## \[Lambda\.4\] Lambda functions should have a dead\-letter queue configured<a name="fsbp-lambda-4"></a>
+## \[Lambda\.4\] Lambda functions should have a dead\-letter queue configured \(Retiring\)<a name="fsbp-lambda-4"></a>
+
+**Note**  
+Security Hub is retiring this control\. When the control is retired, it no longer displays on the console\. Security Hub no longer generates findings for that control\. Existing findings are archived automatically after three days\.
 
 **Category:** Identify > Logging
 
@@ -3057,7 +3005,7 @@ You can configure a dead\-letter queue from the AWS Lambda console\.
 
 **Severity:** Critical
 
-**Resource:** RDS DB snapshot
+**Resource type:** Amazon RDS DB snapshot
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html)
 
@@ -3102,7 +3050,7 @@ To remediate this issue, update your RDS snapshots to remove public access\.
 
 **Severity:** Critical
 
-**Resource:** RDS DB instance
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html)
 
@@ -3146,7 +3094,7 @@ For more information, see [Working with a DB instance in a VPC](https://docs.aws
 
 **Severity:** Medium
 
-**Resource:** RDS DB instance
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-storage-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-storage-encrypted.html)
 
@@ -3172,7 +3120,7 @@ For information about encrypting DB instances in Amazon RDS, see [Encrypting Ama
 
 **Severity:** Medium
 
-**Resource type:** DBClusterSnapshot, DBSnapshot
+**Resource type:** Amazon RDS DB cluster snapshot, Amazon RDS DB snapshot
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshot-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshot-encrypted.html)
 
@@ -3218,7 +3166,7 @@ You can use the Amazon RDS console to remediate this issue\.
 
 **Severity:** Medium
 
-**Resource type:** DBInstance
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-multi-az-support.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-multi-az-support.html)
 
@@ -3254,7 +3202,7 @@ To remediate this issue, update your DB instances to enable multiple Availabilit
 
 **Severity:** Low
 
-**Resource type:** DBInstance
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-enhanced-monitoring-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-enhanced-monitoring-enabled.html)
 
@@ -3276,7 +3224,7 @@ For detailed instructions on how to enable Enhanced Monitoring for your DB insta
 
 **Severity:** Low
 
-**Resource type:** DBCluster
+**Resource type:** `AWS::RDS::DBCluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html)
 
@@ -3323,7 +3271,7 @@ To remediate this issue, update your RDS DB cluster to enable delete protection\
 
 **Severity:** Low
 
-**Resource type:** DBInstance
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-deletion-protection-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-deletion-protection-enabled.html)
 
@@ -3362,7 +3310,7 @@ To remediate this issue, update your RDS DB instance to enable deletion protecti
 
 **Severity:** Medium
 
-**Resource:** DBInstance
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-logging-enabled.html)
 
@@ -3488,7 +3436,7 @@ To enable and publish MariaDB, MySQL, or PostgreSQL logs to CloudWatch Logs from
 
 **Severity:** Medium
 
-**Resource:** DBInstance
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-iam-authentication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-iam-authentication-enabled.html)
 
@@ -3534,7 +3482,7 @@ To remediate this issue, update your DB instance to enable IAM authentication\.
 
 **Severity:** Medium
 
-**Resource type:** `DBCluster`, `DBInstance`
+**Resource type:** `AWS::RDS::DBCluster`, `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-iam-authentication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-iam-authentication-enabled.html)
 
@@ -3582,7 +3530,7 @@ You can enable IAM authentication for a DB cluster from the Amazon RDS console\.
 
 **Severity:** High
 
-**Resource type:** `DBInstance`
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-automatic-minor-version-upgrade-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-automatic-minor-version-upgrade-enabled.html)
 
@@ -3628,7 +3576,7 @@ You can enable minor version upgrades for a DB instance from the Amazon RDS cons
 
 **Severity:** Medium
 
-**Resource type:** `DBCluster`
+**Resource type:** `AWS::RDS::DBCluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/aurora-mysql-backtracking-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/aurora-mysql-backtracking-enabled.html)
 
@@ -3668,7 +3616,7 @@ For information about pricing for backtracking, see the [Aurora pricing page](ht
 
 **Severity:** Medium
 
-**Resource type:** `DBCluster`
+**Resource type:** `AWS::RDS::DBCluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-multi-az-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-multi-az-enabled.html)
 
@@ -3714,7 +3662,7 @@ To remediate this control, configure your DB cluster for multiple Availability Z
 
 **Severity:** Low
 
-**Resource:** DBCluster
+**Resource type:** `AWS::RDS::DBCluster`
 
 **AWS Config rule:** `rds-cluster-copy-tags-to-snapshots-enabled` \(Custom rule developed by Security Hub\)
 
@@ -3726,12 +3674,9 @@ Identification and inventory of your IT assets is a crucial aspect of governance
 
 **Note**  
 This control is not supported in the following Regions:  
-Asia Pacific \(Osaka\)
 China \(Beijing\)
-China \(Ningxia\)
 Middle East \(Bahrain\)
 South America \(São Paulo\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-16-remediation"></a>
 
@@ -3757,7 +3702,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Low
 
-**Resource:** `DBInstance`
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** `rds-instance-copy-tags-to-snapshots-enabled` \(Custom rule developed by Security Hub\)
 
@@ -3766,9 +3711,6 @@ This control is still in the release process\. It might not yet be available in 
 This control checks whether RDS DB instances are configured to copy all tags to snapshots when the snapshots are created\.
 
 Identification and inventory of your IT assets is a crucial aspect of governance and security\. You need to have visibility of all your RDS DB instances so that you can assess their security posture and take action on potential areas of weakness\. Snapshots should be tagged in the same way as their parent RDS database instances\. Enabling this setting ensures that snapshots inherit the tags of their parent database instances\.
-
-**Note**  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-17-remediation"></a>
 
@@ -3794,7 +3736,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** High
 
-**Resource:** `DBInstance`
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** `rds-deployed-in-vpc` \(Custom rule developed by Security Hub\)
 
@@ -3803,9 +3745,6 @@ This control is still in the release process\. It might not yet be available in 
 This control checks whether an RDS instance is deployed in a VPC \(EC2\-VPC\)\.
 
 VPCs provide a number of network controls to secure access to RDS resources\. These controls include VPC Endpoints, network ACLs, and security groups\. To take advantage of these controls, we recommend that you move EC2\-Classic RDS instances to EC2\-VPC\.
-
-**Note**  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-18-remediation"></a>
 
@@ -3817,7 +3756,7 @@ For detailed instructions on how to move RDS instances to VPC, see [Updating the
 
 **Severity:** Low
 
-**Resource:** `AWS::RDS::EventSubscription`
+**Resource type:** `AWS::RDS::EventSubscription`
 
 **AWS Config rule:** `rds-cluster-event-notifications-configured` \(Custom rule developed by Security Hub\)
 
@@ -3830,15 +3769,6 @@ DBCluster: ["maintenance","failure"]
 ```
 
 RDS event notifications uses Amazon SNS to make you aware of changes in the availability or configuration of your RDS resources\. These notifications allow for rapid response\. For additional information about RDS event notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide*\.
-
-**Note**  
-This control is not supported in the following Regions:  
-Asia Pacific \(Osaka\)
-China \(Beijing\)
-China \(Ningxia\)
-Middle East \(Bahrain\)
-South America \(São Paulo\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-19-remediation"></a>
 
@@ -3872,7 +3802,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Low
 
-**Resource:** `AWS::RDS::EventSubscription`
+**Resource type:** `AWS::RDS::EventSubscription`
 
 **AWS Config rule:** `rds-instance-event-notifications-configured` \(Custom rule developed by Security Hub\)
 
@@ -3885,10 +3815,6 @@ DBInstance: ["maintenance","configuration change","failure"]
 ```
 
 RDS event notifications use Amazon SNS to make you aware of changes in the availability or configuration of your RDS resources\. These notifications allow for rapid response\. For additional information about RDS event notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide*\.
-
-**Note**  
-This control is not supported in the Asia Pacific \(Osaka\) Region\.  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-20-remediation"></a>
 
@@ -3922,7 +3848,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Low
 
-**Resource:** `AWS::RDS::EventSubscription`
+**Resource type:** `AWS::RDS::EventSubscription`
 
 **AWS Config rule:** `rds-pg-event-notifications-configured` \(Custom rule developed by Security Hub\)
 
@@ -3935,10 +3861,6 @@ DBParameterGroup: ["configuration change"]
 ```
 
 RDS event notifications use Amazon SNS to make you aware of changes in the availability or configuration of your RDS resources\. These notifications allow for rapid response\. For additional information about RDS event notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide*\.
-
-**Note**  
-This control is not supported in the Asia Pacific \(Osaka\) Region\.  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-21-remediation"></a>
 
@@ -3972,7 +3894,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Low
 
-**Resource:** `AWS::RDS::EventSubscription`
+**Resource type:** `AWS::RDS::EventSubscription`
 
 **AWS Config rule:** `rds-sg-event-notifications-configured` \(Custom rule developed by Security Hub\)
 
@@ -3985,10 +3907,6 @@ DBSecurityGroup: ["configuration change","failure"]
 ```
 
 RDS event notifications use Amazon SNS to make you aware of changes in the availability or configuration of your RDS resources\. These notifications allow for a rapid response\. For additional information about RDS event notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the *Amazon RDS User Guide*\.
-
-**Note**  
-This control is not supported in the Asia Pacific \(Osaka\) Region\.  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-22-remediation"></a>
 
@@ -4022,7 +3940,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Low
 
-**Resource:** `DBInstance`
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** `rds-no-default-ports` \(Custom rule developed by Security Hub\)
 
@@ -4033,10 +3951,6 @@ This control checks whether the RDS cluster or instance uses a port other than t
 If you use a known port to deploy an RDS cluster or instance, an attacker can guess information about the cluster or instance\. The attacker can use this information in conjunction with other information to connect to an RDS cluster or instance or gain additional information about your application\.
 
 When you change the port, you must also update the existing connection strings that were used to connect to the old port\. You should also check the security group of the DB instance to ensure that it includes an ingress rule that allows connectivity on the new port\.
-
-**Note**  
-This control is not supported in the Asia Pacific \(Osaka\) Region\.  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="rds-23-remediation"></a>
 
@@ -4064,7 +3978,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Critical
 
-**Resource:** Cluster
+**Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html)
 
@@ -4098,7 +4012,7 @@ To remediate this issue, update your Amazon Redshift cluster to disable public a
 
 **Severity:** Medium
 
-**Resource:** Cluster
+**Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-require-tls-ssl.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-require-tls-ssl.html)
 
@@ -4135,7 +4049,7 @@ To remediate this issue, update the parameter group to require encryption\.
 
 **Severity:** Medium
 
-**Resource:** Cluster
+**Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-backup-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-backup-enabled.html)
 
@@ -4176,7 +4090,7 @@ To remediate this issue, update the snapshot retention period to at least 7\.
 
 **Severity:** Medium
 
-**Resource:** Cluster
+**Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** `redshift-cluster-audit-logging-enabled` \(Custom rule developed by Security Hub\)
 
@@ -4186,9 +4100,6 @@ To remediate this issue, update the snapshot retention period to at least 7\.
 This control checks whether an Amazon Redshift cluster has audit logging enabled\.
 
 Amazon Redshift audit logging provides additional information about connections and user activities in your cluster\. This data can be stored and secured in Amazon S3 and can be helpful in security audits and investigations\. For more information, see [Database audit logging](https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html) in the *Amazon Redshift Cluster Management Guide*\.
-
-**Note**  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="redshift-4-remediation"></a>
 
@@ -4212,7 +4123,7 @@ This control is still in the release process\. It might not yet be available in 
 
 **Severity:** Medium
 
-**Resource:** Cluster
+**Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-maintenancesettings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-maintenancesettings-check.html)
 
@@ -4242,7 +4153,7 @@ Where `clustername` is the name of your Amazon Redshift cluster\.
 
 **Severity:** High
 
-**Resource type:** Cluster
+**Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-enhanced-vpc-routing-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-enhanced-vpc-routing-enabled.html)
 
@@ -4270,7 +4181,7 @@ For detailed remediation instructions, see [Enabling enhanced VPC routing](https
 
 **Severity:** Medium
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks.html) 
 
@@ -4326,7 +4237,7 @@ For more information, see [Using Amazon S3 block public access](https://docs.aws
 
 **Severity:** Critical
 
-**Resource:** S3 bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited)
 
@@ -4362,7 +4273,7 @@ To remediate this issue, update your S3 bucket to remove public access\.
 
 **Severity:** Critical
 
-**Resource:** S3 bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html) 
 
@@ -4398,7 +4309,7 @@ To remediate this issue, update your S3 bucket to remove public access\.
 
 **Severity:** Medium
 
-**Resource:** S3 bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html)
 
@@ -4450,7 +4361,7 @@ For more information about default S3 bucket encryption, see the [https://docs.a
 
 **Severity:** Medium
 
-**Resource:** S3 Bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html)
 
@@ -4508,7 +4419,7 @@ For more information, see the knowledge center article [What S3 bucket policy sh
 
 **Severity:** High
 
-**Resource type:** AWS::S3::Bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config** rule: [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-blacklisted-actions-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-blacklisted-actions-prohibited.html)
 
@@ -4550,7 +4461,7 @@ To remediate this issue, edit the S3 bucket policy to remove the permissions\.
 
 **Severity:** High
 
-**Resource:** AWS::S3::Bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html)
 
@@ -4585,7 +4496,7 @@ For information on how to remove public access at a bucket level, see [Blocking 
 
 **Severity:** High
 
-**Resource:** SageMaker:NotebookInstance
+**Resource type:** `AWS::SageMaker::NotebookInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html](https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html)
 
@@ -4635,7 +4546,7 @@ For more information, see [Connect a notebook instance to resources in a VPC](ht
 
 **Severity:** Medium
 
-**Resource:** Secrets Manager secret 
+**Resource type:** `AWS::SecretsManager::Secret`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-rotation-enabled-check.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-rotation-enabled-check.html)
 
@@ -4677,7 +4588,7 @@ To learn more about Secrets Manager rotation, see [Rotating your AWS Secrets Man
 
 **Severity:** Medium
 
-**Resource:** Secrets Manager secret 
+**Resource type:** `AWS::SecretsManager::Secret`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-scheduled-rotation-success-check.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-scheduled-rotation-success-check.html)
 
@@ -4707,7 +4618,7 @@ For help on how to diagnose and fix common errors related to secrets rotation, s
 
 **Severity:** Medium
 
-**Resource type:** Secrets Manager Secret
+**Resource type:** `AWS::SecretsManager::Secret`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-secret-unused.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-secret-unused.html)
 
@@ -4749,7 +4660,7 @@ You can delete inactive secrets from the Secrets Manager console\.
 
 **Severity:** Medium
 
-**Resource:** Secrets Manager Secret 
+**Resource type:** `AWS::SecretsManager::Secret`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-secret-periodic-rotation.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-secret-periodic-rotation.html)
 
@@ -4804,7 +4715,7 @@ You can enable automatic secret rotation in the Secrets Manager console\.
 
 **Severity:** Medium
 
-**Resource:** Amazon SNS Topic
+**Resource type:** `AWS::SNS::Topic`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sns-encrypted-kms.html](https://docs.aws.amazon.com/config/latest/developerguide/sns-encrypted-kms.html)
 
@@ -4840,7 +4751,7 @@ To remediate this issue, update your SNS topic to enable encryption\.
 
 **Severity:** Medium
 
-**Resource:** `AWS::SQS::Queue`
+**Resource type:** `AWS::SQS::Queue`
 
 **AWS Config rule:** `sqs-queue-encrypted` \(Custom rule developed by Security Hub\)
 
@@ -4855,9 +4766,6 @@ This control checks whether Amazon SQS queues are encrypted at rest\.
 
 Server\-side encryption \(SSE\) allows you to transmit sensitive data in encrypted queues\. To protect the content of messages in queues, SSE uses keys managed in AWS KMS\. For more information, see [Encryption at rest](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html) in the *Amazon Simple Queue Service Developer Guide*\.
 
-**Note**  
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
-
 ### Remediation<a name="sqs-1-remediation"></a>
 
 For information about managing SSE using the AWS Management Console, see[ Configuring server\-side encryption \(SSE\) for a queue \(console\)](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html) in the *Amazon Simple Queue Service Developer Guide*\.
@@ -4868,7 +4776,7 @@ For information about managing SSE using the AWS Management Console, see[ Config
 
 **Severity:** Medium
 
-**Resource:** EC2 instance
+**Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-ssm.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-ssm.html)
 
@@ -4888,11 +4796,23 @@ You can use the Systems Manager console to remediate this issue\.
 
 1. Open the AWS Systems Manager console at [https://console\.aws\.amazon\.com/systems\-manager/](https://console.aws.amazon.com/systems-manager/)\.
 
-1. Choose **Quick setup**\.
+1. In the navigation menu, choose **Quick setup**\.
 
-1. On the configuration screen, keep the default options\.
+1. Choose **Create**\.
 
-1. Choose **Enable**\.
+1. Under **Configuration type**, choose **Host Management**, then choose **Next**\.
+
+1. On the configuration screen, you can keep the default options\.
+
+   You can optionally make the following changes:
+
+   1. If you use CloudWatch to monitor EC2 instances, select **Install and configure the CloudWatch agent** and **Update the CloudWatch agent once every 30 days**\.
+
+   1. Under **Targets**, choose the management scope to determine the accounts and Regions where this configuration is applied\.
+
+   1. Under **Instance profile options**, select **Add required IAM policies to existing instance profiles attached to your instances**\.
+
+1. Choose **Create**\.
 
 To determine whether your instances support Systems Manager associations, see [Systems Manager prerequisites](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-prereqs.html) in the *AWS Systems Manager User Guide*\.
 
@@ -4902,7 +4822,7 @@ To determine whether your instances support Systems Manager associations, see [S
 
 **Severity:** High
 
-**Resource:** SSM patch compliance
+**Resource type:** SSM patch compliance
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html)
 
@@ -4946,7 +4866,7 @@ For more information about using Systems Manager documents to patch a managed in
 
 **Severity:** Low
 
-**Resource:** AwsSSMAssociationCompliance
+**Resource type:** SSM association compliance
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html)
 
@@ -4995,7 +4915,7 @@ For more information on creating and editing State Manager associations, see [Wo
 
 **Severity:** Medium
 
-**Resource:** `AWS::WAF::WebACL`
+**Resource type:** `AWS::WAF::WebACL`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/waf-classic-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/waf-classic-logging-enabled.html)
 

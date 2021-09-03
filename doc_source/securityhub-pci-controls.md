@@ -6,7 +6,7 @@ The PCI DSS security standard in Security Hub supports the following controls\. 
 
 **Severity:** Low
 
-**Resource:** Auto Scaling group
+**Resource type:** `AWS::AutoScaling::AutoScalingGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html)
 
@@ -44,17 +44,17 @@ This is one method used to implement system hardening configurations\.
 
 For more information on using a load balancer with an Auto Scaling group, see the [https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)\.
 
-## \[PCI\.CloudTrail\.1\] CloudTrail logs should be encrypted at rest using AWS KMS CMKs<a name="pcidss-cloudtrail-1"></a>
+## \[PCI\.CloudTrail\.1\] CloudTrail logs should be encrypted at rest using AWS KMS keys<a name="pcidss-cloudtrail-1"></a>
 
 **Severity:** Medium
 
-**Resource:** CloudTrail trail
+**Resource type:** `AWS::CloudTrail::Trail`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
 
 **Parameters:** None
 
-This control checks whether AWS CloudTrail is configured to use the server\-side encryption \(SSE\) AWS KMS customer master key \(CMK\) encryption\.
+This control checks whether AWS CloudTrail is configured to use the server\-side encryption \(SSE\) AWS KMS key encryption\.
 
 If you are only using the default encryption option, you can choose to disable this check\.
 
@@ -65,38 +65,20 @@ This control is related to the following PCI DSS requirements:
 **PCI DSS 3\.4: Render Primary Account Numbers \(PAN\) unreadable anywhere it is stored \(including on portable digital media, backup media, and in logs\)\.**  
 If you are using AWS services to process and store PAN, your CloudTrail logs should be encrypted at rest\. Encrypting logs ensures that if logs capture PAN\(s\), the PAN\(s\) are protected\.  
 By default, the log files delivered by CloudTrail to your S3 bucket are encrypted using Amazon server\-side encryption with Amazon S3\-managed encryption keys \(SSE\-S3\)\. See the [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.  
-You can configure CloudTrail logs to leverage AWS KMS customer\-created master keys \(CMKs\) to further protect CloudTrail logs\.  
+You can configure CloudTrail logs to leverage customer managed keys to further protect CloudTrail logs\.  
 These are methods used to render PAN unreadable\.
 
 ### Remediation<a name="pcidss-cloudtrail-1-remediation"></a>
 
-**To enable encryption for CloudTrail logs**
+To remediate this issue, you enable encryption for your CloudTrail log files\.
 
-1. Open the CloudTrail console at [https://console\.aws\.amazon\.com/cloudtrail/](https://console.aws.amazon.com/cloudtrail/)\.
-
-1. Choose **Trails**\.
-
-1. Choose the trail to update\.
-
-1. Under **General details**, choose **Edit**\.
-
-1. For **Log file SSE\-KMS encryption**, select **Enabled**\.
-
-1. Under **AWS KMS customer managed CMK**, do one of the following: 
-   + To create a key, choose **New**\. Then in **AWS KMS alias**, enter an alias for the key\. The key is created in the same Region as the S3 bucket\.
-   + To use an existing key, choose **Existing** and then from **AWS KMS alias**, select the key\. 
-
-     The AWS KMS key and S3 bucket must be in the same Region\.
-
-1. Choose **Save changes**\.
-
-You might need to modify the policy for CloudTrail to successfully interact with your CMK\. For more information on encrypting CloudTrail log files with AWS KMS managed keys \(SSE\-KMS\), see the [https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html?icmpid=docs_cloudtrail_console)\.
+For details on how to encrypt CloudTrail log files with AWS KMS managed keys \(SSE\-KMS\), see [Encrypting CloudTrail log files with AWS KMS–managed keys \(SSE\-KMS\)](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html) in the *AWS CloudTrail User Guide*\.
 
 ## \[PCI\.CloudTrail\.2\] CloudTrail should be enabled<a name="pcidss-cloudtrail-2"></a>
 
 **Severity:** High
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-enabled.html)
 
@@ -197,7 +179,7 @@ For more details, see the tutorial in the [https://docs.aws.amazon.com/awscloudt
 
 **Severity:** Low
 
-**Resource:** CloudTrail trail
+**Resource type:** `AWS::CloudTrail::Trail`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html)
 
@@ -243,7 +225,7 @@ This is a method that helps to ensure file\-integrity monitoring or change\-dete
 
 **Severity: ** Low
 
-**Resource:** CloudTrail trail
+**Resource type:** `AWS::CloudTrail::Trail`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html)
 
@@ -298,7 +280,7 @@ For more information about configuring CloudWatch Logs monitoring with the conso
 
 **Severity:** Critical
 
-**Resource:** CodeBuild project
+**Resource type:** `AWS::CodeBuild::Project`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html)
 
@@ -348,7 +330,7 @@ To see CodeBuild use case\-based samples, see the [https://docs.aws.amazon.com/c
 
 **Severity:** Critical
 
-**Resource:** CodeBuild project
+**Resource type:** `AWS::CodeBuild::Project`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html)
 
@@ -422,7 +404,7 @@ See the information on environment variables in build environments in the [https
 
 **Severity: ** Medium
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** None\. To run this check, Security Hub runs through audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
 
@@ -488,7 +470,7 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 **Severity:** Critical
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** Security Hub runs through audit steps without creating an AWS Config managed rules in your AWS account for this check\. 
 
@@ -504,6 +486,16 @@ It checks the following:
 + The log group name is configured for use with active multi\-Region CloudTrail\.
 + There is at least one Event Selector for a Trail with `IncludeManagementEvents` set to `true` and `ReadWriteType` set to `All`\.
 + There is at least one active subscriber to an Amazon SNS topic associated with the alarm\.
+
+**Note**  
+When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
+The check results in `FAILED` findings in the following cases:  
+No trail is configured\.
+The available trails that are in the current Region and that are owned by current account do not meet the control requirements\.
+The check results in a control status of `NO_DATA` in the following cases:  
+The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
+The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Related PCI DSS requirements<a name="pcidss-cw-1-requirements"></a>
 
@@ -582,7 +574,7 @@ These are the same steps to remediate findings for [3\.3 – Ensure a log metric
 
 **Severity: **Critical
 
-**Resource:** DMS:ReplicationInstance
+**Resource type:** `AWS::DMS::ReplicationInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html](https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html)
 
@@ -643,7 +635,7 @@ For more information, see the section on [Creating a replication instance](https
 
 **Severity:** Critical
 
-**Resource:** Amazon EC2 volume
+**Resource type:** `AWS::EC2::Volume`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html)
 
@@ -701,7 +693,7 @@ For more information about sharing an Amazon EBS snapshot, see the [https://docs
 
 **Severity:** Medium
 
-**Resource:** Amazon EC2 security group
+**Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
 
@@ -761,11 +753,14 @@ After you assign the new security groups to the resources, remove the inbound an
 
 For more information about working with security groups in Amazon VPC, see the [https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#WorkingWithSecurityGroups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#WorkingWithSecurityGroups)\.
 
-## \[PCI\.EC2\.3\] Unused EC2 security groups should be removed<a name="pcidss-ec2-3"></a>
+## \[PCI\.EC2\.3\] Unused EC2 security groups should be removed \(Retiring\)<a name="pcidss-ec2-3"></a>
+
+**Note**  
+Security Hub is retiring this control\. When the control is retired, it no longer displays on the console\. Security Hub no longer generates findings for that control\. Existing findings are archived automatically after three days\.
 
 **Severity:** Low
 
-**Resource: ** Amazon EC2 security group
+**Resource type: ** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni.html)
 
@@ -807,7 +802,7 @@ You must perform the following steps for each security group not attached to an 
 
 **Severity:** Low
 
-**Resource:** EC2 EIP
+**Resource type:** `AWS::EC2::EIP`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/eip-attached.html](https://docs.aws.amazon.com/config/latest/developerguide/eip-attached.html)
 
@@ -850,7 +845,7 @@ For more information, see the information on releasing Elastic IP addresses in t
 
 **Severity:** High
 
-**Resource:** EC2 security group
+**Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html)
 
@@ -905,7 +900,7 @@ Perform the following steps for each security group associated with a VPC\.
 
 **Severity:** Medium
 
-**Resource:** EC2 VPC
+**Resource type:** `AWS::EC2::VPC`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
 
@@ -964,7 +959,7 @@ To remediate this issue, enable VPC flow logging\.
 
 **Severity:** Medium
 
-**Resource:** AwsElbv2LoadBalancer
+**Resource type:** `AWS::ElasticLoadBalancingV2::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-http-to-https-redirection-check.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-http-to-https-redirection-check.html) 
 
@@ -1014,21 +1009,21 @@ To remediate this issue, you redirect HTTP request to HTTPS\.
 
 1. Choose the check mark in a circle symbol and then choose **Update**\.
 
-## \[PCI\.ES\.1\] Amazon Elasticsearch Service domains should be in a VPC<a name="pcidss-es-1"></a>
+## \[PCI\.ES\.1\] Elasticsearch domains should be in a VPC<a name="pcidss-es-1"></a>
 
 **Severity: ** Critical
 
-**Resource: ** Amazon ES domain 
+**Resource type: ** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html)
 
 **Parameters:** None
 
-This control checks whether Amazon Elasticsearch Service domains are in a VPC\.
+This control checks whether Elasticsearch domains are in a VPC\.
 
 It does not evaluate the VPC subnet routing configuration to determine public reachability\.
 
-This AWS control also does not check whether the Amazon ES resource\-based policy permits public access by other accounts or external entities\. You should ensure that Amazon ES domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-ac-types-resource) in the *Amazon Elasticsearch Service Developer Guide*\.
+This AWS control also does not check whether the Amazon ES resource\-based policy permits public access by other accounts or external entities\. You should ensure that Elasticsearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-ac-types-resource) in the *Amazon Elasticsearch Service Developer Guide*\.
 
 You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
 
@@ -1068,17 +1063,17 @@ The reverse is also true\. If you create a domain within a VPC, it cannot have a
 
 See the information on migrating from public access to VPC access in the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-migrating-public-to-vpc](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-migrating-public-to-vpc)\.
 
-## \[PCI\.ES\.2\] Amazon Elasticsearch Service domains should have encryption at rest enabled<a name="pcidss-es-2"></a>
+## \[PCI\.ES\.2\] Elasticsearch domains should have encryption at rest enabled<a name="pcidss-es-2"></a>
 
 **Severity:** Medium
 
-**Resource:** Amazon ES domain
+**Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html)
 
 **Parameters:** None
 
-This control checks whether Amazon ES domains have encryption at rest configuration enabled\.
+This control checks whether Elasticsearch domains have encryption at rest configuration enabled\.
 
 **Note**  
 This control is not supported in Asia Pacific \(Osaka\)\.
@@ -1104,7 +1099,7 @@ Encryption of data at rest requires Amazon ES 5\.1 or later\. For more informati
 
 **Severity:** High
 
-**Resource:** AwsAccount
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/guardduty-enabled-centralized.html](https://docs.aws.amazon.com/config/latest/developerguide/guardduty-enabled-centralized.html)
 
@@ -1141,7 +1136,7 @@ For details on how to enable GuardDuty, including how to use AWS Organizations t
 
 **Severity: ** Critical
 
-**Resource: ** Account 
+**Resource type: ** AWS account 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
 
@@ -1188,7 +1183,7 @@ No access keys should be created for the root user\. Doing so might violate the 
 
 **Severity:** Low
 
-**Resource:** IAM user
+**Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
 
@@ -1267,7 +1262,7 @@ For more information about adding users to groups, see the [https://docs.aws.ama
 
 **Severity:** High
 
-**Resource:** IAM policy
+**Resource type:** `AWS::IAM::Policy`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
 
@@ -1306,7 +1301,7 @@ Providing full administrative privileges instead of restricting to the minimum r
 
 **Severity:** Critical
 
-**Resource:** Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
@@ -1356,7 +1351,7 @@ Enabling hardware MFA is a method used to incorporate multi\-factor authenticati
 
 **Severity: ** Critical
 
-**Resource: ** Account 
+**Resource type: ** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html)
 
@@ -1406,7 +1401,7 @@ Enabling virtual MFA is a method used to incorporate multi\-factor authenticatio
 
 **Severity:** Medium
 
-**Resource:** IAM user 
+**Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-mfa-enabled.html)
 
@@ -1441,7 +1436,7 @@ To learn how to delegate MFA setup to users, the AWS Security Blog post [How to 
 
 **Severity:** Medium
 
-**Resource:** IAM User
+**Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
 
@@ -1491,7 +1486,7 @@ After you identify the inactive accounts or unused credentials, use the followin
 
 **Severity:** Medium
 
-**Resource:** AWS Account
+**Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
@@ -1549,19 +1544,19 @@ You can use the IAM console to modify the password policy\.
 
 1. Choose **Save changes**\.
 
-## \[PCI\.KMS\.1\] Customer master key \(CMK\) rotation should be enabled<a name="pcidss-kms-1"></a>
+## \[PCI\.KMS\.1\] KMS key rotation should be enabled<a name="pcidss-kms-1"></a>
 
 **Severity:** Medium
 
-**Resource: ** AWS KMS key 
+**Resource type: ** `AWS::KMS::Key`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
 **Parameters:** None
 
-This control checks that key rotation is enabled for each customer master key \(CMK\)\. It does not check CMKs that have imported key material\.
+This control checks that key rotation is enabled for each KMS key\. It does not check KMS keys that have imported key material\.
 
-You should ensure keys that have imported material and those that are not stored in AWS KMS are rotated\. AWS managed customer master keys are rotated once every 3 years\.
+You should ensure keys that have imported material and those that are not stored in AWS KMS are rotated\. AWS managed keys are rotated once every 3 years\.
 
 ### Related PCI DSS requirements<a name="pcidss-kms-1-requirements"></a>
 
@@ -1569,12 +1564,12 @@ This control is related to the following PCI DSS requirements:
 
 **PCI DSS 3\.6\.4: Cryptographic keys should be changed once they have reached the end of their cryptoperiod\.**  
 While PCI DSS does not specify the time frame for cryptoperiods, if key rotation is enabled, rotation occurs annually by default\.  
-If you use customer master key \(CMK\) to encrypt cardholder data, you should enable key rotation\.  
+If you use a KMS key to encrypt cardholder data, you should enable key rotation\.  
 This is a method used to change cryptographic keys once they have reached the end of their cryptoperiod\.
 
 ### Remediation<a name="pcidss-kms-1-remediation"></a>
 
-**To enable CMK rotation**
+**To enable KMS key rotation**
 
 1. Open the AWS KMS console at [https://console\.aws\.amazon\.com/kms](https://console.aws.amazon.com/kms)\.
 
@@ -1586,13 +1581,13 @@ This is a method used to change cryptographic keys once they have reached the en
 
 1. Choose **Key rotation**\.
 
-1. Select **Automatically rotate this CMK every year** and then choose **Save**\.
+1. Select **Automatically rotate this KMS key every year** and then choose **Save**\.
 
 ## \[PCI\.Lambda\.1\] Lambda functions should prohibit public access<a name="pcidss-lambda-1"></a>
 
 **Severity:** Critical
 
-**Resource:** Lambda function
+**Resource type:** `AWS::Lambda::Function`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html)
 
@@ -1682,7 +1677,7 @@ For other Lambda resource\-based policies examples that allow you to grant usage
 
 **Severity: ** Low
 
-**Resource: ** Lambda function
+**Resource type: ** `AWS::Lambda::Function`
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-inside-vpc.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-inside-vpc.html) 
 
@@ -1742,7 +1737,7 @@ For more information see the section on configuring a Lambda function to access 
 
 **Severity:** Critical
 
-**Resource: ** Amazon RDS DB snapshot
+**Resource type: ** Amazon RDS DB snapshot
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html)
 
@@ -1804,7 +1799,7 @@ To remove public access for Amazon RDS Snapshots
 
 **Severity: ** Critical
 
-**Resource:** RDS DB instance
+**Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html)
 
@@ -1864,7 +1859,7 @@ For more information about working with a DB Instance in a VPC, see the [https:/
 
 **Severity: ** Critical
 
-**Resource:** Amazon Redshift cluster
+**Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html)
 
@@ -1914,7 +1909,7 @@ For more information about creating a cluster in a VPC, see the [https://docs.aw
 
 **Severity:** Critical
 
-**Resource:** S3 bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
 
@@ -1965,7 +1960,7 @@ If you use an S3 bucket to store cardholder data, the bucket should prohibit pub
 
 **Severity:** Critical
 
-**Resource:** S3 bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html)
 
@@ -2014,7 +2009,7 @@ If you use an S3 bucket to store cardholder data, the bucket should prohibit pub
 
 **Severity: ** Low
 
-**Resource:** S3 bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-replication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-replication-enabled.html)
 
@@ -2062,7 +2057,7 @@ For more information about replication, see the [https://docs.aws.amazon.com/Ama
 
 **Severity:** Medium
 
-**Resource:** S3 bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html)
 
@@ -2115,7 +2110,7 @@ For more information about default S3 bucket encryption, see the [https://docs.a
 
 **Severity:** Medium
 
-**Resource:** S3 Bucket
+**Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html)
 
@@ -2180,7 +2175,7 @@ For more information, see the knowledge center article [What S3 bucket policy sh
 
 **Severity:** Medium
 
-**Resource:** S3 AWS account
+**Resource type:** S3 AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks.html)
 
@@ -2245,7 +2240,7 @@ For more information, see [Using Amazon S3 block public access](https://docs.aws
 
 **Severity:** High
 
-**Resource:** SageMaker:NotebookInstance
+**Resource type:** `AWS::SageMaker::NotebookInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html](https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html)
 
@@ -2313,7 +2308,7 @@ For more information, see [Connect a notebook instance to resources in a VPC](ht
 
 **Severity:** Medium
 
-**Resource:** SSM patch compliance and Amazon EC2 instance
+**Resource type:** SSM patch compliance and `AWS::EC2::Instance`
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html)
 
@@ -2372,7 +2367,7 @@ See the *AWS Systems Manager User Guide* for more information about the followin
 
 **Severity:** Low
 
-**Resource:** AwsSSMAssociationCompliance
+**Resource type:** SSM association compliance
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html) 
 
@@ -2429,9 +2424,9 @@ For more information on creating and editing State Manager associations, see [Wo
 
 **Severity:** Medium 
 
-**Resource:** AwsEc2Instance
+**Resource type:** `AWS::EC2::Instance`
 
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html) 
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html)
 
 **Parameters:** None
 

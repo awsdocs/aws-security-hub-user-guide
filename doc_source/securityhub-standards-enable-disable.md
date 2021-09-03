@@ -7,6 +7,7 @@ Remember that Security Hub is Regional\. When you enable or disable a security s
 When you disable a security standard, the following occurs:
 + The checks for its controls are no longer performed\.
 + No additional findings are generated for its controls\.
++ Existing findings are archived automatically after three days\.
 + The related AWS Config rules that Security Hub created are removed\.
 
   This normally occurs within a few minutes after you disable the standard, but might take longer\.

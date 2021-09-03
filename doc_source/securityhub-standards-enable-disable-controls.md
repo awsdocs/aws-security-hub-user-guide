@@ -5,6 +5,7 @@ When you enable a standard, all of the controls for that standard are enabled by
 When you disable a control, the following occurs:
 + The check for the control is no longer performed\.
 + No additional findings are generated for that control\.
++ Existing findings are archived automatically after three days\.
 + The related AWS Config rules that Security Hub created are removed\.
 
 It can be useful to turn off security checks for controls that are not relevant to your environment\. For example, you might use a single Amazon S3 bucket to log your CloudTrail logs\. If so, you can turn off controls related to CloudTrail logging in all accounts and Regions except for the account and Region where the centralized S3 bucket is located\. Disabling irrelevant controls reduces the number of irrelevant findings\. It also removes the failed check from the readiness score for the associated standard\.

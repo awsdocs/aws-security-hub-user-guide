@@ -36,7 +36,7 @@ For information about how to configure EventBridge rules that are triggered by t
 
 ## Security Hub Findings \- Custom Action<a name="securityhub-cwe-event-formats-findings-custom-action"></a>
 
-**Security Hub Findings \- Custom Action** events that are sent from Security Hub to EventBridge use the following format\.
+**Security Hub Findings \- Custom Action** events that are sent from Security Hub to EventBridge use the following format\. Each finding is sent in a separate event\.
 
 ```
 {
@@ -62,7 +62,7 @@ For information about how to configure EventBridge rules that are triggered by t
 }
 ```
 
-`<finding content>` is the content, in JSON format, of a finding that is sent by the event\.
+`<finding content>` is the content, in JSON format, of the finding that is sent by the event\.
 
 For a complete list of finding attributes, see [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\.
 
