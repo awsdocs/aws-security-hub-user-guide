@@ -1597,8 +1597,8 @@ Security groups provide stateful filtering of ingress and egress network traffic
 + 3306 \(mySQL\)
 + 8080 \(proxy\)
 + 1433, 1434 \(MSSQL\)
-+ 9200 or 9300 \(Elasticsearch\)
-+ 5601 \(Kibana\)
++ 9200 or 9300 \(OpenSearch\)
++ 5601 \(OpenSearch Dashboards\)
 + 25 \(SMTP\)
 + 445 \(CIFS\)
 + 135 \(RPC\)
@@ -1620,9 +1620,10 @@ For information on how to delete rules from a security group, see [Delete rules 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-user-for-host-mode-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-user-for-host-mode-check.html)
 
-**Parameters:** None
+**Parameters:**
++ `SkipInactiveTaskDefinitions`: `true`
 
-This control checks whether an Amazon ECS task definition that has host networking mode also has `privileged` or `user` container definitions\. The control fails for task definitions that have host network mode and container definitions where `privileged=false` or is empty and `user=root` or is empty\.
+This control checks whether an active Amazon ECS task definition that has host networking mode also has `privileged` or `user` container definitions\. The control fails for task definitions that have host network mode and container definitions where `privileged=false` or is empty and `user=root` or is empty\.
 
 If a task definition has elevated privileges, it is because the customer has specifically opted in to that configuration\. This control checks for unexpected privilege escalation when a task definition has host networking enabled but the customer has not opted in to elevated privileges\.
 
@@ -2064,20 +2065,20 @@ To remediate this finding, you need to create a new cluster in VPC private subne
 
 This control checks whether Elasticsearch domains have encryption at rest configuration enabled\. The check fails if encryption at rest is not enabled\.
 
-For an added layer of security for your sensitive data in Elasticsearch, you should configure your Elasticsearch to be encrypted at rest\. Elasticsearch domains offer encryption of data at rest\. The feature uses AWS KMS to store and manage your encryption keys\. To perform the encryption, it uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
+For an added layer of security for your sensitive data in OpenSearch, you should configure your OpenSearch to be encrypted at rest\. Elasticsearch domains offer encryption of data at rest\. The feature uses AWS KMS to store and manage your encryption keys\. To perform the encryption, it uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
 
-To learn more about Elasticsearch encryption at rest, see [Encryption of data at rest for Amazon Elasticsearch Service](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html) in the *Amazon Elasticsearch Service Developer Guide*\.
+To learn more about OpenSearch encryption at rest, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 **Note**  
-Certain instance types, such as `t.small` and `t.medium`, do not support encryption of data at rest\. For details, see [Supported instance types](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-supported-instance-types.html) in the *Amazon Elasticsearch Service Developer Guide*\.
+Certain instance types, such as `t.small` and `t.medium`, do not support encryption of data at rest\. For details, see [Supported instance types](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ### Remediation<a name="es-1-remediation"></a>
 
 By default, domains do not encrypt data at rest, and you cannot configure existing domains to use the feature\.
 
-To enable the feature, you must create another domain and migrate your data\. For information about creating domains, see the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)\.
+To enable the feature, you must create another domain and migrate your data\. For information about creating domains, see the [https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html)\.
 
-Encryption of data at rest requires Amazon ES 5\.1 or later\. For more information about encrypting data at rest for Amazon ES, see the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html)\.
+Encryption of data at rest requires OpenSearch Service 5\.1 or later\. For more information about encrypting data at rest for OpenSearch Service, see the [https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html)\.
 
 ## \[ES\.2\] Elasticsearch domains should be in a VPC<a name="fsbp-es-2"></a>
 
@@ -2091,15 +2092,15 @@ Encryption of data at rest requires Amazon ES 5\.1 or later\. For more informati
 
 **Parameters:** None
 
-This control checks whether Elasticsearch domains are in a VPC\. It does not evaluate the VPC subnet routing configuration to determine public access\. You should ensure that Elasticsearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-ac-types-resource) in the *Amazon Elasticsearch Service Developer Guide*\. You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
+This control checks whether Elasticsearch domains are in a VPC\. It does not evaluate the VPC subnet routing configuration to determine public access\. You should ensure that Elasticsearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html#ac-types-resource) in the *Amazon OpenSearch Service Developer Guide*\. You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
 
 Elasticsearch domains deployed within a VPC can communicate with VPC resources over the private AWS network, without the need to traverse the public internet\. This configuration increases the security posture by limiting access to the data in transit\. VPCs provide a number of network controls to secure access to Elasticsearch domains, including network ACL and security groups\. Security Hub recommends that you migrate public Elasticsearch domains to VPCs to take advantage of these controls\.
 
 ### Remediation<a name="es-2-remediation"></a>
 
-If you create a domain with a public endpoint, you cannot later place it within a VPC\. Instead, you must create a new domain and migrate your data\. The reverse is also true\. If you create a domain within a VPC, it cannot have a public endpoint\. Instead, you must either[ create another domain](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains) or disable this control\.
+If you create a domain with a public endpoint, you cannot later place it within a VPC\. Instead, you must create a new domain and migrate your data\. The reverse is also true\. If you create a domain within a VPC, it cannot have a public endpoint\. Instead, you must either [create another domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html) or disable this control\.
 
-See [Migrating from public access to VPC access](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-migrating-public-to-vpc) in the *Amazon Elasticsearch Service Developer Guide*\.
+See [Migrating from public access to VPC access](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[ES\.3\] Elasticsearch domains should encrypt data sent between nodes<a name="fsbp-es-3"></a>
 
@@ -2128,7 +2129,7 @@ Europe \(Milan\)
 
 ### Remediation<a name="es-3-remediation"></a>
 
-Node\-to\-node encryption can only be enabled on a new domain\. To remediate this finding, first [create a new domain](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains) with the **Node\-to\-node encryption** check box selected\. Then follow [Using a snapshot to migrate data](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-version-migration.html#snapshot-based-migration) to migrate your data to the new domain\.
+Node\-to\-node encryption can only be enabled on a new domain\. To remediate this finding, first [create a new domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html) with the **Node\-to\-node encryption** check box selected\. Then follow "Migrating data to a different domain" under [Registering a manual snapshot repository](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshots.html) to migrate your data to the new domain\.
 
 ## \[ES\.4\] Elasticsearch domain error logging to CloudWatch Logs should be enabled<a name="fsbp-es-4"></a>
 
@@ -2156,7 +2157,7 @@ AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="es-4-remediation"></a>
 
-For information on how to enable log publishing, see [Enabling log publishing \(console\)](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createdomain-configure-slow-logs.html#es-createdomain-configure-slow-logs-console) in the *Amazon Elasticsearch Service Developer Guide*\.
+For information on how to enable log publishing, see [Enabling log publishing \(console\)](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html#createdomain-configure-slow-logs-console) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[ES\.5\] Elasticsearch domains should have audit logging enabled<a name="fsbp-es-5"></a>
 
@@ -2175,11 +2176,11 @@ For information on how to enable log publishing, see [Enabling log publishing \(
 
 This control checks whether Elasticsearch domains have audit logging enabled\. This control fails if an Elasticsearch domain does not have audit logging enabled\. 
 
-Audit logs are highly customizable\. They allow you to track user activity on your Elasticsearch clusters, including authentication successes and failures, requests to Elasticsearch, index changes, and incoming search queries\.
+Audit logs are highly customizable\. They allow you to track user activity on your Elasticsearch clusters, including authentication successes and failures, requests to OpenSearch, index changes, and incoming search queries\.
 
 ### Remediation<a name="es-5-remediation"></a>
 
-For detailed instructions on enabling audit logs, see [Enabling audit logs](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/audit-logs.html#audit-log-enabling) in the *Amazon Elasticsearch Service Developer Guide*\.
+For detailed instructions on enabling audit logs, see [Enabling audit logs](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/audit-logs.html#audit-log-enabling) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[ES\.6\] Elasticsearch domains should have at least three data nodes<a name="fsbp-es-6"></a>
 
@@ -2201,7 +2202,7 @@ An Elasticsearch domain requires at least three data nodes for high availability
 
 **To modify the number of data nodes in an Elasticsearch domain**
 
-1. Open the Amazon Elasticsearch Service console at [https://console\.aws\.amazon\.com/es/](https://console.aws.amazon.com/es/)\.
+1. Open the Amazon OpenSearch Service console at [https://console\.aws\.amazon\.com/es/](https://console.aws.amazon.com/es/)\.
 
 1. Under **My domains**, choose the name of the domain to edit\.
 
@@ -2231,9 +2232,9 @@ An Elasticsearch domain requires at least three dedicated master nodes for high 
 
 ### Remediation<a name="es-7-remediation"></a>
 
-**To modify the number of dedicated master nodes in an Elasticsearch domain**
+**To modify the number of dedicated master nodes in an OpenSearch domain**
 
-1. Open the Amazon Elasticsearch Service console at [https://console\.aws\.amazon\.com/es/](https://console.aws.amazon.com/es/)\.
+1. Open the Amazon OpenSearch Service console at [https://console\.aws\.amazon\.com/es/](https://console.aws.amazon.com/es/)\.
 
 1. Under **My domains**, choose the name of the domain to edit\.
 
@@ -2263,7 +2264,7 @@ HTTPS \(TLS\) can be used to help prevent potential attackers from using person\
 
 ### Remediation<a name="es-8-remediation"></a>
 
-To enable TLS encryption, use the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-actions-updateelasticsearchdomainconfig](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-actions-updateelasticsearchdomainconfig) API operation to configure the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-datatypes-domainendpointoptions](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-datatypes-domainendpointoptions) in order to set the `TLSSecurityPolicy`\. For more information, see the *Amazon Elasticsearch Service Developer Guide*\.
+To enable TLS encryption, use the [https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-actions-updatedomainconfig](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-actions-updatedomainconfig) API operation to configure the [https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-datatypes-domainendpointoptions](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-datatypes-domainendpointoptions) in order to set the `TLSSecurityPolicy`\. For more information, see the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[GuardDuty\.1\] GuardDuty should be enabled<a name="fsbp-guardduty-1"></a>
 
@@ -2687,7 +2688,7 @@ After you identify the inactive accounts or unused credentials, use the followin
 
 **Parameters:** None
 
-This control checks whether the IAM identity\-based policies that you create have Allow statements that use the \* wildcard to grant permissions for all actions on any service\. The control fails if any policy statement includes `"Effect": "Allow"` with `"Action": "Service:*"`\.
+This control checks whether the IAM identity\-based policies that you create have Allow statements that use the \* wildcard to grant permissions for all actions on any service\. The control fails if any policy statement includes `"Effect": "Allow"` with `"Action": "Service:*"`\. 
 
 For example, the following statement in a policy results in a failed finding\.
 
@@ -2700,6 +2701,8 @@ For example, the following statement in a policy results in a failed finding\.
   "Resource": "*"
 }
 ```
+
+The control also fails if you use `"Effect": "Allow"` with `"NotAction": "service:*"`\. In that case, the `NotAction` element provides access to all of the actions in an AWS service, except for the actions specified in `NotAction`\.
 
 This control only applies to customer managed IAM policies\. It does not apply to IAM policies that are managed by AWS\.
 
@@ -2935,9 +2938,9 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html)
 
 **Parameters:** 
-+ `runtime`: `nodejs14.x, nodejs12.x, nodejs10.x, python3.8, python3.7, python3.6, ruby2.7, ruby2.5, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnetcore2.1`
++ `runtime`: `nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, python3.6, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnetcore2.1`
 
-This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks for the following runtimes: `nodejs14.x`, `nodejs12.x`, `nodejs10.x`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `ruby2.5`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, `dotnetcore2.1`
+This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks for the following runtimes: `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, `dotnetcore2.1`
 
 [Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a runtime component is no longer supported for security updates, Lambda deprecates the runtime\. Even though you cannot create functions that use the deprecated runtime, the function is still available to process invocation events\. Make sure that your Lambda functions are current and do not use out\-of\-date runtime environments\.
 
@@ -2950,54 +2953,9 @@ This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regi
 
 For more information on supported runtimes and deprecation schedules, see the [Runtime support policy](https://docs.aws.amazon.com/lambda/latest/dg/runtime-support-policy.html) section of the *AWS Lambda Developer Guide*\. When you migrate your runtimes to the latest version, follow the syntax and guidance from the publishers of the language\.
 
-## \[Lambda\.4\] Lambda functions should have a dead\-letter queue configured \(Retiring\)<a name="fsbp-lambda-4"></a>
+## \[Lambda\.4\] Lambda functions should have a dead\-letter queue configured \(Retired\)<a name="fsbp-lambda-4"></a>
 
-**Note**  
-Security Hub is retiring this control\. When the control is retired, it no longer displays on the console\. Security Hub no longer generates findings for that control\. Existing findings are archived automatically after three days\.
-
-**Category:** Identify > Logging
-
-**Severity:** Medium
-
-**Resource type:** `AWS::Lambda::Function`
-
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-dlq-check.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-dlq-check.html)
-
-**Parameters:**
-+ `dlqArns` \(Optional\) – Comma\-separated list of Amazon SQS and Amazon SNS ARNs that must be configured as the Lambda function dead\-letter queue target\.
-
-This control checks whether a Lambda function is configured with a dead\-letter queue\. The control fails if the Lambda function is not configured with a dead\-letter queue\.
-
-As an alternative to an on\-failure destination, you can configure your function with a dead\-letter queue to save discarded events for further processing\. A dead\-letter queue acts the same as an on\-failure destination\. It is used when an event fails all processing attempts or expires without being processed\.
-
-A dead\-letter queue allows you to look back at errors or failed requests to your Lambda function to debug or identify unusual behavior\.
-
-From a security perspective, it is important to understand why your function failed and to ensure that your function does not drop data or compromise data security as a result\. For example, if your function cannot communicate to an underlying resource, that could be a symptom of a denial of service \(DoS\) attack elsewhere in the network\.
-
-**Note**  
-This control is not supported in the Asia Pacific \(Osaka\) orChina \(Ningxia\) Regions\.
-
-### Remediation<a name="lambda-4-remediation"></a>
-
-You can configure a dead\-letter queue from the AWS Lambda console\.
-
-**To configure a dead\-letter queue**
-
-1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
-
-1. In the navigation pane, choose **Functions**\.
-
-1. Choose a function\.
-
-1. Choose **Configuration** and then choose **Asynchronous invocation**\.
-
-1. Under **Asynchronous invocation**, choose **Edit**\.
-
-1. Set **DLQ resource** to Amazon SQS or Amazon SNS\.
-
-1. Choose the target queue or topic\.
-
-1. Choose **Save**\.
+This control is retired\.
 
 ## \[RDS\.1\] RDS snapshots should be private<a name="fsbp-rds-1"></a>
 
@@ -4183,7 +4141,7 @@ For detailed remediation instructions, see [Enabling enhanced VPC routing](https
 
 **Resource type:** AWS account
 
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks.html) 
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks-periodic.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks-periodic.html) 
 
 **Parameters:** 
 + `ignorePublicAcls`: `true`
@@ -4199,7 +4157,7 @@ This control checks whether the following Amazon S3 public access block settings
 
 The control passes if all of the public access block settings are set to `true`\.
 
-The control fails if any of the settings are set to `false`, or if any of the settings are not configured\. When the settings do not have a value, the AWS Config rule cannot complete its evaluation\.
+The control fails if any of the settings are set to `false`, or if any of the settings are not configured\.
 
 Amazon S3 public access block is designed to provide controls across an entire AWS account or at the individual S3 bucket level to ensure that objects never have public access\. Public access is granted to buckets and objects through access control lists \(ACLs\), bucket policies, or both\.
 
@@ -4778,13 +4736,13 @@ For information about managing SSE using the AWS Management Console, see[ Config
 
 **Resource type:** `AWS::EC2::Instance`
 
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-ssm.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-ssm.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html)
 
 **Parameters:** None
 
-This control checks whether the EC2 instances in your account are managed by AWS Systems Manager\. Systems Manager is an AWS service that you can use to view and control your AWS infrastructure\.
+This control checks whether the stopped and running EC2 instances in your account are managed by AWS Systems Manager\. Systems Manager is an AWS service that you can use to view and control your AWS infrastructure\.
 
-To help you to maintain security and compliance, Systems Manager scans your managed instances\. A managed instance is a machine that is configured for use with Systems Manager\. Systems Manager then reports or takes corrective action on any policy violations that it detects\. Systems Manager also helps you to configure and maintain your managed instances\.
+To help you to maintain security and compliance, Systems Manager scans your stopped and running managed instances\. A managed instance is a machine that is configured for use with Systems Manager\. Systems Manager then reports or takes corrective action on any policy violations that it detects\. Systems Manager also helps you to configure and maintain your managed instances\.
 
 To learn more, see [https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html)\.
 

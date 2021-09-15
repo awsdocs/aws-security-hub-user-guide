@@ -7988,7 +7988,7 @@ Information about an Elasticsearch cluster configuration\.
 
 **`ElasticsearchVersion`**  
 Optional  
-Elasticsearch version\.  
+OpenSearch version\.  
 **Type:** String
 
 **[`EncryptionAtRestOptions`](#asff-resourcedetails-awselasticsearchdomain-encryptionatrestoptions)**  
@@ -8013,7 +8013,7 @@ Information about the status of a domain relative to the latest service software
 
 **[`VPCOptions`](#asff-resourcedetails-awselasticsearchdomain-vpcoptions)**  
 Optional  
-Information that Amazon ES derives based on `VPCOptions` for the domain\.  
+Information that OpenSearch Service derives based on `VPCOptions` for the domain\.  
 **Type:** Object
 
 #### DomainEndpointOptions<a name="asff-resourcedetails-awselasticsearchdomain-domainendpointoptions"></a>
@@ -8091,7 +8091,7 @@ Whether to use a dedicated master node for the Elasticsearch domain\. A dedicate
 Optional  
 The hardware configuration of the computer that hosts the dedicated master node\. For example, `m3.medium.elasticsearch`\. If this attribute is specified, then `DedicatedMasterEnabled` must be `true`\.  
 **Type:** String  
-**Valid values:** See [Supported instance types](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-supported-instance-types.html) in the *Amazon Elasticsearch Service Developer Guide*\.
+**Valid values:** See [Supported instance types](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 `InstanceCount`  
 Optional  
@@ -8102,7 +8102,7 @@ The number of data nodes to use in the Elasticsearch domain\.
 Optional  
 The instance type for your data nodes\. For example, `m3.medium.elasticsearch`\.  
 **Type:** String  
-**Valid values:** See [Supported instance types](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-supported-instance-types.html) in the *Amazon Elasticsearch Service Developer Guide*\.
+**Valid values:** See [Supported instance types](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 `ZoneAwarenessConfig`  
 Optional  
@@ -8117,7 +8117,7 @@ The number of Availability Zones that the domain uses\. Valid values are 2 and 3
 
 `ZoneAwarenessEnabled`  
 Optional  
-Whether to enable zone awareness for the Elasticsearch domain\. When zone awareness is enabled, Elasticsearch allocates the cluster's nodes and replica index shards across Availability Zones \(AZs\) in the same Region\. This prevents data loss and minimizes downtime if a node or data center fails\.  
+Whether to enable zone awareness for the Elasticsearch domain\. When zone awareness is enabled, OpenSearch allocates the cluster's nodes and replica index shards across Availability Zones \(AZs\) in the same Region\. This prevents data loss and minimizes downtime if a node or data center fails\.  
 **Type:** Boolean
 
 #### EncryptionAtRestOptions<a name="asff-resourcedetails-awselasticsearchdomain-encryptionatrestoptions"></a>
@@ -8140,11 +8140,11 @@ The AWS KMS key ID\. Takes the form `1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a`\.
 
 The `LogPublishingOptions` object configures the CloudWatch Logs to publish for the Elasticsearch domain\.
 
-The `AuditLogs` object configures the Elasticsearch audit logs publishing\.
+The `AuditLogs` object configures the OpenSearch audit logs publishing\.
 
-The `IndexSlowLogs` object configures the Elasticsearch index logs publishing\.
+The `IndexSlowLogs` object configures the OpenSearch index logs publishing\.
 
-The `SearchSlowLogs` object configures the Elasticsearch search slow log publishing\.
+The `SearchSlowLogs` object configures the OpenSearch search slow log publishing\.
 
 Each of these objects has the following attributes\.
 
@@ -8177,7 +8177,7 @@ The `ServiceSoftwareOptions` object provides information about the state of the 
 
 `AutomatedUpdateDate`  
 Optional  
-The epoch time when the deployment window closes for required updates\. After this time, Amazon Elasticsearch Service schedules the software upgrade automatically\.  
+The epoch time when the deployment window closes for required updates\. After this time, Amazon OpenSearch Service schedules the software upgrade automatically\.  
 **Type:** String
 
 `Cancellable`  
@@ -8213,7 +8213,7 @@ The status of the service software update\.
 
 #### VpcOptions<a name="asff-resourcedetails-awselasticsearchdomain-vpcoptions"></a>
 
-The `VpcOptions` object contains information that Amazon ES derives based on the `VPCOptions` for the domain\.
+The `VpcOptions` object contains information that OpenSearch Service derives based on the `VPCOptions` for the domain\.
 
 It can have the following attributes\.
 

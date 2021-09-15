@@ -187,6 +187,12 @@ Guardicore Centra provides flow visualization, micro\-segmentation, and breach d
 Infection Monkey is an attack simulation tool designed to test networks against attackers\.  
 [Partner documentation](https://www.guardicore.com/infectionmonkey/docs/usage/integrations/aws-security-hub/)
 
+**[http://aws.amazon.com/marketplace/seller-profile?id=10857e7c-011b-476d-b938-b587deba31cf](http://aws.amazon.com/marketplace/seller-profile?id=10857e7c-011b-476d-b938-b587deba31cf) – Vulnerability Intelligence**  
+**Integration type:** Send  
+**Product ARN:** `arn:aws:securityhub:<REGION>::product/hackerone/vulnerability-intelligence`  
+The HackerOne platform partners with the global hacker community to uncover the most relevant security issues\. Vulnerability Intelligence enables your organization to go beyond automated scanning\. It shares vulnerabilities that HackerOne ethical hackers have validated and provided steps to reproduce\.  
+[Partner documentation](https://www.hackerone.com/partners/aws)
+
 **[https://helecloud.com/managed-security-and-compliance-services/](https://helecloud.com/managed-security-and-compliance-services/) – Managed Security**  
 **Integration type:** Receive  
 HeleCloud is a Managed Services Provider, taking care of your AWS infrastructure so that you can focus on your core business\.

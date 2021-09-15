@@ -753,50 +753,9 @@ After you assign the new security groups to the resources, remove the inbound an
 
 For more information about working with security groups in Amazon VPC, see the [https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#WorkingWithSecurityGroups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#WorkingWithSecurityGroups)\.
 
-## \[PCI\.EC2\.3\] Unused EC2 security groups should be removed \(Retiring\)<a name="pcidss-ec2-3"></a>
+## \[PCI\.EC2\.3\] Unused EC2 security groups should be removed \(Retired\)<a name="pcidss-ec2-3"></a>
 
-**Note**  
-Security Hub is retiring this control\. When the control is retired, it no longer displays on the console\. Security Hub no longer generates findings for that control\. Existing findings are archived automatically after three days\.
-
-**Severity:** Low
-
-**Resource type: ** `AWS::EC2::SecurityGroup`
-
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni.html)
-
-**Parameters:** None
-
-This control helps you maintain an accurate asset inventory of needed security groups in your cardholder data environment \(CDE\)\. It does so by checking that security groups are attached to Amazon EC2 instances or to an ENI\. A failed finding indicates you may have unused Amazon EC2 security groups\.
-
-**Note**  
-This control is not supported in the following Regions\.  
-Africa \(Cape Town\)
-Asia Pacific \(Osaka\)
-Europe \(Milan\)
-
-### Related PCI DSS requirements<a name="pcidss-ec2-3-requirements"></a>
-
-This control is related to the following PCI DSS requirements:
-
-**PCI DSS 2\.4: Maintain an inventory of system components that are in scope for PCI DSS\.**  
-If a security group is not attached to an Amazon EC2 instance or an elastic network interface \(ENI\), this is an indication that the resource is no longer in use\.  
-Unless there is a business need to retain them, you should remove unused resources to maintain an accurate inventory of system components\.
-
-### Remediation<a name="pcidss-ec2-3-remediation"></a>
-
-You must perform the following steps for each security group not attached to an ENI\.
-
-**To delete a security group**
-
-1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
-
-1. In the navigation pane, under **Security**, choose **Security groups**\.
-
-1. Select the check box for the security group to delete\.
-
-1. From **Actions**, choose **Delete security group**\.
-
-1. Choose **Delete**\. 
+This control is retired\.
 
 ## \[PCI\.EC2\.4\] Unused EC2 EIPs should be removed<a name="pcidss-ec2-4"></a>
 
@@ -1023,7 +982,7 @@ This control checks whether Elasticsearch domains are in a VPC\.
 
 It does not evaluate the VPC subnet routing configuration to determine public reachability\.
 
-This AWS control also does not check whether the Amazon ES resource\-based policy permits public access by other accounts or external entities\. You should ensure that Elasticsearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-ac-types-resource) in the *Amazon Elasticsearch Service Developer Guide*\.
+This AWS control also does not check whether the OpenSearch Service resource\-based policy permits public access by other accounts or external entities\. You should ensure that Elasticsearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html#ac-types-resource) in the *Amazon OpenSearch Service Developer Guide*\.
 
 You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
 
@@ -1035,33 +994,33 @@ This control is not supported in Asia Pacific \(Osaka\)\.
 This control is related to the following PCI DSS requirements:
 
 **PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment \(CDE\), and specifically deny all other traffic\.**  
-If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC\. Doing so enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+If your OpenSearch Service clusters contain cardholder data, the OpenSearch Service domains should be placed in a VPC\. Doing so enables secure communication between OpenSearch Service and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
 This method is used to allow only necessary traffic to and from the CDE\.
 
 **PCI DSS 1\.3\.1: Implement a DMZ to limit inbound traffic to only system components that provide authorized publicly accessible services, protocols, and ports\.**  
-If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC\. Doing so enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+If your OpenSearch Service clusters contain cardholder data, the OpenSearch Service domains should be placed in a VPC\. Doing so enables secure communication between OpenSearch Service and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
 This method is used to limit inbound traffic to only system components that provide authorized publicly accessible services, protocols, and ports\.
 
 **PCI DSS 1\.3\.2: Limit inbound internet traffic to IP addresses within the DMZ\.**  
-If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC, which enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+If your OpenSearch Service clusters contain cardholder data, the OpenSearch Service domains should be placed in a VPC, which enables secure communication between OpenSearch Service and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
 This method is used to limit inbound internet traffic to IP addresses within the DMZ\.  
-You can also use a resource\-based policy and specify an IP condition for restricting access based on source IP addresses\. See the blog post [How to control access to your Amazon Elasticsearch Service domain](http://aws.amazon.com/blogs/security/how-to-control-access-to-your-amazon-elasticsearch-service-domain/)\.
+You can also use a resource\-based policy and specify an IP condition for restricting access based on source IP addresses\. See the blog post [How to control access to your Amazon OpenSearch Service domain](http://aws.amazon.com/blogs/security/how-to-control-access-to-your-amazon-elasticsearch-service-domain/)\.
 
 **PCI DSS 1\.3\.4: Do not allow unauthorized outbound traffic from the cardholder data environment to the internet\.**  
-If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC, which enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+If your OpenSearch Service clusters contain cardholder data, the OpenSearch Service domains should be placed in a VPC, which enables secure communication between OpenSearch Service and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
 This method is used to block unauthorized outbound traffic from the cardholder data environment to the internet\.
 
 **PCI DSS 1\.3\.6: Place system components that store cardholder data \(such as a database\) in an internal network zone, segregated from the DMZ and other untrusted networks\.**  
-If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC\. Doing so enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+If your OpenSearch Service clusters contain cardholder data, the OpenSearch Service domains should be placed in a VPC\. Doing so enables secure communication between OpenSearch Service and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
 This method is used to place system components that store cardholder data in an internal network zone, segregated from the DMZ and other untrusted networks\.
 
 ### Remediation<a name="pcidss-es-1-remediation"></a>
 
 If you create a domain with a public endpoint, you cannot later place it within a VPC\. Instead, you must create a new domain and migrate your data\.
 
-The reverse is also true\. If you create a domain within a VPC, it cannot have a public endpoint\. Instead, you must either [create another domain](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains) or disable this control\.
+The reverse is also true\. If you create a domain within a VPC, it cannot have a public endpoint\. Instead, you must either [create another domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html) or disable this control\.
 
-See the information on migrating from public access to VPC access in the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-migrating-public-to-vpc](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-migrating-public-to-vpc)\.
+See the information on migrating from public access to VPC access in the [https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html)\.
 
 ## \[PCI\.ES\.2\] Elasticsearch domains should have encryption at rest enabled<a name="pcidss-es-2"></a>
 
@@ -1083,17 +1042,17 @@ This control is not supported in Asia Pacific \(Osaka\)\.
 This control is related to the following PCI DSS requirements:
 
 **PCI DSS 3\.4: Render Primary Account Numbers \(PAN\) unreadable anywhere it is stored \(including on portable digital media, backup media, and in logs\)\.**  
-If you use Amazon ES to store credit card Primary Account Numbers \(PAN\), the PAN should be protected by enabling Amazon ES domain encryption at rest\.  
-If enabled, it encrypts the following aspects of a domain: Indices, automated snapshots, Amazon ES logs, swap files, all other data in the application directory\.  
+If you use OpenSearch Service to store credit card Primary Account Numbers \(PAN\), the PAN should be protected by enabling OpenSearch Service domain encryption at rest\.  
+If enabled, it encrypts the following aspects of a domain: Indices, automated snapshots, OpenSearch Service logs, swap files, all other data in the application directory\.  
 This is a method used to render PAN unreadable\.
 
 ### Remediation<a name="pcidss-es-2-remediation"></a>
 
 By default, domains do not encrypt data at rest, and you cannot configure existing domains to use the feature\.
 
-To enable the feature, you must create another domain and migrate your data\. For information about creating domains, see the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)\.
+To enable the feature, you must create another domain and migrate your data\. For information about creating domains, see the [https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html)\.
 
-Encryption of data at rest requires Amazon ES 5\.1 or later\. For more information about encrypting data at rest for Amazon ES, see the [https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/encryption-at-rest.html)\.
+Encryption of data at rest requires OpenSearch Service 5\.1 or later\. For more information about encrypting data at rest for OpenSearch Service, see the [https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html)\.
 
 ## \[PCI\.GuardDuty\.1\] GuardDuty should be enabled<a name="pcidss-guardduty-1"></a>
 
@@ -1683,11 +1642,9 @@ For other Lambda resource\-based policies examples that allow you to grant usage
 
 **Parameters:** None
 
-This control checks whether a Lambda function is in a VPC\.
+This control checks whether a Lambda function is in a VPC\. The control excludes Lambda@Edge resources\.
 
 It does not evaluate the VPC subnet routing configuration to determine public reachability\. 
-
-Note that if Lambda@Edge is found in the account, then this control generates failed findings\. To prevent these findings, you can disable this control\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -2177,7 +2134,7 @@ For more information, see the knowledge center article [What S3 bucket policy sh
 
 **Resource type:** S3 AWS account
 
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks-periodic.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks-periodic.html)
 
 **Parameters:**
 + `ignorePublicAcls`: `true`
@@ -2193,7 +2150,7 @@ This control checks whether the following public access block settings are confi
 
 The control passes if all of the public access block settings are set to `true`\.
 
-The control fails if any of the settings are set to `false`, or if any of the settings are not configured\. When the settings do not have a value, the AWS Config rule cannot complete its evaluation\.
+The control fails if any of the settings are set to `false`, or if any of the settings are not configured\.
 
 As an AWS best practice, S3 buckets should block public access\. Unless you explicitly require everyone on the internet to be able to access your S3 bucket, you should ensure that your S3 bucket is not publicly accessible\.
 

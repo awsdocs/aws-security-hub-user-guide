@@ -18,7 +18,7 @@ Have you securely enabled all relevant logging for the service? Examples of log 
 + Amazon CloudFront logs
 + Amazon CloudWatch Logs
 + Amazon Relational Database Service logging
-+ Amazon Elasticsearch Service slow index logs
++ Amazon OpenSearch Service slow index logs
 + X\-Ray tracing
 + AWS Directory Service logs
 + AWS Config items

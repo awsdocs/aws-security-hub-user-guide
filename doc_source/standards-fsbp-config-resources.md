@@ -15,7 +15,7 @@ In Regions where a control is not available, the corresponding resource is not a
 + Amazon EC2 security group
 + Amazon EC2 volume
 + Elastic Load Balancing load balancer
-+ Elasticsearch domain
++ OpenSearch domain
 + GuardDuty detector
 + IAM group
 + IAM policy
