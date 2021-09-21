@@ -1,7 +1,7 @@
 # AWS Foundational Security Best Practices controls<a name="securityhub-standards-fsbp-controls"></a>
 
 The AWS Foundational Security Best Practices standard contains the following controls\. For each control, the information includes the following information\.
-+ The category and subcategory that the control applies to
++ The category that the control applies to\. For descriptions of the categories, see [Control categories](control-categories.md)\.
 + The severity
 + The applicable resource
 + The required AWS Config rule, and any specific parameter values set by AWS Security Hub
@@ -1359,7 +1359,7 @@ If your EC2 instance is associated with an Elastic IP address, then your EC2 ins
 
 1. Choose **Disassociate**\.
 
-## \[EC2\.10\] Amazon EC2 should be configured to use VPC endpoints<a name="fsbp-ec2-10"></a>
+## \[EC2\.10\] Amazon EC2 should be configured to use VPC endpoints that are created for the Amazon EC2 service<a name="fsbp-ec2-10"></a>
 
 **Category:** Protect \- Secure network configuration > API private access
 
@@ -2100,7 +2100,7 @@ Elasticsearch domains deployed within a VPC can communicate with VPC resources o
 
 If you create a domain with a public endpoint, you cannot later place it within a VPC\. Instead, you must create a new domain and migrate your data\. The reverse is also true\. If you create a domain within a VPC, it cannot have a public endpoint\. Instead, you must either [create another domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html) or disable this control\.
 
-See [Migrating from public access to VPC access](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html) in the *Amazon OpenSearch Service Developer Guide*\.
+See [Launching your Amazon OpenSearch Service domains within a VPC](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[ES\.3\] Elasticsearch domains should encrypt data sent between nodes<a name="fsbp-es-3"></a>
 
@@ -2129,7 +2129,7 @@ Europe \(Milan\)
 
 ### Remediation<a name="es-3-remediation"></a>
 
-Node\-to\-node encryption can only be enabled on a new domain\. To remediate this finding, first [create a new domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html) with the **Node\-to\-node encryption** check box selected\. Then follow "Migrating data to a different domain" under [Registering a manual snapshot repository](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshots.html) to migrate your data to the new domain\.
+Node\-to\-node encryption can only be enabled on a new domain\. To remediate this finding, first [create a new domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html) with the **Node\-to\-node encryption** check box selected\. Then follow [Using a snapshot to migrate data](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/version-migration.html#snapshot-based-migration) to migrate your data to the new domain\.
 
 ## \[ES\.4\] Elasticsearch domain error logging to CloudWatch Logs should be enabled<a name="fsbp-es-4"></a>
 
@@ -2941,6 +2941,8 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 + `runtime`: `nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, python3.6, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnetcore2.1`
 
 This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks for the following runtimes: `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, `dotnetcore2.1`
+
+The AWS Config rule ignores functions that have a package type of `Image`\.
 
 [Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a runtime component is no longer supported for security updates, Lambda deprecates the runtime\. Even though you cannot create functions that use the deprecated runtime, the function is still available to process invocation events\. Make sure that your Lambda functions are current and do not use out\-of\-date runtime environments\.
 

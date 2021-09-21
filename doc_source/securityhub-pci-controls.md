@@ -1020,7 +1020,7 @@ If you create a domain with a public endpoint, you cannot later place it within 
 
 The reverse is also true\. If you create a domain within a VPC, it cannot have a public endpoint\. Instead, you must either [create another domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html) or disable this control\.
 
-See the information on migrating from public access to VPC access in the [https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html)\.
+See [Launching your Amazon OpenSearch Service domains within a VPC](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[PCI\.ES\.2\] Elasticsearch domains should have encryption at rest enabled<a name="pcidss-es-2"></a>
 

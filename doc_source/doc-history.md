@@ -4,6 +4,7 @@ The following table describes the updates to the documentation for AWS Security 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Integration with AWS Organizations is now supported in the China Regions](#doc-history) | The Security Hub integration with Organizations is now supported in China \(Beijing\) and China \(Ningxia\)\. | September 20, 2021 | 
 | [New AWS Config rule for the S3\.1 and PCI\.S3\.6 controls](#doc-history) | Both S3\.1 and PCI\.S3\.6 verify that the Amazon S3 Block Public Access setting is enabled\. The AWS Config rule for these controls is changed from `s3-account-level-public-access-blocks` to `s3-account-level-public-access-blocks-periodic`\. | September 14, 2021 | 
 | [Removed deprecated runtimes from the Lambda\.2 control](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-lambda-2) | In the AWS Foundational Security Best Practices standard, removed the `nodejs10.x` and `ruby2.5` runtimes from **\[Lambda\.2\] Lambda functions should use supported runtimes**\. | September 13, 2021 | 
 | [Changed the severity of the CIS 2\.2 control](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-2.2) | In the CIS AWS Foundations Benchmark standard, the severity for **2\.2\. – Ensure CloudTrail log file validation is enabled** is changed from Low to Medium\. | September 13, 2021 | 

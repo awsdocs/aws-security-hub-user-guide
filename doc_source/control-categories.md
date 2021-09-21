@@ -1,6 +1,12 @@
 # Control categories<a name="control-categories"></a>
 
-These are the available categories for AWS Security Hub controls\. The category for a control reflects the security function that the control applies to\.
+Each control is assigned a category\. The category for a control reflects the security function that the control applies to\.
+
+The category value contains the category, the subcategory within the category, and, optionally, a classifier within the subcategory\. For example:
++ Identify > Inventory
++ Protect > Data protection > Encryption of data in transit
+
+Here are the descriptions of the available categories, subcategories, and classifiers\.
 
 ## Identify<a name="control-category-identify"></a>
 

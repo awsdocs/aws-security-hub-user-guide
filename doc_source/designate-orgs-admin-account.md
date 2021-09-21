@@ -20,7 +20,7 @@ Remember that all Security Hub accounts must have AWS Config enabled and configu
 
 To designate and remove a Security Hub administrator account, the organization management account must have permissions for the `EnableOrganizationAdminAccount` and `DisableOrganizationAdminAccount` actions in Security Hub\. The organization management account must also have administrative permissions for Organizations\.
 
-To grant all of the required permissions, attach the following Security Hub managed policies to the organization management account principal:
+To grant all of the required permissions, attach the following Security Hub managed policies to the IAM principal for the organization management account:
 + [`AWSSecurityHubFullAccess`](security-iam-awsmanpol.md#security-iam-awsmanpol-awssecurityhubfullaccess)
 + [`AWSSecurityHubOrganizationsAccess`](security-iam-awsmanpol.md#security-iam-awsmanpol-awssecurityhuborganizationsaccess)
 

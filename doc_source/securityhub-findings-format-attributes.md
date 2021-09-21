@@ -8345,12 +8345,12 @@ Information about the configuration of the EC2 instances\.
 
 **`CanonicalHostedZoneName`**  
 Optional  
-The name of the Amazon Route 53 hosted zone for the load balancer\.  
+The name of the Amazon Route 53 hosted zone for the load balancer\.  
 **Type:** String
 
 **`CanonicalHostedZoneNameID`**  
 Optional  
-The ID of the Amazon Route 53 hosted zone for the load balancer\.  
+The ID of the Amazon Route 53 hosted zone for the load balancer\.  
 **Type:** String
 
 **`CreatedTime`**  
@@ -8717,7 +8717,7 @@ The Availability Zones for the load balancer\.
 
 **`CanonicalHostedZoneId`**  
 Optional  
-The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\.  
+The ID of the Amazon Route 53 hosted zone that is associated with the load balancer\.  
 **Type:** String
 
 **`CreatedTime`**  
@@ -10058,7 +10058,7 @@ The version number of the database engine to use\.
 
 **`HostedZoneId`**  
 Optional  
-Specifies the identifier that Amazon Route 53 assigns when you create a hosted zone\.  
+Specifies the identifier that Amazon Route 53 assigns when you create a hosted zone\.  
 **Type:** String
 
 **`HttpEndpointEnabled`**  
@@ -10970,7 +10970,7 @@ Specifies the DNS address of the DB instance\.
 
 **`HostedZoneId`**  
 Optional  
-Specifies the ID that Amazon Route 53 assigns when you create a hosted zone\.  
+Specifies the ID that Amazon Route 53 assigns when you create a hosted zone\.  
 **Type:** String
 
 **`Port`**  
@@ -10991,7 +10991,7 @@ Specifies the DNS address of the DB instance\.
 
 **`HostedZoneId`**  
 Optional  
-The ID that Amazon Route 53 assigns when you create a hosted zone\.  
+The ID that Amazon Route 53 assigns when you create a hosted zone\.  
 **Type:** String
 
 **`Port`**  
