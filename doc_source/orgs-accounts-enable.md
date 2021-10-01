@@ -1,12 +1,16 @@
 # Enabling member accounts from your organization<a name="orgs-accounts-enable"></a>
 
-If you do not automatically enable new organization accounts, then you can enable those accounts manually\. You must also manually enable accounts that you disassociated\.
+If you do not automatically enable new organization accounts as member accounts, then you can enable those accounts manually\. You must also manually enable accounts that you disassociated\.
 
 You cannot enable an account if it is already a member account for a different administrator account\.
 
 You also cannot enable an account that is currently suspended\. If you try to enable a suspended account, the account status changes to **Account Suspended**\.
 
-When you enable an organization account, Security Hub is enabled automatically for that account\. The account does not receive an invitation\. The exception to this is the organization management account\. Security Hub cannot be enabled automatically for the organization management account\. The organization management account must enable Security Hub before you enable the organization management account as a member account\.
+When you enable an organization account as a member account, the following occurs:
++ If the account does not have Security Hub enabled, Security Hub and the default standards are enabled automatically for that account\. The account does not receive an invitation\.
+
+  The exception to this is the organization management account\. Security Hub cannot be enabled automatically for the organization management account\. The organization management account must enable Security Hub before you enable the organization management account as a member account\.
++ If the account already has Security Hub enabled, Security Hub does not make any other changes to the account\. It only enables the membership\.
 
 Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 

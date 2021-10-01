@@ -26,12 +26,6 @@ To get started, read through the [https://docs.aws.amazon.com/securityhub/latest
 3CORESec provides managed detection services for both on\-premises and AWS systems\. Their integration with Security Hub allows visibility into threats such as malware, privilege escalation, lateral movement, and improper network segmentation\.  
 [Partner documentation](https://docs.google.com/document/d/1TPUuuyoAVrMKRVnGKouRy384ZJ1-3xZTnruHkIHJqWQ/edit?usp=sharing)
 
-**[https://www.alcide.io/aws-security/](https://www.alcide.io/aws-security/) – kAudit**  
-**Integration type:** Send  
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/alcide/alcide-kaudit`  
-Alcide is a Kubernetes security company that created a new kind of Kubernetes security solution\. This new solution is designed specifically for complex multi\-cluster Kubernetes environments\. It works for all the stakeholders who operate and protect in this new era: DevOps, security teams and cloud architects\.  
- [Partner documentation](https://alcide.atlassian.net/wiki/spaces/PUB/pages/1506344961/AWS+SecurityHub+Integration)
-
 **[https://www.alertlogic.com/solutions/platform/aws-security/](https://www.alertlogic.com/solutions/platform/aws-security/) – SIEMless Threat Management**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:733251395267:product/alertlogic/althreatmanagement`  

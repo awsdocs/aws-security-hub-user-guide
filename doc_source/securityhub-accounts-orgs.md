@@ -13,7 +13,9 @@ If the administrator account has not enabled the option to automatically enable 
 
 When you choose **Enable**, Security Hub performs the following actions:
 + Enables all of the current organization accounts as member accounts\.
-+ For those accounts, enables the CIS AWS Foundations Benchmark standard and the AWS Foundational Best Practices standard\.
++ For organization accounts that do not have Security Hub enabled, enables Security Hub, and enables the CIS AWS Foundations Benchmark standard and the AWS Foundational Best Practices standard\.
+
+  For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to those accounts\. It does not change their enabled standards or controls\.
 + Enables the option to automatically enable new accounts as they are added to the organization\.
 
 **Topics**

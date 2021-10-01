@@ -15,7 +15,7 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 **Severity:** Medium
 
-**Resource type:** ACM certificate
+**Resource type:** `AWS::ACM::Certificate`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html](https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html)
 
@@ -69,7 +69,7 @@ This control is not supported in the following Regions:
 Africa \(Cape Town\)
 Europe \(Milan\)
 
-### Remediation<a name="apigateway1-remediation"></a>
+### Remediation<a name="apigateway-1-remediation"></a>
 
 To enable logging for REST and WebSocket API operations, see [Set up CloudWatch API logging using the API Gateway console](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html#set-up-access-logging-using-console) in the *API Gateway Developer Guide*\.
 
@@ -1575,7 +1575,7 @@ For information on how to modify a security group, see [Add, remove, or update r
 
 **Category:** Protect > Restricted network access
 
-**Severity:** Medium 
+**Severity:** High
 
 **Resource type:** `AWS::EC2::SecurityGroup`
 
@@ -2965,7 +2965,7 @@ This control is retired\.
 
 **Severity:** Critical
 
-**Resource type:** Amazon RDS DB snapshot
+**Resource type:** `AWS::RDS::DBSnapshot`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html)
 
@@ -3080,7 +3080,7 @@ For information about encrypting DB instances in Amazon RDS, see [Encrypting Ama
 
 **Severity:** Medium
 
-**Resource type:** Amazon RDS DB cluster snapshot, Amazon RDS DB snapshot
+**Resource type:** `AWS::RDS::DBClusterSnapshot`,` AWS::RDS::DBSnapshot`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshot-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshot-encrypted.html)
 
@@ -4782,7 +4782,7 @@ To determine whether your instances support Systems Manager associations, see [S
 
 **Severity:** High
 
-**Resource type:** SSM patch compliance
+**Resource type:** `AWS::SSM::PatchCompliance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html)
 
@@ -4826,7 +4826,7 @@ For more information about using Systems Manager documents to patch a managed in
 
 **Severity:** Low
 
-**Resource type:** SSM association compliance
+**Resource type:** `AWS::SSM::AssociationCompliance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html)
 

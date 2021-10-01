@@ -4,6 +4,8 @@ The following table describes the updates to the documentation for AWS Security 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Removed the integration with Alcide](#doc-history) | The integration with Alcide kAudit is discontinued\. | September 30, 2021 | 
+| [Changed the severity of EC2\.19](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-ec2-19) | The severity of **\[EC2\.19\] Security groups should not allow unrestricted access to ports with high risk** is changed from Medium to High\. | September 30, 2021 | 
 | [Integration with AWS Organizations is now supported in the China Regions](#doc-history) | The Security Hub integration with Organizations is now supported in China \(Beijing\) and China \(Ningxia\)\. | September 20, 2021 | 
 | [New AWS Config rule for the S3\.1 and PCI\.S3\.6 controls](#doc-history) | Both S3\.1 and PCI\.S3\.6 verify that the Amazon S3 Block Public Access setting is enabled\. The AWS Config rule for these controls is changed from `s3-account-level-public-access-blocks` to `s3-account-level-public-access-blocks-periodic`\. | September 14, 2021 | 
 | [Removed deprecated runtimes from the Lambda\.2 control](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-fsbp-controls.html#fsbp-lambda-2) | In the AWS Foundational Security Best Practices standard, removed the `nodejs10.x` and `ruby2.5` runtimes from **\[Lambda\.2\] Lambda functions should use supported runtimes**\. | September 13, 2021 | 

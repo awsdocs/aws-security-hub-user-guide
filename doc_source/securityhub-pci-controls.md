@@ -1694,7 +1694,7 @@ For more information see the section on configuring a Lambda function to access 
 
 **Severity:** Critical
 
-**Resource type: ** Amazon RDS DB snapshot
+**Resource type: ** `AWS::RDS::DBSnapshot`
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html)
 
@@ -2265,7 +2265,7 @@ For more information, see [Connect a notebook instance to resources in a VPC](ht
 
 **Severity:** Medium
 
-**Resource type:** SSM patch compliance and `AWS::EC2::Instance`
+**Resource type:** `AWS::SSM::PatchCompliance` and `AWS::EC2::Instance`
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html)
 
@@ -2324,7 +2324,7 @@ See the *AWS Systems Manager User Guide* for more information about the followin
 
 **Severity:** Low
 
-**Resource type:** SSM association compliance
+**Resource type:** `AWS::SSM::AssociationCompliance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html) 
 
