@@ -2191,7 +2191,7 @@ If you use S3 buckets to store cardholder data, ensure that the bucket does not 
 
 1. Choose **Save changes**\.
 
-For more information, see [Using Amazon S3 block public access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon Simple Storage Service Developer Guide*\.
+For more information, see [Using Amazon S3 block public access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon Simple Storage Service User Guide*\.
 
 ## \[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access<a name="pcidss-sagemaker-1"></a>
 

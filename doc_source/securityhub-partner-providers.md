@@ -103,7 +103,7 @@ Caveonix Cloud is a SaaS risk mitigation platform that delivers automated compli
 Check Point CloudGuard easily extends comprehensive threat prevention security to AWS while protecting assets in the cloud\.  
 [Partner documentation](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk140412)
 
-**[http://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f](http://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f) – Dome9 Arc**  
+**[http://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f](http://aws.amazon.com/marketplace/seller-profile?id=a979fc8a-dd48-42c8-84cc-63d5d50e3a2f) – CloudGuard Posture Management**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:634729597623:product/checkpoint/dome9-arc`  
 A SaaS platform that delivers verifiable cloud network security, advanced IAM protection, and comprehensive compliance and governance\.

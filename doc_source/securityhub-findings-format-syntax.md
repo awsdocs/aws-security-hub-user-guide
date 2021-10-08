@@ -663,6 +663,15 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                             ]
                         },
                         "Status": "string",
+                        "ViewerCertificate": {
+                            "AcmCertificateArn": "string",
+                            "Certificate": "string",
+                            "CertificateSource": "string",
+                            "CloudFrontDefaultCertificate": boolean,
+                            "IamCertificateId": "string",
+                            "MinimumProtocolVersion": "string",
+                            "SslSupportMethod": "string"
+                        },
                         "WebAclId": "string"
                     },
                     "AwsCloudTrailTrail": {
@@ -683,14 +692,48 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "TrailArn": "string"
                     },
                     "AwsCodeBuildProject": {
+                        "Artifacts": [
+                            {
+                                "ArtifactIdentifier": "string",
+                                "EncryptionDisabled": boolean,
+                                "Location": "string",
+                                "Name": "string",
+                                "NamespaceType": "string",
+                                "OverrideArtifactName": boolean,
+                                "Packaging": "string",
+                                "Path": "string",
+                                "Type": "string"
+                            }
+                        ],
                         "EncryptionKey": "string",
-                        "Environment": {
-                            "Type": "string",
                             "Certificate": "string",
+                        "Environment": {
+                            "Certificate": "string",
+                            "EnvironmentVariables": [
+                                {
+                                    "Name": "string",
+                                    "Type": "string",
+                                    "Value": "string"
+                                }
+                            ],
                             "ImagePullCredentialsType": "string",
+                            "PrivilegedMode": boolean, 
                             "RegistryCredential": {
                                 "Credential": "string",
                                 "CredentialProvider": "string"
+                            },
+                            "Type": "string"
+                        },
+                        "LogsConfig": {
+                            "CloudWatchLogs": {
+                                "GroupName": "string",
+                                "Status": "string",
+                                "StreamName": "string"
+                            },
+                            "S3Logs": {
+                                "EncryptionDisabled": boolean,
+                                "Location": "string",
+                                "Status": "string"
                             }
                         },
                         "Name": "string",
@@ -1030,6 +1073,23 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         ],
                         "State": "string"
                     },
+                    "AwsEc2VpcEndpointService": {
+                        "AcceptanceRequired": boolean,
+                        "AvailabilityZones": [ "string" ],
+                        "BaseEndpointDnsNames": [ "string" ],
+                        "ManagesVpcEndpoints": boolean,
+                        "GatewayLoadBalancerArns": [ "string" ],
+                        "NetworkLoadBalancerArns": [ "string" ],
+                        "PrivateDnsName": "string",
+                        "ServiceId": "string",
+                        "ServiceName": "string",
+                        "ServiceState": "string",
+                        "ServiceType": [
+                            {
+                                "ServiceType": "string"
+                            }
+                        ]
+                    },
                     "AwsEc2VpnConnection": {
                         "Category": "string",
                         "CustomerGatewayConfiguration": "string",
@@ -1087,6 +1147,19 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "RegistryId": "string",
                         "RepositoryName": "string"
                      },
+                    "AwsEcrRepository": {
+                        "Arn": "string",
+                        "ImageScanningConfiguration": {
+                            "ScanOnPush": boolean
+                        },
+                        "ImageTagMutability": "string",
+                        "LifecyclePolicy": {
+                            "LifecyclePolicyText": "string",
+                            "RegistryId": "string"
+                            },
+                        "RepositoryName": "string",
+                        "RepositoryPolicyText": "string"
+                    },
                     "AwsEcsCluster": {
                         "CapacityProviders": ["string"],
                         "ClusterSettings": [
@@ -1388,6 +1461,27 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                             }
                         ]
                     },
+                    "AwsEksCluster": {
+                        "Arn": "string",
+                        "CertificateAuthorityData": "string",
+                        "ClusterStatus": "string",
+                        "Endpoint": "string",
+                        "Logging": {
+                            "ClusterLogging": [
+                                {
+                                    "Enabled": boolean,
+                                    "Types": [ "string" ]
+                                }
+                            ]
+                        }
+                        "Name": "string",
+                        "ResourcesVpcConfig": {
+                            "SecurityGroupIds": [ "string" ],
+                            "SubnetIds": [ "string" ]
+                        },
+                        "RoleArn": "string",
+                        "Version": "string"
+                    },
                     "AwsElasticBeanstalkEnvironment": {
                         "ApplicationName": "string",
                         "Cname": "string",
@@ -1579,6 +1673,12 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "CreatedTime": "string",
                         "DNSName": "string",
                         "IpAddressType": "string",
+                        "LoadBalancerAttributes": [
+                            {
+                                "Key": "string",
+                                "Value": "string"
+                            }
+                        ],
                         "Scheme": "string",
                         "SecurityGroups": [ "string" ],
                         "State": {
@@ -1753,7 +1853,7 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "Runtime": "string",
                         "Timeout": "integer",
                         "TracingConfig": {
-                            "TracingConfig.Mode": "string"
+                            "Mode": "string"
                         },
                         "Version": "string",
                         "VpcConfig": {
@@ -1769,6 +1869,73 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         ],
                         "CreatedDate": "string",
                         "Version": number
+                    },
+                    "AwsOpenSearchServiceDomain": {    
+                        "AccessPolicies": "string",
+                        "Arn": "string",
+                        "ClusterConfig": {
+                            "DedicatedMasterCount": number,
+                            "DedicatedMasterEnabled": boolean,
+                            "DedicatedMasterType": "string",
+                            "InstanceCount": number,
+                            "InstanceType": "string",
+                            "WarmCount": number,
+                            "WarmEnabled": boolean,
+                            "WarmType": "string",
+                            "ZoneAwarenessConfig": {
+                                "AvailabilityZoneCount": number
+                            },
+                            "ZoneAwarenessEnabled": boolean
+                        },
+                        "DomainEndpoint": "string",
+                        "DomainEndpointOptions": {
+                            "CustomEndpoint": "string",
+                            "CustomEndpointCertificateArn": "string",
+                            "CustomEndpointEnabled": boolean,
+                            "EnforceHTTPS": boolean,
+                            "TLSSecurityPolicy": "string"
+                        },
+                        "DomainEndpoints": { 
+                            "string": "string" 
+                        },
+                        "DomainName": "string",
+                        "EncryptionAtRestOptions": {
+                            "Enabled": boolean,
+                            "KmsKeyId": "string"
+                        },
+                        "EngineVersion":"string",
+                        "Id": "string",
+                        "LogPublishingOptions": {
+                            "AuditLogs": {
+                                "CloudWatchLogsLogGroupArn": "string",
+                                "Enabled": boolean
+                            },
+                            "IndexSlowLogs": {
+                                "CloudWatchLogsLogGroupArn": "string",
+                                "Enabled": boolean
+                            },
+                            "SearchSlowLogs": {
+                                "CloudWatchLogsLogGroupArn": "string",
+                                "Enabled": boolean
+                            }
+                        },
+                        "NodeToNodeEncryptionOptions": {
+                            "Enabled": boolean
+                        },
+                        "ServiceSoftwareOptions": {
+                            "AutomatedUpdateDate": "string",
+                            "Cancellable": boolean,
+                            "CurrentVersion": "string",
+                            "Description": "string",
+                            "NewVersion": "string",
+                            "OptionalDeployment": boolean,
+                            "UpdateAvailable": boolean,
+                            "UpdateStatus": "string"
+                        },
+                        "VpcOptions": {
+                            "SecurityGroupIds": [ "string" ],
+                            "SubnetIds": [ "string" ]
+                        }
                     },
                     "AwsRdsDbCluster": {
                         "ActivityStreamStatus": "string",
@@ -2267,6 +2434,7 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                             ]
                         },
                         "CreatedAt": "string",
+                        "OwnerAccountId": "string",
                         "OwnerId": "string",
                         "OwnerName": "string",
                         "PublicAccessBlockConfiguration": {
@@ -2345,6 +2513,34 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                         "KmsMasterKeyId": "string",
                         "QueueName": "string"
                     },
+                    "AwsWafRateBasedRule": {
+                        "MatchPredicates": [
+                            {
+                                "DataId": "string",
+                                "Negated": boolean,
+                                "Type": "string"
+                            }
+                        ],
+                        "MetricName": "string",
+                        "Name": "string",
+                        "RateKey": "string",
+                        "RateLimit": number,
+                        "RuleId" : "string"
+                    },
+                    "AwsWafRegionalRateBasedRule": {
+                        "MatchPredicates": [
+                            {
+                                "DataId": "string",
+                                "Negated": boolean,
+                                "Type": "string"
+                            }
+                        ],
+                        "MetricName": "string",
+                        "Name": "string",
+                        "RateKey": "string",
+                        "RateLimit": number,
+                        "RuleId": "string"
+                    },
                     "AwsWafWebAcl": {
                         "DefaultAction": "string",
                         "Name": "string",
@@ -2367,6 +2563,11 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
                             }
                         ],
                         "WebAclId": "string"
+                    },
+                    "AwsXrayEncryptionConfig": {
+                        "KeyId": "string",
+                        "Status": "string",
+                        "Type": "string"
                     },
                     "Container": { 
                         "ImageId": "string",

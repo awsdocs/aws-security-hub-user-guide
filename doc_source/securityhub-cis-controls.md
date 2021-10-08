@@ -124,10 +124,10 @@ Finally, create the metric filter and alarm\.
 
 Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password as well as for an authentication code from their AWS MFA device\.
 
-Security Hub recommends enabling MFA for all accounts that have a console password\. Enabling MFA provides increased security for console access because it requires the authenticating principal to possess a device that emits a time\-sensitive key and have knowledge of a credential\.
+CIS recommends that you enable MFA for all accounts that have a console password\. MFA provides increased security for console access\. It requires the authenticating principal to possess a device that emits a time\-sensitive key and to have knowledge of a credential\.
 
 **Important**  
-The AWS Config rule used for this check may take up to 4 hours to accurately report results for MFA\. Any findings that are generated within the first 4 hours after enabling the CIS security checks may not be accurate\. It may also take up to 4 hours after remediating this issue for the check to pass\.
+The AWS Config rule used for this check may take up to 4 hours to accurately report results for MFA\. Any findings that are generated within the first 4 hours after you enable the CIS security checks might not be accurate\. It may also take up to 4 hours after you remediate this issue for the check to pass\.
 
 ### Remediation<a name="cis-1.2-remediation"></a>
 
@@ -153,7 +153,7 @@ To learn how to delegate MFA setup to users, see [How to Delegate Management of 
 
 IAM users can access AWS resources using different types of credentials, such as passwords or access keys\.
 
-Security Hub recommends that you remove or deactivate all credentials that have been unused in 90 days or more\. Disabling or removing unnecessary credentials reduces the window of opportunity for credentials associated with a compromised or abandoned account to be used\. 
+CIS recommends that you remove or deactivate all credentials that have been unused in 90 days or more\. Disabling or removing unnecessary credentials reduces the window of opportunity for credentials associated with a compromised or abandoned account to be used\. 
 
 The AWS Config rule for this control uses the [https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetCredentialReport.html](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetCredentialReport.html) and [https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateCredentialReport.html](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateCredentialReport.html) API operations, which are only updated every four hours\. Changes to IAM users can take up to four hours to be visible to this control\.
 
@@ -181,7 +181,7 @@ After you identify the inactive accounts or unused credentials, use the followin
 
 Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS\. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface \(AWS CLI\), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services\.
 
-Security Hub recommends that you regularly rotate all access keys\. Rotating access keys reduces the chance for an access key that is associated with a compromised or terminated account to be used\. Rotate access keys to ensure that data can't be accessed with an old key that might have been lost, cracked, or stolen\. 
+When you rotate access keys regularly, you reduce the chance that an access key is used that is associated with a compromised or terminated account\. Rotate access keys to ensure that data can't be accessed with an old key that might have been lost, cracked, or stolen\. 
 
 **Note**  
 This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
@@ -226,7 +226,7 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
-Security Hub recommends that the password policy require at least one uppercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\. 
+CIS recommends that the password policy require at least one uppercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\. 
 
 ### Remediation<a name="cis-1.5-remediation"></a>
 
@@ -244,7 +244,7 @@ Security Hub recommends that the password policy require at least one uppercase 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
-Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\. Security Hub recommends that the password policy require at least one lowercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
+Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\. CIS recommends that the password policy require at least one lowercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
 
 ### Remediation<a name="cis-1.6-remediation"></a>
 
@@ -264,7 +264,7 @@ Password policies, in part, enforce password complexity requirements\. Use IAM p
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
-Security Hub recommends that the password policy require at least one symbol\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
+CIS recommends that the password policy require at least one symbol\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
 
 ### Remediation<a name="cis-1.7-remediation"></a>
 
@@ -284,7 +284,7 @@ Security Hub recommends that the password policy require at least one symbol\. S
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
-Security Hub recommends that the password policy require at least one number\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
+CIS recommends that the password policy require at least one number\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
 
 ### Remediation<a name="cis-1.8-remediation"></a>
 
@@ -304,7 +304,7 @@ Security Hub recommends that the password policy require at least one number\. S
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords are at least a given length\.
 
-Security Hub recommends that the password policy require a minimum password length of 14 characters\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
+CIS recommends that the password policy require a minimum password length of 14 characters\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
 
 ### Remediation<a name="cis-1.9-remediation"></a>
 
@@ -326,7 +326,7 @@ This control checks whether the number of passwords to remember is set to 24\. T
 
 IAM password policies can prevent the reuse of a given password by the same user\.
 
-Security Hub recommends that the password policy prevent the reuse of passwords\. Preventing password reuse increases account resiliency against brute force login attempts\.
+CIS recommends that the password policy prevent the reuse of passwords\. Preventing password reuse increases account resiliency against brute force login attempts\.
 
 ### Remediation<a name="cis-1.10-remediation"></a>
 
@@ -348,7 +348,7 @@ Security Hub recommends that the password policy prevent the reuse of passwords\
 
 IAM password policies can require passwords to be rotated or expired after a given number of days\.
 
-Security Hub recommends that the password policy expire passwords after 90 days or less\. Reducing the password lifetime increases account resiliency against brute force login attempts\. Requiring regular password changes also helps in the following scenarios:
+CIS recommends that the password policy expire passwords after 90 days or less\. Reducing the password lifetime increases account resiliency against brute force login attempts\. Requiring regular password changes also helps in the following scenarios:
 + Passwords can be stolen or compromised without your knowledge\. This can happen via a system compromise, software vulnerability, or internal threat\.
 + Certain corporate and government web filters or proxy servers can intercept and record traffic even if it's encrypted\.
 + Many people use the same password for many systems such as work, email, and personal\.
@@ -374,7 +374,7 @@ Security Hub recommends that the password policy expire passwords after 90 days 
 
 The root account is the most privileged user in an AWS account\. AWS Access Keys provide programmatic access to a given account\.
 
-Security Hub recommends that all access keys be associated with the root account be removed\. Removing access keys associated with the root account limits vectors that the account can be compromised by\. Removing the root access keys also encourages the creation and use of role\-based accounts that are least privileged\.
+CIS recommends that all access keys be associated with the root account be removed\. Removing access keys associated with the root account limits vectors that the account can be compromised by\. Removing the root access keys also encourages the creation and use of role\-based accounts that are least privileged\.
 
 **Note**  
 This control is not supported in Africa \(Cape Town\) or Asia Pacific \(Osaka\)\.
@@ -403,7 +403,7 @@ This control is not supported in Africa \(Cape Town\) or Asia Pacific \(Osaka\)\
 
 The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
 
-When you use virtual MFA for root accounts, Security Hub recommends that the device used is *not* a personal device\. Instead, use a dedicated mobile device \(tablet or phone\) that you manage to keep charged and secured independent of any individual personal devices\. This lessens the risks of losing access to the MFA due to device loss, device trade\-in, or if the individual owning the device is no longer employed at the company\.
+When you use virtual MFA for root accounts, CIS recommends that the device used is *not* a personal device\. Instead, use a dedicated mobile device \(tablet or phone\) that you manage to keep charged and secured independent of any individual personal devices\. This lessens the risks of losing access to the MFA due to device loss, device trade\-in, or if the individual owning the device is no longer employed at the company\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -440,7 +440,7 @@ AWS GovCloud \(US\-West\)\.
 
 The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
 
-For Level 2, Security Hub recommends that you protect the root account with a hardware MFA\. A hardware MFA has a smaller attack surface than a virtual MFA\. For example, a hardware MFA doesn't suffer the attack surface introduced by the mobile smartphone that a virtual MFA resides on\.
+For Level 2, CIS recommends that you protect the root account with a hardware MFA\. A hardware MFA has a smaller attack surface than a virtual MFA\. For example, a hardware MFA doesn't suffer the attack surface introduced by the mobile smartphone that a virtual MFA resides on\.
 
 Using hardware MFA for many, many accounts might create a logistical device management issue\. If this occurs, consider implementing this Level 2 recommendation selectively to the highest security accounts\. You can then apply the Level 1 recommendation to the remaining accounts\.
 
@@ -477,7 +477,7 @@ AWS GovCloud \(US\-West\)\.
 
 By default, IAM users, groups, and roles have no access to AWS resources\. IAM policies are how privileges are granted to users, groups, or roles\.
 
-Security Hub recommends that you apply IAM policies directly to groups and roles but not users\. Assigning privileges at the group or role level reduces the complexity of access management as the number of users grow\. Reducing access management complexity might in turn reduce opportunity for a principal to inadvertently receive or retain excessive privileges\.
+CIS recommends that you apply IAM policies directly to groups and roles but not users\. Assigning privileges at the group or role level reduces the complexity of access management as the number of users grow\. Reducing access management complexity might in turn reduce opportunity for a principal to inadvertently receive or retain excessive privileges\.
 
 ### Remediation<a name="cis-1.16-remediation"></a>
 
@@ -682,7 +682,7 @@ By default, CloudTrail trails that are created using the AWS Management Console 
 
 CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to S3\. You can use these digest files to determine whether a log file was changed, deleted, or unchanged after CloudTrail delivered the log\.
 
-Security Hub recommends that you enable file validation on all trails\. Enabling log file validation provides additional integrity checking of CloudTrail logs\.
+CIS recommends that you enable file validation on all trails\. Enabling log file validation provides additional integrity checking of CloudTrail logs\.
 
 ### Remediation<a name="cis-2.2-remediation"></a>
 
@@ -706,7 +706,7 @@ Security Hub recommends that you enable file validation on all trails\. Enabling
 
 **AWS Config rules:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html), [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
 
-CloudTrail logs a record of every API call made in your account\. These log files are stored in an S3 bucket\. Security Hub recommends that the S3 bucket policy, or access control list \(ACL\), applied to the S3 bucket that CloudTrail logs to prevents public access to the CloudTrail logs\. Allowing public access to CloudTrail log content might aid an adversary in identifying weaknesses in the affected account's use or configuration\.
+CloudTrail logs a record of every API call made in your account\. These log files are stored in an S3 bucket\. CIS recommends that the S3 bucket policy, or access control list \(ACL\), applied to the S3 bucket that CloudTrail logs to prevents public access to the CloudTrail logs\. Allowing public access to CloudTrail log content might aid an adversary in identifying weaknesses in the affected account's use or configuration\.
 
 To run this check, Security Hub first uses custom logic to look for the S3 bucket where your CloudTrail logs are stored\. It then uses the AWS Config managed rules to check that bucket is publicly accessible\.
 
@@ -740,7 +740,7 @@ CloudTrail uses Amazon S3 for log file storage and delivery, so log files are st
 
 For a trail that is enabled in all Regions in an account, CloudTrail sends log files from all those Regions to a CloudWatch Logs log group\.
 
-Security Hub recommends that you send CloudTrail logs to CloudWatch Logs\.
+CIS recommends that you send CloudTrail logs to CloudWatch Logs\.
 
 **Note**  
  The intent of this recommendation is to ensure that account activity is being captured, monitored, and appropriately alarmed on\. CloudWatch Logs is a native way to accomplish this using AWS services but doesn't preclude the use of an alternate solution\.
@@ -783,7 +783,7 @@ For more information, see [Configuring CloudWatch Logs monitoring with the conso
 
 AWS Config is a web service that performs configuration management of supported AWS resources in your account and delivers log files to you\. The recorded information includes the configuration item \(AWS resource\), relationships between configuration items \(AWS resources\), and any configuration changes between resources\.
 
-Security Hub recommends that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\.
+CIS recommends that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\.
 
 **Note**  
 CIS 2\.5 requires that AWS Config is enabled in all Regions in which you use Security Hub\.  
@@ -826,7 +826,7 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 Amazon S3 bucket access logging generates a log that contains access records for each request made to your S3 bucket\. An access log record contains details about the request, such as the request type, the resources specified in the request worked, and the time and date the request was processed\.
 
-Security Hub recommends that you enable bucket access logging on the CloudTrail S3 bucket\.
+CIS recommends that you enable bucket access logging on the CloudTrail S3 bucket\.
 
 By enabling S3 bucket logging on target S3 buckets, you can capture all events that might affect objects in a target bucket\. Configuring logs to be placed in a separate bucket enables access to log information, which can be useful in security and incident response workflows\.
 
@@ -862,7 +862,7 @@ CloudTrail is a web service that records AWS API calls for an account and makes 
 
 You can configure CloudTrail logs to leverage server\-side encryption \(SSE\) and KMS keys to further protect CloudTrail logs\.
 
-Security Hub recommends that you configure CloudTrail to use SSE\-KMS\.
+CIS recommends that you configure CloudTrail to use SSE\-KMS\.
 
 Configuring CloudTrail to use SSE\-KMS provides additional confidentiality controls on log data because a given user must have S3 read permission on the corresponding log bucket and must be granted decrypt permission by the KMS key policy\.
 
@@ -898,7 +898,7 @@ You might need to modify the policy for CloudTrail to successfully interact with
 
 AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the KMS key\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\.
 
-Security Hub recommends that you enable KMS key key rotation\. Rotating encryption keys helps reduce the potential impact of a compromised key because data encrypted with a new key can't be accessed with a previous key that might have been exposed\.
+CIS recommends that you enable KMS key key rotation\. Rotating encryption keys helps reduce the potential impact of a compromised key because data encrypted with a new key can't be accessed with a previous key that might have been exposed\.
 
 ### Remediation<a name="cis-2.8-remediation"></a>
 
@@ -924,7 +924,7 @@ Security Hub recommends that you enable KMS key key rotation\. Rotating encrypti
 
 VPC flow logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC\. After you have created a flow log, you can view and retrieve its data in CloudWatch Logs\.
 
-Security Hub recommends that you enable flow logging for packet rejects for VPCs\. Flow logs provide visibility into network traffic that traverses the VPC and can detect anomalous traffic or insight during security workflows\. 
+CIS recommends that you enable flow logging for packet rejects for VPCs\. Flow logs provide visibility into network traffic that traverses the VPC and can detect anomalous traffic or insight during security workflows\. 
 
 ### Remediation<a name="cis-2.9-remediation"></a>
 
@@ -956,7 +956,7 @@ Security Hub recommends that you enable flow logging for packet rejects for VPCs
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm unauthorized API calls\. Monitoring unauthorized API calls helps reveal application errors and might reduce time to detect malicious activity\.
+CIS recommends that you create a metric filter and alarm unauthorized API calls\. Monitoring unauthorized API calls helps reveal application errors and might reduce time to detect malicious activity\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.1 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1064,7 +1064,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm console logins that aren't protected by MFA\. Monitoring for single\-factor console logins increases visibility into accounts that aren't protected by MFA\. 
+CIS recommends that you create a metric filter and alarm console logins that aren't protected by MFA\. Monitoring for single\-factor console logins increases visibility into accounts that aren't protected by MFA\. 
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.2 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1172,7 +1172,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm for root login attempts\. Monitoring for root account logins provides visibility into the use of a fully privileged account and an opportunity to reduce the use of it\.
+CIS recommends that you create a metric filter and alarm for root login attempts\. Monitoring for root account logins provides visibility into the use of a fully privileged account and an opportunity to reduce the use of it\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.3 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1280,7 +1280,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm for changes made to IAM policies\. Monitoring these changes helps ensure that authentication and authorization controls remain intact\.
+CIS recommends that you create a metric filter and alarm for changes made to IAM policies\. Monitoring these changes helps ensure that authentication and authorization controls remain intact\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.4 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1390,7 +1390,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm for changes to CloudTrail configuration settings\. Monitoring these changes helps ensure sustained visibility to activities in the account\.
+CIS recommends that you create a metric filter and alarm for changes to CloudTrail configuration settings\. Monitoring these changes helps ensure sustained visibility to activities in the account\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.5 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1498,7 +1498,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm for failed console authentication attempts\. Monitoring failed console logins might decrease lead time to detect an attempt to brute\-force a credential, which might provide an indicator, such as source IP, that you can use in other event correlations\. 
+CIS recommends that you create a metric filter and alarm for failed console authentication attempts\. Monitoring failed console logins might decrease lead time to detect an attempt to brute\-force a credential, which might provide an indicator, such as source IP, that you can use in other event correlations\. 
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.6 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1606,7 +1606,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm for customer managed keys that have changed state to disabled or scheduled deletion\. Data encrypted with disabled or deleted keys is no longer accessible\.
+CIS recommends that you create a metric filter and alarm for customer managed keys that have changed state to disabled or scheduled deletion\. Data encrypted with disabled or deleted keys is no longer accessible\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.7 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1714,7 +1714,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm for changes to S3 bucket policies\. Monitoring these changes might reduce time to detect and correct permissive policies on sensitive S3 buckets\.
+CIS recommends that you create a metric filter and alarm for changes to S3 bucket policies\. Monitoring these changes might reduce time to detect and correct permissive policies on sensitive S3 buckets\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.8 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1822,7 +1822,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-Security Hub recommends that you create a metric filter and alarm for changes to AWS Config configuration settings\. Monitoring these changes helps ensure sustained visibility of configuration items in the account\.
+CIS recommends that you create a metric filter and alarm for changes to AWS Config configuration settings\. Monitoring these changes helps ensure sustained visibility of configuration items in the account\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.9 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1930,7 +1930,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Security groups are a stateful packet filter that controls ingress and egress traffic in a VPC\.
 
-Security Hub recommends that you create a metric filter and alarm for changes to security groups\. Monitoring these changes helps ensure that resources and services aren't unintentionally exposed\. 
+CIS recommends that you create a metric filter and alarm for changes to security groups\. Monitoring these changes helps ensure that resources and services aren't unintentionally exposed\. 
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.10 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1954,7 +1954,7 @@ The steps to remediate this issue include setting up an Amazon SNS topic, a Clou
 
 1. Create an Amazon SNS topic that receives all CIS alarms\.
 
-   Create at least one subscriber to the topic\. For more information, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
+   Create at least one subscriber to the topic\. For more information, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html#CreateTopic) in the *Amazon Simple Notification Service Developer Guide*\.
 
 Next, set up an active CloudTrail that applies to all Regions\. To do so, follow the remediation steps in [2\.1 – Ensure CloudTrail is enabled in all Regions](#securityhub-cis-controls-2.1)\.
 
@@ -2038,7 +2038,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. NACLs are used as a stateless packet filter to control ingress and egress traffic for subnets in a VPC\.
 
-Security Hub recommends that you create a metric filter and alarm for changes to NACLs\. Monitoring these changes helps ensure that AWS resources and services aren't unintentionally exposed\. 
+CIS recommends that you create a metric filter and alarm for changes to NACLs\. Monitoring these changes helps ensure that AWS resources and services aren't unintentionally exposed\. 
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.11 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -2146,7 +2146,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Network gateways are required to send and receive traffic to a destination outside a VPC\.
 
-Security Hub recommends that you create a metric filter and alarm for changes to network gateways\. Monitoring these changes helps ensure that all ingress and egress traffic traverses the VPC border via a controlled path\.
+CIS recommends that you create a metric filter and alarm for changes to network gateways\. Monitoring these changes helps ensure that all ingress and egress traffic traverses the VPC border via a controlled path\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.12 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -2254,7 +2254,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Routing tables route network traffic between subnets and to network gateways\.
 
-Security Hub recommends that you create a metric filter and alarm for changes to route tables\. Monitoring these changes helps ensure that all VPC traffic flows through an expected path\.
+CIS recommends that you create a metric filter and alarm for changes to route tables\. Monitoring these changes helps ensure that all VPC traffic flows through an expected path\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.13 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -2362,7 +2362,7 @@ Finally, create the metric filter and alarm\.
 
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. You can have more than one VPC in an account, and you can create a peer connection between two VPCs, enabling network traffic to route between VPCs\.
 
-Security Hub recommends that you create a metric filter and alarm for changes to VPCs\. Monitoring these changes helps ensure that authentication and authorization controls remain intact\.
+CIS recommends that you create a metric filter and alarm for changes to VPCs\. Monitoring these changes helps ensure that authentication and authorization controls remain intact\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.14 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -2380,7 +2380,7 @@ For the alarm, the current account must either own the referenced Amazon SNS top
 
 The steps to remediate this issue include setting up an Amazon SNS topic, a CloudTrail trail, a metric filter, and an alarm for the metric filter\.
 
-**Create an Amazon SNS topic**
+**To create an Amazon SNS topic**
 
 1. Open the Amazon SNS console at [https://console\.aws\.amazon\.com/sns/v3/home](https://console.aws.amazon.com/sns/v3/home)\.
 
@@ -2470,7 +2470,7 @@ Finally, create the metric filter and alarm\.
 
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
-Security Hub recommends that no security group allow unrestricted ingress access to port 22\. Removing unfettered connectivity to remote console services, such as SSH, reduces a server's exposure to risk\.
+CIS recommends that no security group allow unrestricted ingress access to port 22\. Removing unfettered connectivity to remote console services, such as SSH, reduces a server's exposure to risk\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -2506,7 +2506,7 @@ The name of the associated AWS Config managed rule is` restricted-common-ports`\
 
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
-Security Hub recommends that no security group allow unrestricted ingress access to port 3389\. Removing unfettered connectivity to remote console services, such as RDP, reduces a server's exposure to risk\.
+CIS recommends that no security group allow unrestricted ingress access to port 3389\. Removing unfettered connectivity to remote console services, such as RDP, reduces a server's exposure to risk\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -2540,7 +2540,7 @@ Perform the following steps for each security group associated with a VPC\.
 
 A VPC comes with a default security group with initial settings that deny all inbound traffic, allow all outbound traffic, and allow all traffic between instances assigned to the security group\. If you don't specify a security group when you launch an instance, the instance is automatically assigned to this default security group\. Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
-Security Hub recommends that the default security group restrict all traffic\.
+CIS recommends that the default security group restrict all traffic\.
 
 Update the default security group for the default VPC in every Region to comply\. Any new VPCs automatically contain a default security group that you need to remediate to comply with this recommendation\.
 

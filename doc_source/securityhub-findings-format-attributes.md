@@ -1916,10 +1916,13 @@ Security Hub provides a set of available objects for its supported resource type
 + [`AwsEc2Volume`](#asff-resourcedetails-awsec2volume)
 + [`AwsEc2Vpc`](#asff-resourcedetails-awsec2vpc)
 + [`AwsEc2VpnConnection`](#asff-resourcedetails-awsec2vpnconnection)
++ [`AwsEc2VpcEndPointService`](#asff-resourcedetails-awsec2vpcendpointservice)
 + [`AwsEcrContainerImage`](#asff-resourcedetails-awsecrcontainerimage)
++ [`AwsEcrRepository`](#asff-resourcedetails-awsecrrepository)
 + [`AwsEcsCluster`](#asff-resourcedetails-awsecscluster)
 + [`AwsEcsService`](#asff-resourcedetails-awsecsservice)
 + [`AwsEcsTaskDefinition`](#asff-resourcedetails-awsecstaskdefinition)
++ [`AwsEksCluster`](#asff-resourcedetails-awsekscluster)
 + [`AwsElasticBeanstalkEnvironment`](#asff-resourcedetails-awselasticbeanstalkenvironment)
 + [`AwsElasticsearchDomain`](#asff-resourcedetails-awselasticsearchdomain)
 + [`AwsElbLoadBalancer`](#asff-resourcedetails-awselbloadbalancer)
@@ -1932,6 +1935,7 @@ Security Hub provides a set of available objects for its supported resource type
 + [`AwsKmsKey`](#asff-resourcedetails-awskmskey)
 + [`AwsLambdaFunction`](#asff-resourcedetails-awslambdafunction)
 + [`AwsLambdaLayerVersion`](#asff-resourcedetails-awslambdalayerversion)
++ [`AwsOpenSearchServiceDomain`](#asff-resourcedetails-awsopensearchservicedomain)
 + [`AwsRdsDbCluster`](#asff-resourcedetails-awsrdsdbcluster)
 + [`AwsRdsDbClusterSnapshot`](#asff-resourcedetails-awsrdsdbclustersnapshot)
 + [`AwsRdsDbInstance`](#asff-resourcedetails-awsrdsdbinstance)
@@ -1945,7 +1949,10 @@ Security Hub provides a set of available objects for its supported resource type
 + [`AwsSnsTopic`](#asff-resourcedetails-awssnstopic)
 + [`AwsSqsQueue`](#asff-resourcedetails-awssqsqueue)
 + [`AwsSsmPatchCompliance`](#asff-resourcedetails-awsssmpatchcompliance)
++ [`AwsWafRateBasedRule`](#asff-resourcedetails-awswafratebasedrule)
++ [`AwsWafRegionalRateBasedRule`](#asff-resourcedetails-awswafregionalratebasedrule)
 + [`AwsWafWebAcl`](#asff-resourcedetails-awswafwebacl)
++ [`AwsXrayEncryptionConfig`](#asff-resourcedetails-awsxrayencryptionconfig)
 + [`Container`](#asff-resourcedetails-container)
 For example, if the resource is an S3 bucket, then set the resource `Type` to `AwsS3Bucket` and provide the resource details in the `AwsS3Bucket` subfield\.  
 The [`Other`](#asff-resourcedetails-other) subfield allows you to provide custom fields and values\. You use the `Other` subfield in the following cases\.  
@@ -2082,12 +2089,14 @@ Supported values are as follows\. If a type has a corresponding subfield, then t
 + [`AwsEc2Volume`](#asff-resourcedetails-awsec2volume)
 + [`AwsEc2Vpc`](#asff-resourcedetails-awsec2vpc)
 + [`AwsEc2VpnConnection`](#asff-resourcedetails-awsec2vpnconnection)
++ [`AwsEc2VpcEndPointService`](#asff-resourcedetails-awsec2vpcendpointservice)
 + [`AwsEcrContainerImage`](#asff-resourcedetails-awsecrcontainerimage)
++ [`AwsEcrRepository`](#asff-resourcedetails-awsecrrepository)
 + [`AwsEcsCluster`](#asff-resourcedetails-awsecscluster)
 + [`AwsEcsService`](#asff-resourcedetails-awsecsservice)
 + [`AwsEcsTaskDefinition`](#asff-resourcedetails-awsecstaskdefinition)
 + `AwsEfsFileSystem`
-+ `AwsEksCluster`
++ [`AwsEksCluster`](#asff-resourcedetails-awsekscluster)
 + `AwsElastiCacheCacheCluster`
 + [`AwsElasticBeanstalkEnvironment`](#asff-resourcedetails-awselasticbeanstalkenvironment)
 + [`AwsElasticsearchDomain`](#asff-resourcedetails-awselasticsearchdomain)
@@ -2104,6 +2113,7 @@ Supported values are as follows\. If a type has a corresponding subfield, then t
 + [`AwsLambdaFunction`](#asff-resourcedetails-awslambdafunction)
 + [`AwsLambdaLayerVersion`](#asff-resourcedetails-awslambdalayerversion)
 + `AwsLogsLogGroup`
++ [`AwsOpenSearchServiceDomain`](#asff-resourcedetails-awsopensearchservicedomain)
 + [`AwsRdsDbCluster`](#asff-resourcedetails-awsrdsdbcluster)
 + [`AwsRdsDbClusterSnapshot`](#asff-resourcedetails-awsrdsdbclustersnapshot)
 + [`AwsRdsDbInstance`](#asff-resourcedetails-awsrdsdbinstance)
@@ -2119,7 +2129,10 @@ Supported values are as follows\. If a type has a corresponding subfield, then t
 + [`AwsSqsQueue`](#asff-resourcedetails-awssqsqueue)
 + `AwsSsmAssociationCompliance`
 + [`AwsSsmPatchCompliance`](#asff-resourcedetails-awsssmpatchcompliance)
++ [`AwsWafRateBasedRule`](#asff-resourcedetails-awswafratebasedrule)
++ [`AwsWafRegionalRateBasedRule`](#asff-resourcedetails-awswafregionalratebasedrule)
 + [`AwsWafWebAcl`](#asff-resourcedetails-awswafwebacl)
++ [`AwsXrayEncryptionConfig`](#asff-resourcedetails-awsxrayencryptionconfig)
 + [`Container`](#asff-resourcedetails-container)
 + [`Other`](#asff-resourcedetails-other)
 **Example**  
@@ -3946,6 +3959,11 @@ Optional
 Indicates the current status of the distribution\.  
 **Type:** String
 
+**[`ViewerCertificate`](#asff-resourcedetails-awscloudfrontdistribution-viewercertificate)**  
+Optional  
+Provides information about the TLS/SSL configuration that the distribution uses to communicate with viewers\.  
+**Type:** Object
+
 **`WebAclId`**  
 Optional  
 A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution\.  
@@ -4083,6 +4101,50 @@ Type: Object
 Optional  
 The CloudFront origin access identity to associate with the origin\.  
 **Type:** String
+
+#### ViewerCertificate<a name="asff-resourcedetails-awscloudfrontdistribution-viewercertificate"></a>
+
+The `ViewerCertificate` object contains the TLS/SSL configuration that the distribution uses to communicate with viewers\.
+
+`ViewerCertificate` can have the following attributes\.
+
+`AcmCertificateArn`  
+Optional  
+The ARN of the ACM certificate\. Used if the certificate is stored in ACM\. If you provide an ACM certificate ARN, you must also provide `MinimumCertificateVersion` and `SslSupportMethod`\.  
+**Type:** String
+
+`Certificate`  
+Optional  
+The identifier of the certificate\. Note that in CloudFront, this attribute is deprecated\.  
+**Type:** String
+
+`CertificateSource`  
+Optional  
+The source of the certificate identified by `Certificate`\. Note that in CloudFront, this attribute is deprecated\.  
+**Type:** String  
+**Valid values:** `cloudfront` \| `iam` \| `acm`
+
+`CloudFrontDefaultCertificate`  
+Optional  
+Whether the distribution uses the CloudFront domain name\. If set to false, then you provide either `AcmCertificateArn` or `IamCertificateId`\.  
+**Type:** Boolean
+
+`IamCertificateId`  
+Optional  
+The identifier of the IAM certificate\. Used if the certificate is stored in IAM\. If you provide `IamCertificateId`, then you also must provide `MinimumProtocolVersion` and `SslSupportMethod`\.  
+**Type:** String
+
+`MinimumProtocolVersion`  
+Optional  
+The security policy that CloudFront uses for HTTPS connections with viewers\. If `SslSupportMethod` is `sni-only`, then `MinimumProtocolVersion` must be `TLSv1` or higher\.  
+**Type:** String  
+**Valid values:** `SSLv3` \| `TLSv1` \| `TLSv1_2016` \| `TLSv1.1_2016` \| `TLSv1.2_2018` \| `TLSv1.2_2019` \|` TLSv1.2_2021`
+
+`SslSupportMethod`  
+Optional  
+The viewers that the distribution accepts HTTPS connections from\.  
+**Type:** String  
+**Valid values:** `sni-only` \| `vip` \| `static-ip`
 
 ### AwsCloudTrailTrail<a name="asff-resourcedetails-awscloudtrailtrail"></a>
 
@@ -4226,6 +4288,13 @@ The `AwsCodeBuildProject` object provides information about an AWS CodeBuild pro
 
 The `AwsCodeBuildProject` object can have the following attributes\.
 
+**[`Artifacts`](#asff-resourcedetails-awscodebuildproject-artifacts)**  
+Optional  
+Information about the build artifacts for the CodeBuild project\.  
+**Type:** Array of objects  
+**Minimum array length:** 1  
+**Maximum array length:** 25
+
 **`EncryptionKey`**  
 Optional  
 The AWS KMS key to be used for encrypting the build output artifacts\.  
@@ -4237,6 +4306,11 @@ Minimum length: 1
 **[`Environment`](#asff-resourcedetails-awscodebuildproject-environment)**  
 Optional  
 Information about the build environment for this build project\.  
+**Type:** Object
+
+**[`LogsConfig`](#asff-resourcedetails-awscodebuildproject-logsconfig)**  
+Optional  
+Information about logs for the build project\.  
 **Type:** Object
 
 **`Name`**  
@@ -4263,6 +4337,60 @@ Optional
 Information about the VPC configuration that CodeBuild accesses\.  
 **Type:** Object
 
+#### Artifacts<a name="asff-resourcedetails-awscodebuildproject-artifacts"></a>
+
+The `Artifacts` object provides information about the build artifacts for the CodeBuild project\.
+
+Each artifact definition can have the following attributes\.
+
+`ArtifactIdentifier`  
+Optional  
+An identifier for the artifact definition\.  
+**Type:** String
+
+`EncryptionDisabled`  
+Optional  
+Indicates whether to disable encryption on the artifact\. Only valid when `Type` is `S3`\.  
+**Type:** Boolean
+
+`Location`  
+Optional  
+Only used when `Type` is `S3`\. The name of the S3 bucket where the artifact is located\.  
+**Type:** String
+
+`Name`  
+Optional  
+Only used when `Type` is `S3`\. The name of the artifact\. Used with `NamepaceType` and `Path` to determine the pattern for storing the artifact\.  
+**Type:** String
+
+`NamespaceType`  
+Optional  
+Only used when `Type` is `S3`\. The value to use for the namespace\. Used with `Name` and `Path` to determine the pattern for storing the artifact\.  
+**Type:** String  
+**Valid values:** `NONE` \| `BUILD_ID`
+
+`OverrideArtifactName`  
+Optional  
+Whether the name specified in the buildspec file overrides the artifact name\.  
+**Type:** Boolean
+
+`Packaging`  
+Optional  
+Only used when `Type` is `S3`\. The type of output artifact to create\.  
+**Type:** String  
+**Valid values:** `NONE` \| `ZIP`
+
+`Path`  
+Optional  
+Only used when `Type` is `S3`\. The path to the artifact\. Used with `Name` and `NamespaceType` to determine the pattern for storing the artifact\.  
+**Type:** String
+
+`Type`  
+Optional  
+The type of build artifact\.  
+**Type:** String  
+**Valid values:** `CODEPIPELINE` \| `S3` \| `NO_ARTIFACTS`
+
 #### Environment<a name="asff-resourcedetails-awscodebuildproject-environment"></a>
 
 The `Environment` object provides information about the build environment for the build project\.
@@ -4274,6 +4402,12 @@ Optional
 The certificate to use with this build project\.  
 **Type:** String
 
+**[`EnvironmentVariables`](#asff-resourcedetails-awscodebuildproject-environment-environmentvariables)**  
+Optional  
+A set of environment variables to make available to builds for the build project\.  
+**Type:** Array of objects  
+**Maximum array length**: 5
+
 **`ImagePullCredentialsType`**  
 Optional  
 The type of credentials CodeBuild uses to pull images in your build\. There are two valid values:  
@@ -4282,6 +4416,11 @@ The type of credentials CodeBuild uses to pull images in your build\. There are 
 When you use a cross\-account or private registry image, you must use `SERVICE_ROLE` credentials\. When you use a CodeBuild curated image, you must use `CODEBUILD` credentials\.  
 **Type:** String  
 **Valid values:** `CODEBUILD` \| `SERVICE_ROLE`
+
+**`PrivilegedMode`**  
+Optional  
+Whether to allow the Docker daemon to run inside a Docker container\. Set to true if the build project is used to build Docker images\.  
+**Type:** Boolean
 
 **`RegistryCredential`**  
 Optional  
@@ -4308,6 +4447,88 @@ Required
 The service that created the credentials to access a private Docker registry\. The valid value,` SECRETS_MANAGER`, is for Secrets Manager\.  
 **Type:** String  
 **Valid values:** `SECRETS_MANAGER`
+
+##### EnvironmentVariables<a name="asff-resourcedetails-awscodebuildproject-environment-environmentvariables"></a>
+
+The `EnvironmentVariables` object provides information about the environment variables that are available to builds for the build project\.
+
+Each environment variable can have the following attributes\.
+
+`Name`  
+Optional  
+The name of the environment variable\.  
+**Type:** String
+
+`Type`  
+Optional  
+The type of environment variable\.  
+**Type:** String  
+**Valid values:** `PLAINTEXT` \| `PARAMETER_STORE` \|` SECRETS_MANAGER`
+
+`Value`  
+Optional  
+The value of the environment variable\.  
+**Type:** String
+
+#### LogsConfig<a name="asff-resourcedetails-awscodebuildproject-logsconfig"></a>
+
+The `LogsConfig` object contains information about logs for the build project\.
+
+`LogsConfig` can have the following attributes\.
+
+[`CloudWatchLogs`](#asff-resourcedetails-awscodebuildproject-logsconfig-cloudwatchlogs)  
+Optional  
+Information about CloudWatch Logs for the build project\.  
+**Type:** Object
+
+[`S3Logs`](#asff-resourcedetails-awscodebuildproject-logsconfig-s3logs)  
+Optional  
+Information about logs built to an S3 bucket for a build project\.  
+**Type:** Object
+
+##### CloudWatchLogs<a name="asff-resourcedetails-awscodebuildproject-logsconfig-cloudwatchlogs"></a>
+
+The `CloudWatchLogs` object contains information about CloudWatch Logs for the build project\.
+
+`CloudWatchLogs` can have the following attributes\.
+
+`GroupName`  
+Optional  
+The group name of the logs in CloudWatch Logs\.  
+**Type:** String
+
+`Status`  
+Optional  
+The current status of the logs in CloudWatch Logs for a build project\.  
+**Type:** String  
+**Valid values:** `ENABLED` \| `DISABLED`
+
+`StreamName`  
+Optional  
+The prefix of the stream name of the CloudWatch Logs\.  
+**Type:** String
+
+##### S3Logs<a name="asff-resourcedetails-awscodebuildproject-logsconfig-s3logs"></a>
+
+The `S3Logs` object contains information about logs built to an S3 bucket for a build project\.
+
+`S3Logs` can have the following attributes\.
+
+`EncryptionDisabled`  
+Optional  
+Whether to disable encryption of the S3 build log output\.  
+**Type:** Boolean
+
+`Location`  
+Optional  
+The ARN of the S3 bucket and the path prefix for S3 logs\.  
+**Type:** String
+
+`Status`  
+Optional  
+The current status of the S3 build logs\.  
+**Type:** String  
+**Valid values:** `ENABLED` \| `DISABLED`
 
 #### Source<a name="asff-resourcedetails-awscodebuildproject-source"></a>
 
@@ -5908,6 +6129,110 @@ Optional
 The IPv6 CIDR block\.  
 **Type:** CIDR IPV6
 
+### AwsEc2VpcEndpointService<a name="asff-resourcedetails-awsec2vpcendpointservice"></a>
+
+The `AwsEc2VpcEndpointService` object contains details about the service configuration for a VPC endpoint service\.
+
+**Example**
+
+```
+"AwsEc2VpcEndpointService": {
+    "ServiceType": [
+      {
+        "ServiceType": "Interface"
+      }
+    ],
+    "ServiceId": "vpce-svc-example1",
+    "ServiceName": "com.amazonaws.vpce.us-east-1.vpce-svc-example1",
+    "ServiceState": "Available",
+    "AvailabilityZones": [
+      "us-east-1"
+    ],
+    "AcceptanceRequired": true,
+    "ManagesVpcEndpoints": false,
+    "NetworkLoadBalancerArns": [
+      "arn:aws:elasticloadbalancing:us-east-1:444455556666:loadbalancer/net/my-network-load-balancer/example1"
+    ],
+    "GatewayLoadBalancerArns": [],
+    "BaseEndpointDnsNames": [
+      "vpce-svc-04eec859668b51c34.us-east-1.vpce.amazonaws.com"
+    ],
+    "PrivateDnsName": "my-private-dns"
+}
+```
+
+`AwsEc2VpcEndPointService` can have the following attributes\.
+
+`AcceptanceRequired`  
+Optional  
+Whether requests from other AWS accounts to create an endpoint to the service must first be accepted\.  
+**Type:** Boolean
+
+`AvailabilityZones`  
+Optional  
+The Availability Zones where the service is available\.  
+**Type:** Array of strings
+
+`BaseEndpointDnsNames`  
+Optional  
+The DNS names for the service\.  
+**Type:** Array of strings
+
+`GatewayLoadBalancerArns`  
+Optional  
+The ARNs of the Gateway Load Balancers for the service\.  
+**Type:** Array of strings
+
+`ManagesVpcEndpoints`  
+Optional  
+Whether the service manages its VPC endpoints\.  
+**Type:** Boolean
+
+`NetworkLoadBalancerArns`  
+Optional  
+The ARNs of the Network Load Balancers for the service\.  
+**Type:** Array of strings
+
+`PrivateDnsName`  
+Optional  
+The private DNS name for the service\.  
+**Type:** String
+
+`ServiceId`  
+Optional  
+The identifier of the service\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 32
+
+`ServiceName`  
+Optional  
+The name of the service\.  
+**Type:** String
+
+`ServiceState`  
+Optional  
+The current state of the service\.  
+**Type:** String  
+**Valid values:** `Pending` \| `Available` \| `Deleting` \| `Deleted` \| `Failed`
+
+  
+[`ServiceType`](#asff-resourcedetails-awsec2vpcendpointservice-servicetype)  
+Optional  
+The types for the service\.  
+**Type:** Array of objects
+
+#### ServiceType<a name="asff-resourcedetails-awsec2vpcendpointservice-servicetype"></a>
+
+The `ServiceType` object contains the service type information for the service\.
+
+Each `ServiceType` entry can have the following attributes\.
+
+`ServiceType`  
+Optional  
+The type of service\.  
+**Type:** String
+
 ### AwsEc2VpnConnection<a name="asff-resourcedetails-awsec2vpnconnection"></a>
 
 The `AwsEc2VpnConnection` object provides details about an Amazon EC2 VPN connection\.
@@ -6237,6 +6562,86 @@ The name of the repository that the image belongs to\.
 **Type:** String  
 **Minimum length:** 2  
 **Maximum length:** 256
+
+### AwsEcrRepository<a name="asff-resourcedetails-awsecrrepository"></a>
+
+The `AwsEcrRepository` object provides information about an Amazon Elastic Container Registry repository\.
+
+**Example**
+
+```
+"AwsEcrRepository": {
+    "RegistryId": "222222222222",
+    "RepositoryName": "sample-repo",
+    "RepositoryArn": "arn:aws:ecr:us-west-2:222222222222:repository/sample-repo",
+    "ImageScanningConfiguration": {
+        "ScanOnPush": true
+    },
+    "ImageTagMutability": "IMMUTABLE"
+}
+```
+
+`AwsEcrRepository` can have the following attributes\.
+
+`Arn`  
+Optional  
+The ARN of the repository\.  
+**Type:** String
+
+[`ImageScanningConfiguration`](#asff-resourcedetails-awsecrrepository-imagescanningconfiguration)  
+Optional  
+The image scanning configuration for a repository\.  
+**Type:** Object
+
+`ImageTagMutability`  
+Optional  
+The tag mutability setting for the repository\.  
+**Type:** String  
+**Valid values:** `MUTABLE` \| `IMMUTABLE`
+
+[`LifecyclePolicy`](#asff-resourcedetails-awsecrrepository-lifecyclepolicy)  
+Optional  
+Information about the lifecycle policy for the repository\.  
+**Type:** Object
+
+`RepositoryName`  
+Optional  
+The name of the repository\.  
+**Type:** String  
+**Minimum length:** 2  
+**Maximum length:** 256
+
+`RepositoryPolicyText`  
+Optional  
+The text of the repository policy\.  
+**Type:** String
+
+#### ImageScanningConfiguration<a name="asff-resourcedetails-awsecrrepository-imagescanningconfiguration"></a>
+
+The `ImageScanningConfiguration` object contains the image scanning configuration for a repository\.
+
+`ImageScanningConfiguration` can have the following attributes\.
+
+`ScanOnPush`  
+Optional  
+Whether to scan images after they are pushed to a repository\.  
+**Type:** Boolean
+
+#### LifecyclePolicy<a name="asff-resourcedetails-awsecrrepository-lifecyclepolicy"></a>
+
+The `LifecyclePolicy` object contains information about the lifecycle policy for the repository\.
+
+`LifecyclePolicy` can have the following attributes\.
+
+`LifecyclePolicyText`  
+Optional  
+The text of the lifecycle policy\.  
+**Type:** String
+
+`RegistryId`  
+Optional  
+The AWS account identifier that is associated with the registry that contains the repository\.  
+**Type:** String
 
 ### AwsEcsCluster<a name="asff-resourcedetails-awsecscluster"></a>
 
@@ -7742,6 +8147,136 @@ Optional
 The path on the host container instance that is presented to the container\. Not supported for the Fargate launch type\.  
 **Type:** String
 
+### AwsEksCluster<a name="asff-resourcedetails-awsekscluster"></a>
+
+The `AwsEksCluster` object provides details about an Amazon EKS cluster\.
+
+**Example**
+
+```
+{
+  "AwsEksCluster": {
+    "Name": "example",
+    "Arn": "arn:aws:eks:us-west-2:222222222222:cluster/example",
+    "CreatedAt": 1565804921.901,
+    "Version": "1.12",
+    "RoleArn": "arn:aws:iam::222222222222:role/example-cluster-ServiceRole-1XWBQWYSFRE2Q",
+    "ResourcesVpcConfig": {
+      "SubnetIds": [
+        "subnet-021345abcdef6789",
+        "subnet-abcdef01234567890",
+        "subnet-1234567890abcdef0"
+      ],
+      "SecurityGroupIds": [
+        "sg-abcdef01234567890"
+      ]
+    },
+    "Logging": {
+      "ClusterLogging": [
+        {
+          "Types": [
+            "api",
+            "audit",
+            "authenticator",
+            "controllerManager",
+            "scheduler"
+          ],
+          "Enabled": true
+        }
+      ]
+    },
+    "Status": "CREATING",
+    "CertificateAuthorityData": {},
+  }
+}
+```
+
+`AwsEksCluster` can have the following attributes\.
+
+  
+Arn  
+Optional  
+The ARN of the cluster\.  
+**Type:** String
+
+`CertificateAuthorityData`  
+Optional  
+The certificate authority data for the cluster\.  
+**Type:** String
+
+`ClusterStatus`  
+Optional  
+The status of the cluster\.  
+**Type:** String  
+**Valid values:** `CREATING` \| `ACTIVE` \| `DELETING` \| `FAILED` \| `UPDATING` \| `PENDING`
+
+`Endpoint`  
+Optional  
+The endpoint for the Amazon EKS API server\.  
+**Type:** String
+
+[`Logging`](#asff-resourcedetails-awsekscluster-logging)  
+Optional  
+The logging configuration for the cluster\.  
+**Type:** Object
+
+`Name`  
+Optional  
+The name of the cluster\.  
+**Type:** String
+
+[`ResourcesVpcConfig`](#asff-resourcedetails-awsekscluster-resourcesvpcconfig)  
+Optional  
+The VPC configuration used by the cluster control plane\.  
+**Type:** Object
+
+`RoleArn`  
+Optional  
+The ARN of the IAM role that provides permissions for the Amazon EKS control plane to make calls to AWS API operations on your behalf\.  
+Type: String
+
+`Version`  
+Optional  
+The Amazon EKS server version for the cluster\.  
+**Type:** String
+
+#### Logging<a name="asff-resourcedetails-awsekscluster-logging"></a>
+
+The `Logging` object contains the logging configuration for the cluster\.
+
+`Logging` contains a `ClusterLogging` array of up to 25 objects\.
+
+Each entry in `ClusterLogging` can have the following attributes\.
+
+`Enabled`  
+Optional  
+Whether the logging types that are listed in `Types` are enabled\.  
+**Type:** Boolean
+
+`Types`  
+Optional  
+A list of logging types\.  
+**Type:** Array of strings  
+**Valid array values:** `api` \| `audit` \| `authenticator` \| `controllerManager` \| `scheduler`
+
+#### ResourcesVpcConfig<a name="asff-resourcedetails-awsekscluster-resourcesvpcconfig"></a>
+
+The `ResourcesVpcConfig` object contains information about the VPC configuration used by the cluster control plane\.
+
+`ResourcesVpcConfig` can have the following attributes\.
+
+`SecurityGroupIds`  
+Optional  
+The security groups that are associated with the cross\-account elastic network interfaces that are used to allow communication between your nodes and the Amazon EKS control plane\.  
+**Type:** Array of strings  
+**Maximum array length:** 5
+
+`SubnetIds`  
+Optional  
+The subnets that are associated with the cluster\.  
+**Type:** Array of strings  
+**Maximum array length:** 5
+
 ### AwsElasticBeanstalkEnvironment<a name="asff-resourcedetails-awselasticbeanstalkenvironment"></a>
 
 The `AwsElasticBeanstalkEnvironment` object contains details about an AWS Elastic Beanstalk environment\.
@@ -8737,6 +9272,11 @@ The type of IP addresses used by the subnets for your load balancer\.
 The possible values are `ipv4` \(for IPv4 addresses\) and `dualstack` \(for IPv4 and IPv6 addresses\)\.  
 **Type:** String
 
+**[`LoadBalancerAttributes`](#asff-resourcedetails-awselbv2loadbalancer-loadbalancerattributes)**  
+Optional  
+Attributes of the load balancer\.  
+**Type:** Array of objects
+
 **`Scheme`**  
 Optional  
 The nodes of an Internet\-facing load balancer have public IP addresses\.  
@@ -8777,6 +9317,24 @@ The ID of the subnet\.
 Optional  
 The name of the Availability Zone\.  
 **Type:** String
+
+#### `LoadBalancerProperties`<a name="asff-resourcedetails-awselbv2loadbalancer-loadbalancerattributes"></a>
+
+The `LoadBalancerAttributes` object contains a list of attribute values for the load balancer\.
+
+Each attribute has the following attributes\.
+
+`Key`  
+Optional  
+The name of the load balancer attribute\.  
+**Type:** String  
+**Maximum length:** 256
+
+`Value`  
+Optional  
+The value of the load balancer attribute\.  
+**Type:** String  
+**Maximum length:** 1024
 
 #### State<a name="asff-resourcedetails-awselbv2loadbalancer-state"></a>
 
@@ -9828,6 +10386,379 @@ Indicates when the layer version was created\.
 Optional  
 The version number\.  
 **Type:** Long
+
+### AwsOpenSearchServiceDomain<a name="asff-resourcedetails-awsopensearchservicedomain"></a>
+
+The `AwsOpenSearchServiceDomain` object contains information about an Amazon OpenSearch Service domain\.
+
+**Example**
+
+```
+"AwsOpenSearchServiceDomain": {
+    "Arn": "arn:aws:Opensearch:us-east-1:111122223333:somedomain",
+    "DomainEndpointOptions": {
+        "EnforceHTTPS": false,
+        "TLSSecurityPolicy": "Policy-Min-TLS-1-0-2019-07",
+        "CustomEndpointCertificateArn": "arn:aws:acm:us-east-1:111122223333:certificate/bda1bff1-79c0-49d0-abe6-50a15a7477d4",
+        "CustomEndpointEnabled": true,
+        "CustomEndpoint": "example.com"
+    },
+    "Id": "123456789012",
+    "DomainName": "my-domain",
+    "DomainEndpoint": "https://es-2021-06-23t17-04-qowmgghud5vofgb5e4wmi.eu-central-1.es.amazonaws.com",
+    "DomainEndpoints": {
+        "vpc": "vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com"
+    },
+    "EngineVersion": "7.1",
+    "ClusterConfig": {
+        "InstanceType": "c5.large.search",
+        "InstanceCount": 1,
+        "DedicatedMasterEnabled": true,
+        "ZoneAwarenessEnabled": false,
+        "ZoneAwarenessConfig": {
+            "AvailabilityZoneCount": 2
+        },
+        "DedicatedMasterType": "c5.large.search",
+        "DedicatedMasterCount": 3,
+        "WarmEnabled": true,
+        "WarmCount": 3,
+        "WarmType": "ultrawarm1.large.search"
+    },
+    "EncryptionAtRestOptions": {
+        "Enabled": false,
+        "KmsKeyId": "1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a"
+    },
+    "LogPublishingOptions": {
+        "IndexSlowLogs": {
+            "CloudWatchLogsLogGroupArn": "arn:aws:logs:us-east-1:111122223333:log-group:/aws/aes/domains/es-index-slow-logs",
+            "Enabled": true
+        },
+        "SearchSlowLogs": {
+            "CloudWatchLogsLogGroupArn": "arn:aws:logs:us-east-1:111122223333:log-group:/aws/aes/domains/es-slow-logs",
+            "Enabled": true
+        },
+        "AuditLogs": {
+            "CloudWatchLogsLogGroupArn": "arn:aws:logs:us-east-1:111122223333:log-group:/aws/aes/domains/es-slow-logs",
+            "Enabled": true
+        }
+    },
+    "NodeToNodeEncryptionOptions": {
+        "Enabled": true
+    },
+    "ServiceSoftwareOptions": {
+        "AutomatedUpdateDate": "2022-04-28T14:08:37.000Z",
+        "Cancellable": false,
+        "CurrentVersion": "R20210331",
+        "Description": "There is no software update available for this domain.",
+        "NewVersion": "",
+        "UpdateAvailable": false,
+        "UpdateStatus": "COMPLETED",
+        "OptionalDeployment": false
+    },
+    "VpcOptions": {
+        "SecurityGroupIds": [
+            "sg-2a3a4a5a"
+        ],
+        "SubnetIds": [
+            "subnet-1a2a3a4a"
+        ],
+    }
+}
+```
+
+`AwsOpenSearchServiceDomain` can have the following attributes\.
+
+`AccessPolicies`  
+Optional  
+The IAM policy document that specifies the access policies for the OpenSearch domain\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 6144
+
+`Arn`  
+Optional  
+The ARN of the OpenSearch domain\.  
+**Type:** String
+
+[`ClusterConfig`](#asff-resourcedetails-awsopensearchservicedomain-clusterconfig)  
+Optional  
+Details about the configuration of an OpenSearch cluster\.  
+**Type:** Object
+
+`DomainEndpoint`  
+Optional  
+The domain endpoint\.  
+**Type:** String
+
+[`DomainEndpointOptions`](#asff-resourcedetails-awsopensearchservicedomain-domainendpointoptions)  
+Optional  
+Additional options for the domain endpoint\.  
+Type: Object
+
+`DomainEndpoints`  
+Optional  
+The domain endpoints\. Used if the OpenSearch domain resides in a VPC\.  
+**Type:** Map of key\-value pairs\.  
+The key is always `vpc`\. The value is the endpoint\. For example:  
+
+```
+"vpc": "vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com"
+```
+
+`DomainName`  
+Optional  
+The name of the endpoint\.  
+**Type:** String  
+**Minimum length:** 3  
+**Maximum length:** 28
+
+[`EncryptionAtRestOptions`](#asff-resourcedetails-awsopensearchservicedomain-encryptionatrestoptions)  
+Optional  
+Details about the configuration for encryption at rest\.  
+**Type:** Object
+
+`EngineVersion`  
+Optional  
+The version of the domain engine\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 64
+
+`Id`  
+Optional  
+The identifier of the domain\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 64
+
+[`LogPublishingOptions`](#asff-resourcedetails-awsopensearchservicedomain-logpublishingoptions)  
+Optional  
+Configures the CloudWatch Logs to publish for the OpenSearch domain\.  
+**Type:** Object
+
+[`NodeToNodeEncryptionOptions`](#asff-resourcedetails-awsopensearchservicedomain-nodetonodeencryptionoptions)  
+Optional  
+Details about the configuration for node\-to\-node encryption\.  
+**Type:** Object
+
+[`ServiceSoftwareOptions`](#asff-resourcedetails-awsopensearchservicedomain-servicesoftwareoptions)  
+Optional  
+Information about the status of a domain relative to the latest service software\.  
+**Type:** Object
+
+[`VpcOptions`](#asff-resourcedetails-awsopensearchservicedomain-vpcoptions)  
+Optional  
+Information that OpenSearch Service derives based on `VPCOptions` for the domain\.  
+**Type:** Object
+
+#### ClusterConfig<a name="asff-resourcedetails-awsopensearchservicedomain-clusterconfig"></a>
+
+The `ClusterConfig` object provides details about the configuration of an OpenSearch cluster\.
+
+`ClusterConfig` can have the following attributes\.
+
+`DedicatedMasterCount`  
+Optional  
+The number of instances to use for the master node\. If this attribute is specified, then `DedicatedMasterEnabled` must be `true`\.  
+**Type:** Integer
+
+`DedicatedMasterEnabled`  
+Optional  
+Whether to use a dedicated master node for the OpenSearch domain\. A dedicated master node performs cluster management tasks, but doesn't hold data or respond to data upload requests\.  
+**Type:** Boolean
+
+`DedicatedMasterType`  
+Optional  
+The hardware configuration of the computer that hosts the dedicated master node\.  
+If this attribute is specified, then `DedicatedMasterEnabled` must be `true`\.  
+**Type:** String
+
+`InstanceCount`  
+Optional  
+The number of data nodes to use in the OpenSearch domain\.  
+**Type:** Integer
+
+`InstanceType`  
+Optional  
+The instance type for your data nodes\.   
+**Type:** String  
+**Valid values:** See [Supported instance types](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html) in the *Amazon OpenSearch Service Developer Guide*\.
+
+`WarmCount`  
+Optional  
+The number of UltraWarm instances\.  
+**Type:** Integer
+
+`WarmEnabled`  
+Optional  
+Whether UltraWarm is enabled\.  
+**Type:** Boolean
+
+`WarmType`  
+Optional  
+The type of UltraWarm instance\.  
+**Type:** String
+
+`ZoneAwarenessConfig`  
+Optional  
+Configuration options for zone awareness\. Provided if `ZoneAwarenessEnabled` is true\.  
+**Type:** Object
+
+`ZoneAwarenessConfig.AvailabilityZoneCount`  
+Optional  
+The number of Availability Zones that the domain uses\. Valid values are 2 and 3\. The default is 2\.  
+**Type:** Integer  
+**Valid values:** `2` \| `3`
+
+`ZoneAwarenessEnabled`  
+Optional  
+Whether to enable zone awareness for the OpenSearch domain\. When zone awareness is enabled, OpenSearch allocates the cluster's nodes and replica index shards across Availability Zones in the same Region\. This prevents data loss and minimizes downtime if a node or data center fails\.  
+**Type:** Boolean
+
+#### DomainEndpointOptions<a name="asff-resourcedetails-awsopensearchservicedomain-domainendpointoptions"></a>
+
+The `DomainEndpointOptions` object provides information about additional options for the domain endpoint\.
+
+`DomainEndpointOptions` can have the following attributes\.
+
+`CustomEndpoint`  
+Optional  
+The fully qualified URL for the custom endpoint\.  
+**Type:** String
+
+`CustomEndpointCertificateArn`  
+Optional  
+The ARN for the security certificate\. The certificate is managed in ACM\.  
+**Type:** String
+
+`CustomEndpointEnabled`  
+Optional  
+Whether to enable a custom endpoint for the domain\.  
+**Type:** Boolean
+
+`EnforceHTTPS`  
+Optional  
+Whether to require that all traffic to the domain arrive over HTTPS\.  
+**Type:** Boolean
+
+`TLSSecurityPolicy`  
+Optional  
+The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain\.  
+**Type:** String
+
+#### EncryptionAtRestOptions<a name="asff-resourcedetails-awsopensearchservicedomain-encryptionatrestoptions"></a>
+
+The `EncryptionAtRestOptions` object provides details about the configuration for encryption at rest\.
+
+`EncryptionAtRestOptions` can have the following attributes\.
+
+`Enabled`  
+Optional  
+Whether encryption at rest is enabled\.  
+**Type:** Boolean
+
+`KmsKeyId`  
+Optional  
+The KMS key ID\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 2048
+
+#### LogPublishingOptions<a name="asff-resourcedetails-awsopensearchservicedomain-logpublishingoptions"></a>
+
+The `LogPublishingOptions` object configures the CloudWatch Logs to publish for the OpenSearch domain\.
+
+The `AuditLogs` object configures the OpenSearch audit logs publishing\.
+
+The `IndexSlowLogs` object configures the OpenSearch index logs publishing\.
+
+The `SearchSlowLogs` object configures the OpenSearch search slow log publishing\.
+
+Each of these objects has the following attributes\.
+
+`CloudWatchLogsLogGroupArn`  
+Optional  
+The ARN of the CloudWatch Logs group to publish the logs to\.  
+**Type:** String
+
+`Enabled`  
+Optional  
+Whether the log publishing is enabled\.  
+**Type:** Boolean
+
+#### NodeToNodeEncryptionOptions<a name="asff-resourcedetails-awsopensearchservicedomain-nodetonodeencryptionoptions"></a>
+
+The `NodeToNodeEncryptionOptions` object provides details about the configuration for node\-to\-node encryption\.
+
+It can have the following attributes\.
+
+`Enabled`  
+Optional  
+Whether node\-to\-node encryption is enabled\.  
+**Type:** Boolean
+
+#### ServiceSoftwareOptions<a name="asff-resourcedetails-awsopensearchservicedomain-servicesoftwareoptions"></a>
+
+The `ServiceSoftwareOptions` object provides information about the state of the domain relative to the latest service software\.
+
+`ServiceSoftwareOptions` can have the following attributes\.
+
+`AutomatedUpdateDate`  
+Optional  
+The epoch time when the deployment window closes for required updates\. After this time, OpenSearch Service schedules the software upgrade automatically\.  
+**Type:** String
+
+`Cancellable`  
+Optional  
+Whether a request to update the domain can be canceled\.  
+**Type:** Boolean
+
+`CurrentVersion`  
+Optional  
+The version of the service software that is currently installed on the domain\.  
+**Type:** String
+
+`Description`  
+Optional  
+A more detailed description of the service software status\.  
+**Type:** String
+
+`NewVersion`  
+Optional  
+The most recent version of the service software\.  
+**Type:** String
+
+`OptionalDeployment`  
+Optional  
+Whether the service software update is optional\.  
+**Type:** Boolean
+
+`UpdateAvailable`  
+Optional  
+Whether a service software update is available for the domain\.  
+**Type:** Boolean
+
+`UpdateStatus`  
+Optional  
+The status of the service software update\.  
+**Type:** String  
+**Valid values:** `ELIGIBLE` \| `PENDING_UPDATE` \|` IN_PROGRESS` \| `COMPLETED` \| `NOT_ELIGIBLE`
+
+#### VpcOptions<a name="asff-resourcedetails-awsopensearchservicedomain-vpcoptions"></a>
+
+The `VpcOptions` object contains information that OpenSearch Service derives based on the `VPCOptions` for the domain\.
+
+It can have the following attributes\.
+
+`SecurityGroupIds`  
+Optional  
+The list of security group IDs that are associated with the VPC endpoints for the domain\.  
+**Type:** Array of strings
+
+`SubnetIds`  
+Optional  
+A list of subnet IDs that are associated with the VPC endpoints for the domain\.  
+**Type:** Array of strings
 
 ### AwsRdsDbCluster<a name="asff-resourcedetails-awsrdsdbcluster"></a>
 
@@ -12407,6 +13338,11 @@ Indicates when the S3 bucket was created\.
 **Type:** String  
 **Format:** Uses the `date-time` format specified in [RFC 3339 section 5\.6, Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6)\. The value cannot contain spaces\.
 
+**`OwnerAccountId`**  
+Optional  
+The AWS account identifier of the account that owns the S3 bucket\.  
+**Type:** String
+
 **`OwnerId`**  
 Optional  
 The canonical user ID of the owner of the S3 bucket\.  
@@ -13131,6 +14067,180 @@ The current patch compliance status\.
 **Type:** String  
 **Valid values:** `COMPLIANT` \| `NON_COMPLIANT` \| `UNSPECIFIED_DATA`
 
+### AwsWafRateBasedRule<a name="asff-resourcedetails-awswafratebasedrule"></a>
+
+The `AwsWafRateBasedRule` object contains details about a rate\-based rule for global resources\. A rate\-based rule provides settings to indicate when to allow, block, or count a request\. Rate\-based rules include the number of requests that arrive over a specified period of time\.
+
+**Example**
+
+```
+"AwsWafRateBasedRule":{
+    "MatchPredicates" : [{
+        "DataId" : "391b7a7e-5f00-40d2-b114-3f27ceacbbb0",
+        "Negated" : "True",
+        "Type" : "IPMatch" ,
+    }],
+    "MetricName" : "MetricName",
+    "Name" : "Test",
+    "RateKey" : "IP",
+    "RateLimit" : 235000,
+    "RuleId" : "5dfb4085-f103-4ec6-b39a-d4a0dae5f47f"
+}
+```
+
+`AwsWafRateBasedRule` can have the following attributes\.
+
+[`MatchPredicates`](#asff-resourcedetails-awswafratebasedrule-matchpredicates)  
+Optional  
+The predicates to include in the rate\-based rule\.  
+**Type:** Array of objects
+
+`MetricName`  
+Optional  
+The name of the metrics for the rate\-based rule\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 128  
+**Allowed characters:** A\-Z, a\-z, 0\-9
+
+`Name`  
+Optional  
+The name of the rate\-based rule\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 128  
+**Allowed characters:** A\-Z, a\-z, 0\-9
+
+`RateKey`  
+Optional  
+The field that AWS WAF uses to determine whether requests are likely arriving from single source and are subject to rate monitoring\.  
+**Type:** String  
+**Valid values:** `IP`
+
+`RateLimit`  
+Optional  
+The maximum number of requests that have an identical value for the field specified in `RateKey` that are allowed within a five\-minute period\. If the number of requests exceeds `RateLimit` and the other predicates specified in the rule are met, AWS WAF triggers the action for the rule\.  
+**Type:** Long  
+**Minimum value:** 100  
+**Maximum value:** 2000000000
+
+`RuleId`  
+Optional  
+The unique identifier for the rate\-based rule\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 128
+
+#### MatchPredicates<a name="asff-resourcedetails-awswafratebasedrule-matchpredicates"></a>
+
+The `MatchPredicates` object contains the set of match predicates\. Predicates might look for characteristics such as specific IP addresses, geographic locations, or sizes\.
+
+Each predicate can have the following attributes\.
+
+`DataId`  
+Optional  
+The unique identifier for the predicate\.  
+**Type:** String
+
+`Negated`  
+Optional  
+If set to `true`, then the rule actions are performed on requests that match the predicate settings\.  
+If set to `false`, then the rule actions are performed on all requests except those that match the predicate settings\.  
+**Type:** Boolean
+
+`Type`  
+Optional  
+The type of predicate\.  
+**Type:** String  
+**Valid values:** `IPMatch` \| `ByteMatch` \| `SqlInjectionMatch` \| `GeoMatch` \| `SizeConstraint` \| `XssMatch` \| `RegexMatch`
+
+### AwsWafRegionalRateBasedRule<a name="asff-resourcedetails-awswafregionalratebasedrule"></a>
+
+The `AwsWafRegionalRateBasedRule` object contains details about a rate\-based rule for Regional resources\. A rate\-based rule provides settings to indicate when to allow, block, or count a request\. Rate\-based rules include the number of requests that arrive over a specified period of time\.
+
+**Example**
+
+```
+"AwsWafRegionalRateBasedRule":{
+    "MatchPredicates" : [{
+        "DataId" : "391b7a7e-5f00-40d2-b114-3f27ceacbbb0",
+        "Negated" : "True",
+        "Type" : "IPMatch" ,
+    }],
+    "MetricName" : "MetricName",
+    "Name" : "Test",
+    "RateKey" : "IP",
+    "RateLimit" : 235000,
+    "RuleId" : "5dfb4085-f103-4ec6-b39a-d4a0dae5f47f"
+}
+```
+
+`AwsWafRegionalRateBasedRule` can have the following attributes\.
+
+[`MatchPredicates`](#asff-resourcedetails-awswafregionalratebasedrule-matchpredicates)  
+Optional  
+The predicates to include in the rate\-based rule\.  
+**Type:** Array of objects
+
+`MetricName`  
+Optional  
+The name of the metrics for the rate\-based rule\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 128  
+**Allowed characters:** A\-Z, a\-z, 0\-9
+
+`Name`  
+Optional  
+The name of the rate\-based rule\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 128  
+**Allowed characters:** A\-Z, a\-z, 0\-9
+
+`RateKey`  
+Optional  
+The field that AWS WAF uses to determine whether requests are likely arriving from single source and are subject to rate monitoring\.  
+**Type:** String  
+**Valid values:** `IP`
+
+`RateLimit`  
+Optional  
+The maximum number of requests that have an identical value for the field specified in `RateKey` that are allowed within a five\-minute period\. If the number of requests exceeds `RateLimit` and the other predicates specified in the rule are met, AWS WAF triggers the action for the rule\.  
+**Type:** Long  
+**Minimum value:** 100  
+**Maximum value:** 2000000000
+
+`RuleId`  
+Optional  
+The unique identifier for the rate\-based rule\.  
+**Type:** String  
+**Minimum length:** 1  
+**Maximum length:** 128
+
+#### MatchPredicates<a name="asff-resourcedetails-awswafregionalratebasedrule-matchpredicates"></a>
+
+The `MatchPredicates` object contains the set of match predicates\. Predicates might look for characteristics such as specific IP addresses, geographic locations, or sizes\.
+
+Each predicate can have the following attributes\.
+
+`DataId`  
+Optional  
+The unique identifier for the predicate\.  
+**Type:** String
+
+`Negated`  
+Optional  
+If set to `true`, then the rule actions are performed on requests that match the predicate settings\.  
+If set to `false`, then the rule actions are performed on all requests except those that match the predicate settings\.  
+**Type:** Boolean
+
+`Type`  
+Optional  
+The type of predicate\.  
+**Type:** String  
+**Valid values:** `IPMatch` \| `ByteMatch` \| `SqlInjectionMatch` \| `GeoMatch` \| `SizeConstraint` \| `XssMatch` \| `RegexMatch`
+
 ### AwsWafWebAcl<a name="asff-resourcedetails-awswafwebacl"></a>
 
 The `AwsWafWebAcl` object provides details about an AWS WAF web ACL\.
@@ -13262,6 +14372,39 @@ Required
 If set to `NONE`, the rule's action takes place\.  
 **Type:** String  
 **Valid values:** `NONE` \| `COUNT`
+
+### AwsXrayEncryptionConfig<a name="asff-resourcedetails-awsxrayencryptionconfig"></a>
+
+The `AwsXrayEncryptionConfig` object contains information about the encryption configuration for AWS X\-Ray\.
+
+**Example**
+
+```
+"AwsXRayEncryptionConfig":{
+    "KeyId": "arn:aws:kms:us-east-2:222222222222:key/example-key",
+    "Status": "UPDATING",
+    "Type":"KMS"
+}
+```
+
+`AwsXrayEncryptionConfig` can have the following attributes\.
+
+`KeyId`  
+Optional  
+The identifier of the KMS key that is used for encryption\. Provided if `Type` is `KMS`\.  
+**Type:** String
+
+`Status`  
+Optional  
+The current status of the encryption configuration\. When `Status` is `UPDATING`, AWS X\-Ray might use both the old and new encryption\.  
+**Type:** String  
+**Valid values:** `UPDATING` \| `ACTIVE`
+
+`Type`  
+Optional  
+The type of encryption\. `KMS` indicates that the encryption uses KMS keys\. `NONE` indicates to use the default encryption\.  
+**Type:** String  
+**Valid values:** `NONE` \| `KMS`
 
 ### Container<a name="asff-resourcedetails-container"></a>
 
