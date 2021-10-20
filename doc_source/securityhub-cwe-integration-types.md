@@ -12,6 +12,8 @@ Every [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportF
 
 For administrator accounts, the event feed in EventBridge includes events for findings from both their account and from their member accounts\.
 
+In an aggregation Region, the event feed includes events for findings from the aggregation Region and the linked Regions\. For information on how to configure finding aggregation, see [Aggregating findings across Regions](finding-aggregation.md)\.
+
 You can define rules in EventBridge that automatically route findings to an Amazon S3 bucket, a remediation workflow, or a third\-party tool\. The rules can include filters that only apply the rule if the finding has specific attribute values\.
 
 You use this method to automatically send all findings, or all findings that have specific characteristics, to a response or remediation workflow\.

@@ -3,10 +3,11 @@
 To view the Regions that AWS Security Hub is available in, see [Security Hub Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/sechub.html)\.
 
 **Contents**
++ [Cross\-Region finding aggregation restrictions](#securityhub-regions-finding-aggregation-support)
 + [Integrations not supported in all Regions](#securityhub-regions-integration-support)
   + [Integrations that are supported in China \(Beijing\) and China \(Ningxia\)](#securityhub-regions-integration-support-china)
   + [Integrations that are supported in AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)](#securityhub-regions-integration-support-govcloud)
-+ [Controls that are not supported in all Regions](#securityhub-regions-control-support)
++ [Controls not supported in all Regions](#securityhub-regions-control-support)
   + [US East \(Ohio\)](#securityhub-control-support-useast2)
   + [US West \(N\. California\)](#securityhub-control-support-uswest1)
   + [US West \(Oregon\)](#securityhub-control-support-uswest2)
@@ -31,6 +32,12 @@ To view the Regions that AWS Security Hub is available in, see [Security Hub Ser
   + [South America \(São Paulo\)](#securityhub-control-support-sasouth1)
   + [AWS GovCloud \(US\-East\)](#securityhub-control-support-govuseast1)
   + [AWS GovCloud \(US\-West\)](#securityhub-control-support-govuswest1)
+
+## Cross\-Region finding aggregation restrictions<a name="securityhub-regions-finding-aggregation-support"></a>
+
+[Cross\-Region finding aggregation](finding-aggregation.md) is not available in the China Regions or in the AWS GovCloud \(US\) Region\.
+
+You cannot use a Region that is disabled by default as your aggregation Region\. For a list of Regions that are disabled by default, see [Enabling a Region](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable) in the *AWS General Reference*\.
 
 ## Integrations not supported in all Regions<a name="securityhub-regions-integration-support"></a>
 
@@ -96,7 +103,7 @@ The AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions only support
 + ThreatModeler
 + Vectra AI Cognito Detect
 
-## Controls that are not supported in all Regions<a name="securityhub-regions-control-support"></a>
+## Controls not supported in all Regions<a name="securityhub-regions-control-support"></a>
 
 The following Regions do not support all of the Security Hub controls\. For each Region, the list provides the controls that are not supported\.
 

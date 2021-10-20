@@ -4,6 +4,8 @@ Security Hub uses the `Compliance.Status` value from each control's findings to 
 
 For administrator accounts, the status for each control is the aggregated status across both the administrator account and all of the member accounts\.
 
+The control status only reflects findings from the current Region\. It does not support finding aggregation\.
+
 Security Hub calculates the control status every 24 hours\. The calculation uses the findings from the previous 24 hours\. On the standard details page and the control details page, Security Hub displays a timestamp to indicate when the status was last updated\.
 
 ## Values for Compliance\.Status<a name="controls-overall-status-compliance-status"></a>

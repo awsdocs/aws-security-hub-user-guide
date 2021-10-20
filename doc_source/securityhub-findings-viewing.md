@@ -1,4 +1,4 @@
-# Viewing findings in AWS Security Hub<a name="securityhub-findings-viewing"></a>
+# Viewing finding lists and details in AWS Security Hub<a name="securityhub-findings-viewing"></a>
 
 In the AWS Security Hub navigation pane, **Findings** displays a list of findings from all of the enabled product integrations and controls\.
 
@@ -9,6 +9,8 @@ From **Insights**, you can display a list of findings for a matching insight res
 From **Security standards**, you can display a list of findings generated from a selected control\. See [Viewing and taking action on control findings](securityhub-control-manage-findings.md)\.
 
 You can also use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html) API operation to retrieve a filtered list of findings\.
+
+If you enable finding aggregation, you can view findings from across Regions\. In the aggregation Region, the **Findings** and **Insights** pages contain findings from the aggregation Region and the linked Regions\. In other Regions, these pages only contain findings from that Region\. For information on how to configure finding aggregation, see [Aggregating findings across Regions](finding-aggregation.md)\.
 
 **Topics**
 + [Filtering and grouping findings \(console\)](findings-filtering-grouping.md)

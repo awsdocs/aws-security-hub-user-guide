@@ -9401,7 +9401,7 @@ Information about the session that the key was used for\.
 
 **`Status`**  
 Optional  
-The status of the IAM access key that is related to a finding\. Valid values are `ACTIVE` and `INACTIVE`\.  
+The status of the IAM access key that is related to a finding\. Valid values are `Active` and `Inactive`\.  
 **Type:** Enum
 
 **`UserName`**  

@@ -3,7 +3,7 @@
 The **Integrations** page in the AWS Management Console provides access to all of the available AWS and third\-party product integrations\. The AWS Security Hub API also provides operations to allow you to manage integrations\.
 
 **Note**  
-Some integrations are not available in all Regions\. If an integration is not supported, it is not listed on the **Integrations** page\.  
+Some integrations are not available in all Regions\. If an integration is not supported in the current Region, it is not listed on the **Integrations** page\.  
 See also [Integrations that are supported in China \(Beijing\) and China \(Ningxia\)](securityhub-regions.md#securityhub-regions-integration-support-china) and [Integrations that are supported in AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)](securityhub-regions.md#securityhub-regions-integration-support-govcloud)\.
 
 ## Viewing and filtering the list of integrations \(console\)<a name="securityhub-integrations-view-filter"></a>
@@ -119,6 +119,12 @@ To enable the flow of findings from an integration, you can use an API call or t
 For integrations that you accept findings for \(**Status** is **Accepting findings**\), to view a list of findings, choose **See findings**\.
 
 The findings list shows the active findings for the selected integration that have a workflow status of `NEW` or `NOTIFIED`\.
+
+If you enabled finding aggregation, then in the aggregation Region, the list includes findings from the aggregation Region and from linked Regions where the integration is enabled\. Security Hub does not automatically enable integrations based on the finding aggregation configuration\.
+
+In other Regions, the finding list for an integration only contains findings from the current Region\.
+
+For information on how to configure finding aggregation, see [Aggregating findings across Regions](finding-aggregation.md)\.
 
 From the findings list, you can perform the following actions\.
 + [Change the filters and grouping for the list](findings-filtering-grouping.md)

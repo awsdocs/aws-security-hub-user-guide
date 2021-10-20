@@ -33,6 +33,8 @@ At the bottom of the details page is the list of controls for the standard\. The
 
 For administrator accounts, the score and statuses are aggregated across both their account and their member accounts\.
 
+All of the data on the standard details page is specific to the current Region\.
+
 ## Filtering and sorting the controls<a name="standard-details-filter-controls"></a>
 
 The control list for a standard uses tabs to provide built\-in filtering for the list based on the control status\. You can also filter the list based on the ID, title, and severity\.

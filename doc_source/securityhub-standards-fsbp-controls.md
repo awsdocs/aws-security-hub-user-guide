@@ -1649,7 +1649,7 @@ Note that when you update a task definition, it does not update running tasks th
 
 **Resource type:** `AWS::ECS::Service`
 
-**AWS Configrule:**` ecs-service-assign-public-ip-disabled` \(Custom rule developed by Security Hub\)
+**AWS Configrule:** `ecs-service-assign-public-ip-disabled` \(Custom rule developed by Security Hub\)
 
 **Parameters:**
 + `exemptEcsServiceArns` \(Optional\)\. Security Hub does not populate this parameter\. Comma\-separated list of ARNs of Amazon ECS services that are exempt from this rule\.
@@ -2801,11 +2801,11 @@ For more information, see [Using IAM policies with AWS KMS](https://docs.aws.ama
 
 Checks whether the inline policies that are embedded in your IAM identities \(role, user, or group\) allow the AWS KMS decryption actions on all KMS keys\. This control uses [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), an automated reasoning engine, to validate and warn you about policies that may grant broad access to your secrets across AWS accounts\.
 
-This control fails if `kms:Decrypt` or `kms:ReEncryptFrom` actions are allowed on all KMS keys in an inline policy\. 
+This control fails, and flags the policy as `FAILED`, if the policy is open enough to allow `kms:Decrypt` or `kms:ReEncryptFrom` actions on any arbitrary KMS key\.
 
 With AWS KMS, you control who can use your KMS keys and gain access to your encrypted data\. IAM policies define which actions an identity \(user, group, or role\) can perform on which resources\. Following security best practices, AWS recommends that you allow least privilege\. In other words, you should grant to identities only the permissions they need and only for keys that are required to perform a task\. Otherwise, the user might use keys that are not appropriate for your data\.
 
-Instead of granting permission for all keys, determine the minimum set of keys that users need to access encrypted data\. Then design policies that allow the users to use only those keys\. For example, do not allow `kms:Decrypt` permission on all KMS keys\. Instead, allow them only on keys in a particular Region for your account\. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data\.
+Instead of granting permission for all keys, determine the minimum set of keys that users need to access encrypted data\. Then design policies that allow the users to use only those keys\. For example, do not allow `kms:Decrypt` permission on all KMS keys\. Instead, allow the permission only on specific keys in a specific Region for your account\. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data\.
 
 ### Remediation<a name="kms-2-remediation"></a>
 

@@ -10,6 +10,8 @@ When the standard is first enabled, Security Hub cannot calculate the initial se
 
 The security score represents the proportion of **Passed** controls to enabled controls\. The score is displayed as a percentage\. For example, if 10 controls are enabled for a standard, and seven of those controls are in a **Passed** state, then the security score is 70%\.
 
+The security score only reflects enabled controls and control findings from the current Region\. It does not support finding aggregation\.
+
 The security score calculation omits enabled controls that do not have any findings \(overall status is **No data**\)\. For example, a standard has 12 controls enabled\. Six of those controls are in a **Passed** state\. Two controls have no data\. Because the calculation omits the controls without data, the security score is 60%\.
 
 ## Security score for administrator accounts<a name="standard-security-score-admin"></a>

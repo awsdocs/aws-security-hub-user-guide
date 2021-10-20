@@ -39,6 +39,7 @@ To learn more about the AWS Chatbot integration with Security Hub, see the [Secu
 Detective automatically collects log data from your AWS resources and uses machine learning, statistical analysis, and graph theory to help you visualize and conduct faster and more efficient security investigations\.  
 The Security Hub integration with Detective allows you to pivot from Amazon GuardDuty findings in Security Hub into Detective\. You can then use the Detective tools and visualizations to investigate them\. The integration does not require any additional configuration in Security Hub or Detective\.  
 For GuardDuty finding types, the finding details include an **Investigate in Detective** subsection\. That subsection contains the link to Detective\. See [Pivoting to an entity profile or finding overview from Amazon GuardDuty or AWS Security Hub](https://docs.aws.amazon.com/detective/latest/userguide/profile-pivot-from-service.html) in the *Amazon Detective User Guide*\.  
+If finding aggregation is enabled, then when you pivot from the aggregation Region, Detective opens in the Region where the finding originated\.  
 If a link does not work, then for troubleshooting advice, see [Troubleshooting the pivot](https://docs.aws.amazon.com/detective/latest/userguide/profile-pivot-from-service.html#profile-pivot-troubleshooting)\.
 
 **AWS Firewall Manager**  <a name="integration-aws-firewall-manager"></a>

@@ -12,7 +12,7 @@ When you enable Security Hub, it begins to consume, aggregate, organize, and pri
 
 Security Hub also generates its own findings by running continuous, automated security checks based on AWS best practices and supported industry standards\. See [Security standards and controls in AWS Security Hub](securityhub-standards.md)\.
 
-Security Hub then correlates and consolidates findings across providers to help you to prioritize the most significant findings\. See [Viewing findings in AWS Security Hub](securityhub-findings-viewing.md) and [Taking action on findings in AWS Security Hub](securityhub-findings-taking-action.md)\.
+Security Hub then correlates and consolidates findings across providers to help you to prioritize the most significant findings\. See [Viewing finding lists and details in AWS Security Hub](securityhub-findings-viewing.md) and [Taking action on findings in AWS Security Hub](securityhub-findings-taking-action.md)\.
 
 You can also create *insights* in Security Hub\. An insight is a collection of findings that are grouped together when you apply a **Group by** filter\. Insights help you identify common security issues that may require remediation action\. Security Hub includes several managed insights, or you can create your own custom insights\. See [Insights in AWS Security Hub](securityhub-insights.md)\.
 

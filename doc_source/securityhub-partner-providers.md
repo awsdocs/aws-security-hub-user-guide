@@ -185,7 +185,7 @@ Infection Monkey is an attack simulation tool designed to test networks against 
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>::product/hackerone/vulnerability-intelligence`  
 The HackerOne platform partners with the global hacker community to uncover the most relevant security issues\. Vulnerability Intelligence enables your organization to go beyond automated scanning\. It shares vulnerabilities that HackerOne ethical hackers have validated and provided steps to reproduce\.  
-[Partner documentation](https://www.hackerone.com/partners/aws)
+[Partner documentation](https://docs.hackerone.com/programs/aws-security-hub-integration.html)
 
 **[https://helecloud.com/managed-security-and-compliance-services/](https://helecloud.com/managed-security-and-compliance-services/) – Managed Security**  
 **Integration type:** Receive  

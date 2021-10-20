@@ -8,7 +8,9 @@ Whenever AWS Security Hub receives a [https://docs.aws.amazon.com/securityhub/1.
 
 ## Requirements for accounts and batch size<a name="batchimportfindings-accounts-batch-size"></a>
 
-[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) must be called by the account that is associated with the findings\. The identifier of the associated account is the value of the `AwsAccountId` attribute for the finding\.
+[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) must be called by one of the following:
++ The account that is associated with the findings\. The identifier of the associated account is the value of the `AwsAccountId` attribute for the finding\.
++ An account that is allow\-listed for an official Security Hub partner integration\.
 
 Security Hub can only accept finding updates for accounts that have Security Hub enabled\. The finding provider also must be enabled\. If Security Hub is disabled, or the finding provider integration is not enabled, then the findings are returned in the `FailedFindings` list, with an `InvalidAccess` error\.
 

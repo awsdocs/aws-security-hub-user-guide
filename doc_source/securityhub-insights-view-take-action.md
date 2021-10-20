@@ -4,6 +4,12 @@ For each insight, AWS Security Hub first determines the findings that match the 
 
 From the **Insights** console page, you can view and take action on the results and findings\.
 
+If you enabled finding aggregation, then in the aggregation Region, the results for managed insights include findings from the aggregation Region and the linked Regions\. For custom insight results, if the insight does not filter by Region, then the results include findings from the aggregation Region and linked Regions\.
+
+In other Regions, the insight results are only for that Region\.
+
+For information on how to configure finding aggregation, see [Aggregating findings across Regions](finding-aggregation.md)\.
+
 ## Viewing and taking action on insight results \(console\)<a name="securityhub-insight-results-console"></a>
 
 The insight results consist of a grouped list of the results for the insight\. For example, if the insight is grouped by resource identifiers, then the insight results are the list of resource identifiers\. Each item in the results list indicates the number of matching findings for that item\.

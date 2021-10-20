@@ -6,6 +6,8 @@ The record state indicates whether the finding is active or archived\. A finding
 
 The workflow status indicates the status of the investigation into the finding\. The workflow status can only be updated by the Security Hub customer or a system that is operating on the customer's behalf\. By default, a finding list only shows findings with a workflow status of `NEW` or `NOTIFIED`\. The default finding list for a control also includes `RESOLVED` findings\.
 
+If you enabled finding aggregation, then on the **Findings** and **Insights** pages, you can filter the findings by Region\.
+
 For information on working with the finding list for a control, see [Filtering, sorting, and downloading the control finding list](control-finding-list.md)\.
 
 ## Adding filters<a name="finding-list-filters"></a>
