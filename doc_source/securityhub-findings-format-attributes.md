@@ -6571,9 +6571,11 @@ The `AwsEcrRepository` object provides information about an Amazon Elastic Conta
 
 ```
 "AwsEcrRepository": {
-    "RegistryId": "222222222222",
+    "LifecyclePolicy": {
+        "RegistryId": "123456789012",
+    },  
     "RepositoryName": "sample-repo",
-    "RepositoryArn": "arn:aws:ecr:us-west-2:222222222222:repository/sample-repo",
+    "Arn": "arn:aws:ecr:us-west-2:111122223333:repository/sample-repo",
     "ImageScanningConfiguration": {
         "ScanOnPush": true
     },

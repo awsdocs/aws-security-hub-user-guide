@@ -7,7 +7,7 @@ You cannot enable an account if it is already a member account for a different a
 You also cannot enable an account that is currently suspended\. If you try to enable a suspended account, the account status changes to **Account Suspended**\.
 
 When you enable an organization account as a member account, the following occurs:
-+ If the account does not have Security Hub enabled, Security Hub and the default standards are enabled automatically for that account\. The account does not receive an invitation\.
++ If the account does not have Security Hub enabled, Security Hub is enabled for that account\. The AWS Foundational Security Best Practices and CIS AWS Foundations Benchmark standards also are enabled for the account\. The account does not receive an invitation\.
 
   The exception to this is the organization management account\. Security Hub cannot be enabled automatically for the organization management account\. The organization management account must enable Security Hub before you enable the organization management account as a member account\.
 + If the account already has Security Hub enabled, Security Hub does not make any other changes to the account\. It only enables the membership\.

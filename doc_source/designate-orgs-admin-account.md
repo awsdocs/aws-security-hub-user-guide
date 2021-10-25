@@ -2,7 +2,7 @@
 
 The delegated AWS Security Hub administrator account manages Security Hub membership for an organization\.
 
-The organization management account designates the Security Hub administrator account for the organization\. The administrator account selects the member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md) and [Managing member accounts that are not in an organization](account-management-manual.md)\.
+The organization management account designates the Security Hub administrator account for the organization\. The administrator account selects the member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md) and [Managing member accounts by invitation](account-management-manual.md)\.
 
 ![\[Diagram that shows how the organization management account designates an organization account as the delegated administrator for Security Hub. The delegated administrator becomes a Security Hub administrator account.\]](http://docs.aws.amazon.com/securityhub/latest/userguide/images/diagram_account_delegation.png)
 

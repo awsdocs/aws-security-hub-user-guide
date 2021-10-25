@@ -1,8 +1,8 @@
 # Adding and inviting member accounts<a name="securityhub-accounts-add-invite"></a>
 
-Your account becomes an AWS Security Hub administrator account when an account that you invite accepts your invitation\.
+Your account becomes the administrator account for accounts that accept your invitation\.
 
-When you accept an invitation from another account, your account becomes a member account\.
+When you accept an invitation from another account, your account becomes a member account, and that account becomes your administrator account\.
 
 If your account is an administrator account, you cannot accept an invitation to become a member account\.
 

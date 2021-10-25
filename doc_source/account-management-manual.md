@@ -1,8 +1,10 @@
-# Managing member accounts that are not in an organization<a name="account-management-manual"></a>
+# Managing member accounts by invitation<a name="account-management-manual"></a>
 
-AWS Security Hub also supports a manual invitation process\. This process is intended for accounts that do not belong to an organization in AWS Organizations\. You might not use AWS Organizations, or you might have accounts that are not part of the organization\. For example, you might not include a test account in your organization\.
+AWS Security Hub also supports a manual invitation process\. You use the manual process if you do not use AWS Organizations\.
 
-On the **Accounts** tab of the **Settings** page, accounts that are not part of an organization have **Type** set to **By invitation**\.
+You also use this process for accounts that do not belong to your organization\. For example, you might not include a test account in your organization\. Or you might want to consolidate accounts from multiple organizations under a single Security Hub administrator account\. The Security Hub administrator account must send invitations to accounts that belong to other organizations\.
+
+On the **Accounts** tab of the **Settings** page, accounts that were added by invitation have **Type** set to **By invitation**\.
 
 If you do not use Organizations at all, then an account becomes an administrator account when a member account accepts an invitation\.
 

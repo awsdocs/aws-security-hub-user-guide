@@ -65,7 +65,10 @@ For more information about the integration, see [Integration with AWS Security H
 
 **Amazon Macie**  <a name="integration-amazon-macie"></a>
 A finding from Macie can indicate that there is a policy violation, or that sensitive data, such as personal identifying information \(PII\) and intellectual property, is present in the data that your organization stores in Amazon S3\.  
-By default, Macie only sends policy violation findings to Security Hub\. You can also configure the integration to send sensitive data findings to Security Hub\. For more information, see [Amazon Macie integration with AWS Security Hub](https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html) in the *Amazon Macie User Guide*\.  
+By default, Macie only sends policy violation findings to Security Hub\. You can also configure the integration to send sensitive data findings to Security Hub\.   
+In Security Hub, the finding type for a policy or sensitive data finding is changed to a value that is compatible with ASFF\. For example, the finding type `Policy:IAMUser/S3BlockPublicAccessDisabled` in Macie is displayed as `Effects/Data Exposure/Policy:IAMUser-S3BucketPublic` in Security Hub\.  
+Macie also sends generated sample findings to Security Hub\. For sample findings, the change to the finding type includes removing the `[SAMPLE]` prefix\. For example, the `[SAMPLE] Policy:IAMUser/S3BlockPublicAccessDisabled` type for a sample finding in Macie is displayed as `Effects/Data Exposure/Policy:IAMUser-S3BucketPublic` in Security Hub\.  
+For more information, see [Amazon Macie integration with AWS Security Hub](https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html) in the *Amazon Macie User Guide*\.  
 Security Hub can also receive findings from Macie Classic\. Macie Classic sends basic and custom findings to Macie from the **S3 bucket properties** and **S3 objects** indices\. Macie Classic does not send data classifications, or findings from the **CloudTrail data** index\.  
 For more information, see [Locating and analyzing Macie Classic alerts](https://docs.aws.amazon.com/macie/latest/userguide/macie-alerts.html#macie-alert-working-locate) in the *Amazon Macie Classic User Guide*\.
 
