@@ -197,6 +197,11 @@ HeleCloud is a Managed Services Provider, taking care of your AWS infrastructure
 IBM QRadar SIEM provides security teams with the ability to quickly and accurately detect, prioritize, investigate, and respond to threats\.  
 [Partner documentation](https://www.ibm.com/docs/en/qradar-common?topic=configuration-integrating-aws-security-hub)
 
+**[Logz\.io Cloud SIEM](https://logz.io/solutions/cloud-monitoring-aws/)**  
+**Integration type:** Receive  
+Logz\.io is a provider of Cloud SIEM that provides advanced correlation of log and event data to help security teams to detect, analyze, and respond to security threats in real time\.  
+[Partner documentation](https://docs.logz.io/shipping/security-sources/aws-security-hub.html)
+
 **[https://aws.amazon.com/marketplace/pp/prodview-ol6txkzkdyacc](https://aws.amazon.com/marketplace/pp/prodview-ol6txkzkdyacc) – MVISION Cloud Native Application Protection Platform \(CNAPP\)**  
 **Integration type:** Send  
 **Product ARN:** `arn:aws:securityhub:<REGION>:297986523463:product/mcafee-skyhigh/mcafee-mvision-cloud-aws`  
