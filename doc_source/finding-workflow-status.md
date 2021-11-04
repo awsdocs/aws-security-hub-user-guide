@@ -7,18 +7,27 @@ The workflow status has the following values:
 `NEW`  
 The initial state of a finding before you review it\.  
 Security Hub also resets the workflow status from either `NOTIFIED` or `RESOLVED` to `NEW` in the following cases:  
-+ An archived finding is made active\.
-+ The compliance status changes from `PASSED` to either `WARNING`, `FAILED`, or `NOT_AVAILABLE`\.
++ `RecordState` changes from `ARCHIVED` to `ACTIVE`\.
++ `Compliance.Status` changes from `PASSED` to `FAILED`, `WARNING`, or `NOT_AVAILABLE`\.
 These changes imply that additional investigation is required\.
 
 `NOTIFIED`  
-Indicates that you notified the resource owner about the security issue\. You can use this status when you are not the resource owner, and you need intervention from the resource owner in order to resolve a security issue\.
+Indicates that you notified the resource owner about the security issue\. You can use this status when you are not the resource owner, and you need intervention from the resource owner in order to resolve a security issue\.  
+If one of the following occurs, the workflow status is changed automatically from `NOTIFIED` to `NEW`:  
++ `RecordState` changes from `ARCHIVED` to `ACTIVE`\.
++ `Compliance.Status` changes from `PASSED` to `FAILED`, `WARNING`, or `NOT_AVAILABLE`\.
 
 `SUPPRESSED`  
-Indicates that you reviewed the finding and do not believe that any action is needed\. The finding is no longer updated\.
+Indicates that you reviewed the finding and do not believe that any action is needed\.  
+`SUPPRESSED` findings cannot be updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\. For example, finding providers cannot change `RecordState`\.  
+You can use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update `SUPPRESSED` findings\.
 
 `RESOLVED`  
 The finding was reviewed and remediated and is now considered resolved\.  
+The finding remains `RESOLVED` unless one of the following occurs:  
++ `RecordState` changes from `ARCHIVED` to `ACTIVE`\.
++ `Compliance.Status` changes from `PASSED` to `FAILED`, `WARNING`, or `NOT_AVAILABLE`\.
+In those cases, the workflow status is automatically reset to `NEW`\.  
 For findings from controls, if `Compliance.Status` is `PASSED`, then Security Hub automatically sets the workflow status to `RESOLVED`\.
 
 ## Setting the workflow status \(console\)<a name="finding-workflow-status-console"></a>

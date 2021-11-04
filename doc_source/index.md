@@ -35,6 +35,7 @@ Amazon's trademarks and trade dress may not be used in
    + [AWS managed policies for AWS Security Hub](security-iam-awsmanpol.md)
    + [Compliance validation for AWS Security Hub](SERVICENAME-compliance.md)
    + [Infrastructure security in AWS Security Hub](infrastructure-security.md)
+   + [AWS Security Hub and interface VPC endpoints (AWS PrivateLink)](security-vpc-endpoints.md)
 + [Managing administrator and member accounts](securityhub-accounts.md)
    + [Effects of an administrator-member relationship](accounts-admin-member-relationship.md)
    + [Restrictions and recommendations](securityhub-account-restrictions-recommendations.md)

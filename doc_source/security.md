@@ -15,3 +15,4 @@ This documentation helps you understand how to apply the shared responsibility m
 + [AWS managed policies for AWS Security Hub](security-iam-awsmanpol.md)
 + [Compliance validation for AWS Security Hub](SERVICENAME-compliance.md)
 + [Infrastructure security in AWS Security Hub](infrastructure-security.md)
++ [AWS Security Hub and interface VPC endpoints \(AWS PrivateLink\)](security-vpc-endpoints.md)

@@ -1588,23 +1588,27 @@ This control checks whether unrestricted incoming traffic for the security group
 Unrestricted access \(0\.0\.0\.0/0\) increases opportunities for malicious activity, such as hacking, denial\-of\-service attacks, and loss of data\.
 
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\. No security group should allow unrestricted ingress access to the following ports:
-+ 3389 \(RDP\)
 + 20, 21 \(FTP\)
 + 22 \(SSH\)
 + 23 \(Telnet\)
-+ 110 \(POP3\)
-+ 143 \(IMAP\)
-+ 3306 \(mySQL\)
-+ 8080 \(proxy\)
-+ 1433, 1434 \(MSSQL\)
-+ 9200 or 9300 \(OpenSearch\)
-+ 5601 \(OpenSearch Dashboards\)
 + 25 \(SMTP\)
-+ 445 \(CIFS\)
++ 110 \(POP3\)
 + 135 \(RPC\)
++ 143 \(IMAP\)
++ 445 \(CIFS\)
++ 1433, 1434 \(MSSQL\)
++ 3000 \(Go, Node\.js, and Ruby web development frameworks\)
++ 3306 \(mySQL\)
++ 3389 \(RDP\)
 + 4333 \(ahsp\)
++ 5000 \(Python web development frameworks\)
 + 5432 \(postgresql\)
 + 5500 \(fcp\-addr\-srvr1\) 
++ 5601 \(OpenSearch Dashboards\)
++ 8080 \(proxy\)
++ 8088 \(legacy HTTP port\)
++ 8888 \(alternative HTTP port\)
++ 9200 or 9300 \(OpenSearch\)
 
 ### Remediation<a name="ec2-19-remediation"></a>
 
@@ -1799,6 +1803,38 @@ AWS GovCloud \(US\-West\)
 
 For instructions on how to enable managed platform updates, see [To configure managed platform updates under Managed platform updates](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-platform-update-managed.html) in the *AWS Elastic Beanstalk Developer Guide*\.
 
+## \[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager<a name="fsbp-elb-2"></a>
+
+**Category:** Protect > Encryption of data in transit
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-acm-certificate-required.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-acm-certificate-required.html)
+
+**Parameters:** None
+
+This control checks whether the Classic Load Balancer uses HTTPS/SSL certificates provided by AWS Certificate Manager \(ACM\)\. The control fails if the Classic Load Balancer configured with HTTPS/SSL listener does not use a certificate provided by ACM\.
+
+To create a certificate, you can use either ACM or a tool that supports the SSL and TLS protocols, such as OpenSSL\. Security Hub recommends that you use ACM to create or import certificates for your load balancer\.
+
+ACM integrates with Classic Load Balancers so that you can deploy the certificate on your load balancer\. You also should automatically renew these certificates\.
+
+**Note**  
+These controls are not supported in the following Regions:  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Milan\)
+AWS GovCloud \(US\-East\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="elb-2-remediation"></a>
+
+For information on how to associate an ACM SSL/TLS certificate with a Classic Load Balancer, see the Knowledge Center article [How can I associate an ACM SSL/TLS certificate with a Classic, Application, or Network Load Balancer?](http://aws.amazon.com/premiumsupport/knowledge-center/associate-acm-certificate-alb-nlb/)
+
 ## \[ELB\.3\] Classic Load Balancer listeners should be configured with HTTPS or TLS termination<a name="fsbp-elb-3"></a>
 
 **Category:** Protect > Data protection > Encryption of data in transit 
@@ -1831,7 +1867,7 @@ To remediate this issue, update your listeners to use the TLS or HTTPS protocol\
 
 1. Choose the **Listeners** tab, and then choose **Edit**\.
 
-1. For all listeners where Load Balancer Protocol is not set to HTTPS or SSL, change the setting to HTTPS or SSL\.
+1. For all listeners where **Load Balancer Protocol** is not set to HTTPS or SSL, change the setting to HTTPS or SSL\.
 
 1. For all modified listeners, under **SSL Certificate**, choose **Change**\.
 
@@ -1853,9 +1889,9 @@ To remediate this issue, update your listeners to use the TLS or HTTPS protocol\
 
 **Parameters:** None
 
-This control evaluates AWS Application Load Balancers \(ALB\) to ensure they are configured to drop invalid HTTP headers\. The control fails if the value of `routing.http.drop_invalid_header_fields.enabled` is set to `false`\.
+This control evaluates AWS Application Load Balancers to ensure they are configured to drop invalid HTTP headers\. The control fails if the value of `routing.http.drop_invalid_header_fields.enabled` is set to `false`\.
 
-By default, ALBs are not configured to drop invalid HTTP header values\. Removing these header values prevents HTTP desync attacks\.
+By default, Application Load Balancers are not configured to drop invalid HTTP header values\. Removing these header values prevents HTTP desync attacks\.
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -1893,7 +1929,7 @@ To remediate this issue, configure your load balancer to drop invalid header fie
 
 **Parameters:** None
 
-This control checks whether the Application Load Balancer and the Classic Load Balancer have logging enabled\. The control fails if `access_logs.s3.enabled` is `false`\.
+This control checks whether the Application Load Balancer and the Classic Load Balancerhave logging enabled\. The control fails if `access_logs.s3.enabled` is `false`\.
 
 Elastic Load Balancing provides access logs that capture detailed information about requests sent to your load balancer\. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses\. You can use these access logs to analyze traffic patterns and to troubleshoot issues\. 
 
@@ -1976,6 +2012,37 @@ Enabling connection draining on Classic Load Balancers ensures that the load bal
 ### Remediation<a name="elb-7-remediation"></a>
 
 To enable connection draining on Classic Load Balancers, following the steps in [Configure connection draining for your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html) in *User Guide for Classic Load Balancers*\.
+
+## \[ELB\.8\] Classic Load Balancers with HTTPS/SSL listeners should use a predefined security policy that has strong configuration<a name="fsbp-elb-8"></a>
+
+**Category:** Protect > Encryption of data in transit 
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-predefined-security-policy-ssl-check.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-predefined-security-policy-ssl-check.html)
+
+**Parameters:**
++ `predefinedPolicyName`: `ELBSecurityPolicy-TLS-1-2-2017-01`
+
+This control checks whether your Classic Load Balancer HTTPS/SSL listeners use the predefined policy `ELBSecurityPolicy-TLS-1-2-2017-01`\. The control fails if the Classic Load Balancer HTTPS/SSL listeners do not use `ELBSecurityPolicy-TLS-1-2-2017-01`\.
+
+A security policy is a combination of SSL protocols, ciphers, and the Server Order Preference option\. Predefined policies control the ciphers, protocols, and preference orders to support during SSL negotiations between a client and load balancer\.
+
+Using `ELBSecurityPolicy-TLS-1-2-2017-01` can help you to meet compliance and security standards that require you to disable specific versions of SSL and TLS\. For more information, see [Predefined SSL security policies for Classic Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html) in *User Guide for Classic Load Balancers*\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+Europe \(Milan\)
+AWS GovCloud \(US\-East\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="elb-8-remediation"></a>
+
+For information on how to use the predefined security policy `ELBSecurityPolicy-TLS-1-2-2017-01` with a Classic Load Balancer, see [Configure security settings](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#config-backend-auth) in *User Guide for Classic Load Balancers*\.
 
 ## \[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS<a name="fsbp-elbv2-1"></a>
 
@@ -4870,6 +4937,38 @@ You can edit an association to specify a new name, schedule, severity level, or 
 1. After you determine the issue, edit the failed association to correct the problem\. For information on how to edit an association, see [Edit an association](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc-edit.html)\.
 
 For more information on creating and editing State Manager associations, see [Working with associations in Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-associations.html) in the *AWS Systems Manager User Guide*\.
+
+## \[SSM\.4\] SSM documents should not be public<a name="fsbp-ssm-4"></a>
+
+**Category:** Protect > Secure network configuration > Resources not publicly accessible
+
+**Severity:** Critical
+
+**Resource type:** `AWS::SSM::Document`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ssm-document-not-public.html](https://docs.aws.amazon.com/config/latest/developerguide/ssm-document-not-public.html)
+
+**Parameters:** None
+
+This control checks whether AWS Systems Manager documents that are owned by the account are public\. This control fails if SSM documents with the owner `Self` are public\.
+
+SSM documents that are public might allow unintended access to your documents\. A public SSM document can expose valuable information about your account, resources, and internal processes\.
+
+Unless your use case requires public sharing to be enabled, Security Hub recommends that you turn on the block public sharing setting for your Systems Manager documents that are owned by `Self`\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
+
+### Remediation<a name="ssm-4-remediation"></a>
+
+
+
+For more information about disabling public access to SSM documents, see [Modify permissions for a shared SSM document](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-share-modify.html) and [Best practices for shared SSM documents](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-before-you-share.html) in the *AWS Systems Manager User Guide*\.
 
 ## \[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled<a name="fsbp-waf-1"></a>
 
