@@ -8,5 +8,6 @@ To save on the cost of AWS Config, you can disable recording of global resources
 + [\[IAM\.5\] MFA should be enabled for all IAM users that have a console password](securityhub-standards-fsbp-controls.md#fsbp-iam-5)
 + [\[IAM\.6\] Hardware MFA should be enabled for the root user](securityhub-standards-fsbp-controls.md#fsbp-iam-6)
 + [\[IAM\.7\] Password policies for IAM users should have strong configurations](securityhub-standards-fsbp-controls.md#fsbp-iam-7)
-
++ [\[IAM\.8\] Unused IAM user credentials should be removed](securityhub-standards-fsbp-controls.md#fsbp-iam-8)
++ [\[IAM\.21\] IAM customer managed policies that you create should not allow wildcard actions for services](securityhub-standards-fsbp-controls.md#fsbp-iam-21)
 If you disable these controls and disable recording of global resources in a particular Region, you should also disable [\[Config\.1\] AWS Config should be enabled](securityhub-standards-fsbp-controls.md#fsbp-config-1)\. This is because [\[Config\.1\] AWS Config should be enabled](securityhub-standards-fsbp-controls.md#fsbp-config-1) requires recording of global resources in order to pass\.
