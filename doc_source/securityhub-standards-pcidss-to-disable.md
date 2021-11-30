@@ -7,5 +7,7 @@ To save on the cost of AWS Config, you can disable recording of global resources
 + [\[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-4)
 + [\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-5)
 + [\[PCI\.IAM\.6\] MFA should be enabled for all IAM users](securityhub-pci-controls.md#pcidss-iam-6)
++ [\[PCI\.IAM\.7\] IAM user credentials should be disabled if not used within a predefined number of days](securityhub-pci-controls.md#pcidss-iam-7)
++ [\[PCI\.IAM\.8\] Password policies for IAM users should have strong configurations](securityhub-pci-controls.md#pcidss-iam-8)
 
 If you disable these controls and disable recording of global resources in a particular Region, you should also disable[ \[PCI\.Config\.1\] AWS Config should be enabled](securityhub-pci-controls.md#pcidss-config-1)\. This is because [ \[PCI\.Config\.1\] AWS Config should be enabled](securityhub-pci-controls.md#pcidss-config-1) requires recording of global resources in order to pass\.
