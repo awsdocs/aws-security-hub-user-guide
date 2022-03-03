@@ -216,7 +216,7 @@ Finding details related to a control\. Only returned for findings generated from
 ```
 "Compliance": {
     "RelatedRequirements": ["Req1", "Req2"],
-    "Status": "PASSED",
+    "Status": ["PASSED"],
     "StatusReasons": [
         {
             "ReasonCode": "CLOUDWATCH_ALARMS_NOT_PRESENT";
@@ -980,7 +980,7 @@ Contains finding details related to a control\. Only returned for findings that 
 ```
 "Compliance": {
     "RelatedRequirements": ["Req1", "Req2"],
-    "Status": "FAILED",
+    "Status": ["FAILED"],
     "StatusReasons": [
         {
             "ReasonCode": "CLOUDWATCH_ALARMS_NOT_PRESENT",
@@ -1002,9 +1002,9 @@ To identify a requirement, use its identifier\.
 **`Status`**  
 Optional  
 The result of a security check\.  
-**Type:** Enum  
+**Type:** Array of enum  
 **Valid values:**  
-+ `PASSED` – Security check passed for all evaluated resources\. If` Compliance.Status` is `PASSED`, then Security Hub automatically sets `Workflow.Status` to `RESOLVED`\.
++ `PASSED` – Security check passed for all evaluated resources\. If `Compliance.Status` is `PASSED`, then Security Hub automatically sets `Workflow.Status` to `RESOLVED`\.
 
   If `Compliance.Status` for a finding changes from `PASSED` to `FAILED`, `WARNING`, or `NOT_AVAILABLE`, and `Workflow.Status` was either `NOTIFIED` or `RESOLVED`, then Security Hub automatically sets `Workflow.Status` to `NEW`\.
 + `WARNING` – Some information is missing, or this check is not supported given your configuration\.
@@ -1013,7 +1013,7 @@ The result of a security check\.
 **Example**  
 
 ```
-"Status": "PASSED"
+"Status": ["PASSED"]
 ```
 
 **[`StatusReasons`](#asff-compliance-statusreasons)**  
