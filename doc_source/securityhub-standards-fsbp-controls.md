@@ -2561,9 +2561,7 @@ To remediate this issue, delete the root user access key\.
 
 1. Log in to your account using the AWS account root user credentials\.
 
-1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
-
-1. In the pop\-up warning, choose **Continue to Security Credentials**\. 
+1. Choose the account name near the top\-right corner of the page and then choose **Security Credentials**\.
 
 1. Choose **Access keys \(access key ID and secret access key\)**\. 
 
@@ -2640,9 +2638,7 @@ To remediate this issue, add hardware\-based MFA to the root account\.
 
 1. Log in to your account using the root user credentials\.
 
-1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
-
-1. In the pop\-up warning, choose **Continue to Security Credentials**\.
+1. Choose the account name near the top\-right corner of the page and then choose **Security Credentials**\.
 
 1. Choose **Multi\-Factor Authentication \(MFA\)**\.
 
