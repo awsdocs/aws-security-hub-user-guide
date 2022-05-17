@@ -1596,7 +1596,7 @@ You cannot author policies for your Lambda resources in JSON, or use conditions 
 1. To get the ID of the statement from the output of `GetPolicy`, from the AWS CLI, run the following:
 
    ```
-   aws lambda get-policy —function-name yourfunctionname
+   aws lambda get-policy --function-name yourfunctionname
    ```
 
    This command returns the Lambda resource\-based policy string associated with the publicly accessible Lambda function\.
