@@ -117,7 +117,7 @@ The following is the complete JSON syntax for the AWS Security Finding Format \(
         "CompanyName": "string",
         "Compliance": { 
             "RelatedRequirements": ["string"],
-            "Status": ["string"],
+            "Status": "string",
             "StatusReasons": [
                 {
                     "Description": "string",
