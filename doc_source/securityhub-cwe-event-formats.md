@@ -21,14 +21,14 @@ The event format is the format that is used when Security Hub sends an event to 
       "arn:aws:securityhub:us-west-2::product/aws/macie/arn:aws:macie:us-west-2:111122223333:integtest/trigger/6294d71b927c41cbab915159a8f326a3/alert/f2893b211841"
    ],
    "detail":{
-      "findings": [{
+      "finding": [{
          <finding content>
        }]
    }
 }
 ```
 
-`<finding content>` is the content, in JSON format, of the finding that is sent by the event\.
+`<finding content>` is the content, in JSON format, of the finding that is sent by the event\. Each event sends a single finding\.
 
 For a complete list of finding attributes, see [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\.
 
@@ -53,7 +53,7 @@ For information about how to configure EventBridge rules that are triggered by t
   "detail": {
     "actionName":"custom-action-name",
     "actionDescription": "description of the action",
-    "findings": [
+    "finding": [
       {
         <finding content>
       }
@@ -62,7 +62,7 @@ For information about how to configure EventBridge rules that are triggered by t
 }
 ```
 
-`<finding content>` is the content, in JSON format, of the finding that is sent by the event\.
+`<finding content>` is the content, in JSON format, of the finding that is sent by the event\. Each event sends a single finding\.
 
 For a complete list of finding attributes, see [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\.
 

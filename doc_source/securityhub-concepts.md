@@ -4,26 +4,28 @@ This topic describes the key concepts in AWS Security Hub to help you get starte
 
 **Account**  
 A standard Amazon Web Services \(AWS\) account that contains your AWS resources\. You can sign in to AWS with your account and enable Security Hub\.  
-An account can also invite other accounts to enable Security Hub and become associated with that account in Security Hub\. Accepting a membership invitation is optional\. If the invitations are accepted, the account becomes a Security Hub *administrator* account, and the added accounts are *member* accounts\. As the administrator account, you can view findings in your member accounts\.  
-If you are enrolled in AWS Organizations, then your organization designates a Security Hub administrator account for the organization\. The administrator account can enable other organization accounts as member accounts\.  
-An account cannot be both a Security Hub administrator account and a member account at the same time\. An account can only have one administrator account\.  
+An account can invite other accounts to enable Security Hub and become associated with that account in Security Hub\. Accepting a membership invitation is optional\. If the invitations are accepted, the account becomes an administrator account, and the added accounts are member accounts\. Administrator accounts can view findings in their member accounts\.  
+If you are enrolled in AWS Organizations, then your organization designates a Security Hub administrator account for the organization\. The Security Hub administrator account can enable other organization accounts as member accounts\.  
+An account cannot be both an administrator account and a member account at the same time\. An account can only have one administrator account\.  
 For more information, see [Managing administrator and member accounts](securityhub-accounts.md)\.
 
+**Administrator account**  
+An account in Security Hub that is granted access to view findings for associated member accounts\.  
+An account becomes an administrator account in one of the following ways:  
++ The account invites other accounts to become associated with it in Security Hub\. When those accounts accept the invitation, they become member accounts, and the inviting account becomes their administrator account\.
++ The account is designated by an organization management account as the Security Hub administrator account\. The Security Hub administrator account can enable any organization account as a member account, and can also invite other accounts to be member accounts\.
+An account can only have one administrator account\. An account cannot be both an administrator account and a member account at the same time\.
+
 **Aggregation Region**  
-  
-For finding aggregation, the aggregation Region is the Region from which you view and manage findings\.  
-Findings are aggregated to the aggregation Region from the linked Regions\. Updates to findings are replicated across Regions\.  
-In the aggregation Region, the **Findings** and **Insights** pages include findings from the linked Regions\.  
-The following pages do not yet support finding aggregation\. The content on these pages, including the lists of related findings, is always specific to the current Region\.  
-+ **Standards**
-+ Standard details
-+ Control details
-See [Aggregating findings across Regions](finding-aggregation.md)\.
+Setting an aggregation Region allows you to view security findings from multiple Regions in a single pane of glass\.   
+The aggregation Region is the Region from which you view and manage findings\. Findings are aggregated to the aggregation Region from linked Regions\. Updates to findings are replicated across Regions\.  
+In the aggregation Region, the **Security standards**, **Insights**, and **Findings** pages include data from all linked Regions\.  
+See [Cross\-Region aggregation](finding-aggregation.md)\.
 
 **Archived finding**  
 A finding that has a `RecordState` set to `ARCHIVED`\. Archiving a finding indicates that the finding provider believes that the finding is no longer relevant\. The record state is separate from the workflow status, which tracks the status of an investigation into a finding\.  
 Finding providers can use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) operation of the Security Hub API to archive findings that they created\. Security Hub automatically archives findings for controls if the control is disabled or the associated resource is deleted, based on one of the following criteria\.  
-+ The finding is not updated in three days\.
++ The finding is not updated in three to five days \(note that this is best effort and not guaranteed\)\.
 + The associated AWS Config evaluation returns `NOT_APPLICABLE`\.
 By default, archived findings are excluded from findings lists in the Security Hub console\. You can update the filter to include archived findings\.  
 The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html) operation of the Security Hub API returns both active and archived findings\. You can include a filter for the record state\.  
@@ -46,18 +48,19 @@ A safeguard or countermeasure prescribed for an information system or an organiz
 **Custom action**  
 A Security Hub mechanism for sending selected findings to EventBridge\. A custom action is created in Security Hub\. It is then linked to an EventBridge rule\. The rule defines a specific action to take when a finding is received that is associated with the custom action ID\. Custom actions can be used, for example, to send a specific finding, or a small set of findings, to a response or remediation workflow\. For more information, see [Creating a custom action \(console\)](securityhub-cwe-custom-actions.md#securityhub-cwe-configure)\.
 
+**Delegated administrator account \(Organizations\)**  
+In Organizations, the delegated administrator account for a service is able to manage the use of a service for the organization\.  
+In Security Hub, the Security Hub administrator account is also the delegated administrator account for Security Hub\. When the organization management account first designates a Security Hub administrator account, Security Hub calls Organizations to make that account the delegated administrator account\.  
+The organization management account must then choose the delegated administrator account as the Security Hub administrator account in all Regions\.
+
 **Finding**  
 The observable record of a security check or security\-related detection\.  
 For more information about findings in Security Hub, see [Findings in AWS Security Hub](securityhub-findings.md)\.  
 Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in EventBridge that routes findings to your Amazon S3 bucket\.
 
-**Finding aggregation**  
-The aggregation of findings from linked Regions to an aggregation Region\. You can then view and update all of your findings from the aggregation Region\.  
-The following pages do not yet support finding aggregation\. The content on these pages, including the list of findings for a control, is always specific to the current Region\.  
-+ **Standards**
-+ Standard details
-+ Control details
-See [Aggregating findings across Regions](finding-aggregation.md)\.
+**Cross\-Region aggregation**  
+The aggregation of findings, insights, control compliance statuses, and security scores from linked Regions to an aggregation Region\. You can then view all of your data from the aggregation Region and update findings and insights from the aggregation Region\.  
+See [Cross\-Region aggregation](finding-aggregation.md)\.
 
 **Finding ingestion**  
 The import of findings into Security Hub from other AWS services and from third\-party partner providers\.  
@@ -67,9 +70,15 @@ Finding ingestion events include both new findings and updates to existing findi
 A collection of related findings defined by an aggregation statement and optional filters\. An insight identifies a security area that requires attention and intervention\. Security Hub offers several managed \(default\) insights that you can't modify\. You can also create custom Security Hub insights to track security issues that are unique to your AWS environment and usage\. For more information, see [Insights in AWS Security Hub](securityhub-insights.md)\.
 
 **Linked Region**  
-For finding aggregation, a linked Region is a region that aggregates findings to the aggregation Region\.  
+When you enable cross\-Region aggregation, a linked Region is a region that aggregates findings, insights, control compliance statuses, and security scores to the aggregation Region\.  
 In a linked Region, the **Findings** and **Insights** pages contain findings only from that Region\.  
-See [Aggregating findings across Regions](finding-aggregation.md)\.
+See [Cross\-Region aggregation](finding-aggregation.md)\.
+
+**Member account**  
+An account that has granted permission to an administrator account to view and take action on their findings\.  
+An account becomes a member account in one of the following ways:  
++ The account accepts an invitation from another account\.
++ For an organization account, the Security Hub administrator account enables the account as a member account\.
 
 **Related requirements**  
 A set of industry or regulatory requirements that are mapped to a control\.
@@ -79,6 +88,12 @@ A set of automated criteria that is used to assess whether a control is being ad
 
 **Security check**  
 A specific point\-in\-time evaluation of a rule against a single resource resulting in a passed, failed, warning, or not available state\. Running a security check produces a finding\.
+
+**Security Hub administrator account**  
+An organization account that manages Security Hub membership for an organization\.  
+The organization management account designates the Security Hub administrator account in each Region\. The organization management account must choose the same Security Hub administrator account in all Regions\.  
+The Security Hub administrator account is also the delegated administrator account for Security Hub in Organizations\.  
+The Security Hub administrator account can enable any organization account as a member account\. The Security Hub administrator account can also invite other accounts to be member accounts\.
 
 **Security standard**  
 A published statement on a topic specifying the characteristics, usually measurable and in the form of controls, that must be satisfied or achieved for compliance\. Security standards can be based on regulatory frameworks, best practices, or internal company policies\. To learn more about security standards in Security Hub, see [Security standards and controls in AWS Security Hub](securityhub-standards.md)\.

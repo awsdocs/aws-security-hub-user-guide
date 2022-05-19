@@ -2,15 +2,17 @@
 
 For the CIS AWS Foundations standard, Security Hub supports the following controls\. For each control, the information includes the required AWS Config rule and the remediation steps\.
 
-## 1\.1 – Avoid the use of the "root" account<a name="securityhub-standards-cis-controls-1.1"></a>
+## 1\.1 – Avoid the use of the root user<a name="securityhub-standards-cis-controls-1.1"></a>
 
 **Severity:** Low
 
 **AWS Config rule:** None
 
-The root account has unrestricted access to all resources in the AWS account\. We highly recommend that you avoid using this account\. The root account is the most privileged account\. Minimizing the use of this account and adopting the principle of least privilege for access management reduces the risk of accidental changes and unintended disclosure of highly privileged credentials\.
+**Schedule type:** Periodic
 
-As a best practice, use your root credentials only when required to [ perform account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\. Apply IAM policies directly to groups and roles but not users\. For a tutorial on how to set up an administrator for daily use, see [ Creating your first IAM admin user and group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*
+The root user has unrestricted access to all services and resources in an AWS account\. We highly recommend that you avoid using the root user for daily tasks\. Minimizing the use of the root user and adopting the principle of least privilege for access management reduce the risk of accidental changes and unintended disclosure of highly privileged credentials\.
+
+As a best practice, use your root user credentials only when required to [ perform account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\. Apply IAM policies directly to groups and roles but not users\. For a tutorial on how to set up an administrator for daily use, see [ Creating your first IAM admin user and group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.3 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -22,7 +24,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-1.1-remediation"></a>
 
@@ -78,7 +80,7 @@ Finally, create the metric filter and alarm\.
 
 1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms**\.
+1. In the navigation pane, choose **Alarms** and then **All alarms**\.
 
 1. Choose **Create Alarm**\.
 
@@ -86,7 +88,7 @@ Finally, create the metric filter and alarm\.
 
    1. Choose **Select metric**\.
 
-   1. On the **Select metric** panel, on the **All metrics** tab, choose the **LogMetrics** namespace\. You can use the search bar to search for it\.
+   1. On the **Select metric** panel, scroll down to **Metrics**\. Choose the **LogMetrics** namespace\. You can also use the search bar to search for it\.
 
    1. Choose **Metrics with no dimensions**\.
 
@@ -122,6 +124,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html](https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html)
 
+**Schedule type:** Periodic
+
 Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password as well as for an authentication code from their AWS MFA device\.
 
 CIS recommends that you enable MFA for all accounts that have a console password\. MFA provides increased security for console access\. It requires the authenticating principal to possess a device that emits a time\-sensitive key and to have knowledge of a credential\.
@@ -151,6 +155,8 @@ To learn how to delegate MFA setup to users, see [How to Delegate Management of 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
 
+**Schedule type:** Periodic
+
 IAM users can access AWS resources using different types of credentials, such as passwords or access keys\.
 
 CIS recommends that you remove or deactivate all credentials that have been unused in 90 days or more\. Disabling or removing unnecessary credentials reduces the window of opportunity for credentials associated with a compromised or abandoned account to be used\. 
@@ -178,6 +184,8 @@ After you identify the inactive accounts or unused credentials, use the followin
 **Severity:** Medium
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html](https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html)
+
+**Schedule type:** Periodic
 
 Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS\. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface \(AWS CLI\), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services\.
 
@@ -224,9 +232,11 @@ This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
+**Schedule type:** Periodic
+
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
-CIS recommends that the password policy require at least one uppercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\. 
+CIS recommends that the password policy require at least one uppercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
 
 ### Remediation<a name="cis-1.5-remediation"></a>
 
@@ -243,6 +253,8 @@ CIS recommends that the password policy require at least one uppercase letter\. 
 **Severity:** Medium
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+
+**Schedule type:** Periodic
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\. CIS recommends that the password policy require at least one lowercase letter\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
 
@@ -261,6 +273,8 @@ Password policies, in part, enforce password complexity requirements\. Use IAM p
 **Severity:** Medium
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+
+**Schedule type:** Periodic
 
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
@@ -282,6 +296,8 @@ CIS recommends that the password policy require at least one symbol\. Setting a 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
+**Schedule type:** Periodic
+
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords use different character sets\.
 
 CIS recommends that the password policy require at least one number\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
@@ -302,6 +318,8 @@ CIS recommends that the password policy require at least one number\. Setting a 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
+**Schedule type:** Periodic
+
 Password policies, in part, enforce password complexity requirements\. Use IAM password policies to ensure that passwords are at least a given length\.
 
 CIS recommends that the password policy require a minimum password length of 14 characters\. Setting a password complexity policy increases account resiliency against brute force login attempts\.
@@ -321,6 +339,8 @@ CIS recommends that the password policy require a minimum password length of 14 
 **Severity:** Low
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+
+**Schedule type:** Periodic
 
 This control checks whether the number of passwords to remember is set to 24\. The control fails if the value is not 24\.
 
@@ -346,6 +366,8 @@ CIS recommends that the password policy prevent the reuse of passwords\. Prevent
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
 
+**Schedule type:** Periodic
+
 IAM password policies can require passwords to be rotated or expired after a given number of days\.
 
 CIS recommends that the password policy expire passwords after 90 days or less\. Reducing the password lifetime increases account resiliency against brute force login attempts\. Requiring regular password changes also helps in the following scenarios:
@@ -366,28 +388,28 @@ CIS recommends that the password policy expire passwords after 90 days or less\.
 
 1. Choose **Apply password policy**\.
 
-## 1\.12 – Ensure no root account access key exists<a name="securityhub-cis-controls-1.12"></a>
+## 1\.12 – Ensure no root user access key exists<a name="securityhub-cis-controls-1.12"></a>
 
 **Severity:** Critical
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
 
-The root account is the most privileged user in an AWS account\. AWS Access Keys provide programmatic access to a given account\.
+**Schedule type:** Periodic
 
-CIS recommends that all access keys be associated with the root account be removed\. Removing access keys associated with the root account limits vectors that the account can be compromised by\. Removing the root access keys also encourages the creation and use of role\-based accounts that are least privileged\.
+The root user has complete access to all services and resources in an AWS account\. AWS Access Keys provide programmatic access to a given account\.
+
+CIS recommends that all access keys be associated with the root user be removed\. Removing access keys associated with the root user limits vectors that the account can be compromised by\. Removing the root user access keys also encourages the creation and use of role\-based accounts that are least privileged\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Asia Pacific \(Osaka\)\.
+This control is not supported in Asia Pacific \(Osaka\)\.
 
 ### Remediation<a name="cis-1.12-remediation"></a>
 
 **To delete access keys**
 
-1. Log in to your account using the root credentials\.
+1. Log in to your account using the root user credentials\.
 
-1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
-
-1. In the pop\-up warning, choose **Continue to Security Credentials**\.
+1. Choose the account name near the top\-right corner of the page and then choose **Security Credentials**\.
 
 1. Choose **Access keys \(access key ID and secret access key\)**\.
 
@@ -395,15 +417,17 @@ This control is not supported in Africa \(Cape Town\) or Asia Pacific \(Osaka\)\
 
 1. If there is more than one root user access key, then repeat steps 4 and 5 for each key\.
 
-## 1\.13 – Ensure MFA is enabled for the "root" account<a name="securityhub-cis-controls-1.13"></a>
+## 1\.13 – Ensure MFA is enabled for the root user<a name="securityhub-cis-controls-1.13"></a>
 
 **Severity:** Critical
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html)
 
-The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
+**Schedule type:** Periodic
 
-When you use virtual MFA for root accounts, CIS recommends that the device used is *not* a personal device\. Instead, use a dedicated mobile device \(tablet or phone\) that you manage to keep charged and secured independent of any individual personal devices\. This lessens the risks of losing access to the MFA due to device loss, device trade\-in, or if the individual owning the device is no longer employed at the company\.
+The root user has complete access to all the services and resources in an AWS account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
+
+When you use virtual MFA for the root user, CIS recommends that the device used is *not* a personal device\. Instead, use a dedicated mobile device \(tablet or phone\) that you manage to keep charged and secured independent of any individual personal devices\. This lessens the risks of losing access to the MFA due to device loss, device trade\-in, or if the individual owning the device is no longer employed at the company\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -414,9 +438,9 @@ AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="cis-1.13-remediation"></a>
 
-**To enable MFA for the root account**
+**To enable MFA for the root user**
 
-1. Log in to your account using the root credentials\.
+1. Log in to your account using the root user credentials\.
 
 1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
 
@@ -430,19 +454,23 @@ AWS GovCloud \(US\-West\)\.
 
 1. Complete the steps to configure the device type appropriate to your selection\.
 
-   Choose a hardware\-based authentication mechanism for best results in passing the check [1\.14 – Ensure hardware MFA is enabled for the "root" account ](#securityhub-cis-controls-1.14)\.
+   Choose a hardware\-based authentication mechanism for best results in passing the check [1\.14 – Ensure hardware MFA is enabled for the root user ](#securityhub-cis-controls-1.14)\.
 
-## 1\.14 – Ensure hardware MFA is enabled for the "root" account<a name="securityhub-cis-controls-1.14"></a>
+## 1\.14 – Ensure hardware MFA is enabled for the root user<a name="securityhub-cis-controls-1.14"></a>
 
 **Severity:** Critical
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
-The root account is the most privileged user in an account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
+**Schedule type:** Periodic
 
-For Level 2, CIS recommends that you protect the root account with a hardware MFA\. A hardware MFA has a smaller attack surface than a virtual MFA\. For example, a hardware MFA doesn't suffer the attack surface introduced by the mobile smartphone that a virtual MFA resides on\.
+The root user has complete access to all services and resources in an AWS account\. MFA adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device\.
+
+For Level 2, CIS recommends that you protect root user credentials with a hardware MFA\. A hardware MFA has a smaller attack surface than a virtual MFA\. For example, a hardware MFA doesn't suffer the attack surface introduced by the mobile smartphone that a virtual MFA resides on\.
 
 Using hardware MFA for many, many accounts might create a logistical device management issue\. If this occurs, consider implementing this Level 2 recommendation selectively to the highest security accounts\. You can then apply the Level 1 recommendation to the remaining accounts\.
+
+Both time\-based one\-time password \(TOTP\) and Universal 2nd Factor \(U2F\) tokens are viable as hardware MFA options\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -453,9 +481,9 @@ AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="cis-1.14-remediation"></a>
 
-**To enable hardware\-based MFA for the root account**
+**To enable hardware\-based MFA for the root user**
 
-1. Log in to your account using the root credentials\.
+1. Log in to your account using the root user credentials\.
 
 1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
 
@@ -475,9 +503,14 @@ AWS GovCloud \(US\-West\)\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
 
+**Schedule type:** Change triggered
+
 By default, IAM users, groups, and roles have no access to AWS resources\. IAM policies are how privileges are granted to users, groups, or roles\.
 
 CIS recommends that you apply IAM policies directly to groups and roles but not users\. Assigning privileges at the group or role level reduces the complexity of access management as the number of users grow\. Reducing access management complexity might in turn reduce opportunity for a principal to inadvertently receive or retain excessive privileges\.
+
+**Note**  
+IAM users created by Amazon Simple Email Service are automatically created using inline policies\. Security Hub automatically exempts these users from this control\.
 
 ### Remediation<a name="cis-1.16-remediation"></a>
 
@@ -528,6 +561,8 @@ For more information about adding users to groups, see [Adding and removing user
 **Severity:** Low
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-in-use.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-in-use.html)
+
+**Schedule type:** Periodic
 
 AWS provides a support center that can be used for incident notification and response, as well as technical support and customer services\.
 
@@ -585,6 +620,8 @@ The administrator of the specified account can grant permission to assume this r
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
 
+**Schedule type:** Change triggered
+
 IAM policies define a set of privileges granted to users, groups, or roles\. It's recommended and considered a standard security advice to grant least privilege—that is, granting only the permissions required to perform a task\. Determine what users need to do and then craft policies that let the users perform only those tasks, instead of allowing full administrative privileges\.
 
 It's more secure to start with a minimum set of permissions and grant additional permissions as necessary, rather than starting with permissions that are too lenient and then trying to tighten them later\. Providing full administrative privileges instead of restricting to the minimum set of permissions that the user is required to do exposes the resources to potentially unwanted actions\.
@@ -609,9 +646,13 @@ Confirm that the user that you detached the policy from can still access AWS ser
 
 ## 2\.1 – Ensure CloudTrail is enabled in all Regions<a name="securityhub-cis-controls-2.1"></a>
 
-**Severity:** Critical
+**Severity:** High
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html)
+
+**Schedule type:** Periodic
+
+This control checks that there is at least one multi\-Region CloudTrail trail\. It also checks that the `ExcludeManagementEventSources` parameter is empty for at least one of those trails\.
 
 CloudTrail is a service that records AWS API calls for your account and delivers log files to you\. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, the request parameters, and the response elements returned by the AWS service\. CloudTrail provides a history of AWS API calls for an account, including API calls made via the AWS Management Console, AWS SDKs, command\-line tools, and higher\-level AWS services \(such as AWS CloudFormation\)\.
 
@@ -680,6 +721,8 @@ By default, CloudTrail trails that are created using the AWS Management Console 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html)
 
+**Schedule type:** Periodic
+
 CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to S3\. You can use these digest files to determine whether a log file was changed, deleted, or unchanged after CloudTrail delivered the log\.
 
 CIS recommends that you enable file validation on all trails\. Enabling log file validation provides additional integrity checking of CloudTrail logs\.
@@ -705,6 +748,8 @@ CIS recommends that you enable file validation on all trails\. Enabling log file
 **Severity:** Critical
 
 **AWS Config rules:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html), [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
+
+**Schedule type:** Periodic and change triggered
 
 CloudTrail logs a record of every API call made in your account\. These log files are stored in an S3 bucket\. CIS recommends that the S3 bucket policy, or access control list \(ACL\), applied to the S3 bucket that CloudTrail logs to prevents public access to the CloudTrail logs\. Allowing public access to CloudTrail log content might aid an adversary in identifying weaknesses in the affected account's use or configuration\.
 
@@ -733,6 +778,8 @@ If the bucket is publicly accessible, the check generates a failed finding\.
 **Severity:** Low
 
 **AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html)
+
+**Schedule type:** Periodic
 
 CloudTrail is a web service that records AWS API calls made in a given account\. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, the request parameters, and the response elements returned by the AWS service\.
 
@@ -781,6 +828,8 @@ For more information, see [Configuring CloudWatch Logs monitoring with the conso
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 AWS Config is a web service that performs configuration management of supported AWS resources in your account and delivers log files to you\. The recorded information includes the configuration item \(AWS resource\), relationships between configuration items \(AWS resources\), and any configuration changes between resources\.
 
 CIS recommends that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\.
@@ -800,19 +849,17 @@ To run this check, Security Hub performs custom logic to perform the audit steps
 
 1. Select the Region to configure AWS Config in\.
 
-1. If you haven't used AWS Config before, choose **Get started**\.
+1. If you haven't used AWS Config before, see [Getting Started](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\.
 
-1. On the Settings page, do the following:
+1. Navigate to the Settings page from the menu, and do the following:
+   + Choose **Edit**\.
    + Under **Resource types to record**, select **Record all resources supported in this region** and **Include global resources \(e\.g\., AWS IAM resources\)**\.
+   + Under **Data retention period**, choose the default retention period for AWS Config data, or specify a custom retention period\.
+   + Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or choose **Choose a role from your account** and then select the role to use\.
    + Under **Amazon S3 bucket**, specify the bucket to use or create a bucket and optionally include a prefix\.
    + Under **Amazon SNS topic**, select an Amazon SNS topic from your account or create one\. For more information about Amazon SNS, see the [https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html)\.
-   + Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or choose **Choose a role from your account** and then select the role to use\.
 
-1. Choose **Next**\.
-
-1. On the **AWS Config** rules page, choose **Skip**\.
-
-1. Choose **Confirm**\.
+1. Choose **Save**\.
 
 For more information about using AWS Config from the AWS Command Line Interface, see [Turning on AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/gs-cli-subscribe.html) in the *AWS Config Developer Guide*\.
 
@@ -823,6 +870,8 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 **Severity:** Low
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html)
+
+**Schedule type:** Change triggered
 
 Amazon S3 bucket access logging generates a log that contains access records for each request made to your S3 bucket\. An access log record contains details about the request, such as the request type, the resources specified in the request worked, and the time and date the request was processed\.
 
@@ -857,6 +906,8 @@ If the bucket is publicly accessible, the check generates a failed finding\.
 **Severity:** Medium
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
+
+**Schedule type:** Periodic
 
 CloudTrail is a web service that records AWS API calls for an account and makes those logs available to users and resources in accordance with IAM policies\. AWS Key Management Service \(AWS KMS\) is a managed service that helps create and control the encryption keys used to encrypt account data, and uses hardware security modules \(HSMs\) to protect the security of encryption keys\.
 
@@ -896,6 +947,8 @@ You might need to modify the policy for CloudTrail to successfully interact with
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
+**Schedule type:** Periodic
+
 AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the KMS key\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\.
 
 CIS recommends that you enable KMS key key rotation\. Rotating encryption keys helps reduce the potential impact of a compromised key because data encrypted with a new key can't be accessed with a previous key that might have been exposed\.
@@ -921,6 +974,8 @@ CIS recommends that you enable KMS key key rotation\. Rotating encryption keys h
 **Severity:** Medium
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
+
+**Schedule type:** Periodic
 
 VPC flow logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC\. After you have created a flow log, you can view and retrieve its data in CloudWatch Logs\.
 
@@ -954,6 +1009,8 @@ CIS recommends that you enable flow logging for packet rejects for VPCs\. Flow l
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
 CIS recommends that you create a metric filter and alarm unauthorized API calls\. Monitoring unauthorized API calls helps reveal application errors and might reduce time to detect malicious activity\.
@@ -968,7 +1025,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.1-remediation"></a>
 
@@ -1062,6 +1119,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
 CIS recommends that you create a metric filter and alarm console logins that aren't protected by MFA\. Monitoring for single\-factor console logins increases visibility into accounts that aren't protected by MFA\. 
@@ -1076,7 +1135,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.2-remediation"></a>
 
@@ -1111,7 +1170,7 @@ Finally, create the metric filter and alarm\.
    1. Copy the following pattern and then paste it into the **Filter Pattern** field\.
 
       ```
-      {($.eventName="ConsoleLogin") && ($.additionalEventData.MFAUsed !="Yes")}
+      { ($.eventName = "ConsoleLogin") && ($.additionalEventData.MFAUsed != "Yes") && ($.userIdentity.type = "IAMUser") && ($.responseElements.ConsoleLogin = "Success") }
       ```
 
    1. Choose **Next**\.
@@ -1164,15 +1223,17 @@ Finally, create the metric filter and alarm\.
 
 1. Under **Preview and create**, review the alarm configuration\. Then choose **Create alarm**\.
 
-## 3\.3 – Ensure a log metric filter and alarm exist for usage of "root" account<a name="securityhub-cis-controls-3.3"></a>
+## 3\.3 – Ensure a log metric filter and alarm exist for usage of root user<a name="securityhub-cis-controls-3.3"></a>
 
 **Severity:** Low
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
-CIS recommends that you create a metric filter and alarm for root login attempts\. Monitoring for root account logins provides visibility into the use of a fully privileged account and an opportunity to reduce the use of it\.
+CIS recommends that you create a metric filter and alarm for root user login attempts\. Monitoring for root user logins provides visibility into the use of a fully privileged account and an opportunity to reduce the use of it\.
 
 To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.3 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
 
@@ -1184,7 +1245,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.3-remediation"></a>
 
@@ -1278,6 +1339,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
 CIS recommends that you create a metric filter and alarm for changes made to IAM policies\. Monitoring these changes helps ensure that authentication and authorization controls remain intact\.
@@ -1292,7 +1355,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.4-remediation"></a>
 
@@ -1388,6 +1451,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
 CIS recommends that you create a metric filter and alarm for changes to CloudTrail configuration settings\. Monitoring these changes helps ensure sustained visibility to activities in the account\.
@@ -1402,7 +1467,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.5-remediation"></a>
 
@@ -1496,6 +1561,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
 CIS recommends that you create a metric filter and alarm for failed console authentication attempts\. Monitoring failed console logins might decrease lead time to detect an attempt to brute\-force a credential, which might provide an indicator, such as source IP, that you can use in other event correlations\. 
@@ -1510,7 +1577,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.6-remediation"></a>
 
@@ -1604,11 +1671,13 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
 CIS recommends that you create a metric filter and alarm for customer managed keys that have changed state to disabled or scheduled deletion\. Data encrypted with disabled or deleted keys is no longer accessible\.
 
-To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.7 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\.
+To run this check, Security Hub uses custom logic to perform the exact audit steps prescribed for control 3\.7 in the [CIS AWS Foundations Benchmark v1\.2](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf)\. This control fails if the exact metric filters prescribed by CIS are not used\. Additional fields or terms cannot be added to the metric filters\. The control also fails if `ExcludeManagementEventSources` contains `kms.amazonaws.com`\.
 
 **Note**  
 When Security Hub performs the check for this control, it looks for CloudTrail trails that the current account uses\. These trails might be organization trails that belong to another account\. Multi\-Region trails also might be based in a different Region\.  
@@ -1618,7 +1687,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.7-remediation"></a>
 
@@ -1712,6 +1781,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
 CIS recommends that you create a metric filter and alarm for changes to S3 bucket policies\. Monitoring these changes might reduce time to detect and correct permissive policies on sensitive S3 buckets\.
@@ -1726,7 +1797,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.8-remediation"></a>
 
@@ -1820,6 +1891,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\.
 
 CIS recommends that you create a metric filter and alarm for changes to AWS Config configuration settings\. Monitoring these changes helps ensure sustained visibility of configuration items in the account\.
@@ -1834,7 +1907,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.9-remediation"></a>
 
@@ -1928,6 +2001,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Security groups are a stateful packet filter that controls ingress and egress traffic in a VPC\.
 
 CIS recommends that you create a metric filter and alarm for changes to security groups\. Monitoring these changes helps ensure that resources and services aren't unintentionally exposed\. 
@@ -1942,7 +2017,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.10-remediation"></a>
 
@@ -2036,6 +2111,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. NACLs are used as a stateless packet filter to control ingress and egress traffic for subnets in a VPC\.
 
 CIS recommends that you create a metric filter and alarm for changes to NACLs\. Monitoring these changes helps ensure that AWS resources and services aren't unintentionally exposed\. 
@@ -2050,7 +2127,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.11-remediation"></a>
 
@@ -2144,6 +2221,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Network gateways are required to send and receive traffic to a destination outside a VPC\.
 
 CIS recommends that you create a metric filter and alarm for changes to network gateways\. Monitoring these changes helps ensure that all ingress and egress traffic traverses the VPC border via a controlled path\.
@@ -2158,7 +2237,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.12-remediation"></a>
 
@@ -2252,6 +2331,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. Routing tables route network traffic between subnets and to network gateways\.
 
 CIS recommends that you create a metric filter and alarm for changes to route tables\. Monitoring these changes helps ensure that all VPC traffic flows through an expected path\.
@@ -2266,7 +2347,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.13-remediation"></a>
 
@@ -2360,6 +2441,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** None
 
+**Schedule type:** Periodic
+
 You can do real\-time monitoring of API calls by directing CloudTrail logs to CloudWatch Logs and establishing corresponding metric filters and alarms\. You can have more than one VPC in an account, and you can create a peer connection between two VPCs, enabling network traffic to route between VPCs\.
 
 CIS recommends that you create a metric filter and alarm for changes to VPCs\. Monitoring these changes helps ensure that authentication and authorization controls remain intact\.
@@ -2374,7 +2457,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Remediation<a name="cis-3.14-remediation"></a>
 
@@ -2468,6 +2551,8 @@ Finally, create the metric filter and alarm\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html)
 
+**Schedule type:** Change triggered
+
 Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 
 CIS recommends that no security group allow unrestricted ingress access to port 22\. Removing unfettered connectivity to remote console services, such as SSH, reduces a server's exposure to risk\.
@@ -2501,6 +2586,8 @@ Perform the following steps for each security group associated with a VPC\.
 **Severity:** High
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/restricted-common-ports.html](https://docs.aws.amazon.com/config/latest/developerguide/restricted-common-ports.html)
+
+**Schedule type:** Change triggered
 
 The name of the associated AWS Config managed rule is` restricted-common-ports`\. However, the rule that is created uses the name `restricted-rdp`\.
 
@@ -2537,6 +2624,8 @@ Perform the following steps for each security group associated with a VPC\.
 **Severity:** High
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
+
+**Schedule type:** Change triggered
 
 A VPC comes with a default security group with initial settings that deny all inbound traffic, allow all outbound traffic, and allow all traffic between instances assigned to the security group\. If you don't specify a security group when you launch an instance, the instance is automatically assigned to this default security group\. Security groups provide stateful filtering of ingress and egress network traffic to AWS resources\.
 

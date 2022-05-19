@@ -9,7 +9,7 @@ A dash \(–\) indicates that the account cannot perform the action\.
 This table reflects the default permissions for administrator and member accounts\. You can use custom IAM policies to further restrict access to Security Hub features and functions\. For guidance and examples, see the blog post[ Aligning IAM policies to user personas for AWS Security Hub](http://aws.amazon.com/blogs/security/aligning-iam-policies-to-user-personas-for-aws-security-hub/)\.
 
 
-|  Action  |  Delegated administrator account \(Organization\)  |  Administrator account \(Invitation\)  |  Member \(Organization\)  |  Member \(Invitation\)  | 
+|  Action  |  Security Hub administrator account \(Organization\)  |  Administrator account \(Invitation\)  |  Member \(Organization\)  |  Member \(Invitation\)  | 
 | --- | --- | --- | --- | --- | 
 |  View accounts  |  Any  |  Any  |  \-  |  \-  | 
 |  Disassociate member account  |  Any  |  Any  |  \-  |  Self  | 

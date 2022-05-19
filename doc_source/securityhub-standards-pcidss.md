@@ -1,6 +1,6 @@
 # Payment Card Industry Data Security Standard \(PCI DSS\)<a name="securityhub-standards-pcidss"></a>
 
-The Payment Card Industry Data Security Standard \(PCI DSS\) standard in Security Hub consists of a set of AWS security best practices controls\. Each control applies to a specific AWS resource, and relates to one or more PCI DSS version 3\.2\.1 requirements\. A PCI DSS requirement can be related to multiple controls\. The details page for each PCI DSS control lists the specific PCI DSS requirements that are related to that control\. See [Viewing details for a standard](securityhub-standards-view-controls.md)\.
+The Payment Card Industry Data Security Standard \(PCI DSS\) in Security Hub consists of a set of AWS security best practices controls\. Each control applies to a specific AWS resource, and relates to one or more PCI DSS version 3\.2\.1 requirements\. A PCI DSS requirement can be related to multiple controls\. The details page for each PCI DSS control lists the specific PCI DSS requirements that are related to that control\. See [Viewing details for a standard](securityhub-standards-view-controls.md)\.
 
 The PCI DSS Compliance Standard in Security Hub is designed to help you with your ongoing PCI DSS security activities\. The controls cannot verify whether your systems are compliant with the PCI DSS standard\. They can neither replace internal efforts nor guarantee that you will pass a PCI DSS assessment\. Security Hub does not check procedural controls that require manual evidence collection\.
 

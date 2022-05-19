@@ -1,6 +1,6 @@
 # PCI DSS controls<a name="securityhub-pci-controls"></a>
 
-The PCI DSS security standard in Security Hub supports the following controls\. For each control, the information includes the severity, the resource type, the AWS Config rule, and the remediation steps\.
+PCI DSS in Security Hub supports the following controls\. For each control, the information includes the severity, the resource type, the AWS Config rule, and the remediation steps\.
 
 ## \[PCI\.AutoScaling\.1\] Auto Scaling groups associated with a load balancer should use health checks<a name="pcidss-autoscaling-1"></a>
 
@@ -9,6 +9,8 @@ The PCI DSS security standard in Security Hub supports the following controls\. 
 **Resource type:** `AWS::AutoScaling::AutoScalingGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -52,6 +54,8 @@ For more information on using a load balancer with an Auto Scaling group, see th
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether AWS CloudTrail is configured to use the server\-side encryption \(SSE\) AWS KMS key encryption\.
@@ -81,6 +85,8 @@ For details on how to encrypt CloudTrail log files with AWS KMS managed keys \(S
 **Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudtrail-enabled.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -183,6 +189,8 @@ For more details, see the tutorial in the [https://docs.aws.amazon.com/awscloudt
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether CloudTrail log file validation is enabled\.
@@ -228,6 +236,8 @@ This is a method that helps to ensure file\-integrity monitoring or change\-dete
 **Resource type:** `AWS::CloudTrail::Trail`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -284,6 +294,8 @@ For more information about configuring CloudWatch Logs monitoring with the conso
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the GitHub or Bitbucket source repository URL contains either personal access tokens or a user name and password\.
@@ -333,6 +345,8 @@ To see CodeBuild use case\-based samples, see the [https://docs.aws.amazon.com/c
 **Resource type:** `AWS::CodeBuild::Project`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html)
+
+**Schedule:** Change triggered
 
 **Parameters:** None
 
@@ -408,6 +422,8 @@ See the information on environment variables in build environments in the [https
 
 **AWS Config rule:** None\. To run this check, Security Hub runs through audit steps prescribed for it in [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/)\. No AWS Config managed rules are created in your AWS environment for this check\.
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether AWS Config is enabled in the account for the local Region and is recording all resources\.
@@ -442,25 +458,19 @@ You should enable AWS Config to ensure a change\-detection mechanism is deployed
 
 1. Open the AWS Config console at [https://console\.aws\.amazon\.com/config/](https://console.aws.amazon.com/config/)\.
 
-1. Choose the Region to configure AWS Config in\.
+1. Select the Region to configure AWS Config in\.
 
-1. If you have not used AWS Config before, choose **Get started**\. 
+1. If you haven't used AWS Config before, see [Getting Started](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\.
 
-1. On the **Settings** page, do the following:
+1. Navigate to the Settings page from the menu, and do the following:
+   + Choose **Edit**\.
+   + Under **Resource types to record**, select **Record all resources supported in this region** and **Include global resources \(e\.g\., AWS IAM resources\)**\.
+   + Under **Data retention period**, choose the default retention period for AWS Config data, or specify a custom retention period\.
+   + Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or choose **Choose a role from your account** and then select the role to use\.
+   + Under **Amazon S3 bucket**, specify the bucket to use or create a bucket and optionally include a prefix\.
+   + Under **Amazon SNS topic**, select an Amazon SNS topic from your account or create one\. For more information about Amazon SNS, see the [https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html)\.
 
-   1.  Under **Resource types to record**, choose **Record all resources supported in this region** and **Include global resources \(e\.g\., AWS IAM resources\)**\. 
-
-   1.  Under **Amazon S3 bucket**, either specify the bucket to use or create a bucket and optionally include a prefix\. 
-
-   1. Under **Amazon SNS topic**, either select an Amazon SNS topic from your account or create one\. For more information about Amazon SNS, see the [https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html)\.
-
-   1. Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or choose **Choose a role from your account** and then choose the role to use\. 
-
-1. Choose **Next**\. 
-
-1. On the **AWS Config rules** page, choose **Skip**\.
-
-1. Choose **Confirm**\.
+1. Choose **Save**\.
 
 For more information about using AWS Config from the AWS CLI, see the [https://docs.aws.amazon.com/config/latest/developerguide/gs-cli-subscribe.html](https://docs.aws.amazon.com/config/latest/developerguide/gs-cli-subscribe.html)\.
 
@@ -472,7 +482,9 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 **Resource type:** AWS account
 
-**AWS Config rule:** Security Hub runs through audit steps without creating an AWS Config managed rules in your AWS account for this check\. 
+**AWS Config rule:** None\. Security Hub runs through audit steps without creating an AWS Config managed rules in your AWS account for this check\. 
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -495,7 +507,7 @@ The available trails that are in the current Region and that are owned by curren
 The check results in a control status of `NO_DATA` in the following cases:  
 The multi\-Region trail is based in a different Region\. Security Hub can only generate findings in the Region where the trail is based\.
 The multi\-Region trail belongs to a different account\. Security Hub can only generate findings for the account that owns the trail\.
-For the alarm, the current account must either own the referenced Amazon SNS topic, or must have `listSubscription` access to the Amazon SNS topic\. Otherwise Security Hub generates `WARNING` findings for the control\.
+For the alarm, the current account must either own the referenced Amazon SNS topic, or must get access to the Amazon SNS topic by calling `ListSubscriptionsByTopic`\. Otherwise Security Hub generates `WARNING` findings for the control\.
 
 ### Related PCI DSS requirements<a name="pcidss-cw-1-requirements"></a>
 
@@ -510,7 +522,7 @@ You should also ensure that CloudTrail is enabled to keep an audit trail of acti
 
 The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
 
-These are the same steps to remediate findings for [3\.3 – Ensure a log metric filter and alarm exist for usage of "root" account ](securityhub-cis-controls.md#securityhub-cis-controls-3.3)\. 
+These are the same steps to remediate findings for [3\.3 – Ensure a log metric filter and alarm exist for usage of root user ](securityhub-cis-controls.md#securityhub-cis-controls-3.3)\. 
 
 **To create an Amazon SNS topic**
 
@@ -560,7 +572,7 @@ These are the same steps to remediate findings for [3\.3 – Ensure a log metric
 
 1. Choose **Create metric filter**\. 
 
-1. Next, set up the notification\. Select the select the metric filter you just created, then choose **Create alarm**\.
+1. Next, set up the notification\. Select the metric filter you just created, then choose **Create alarm**\.
 
 1. Enter the threshold for the alarm \(for example, **1**\), then choose **Next**\.
 
@@ -577,6 +589,8 @@ These are the same steps to remediate findings for [3\.3 – Ensure a log metric
 **Resource type:** `AWS::DMS::ReplicationInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html](https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -639,9 +653,11 @@ For more information, see the section on [Creating a replication instance](https
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
-This control checks whether Amazon Elastic Block Store snapshots are not publicly restorable by everyone, which makes them public\. Amazon EBS snapshots should not be publicly restorable by everyone unless you explicitly allow it, to avoid accidental exposure of your company’s sensitive data\.
+This control checks whether Amazon Elastic Block Store snapshots are not publicly restorable by everyone\. Amazon EBS snapshots should not be publicly restorable by everyone unless you explicitly allow it, to avoid accidental exposure of your company’s sensitive data\.
 
 You should also ensure that permission to change Amazon EBS configurations are restricted to authorized AWS accounts only\. Learn more about managing Amazon EBS snapshot permissions in the [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html)\.
 
@@ -696,6 +712,8 @@ For more information about sharing an Amazon EBS snapshot, see the [https://docs
 **Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -765,6 +783,8 @@ This control is retired\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/eip-attached.html](https://docs.aws.amazon.com/config/latest/developerguide/eip-attached.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether Elastic IP addresses that are allocated to a VPC are attached to Amazon EC2 instances or in\-use elastic network interfaces \(ENIs\)\.
@@ -807,6 +827,8 @@ For more information, see the information on releasing Elastic IP addresses in t
 **Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html](https://docs.aws.amazon.com/config/latest/developerguide/restricted-ssh.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -862,6 +884,8 @@ Perform the following steps for each security group associated with a VPC\.
 **Resource type:** `AWS::EC2::VPC`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
+
+**Schedule type:** Periodic
 
 **Parameters: **
 + `trafficType` – `REJECT`
@@ -922,6 +946,8 @@ To remediate this issue, enable VPC flow logging\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-http-to-https-redirection-check.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-http-to-https-redirection-check.html) 
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether HTTP to HTTPS redirection is configured on all HTTP listeners of Application Load Balancers\. The control fails if any of the HTTP listeners of Application Load Balancers do not have HTTP to HTTPS redirection configured\.
@@ -975,6 +1001,8 @@ To remediate this issue, you redirect HTTP request to HTTPS\.
 **Resource type: ** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -1030,6 +1058,8 @@ See [Launching your Amazon OpenSearch Service domains within a VPC](https://docs
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether Elasticsearch domains have encryption at rest configuration enabled\.
@@ -1061,6 +1091,8 @@ Encryption of data at rest requires OpenSearch Service 5\.1 or later\. For more 
 **Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/guardduty-enabled-centralized.html](https://docs.aws.amazon.com/config/latest/developerguide/guardduty-enabled-centralized.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -1098,6 +1130,8 @@ For details on how to enable GuardDuty, including how to use AWS Organizations t
 **Resource type: ** AWS account 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -1146,11 +1180,16 @@ No access keys should be created for the root user\. Doing so might violate the 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks that none of your IAM users have policies attached\. IAM users must inherit permissions from IAM groups or roles\.
 
 It does not check whether least privileged policies are applied to IAM roles and groups\.
+
+**Note**  
+IAM users created by Amazon Simple Email Service are automatically created using inline policies\. Security Hub automatically exempts these users from this control\.
 
 ### Related PCI DSS requirements<a name="pcidss-iam-2-requirements"></a>
 
@@ -1225,6 +1264,8 @@ For more information about adding users to groups, see the [https://docs.aws.ama
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the default version of AWS Identity and Access Management policies \(also known as customer managed policies\) do not have administrator access with a statement that has `"Effect": "Allow" with "Action": "*"` over `"Resource": "*"`\.
@@ -1264,6 +1305,8 @@ Providing full administrative privileges instead of restricting to the minimum r
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether your AWS account is enabled to use multi\-factor authentication \(MFA\) hardware device to sign in with root user credentials\.
@@ -1271,6 +1314,8 @@ This control checks whether your AWS account is enabled to use multi\-factor aut
 It does not check whether you are using virtual MFA\.
 
 To address PCI DSS requirement 8\.3\.1, you can choose between hardware MFA \(this control\) or virtual MFA \([\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](#pcidss-iam-5)\)\.
+
+Both time\-based one\-time password \(TOTP\) and Universal 2nd Factor \(U2F\) tokens are viable as hardware MFA options\.
 
 **Note**  
 This control is not supported in the following Regions\.  
@@ -1290,7 +1335,7 @@ Enabling hardware MFA is a method used to incorporate multi\-factor authenticati
 
 ### Remediation<a name="pcidss-iam-4-remediation"></a>
 
-**To enable hardware\-based MFA for the root account**
+**To enable hardware\-based MFA for the root user**
 
 1. Log in to your account using the root user credentials\.
 
@@ -1313,6 +1358,8 @@ Enabling hardware MFA is a method used to incorporate multi\-factor authenticati
 **Resource type: ** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-mfa-enabled.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -1340,7 +1387,7 @@ Enabling virtual MFA is a method used to incorporate multi\-factor authenticatio
 
 ### Remediation<a name="pcidss-iam-5-remediation"></a>
 
-**To enable MFA for the root account**
+**To enable MFA for the root user**
 
 1. Log in to your account using the root user credentials\.
 
@@ -1363,6 +1410,8 @@ Enabling virtual MFA is a method used to incorporate multi\-factor authenticatio
 **Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-mfa-enabled.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -1398,6 +1447,8 @@ To learn how to delegate MFA setup to users, the AWS Security Blog post [How to 
 **Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** 
 + `maxCredentialUsageAge`: 90 \(days\)
@@ -1448,6 +1499,8 @@ After you identify the inactive accounts or unused credentials, use the followin
 **Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -1511,6 +1564,8 @@ You can use the IAM console to modify the password policy\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cmk-backing-key-rotation-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks that key rotation is enabled for each KMS key\. It does not check KMS keys that have imported key material\.
@@ -1549,6 +1604,8 @@ This is a method used to change cryptographic keys once they have reached the en
 **Resource type:** `AWS::Lambda::Function`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -1640,9 +1697,11 @@ For other Lambda resource\-based policies examples that allow you to grant usage
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-inside-vpc.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-inside-vpc.html) 
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
-This control checks whether a Lambda function is in a VPC\. The control excludes Lambda@Edge resources\.
+This control checks whether a Lambda function is in a VPC\. You might see failed findings for Lambda@Edge resources\.
 
 It does not evaluate the VPC subnet routing configuration to determine public reachability\. 
 
@@ -1690,13 +1749,105 @@ If you use a Lambda function that is in scope for PCI DSS, the function can be c
 
 For more information see the section on configuring a Lambda function to access resources in a VPC in the [https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)\.
 
-## \[PCI\.RDS\.1\] RDS snapshots should prohibit public access<a name="pcidss-rds-1"></a>
+## \[PCI\.OpenSearch\.1\] Amazon OpenSearch domains should be in a VPC<a name="pcidss-opensearch-1"></a>
+
+**Category:** Protect > Secure network configuration > Resources within VPC
+
+**Severity:** Medium
+
+**Resource type: ** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-in-vpc-only.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-in-vpc-only.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether Amazon OpenSearch domains are in a VPC\. It does not evaluate the VPC subnet routing configuration to determine public access\.
+
+You should ensure that Amazon OpenSearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html#ac-types-resource) in the Amazon OpenSearch Service Developer Guide\.
+
+You also should ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the Amazon VPC User Guide\.
+
+Amazon OpenSearch domains deployed within a VPC can communicate with VPC resources over the private AWS network, without the need to traverse the public internet\. This configuration increases the security posture by limiting access to the data in transit\. VPCs provide a number of network controls to secure access to Amazon OpenSearch domains, including network ACL and security groups\. Security Hub recommends that you migrate public Amazon OpenSearch domains to VPCs to take advantage of these controls\.
+
+### Related PCI DSS requirements<a name="pcidss-opensearch-1-requirements"></a>
+
+This control is related to the following PCI DSS requirements:
+
+**PCI DSS 1\.2\.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment \(CDE\), and specifically deny all other traffic\.**  
+If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC\. Doing so enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+This method is used to allow only necessary traffic to and from the CDE\.
+
+**PCI DSS 1\.3\.1: Implement a DMZ to limit inbound traffic to only system components that provide authorized publicly accessible services, protocols, and ports\.**  
+If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC\. Doing so enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+This method is used to limit inbound traffic to only system components that provide authorized publicly accessible services, protocols, and ports\.
+
+**PCI DSS 1\.3\.2: Limit inbound internet traffic to IP addresses within the DMZ\.**  
+If your Amazon OpenSearch Service clusters contain cardholder data, the Amazon OpenSearch Service domains should be placed in a VPC, which enables secure communication between Amazon OpenSearch Service and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+This method is used to limit inbound internet traffic to IP addresses within the DMZ\.  
+You can also use a resource\-based policy and specify an IP condition for restricting access based on source IP addresses\. See the blog post [How to control access to your Amazon Elasticsearch Service domain](http://aws.amazon.com/blogs/blogs/security/how-to-control-access-to-your-amazon-elasticsearch-service-domain)\.
+
+**PCI DSS 1\.3\.4: Do not allow unauthorized outbound traffic from the cardholder data environment to the internet\.**  
+If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC, which enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+This method is used to block unauthorized outbound traffic from the cardholder data environment to the internet\.
+
+**PCI DSS 1\.3\.6: Place system components that store cardholder data \(such as a database\) in an internal network zone, segregated from the DMZ and other untrusted networks\.**  
+If your Amazon ES clusters contain cardholder data, the Amazon ES domains should be placed in a VPC\. Doing so enables secure communication between Amazon ES and other services within the VPC without the need for an internet gateway, NAT device, or VPN connection port\.  
+This method is used to place system components that store cardholder data in an internal network zone, segregated from the DMZ and other untrusted networks\.
+
+### Remediation<a name="pcidss-opensearch-1-remediation"></a>
+
+If you create a domain with a public endpoint, you cannot later place it within a VPC\. Instead, you must create a new domain and migrate your data\. The reverse is also true\. If you create a domain within a VPC, it cannot have a public endpoint\. Instead, you must either [create another domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#es-createdomains) or disable this control\.
+
+ See [Launching your Amazon OpenSearch Service domains within a VPC](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html) in the Amazon OpenSearch Service Developer Guide\. 
+
+## \[PCI\.OpenSearch\.2\] OpenSearch domains should have encryption at rest enabled<a name="pcidss-opensearch-2"></a>
+
+**Category:** Protect > Data protection > Encryption of data at rest
+
+**Severity:** Medium
+
+**Resource type: ** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-encrypted-at-rest.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-encrypted-at-rest.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether Amazon OpenSearch domains have encryption\-at\-rest configuration enabled\. The check fails if encryption at rest is not enabled\.
+
+For an added layer of security for your sensitive data in OpenSearch, you should configure your OpenSearch domain to be encrypted at rest\. OpenSearch domains offer encryption of data at rest\. The feature uses AWS KMS to store and manage your encryption keys\. To perform the encryption, it uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
+
+To learn more about OpenSearch encryption at rest, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the Amazon OpenSearch Service Developer Guide\.
+
+### Related PCI DSS requirements<a name="pcidss-opensearch-1-requirements"></a>
+
+This control is related to the following PCI DSS requirements:
+
+**PCI DSS 3\.4: Render Primary Account Numbers \(PAN\) unreadable anywhere it is stored \(including on portable digital media, backup media, and in logs\)\.**  
+If you use Amazon OpenSearch Service to store credit card Primary Account Numbers \(PAN\), the PAN should be protected by enabling Amazon OpenSearch Service domain encryption at rest\.  
+If enabled, it encrypts the following aspects of a domain: Indices, automated snapshots, Amazon OpenSearch Service logs, swap files, all other data in the application directory\.  
+This is a method used to render PAN unreadable\.
+
+### Remediation<a name="pcidss-opensearch-2-remediation"></a>
+
+By default, domains do not encrypt data at rest, and you cannot configure existing domains to use the feature\. To enable the feature, you must create another domain and migrate your data\.
+
+For information about creating domains, see [Creating and managing Amazon OpenSearch Service domains](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#es-createdomains) in the Amazon OpenSearch Service Developer Guide\.
+
+ See [Launching your Amazon OpenSearch Service domains within a VPC](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html) in the Amazon OpenSearch Service Developer Guide\. 
+
+## \[PCI\.RDS\.1\] Amazon RDS snapshots should prohibit public access<a name="pcidss-rds-1"></a>
 
 **Severity:** Critical
 
 **Resource type: ** `AWS::RDS::DBSnapshot`
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -1752,13 +1903,15 @@ To remove public access for Amazon RDS Snapshots
 
 1. Choose **Save**
 
-## \[PCI\.RDS\.2\] RDS DB Instances should prohibit public access<a name="pcidss-rds-2"></a>
+## \[PCI\.RDS\.2\] Amazon RDS DB Instances should prohibit public access, determined by PubliclyAccessible configuration<a name="pcidss-rds-2"></a>
 
 **Severity: ** Critical
 
 **Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -1820,6 +1973,8 @@ For more information about working with a DB Instance in a VPC, see the [https:/
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether Amazon Redshift clusters are publicly accessible by evaluating the `publiclyAccessible` field in the cluster configuration item\.
@@ -1869,6 +2024,8 @@ For more information about creating a cluster in a VPC, see the [https://docs.aw
 **Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule: **[https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html)
+
+**Schedule type:** Periodic and change triggered
 
 **Parameters:** None
 
@@ -1921,6 +2078,8 @@ If you use an S3 bucket to store cardholder data, the bucket should prohibit pub
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited.html)
 
+**Schedule type:** Periodic and change triggered
+
 **Parameters:** None
 
 This control checks whether your S3 buckets allow public read access by evaluating the Block Public Access settings, the bucket policy, and the bucket access control list \(ACL\)\.
@@ -1970,6 +2129,8 @@ If you use an S3 bucket to store cardholder data, the bucket should prohibit pub
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-replication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-replication-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether S3 buckets have cross\-region replication enabled\.
@@ -2018,6 +2179,8 @@ For more information about replication, see the [https://docs.aws.amazon.com/Ama
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks that your Amazon S3 bucket either has Amazon S3 default encryption enabled or that the S3 bucket policy explicitly denies put\-object requests without server\-side encryption\.
@@ -2039,17 +2202,17 @@ If you use an S3 bucket to store credit card Primary Account Numbers \(PAN\), th
 
 1. Open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. Choose the bucket from the list\.
+1. Select the bucket from the list\.
 
 1. Choose **Properties**\.
 
-1. Choose **Default encryption**\.
+1. Under **Default encryption**, choose **Edit**\.
 
-1. For the encryption, choose either **AES\-256** or **AWS\-KMS**\.
-   + To use keys that are managed by Amazon S3 for default encryption, choose **AES\-256**\. For more information about using Amazon S3 server\-side encryption to encrypt your data, see the [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
-   + To use keys that are managed by AWS KMS for default encryption, choose **AWS\-KMS**\. Then choose a master key from the list of the AWS KMS master keys that you have created\.
+1. Turn on Server\-side encryption by choosing **Enable**\. Then, choose either **SSE\-S3** or **SSE\-KMS**\.
+   + To use keys that are managed by Amazon S3 for default encryption, choose **SSE\-S3**\. For more information about using Amazon S3 server\-side encryption to encrypt your data, see the [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
+   + To use keys that are managed by AWS KMS for default encryption, choose **SSE\-KMS**\. Then choose a master key from the list of the AWS KMS master keys that you have created\.
 
-     Type the Amazon Resource Name \(ARN\) of the AWS KMS key to use\. You can find the ARN for your AWS KMS key in the IAM console, under **Encryption keys**\. Or, you can choose a key name from the drop\-down list\.
+     If you choose **SSE\-KMS** type the Amazon Resource Name \(ARN\) of the AWS KMS key to use\. You can find the ARN for your AWS KMS key in the IAM console, under **Encryption keys**\. Or, you can choose a key name from the drop\-down list\.
 **Important**  
  If you use the AWS KMS option for your default encryption configuration, you are subject to the RPS \(requests per second\) limits of AWS KMS\. For more information about AWS KMS limits and how to request a limit increase, see the [https://docs.aws.amazon.com/kms/latest/developerguide/limits.html](https://docs.aws.amazon.com/kms/latest/developerguide/limits.html)\.
 
@@ -2070,6 +2233,8 @@ For more information about default S3 bucket encryption, see the [https://docs.a
 **Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -2136,6 +2301,8 @@ For more information, see the knowledge center article [What S3 bucket policy sh
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks-periodic.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks-periodic.html)
 
+**Schedule type:** Periodic
+
 **Parameters:**
 + `ignorePublicAcls`: `true`
 + `blockPublicPolicy`: `true`
@@ -2200,6 +2367,8 @@ For more information, see [Using Amazon S3 block public access](https://docs.aws
 **Resource type:** `AWS::SageMaker::NotebookInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html](https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -2269,6 +2438,8 @@ For more information, see [Connect a notebook instance to resources in a VPC](ht
 
 **AWS Config rule: ** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html)
 
+**Schedule:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the compliance status of the Amazon EC2 Systems Manager patch compliance is `COMPLIANT` or `NON_COMPLIANT` after the patch installation on the instance\.
@@ -2328,6 +2499,8 @@ See the *AWS Systems Manager User Guide* for more information about the followin
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html) 
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the status of the AWS Systems Manager association compliance is `COMPLIANT` or `NON_COMPLIANT` after the association is run on an instance\. The control passes if the association compliance status is `COMPLIANT`\.
@@ -2384,6 +2557,8 @@ For more information on creating and editing State Manager associations, see [Wo
 **Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 

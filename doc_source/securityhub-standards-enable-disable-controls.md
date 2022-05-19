@@ -5,14 +5,19 @@ When you enable a standard, all of the controls for that standard are enabled by
 When you disable a control, the following occurs:
 + The check for the control is no longer performed\.
 + No additional findings are generated for that control\.
-+ Existing findings are archived automatically after three days\.
++ Existing findings are archived automatically after three to five days \(note that this is best effort and not guaranteed\)\.
 + The related AWS Config rules that Security Hub created are removed\.
 
-It can be useful to turn off security checks for controls that are not relevant to your environment\. For example, you might use a single Amazon S3 bucket to log your CloudTrail logs\. If so, you can turn off controls related to CloudTrail logging in all accounts and Regions except for the account and Region where the centralized S3 bucket is located\. Disabling irrelevant controls reduces the number of irrelevant findings\. It also removes the failed check from the readiness score for the associated standard\.
+It can be useful to turn off security checks for controls that are not relevant to your environment\. For example, you might prefer to use Amazon GuardDuty instead of CloudWatch alarms to monitor for anomalous activity associated with your AWS CloudTrail logs\. You can then disable the CIS AWS Foundations Benchmark controls 3\.1\-3\.14, which focus on CloudWatch alarms\.
 
-Remember that Security Hub is Regional\. When you disable or enable a control, it is disabled only in the current Region or in the Region that you specify in an API request\.
+Disabling irrelevant controls reduces the number of irrelevant findings\. It also removes the failed check from the security score for the associated standard\.
+
+Remember that Security Hub is Regional\. When you disable or enable a control, it is disabled only in the current Region or in the Region that you specify in the API request\.
 
 Also, when you disable an entire standard, Security Hub does not track which controls were disabled\. If you subsequently enable the standard again, all of the controls are enabled\. For more information, see [Disabling or enabling a security standard](securityhub-standards-enable-disable.md)\.
+
+**Note**  
+You enable and disable controls on a region\-by\-region basis via the Security Hub console, API, or CLI\. If you have set an aggregation Region, you see controls from all linked Regions\. If a control is available in a linked Region but not in the aggregation Region, you cannot enable or disable that control from the aggregation Region\. For multi\-account and multi\-Region control disablement scripts, refer to [ Disabling Security Hub Controls in a multi\-account environment](http://aws.amazon.com/blogs/security/disabling-security-hub-controls-in-a-multi-account-environment/)
 
 ## Disabling a control \(console\)<a name="securityhub-standard-control-disable-console"></a>
 

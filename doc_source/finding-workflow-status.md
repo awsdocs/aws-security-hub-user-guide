@@ -19,8 +19,7 @@ If one of the following occurs, the workflow status is changed automatically fro
 
 `SUPPRESSED`  
 Indicates that you reviewed the finding and do not believe that any action is needed\.  
-`SUPPRESSED` findings cannot be updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\. For example, finding providers cannot change `RecordState`\.  
-You can use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) to update `SUPPRESSED` findings\.
+The workflow status of a `SUPPRESSED` finding does not change if `RecordState` changes from `ARCHIVED` to `ACTIVE`\.
 
 `RESOLVED`  
 The finding was reviewed and remediated and is now considered resolved\.  

@@ -17,17 +17,9 @@ When you enable Security Hub, a default product Amazon Resource Name \(ARN\) for
 This product ARN has the following format: `arn:aws:securityhub:<region>:<account-id>:product/<account-id>/default`\. For example, `arn:aws:securityhub:us-west-2:123456789012:product/123456789012/default`\.  
 Use this product ARN as the value for the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-ProductArn](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-ProductArn) attribute when invoking the `BatchImportFindings` API operation\.
 
-**Defining the product name**  
-We recommend that you use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-ProductFields](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-ProductFields) attribute to define the name of the product that generates the findings that you send to Security Hub\.  
-For example\.  
-
-```
-"ProductFields": 
-  {
-    "ProviderName": "<name of the product>",
-    "ProviderVersion": "<product version>",
-  }
-```
+**Defining the company and product name**  
+You can use `BatchImportFindings` to set a preferred company name and product name for the custom integration that is sending findings to Security Hub\.   
+Your specified names replace the preconfigured company name and product name, called personal name and default name respectively, and appear in the Security Hub console and the JSON of each finding\. See [Using BatchImportFindings to create and update findings](finding-update-batchimportfindings.md)\.
 
 **Setting the finding IDs**  
 You must supply, manage, and increment your own finding IDs, using the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-Id](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFinding.html#securityhub-Type-AwsSecurityFinding-Id) attribute\.  

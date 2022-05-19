@@ -1,13 +1,13 @@
 # Disabling or enabling a security standard<a name="securityhub-standards-enable-disable"></a>
 
-You can disable or enable each security standard\.
+You can disable or enable each supported security standard in Security Hub\. Some security standards are enabled by default, but you can opt out of auto\-enabled standards\.
 
-Remember that Security Hub is Regional\. When you enable or disable a security standard, it is enabled or disabled only in the current Region or in the Region that you specify in an API request\.
+Security Hub is Regional\. When you enable or disable a security standard, it is enabled or disabled only in the current Region or in the Regions that you specify\.
 
 When you disable a security standard, the following occurs:
 + The checks for its controls are no longer performed\.
 + No additional findings are generated for its controls\.
-+ Existing findings are archived automatically after three days\.
++ Existing findings are archived automatically after three to five days \(note that this is best effort and not guaranteed\)\.
 + The related AWS Config rules that Security Hub created are removed\.
 
   This normally occurs within a few minutes after you disable the standard, but might take longer\.
@@ -18,13 +18,45 @@ Before you enable any security standards, make sure that you have enabled AWS Co
 
 When you enable a security standard, all of the controls for that standard are enabled by default\. You can then disable individual controls\. See [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)\.
 
-When a standard is first enabled, Security Hub cannot calculate the initial aggregated security score until the standard status is `READY`\. After that, the initial security score is available within 24 hours\. To see the current status of the standard, use the `GetEnabledStandards` API operation\.
+When a standard is first enabled, Security Hub calculates the initial security score for the standard when the standard status is `READY`\. After the status is `READY`, the initial security score is typically available within 30 minutes\. To see the current status of the standard, use the `GetEnabledStandards` API operation\.
 
-## Disabling a security standard \(console\)<a name="securityhub-standard-disable-console"></a>
+**Note**  
+It can take up to 24 hours for initial security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
-On the **Security standards** page, each enabled standard includes an option to disable the standard\.
+## Auto\-enabled standards for new organization accounts<a name="securityhub-auto-enabled-standards"></a>
 
-**To disable a standard**
+If you are using the integration with AWS Organizations, Security Hub automatically enables default security standards for new member accounts\.
+
+Currently, the default security standards that are automatically enabled are the AWS Foundational Security Best Practices \(FSBP\) standard and the Center for Internet Security \(CIS\) AWS Foundations Benchmark standard\. For more information, see [Available security standards in AWS Security Hub](https://docs.aws.amazon.com/securityhub/latest/userguide/standards-available.html)\.
+
+**Note**  
+In order to auto\-enable standards, you must first automatically enable Security Hub for new member accounts in your organization\. If you turn off automatic enablement of Security Hub in new member accounts, Security Hub automatically turns off automatic enablement of default standards in new member accounts\. See [Automatically enabling new organization accounts](accounts-orgs-auto-enable.md)\.
+
+### Opt out of auto\-enabled standards<a name="Opt-out-of-auto-enabled-standards"></a>
+
+If you do not want to auto\-enable the default security standards on new member accounts, follow these steps\.
+
+**To opt out of auto\-enabled standards \(console\)**
+
+1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
+
+1. On the Security Hub navigation bar, choose **Settings**\.
+
+1. On the **Accounts** tab, turn off **Auto\-enable standards**\.
+
+**To opt out of auto\-enabled standards \(Security Hub API, AWS CLI\)**
++ **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateOrganizationConfiguration.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateOrganizationConfiguration.html) operation from your Security Hub administrator account\. The default value for the `AutoEnabledStandards` parameter is equal to `DEFAULT`\. To opt out of auto\-enabled standards in new member accounts, set `AutoEnableStandards` equal to `NONE`\.
++ **AWS CLI** – At the command line, run the `update-organization-configuration` command\.
+
+  ```
+  aws securityhub update-organization-configuration --auto-enable-standards
+  ```
+
+## Disabling a security standard<a name="securityhub-standard-disable-console"></a>
+
+On the **Security standards** page, each enabled standard includes an option to disable the standard\. Follow these steps to disable a standard\.
+
+**To disable a security standard \(console\)**
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
@@ -33,10 +65,6 @@ On the **Security standards** page, each enabled standard includes an option to 
 1. In the Security Hub navigation pane, choose **Security standards**\.
 
 1. For the standard you want to disable, choose **Disable**\.
-
-## Disabling a security standard \(Security Hub API, AWS CLI\)<a name="securityhub-standard-disable-api"></a>
-
-To disable a security standard, you can use an API call or the AWS Command Line Interface\.
 
 **To disable a security standard \(Security Hub API, AWS CLI\)**
 + **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchDisableStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchDisableStandards.html) operation\. For each standard to disable, you provide the ARN of your subscription to the standard\. To get the subscription ARNs for your enabled standards, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) operation\.
@@ -52,13 +80,11 @@ To disable a security standard, you can use an API call or the AWS Command Line 
   aws securityhub batch-disable-standards --standards-subscription-arns "arn:aws:securityhub:us-west-1:123456789012:subscription/aws-foundational-security-best-practices/v/1.0.0"
   ```
 
-## Enabling a security standard \(console\)<a name="securityhub-standard-enable-console"></a>
+## Enabling a security standard<a name="securityhub-standard-enable-console"></a>
 
-On the **Security standards** page, each disabled standard includes an option to enable the standard\.
+On the **Security standards** page, each disabled standard includes an option to enable the standard\. Follow these steps to enable a standard\.
 
 **To enable a security standard \(console\)**
-
-ß
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
@@ -67,10 +93,6 @@ On the **Security standards** page, each disabled standard includes an option to
 1. In the Security Hub navigation pane, choose **Security standards**\.
 
 1. For the standard you want to enable, choose **Enable**\.
-
-## Enabling a security standard \(Security Hub API, AWS CLI\)<a name="securityhub-standard-enable-api"></a>
-
-To enable a security standard, you can use an API call or the AWS Command Line Interface\.
 
 **To enable a security standard \(Security Hub API, AWS CLI\)**
 + **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchEnableStandards.html) operation\. To identify a standard to enable, you must provide the standard ARN\. To obtain the standard ARN, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) operation\.

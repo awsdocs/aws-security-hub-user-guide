@@ -2,7 +2,7 @@
 
 AWS Security Hub consumes, aggregates, and analyzes security findings from various supported AWS and third\-party products\.
 
-Security Hub also generates its own findings as the result of running automated and continuous checks against the rules in a set of supported security standards\. These checks provide a readiness score and identify specific accounts and resources that require attention\.
+Security Hub also generates its own findings by running automated and continuous checks against the rules in a set of supported security standards\. These rules determine whether controls within a standard are being adhered to\. The checks provide a readiness score and identify specific accounts and resources that require attention\.
 
 Security Hub provides controls for the following standards\.
 + [CIS AWS Foundations](securityhub-standards-cis.md)

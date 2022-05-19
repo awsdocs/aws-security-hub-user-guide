@@ -120,11 +120,11 @@ For integrations that you accept findings for \(**Status** is **Accepting findin
 
 The findings list shows the active findings for the selected integration that have a workflow status of `NEW` or `NOTIFIED`\.
 
-If you enabled finding aggregation, then in the aggregation Region, the list includes findings from the aggregation Region and from linked Regions where the integration is enabled\. Security Hub does not automatically enable integrations based on the finding aggregation configuration\.
+If you enable cross\-Region aggregation, then in the aggregation Region, the list includes findings from the aggregation Region and from linked Regions where the integration is enabled\. Security Hub does not automatically enable integrations based on the cross\-Region aggregation configuration\.
 
 In other Regions, the finding list for an integration only contains findings from the current Region\.
 
-For information on how to configure finding aggregation, see [Aggregating findings across Regions](finding-aggregation.md)\.
+For information on how to configure cross\-Region aggregation, see [Cross\-Region aggregation](finding-aggregation.md)\.
 
 From the findings list, you can perform the following actions\.
 + [Change the filters and grouping for the list](findings-filtering-grouping.md)

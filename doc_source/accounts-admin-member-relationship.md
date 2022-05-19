@@ -8,4 +8,4 @@ In Security Hub, all findings are ingested into a specific Region for a specific
 
 In each Region, the administrator account can view and manage findings for their member accounts in that Region\.
 
-In an aggregation Region, the administrator account can view and manage member account findings from linked Regions that are replicated to the aggregation Region\. For more information about finding aggregation, see [Aggregating findings across Regions](finding-aggregation.md)\.
+In an aggregation Region, the administrator account can view and manage member account findings from linked Regions that are replicated to the aggregation Region\. For more information about cross\-Region aggregation, see [Cross\-Region aggregation](finding-aggregation.md)\.

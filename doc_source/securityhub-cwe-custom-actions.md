@@ -4,7 +4,7 @@ To use Security Hub custom actions to send findings or insight results to EventB
 
 You can create up to 50 custom actions\.
 
-If you enabled finding aggregation, and manage findings from the aggregation Region, then create custom actions in the aggregation Region\.
+If you enabled cross\-Region aggregation, and manage findings from the aggregation Region, then create custom actions in the aggregation Region\.
 
 The rule in EventBridge uses the ARN from the custom action\.
 

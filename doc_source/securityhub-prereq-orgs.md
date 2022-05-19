@@ -6,4 +6,6 @@ If you have Organizations enabled, then Security Hub automatically detects new a
 
 For information on setting up Organizations, see [Creating and managing an organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org.html) in the *AWS Organizations User Guide*\.
 
-After you set up your organization, your organization management account designates the Security Hub administrator account\. See [Designating a Security Hub administrator account](designate-orgs-admin-account.md)\. The Security Hub administrator account then enables and manages other organization accounts as Security Hub member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)\.
+After you set up your organization, your organization management account designates the Security Hub administrator account\. See [Designating a Security Hub administrator account](designate-orgs-admin-account.md)\. The Security Hub administrator account is also the delegated administrator account in Organizations\.
+
+The Security Hub administrator account then enables and manages other organization accounts as Security Hub member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)\.

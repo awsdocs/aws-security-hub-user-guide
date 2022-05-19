@@ -22,7 +22,10 @@ This also applies to administrator accounts\. Administrator accounts that do not
 
 ## Information on the standard details page<a name="standard-details-overview"></a>
 
-At the top of the details page is the overall score for the standard\. The overall score is the percentage of passed controls relative to the number of enabled controls that have data\. Security Hub updates the overall score every 24 hours\. A timestamp indicates when the score was most recently updated\. See [Determining the security score for a security standard](standards-security-score.md)\.
+At the top of the details page is the overall score for the standard\. The score is the percentage of passed controls relative to the number of enabled controls for the standard that have data\. Security Hub typically generates the initial security score within 30 minutes after the standard status is `READY`\. After that, Security Hub updates the score every 24 hours\. A timestamp indicates when the score was most recently updated\. See [Determining the security score for a security standard](standards-security-score.md)\.
+
+**Note**  
+It can take up to 24 hours for initial security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
 Next to the overall score is a chart that summarizes the control statuses\. The chart shows the percentage of failed and passed controls\. When you pause on the chart, the pop\-up displays the following:
 + The number of failed controls for each severity
@@ -31,21 +34,23 @@ Next to the overall score is a chart that summarizes the control statuses\. The 
 
 At the bottom of the details page is the list of controls for the standard\. The control list is organized and sorted based on the current overall status of the control and the severity assigned to each control\. Security Hub updates the control statuses every 24 hours\. A timestamp on each tab indicates when the control statuses were most recently updated\. See [Determining the overall status of a control from its findings](controls-overall-status.md)\.
 
-For administrator accounts, the score and statuses are aggregated across both their account and their member accounts\.
+For administrator accounts, the score and statuses are aggregated across the administrator account and all member accounts\.
 
-All of the data on the standard details page is specific to the current Region\.
+All of the data on the **Security standards** details pages is specific to the current Region unless you have  set an aggregation Region\. If you have set an aggregation Region, the security scores are cross\-regional, accounting  for findings in all linked Regions\. The compliance status of controls on the standards details pages also reflect findings from  linked Regions, and the number of security checks includes findings from linked Regions\.
 
 ## Filtering and sorting the controls<a name="standard-details-filter-controls"></a>
 
 The control list for a standard uses tabs to provide built\-in filtering for the list based on the control status\. You can also filter the list based on the ID, title, and severity\.
 
-The **All enabled** tab lists all of the enabled controls for the standard\. By default, the list is sorted so that failed controls are at the top of the list\. This sort order calls attention to controls that need to be addressed\.
+The **All enabled** tab lists all of the enabled controls for the standard\. For administrator accounts, **All enabled** contains controls that are enabled in either their account or in any member account\.
 
-The lists on the **Failed**, **Unknown**, **No data**, and **Passed** tabs are filtered to only include enabled controls with that status\.
+On the **Failed**, **Unknown**, **No data**, and **Passed** tabs, the controls from the **All enabled** tab are filtered to only include controls with that status\.
 
-The **Disabled** tab contains the list of disabled controls\.
+The **Disabled** tab contains the list of disabled controls\. For administrator accounts, the **Disabled** tab lists controls that are not enabled in either their account or any of their member accounts\.
 
-The list of enabled and disabled controls for an individual account is updated in real time to reflect which controls are enabled and disabled\. The overall status and the number of passed and failed checks for each control is updated every 24 hours\.
+For standalone accounts and member accounts, the lists of enabled and disabled controls are updated in real time to reflect which controls are enabled and disabled\. The overall status and the number of passed and failed checks for each control are updated every 24 hours\.
+
+For administrator accounts, all of the information, including the lists, is updated every 24 hours\.
 
 For each control, the control list contains the following information:
 + The overall status of the control \(see [Determining the overall status of a control from its findings](controls-overall-status.md)\)
@@ -65,7 +70,7 @@ Within each status, and on the remaining tabs, the controls are sorted by defaul
 
 ## Additional tabs for administrator accounts<a name="standard-details-admin-additional-tabs"></a>
 
-For an administrator account, the lists on the first six tabs contain aggregated information across both the administrator account and their member accounts\. For example, a control is listed on the **All enabled** tab if at least one of the accounts has the control enabled\.
+For an administrator account, the lists on the first six tabs contain aggregated information across both the administrator account and their member accounts\. For example, a control is listed on the **All enabled** tab if at least one of the accounts has the control enabled\. A control is listed on the **Disabled** tab only if none of the accounts has the control enabled\.
 
 All of the information on these tabs is updated every 24 hours\.
 

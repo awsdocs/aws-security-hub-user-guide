@@ -4,7 +4,7 @@ Security standards provide a set of related controls to determine compliance wit
 
 For a standard in Security Hub, you can view the list of controls and determine whether to enable or disable a standard for your account\. You can also see the overall security score for the standard\.
 
-Administrator accounts see aggregated scores and statuses across their member accounts\.
+Administrator accounts see aggregated security scores and control statuses across their member accounts\. If you are viewing standards from an aggregation Region, your security scores for standards incorporate the compliance statuses of controls across all of your linked Regions\.
 
 For the list of available standards and their controls, see [Available security standards in AWS Security Hub](standards-available.md)\.
 

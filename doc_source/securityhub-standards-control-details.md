@@ -10,7 +10,12 @@ For each control, you can display a page of useful details\.
 
 1. From the controls list, choose the control name\.
 
-The top of the details page provides an overview of the control and its current status\. The overall control status is calculated every 24 hours\. Administrator accounts see an aggregated status across the administrator account and the member accounts\.
+The top of the control details page provides an overview of the control, including its enablement status and the overall control status\.
++ **Enablement status** – The enablement status tells you whether the control is currently activated\. If you are logged into an administrator account, the status displays as **Enabled** if the control is activated in at least one member account\. If you have set an aggregation Region, the status displays as **Enabled** if the control is activated in at least one Region\. 
++ **Control status** – The control status summarizes the performance of a control based on the compliance status of the control findings\. Security Hub typically generates the initial control status within 30 minutes after enabling a control\. After that, Security Hub updates the control status every 24 hours based on the control findings from the previous 24 hours\. Administrator accounts see an aggregated control status across the administrator account and member accounts\. If you have set an aggregation Region, the control status accounts for findings across all linked Regions\. For more information about control status, see [Determining the overall status of a control from its findings](controls-overall-status.md)\. 
+
+**Note**  
+It can take up to 24 hours after enabling a control for initial control statuses to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
 For controls in the Payment Card Industry Data Security Standard \(PCI DSS\) and the CIS AWS Foundations standard, the **Related requirements** tab lists the related requirements from within the framework\.
 
@@ -20,6 +25,6 @@ The bottom of the details page contains information about the active findings fo
 
 The finding list uses tabs that display different subsets of the list\. On most of the tabs, the finding list shows findings that have a workflow status of `NEW`, `NOTIFIED`, or `RESOLVED`\. A separate tab displays `SUPPRESSED` findings\.
 
-For each finding, the list provides access to details about the finding and the associated resource\. You can also set the workflow status of each finding and send findings to custom actions\.
+For each finding, the list provides access to its compliance status and details about the finding and the associated resource\. You can also set the workflow status of each finding and send findings to custom actions\.
 
 See [Viewing and taking action on control findings](securityhub-control-manage-findings.md)\.

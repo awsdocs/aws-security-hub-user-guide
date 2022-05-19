@@ -45,13 +45,13 @@ However, Security Hub applies OR logic to filters that use the same attribute bu
 
    For a numeric filter, you can choose whether to provide a single number \(**Simple**\) or a range of numbers \(**Range**\)\.
 
-   For a date or time filter, you can choose whether to provide a length of time from the current date time \(**Rolling window**\) or a date range \(**Fixed range**\)\.
+   For a date or time filter, you can choose whether to provide a length of time from the current date and time \(**Rolling window**\) or a specific date range \(**Fixed range**\)\.
 
    Adding multiple filters has the following interactions:
    + **is** and **starts with** filters are joined by OR\. A value matches if it contains any of the filter values\. For example, if you specify **Severity label is CRITICAL** and **Severity label is HIGH**, the results include both critical and high severity findings\.
-   + **is not** and **does not start with** filters are joined by AND\. A value matches only if it does not contain any of those filter values\. For example, if you specify **Severity label is not LOW** and **Severity label is not MEDIUM**, the results do not include either low or medium severity findings\.
+   + **is not** and **does not start with** filters are joined by AND\. A value matches only if it does not contain any of those filter values\. For example, if you specify **Severity label is not LOW** and **Severity label is not MEDIUM**, the results do not include low or medium severity findings\.
 
-   If you have an **is** filter on a field, you cannot have a **is not** or a **does not start with** filter on the same field\.
+   If you have an **is** filter on a field, you cannot have an **is not** or a **does not start with** filter on the same field\.
 
 1. Specify the filter value\.
 

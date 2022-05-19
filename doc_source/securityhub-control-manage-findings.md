@@ -2,7 +2,7 @@
 
 The control details page contains a list of active findings for the control\. The list does not include archived findings\.
 
-The control details page does not support finding aggregation\. The control details page only displays findings from the current Region\.
+The control details page does not support cross\-Region aggregation\. The control details page only displays findings from the current Region\.
 
 The list provides tools to filter and sort the findings, so that you can focus on more urgent findings first\. Each finding can include links to resource details in the related service console\. For controls that are based on AWS Config rules, you can view details about the rule and the configuration timeline\.
 

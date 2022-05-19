@@ -26,11 +26,11 @@ Custom settings or integrations that are defined for the administrator account a
 
 ## Member account is removed from an organization<a name="securityhub-effects-member-leaves-org"></a>
 
-When a member account is removed from an organization, the administrator account loses permission to view findings in the member account\.
+When a member account is removed from an organization, the Security Hub administrator account loses permission to view findings in the member account\.
 
 Security Hub continues to run in both accounts\.
 
-In the **Accounts** list for the administrator account, the account has a status of **Disassociated**\.
+In the **Accounts** list for the Security Hub administrator account, the account has a status of **Disassociated**\.
 
 ## Account is suspended<a name="securityhub-effects-account-suspended"></a>
 
@@ -46,10 +46,10 @@ After 90 days, the account is either terminated or reactivated\. When the accoun
 
 When an AWS account is closed, Security Hub responds to the closure as follows\.
 
- AWS retains the policy data for the account for 90 days from the effective date of the administrator account closure\. At the end of the 90 day period, AWS permanently deletes all policy data for the account\. 
-+  To retain findings for more than 90 days, you can archive the policies\. You can also use a custom action with an EventBridge rule to store the findings in an S3 bucket\. 
-+  As long as AWS retains the policy data, when you reopen the closed account, AWS reassigns the account as the service administrator and recovers the service policy data for the account\. 
-+  For more information, see [Closing an account](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html)\. 
+Security Hub retains the findings for the account for 90 days from the effective date of the account closure\. At the end of the 90 day period, Security Hub permanently deletes all findings for the account\.
++ To retain findings for more than 90 days, you can use a custom action with an EventBridge rule to store the findings in an Amazon S3 bucket\. As long as Security Hub retains the findings, when you reopen the closed account, Security Hub restores the findings for the account\.
++ If the account is a Security Hub administrator account, it is removed as an administrator and all the member accounts are removed\. If the account is a member account, it is disassociated and removed as a member from the Security Hub administrator account\.
++ For more information, see [Closing an account](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html)\.
 
 **Important**  
  For customers in the AWS GovCloud \(US\) Regions:   

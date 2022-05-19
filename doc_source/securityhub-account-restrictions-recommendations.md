@@ -6,13 +6,23 @@ Security Hub supports up to 5,000 member accounts per administrator account in e
 
 ## Accounts and Regions<a name="securityhub-accounts-regions"></a>
 
-If you use AWS Organizations to manage accounts, the organization management account designates the Security Hub administrator account\. The designated administrator account must be the same in all Regions\. However, the organization management account must designate the administrator account separately in each Region\. The administrator account also manages member accounts separately for each Region\.
+### Membership by organization<a name="accounts-regions-orgs"></a>
+
+If you are enrolled in AWS Organizations, the organization management account can designate a Security Hub administrator account in each Region\.
+
+The Security Hub administrator account for a Region also becomes that Region's delegated administrator account for Security Hub in Organizations\. The exception is if the organization management account designates itself as the Security Hub administrator account\. The organization management account cannot be a delegated administrator in Organizations\.
+
+Once the delegated administrator account for a Region is set in Organizations, the organization management account can choose either the delegated administrator account or itself as the Security Hub administrator account in that Region\. We recommend that you choose the same delegated administrator account in all Regions\.
+
+The Security Hub administrator account manages member accounts separately in each Region\.
+
+### Membership by invitation<a name="accounts-regions-invitation"></a>
 
 For member accounts created by invitation, the administrator\-member account association is created only in the Region that the invitation is sent from\. The administrator account must enable Security Hub in each Region that you want to use it in\. The administrator account then invites each account to associate as a member account in that Region\.
 
 ## Restrictions on administrator\-member relationships<a name="account-relationship-restrictions"></a>
 
-An account cannot be a Security Hub administrator account and member account at the same time\.
+An account cannot be an administrator account and a member account at the same time\.
 
 A member account can only be associated with one administrator account\. If an organization account is enabled by the Security Hub administrator account, the account cannot accept an invitation from another account\. If an account has accepted an invitation, the account cannot be enabled by the Security Hub administrator account for the organization\. It also cannot receive invitations from other accounts\.
 

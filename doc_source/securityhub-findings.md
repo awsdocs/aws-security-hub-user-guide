@@ -14,11 +14,10 @@ Security Hub correlates the findings across integrated products to prioritize th
 
 Finding providers can update findings to reflect additional instances of the finding\. You can update findings to provide details about your investigation and its results\.
 
-Security Hub also allows you to aggregate findings across Regions, so that you can view all of your findings from one place\. See [Aggregating findings across Regions](finding-aggregation.md)\.
+Security Hub also allows you to aggregate findings across Regions, so that you can view all of your findings from one place\. See [Cross\-Region aggregation](finding-aggregation.md)\.
 
 **Topics**
 + [Creating and updating findings in AWS Security Hub](securityhub-findings-update-types.md)
-+ [Aggregating findings across Regions](finding-aggregation.md)
 + [Viewing a cross\-Region summary of findings by severity](findings-view-summary.md)
 + [Viewing finding lists and details in AWS Security Hub](securityhub-findings-viewing.md)
 + [Taking action on findings in AWS Security Hub](securityhub-findings-taking-action.md)

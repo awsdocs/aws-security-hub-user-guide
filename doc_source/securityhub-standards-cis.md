@@ -1,8 +1,8 @@
 # CIS AWS Foundations Benchmark standard<a name="securityhub-standards-cis"></a>
 
-Security Hub supports the CIS AWS Foundations Benchmark standard\. For more information, see [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/) on the CIS website\.
+Security Hub supports the Center for Internet Security \(CIS\) AWS Foundations Benchmark standard\. For more information, see [Securing Amazon Web Services](https://www.cisecurity.org/benchmark/amazon_web_services/) on the CIS website\.
 
-AWS Security Hub has satisfied the requirements of CIS Security Software Certification and is hereby awarded CIS Security Software Certification for the following CIS Benchmarks:
+AWS Security Hub has satisfied the requirements of CIS Security Software Certification and has been awarded CIS Security Software Certification for the following CIS Benchmarks:
 + CIS Benchmark for CIS Amazon Web Services Foundations Benchmark, v1\.2\.0, Level 1
 + CIS Benchmark for CIS Amazon Web Services Foundations Benchmark, v1\.2\.0, Level 2
 

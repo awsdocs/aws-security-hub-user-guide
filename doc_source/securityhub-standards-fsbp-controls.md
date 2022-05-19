@@ -9,6 +9,72 @@ The AWS Foundational Security Best Practices standard contains the following con
 
 Note that gaps in the control numbers indicate controls that are not yet released\.
 
+## Controls categorized by service<a name="controls-categorized-service"></a>
+
+[AWS Certificate Manager](#fsbp-acm-1)
+
+[Amazon API Gateway](#fsbp-apigateway-1)
+
+[Amazon EC2 Auto Scaling](#fsbp-autoscaling-1)
+
+[Amazon CloudFront](#fsbp-cloudfront-1)
+
+[AWS CloudTrail](#fsbp-cloudtrail-1)
+
+[AWS CodeBuild](#fsbp-codebuild-1)
+
+[AWS Config](#fsbp-config-1)
+
+[AWS Database Migration Service](#fsbp-dms-1)
+
+[Amazon DynamoDB](#fsbp-dynamodb-1)
+
+[Amazon EC2](#fsbp-ec2-1)
+
+[Amazon ECR](#fsbp-ecr-3)
+
+[Amazon ECS](#fsbp-ecs-1)
+
+[Amazon EFS](#fsbp-efs-1)
+
+[AWS Elastic Beanstalk](#fsbp-elasticbeanstalk-1)
+
+[Elastic Load Balancing](#fsbp-elb-2)
+
+[Amazon EMR](#fsbp-emr-1)
+
+[Amazon ES](#fsbp-es-1)
+
+[Amazon GuardDuty](#fsbp-guardduty-1)
+
+[AWS Identity and Access Management](#fsbp-iam-1)
+
+[AWS Key Management Service](#fsbp-kms-1)
+
+[AWS Lambda](#fsbp-lambda-1)
+
+[AWS Firewall Manager](#fsbp-networkfirewall-6)
+
+[Amazon OpenSearch Service](#fsbp-opensearch-1)
+
+[Amazon Relational Database Service](#fsbp-rds-1)
+
+[Amazon Redshift](#fsbp-redshift-1)
+
+[Amazon Simple Storage Service](#fsbp-s3-1)
+
+[Amazon SageMaker](#fsbp-sagemaker-1)
+
+[AWS Secrets Manager](#fsbp-secretsmanager-1)
+
+[Amazon Simple Notification Service](#fsbp-sns-1)
+
+[Amazon Simple Queue Service](#fsbp-sqs-1)
+
+[Amazon EC2 Systems Manager](#fsbp-ssm-1)
+
+[AWS WAF](#fsbp-waf-1)
+
 ## \[ACM\.1\] Imported ACM certificates should be renewed after a specified time period<a name="fsbp-acm-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data in transit
@@ -18,6 +84,8 @@ Note that gaps in the control numbers indicate controls that are not yet release
 **Resource type:** `AWS::ACM::Certificate`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html](https://docs.aws.amazon.com/config/latest/developerguide/acm-certificate-expiration-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:**
 + `daysToExpiration`: 30
@@ -58,6 +126,8 @@ For more information, see [Renewal for domains validated by DNS](https://docs.aw
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-execution-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-execution-logging-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether all stages of an Amazon API Gateway REST or WebSocket API have logging enabled\. The control fails if logging is not enabled for all methods of a stage or if `loggingLevel` is neither `ERROR` nor `INFO`\.
@@ -82,6 +152,8 @@ To enable logging for REST and WebSocket API operations, see [Set up CloudWatch 
 **Resource type:** `AWS::ApiGateway::Stage`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-ssl-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-ssl-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -111,6 +183,8 @@ For detailed instructions on how to generate and configure API Gateway REST API 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-xray-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-xray-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether AWS X\-Ray active tracing is enabled for your Amazon API Gateway REST API stages\.
@@ -139,6 +213,8 @@ For detailed instructions on how to enable X\-Ray active tracing for API Gateway
 
 **AWS Configrule:** [https://docs.aws.amazon.com/config/latest/developerguide/api-gw-associated-with-waf.html](https://docs.aws.amazon.com/config/latest/developerguide/api-gw-associated-with-waf.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an API Gateway stage uses an AWS WAF web access control list \(ACL\)\. This control fails if an AWS WAF web ACL is not attached to a REST API Gateway stage\.
@@ -166,6 +242,8 @@ For information on how to use the API Gateway console to associate an AWS WAF Re
 **Resource type:** `AWS::ApiGateway::Stage`
 
 AWS Config rule: `api-gw-cache-encrypted` \(Custom rule developed by Security Hub\)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -207,6 +285,8 @@ To remediate this control, configure the stage to encrypt the cache data\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-group-elb-healthcheck-required.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether your Auto Scaling groups that are associated with a load balancer are using Elastic Load Balancing health checks\.
@@ -235,6 +315,81 @@ To remediate this issue, update your Auto Scaling groups to use Elastic Load Bal
 
 For more information on using a load balancer with an Auto Scaling group, see the [https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)\.
 
+## \[AutoScaling\.2\] Amazon EC2 Auto Scaling group should cover multiple Availability Zones<a name="fsbp-autoscaling-2"></a>
+
+**Category:** Recover > Resilience > High Availability
+
+**Severity:** Medium
+
+**Resource type:** `AWS::AutoScaling::AutoScalingGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-multiple-az.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-multiple-az.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an Auto Scaling group spans multiple Availability Zones\. The control fails if an Auto Scaling group does not span multiple availability zones\.
+
+Amazon EC2 Auto Scaling groups can be configured to use multiple Availability Zones\. An Auto Scaling group with a single Availability Zone is preferred in some use cases, such as batch\-jobs or when inter\-AZ transfer costs need to be kept to a minimum\. However, an Auto Scaling group that does not span multiple Availability Zones will not launch instances in another Availability Zone to compensate if the configured single Availability Zone becomes unavailable\.
+
+### Remediation<a name="autoscaling-2-remediation"></a>
+
+For information on how to add Availability Zones to an existing auto scaling group, see [Availability zones](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-add-availability-zone.html) in Amazon EC2 Auto Scaling user guide\.
+
+## \[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses<a name="fsbp-autoscaling-5"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** High
+
+**Resource type:** `AWS::AutoScaling::LaunchConfiguration`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-launch-config-public-ip-disabled.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-launch-config-public-ip-disabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an Auto Scaling group's associated launch configuration assigns a [public IP address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#public-ip-addresses) to the group’s instances\. The control fails if the associated launch configuration assigns a public IP address\.
+
+Amazon EC2 instances in an autoscaling group launch configuration should not have an associated public IP address, except for in limited edge cases\. Amazon EC2 instances should only be accessible from behind a load balancer instead of being directly exposed to the internet\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\.
+
+### Remediation<a name="autoscaling-5-remediation"></a>
+
+An Auto Scaling group is associated with one launch configuration at a time\. You cannot modify a launch configuration after you have create it\. To change the launch configuration for an Auto Scaling group, use an existing launch configuration as the basis for a new launch configuration\. Then, update the Auto Scaling group to use the new launch configuration as described in steps below\.
+
+After you change the launch configuration for an Auto Scaling group, any new instances are launched with the new configuration options\. Existing instances are not affected\. To update existing instances, either terminate them so that they are replaced by your Auto Scaling group, or allow automatic scaling to gradually replace older instances with newer instances based on your [termination policies](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html)\.
+
+**To enable Elastic Load Balancing health checks**
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, under **Auto Scaling**, choose **Launch Configurations**\.
+
+1. Select the launch configuration and choose **Actions**, then **Copy launch configuration**\. This sets up a new launch configuration with the same options as the original, but with "Copy" added to the name\. 
+
+1. On the **Create Launch Configuration** page, expand **Advanced details** under **Additional configuration \- optional**\.
+
+1. Under **IP address type**, choose **Do not assign a public IP address to any instances**\.
+
+1. When you have finished, Choose **Create launch configuration**\.
+
+1. On the navigation pane, under **Auto Scaling**, choose **Auto Scaling Groups**\.
+
+1. Select the check box next to the Auto Scaling group\.
+
+1. A split pane opens up in the bottom part of the page, showing information about the group that's selected\.
+
+1. On the **Details** tab, choose **Launch configuration**, **Edit**\.
+
+1. For **Launch configuration**, select the new launch configuration\.
+
+1. When you have finished changing your launch configuration, choose **Update**\.
+
 ## \[CloudFront\.1\] CloudFront distributions should have a default root object configured<a name="fsbp-cloudfront-1"></a>
 
 **Category:** Protect > Secure access management > Resources not publicly accessible
@@ -245,6 +400,8 @@ For more information on using a load balancer with an Auto Scaling group, see th
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-default-root-object-configured.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-default-root-object-configured.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an Amazon CloudFront distribution is configured to return a specific object that is the default root object\. The control fails if the CloudFront distribution does not have a default root object configured\.
@@ -252,31 +409,7 @@ This control checks whether an Amazon CloudFront distribution is configured to r
 A user might sometimes request the distribution’s root URL instead of an object in the distribution\. When this happens, specifying a default root object can help you to avoid exposing the contents of your web distribution\.
 
 **Note**  
-This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
-US East \(Ohio\)
-US West \(N\. California\)
-US West \(Oregon\)
-Africa \(Cape Town\)
-Asia Pacific \(Hong Kong\)
-Asia Pacific \(Mumbai\)
-Asia Pacific \(Osaka\)
-Asia Pacific \(Seoul\)
-Asia Pacific \(Singapore\)
-Asia Pacific \(Sydney\)
-Asia Pacific \(Tokyo\)
-Canada \(Central\)
-China \(Beijing\)
-China \(Ningxia\)
-Europe \(Frankfurt\)
-Europe \(Ireland\)
-Europe \(London\)
-Europe \(Milan\)
-Europe \(Paris\)
-Europe \(Stockholm\)
-Middle East \(Bahrain\)
-South America \(São Paulo\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
+This control is only supported in US East \(N\. Virginia\)\.
 
 ### Remediation<a name="cloudfront-1-remediation"></a>
 
@@ -292,6 +425,8 @@ For detailed instructions on how to specify a default root object for your distr
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-access-identity-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-access-identity-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an Amazon CloudFront distribution with Amazon S3 Origin type has Origin Access Identity \(OAI\) configured\. The control fails if OAI is not configured\.
@@ -299,31 +434,7 @@ This control checks whether an Amazon CloudFront distribution with Amazon S3 Ori
 CloudFront OAI prevents users from accessing S3 bucket content directly\. When users access an S3 bucket directly, they effectively bypass the CloudFront distribution and any permissions that are applied to the underlying S3 bucket content\.
 
 **Note**  
-This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
-US East \(Ohio\)
-US West \(N\. California\)
-US West \(Oregon\)
-Africa \(Cape Town\)
-Asia Pacific \(Hong Kong\)
-Asia Pacific \(Mumbai\)
-Asia Pacific \(Osaka\)
-Asia Pacific \(Seoul\)
-Asia Pacific \(Singapore\)
-Asia Pacific \(Sydney\)
-Asia Pacific \(Tokyo\)
-Canada \(Central\)
-China \(Beijing\)
-China \(Ningxia\)
-Europe \(Frankfurt\)
-Europe \(Ireland\)
-Europe \(London\)
-Europe \(Milan\)
-Europe \(Paris\)
-Europe \(Stockholm\)
-Middle East \(Bahrain\)
-South America \(São Paulo\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
+This control is only supported in US East \(N\. Virginia\)\.
 
 ### Remediation<a name="cloudfront-2-remediation"></a>
 
@@ -339,6 +450,8 @@ For detailed remediation instructions, see [Creating a CloudFront OAI and adding
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-viewer-policy-https.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-viewer-policy-https.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an Amazon CloudFront distribution requires viewers to use HTTPS directly or whether it uses redirection\. The control fails if `ViewerProtocolPolicy` is set to `allow-all` for `defaultCacheBehavior` or for `cacheBehaviors`\.
@@ -346,31 +459,7 @@ This control checks whether an Amazon CloudFront distribution requires viewers t
 HTTPS \(TLS\) can be used to help prevent potential attackers from using person\-in\-the\-middle or similar attacks to eavesdrop on or manipulate network traffic\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Encrypting data in transit can affect performance\. You should test your application with this feature to understand the performance profile and the impact of TLS\.
 
 **Note**  
-This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
-US East \(Ohio\)
-US West \(N\. California\)
-US West \(Oregon\)
-Africa \(Cape Town\)
-Asia Pacific \(Hong Kong\)
-Asia Pacific \(Mumbai\)
-Asia Pacific \(Osaka\)
-Asia Pacific \(Seoul\)
-Asia Pacific \(Singapore\)
-Asia Pacific \(Sydney\)
-Asia Pacific \(Tokyo\)
-Canada \(Central\)
-China \(Beijing\)
-China \(Ningxia\)
-Europe \(Frankfurt\)
-Europe \(Ireland\)
-Europe \(London\)
-Europe \(Milan\)
-Europe \(Paris\)
-Europe \(Stockholm\)
-Middle East \(Bahrain\)
-South America \(São Paulo\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
+This control is only supported in US East \(N\. Virginia\)\.
 
 ### Remediation<a name="cloudfront-3-remediation"></a>
 
@@ -386,6 +475,8 @@ For detailed remediation instructions, see [Requiring HTTPS for communication be
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-failover-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-origin-failover-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an Amazon CloudFront distribution is configured with an origin group that has two or more origins\.
@@ -393,31 +484,7 @@ This control checks whether an Amazon CloudFront distribution is configured with
 CloudFront origin failover can increase availability\. Origin failover automatically redirects traffic to a secondary origin if the primary origin is unavailable or if it returns specific HTTP response status codes\.
 
 **Note**  
-This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
-US East \(Ohio\)
-US West \(N\. California\)
-US West \(Oregon\)
-Africa \(Cape Town\)
-Asia Pacific \(Hong Kong\)
-Asia Pacific \(Mumbai\)
-Asia Pacific \(Osaka\)
-Asia Pacific \(Seoul\)
-Asia Pacific \(Singapore\)
-Asia Pacific \(Sydney\)
-Asia Pacific \(Tokyo\)
-Canada \(Central\)
-China \(Beijing\)
-China \(Ningxia\)
-Europe \(Frankfurt\)
-Europe \(Ireland\)
-Europe \(London\)
-Europe \(Milan\)
-Europe \(Paris\)
-Europe \(Stockholm\)
-Middle East \(Bahrain\)
-South America \(São Paulo\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
+This control is only supported in US East \(N\. Virginia\)\.
 
 ### Remediation<a name="cloudfront-4-remediation"></a>
 
@@ -433,6 +500,8 @@ For detailed remediation instructions, see [Creating an origin group](https://do
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-accesslogs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-accesslogs-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `S3BucketName` \(Optional\) – The S3 bucket to send the logs to
 
@@ -443,31 +512,7 @@ CloudFront access logs provide detailed information about every user request tha
 These logs are useful for applications such as security and access audits and forensics investigation\. For additional guidance on how to analyze access logs, see [Querying Amazon CloudFront logs](https://docs.aws.amazon.com/athena/latest/ug/cloudfront-logs.html) in the *Amazon Athena User Guide*\.
 
 **Note**  
-This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
-US East \(Ohio\)
-US West \(N\. California\)
-US West \(Oregon\)
-Africa \(Cape Town\)
-Asia Pacific \(Hong Kong\)
-Asia Pacific \(Mumbai\)
-Asia Pacific \(Osaka\)
-Asia Pacific \(Seoul\)
-Asia Pacific \(Singapore\)
-Asia Pacific \(Sydney\)
-Asia Pacific \(Tokyo\)
-Canada \(Central\)
-China \(Beijing\)
-China \(Ningxia\)
-Europe \(Frankfurt\)
-Europe \(Ireland\)
-Europe \(London\)
-Europe \(Milan\)
-Europe \(Paris\)
-Europe \(Stockholm\)
-Middle East \(Bahrain\)
-South America \(São Paulo\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
+This control is only supported in US East \(N\. Virginia\)\.
 
 ### Remediation<a name="cloudfront-5-remediation"></a>
 
@@ -483,6 +528,8 @@ For information on how to configure access logging for a CloudFront distribution
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-associated-with-waf.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-associated-with-waf.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `wafWebAclIds` \(Optional\) \- A comma\-separated list of web ACL IDs \(for AWS WAF\) or web ACL ARNs \(for AWS WAFv2\)\.
 
@@ -491,37 +538,92 @@ This control checks whether CloudFront distributions are associated with either 
 AWS WAF is a web application firewall that helps protect web applications and APIs from attacks\. It allows you to configure a set of rules, called a web access control list \(web ACL\), that allow, block, or count web requests based on customizable web security rules and conditions that you define\. Ensure your CloudFront distribution is associated with an AWS WAF web ACL to help protect it from malicious attacks\.
 
 **Note**  
-This control is only supported in US East \(N\. Virginia\)\. It is not supported in the following Regions:  
-US East \(Ohio\)
-US West \(N\. California\)
-US West \(Oregon\)
-Africa \(Cape Town\)
-Asia Pacific \(Hong Kong\)
-Asia Pacific \(Mumbai\)
-Asia Pacific \(Osaka\)
-Asia Pacific \(Seoul\)
-Asia Pacific \(Singapore\)
-Asia Pacific \(Sydney\)
-Asia Pacific \(Tokyo\)
-Canada \(Central\)
-China \(Beijing\)
-China \(Ningxia\)
-Europe \(Frankfurt\)
-Europe \(Ireland\)
-Europe \(London\)
-Europe \(Milan\)
-Europe \(Paris\)
-Europe \(Stockholm\)
-Middle East \(Bahrain\)
-South America \(São Paulo\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
+This control is only supported in US East \(N\. Virginia\)\.
 
 ### Remediation<a name="cloudfront-6-remediation"></a>
 
 For information on how to associate a web ACL with a CloudFront distribution, see [Using AWS WAF to control access to your content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-awswaf.html) in the *Amazon CloudFront Developer Guide*\.
 
-## \[CloudTrail\.1\] CloudTrail should be enabled and configured with at least one multi\-Region trail<a name="fsbp-cloudtrail-1"></a>
+## \[CloudFront\.7\] CloudFront distributions should use custom SSL/TLS certificates<a name="fsbp-cloudfront-7"></a>
+
+**Category:** Protect > Data protection > Encryption of data\-in\-transit
+
+**Severity:** Medium
+
+**Resource type:** `AWS::CloudFront::Distribution`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-custom-ssl-certificate.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-custom-ssl-certificate.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**None
+
+This control checks whether CloudFront distributions are using the default SSL/TLS certificate CloudFront provides\. This control passes if the CloudFront distribution uses a custom SSL/TLS certificate\. This control fails if the CloudFront distribution uses the default SSL/TLS certificate\.
+
+ Custom SSL/TLS allow your users to access content by using alternate domain names\. You can store custom certificates in AWS Certificate Manager \(recommended\), or in IAM\. 
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\.
+
+### Remediation<a name="cloudfront-7-remediation"></a>
+
+To add an alternate domain name using a custom SSL/TLS certificate for your CloudFront distributions, see [Adding an alternate domain name](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#CreatingCNAME) in the CloudFront Developer Guide\.
+
+### Remediation<a name="cloudfront-7-remediation"></a>
+
+For information on how to associate a web ACL with a CloudFront distribution, see [Using AWS WAF to control access to your content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-awswaf.html) in the *Amazon CloudFront Developer Guide*\.
+
+## \[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests<a name="fsbp-cloudfront-8"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Low
+
+**Resource type:** `AWS::CloudFront::Distribution`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-sni-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-sni-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**None
+
+This control checks if Amazon CloudFront distributions are using a custom SSL/TLS certificate and are configured to use SNI to serve HTTPS requests\. This control fails if a custom SSL/TLS certificate is associated but the SSL/TLS support method is a dedicated IP address\.
+
+Server Name Indication \(SNI\) is an extension to the TLS protocol that is supported by browsers and clients released after 2010\. If you configure CloudFront to serve HTTPS requests using SNI, CloudFront associates your alternate domain name with an IP address for each edge location\. When a viewer submits an HTTPS request for your content, DNS routes the request to the IP address for the correct edge location\. The IP address to your domain name is determined during the SSL/TLS handshake negotiation; the IP address isn't dedicated to your distribution\. 
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\.
+
+### Remediation<a name="cloudfront-8-remediation"></a>
+
+To configure your CloudFront distributions to use SNI to serve HTTPS requests, see [Using SNI to Serve HTTPS Requests \(works for Most Clients\)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cnames-https-dedicated-ip-or-sni.html#cnames-https-sni) in the CloudFront Developer Guide\.
+
+## \[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins<a name="fsbp-cloudfront-9"></a>
+
+**Category:** Protect > Data protection > Encryption of data\-in\-transit
+
+**Severity:** Medium
+
+**Resource type:** `AWS::CloudFront::Distribution`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-traffic-to-origin-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-traffic-to-origin-encrypted.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon CloudFront distributions are encrypting traffic to custom origins\. This control fails for a CloudFront distribution whose origin protocol policy allows 'http\-only'\. This control also fails if the distribution's origin protocol policy is 'match\-viewer' while the viewer protocol policy is 'allow\-all'\.
+
+HTTPS \(TLS\) can be used to help prevent eavesdropping or manipulation of network traffic\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. 
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\.
+
+### Remediation<a name="cloudfront-9-remediation"></a>
+
+To update the Origin Protocol Policy to require encryption for your CloudFront connections, see [Requiring HTTPS for communication between CloudFront and your custom origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-custom-origin.html) in the *Amazon CloudFront Developer Guide*\.
+
+## \[CloudTrail\.1\] CloudTrail should be enabled and configured with at least one multi\-Region trail that includes read and write management events<a name="fsbp-cloudtrail-1"></a>
 
 **Category:** Identify > Logging
 
@@ -531,10 +633,12 @@ For information on how to associate a web ACL with a CloudFront distribution, se
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/multi-region-cloudtrail-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:**
 + `readWriteType`: `ALL`
 
-This control checks that there is at least one multi\-Region CloudTrail trail\.
+This control checks that there is at least one multi\-Region CloudTrail trail\. It also checks that the `ExcludeManagementEventSources` parameter is empty for at least one of those trails\.
 
 AWS CloudTrail records AWS API calls for your account and delivers log files to you\. The recorded information includes the following information\.
 + Identity of the API caller
@@ -600,6 +704,8 @@ To remediate this issue, create a new multi\-Region trail in CloudTrail\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-encryption-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether CloudTrail is configured to use the server\-side encryption \(SSE\) AWS KMS key encryption\. The check passes if the `KmsKeyId` is defined\.
@@ -642,6 +748,8 @@ To remediate this issue, update your trail to enable SSE\-KMS encryption for the
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-log-file-validation-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether log file integrity validation is enabled on a CloudTrail trail\.
@@ -681,6 +789,8 @@ For more information, see [Validating CloudTrail log file integrity](https://doc
 **Resource type:** `AWS::CloudTrail::Trail`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/cloud-trail-cloud-watch-logs-enabled.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -742,12 +852,14 @@ For more information, see [Configuring CloudWatch Logs monitoring with the conso
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-source-repo-url-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the GitHub or Bitbucket source repository URL contains either personal access tokens or a user name and password\.
 
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 Africa \(Cape Town\)
 Europe \(Milan\)
 AWS GovCloud \(US\-East\)
@@ -789,6 +901,8 @@ For more information, refer to [CodeBuild use case\-based samples](https://docs.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-envvar-awscred-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the project contains the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`\.
@@ -796,7 +910,7 @@ This control checks whether the project contains the environment variables `AWS_
 Authentication credentials `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` should never be stored in clear text, as this could lead to unintended data exposure and unauthorized access\.
 
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 Africa \(Cape Town\)
 Europe \(Milan\)
 AWS GovCloud \(US\-East\)
@@ -852,6 +966,50 @@ To remediate this issue, update your CodeBuild project to remove the environment
 
 For more information, see [Environment variables in build environments](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html) in the *AWS CodeBuild User Guide*\.
 
+## \[CodeBuild\.4\] CodeBuild project environments should have a logging configuration<a name="fsbp-codebuild-4"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::CodeBuild::Project`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-logging-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether a CodeBuild project environment has at least one log option, either to S3 or CloudWatch logs enabled\. This control fails if a CodeBuild project environment does not have at least one log option enabled\. 
+
+From a security perspective, logging is an important feature to enable for future forensics efforts in the case of any security incidents\. Correlating anomalies in CodeBuild projects with threat detections can increase confidence in the accuracy of those threat detections\.
+
+### Remediation<a name="codebuild-4-remediation"></a>
+
+For more information on how to configure CodeBuild project log settings, see [Create a build project \(console\)](https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-console.html#create-project-console-logs) in the CodeBuild User Guide\.
+
+## \[CodeBuild\.5\] CodeBuild project environments should not have privileged mode enabled<a name="fsbp-codebuild-5"></a>
+
+**Category:** Protect > Secure Access Management
+
+**Severity:** High
+
+**Resource type:** `AWS::CodeBuild::Project`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-environment-privileged-check.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-environment-privileged-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if an AWS CodeBuild project environment has privileged mode enabled\. This control fails when an AWS CodeBuild project environment has privileged mode enabled\.
+
+By default, Docker containers do not allow access to any devices\. Privileged mode grants a build project's Docker container access to all devices\. Setting `privilegedMode` with value `true` enables running the Docker daemon inside a Docker container\. The Docker daemon listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes\. This parameter should only be set to true if the build project is used to build Docker images\. Otherwise, this setting should be disabled to prevent unintended access to Docker APIs as well as the container’s underlying hardware as unintended access to `privilegedMode` may risk malicious tampering or deletion of critical resources\.
+
+### Remediation<a name="codebuild-5-remediation"></a>
+
+For more information on how to configure CodeBuild project environment settings, see [Create a build project \(console\)](https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-console.html#create-project-console-environment) in the CodeBuild User Guide
+
 ## \[Config\.1\] AWS Config should be enabled<a name="fsbp-config-1"></a>
 
 **Category:** Identify > Inventory
@@ -861,6 +1019,8 @@ For more information, see [Environment variables in build environments](https://
 **Resource type:** AWS account
 
 **AWS Config rule:** None
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -884,25 +1044,19 @@ After you enable AWS Config, configure it to record all resources\.
 
 1. Open the AWS Config console at [https://console\.aws\.amazon\.com/config/](https://console.aws.amazon.com/config/)\.
 
-1. Choose the Region to configure AWS Config in\.
+1. Select the Region to configure AWS Config in\.
 
-1. If you have not used AWS Config before, choose **Get started**\.
+1. If you haven't used AWS Config before, see [Getting Started](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\.
 
-1. On the **Settings** page, do the following:
+1. Navigate to the Settings page from the menu, and do the following:
+   + Choose **Edit**\.
+   + Under **Resource types to record**, select **Record all resources supported in this region** and **Include global resources \(e\.g\., AWS IAM resources\)**\.
+   + Under **Data retention period**, choose the default retention period for AWS Config data, or specify a custom retention period\.
+   + Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or choose **Choose a role from your account** and then select the role to use\.
+   + Under **Amazon S3 bucket**, specify the bucket to use or create a bucket and optionally include a prefix\.
+   + Under **Amazon SNS topic**, select an Amazon SNS topic from your account or create one\. For more information about Amazon SNS, see the [https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html](https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html)\.
 
-   1. Under **Resource types to record**, choose **Record all resources supported in this region** and **Include global resources \(e\.g\. AWS IAM resources\)**\. 
-
-   1. Under **AWS Config role**, either choose **Create AWS Config service\-linked role** or **Choose a role from your account** and then choose the role to use\.
-
-   1. Under **Amazon S3 bucket**, specify the bucket to use or create a bucket and optionally include a prefix\. 
-
-   1. Under **Amazon SNS topic**, choose an Amazon SNS topic from your account or create one\. For more information about Amazon SNS, see the [https://docs.aws.amazon.com/sns/latest/gsg/](https://docs.aws.amazon.com/sns/latest/gsg/)\. 
-
-1. Choose **Next**\.
-
-1. On the **AWS Config rules** page, choose **Next**\. 
-
-1. Choose **Confirm**\.
+1. Choose **Save**\.
 
 For more information about using AWS Config from the AWS CLI, see [Turning on AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/gs-cli-subscribe.html) in the *AWS Config Developer Guide*\. 
 
@@ -917,6 +1071,8 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 **Resource type:** `AWS::DMS::ReplicationInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html](https://docs.aws.amazon.com/config/latest/developerguide/dms-replication-not-public.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -957,6 +1113,8 @@ For more information, see the section on [Creating a replication instance](https
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-autoscaling-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-autoscaling-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether an Amazon DynamoDB table can scale its read and write capacity as needed\. This control passes if the table uses either on\-demand capacity mode or provisioned mode with auto scaling configured\. Scaling capacity with demand avoids throttling exceptions, which helps to maintain availability of your applications\.
@@ -981,6 +1139,8 @@ For detailed instructions on enabling DynamoDB automatic scaling on existing tab
 **Resource type:** `AWS::DynamoDB::Table`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-pitr-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dynamodb-pitr-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -1012,6 +1172,8 @@ To remediate this issue, add point\-in\-time recovery to your DynamoDB table\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/dax-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/dax-encryption-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether a DAX cluster is encrypted at rest\. 
@@ -1022,7 +1184,7 @@ Encrypting data at rest reduces the risk of data stored on disk being accessed b
 
 You cannot enable or disable encryption at rest after a cluster is created\. You must recreate the cluster in order to enable encryption at rest\. For detailed instructions on how to create a DAX cluster with encryption at rest enabled, see[ Enabling encryption at rest using the AWS Management Console](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAXEncryptionAtRest.html#dax.encryption.tutorial-console) in the *Amazon DynamoDB Developer Guide*\.
 
-## \[EC2\.1\] Amazon EBS snapshots should not be public, determined by the ability to be restorable by anyone<a name="fsbp-ec2-1"></a>
+## \[EC2\.1\] Amazon EBS snapshots should not be public, determined by the availability to be restorable by anyone<a name="fsbp-ec2-1"></a>
 
 **Category:** Protect > Secure network configuration
 
@@ -1032,9 +1194,11 @@ You cannot enable or disable encryption at rest after a cluster is created\. You
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ebs-snapshot-public-restorable-check.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
-This control checks that Amazon Elastic Block Store snapshots are not public, as determined by the ability to be restorable by anyone\.
+This control checks whether Amazon Elastic Block Store snapshots are not public\. The control fails if Amazon EBS snapshots are restorable by anyone\.
 
 EBS snapshots are used to back up the data on your EBS volumes to Amazon S3 at a specific point in time\. You can use the snapshots to restore previous states of EBS volumes\. It is rarely acceptable to share a snapshot with the public\. Typically the decision to share a snapshot publicly was made in error or without a complete understanding of the implications\. This check helps ensure that all such sharing was fully planned and intentional\.
 
@@ -1068,6 +1232,8 @@ To remediate this issue, update your EBS snapshot to make it private instead of 
 **Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-default-security-group-closed.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -1121,6 +1287,8 @@ For more information, see [Working with security groups](https://docs.aws.amazon
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/encrypted-volumes.html](https://docs.aws.amazon.com/config/latest/developerguide/encrypted-volumes.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the EBS volumes that are in an attached state are encrypted\. To pass this check, EBS volumes must be in use and encrypted\. If the EBS volume is not attached, then it is not subject to this check\.
@@ -1149,6 +1317,8 @@ For more information, see [Creating an Amazon EBS volume](https://docs.aws.amazo
 **Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-stopped-instance.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-stopped-instance.html)
+
+**Schedule type:** Periodic
 
 **Parameters:**
 + `allowedDays`: 30
@@ -1195,6 +1365,8 @@ To learn more about terminating instances, see [Terminating an instance](https:/
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-flow-logs-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:**
 + `trafficType`: `REJECT`
 
@@ -1240,6 +1412,8 @@ To remediate this issue, enable VPC flow logging\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-ebs-encryption-by-default.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-ebs-encryption-by-default.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether account\-level encryption is enabled by default for Amazon Elastic Block Store\(Amazon EBS\)\. The control fails if the account level encryption is not enabled\. 
@@ -1275,6 +1449,8 @@ You can use the Amazon EC2 console to enable default encryption for Amazon EBS v
 **Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-imdsv2-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-imdsv2-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -1323,6 +1499,8 @@ If your software uses IMDSv1, you can reconfigure your software to use IMDSv2\. 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-no-public-ip.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-no-public-ip.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether EC2 instances have a public IP address\. The control fails if the `publicIp` field is present in the EC2 instance configuration item\. This control applies to IPv4 addresses only\. 
@@ -1369,10 +1547,14 @@ If your EC2 instance is associated with an Elastic IP address, then your EC2 ins
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/service-vpc-endpoint-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/service-vpc-endpoint-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** 
 + `serviceName`: `ec2`
 
 This control checks whether a service endpoint for Amazon EC2 is created for each VPC\. The control fails if a VPC does not have a VPC endpoint created for the Amazon EC2 service\. 
+
+This control evaluates resources in single account\. It cannot describe resources that are outside of the account\. Because AWS Config and Security Hub do not conduct cross\-account checks, you will see `FAILED` findings for VPCs that are shared across accounts\. Security Hub recommends that you suppress these `FAILED` findings\.
 
 To improve the security posture of your VPC, you can configure Amazon EC2 to use an interface VPC endpoint\. Interface endpoints are powered by AWS PrivateLink, a technology that enables you to access Amazon EC2 API operations privately\. It restricts all network traffic between your VPC and Amazon EC2 to the Amazon network\. Because endpoints are supported within the same Region only, you cannot create an endpoint between a VPC and a service in a different Region\. This prevents unintended Amazon EC2 API calls to other Regions\. 
 
@@ -1439,6 +1621,8 @@ For more details on creating a VPC endpoint policy, see [Amazon EC2 and interfac
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/subnet-auto-assign-public-ip-disabled.html](https://docs.aws.amazon.com/config/latest/developerguide/subnet-auto-assign-public-ip-disabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the assignment of public IPs in Amazon Virtual Private Cloud \(Amazon VPC\) subnets have `MapPublicIpOnLaunch` set to `FALSE`\. The control passes if the flag is set to `FALSE`\. 
@@ -1477,6 +1661,8 @@ You can configure a subnet from the Amazon VPC console\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-network-acl-unused-check.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-network-acl-unused-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether there are any unused network access control lists \(ACLs\)\.
@@ -1508,6 +1694,8 @@ For instructions on how to delete an unused network ACL, see [Deleting a network
 **Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-multiple-eni-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-multiple-eni-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:**
 + `Adapterids` \(Optional\) – A list of network interface IDs that are attached to EC2 instances
@@ -1552,6 +1740,8 @@ To remediate this issue, detach the additional ENIs\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-sg-open-only-to-authorized-ports.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-sg-open-only-to-authorized-ports.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `authorizedTcpPorts` \(Optional\) – Comma\-separated list of ports to which to allow unrestricted access\. For example: `'80, 443'`\. For this rule, the default values for `authorizedTcpPorts` are 80 and 443\.
 
@@ -1575,11 +1765,13 @@ For information on how to modify a security group, see [Add, remove, or update r
 
 **Category:** Protect > Restricted network access
 
-**Severity:** High
+**Severity:** Critical
 
 **Resource type:** `AWS::EC2::SecurityGroup`
 
 **AWS Config rule:** `vpc-sg-restricted-common-ports` \(Custom rule developed by Security Hub\)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -1614,6 +1806,109 @@ Security groups provide stateful filtering of ingress and egress network traffic
 
 For information on how to delete rules from a security group, see [Delete rules from a security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#deleting-security-group-rule) in the *Amazon EC2 User Guide for Linux Instances*\.
 
+## \[EC2\.20\] Both VPN tunnels for an AWS Site\-to\-Site VPN connection should be up<a name="fsbp-ec2-20"></a>
+
+**Category:** Resilience > Recover > High availability
+
+**Severity:** Medium 
+
+**Resource type:**`AWS::EC2::VPNConnection`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/vpc-vpn-2-tunnels-up.html](https://docs.aws.amazon.com/config/latest/developerguide/vpc-vpn-2-tunnels-up.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+A VPN tunnel is an encrypted link where data can pass from the customer network to or from AWS within an AWS Site\-to\-Site VPN connection\. Each VPN connection includes two VPN tunnels which you can simultaneously use for high availability\. Ensuring that both VPN tunnels are up for a VPN connection is important for confirming a secure and highly available connection between an AWS VPC and your remote network\.
+
+This control checks that both VPN tunnels provided by AWS Site\-to\-Site VPN are in UP status\. The control fails if one or both tunnels are in DOWN status\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+Middle East \(Bahrain\)
+
+### Remediation<a name="ec2-20-remediation"></a>
+
+To modify VPN tunnel options, see [Modifying Site\-to\-Site VPN tunnel options](https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-tunnel-options.html) in the AWS Site\-to\-Site VPN User Guide\.
+
+## \[EC2\.21\] Network ACLs should not allow ingress from 0\.0\.0\.0/0 to port 22 or port 3389<a name="fsbp-ec2-21"></a>
+
+**Category:** Protect > Secure Network Configuration
+
+**Severity:** Medium 
+
+**Resource type:**`AWS::EC2::NetworkAcl`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/nacl-no-unrestricted-ssh-rdp.html](https://docs.aws.amazon.com/config/latest/developerguide/nacl-no-unrestricted-ssh-rdp.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether a network access control list \(NACL\) allows unrestricted access to the default ports for SSH/RDP ingress traffic\. The rule fails if a NACL inbound entry allows a source CIDR block of '0\.0\.0\.0/0' or '::/0' for ports 22 or 3389\.
+
+Access to remote server administration ports, such as port 22 \(SSH\) and port 3389 \(RDP\), should not be publicly accessible, as this may allow unintended access to resources within your VPC\.
+
+### Remediation<a name="ec2-21-remediation"></a>
+
+For more information about NACLs, see [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the VPC User Guide\.
+
+## \[EC2\.22\] Unused EC2 security groups should be removed<a name="fsbp-ec2-22"></a>
+
+**Category:** Identify > Inventory
+
+**Severity:** Medium 
+
+**Resource type:**`AWS::EC2::SecurityGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni-periodic.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni-periodic.html)
+
+**Schedule type:** Periodic
+
+**Parameters:** None
+
+This AWS control checks that security groups are attached to Amazon Elastic Compute Cloud \(Amazon EC2\) instances or to an elastic network interface\. The control will fail if the security group is not associated with an Amazon EC2 instance or an elastic network interface\.
+
+### Remediation<a name="ec2-22-remediation"></a>
+
+To create, assign and delete security groups, see [Security groups](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/working-with-security-groups.html#deleting-security-group) in Amazon EC2 user guide\.
+
+## \[ECR\.3\] ECR repositories should have at least one lifecycle policy configured<a name="fsbp-ecr-3"></a>
+
+**Category:** Identify > Resource configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ECR::Repository`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-lifecycle-policy-configured.html](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-lifecycle-policy-configured.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an Amazon ECR repository has at least one lifecycle policy configured\. This control fails if an ECR repository does not have any lifecycle policies configured\.
+
+Amazon ECR lifecycle policies enable you to specify the lifecycle management of images in a repository\. By configuring lifecycle policies, you can automate the cleanup of unused images and the expiration of images based on age or count\. Automating these tasks can help you avoid unintentionally using outdated images in your repository\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="ecr-3-remediation"></a>
+
+To configure a lifecycle policy, see [Creating a lifecycle policy preview](https://docs.aws.amazon.com/AmazonECR/latest/userguide/lpp_creation.html) in the *Amazon Elastic Container Registry User Guide*\.
+
 ## \[ECS\.1\] Amazon ECS task definitions should have secure networking modes and user definitions<a name="fsbp-ecs-1"></a>
 
 **Category:** Protect > Secure access management
@@ -1623,6 +1918,8 @@ For information on how to delete rules from a security group, see [Delete rules 
 **Resource type:** `AWS::ECS::TaskDefinition`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-user-for-host-mode-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-user-for-host-mode-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:**
 + `SkipInactiveTaskDefinitions`: `true`
@@ -1655,6 +1952,8 @@ Note that when you update a task definition, it does not update running tasks th
 
 **AWS Configrule:** `ecs-service-assign-public-ip-disabled` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `exemptEcsServiceArns` \(Optional\)\. Security Hub does not populate this parameter\. Comma\-separated list of ARNs of Amazon ECS services that are exempt from this rule\.
 
@@ -1683,6 +1982,8 @@ To disable automatic public IP assignment, see [To configure VPC and security gr
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/efs-encrypted-check.html](https://docs.aws.amazon.com/config/latest/developerguide/efs-encrypted-check.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether Amazon Elastic File System is configured to encrypt the file data using AWS KMS\. The check fails in the following cases\.
@@ -1709,6 +2010,8 @@ For details on how to encrypt a new Amazon EFS file system, see [Encrypting data
 **Resource type:** `AWS::EFS::FileSystem`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/efs-in-backup-plan.html](https://docs.aws.amazon.com/config/latest/developerguide/efs-in-backup-plan.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -1753,6 +2056,8 @@ To learn more, visit [Using AWS Backup with Amazon EFS](https://docs.aws.amazon.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/beanstalk-enhanced-health-reporting-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/beanstalk-enhanced-health-reporting-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether enhanced health reporting is enabled for your AWS Elastic Beanstalk environments\.
@@ -1785,6 +2090,8 @@ For instructions on how to enable enhanced health reporting, see [Enabling enhan
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elastic-beanstalk-managed-updates-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elastic-beanstalk-managed-updates-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether managed platform updates are enabled for the Elastic Beanstalk environment\.
@@ -1813,6 +2120,8 @@ For instructions on how to enable managed platform updates, see [To configure ma
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-acm-certificate-required.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-acm-certificate-required.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the Classic Load Balancer uses HTTPS/SSL certificates provided by AWS Certificate Manager \(ACM\)\. The control fails if the Classic Load Balancer configured with HTTPS/SSL listener does not use a certificate provided by ACM\.
@@ -1829,7 +2138,6 @@ China \(Beijing\)
 China \(Ningxia\)
 Europe \(Milan\)
 AWS GovCloud \(US\-East\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="elb-2-remediation"></a>
 
@@ -1844,6 +2152,8 @@ For information on how to associate an ACM SSL/TLS certificate with a Classic Lo
 **Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-tls-https-listeners-only.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-tls-https-listeners-only.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -1887,6 +2197,8 @@ To remediate this issue, update your listeners to use the TLS or HTTPS protocol\
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-http-drop-invalid-header-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-http-drop-invalid-header-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control evaluates AWS Application Load Balancers to ensure they are configured to drop invalid HTTP headers\. The control fails if the value of `routing.http.drop_invalid_header_fields.enabled` is set to `false`\.
@@ -1927,6 +2239,8 @@ To remediate this issue, configure your load balancer to drop invalid header fie
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-logging-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the Application Load Balancer and the Classic Load Balancerhave logging enabled\. The control fails if `access_logs.s3.enabled` is `false`\.
@@ -1964,6 +2278,8 @@ To remediate this issue, update your load balancers to enable logging\.
 **Resource type:** `AWS::ElasticLoadBalancingV2::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-deletion-protection-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-deletion-protection-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -2003,6 +2319,8 @@ To learn more, see [Deletion protection](https://docs.aws.amazon.com/elasticload
 
 **AWS Configrule:** `elb-connection-draining-enabled` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether Classic Load Balancers have connection draining enabled\.
@@ -2023,6 +2341,8 @@ To enable connection draining on Classic Load Balancers, following the steps in 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-predefined-security-policy-ssl-check.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-predefined-security-policy-ssl-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `predefinedPolicyName`: `ELBSecurityPolicy-TLS-1-2-2017-01`
 
@@ -2038,11 +2358,66 @@ Africa \(Cape Town\)
 Asia Pacific \(Osaka\)
 Europe \(Milan\)
 AWS GovCloud \(US\-East\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="elb-8-remediation"></a>
 
 For information on how to use the predefined security policy `ELBSecurityPolicy-TLS-1-2-2017-01` with a Classic Load Balancer, see [Configure security settings](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#config-backend-auth) in *User Guide for Classic Load Balancers*\.
+
+## \[ELB\.9\] Classic Load Balancers should have cross\-zone load balancing enabled<a name="fsbp-elb-9"></a>
+
+**Category:** Recover > Resilience > High Availability 
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-cross-zone-load-balancing-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-cross-zone-load-balancing-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ `predefinedPolicyName`: `ELBSecurityPolicy-TLS-1-2-2017-01`
+
+This control checks if cross\-zone load balancing is enabled for the Classic Load Balancers \(CLBs\)\. This control fails if cross\-zone load balancing is not enabled for a CLB\.
+
+A load balancer node distributes traffic only across the registered targets in its Availability Zone\. When cross\-zone load balancing is disabled, each load balancer node distributes traffic only across the registered targets in its Availability Zone\. If the number of registered targets is not same across the Availability Zones, traffic wont be distributed evenly and the instances in one zone may end up over utilized compared to the instances in another zone\. With cross\-zone load balancing enabled, each load balancer node for your Classic Load Balancer distributes requests evenly across the registered instances in all enabled Availability Zones\. For details see [Cross\-zone load balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#cross-zone-load-balancing) in the Elastic Load Balancing User Guide\.
+
+**Note**  
+This control is not supported in Africa \(Cape Town\)\.
+
+### Remediation<a name="elb-9-remediation"></a>
+
+To enable cross\-zone load balancing in a Classic Load Balancer, see [Enable cross\-zone load balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html#enable-cross-zone) in the Elastic Load Balancing User Guide\.
+
+## \[ELB\.10\] Classic Load Balancers should span multiple Availability Zones<a name="fsbp-elb-10"></a>
+
+**Category:** Recover > Resilience > High Availability 
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/clb-multiple-az.html](https://docs.aws.amazon.com/config/latest/developerguide/clb-multiple-az.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether a Classic Load Balancer has been configured to span multiple Availability Zones\. The control fails if the Classic Load Balancer does not span multiple Availability Zones\.
+
+ A Classic Load Balancer can be set up to distribute incoming requests across Amazon EC2 instances in a single Availability Zone or multiple Availability Zones\. A Classic Load Balancer that does not span multiple Availability Zones is unable to redirect traffic to targets in another Availability Zone if the sole configured Availability Zone becomes unavailable\. 
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="elb-10-remediation"></a>
+
+ For information on how to add Availability Zones to a Classic Load Balancer, see [Add or remove Availability Zones](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html) in the *User Guide for Classic Load Balancers*\. 
 
 ## \[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS<a name="fsbp-elbv2-1"></a>
 
@@ -2053,6 +2428,8 @@ For information on how to use the predefined security policy `ELBSecurityPolicy-
 **Resource type:** `AWS::ElasticLoadBalancingV2::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-http-to-https-redirection-check.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-http-to-https-redirection-check.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -2097,6 +2474,8 @@ To remediate this issue, update your load balancers to redirect HTTP requests\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/emr-master-no-public-ip.html](https://docs.aws.amazon.com/config/latest/developerguide/emr-master-no-public-ip.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether master nodes on Amazon EMR clusters have public IP addresses\. 
@@ -2128,6 +2507,8 @@ To remediate this finding, you need to create a new cluster in VPC private subne
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-encrypted-at-rest.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether Elasticsearch domains have encryption at rest configuration enabled\. The check fails if encryption at rest is not enabled\.
@@ -2157,6 +2538,8 @@ Encryption of data at rest requires OpenSearch Service 5\.1 or later\. For more 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-in-vpc-only.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether Elasticsearch domains are in a VPC\. It does not evaluate the VPC subnet routing configuration to determine public access\. You should ensure that Elasticsearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html#ac-types-resource) in the *Amazon OpenSearch Service Developer Guide*\. You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the *Amazon VPC User Guide*\.
@@ -2179,6 +2562,8 @@ See [Launching your Amazon OpenSearch Service domains within a VPC](https://docs
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-node-to-node-encryption-check.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-node-to-node-encryption-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether Elasticsearch domains have node\-to\-node encryption enabled\.
@@ -2196,7 +2581,7 @@ Europe \(Milan\)
 
 ### Remediation<a name="es-3-remediation"></a>
 
-Node\-to\-node encryption can only be enabled on a new domain\. To remediate this finding, first [create a new domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html) with the **Node\-to\-node encryption** check box selected\. Then follow [Using a snapshot to migrate data](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/version-migration.html#snapshot-based-migration) to migrate your data to the new domain\.
+For information about enabling node\-to\-node encryption on new and existing domains, see [Enabling node\-to\-node encryption](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html#enabling-ntn) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[ES\.4\] Elasticsearch domain error logging to CloudWatch Logs should be enabled<a name="fsbp-es-4"></a>
 
@@ -2207,6 +2592,8 @@ Node\-to\-node encryption can only be enabled on a new domain\. To remediate thi
 **Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-logs-to-cloudwatch.html](https://docs.aws.amazon.com/config/latest/developerguide/elasticsearch-logs-to-cloudwatch.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:**
 + `logtype = 'error'`
@@ -2236,6 +2623,8 @@ For information on how to enable log publishing, see [Enabling log publishing \(
 
 **AWS Config rule:** `elasticsearch-audit-logging-enabled` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `cloudWatchLogsLogGroupArnList` \(Optional\)\. Security Hub does not populate this parameter\. Comma\-separated list of CloudWatch Logs log groups that should be configured for audit logs\.
 
@@ -2258,6 +2647,8 @@ For detailed instructions on enabling audit logs, see [Enabling audit logs](http
 **Resource type:** `AWS::Elasticsearch::Domain`
 
 **AWS Config rule:** `elasticsearch-data-node-fault-tolerance` \(Custom rule developed by Security Hub\)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -2291,6 +2682,8 @@ An Elasticsearch domain requires at least three data nodes for high availability
 
 **AWS Configrule:** `elasticsearch-primary-node-fault-tolerance` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether Elasticsearch domains are configured with at least three dedicated master nodes\. This control fails if the domain does not use dedicated master nodes\. This control passes if Elasticsearch domains have five dedicated master nodes\. However, using more than three master nodes might be unnecessary to mitigate the availability risk, and will result in additional cost\.
@@ -2323,6 +2716,8 @@ An Elasticsearch domain requires at least three dedicated master nodes for high 
 
 **AWS Config rule:** `elasticsearch-https-required` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether connections to Elasticsearch domains are required to use TLS 1\.2\. The check fails if the Elasticsearch domain `TLSSecurityPolicy` is not Policy\-Min\-TLS\-1\-2\-2019\-07\.
@@ -2343,6 +2738,8 @@ To enable TLS encryption, use the [https://docs.aws.amazon.com/opensearch-servic
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/guardduty-enabled-centralized.html](https://docs.aws.amazon.com/config/latest/developerguide/guardduty-enabled-centralized.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether Amazon GuardDuty is enabled in your GuardDuty account and Region\.
@@ -2350,7 +2747,7 @@ This control checks whether Amazon GuardDuty is enabled in your GuardDuty accoun
 It is highly recommended that you enable GuardDuty in all supported AWS Regions\. Doing so allows GuardDuty to generate findings about unauthorized or unusual activity, even in Regions that you do not actively use\. This also allows GuardDuty to monitor CloudTrail events for global AWS services such as IAM\.
 
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 Africa \(Cape Town\)
 China \(Beijing\)
 China \(Ningxia\)
@@ -2373,6 +2770,8 @@ For details on how to enable GuardDuty, including how to use AWS Organizations t
 **Resource type:** `AWS::IAM::Policy`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-admin-access.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -2414,13 +2813,16 @@ Confirm that the user that you detached the policy from can still access AWS ser
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-no-policies-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks that none of your IAM users have policies attached\. Instead, IAM users must inherit permissions from IAM groups or roles\.
 
 By default, IAM users, groups, and roles have no access to AWS resources\. IAM policies grant privileges to users, groups, or roles\. We recommend that you apply IAM policies directly to groups and roles but not to users\. Assigning privileges at the group or role level reduces the complexity of access management as the number of users grows\. Reducing access management complexity might in turn reduce the opportunity for a principal to inadvertently receive or retain excessive privileges\. 
 
-Note that this control also generates failed findings for IAM users that are created by Amazon Simple Email Service \(Amazon SES\)\. Amazon SES generates users that have inline policies attached\. You can suppress these findings\.
+**Note**  
+IAM users created by Amazon Simple Email Service are automatically created using inline policies\. Security Hub automatically exempts these users from this control\.
 
 ### Remediation<a name="iam-2-remediation"></a>
 
@@ -2475,6 +2877,8 @@ For more information about adding users to groups, see [Adding and removing user
 **Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html](https://docs.aws.amazon.com/config/latest/developerguide/access-keys-rotated.html)
+
+**Schedule type:** Periodic
 
 **Parameters:**
 + `maxAccessKeyAge`: 90
@@ -2542,13 +2946,15 @@ To remediate this issue, replace any keys that are older than 90 days\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-root-access-key-check.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether the root user access key is present\. 
 
-The root account is the most privileged user in an AWS account\. AWS access keys provide programmatic access to a given account\.
+The root user is the most privileged user in an AWS account\. AWS access keys provide programmatic access to a given account\.
 
-Security Hub recommends that you remove all access keys that are associated with the root account\. This limits that vectors that can be used to compromise the account\. It also encourages the creation and use of role\-based accounts that are least privileged\. 
+Security Hub recommends that you remove all access keys that are associated with the root user\. This limits that vectors that can be used to compromise your account\. It also encourages the creation and use of role\-based accounts that are least privileged\. 
 
 **Note**  
 This control is not supported in Africa \(Cape Town\)\.
@@ -2578,6 +2984,8 @@ To remediate this issue, delete the root user access key\.
 **Resource type:** `AWS::IAM::User`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html](https://docs.aws.amazon.com/config/latest/developerguide/mfa-enabled-for-iam-console-access.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -2617,14 +3025,18 @@ To learn how to delegate MFA setup to users, see the blog post [How to delegate 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/root-account-hardware-mfa-enabled.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether your AWS account is enabled to use a hardware multi\-factor authentication \(MFA\) device to sign in with root user credentials\.
 
 Virtual MFA might not provide the same level of security as hardware MFA devices\. We recommend that you use only a virtual MFA device while you wait for hardware purchase approval or for your hardware to arrive\. To learn more, see[ Enabling a virtual multi\-factor authentication \(MFA\) device \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html) in the *IAM User Guide*\.
 
+Both time\-based one\-time password \(TOTP\) and Universal 2nd Factor \(U2F\) tokens are viable as hardware MFA options\.
+
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
@@ -2632,13 +3044,15 @@ AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="iam-6-remediation"></a>
 
-To remediate this issue, add hardware\-based MFA to the root account\.
+To remediate this issue, add hardware\-based MFA to the root user\.
 
-**To enable hardware\-based MFA for the root account**
+**To enable hardware\-based MFA for the root user**
 
 1. Log in to your account using the root user credentials\.
 
-1. Choose the account name near the top\-right corner of the page and then choose **Security Credentials**\.
+1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
+
+1. In the pop\-up warning, choose **Continue to Security Credentials**\.
 
 1. Choose **Multi\-Factor Authentication \(MFA\)**\.
 
@@ -2657,6 +3071,8 @@ To remediate this issue, add hardware\-based MFA to the root account\.
 **Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-password-policy.html)
+
+**Schedule type:** Periodic
 
 **Parameters:**
 + `RequireUppercaseCharacters`: `true`
@@ -2710,6 +3126,8 @@ To remediate this issue, update your password policy to use the recommended conf
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-user-unused-credentials-check.html)
 
+**Schedule type:** Periodic
+
 **Parameters:**
 + `maxCredentialUsageAge`: 90 
 
@@ -2748,6 +3166,8 @@ After you identify the inactive accounts or unused credentials, use the followin
 **Resource type:** `AWS::IAM::Policy`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-policy-no-statements-with-full-access.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -2801,7 +3221,7 @@ To remediate this issue, update your IAM policies so that they do not allow full
 
 For details on how to edit an IAM policy, see [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\.
 
-## \[KMS\.1\] IAM customer managed policies should not allow decryption actions on all KMS keys<a name="fsbp-kms-1"></a>
+## \[KMS\.1\] IAM customer managed policies should not allow decryption and re\-encryption actions on all KMS keys<a name="fsbp-kms-1"></a>
 
 **Category:** Protect > Secure access management
 
@@ -2811,8 +3231,10 @@ For details on how to edit an IAM policy, see [Editing IAM policies](https://doc
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-customer-policy-blocked-kms-actions.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-customer-policy-blocked-kms-actions.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** 
-+ `kms:ReEncryptFrom, kms:Decrypt`
++ `blockedActionsPatterns: kms:ReEncryptFrom, kms:Decrypt`
 
 Checks whether the default version of IAM customer managed policies allow principals to use the AWS KMS decryption actions on all resources\. This control uses [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), an automated reasoning engine, to validate and warn you about policies that may grant broad access to your secrets across AWS accounts\.
 
@@ -2848,7 +3270,7 @@ To remediate this issue, you modify the IAM customer managed policies to restric
 
 For more information, see [Using IAM policies with AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html) in the *AWS Key Management Service Developer Guide*\.
 
-## \[KMS\.2\] IAM principals should not have IAM inline policies that allow decryption actions on all KMS keys<a name="fsbp-kms-2"></a>
+## \[KMS\.2\] IAM principals should not have IAM inline policies that allow decryption and re\-encryption actions on all KMS keys<a name="fsbp-kms-2"></a>
 
 **Category:** Protect > Secure access management
 
@@ -2861,10 +3283,12 @@ For more information, see [Using IAM policies with AWS KMS](https://docs.aws.ama
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/iam-inline-policy-blocked-kms-actions.html](https://docs.aws.amazon.com/config/latest/developerguide/iam-inline-policy-blocked-kms-actions.html) 
 
-**Parameters:**
-+ `kms:ReEncryptFrom, kms:Decrypt`
+**Schedule type:** Change triggered
 
-Checks whether the inline policies that are embedded in your IAM identities \(role, user, or group\) allow the AWS KMS decryption actions on all KMS keys\. This control uses [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), an automated reasoning engine, to validate and warn you about policies that may grant broad access to your secrets across AWS accounts\.
+**Parameters:**
++ `blockedActionsPatterns: kms:ReEncryptFrom, kms:Decrypt`
+
+Checks whether the inline policies that are embedded in your IAM identities \(role, user, or group\) allow the AWS KMS decryption and re\-encryption actions on all KMS keys\. This control uses [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), an automated reasoning engine, to validate and warn you about policies that may grant broad access to your secrets across AWS accounts\.
 
 This control fails if the policy is open enough to allow `kms:Decrypt` or `kms:ReEncryptFrom` actions on any arbitrary KMS key\.
 
@@ -2908,6 +3332,8 @@ For more information, see [Using IAM policies with AWS KMS](https://docs.aws.ama
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/kms-cmk-not-scheduled-for-deletion.html](https://docs.aws.amazon.com/config/latest/developerguide/kms-cmk-not-scheduled-for-deletion.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether KMS keys are scheduled for deletion\. The control fails if a KMS key is scheduled for deletion\.
@@ -2934,6 +3360,8 @@ For detailed remediation instructions to cancel a scheduled KMS key deletion, se
 **Resource type:** `AWS::Lambda::Function`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-public-access-prohibited.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -3002,10 +3430,12 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-function-settings-check.html)
 
-**Parameters:** 
-+ `runtime`: `nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, python3.6, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1`
+**Schedule type:** Change triggered
 
-This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks for the following runtimes: `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`
+**Parameters:** 
++ `runtime`: `nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, python3.6, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnet6`
+
+This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks function settings for the following runtimes: `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, and `dotnet6`\.
 
 The AWS Config rule ignores functions that have a package type of `Image`\.
 
@@ -3024,6 +3454,252 @@ For more information on supported runtimes and deprecation schedules, see the [R
 
 This control is retired\.
 
+## \[Lambda\.5\] VPC Lambda functions should operate in more than one Availability Zone<a name="fsbp-lambda-5"></a>
+
+**Category:** Recover > Resilience > High Availability
+
+**Severity:** Medium
+
+**Resource type:** `AWS::Lambda::Function`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/lambda-vpc-multi-az-check.html](https://docs.aws.amazon.com/config/latest/developerguide/lambda-vpc-multi-az-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Lambda has more than one availability zone associated\. The rule fails if only one availability zone is associated with Lambda\. 
+
+Deploying resources across multiple Availability Zones is an AWS best practice to ensure high availability within your architecture\. Availability is a core pillar in the confidentiality, integrity, and availability triad security model\. All Lambda functions should have a multi\-Availability Zone deployment to ensure that a single zone of failure does not cause a total disruption of operations\.
+
+### Remediation<a name="lambda-5-remediation"></a>
+
+**To deploy a Lambda function in multiple Availability Zones through console:**
+
+1. Open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)
+
+1. From the **Functions** page on the Lambda console choose a function\.
+
+1. Choose **Configuration** and then choose **VPC**\.
+
+1. Choose **Edit**\.
+
+1. If the function was not originally connected to a VPC, select a VPC from the dropdown menu\. If the function was not originally connected to a VPC, choose at least one security group to attach to the function
+**Note**  
+The function execution role must have permissions to call `CreateNetworkInterface` on EC2\.
+
+1. Choose **Save**\.
+
+## \[NetworkFirewall\.6\] Stateless network firewall rule group should not be empty<a name="fsbp-networkfirewall-6"></a>
+
+**Category:** Protect > Secure Network Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::NetworkFirewall::RuleGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/netfw-stateless-rule-group-not-empty.html](https://docs.aws.amazon.com/config/latest/developerguide/netfw-stateless-rule-group-not-empty.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if a Stateless Network Firewall Rule Group contains rules\. The rule will fail if there are no rules in a Stateless Network Firewall Rule Group\.
+
+A rule group contains rules that define how your firewall processes traffic in your VPC\. An empty stateless rule group when present in a firewall policy might give the impression that the rule group will process traffic\. However, when the stateless rule group is empty, it does not process traffic\.
+
+### Remediation<a name="networkfirewall-6-remediation"></a>
+
+**To update rule group and add a rule through console:**
+
+1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)
+
+1. In the navigation pane, under **Network Firewall**, choose **Network Firewall rule groups**\.
+
+1. In the **Network Firewall rule groups** page, choose the name of the firewall rule group that you want to edit\. This takes you to the firewall rule groups details page\. 
+
+1. For stateless rule groups, choose **Edit Rules** to add rules to the rule group\.
+
+## \[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled<a name="fsbp-opensearch-1"></a>
+
+**Category:** Protect > Data protection > Encryption of data at rest
+
+**Severity:** Medium
+
+**Resource type:** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-encrypted-at-rest.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-encrypted-at-rest.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether OpenSearch domains have encryption\-at\-rest configuration enabled\. The check fails if encryption at rest is not enabled\.
+
+For an added layer of security for your sensitive data in OpenSearch, you should configure your OpenSearch domain to be encrypted at rest\. OpenSearch domains offer encryption of data at rest\. The feature uses AWS KMS to store and manage your encryption keys\. To perform the encryption, it uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
+
+To learn more about OpenSearch encryption at rest, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the Amazon OpenSearch Service Developer Guide\.
+
+### Remediation<a name="opensearch-1-remediation"></a>
+
+By default, domains do not encrypt data at rest, and you cannot configure existing domains to use the feature\. To enable the feature, you must create another domain and migrate your data\.
+
+For information about creating domains, see [Creating and managing Amazon OpenSearch Service domains](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#es-createdomains) in the Amazon OpenSearch Service Developer Guide\.
+
+Encryption of data at rest requires Amazon OpenSearch 1\.0 or later\. For more information about encrypting data at rest for Amazon OpenSearch, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the Amazon OpenSearch Service Developer Guide\.
+
+## \[OpenSearch\.2\] OpenSearch should be in a VPC<a name="fsbp-opensearch-2"></a>
+
+**Category:** Protect > Secure network configuration > Resources within VPC
+
+**Severity:** Critical
+
+**Resource type:** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-in-vpc-only.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-in-vpc-only.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether OpenSearch domains are in a VPC\. It does not evaluate the VPC subnet routing configuration to determine public access\.
+
+You should ensure that OpenSearch domains are not attached to public subnets\. See [Resource\-based policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html#ac-types-resource) in the Amazon OpenSearch Service Developer Guide\. You should also ensure that your VPC is configured according to the recommended best practices\. See [Security best practices for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-best-practices.html) in the Amazon VPC User Guide\.
+
+OpenSearch domains deployed within a VPC can communicate with VPC resources over the private AWS network, without the need to traverse the public internet\. This configuration increases the security posture by limiting access to the data in transit\. VPCs provide a number of network controls to secure access to OpenSearch domains, including network ACL and security groups\. Security Hub recommends that you migrate public OpenSearch domains to VPCs to take advantage of these controls\.
+
+### Remediation<a name="opensearch-2-remediation"></a>
+
+If you create a domain with a public endpoint, you cannot later place it within a VPC\. Instead, you must create a new domain and migrate your data\. The reverse is also true\. If you create a domain within a VPC, it cannot have a public endpoint\.
+
+Instead, you must either [create another domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#es-createdomains) or disable this control\.
+
+See [Launching your Amazon OpenSearch Service domains within a VPC](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html) in the Amazon OpenSearch Service Developer Guide\.
+
+## \[OpenSearch\.3\] OpenSearch domains should encrypt data sent between nodes<a name="fsbp-opensearch-3"></a>
+
+**Category:** Protect > Data protection > Encryption of data in transit
+
+**Severity:** Medium
+
+**Resource type:** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-node-to-node-encryption-check.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-node-to-node-encryption-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether OpenSearch domains have node\-to\-node encryption enabled\. This control fails if node\-to\-node encryption is disabled on the domain\.
+
+HTTPS \(TLS\) can be used to help prevent potential attackers from eavesdropping on or manipulating network traffic using person\-in\-the\-middle or similar attacks\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Enabling node\-to\-node encryption for OpenSearch domains ensures that intra\-cluster communications are encrypted in transit\.
+
+There can be a performance penalty associated with this configuration\. You should be aware of and test the performance trade\-off before enabling this option\.
+
+### Remediation<a name="opensearch-3-remediation"></a>
+
+Node\-to\-node encryption can only be enabled on a new domain\. To remediate this finding, create a new domain with **Node\-to\-node encryption** enabled and migrate your data to the new domain\. Follow the instructions to [create a new domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#es-createdomains) in the Amazon OpenSearch Service Developer Guide and ensure that you select the **Node\-to\-node encryption** option when creating the new domain\. Then follow [Using a snapshot to migrate data](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/version-migration.html#snapshot-based-migration) to migrate your data to the new domain\.
+
+## \[OpenSearch\.4\] OpenSearch domain error logging to CloudWatch Logs should be enabled<a name="fsbp-opensearch-4"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-logs-to-cloudwatch.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-logs-to-cloudwatch.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ `logtype = 'error'`
+
+This control checks whether OpenSearch domains are configured to send error logs to CloudWatch Logs\. This control fails if error logging to CloudWatch is not enabled for a domain\.
+
+You should enable error logs for OpenSearch domains and send those logs to CloudWatch Logs for retention and response\. Domain error logs can assist with security and access audits, and can help to diagnose availability issues\.
+
+### Remediation<a name="opensearch-4-remediation"></a>
+
+For information on how to enable log publishing, see [Enabling log publishing \(console\)](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html#createdomain-configure-slow-logs-console) in the Amazon OpenSearch Service Developer Guide\.
+
+## \[OpenSearch\.5\] OpenSearch domains should have audit logging enabled<a name="fsbp-opensearch-5"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-audit-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-audit-logging-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ `cloudWatchLogsLogGroupArnList` \(Optional\)\. Security Hub does not populate this parameter\. Comma\-separated list of CloudWatch Logs log groups that should be configured for audit logs\.
+
+This rule is `NON_COMPLIANT` if the CloudWatch Logs log group of the OpenSearch domain is not specified in this parameter list\.
+
+This control checks whether OpenSearch domains have audit logging enabled\. This control fails if an OpenSearch domain does not have audit logging enabled\.
+
+Audit logs are highly customizable\. They allow you to track user activity on your OpenSearch clusters, including authentication successes and failures, requests to OpenSearch, index changes, and incoming search queries\.
+
+### Remediation<a name="opensearch-5-remediation"></a>
+
+For detailed instructions on enabling audit logs, see [Enabling audit logs](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/audit-logs.html#audit-log-enabling) in the Amazon OpenSearch Service Developer Guide\.
+
+## \[OpenSearch\.6\] OpenSearch domains should have at least three data nodes<a name="fsbp-opensearch-6"></a>
+
+**Category:** Recover > Resilience > High availability
+
+**Severity:** Medium
+
+**Resource type:** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-data-node-fault-tolerance.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-data-node-fault-tolerance.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether OpenSearch domains are configured with at least three data nodes and `zoneAwarenessEnabled` is `true`\. This control fails for an OpenSearch domain if `instanceCount` is less than 3 or `zoneAwarenessEnabled` is `false`\.
+
+An OpenSearch domain requires at least three data nodes for high availability and fault\-tolerance\. Deploying an OpenSearch domain with at least three data nodes ensures cluster operations if a node fails\.
+
+### Remediation<a name="opensearch-6-remediation"></a>
+
+**To modify the number of data nodes in an OpenSearch domain**
+
+1. Sign in to the AWS console and open the Amazon OpenSearch Service console at [https://console\.aws\.amazon\.com/es/](https://console.aws.amazon.com/es/)\.
+
+1. Under **My domains**, choose the name of the domain to edit, and choose **Edit**\.
+
+1. Under **Data nodes** set **Number of nodes** to a number greater than three\. If you are deploying to three Availability Zone, set the number to a multiple of three to ensure equal distribution across Availability Zones\. 
+
+1. Choose **Submit**\.
+
+## \[OpenSearch\.8\] Connections to OpenSearch domains should be encrypted using TLS 1\.2<a name="fsbp-opensearch-8"></a>
+
+**Category:** Protect > Data protection > Encryption of data\-in\-transit
+
+**Severity:** Medium
+
+**Resource type:** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-https-required.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-https-required.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+TThis control checks whether connections to OpenSearch domains are required to use TLS 1\.2\. The check fails if the OpenSearch domain `TLSSecurityPolicy` is not `Policy-Min-TLS-1-2-2019-07`\.
+
+HTTPS \(TLS\) can be used to help prevent potential attackers from using person\-in\-the\-middle or similar attacks to eavesdrop on or manipulate network traffic\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Encrypting data in transit can affect performance\. You should test your application with this feature to understand the performance profile and the impact of TLS\. TLS 1\.2 provides several security enhancements over previous versions of TLS\. 
+
+### Remediation<a name="opensearch-8-remediation"></a>
+
+To enable TLS encryption, use the [UpdateDomainConfig](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-actions-updatedomainconfig) API operation to configure the [DomainEndpointOptions](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-datatypes-domainendpointoptions) in order to set the `TLSSecurityPolicy`\. For more information, see [Node\-to\-node encryption](https://docs.aws.amazon.com/pensearch-service/latest/developerguide/ntn.html) in the Amazon OpenSearch Service Developer Guide\.
+
 ## \[RDS\.1\] RDS snapshots should be private<a name="fsbp-rds-1"></a>
 
 **Category:** Protect > Secure network configuration
@@ -3033,6 +3709,8 @@ This control is retired\.
 **Resource type:** `AWS::RDS::DBSnapshot`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -3069,7 +3747,7 @@ To remediate this issue, update your RDS snapshots to remove public access\.
 
 1. Choose **Save**\.
 
-## \[RDS\.2\] RDS DB instances should prohibit public access, determined by the PubliclyAccessible configuration<a name="fsbp-rds-2"></a>
+## \[RDS\.2\] Amazon RDS DB instances should prohibit public access, determined by the PubliclyAccessible configuration<a name="fsbp-rds-2"></a>
 
 **Category:** Protect > Secure network configuration
 
@@ -3078,6 +3756,8 @@ To remediate this issue, update your RDS snapshots to remove public access\.
 **Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-public-access-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -3123,6 +3803,8 @@ For more information, see [Working with a DB instance in a VPC](https://docs.aws
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-storage-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-storage-encrypted.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether storage encryption is enabled for your Amazon RDS DB instances\.
@@ -3148,6 +3830,8 @@ For information about encrypting DB instances in Amazon RDS, see [Encrypting Ama
 **Resource type:** `AWS::RDS::DBClusterSnapshot`,` AWS::RDS::DBSnapshot`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshot-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshot-encrypted.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -3195,6 +3879,8 @@ You can use the Amazon RDS console to remediate this issue\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-multi-az-support.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-multi-az-support.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether high availability is enabled for your RDS DB instances\.
@@ -3231,6 +3917,8 @@ To remediate this issue, update your DB instances to enable multiple Availabilit
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-enhanced-monitoring-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-enhanced-monitoring-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether enhanced monitoring is enabled for your RDS DB instances\.
@@ -3253,6 +3941,8 @@ For detailed instructions on how to enable Enhanced Monitoring for your DB insta
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-deletion-protection-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether RDS clusters have deletion protection enabled\. 
@@ -3264,7 +3954,7 @@ Enabling cluster deletion protection is an additional layer of protection agains
 When deletion protection is enabled, an RDS cluster cannot be deleted\. Before a deletion request can succeed, deletion protection must be disabled\.
 
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 China \(Beijing\)
 China \(Ningxia\)
 Middle East \(Bahrain\)
@@ -3299,6 +3989,8 @@ To remediate this issue, update your RDS DB cluster to enable delete protection\
 **Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-deletion-protection-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-deletion-protection-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:**
 + `databaseEngines`: `mariadb,mysql,oracle-ee,oracle-se2,oracle-se1,oracle-se,postgres,sqlserver-ee,sqlserver-se,sqlserver-ex,sqlserver-web`
@@ -3339,6 +4031,8 @@ To remediate this issue, update your RDS DB instance to enable deletion protecti
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-logging-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the following logs of Amazon RDS are enabled and sent to CloudWatch Logs:
@@ -3355,9 +4049,9 @@ RDS databases should have relevant logs enabled\. Database logging provides deta
 
 **Note**  
 This control is not supported in the following Regions:  
-Africa \(Cape Town\)  
-Asia Pacific \(Osaka\)  
-China \(Ningxia\)  
+Africa \(Cape Town\)
+Asia Pacific \(Osaka\)
+China \(Ningxia\)
 Europe \(Milan\)
 
 ### Remediation<a name="rds-9-remediation"></a>
@@ -3465,6 +4159,8 @@ To enable and publish MariaDB, MySQL, or PostgreSQL logs to CloudWatch Logs from
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-iam-authentication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-iam-authentication-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an RDS DB instance has IAM database authentication enabled\.
@@ -3473,10 +4169,10 @@ IAM database authentication allows authentication to database instances with an 
 
 **Note**  
 This control is not supported in the following Regions:  
-Africa \(Cape Town\)  
-Asia Pacific \(Hong Kong\)  
-Asia Pacific \(Osaka\)  
-China \(Beijing\)  
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Osaka\)
+China \(Beijing\)
 China \(Ningxia\)
 
 ### Remediation<a name="rds-10-remediation"></a>
@@ -3501,6 +4197,44 @@ To remediate this issue, update your DB instance to enable IAM authentication\.
 
 1. For clusters, choose **Modify DB Instance**\.
 
+## \[RDS\.11\] Amazon RDS instances should have automatic backups enabled<a name="fsbp-rds-11"></a>
+
+**Category:** Recover > Resilience > Backups enabled 
+
+**Severity:** Medium
+
+**Resource type:** `AWS::RDS::DBCluster`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/db-instance-backup-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/db-instance-backup-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** 
++ `backupRetentionMinimum:` 7
+
+This control checks whether Amazon Relational Database Service instances have automated backups enabled and the backup retention period is greater than or equal to 7 days\. The control fails if backups are not enabled, and if the retention period is less than 7 days\.
+
+Backups help you more quickly recover from a security incident and strengthens the resilience of your systems\. Amazon RDS provides an easy way to configure daily full instance volume snapshots\. For more details on Amazon RDS automated backups, see [Working with Backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html) in the Amazon RDS User Guide\.
+
+**Note**  
+This control is not supported in Asia Pacific \(Osaka\)\.
+
+### Remediation<a name="rds-11-remediation"></a>
+
+**To enable automated backups immediately**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
+
+1. Choose **Modify** to open the **Modify DB Instance** page\. 
+
+1. Under **Backup Retention Period**, choose a positive nonzero value, for example 30 days, then choose **Continue**\. 
+
+1. Select the **Scheduling of modifications** section and choose when to apply modifications: you can choose to **Apply during the next scheduled maintenance window** or **Apply immediately**\.
+
+1. Then, on the confirmation page, choose **Modify DB Instance** to save your changes and enable automated backups\.
+
 ## \[RDS\.12\] IAM authentication should be configured for RDS clusters<a name="fsbp-rds-12"></a>
 
 **Category:** Protect > Secure access management > Passwordless authentication
@@ -3511,9 +4245,11 @@ To remediate this issue, update your DB instance to enable IAM authentication\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-iam-authentication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-iam-authentication-enabled.html)
 
-**Parameters:** None
+**Schedule type:** Change triggered
 
-This control checks whether an RDS DB cluster has IAM database authentication enabled\.
+**Parameters:**None
+
+This control checks whether an Amazon RDS DB cluster has IAM database authentication enabled\.
 
 IAM database authentication allows for password\-free authentication to database instances\. The authentication uses an authentication token\. Network traffic to and from the database is encrypted using SSL\. For more information, see [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon Aurora User Guide*\.
 
@@ -3558,6 +4294,8 @@ You can enable IAM authentication for a DB cluster from the Amazon RDS console\.
 **Resource type:** `AWS::RDS::DBInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-automatic-minor-version-upgrade-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-automatic-minor-version-upgrade-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -3605,6 +4343,8 @@ You can enable minor version upgrades for a DB instance from the Amazon RDS cons
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/aurora-mysql-backtracking-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/aurora-mysql-backtracking-enabled.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether Amazon Aurora clusters have backtracking enabled\.
@@ -3644,6 +4384,8 @@ For information about pricing for backtracking, see the [Aurora pricing page](ht
 **Resource type:** `AWS::RDS::DBCluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-multi-az-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-multi-az-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -3691,6 +4433,8 @@ To remediate this control, configure your DB cluster for multiple Availability Z
 
 **AWS Config rule:** `rds-cluster-copy-tags-to-snapshots-enabled` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether RDS DB clusters are configured to copy all tags to snapshots when the snapshots are created\.
@@ -3731,6 +4475,8 @@ South America \(São Paulo\)
 
 **AWS Config rule:** `rds-instance-copy-tags-to-snapshots-enabled` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether RDS DB instances are configured to copy all tags to snapshots when the snapshots are created\.
@@ -3765,6 +4511,8 @@ Identification and inventory of your IT assets is a crucial aspect of governance
 
 **AWS Config rule:** `rds-deployed-in-vpc` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an RDS instance is deployed in a VPC \(EC2\-VPC\)\.
@@ -3784,6 +4532,8 @@ For detailed instructions on how to move RDS instances to VPC, see [Updating the
 **Resource type:** `AWS::RDS::EventSubscription`
 
 **AWS Config rule:** `rds-cluster-event-notifications-configured` \(Custom rule developed by Security Hub\)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -3831,6 +4581,8 @@ RDS event notifications uses Amazon SNS to make you aware of changes in the avai
 
 **AWS Config rule:** `rds-instance-event-notifications-configured` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an Amazon RDS event subscription exists with notifications enabled for the following source type, event category key\-value pairs\.
@@ -3876,6 +4628,8 @@ RDS event notifications use Amazon SNS to make you aware of changes in the avail
 **Resource type:** `AWS::RDS::EventSubscription`
 
 **AWS Config rule:** `rds-pg-event-notifications-configured` \(Custom rule developed by Security Hub\)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -3923,6 +4677,8 @@ RDS event notifications use Amazon SNS to make you aware of changes in the avail
 
 **AWS Config rule:** `rds-sg-event-notifications-configured` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an Amazon RDS event subscription exists with notifications enabled for the following source type, event category key\-value pairs\.
@@ -3969,6 +4725,8 @@ RDS event notifications use Amazon SNS to make you aware of changes in the avail
 
 **AWS Config rule:** `rds-no-default-ports` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the RDS cluster or instance uses a port other than the default port of the database engine\.
@@ -3997,6 +4755,50 @@ When you change the port, you must also update the existing connection strings t
 
 1. For clusters, choose **Modify cluster**\. For instances, choose **Modify DB Instance**\.
 
+## \[RDS\.24\] RDS database clusters should use a custom administrator username<a name="fsbp-rds-24"></a>
+
+**Category:** Identify > Resource Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::RDS:DBCluster`
+
+**AWS Config rule:** `[rds\-cluster\-default\-admin\-check](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-default-admin-check.html)`
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an Amazon RDS database cluster has changed the admin username from its default value\. This rule will fail if the admin username is set to the default value\.
+
+When creating an Amazon RDS database, you should change the default admin username to a unique value\. Default usernames are public knowledge and should be changed during RDS database creation\. Changing the default usernames reduces the risk of unintended access\.
+
+### Remediation<a name="rds-24-remediation"></a>
+
+For changing the admin username associated with the Amazon RDS database cluster, [create a new RDS database cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html) and change the default admin username while creating the database\.
+
+## \[RDS\.25\] RDS database instances should use a custom administrator username<a name="fsbp-rds-25"></a>
+
+**Category:** Identify > Resource Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::RDS::DBInstance`
+
+**AWS Config rule:** `[rds\-instance\-default\-admin\-check](https://docs.aws.amazon.com/config/latest/developerguide/rds-instance-default-admin-check.html)`
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether you've changed the administrative username for Amazon Relational Database Service \(Amazon RDS\) database instances from the default value\. The control fails if the administrative username is set to the default value\.
+
+Default administrative usernames on Amazon RDS databases are public knowledge\. When creating an Amazon RDS database, you should change the default administrative username to a unique value to reduce the risk of unintended access\.
+
+### Remediation<a name="rds-25-remediation"></a>
+
+To change the administrative username associated with an RDS database instance, first [create a new RDS database instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)\. Change the default administrative username while creating the database\.
+
 ## \[Redshift\.1\] Amazon Redshift clusters should prohibit public access<a name="fsbp-redshift-1"></a>
 
 **Category:** Protect > Secure network configuration > Resources not publicly accessible
@@ -4006,6 +4808,8 @@ When you change the port, you must also update the existing connection strings t
 **Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-public-access-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None 
 
@@ -4040,6 +4844,8 @@ To remediate this issue, update your Amazon Redshift cluster to disable public a
 **Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-require-tls-ssl.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-require-tls-ssl.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -4077,6 +4883,8 @@ To remediate this issue, update the parameter group to require encryption\.
 **Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-backup-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-backup-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:**
 + `MinRetentionPeriod = 7`
@@ -4119,6 +4927,8 @@ To remediate this issue, update the snapshot retention period to at least 7\.
 
 **AWS Config rule:** `redshift-cluster-audit-logging-enabled` \(Custom rule developed by Security Hub\)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `loggingEnabled = true`
 
@@ -4152,6 +4962,8 @@ Amazon Redshift audit logging provides additional information about connections 
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-maintenancesettings-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-cluster-maintenancesettings-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `allowVersionUpgrade = true`
 
@@ -4176,11 +4988,13 @@ Where `clustername` is the name of your Amazon Redshift cluster\.
 
 **Category:** Protect > Secure network configuration > API private access
 
-**Severity:** High
+**Severity:** Medium
 
 **Resource type:** `AWS::Redshift::Cluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-enhanced-vpc-routing-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-enhanced-vpc-routing-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -4200,6 +5014,28 @@ AWS GovCloud \(US\-West\)
 
 For detailed remediation instructions, see [Enabling enhanced VPC routing](https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-enabling-cluster.html) in the *Amazon Redshift Cluster Management Guide*\.
 
+## \[Redshift\.8\] Amazon Redshift clusters should not use the default Admin username<a name="fsbp-redshift-8"></a>
+
+**Category:** Identify > Resource Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::Redshift::Cluster`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-default-admin-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-default-admin-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+: This control checks whether a Amazon Redshift cluster has changed the admin username from its default value\. This control will fail if the admin username for a Redshift cluster is set to `awsuser`\.
+
+When creating a Redshift cluster, you should change the default admin username to a unique value\. Default usernames are public knowledge and should be changed upon configuration\. Changing the default usernames reduces the risk of unintended access\.
+
+### Remediation<a name="redshift-8-remediation"></a>
+
+You cannot change the admin username for your Amazon Redshift cluster after it is created\. To create a new cluster, follow the instructions [here](https://docs.aws.amazon.com/redshift/latest/gsg/rs-gsg-prereq.html)\.
+
 ## \[S3\.1\] S3 Block Public Access setting should be enabled<a name="fsbp-s3-1"></a>
 
 **Category:** Protect > Secure network configuration
@@ -4209,6 +5045,8 @@ For detailed remediation instructions, see [Enabling enhanced VPC routing](https
 **Resource type:** AWS account
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks-periodic.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-account-level-public-access-blocks-periodic.html) 
+
+**Schedule type:** Periodic
 
 **Parameters:** 
 + `ignorePublicAcls`: `true`
@@ -4233,7 +5071,7 @@ Unless you intend to have your S3 buckets be publicly accessible, you should con
 To learn more, see [Using Amazon S3 Block Public Access](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon Simple Storage Service User Guide*\.
 
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 Africa \(Cape Town\)
 Europe \(Milan\)
 Middle East \(Bahrain\)
@@ -4265,6 +5103,8 @@ For more information, see [Using Amazon S3 block public access](https://docs.aws
 **Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-read-prohibited)
+
+**Schedule type:** Periodic and change triggered
 
 **Parameters:** None
 
@@ -4302,6 +5142,8 @@ To remediate this issue, update your S3 bucket to remove public access\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-public-write-prohibited.html) 
 
+**Schedule type:** Periodic and change triggered
+
 **Parameters:** None
 
 This control checks whether your S3 buckets allow public write access\. It evaluates the block public access settings, the bucket policy, and the bucket access control list \(ACL\)\.
@@ -4337,6 +5179,8 @@ To remediate this issue, update your S3 bucket to remove public access\.
 **Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-server-side-encryption-enabled.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -4389,6 +5233,8 @@ For more information about default S3 bucket encryption, see the [https://docs.a
 **Resource type:** `AWS::S3::Bucket`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-ssl-requests-only.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -4448,6 +5294,8 @@ For more information, see the knowledge center article [What S3 bucket policy sh
 
 **AWS Config** rule: [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-blacklisted-actions-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-blacklisted-actions-prohibited.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `blacklistedactionpatterns`: `s3:DeleteBucketPolicy, s3:PutBucketAcl, s3:PutBucketPolicy, s3:PutEncryptionConfiguration, s3:PutObjectAcl`
 
@@ -4490,6 +5338,8 @@ To remediate this issue, edit the S3 bucket policy to remove the permissions\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:**
 + `excludedPublicBuckets` \(Optional\) – A comma\-separated list of known allowed public S3 bucket names\.
 
@@ -4515,6 +5365,120 @@ AWS GovCloud \(US\-West\)
 
 For information on how to remove public access at a bucket level, see [Blocking public access to your Amazon S3 storage](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html) in the *Amazon S3 User Guide*\.
 
+## \[S3\.9\] S3 bucket server access logging should be enabled<a name="fsbp-s3-9"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::S3::Bucket`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether server access logging is enabled for S3 buckets\. When logging is enabled, Amazon S3 delivers access logs for a source bucket to a chosen target bucket\. The target bucket must be in the same AWS Region as the source bucket and must not have a default retention period configuration\. This control passes if server access logging is enabled\. The target logging bucket does not need to have server access logging enabled, and you should suppress findings for this bucket\. 
+
+Server access logging provides detailed records of requests made to a bucket\. Server access logs can assist in security and access audits\. For more information, see [Security Best Practices for Amazon S3: Enable Amazon S3 server access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html)\.
+
+### Remediation<a name="s3-9-remediation"></a>
+
+**To enable S3 bucket access logging**
+
+1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
+
+1. Select the bucket from the list\.
+
+1. Choose **Properties**\.
+
+1. Under **Server access logging**, choose **Edit**\.
+
+1. Under **Server access logging**, choose **Enable**\. Then, choose **Save changes**\. 
+
+## \[S3\.10\] S3 buckets with versioning enabled should have lifecycle policies configured<a name="fsbp-s3-10"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::S3::Bucket`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-version-lifecycle-policy-check.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-version-lifecycle-policy-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon Simple Storage Service \(Amazon S3\) version enabled buckets have lifecycle policy configured\. This rule fails if Amazon S3 lifecycle policy is not enabled\.
+
+It is recommended to configure lifecycle rules on your Amazon S3 bucket as these rules help you define actions that you want Amazon S3 to take during an object's lifetime\. 
+
+### Remediation<a name="s3-10-remediation"></a>
+
+For more information on configuring lifecycle on an Amazon S3 bucket, see [Setting lifecycle configuration on a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/how-to-set-lifecycle-configuration-intro.html) and [Managing your storage lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)\.
+
+## \[S3\.11\] S3 buckets should have event notifications enabled<a name="fsbp-s3-11"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::S3::Bucket`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-event-notifications-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-event-notifications-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether S3 Event Notifications are enabled on an Amazon S3 bucket\. This control fails if S3 Event Notifications are not enabled on a bucket\.
+
+By enabling Event Notifications, you receive alerts on your Amazon S3 buckets when specific events occur\. For example, you can be notified of object creation, object removal, and object restoration\. These notifications can alert relevant teams to accidental or intentional modifications that may lead to unauthorized data access\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="s3-11-remediation"></a>
+
+For more information on detecting changes to S3 buckets and objects, see [Amazon S3 Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html) in the *Amazon S3 User Guide*\.
+
+## \[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets<a name="fsbp-s3-12"></a>
+
+**Category:** Protect > Secure access management > Access control
+
+**Severity:** Medium
+
+**Resource type:** `AWS::S3::Bucket`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether Amazon S3 buckets provide user permissions via ACLs\. The control fails if ACLs are configured for managing user access on S3 buckets\.
+
+ACLs are legacy access control mechanisms that predate IAM\. Instead of ACLs, we recommend using IAM policies or S3 bucket policies to more easily manage access to your S3 buckets\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="s3-12-remediation"></a>
+
+For more information on managing access to S3 buckets, see [Bucket policies and user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-iam-policies.html)in the *Amazon S3 User Guide*\. For details on how to review your current ACL permissions, see [Access control list \(ACL\) overview](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html) in the *Amazon S3 User Guide*\.
+
 ## \[SageMaker\.1\] SageMaker notebook instances should not have direct internet access<a name="fsbp-sagemaker-1"></a>
 
 **Category:** Protect > Secure network configuration
@@ -4524,6 +5488,8 @@ For information on how to remove public access at a bucket level, see [Blocking 
 **Resource type:** `AWS::SageMaker::NotebookInstance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html](https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-no-direct-internet-access.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -4536,7 +5502,7 @@ To train or host models from a notebook, you need internet access\. To enable in
 You should also ensure that access to your SageMaker configuration is limited to only authorized users\. Restrict users' IAM permissions to modify SageMaker settings and resources\.
 
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 Africa \(Cape Town\)
 China \(Beijing\)
 China \(Ningxia\)
@@ -4574,6 +5540,8 @@ For more information, see [Connect a notebook instance to resources in a VPC](ht
 **Resource type:** `AWS::SecretsManager::Secret`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-rotation-enabled-check.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-rotation-enabled-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -4617,6 +5585,8 @@ To learn more about Secrets Manager rotation, see [Rotating your AWS Secrets Man
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-scheduled-rotation-success-check.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-scheduled-rotation-success-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an AWS Secrets Manager secret rotated successfully based on the rotation schedule\. The control fails if `RotationOccurringAsScheduled` is `false`\. The control does not evaluate secrets that do not have rotation configured\.
@@ -4646,6 +5616,8 @@ For help on how to diagnose and fix common errors related to secrets rotation, s
 **Resource type:** `AWS::SecretsManager::Secret`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-secret-unused.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-secret-unused.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 
@@ -4688,6 +5660,8 @@ You can delete inactive secrets from the Secrets Manager console\.
 **Resource type:** `AWS::SecretsManager::Secret`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-secret-periodic-rotation.html](https://docs.aws.amazon.com/config/latest/developerguide/secretsmanager-secret-periodic-rotation.html)
+
+**Schedule type:** Periodic
 
 **Parameters:**
 + **Rotation period:** 90 days by default
@@ -4744,6 +5718,8 @@ You can enable automatic secret rotation in the Secrets Manager console\.
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sns-encrypted-kms.html](https://docs.aws.amazon.com/config/latest/developerguide/sns-encrypted-kms.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether an SNS topic is encrypted at rest using AWS KMS\.
@@ -4780,16 +5756,13 @@ To remediate this issue, update your SNS topic to enable encryption\.
 
 **AWS Config rule:** `sqs-queue-encrypted` \(Custom rule developed by Security Hub\)
 
-**Parameters:**
-+ `KmsKeyAliasList` \(Optional\)\. Security Hub does not populate this parameter\. Comma\-separated list of customer\-managed AWS KMS key aliases that are used to encrypt queues\.
+**Schedule type:** Change triggered
 
-  For example: "`alias/myKey`"\.
+**Parameters:** None
 
-  This rule is `NON_COMPLIANT` if the key used to encrypt a queue is not specified in this parameter list\.
+This control checks whether Amazon SQS queues are encrypted at rest\. The control passes if you use an Amazon SQS managed key \(SSE\-SQS\) or an AWS Key Management Service \(AWS KMS\) key \(SSE\-KMS\)\.
 
-This control checks whether Amazon SQS queues are encrypted at rest\.
-
-Server\-side encryption \(SSE\) allows you to transmit sensitive data in encrypted queues\. To protect the content of messages in queues, SSE uses keys managed in AWS KMS\. For more information, see [Encryption at rest](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html) in the *Amazon Simple Queue Service Developer Guide*\.
+Server\-side encryption \(SSE\) allows you to transmit sensitive data in encrypted queues\. To protect the content of messages in queues, SSE uses KMS keys\. For more information, see [Encryption at rest](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html) in the *Amazon Simple Queue Service Developer Guide*\.
 
 ### Remediation<a name="sqs-1-remediation"></a>
 
@@ -4804,6 +5777,8 @@ For information about managing SSE using the AWS Management Console, see[ Config
 **Resource type:** `AWS::EC2::Instance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-instance-managed-by-systems-manager.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -4851,14 +5826,16 @@ To determine whether your instances support Systems Manager associations, see [S
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-patch-compliance-status-check.html)
 
+**Schedule type:** Change triggered
+
 **Parameters:** None
 
 This control checks whether the compliance status of the Amazon EC2 Systems Manager patch compliance is `COMPLIANT` or `NON_COMPLIANT` after the patch installation on the instance\. It only checks instances that are managed by Systems Manager Patch Manager\.
 
-Having your EC2 instances fully patched as required by your organization reduces the attack surface of your AWS accounts\. 
+Having your EC2 instances fully patched as required by your organization reduces the attack surface of your AWS accounts\.
 
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 Africa \(Cape Town\)
 Europe \(Milan\)
 Middle East \(Bahrain\)
@@ -4894,6 +5871,8 @@ For more information about using Systems Manager documents to patch a managed in
 **Resource type:** `AWS::SSM::AssociationCompliance`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-managedinstance-association-compliance-status-check.html)
+
+**Schedule type:** Change triggered
 
 **Parameters:** None
 
@@ -4944,6 +5923,8 @@ For more information on creating and editing State Manager associations, see [Wo
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ssm-document-not-public.html](https://docs.aws.amazon.com/config/latest/developerguide/ssm-document-not-public.html)
 
+**Schedule type:** Periodic
+
 **Parameters:** None
 
 This control checks whether AWS Systems Manager documents that are owned by the account are public\. This control fails if SSM documents with the owner `Self` are public\.
@@ -4958,7 +5939,6 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
-This control is still in the release process\. It might not yet be available in all of the Regions where it is supported\.
 
 ### Remediation<a name="ssm-4-remediation"></a>
 
@@ -4975,6 +5955,8 @@ For more information about disabling public access to SSM documents, see [Modify
 **Resource type:** `AWS::WAF::WebACL`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/waf-classic-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/waf-classic-logging-enabled.html)
+
+**Schedule type:** Periodic
 
 **Parameters:** None
 

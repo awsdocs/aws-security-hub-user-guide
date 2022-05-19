@@ -208,7 +208,7 @@ In the current release, Security Hub offers the following managed insights:
 
 **23\. Top products by counts of findings**  
 **ARN:** `arn:aws:securityhub:::insight/securityhub/default/28`  
-**Grouped by:** Product ARN  
+**Grouped by:** Product name  
 **Finding filters:**  
 + Record state is `ACTIVE`
 + Workflow status is `NEW` or `NOTIFIED`

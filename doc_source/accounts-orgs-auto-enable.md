@@ -30,7 +30,7 @@ The **Accounts** page includes a configuration option to automatically add new a
 
 ## Enabling Security Hub automatically for new organization accounts \(Security Hub API, AWS CLI\)<a name="accounts-orgs-auto-enable-api"></a>
 
-To determine whether to automatically enable new organization accounts, the administrator account can use the Security Hub API or the AWS Command Line Interface\.
+To determine whether to automatically enable new organization accounts, the Security Hub administrator account can use the Security Hub API or the AWS Command Line Interface\.
 
 **To automatically enable new organization accounts**
 + **Security Hub API –** Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateOrganizationConfiguration.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateOrganizationConfiguration.html) operation\. To automatically enable new organization accounts, set `autoEnable` to `true`\.

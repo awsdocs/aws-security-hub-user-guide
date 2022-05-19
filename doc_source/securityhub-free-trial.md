@@ -23,7 +23,7 @@ The Security Hub free trial is not supported in the China \(Beijing\) Region\.
 
 The estimated monthly cost is based on your account's Security Hub usage for findings and security checks projected over a 30\-day period\.
 
-The usage information is only for the current Region\. It is not for all Regions in which Security Hub is enabled\. In an aggregation Region, it does not include linked Regions\.
+The usage information and estimated cost are only for the current Region, not for all Regions in which Security Hub is enabled\. In an aggregation Region, the usage information and estimated cost do not include linked Regions\. For more information about linked Regions, see [How cross\-Region aggregation works](finding-aggregation-overview.md)\.
 
 ## Viewing pricing details<a name="pricing-details"></a>
 

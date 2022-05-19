@@ -15,7 +15,7 @@ Security Hub also automatically updates and deletes findings\.
 
 All findings are automatically deleted if they were not updated in the past 90 days\.
 
-If you enable finding aggregation, then Security Hub automatically aggregates new findings from the linked Regions to the aggregation Region\. Security Hub also replicates updates to findings\. Updates that occur in the linked Regions are replicated to the aggregation Region\. Updates that occur in the aggregation Region are replicated to the original linked Region\. For more information about finding aggregation, see [Aggregating findings across Regions](finding-aggregation.md)\.
+If you enable cross\-Region aggregation, then Security Hub automatically aggregates new findings from the linked Regions to the aggregation Region\. Security Hub also replicates updates to findings\. Updates that occur in the linked Regions are replicated to the aggregation Region\. Updates that occur in the aggregation Region are replicated to the original linked Region\. For more information about cross\-Region aggregation, see [Cross\-Region aggregation](finding-aggregation.md)\.
 
 **Topics**
 + [Using BatchImportFindings to create and update findings](finding-update-batchimportfindings.md)

@@ -1,22 +1,29 @@
 # Determining the security score for a security standard<a name="standards-security-score"></a>
 
-On the **Security standards** page, each enabled standard displays a security score from 0–100%\. The standard details page also displays the overall security score\.
+On the **Security standards** page, each enabled standard displays a security score from 0–100%\. The **Summary** page also displays the overall security score\.
 
-Security Hub updates the calculated security score every 24 hours\. Security Hub displays a timestamp to indicate when the current security score was last updated\.
+Once you enable a standard in Security Hub, Security Hub calculates the initial security score for the standard when the standard status is `READY`\. After the status is `READY`, the initial security score is typically available within 30 minutes\. After that, Security Hub updates the security score every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\. To see the current status of a standard, use the `GetEnabledStandards` API operation\.
 
-When the standard is first enabled, Security Hub cannot calculate the initial security score until the standard status is `READY`\. The initial security score is available within 24 hours after that\. To see the current status of the standard, use the `GetEnabledStandards` API operation\.
+**Note**  
+It can take up to 24 hours for initial security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
-## How the security score is calculated<a name="standard-security-score-calculation"></a>
+## How security scores are calculated<a name="standard-security-score-calculation"></a>
 
-The security score represents the proportion of **Passed** controls to enabled controls\. The score is displayed as a percentage\. For example, if 10 controls are enabled for a standard, and seven of those controls are in a **Passed** state, then the security score is 70%\.
+Security scores represent the proportion of **Passed** controls to enabled controls\. The score is displayed as a percentage\. For example, if 10 controls are enabled for a standard, and seven of those controls are in a **Passed** state, then the security score for the standard is 70%\.
 
-The security score only reflects enabled controls and control findings from the current Region\. It does not support finding aggregation\.
+If your account is an administrator account, security scores account for control findings in all member accounts\.
 
-The security score calculation omits enabled controls that do not have any findings \(overall status is **No data**\)\. For example, a standard has 12 controls enabled\. Six of those controls are in a **Passed** state\. Two controls have no data\. Because the calculation omits the controls without data, the security score is 60%\.
+If you have set an aggregation Region, the overall security score is an aggregated score  that accounts for findings in all linked Regions\. Similarly,  the security score for each standard is an aggregated score that accounts for findings associated  with that standard in all linked Regions\. Note that if your account is an administrator  account, the security scores account for all member accounts and all Regions\.
 
-## Security score for administrator accounts<a name="standard-security-score-admin"></a>
+Security score calculation omits enabled controls that do not have any findings \(overall status is **No data**\)\. For example, a standard has 12 controls enabled\. Six of those controls are in a **Passed** state\. Two controls have no data\. Because the calculation omits the controls without data, the security score is 60%\.
 
-For the administrator account, the security score for a standard is an aggregated score across both the administrator account and all of the member accounts\.
+## Security scores for administrator accounts<a name="standard-security-score-admin"></a>
+
+For the administrator account, the overall security score and security scores for specific standards are aggregated scores across both the administrator account and all of the member accounts\.
+
+## Security scores if you have set an aggregation Region<a name="standard-security-aggregation-region"></a>
+
+If you have set an aggregation Region, the overall security score and the security scores for each standard reflect  findings from all linked Regions\. If your account is an administrator account, the security scores also account for all member accounts\.
 
 ## Security scores on the Summary page<a name="standard-security-score-summary-page"></a>
 

@@ -38,7 +38,7 @@ Develop and implement the appropriate safeguards to ensure delivery of critical 
 Does the service use least privilege practices in its IAM or resource policies?  
 Are passwords and secrets sufficiently complex? Are they rotated appropriately?  
 Does the service use multi\-factor authentication \(MFA\)?  
-Does the service avoid the root account?  
+Does the service avoid the root user?  
 Do resource\-based policies allow public access?
 
 **Secure network configuration**  
