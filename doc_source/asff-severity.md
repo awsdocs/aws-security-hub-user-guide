@@ -8,42 +8,7 @@ The finding severity does not consider the criticality of the involved assets or
 
 The finding must have either `Label` or `Normalized` populated\. `Label` is the preferred attribute\. Security Hub populates `Normalized`, but does not otherwise use it\. If neither attribute is populated, then the finding is invalid\.
 
-## Severity attributes<a name="asff-severity-attributes"></a>
-
-The `Severity` object can have the following attributes\.
-
-**`Label`**  
-Optional  
-The severity value for the finding\.  
-**Type:** Enum  
-**Valid values:** `INFORMATIONAL` \| `LOW` \| `MEDIUM` \| `HIGH` \|`CRITICAL`  
-At a high level, the `Label` values can be interpreted as follows\.  
-+ `INFORMATIONAL` – No issue was found, or a `WARNING` or `NOT_AVAILABLE` compliance status was returned by the security check\.
-+ `LOW` – The issue does not require action on its own\.
-+ `MEDIUM` – The issue must be addressed but not urgently\.
-+ `HIGH` – The issue must be addressed as a priority\.
-+ `CRITICAL` – The issue must be remediated immediately to prevent it from escalating\.
-For guidance on how to set the value of `Label`, see [Guidance for assigning severity \(AWS services and partners\)](#asff-severity-guidance)\.
-
-**`Normalized` \(To be deprecated\)**  
-Optional  
-This attribute is no longer relevant\. Security Hub populates the `Normalized` attribute, but does not otherwise use it\. Instead of `Normalized`, use `Label`\.  
-The normalized severity of a finding\.  
-**Type:** Integer  
-The value of `Normalized` must be an integer between 0 and 100\. Zero means that no severity applies, and 100 means that the finding has the maximum possible severity\.
-
-**`Original`**  
-Optional  
-The native severity from the finding product that generated the finding\.  
-**Type:** String  
-**Maximum length:** 64
-
-**`Product` \(Deprecated\)**  
-Optional  
-The native severity as defined by the finding product that generated the finding\.  
-This is deprecated in favor of `Original`\.  
-**Type:** Number  
-**Format:** Single\-precision 32\-bit IEEE 754 floating point number, restricted to finite values
+To view descriptions of `Severity` attributes, see [Severity](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html) in the *AWS Security Hub API Reference*\.
 
 ## Guidance for assigning severity \(AWS services and partners\)<a name="asff-severity-guidance"></a>
 

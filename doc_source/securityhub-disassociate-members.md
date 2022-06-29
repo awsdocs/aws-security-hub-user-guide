@@ -1,6 +1,6 @@
 # Disassociating member accounts<a name="securityhub-disassociate-members"></a>
 
-To stop receiving and viewing findings from an enabled member account, you can disassociate the member account\. You must disassociate a member account before you can delete it\.
+When you're logged into an administrator account, you can disassociate a member account to stop receiving and viewing findings from that account\. You must disassociate a member account before you can delete it\.
 
 When you disassociate a member account, it remains in your list of member accounts with a status of **Removed \(Disassociated\)**\. Your account is removed from the administrator account information for the member account\.
 

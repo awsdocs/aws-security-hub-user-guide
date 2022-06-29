@@ -18,10 +18,10 @@ Before you enable any security standards, make sure that you have enabled AWS Co
 
 When you enable a security standard, all of the controls for that standard are enabled by default\. You can then disable individual controls\. See [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)\.
 
-When a standard is first enabled, Security Hub calculates the initial security score for the standard when the standard status is `READY`\. After the status is `READY`, the initial security score is typically available within 30 minutes\. To see the current status of the standard, use the `GetEnabledStandards` API operation\.
+When you enable Security Hub, Security Hub calculates the initial security score for a standard within 30 minutes after your first visit to the **Summary** page or **Security standards** page on the Security Hub console\. Scores are only generated for standards that are enabled when you visit those pages\. In addition, AWS Config resource recording must be configured for scores to appear\. After first\-time score generation, Security Hub updates the security score every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\. To view a list of standards that are currently enabled, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) API operation\.
 
 **Note**  
-It can take up to 24 hours for initial security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
+It can take up to 24 hours for first\-time security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
 ## Auto\-enabled standards for new organization accounts<a name="securityhub-auto-enabled-standards"></a>
 

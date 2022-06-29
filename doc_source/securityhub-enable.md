@@ -22,7 +22,7 @@ When you enable Security Hub from the console, you also have the option to enabl
 
 1. Use the credentials of the IAM identity to sign in to the Security Hub console\.
 
-1.  When you open the Security Hub console for the first time, choose **Get Started**\.
+1.  When you open the Security Hub console for the first time, choose **Enable AWS Security Hub**\.
 
 1. On the welcome page, **Security standards** lists the security standards that Security Hub supports\.
 

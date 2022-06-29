@@ -1,6 +1,6 @@
 # AwsElasticSearchDomain<a name="asff-resourcedetails-awselasticsearchdomain"></a>
 
-The `AwsElasticSearchDomain` object provides details about an Elasticsearch domain\.
+The `AwsElasticSearchDomain` object provides details about an Amazon OpenSearch Service domain\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsElasticSearchDomain` object\. To view descriptions of `AwsElasticSearchDomain` attributes, see [AwsElasticSearchDomainDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsElasticSearchDomainDetails.html) in the *AWS Security Hub API Reference*\.
 

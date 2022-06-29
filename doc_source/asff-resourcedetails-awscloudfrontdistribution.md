@@ -1,6 +1,6 @@
 # AwsCloudFrontDistribution<a name="asff-resourcedetails-awscloudfrontdistribution"></a>
 
-The `AwsCloudFrontDistribution` object provides details about a distribution configuration\.
+The `AwsCloudFrontDistribution` object provides details about a Amazon CloudFront distribution configuration\.
 
 The following is an example `AwsCloudFrontDistribution` finding in the AWS Security Finding Format \(ASFF\)\. To view descriptions of `AwsCloudFrontDistribution` attributes, see [AwsCloudFrontDistributionDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsCloudFrontDistributionDetails.html) in the *AWS Security Hub API Reference*\.
 
@@ -11,30 +11,34 @@ The following is an example `AwsCloudFrontDistribution` finding in the AWS Secur
     "CacheBehaviors": {
         "Items": [
             {
-               "ViewerProtocolPolicy": "string"
+               "ViewerProtocolPolicy": "https-only"
             }
          ]
     },
     "DefaultCacheBehavior": {
-         "ViewerProtocolPolicy": "string"
+         "ViewerProtocolPolicy": "https-only"
     },
-    "DefaultRootObject": "string",
-    "DomainName": "string",
-    "Etag": "string",
-    "LastModifiedTime": "string",
+    "DefaultRootObject": "index.html",
+    "DomainName": "d2wkuj2w9l34gt.cloudfront.net",
+    "Etag": "E37HOT42DHPVYH",
+    "LastModifiedTime": "2015-08-31T21:11:29.093Z",
     "Logging": {
-         "Bucket": "string",
-         "Enabled": boolean,
-         "IncludeCookies": boolean,
-         "Prefix": "string"
+         "Bucket": "myawslogbucket.s3.amazonaws.com",
+         "Enabled": false,
+         "IncludeCookies": false,
+         "Prefix": "myawslog/"
      },
      "OriginGroups": {
           "Items": [
               {
                  "FailoverCriteria": {
                      "StatusCodes": {
-                          "Items": [ number ],
-                          "Quantity": number
+                          "Items": [
+                              200,
+                              301,
+                              404
+                          ]
+                          "Quantity": 3
                       }
                  }
               }
@@ -43,25 +47,38 @@ The following is an example `AwsCloudFrontDistribution` finding in the AWS Secur
      "Origins": {
            "Items": [
                {
-                  "DomainName": "string",
-                  "Id": "string",
-                  "OriginPath": "string",
-                  "S3OriginConfig": {
-                      "OriginAccessIdentity": "string"
+                  "CustomOriginConfig": {
+                      "HttpPort": 80,
+                      "HttpsPort": 443,
+                      "OriginKeepaliveTimeout": 60,
+                      "OriginProtocolPolicy": "match-viewer",
+                      "OriginReadTimeout": 30,
+                      "OriginSslProtocols": {
+                        "Items": ["SSLv3", "TLSv1"],
+                        "Quantity": 2
+                      }                       
                   }
-               }
-            ]
+               },                  
+           ]
      },
-     "Status": "string",
+                  "DomainName": "my-bucket.s3.amazonaws.com",
+                  "Id": "my-origin",
+                  "OriginPath": "/production",
+                  "S3OriginConfig": {
+                      "OriginAccessIdentity": "origin-access-identity/cloudfront/E2YFS67H6VB6E4"
+                  }
+           ]
+     },
+     "Status": "Deployed",
      "ViewerCertificate": {
-            "AcmCertificateArn": "string",
-            "Certificate": "string",
-            "CertificateSource": "string",
-            "CloudFrontDefaultCertificate": boolean,
-            "IamCertificateId": "string",
-            "MinimumProtocolVersion": "string",
-            "SslSupportMethod": "string"
+            "AcmCertificateArn": "arn:aws:acm::123456789012:AcmCertificateArn",
+            "Certificate": "ASCAJRRE5XYF52TKRY5M4",
+            "CertificateSource": "iam",
+            "CloudFrontDefaultCertificate": true,
+            "IamCertificateId": "ASCAJRRE5XYF52TKRY5M4",
+            "MinimumProtocolVersion": "TLSv1.2_2021",
+            "SslSupportMethod": "sni-only"
       },
-      "WebAclId": "string"
+      "WebAclId": "waf-1234567890"
 }
 ```

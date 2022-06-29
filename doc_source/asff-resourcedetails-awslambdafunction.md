@@ -1,6 +1,6 @@
 # AwsLambdaFunction<a name="asff-resourcedetails-awslambdafunction"></a>
 
-The `AwsLambdaFunction` object provides details about a Lambda function's configuration\.
+The `AwsLambdaFunction` object provides details about the configuration of an AWS Lambda function\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsLambdaFunction` object\. To view descriptions of `AwsLambdaFunction` attributes, see [AwsLambdaFunctionDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsLambdaFunctionDetails.html) in the *AWS Security Hub API Reference*\.
 

@@ -1,6 +1,6 @@
 # AwsRdsEventSubscription<a name="asff-resourcedetails-awsrdseventsubscription"></a>
 
-The `AwsRdsEventSubscription` contains details about an RDS event notification subscription\. The subscription allows RDS to post events to an SNS topic\.
+The `AwsRdsEventSubscription` contains details about an Amazon Relational Database Service event notification subscription\. The subscription allows Amazon RDS to post events to an Amazon Simple Notification Service topic\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsRdsEventSubscription` object\. To view descriptions of `AwsRdsEventSubscription` attributes, see [AwsRdsEventSubscriptionDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsRdsEventSubscriptionDetails.html) in the *AWS Security Hub API Reference*\.
 

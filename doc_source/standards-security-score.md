@@ -1,11 +1,13 @@
 # Determining the security score for a security standard<a name="standards-security-score"></a>
 
-On the **Security standards** page, each enabled standard displays a security score from 0–100%\. The **Summary** page also displays the overall security score\.
+On the **Security standards** page, Security Hub displays a security score from 0–100% for each enabled standard\. The **Summary** page also displays the overall security score across all enabled standards\.
 
-Once you enable a standard in Security Hub, Security Hub calculates the initial security score for the standard when the standard status is `READY`\. After the status is `READY`, the initial security score is typically available within 30 minutes\. After that, Security Hub updates the security score every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\. To see the current status of a standard, use the `GetEnabledStandards` API operation\.
+When you enable Security Hub, Security Hub calculates the initial security score for a standard within 30 minutes after your first visit to the **Summary** page or **Security standards** page on the Security Hub console\. Scores are only generated for standards that are enabled when you visit those pages\. To view a list of standards that are currently enabled, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) API operation\. In addition, AWS Config resource recording must be configured for scores to appear\. The overall security score is the average of the standard security scores\.
+
+After first\-time score generation, Security Hub updates the security score every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\.
 
 **Note**  
-It can take up to 24 hours for initial security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
+It can take up to 24 hours for first\-time security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
 ## How security scores are calculated<a name="standard-security-score-calculation"></a>
 

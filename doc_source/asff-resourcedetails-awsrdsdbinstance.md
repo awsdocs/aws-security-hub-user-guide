@@ -1,6 +1,6 @@
 # AwsRdsDbInstance<a name="asff-resourcedetails-awsrdsdbinstance"></a>
 
-The `AwsRdsDbInstance` object provides details about an Amazon RDS DB instance\.
+The `AwsRdsDbInstance` object provides details about an Amazon RDS database instance\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsRdsDbInstance` object\. To view descriptions of `AwsRdsDbInstance` attributes, see [AwsRdsDbInstanceDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsRdsDbInstanceDetails.html) in the *AWS Security Hub API Reference*\.
 

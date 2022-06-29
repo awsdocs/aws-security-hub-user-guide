@@ -1,6 +1,6 @@
 # AwsAutoScalingAutoScalingGroup<a name="asff-resourcedetails-awsautoscalingautoscalinggroup"></a>
 
-The `AwsAutoScalingAutoScalingGroup` object provides details about an automatic scaling group\.
+The `AwsAutoScalingAutoScalingGroup` object provides details about an Amazon EC2 Auto Scaling automatic scaling group\.
 
 The following is an example `AwsAutoScalingAutoScalingGroup` finding in the AWS Security Finding Format \(ASFF\)\. To view descriptions of `AwsAutoScalingAutoScalingGroup` attributes, see [AwsAutoScalingAutoScalingGroupDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsAutoScalingAutoScalingGroupDetails.html) in the *AWS Security Hub API Reference*\.
 

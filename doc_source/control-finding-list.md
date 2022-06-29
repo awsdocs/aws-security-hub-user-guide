@@ -21,7 +21,7 @@ You can sort each list using any of the columns\.
 
 ## Downloading the control finding list<a name="control-finding-list-download"></a>
 
-You can download the current page of the control finding list to a \.csv file\.
+From the control details page, you can download the current page of control findings to a \.csv file\.
 
 If you filtered the finding list, then the download only includes the controls that match the filter\.
 

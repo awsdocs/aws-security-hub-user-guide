@@ -414,6 +414,34 @@ IBM QRadar SIEM provides security teams with the ability to quickly and accurate
 
 [Partner documentation](https://www.ibm.com/docs/en/qradar-common?topic=configuration-integrating-aws-security-hub)
 
+## Juniper Networks – vSRX Next Generation Firewall \(Sends findings\)<a name="integration-junipernetworks-vsrxnextgenerationfirewall"></a>
+
+**Integration type:** Send
+
+**Product ARN:** `arn:aws:securityhub:<REGION>::product/juniper-networks/vsrx-next-generation-firewall`
+
+Juniper Networks' vSRX Virtual Next Generation Firewall delivers a complete cloud\-based virtual firewall with advanced security, secure SD\-WAN, robust networking, and built\-in automation\.
+
+[AWS Marketplace link](http://aws.amazon.com/marketplace/pp/prodview-z7jcugjx442hw)
+
+[Partner documentation](https://www.juniper.net/documentation/us/en/software/vsrx/vsrx-consolidated-deployment-guide/vsrx-aws/topics/topic-map/security-aws-cloudwatch-security-hub-and-logs.html#id-enable-and-configure-security-hub-on-vsrx)
+
+[Product link](https://www.juniper.net/documentation/us/en/software/vsrx/vsrx-consolidated-deployment-guide/vsrx-aws/topics/topic-map/security-aws-cloudwatch-security-hub-and-logs.html)
+
+## k9 Security – Access Analyzer \(Sends findings\)<a name="integration-k9-security-access-analyzer"></a>
+
+**Integration type:** Send
+
+**Product ARN:** `arn:aws:securityhub:<REGION>::product/k9-security/access-analyzer`
+
+k9 Security notifies you when important access changes occur in your AWS Identity and Access Management account\. With k9 Security, you can understand the access that each IAM user and role has to critical AWS services and your data\.
+
+k9 Security is built for continuous delivery, allowing you to operationalize IAM with actionable access audits and simple policy automation for AWS CDK and Terraform\.
+
+[Product link](https://www.k9security.io/lp/operationalize-aws-iam-security-hub)
+
+[Partner documentation](https://www.k9security.io/docs/how-to-configure-k9-access/)
+
 ## Lacework \(Sends findings\)<a name="integration-lacework"></a>
 
 **Integration type:** Send
@@ -606,6 +634,20 @@ SecureCloudDB is a cloud native database security tool that provides comprehensi
 
 [Partner documentation](https://help.secureclouddb.com/guide/aws/security_hub.html)
 
+## SentinelOne \(Sends findings\)<a name="integration-sentinelone"></a>
+
+**Integration type:** Send
+
+**Product ARN:** `arn:aws:securityhub:<REGION>::product/sentinelone/endpoint-protection`
+
+SentinelOne is an autonomous extended detection and response \(XDR\) platform encompassing AI\-powered prevention, detection, response, and hunting across endpoints, containers, cloud workloads, and IoT devices\.
+
+[AWS Marketplace link](http://aws.amazon.com/marketplace/pp/prodview-2qxvr62fng6li?sr=0-2&ref_=beagle&applicationId=AWSMPContessa)
+
+[Partner documentation](https://support.sentinelone.com/hc/en-us/articles/4412384322711-Marketplace-Overview)
+
+[Product link](https://www.sentinelone.com/sentinelone-for-aws/)
+
 ## ServiceNow – ITSM \(Receives and updates findings\)<a name="integration-servicenow-itsm"></a>
 
 **Integration type:** Receive and update
@@ -766,6 +808,6 @@ Turbot ensures that your cloud infrastructure is secure, compliant, scalable, an
 
 Vectra is transforming cybersecurity by applying advanced AI to detect and respond to hidden cyberattackers before they can steal or cause damage\.
 
-[Product link](http://aws.amazon.com/marketplace/pp/prodview-x2mabtjqsjb2w)
+[AWS Marketplace link](http://aws.amazon.com/marketplace/pp/prodview-x2mabtjqsjb2w)
 
 [Partner documentation](https://cognito-resource-guide.s3.us-west-2.amazonaws.com/Vectra_AWS_SecurityHub_Integration_Guide.pdf)

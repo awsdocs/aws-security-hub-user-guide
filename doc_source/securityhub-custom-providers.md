@@ -41,10 +41,6 @@ To update existing findings, use the existing finding ID \(via the [https://docs
 
 You can use the following example custom product integrations as a guide to create your own custom solution\.
 
-**Importing AWS Config rules**  
-You can use an AWS CloudFormation template to import AWS Config rules into Security Hub\.  
-To learn more, see [How to import AWS Config rules evaluations as findings in Security Hub](http://aws.amazon.com/blogs/security/how-to-import-aws-config-rules-evaluations-findings-security-hub/)\.
-
 **Sending findings from Chef InSpec scans to Security Hub**  
 You can create an AWS CloudFormation template that runs a [Chef InSpec](https://www.chef.io/products/chef-inspec/) compliance scan and then sends findings to Security Hub\.  
 For more details, see [Continuous compliance monitoring with Chef InSpec and AWS Security Hub](http://aws.amazon.com/blogs/security/continuous-compliance-monitoring-with-chef-inspec-and-aws-security-hub/)\.

@@ -4,5 +4,5 @@ AWS Security Hub consumes, aggregates, organizes, and prioritizes findings from 
 
 **Topics**
 + [ASFF syntax](securityhub-findings-format-syntax.md)
-+ [ASFF attributes](securityhub-findings-format-attributes.md)
++ [ASFF examples](securityhub-findings-format-attributes.md)
 + [Types taxonomy for ASFF](securityhub-findings-format-type-taxonomy.md)

@@ -1,6 +1,6 @@
-# ASFF attributes<a name="securityhub-findings-format-attributes"></a>
+# ASFF examples<a name="securityhub-findings-format-attributes"></a>
 
-The following sections show the attributes and objects for the AWS Security Finding Format \(ASFF\)\. To see the details for an object's attributes and structure, choose the object name\.
+The following sections contain details and examples of objects in the AWS Security Finding Format\. Choose an object to see more information about it\.
 
 **Topics**
 + [Required attributes](asff-required-attributes.md)
@@ -18,6 +18,7 @@ The following sections show the attributes and objects for the AWS Security Find
 + [Remediation](asff-remediation.md)
 + [Resources](asff-resources.md)
 + [Severity](asff-severity.md)
++ [Threats](asff-threats.md)
 + [ThreatIntelIndicators](asff-threatintelindicators.md)
 + [Vulnerabilities](asff-vulnerabilities.md)
 + [Workflow](asff-workflow.md)

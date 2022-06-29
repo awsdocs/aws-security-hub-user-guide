@@ -17,6 +17,8 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 [Amazon EC2 Auto Scaling](#fsbp-autoscaling-1)
 
+[Amazon CloudFront](#fsbp-cloudformation-1)
+
 [Amazon CloudFront](#fsbp-cloudfront-1)
 
 [AWS CloudTrail](#fsbp-cloudtrail-1)
@@ -37,6 +39,8 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 [Amazon EFS](#fsbp-efs-1)
 
+[Amazon EFS](#fsbp-eks-2)
+
 [AWS Elastic Beanstalk](#fsbp-elasticbeanstalk-1)
 
 [Elastic Load Balancing](#fsbp-elb-2)
@@ -49,11 +53,13 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 [AWS Identity and Access Management](#fsbp-iam-1)
 
+[AWS Identity and Access Management](#fsbp-kinesis-1)
+
 [AWS Key Management Service](#fsbp-kms-1)
 
 [AWS Lambda](#fsbp-lambda-1)
 
-[AWS Firewall Manager](#fsbp-networkfirewall-6)
+[AWS Network Firewall](#fsbp-networkfirewall-3)
 
 [Amazon OpenSearch Service](#fsbp-opensearch-1)
 
@@ -75,7 +81,7 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 [AWS WAF](#fsbp-waf-1)
 
-## \[ACM\.1\] Imported ACM certificates should be renewed after a specified time period<a name="fsbp-acm-1"></a>
+## \[ACM\.1\] Imported and ACM\-issued certificates should be renewed after a specified time period<a name="fsbp-acm-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data in transit
 
@@ -335,7 +341,71 @@ Amazon EC2 Auto Scaling groups can be configured to use multiple Availability Zo
 
 ### Remediation<a name="autoscaling-2-remediation"></a>
 
-For information on how to add Availability Zones to an existing auto scaling group, see [Availability zones](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-add-availability-zone.html) in Amazon EC2 Auto Scaling user guide\.
+For information on how to add Availability Zones to an existing auto scaling group, see [Availability zones](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-add-availability-zone.html) in the *Amazon EC2 Auto Scaling User Guide*\.
+
+## \[AutoScaling\.3\] Auto Scaling group should configure EC2 instances to require Instance Metadata Service Version 2 \(IMDSv2\)<a name="fsbp-autoscaling-3"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** High
+
+**Resource type:** `AWS::AutoScaling::LaunchConfiguration`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-launchconfig-requires-imdsv2.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-launchconfig-requires-imdsv2.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether IMDSv2 is enabled on all instances launched by Amazon EC2 Auto Scaling groups\. The control fails if the Metadata version is not included in the launch configuration or if both IMDSv1 and IMDSv2 are enabled\.
+
+IMDS provides data about your instance that you can use to configure or manage the running instance\.
+
+Version 2 of the IMDS adds new protections that weren't available in IMDSv1 to further safeguard your EC2 instances\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="autoscaling-3-remediation"></a>
+
+An Auto Scaling group is associated with one launch configuration at a time\. You cannot modify a launch configuration after you create it\. To change the launch configuration for an Auto Scaling group, use an existing launch configuration as the basis for a new launch configuration with IMDSv2 enabled\. For more information, see [Configure instance metadata options for new instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#configuring-IMDS-new-instances) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+## \[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`<a name="fsbp-autoscaling-4"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** High
+
+**Resource type:** `AWS::AutoScaling::LaunchConfiguration`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-launch-config-hop-limit.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-launch-config-hop-limit.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks the number of network hops that a metadata token can travel\. The control fails if the metadata response hop limit is greater than `1`\.
+
+The Instance Metadata Service \(IMDS\) provides metadata information about an Amazon EC2 instance and is useful for application configuration\. Restricting the HTTP `PUT` response for the metadata service to only the EC2 instance protects the IMDS from unauthorized use\.
+
+The Time To Live \(TTL\) field in the IP packet is reduced by one on every hop\. This reduction can be used to ensure that the packet does not travel outside EC2\. IMDSv2 protects EC2 instances that may have been misconfigured as open routers, layer 3 firewalls, VPNs, tunnels, or NAT devices, which prevents unauthorized users from retrieving metadata\. With IMDSv2, the `PUT` response that contains the secret token cannot travel outside the instance because the default metadata response hop limit is set to `1`\. However, if this value is greater than `1`, the token can leave the EC2 instance\. 
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="autoscaling-4-remediation"></a>
+
+For detailed instructions on how to modify the metadata response hop limit for an existing launch configuration, see [Modify instance metadata options for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#configuring-IMDS-existing-instances) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 ## \[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses<a name="fsbp-autoscaling-5"></a>
 
@@ -389,6 +459,79 @@ After you change the launch configuration for an Auto Scaling group, any new ins
 1. For **Launch configuration**, select the new launch configuration\.
 
 1. When you have finished changing your launch configuration, choose **Update**\.
+
+## \[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones<a name="fsbp-autoscaling-6"></a>
+
+**Category:** Recover > Resilience > High Availability
+
+**Severity:** Medium
+
+**Resource type:** `AWS::AutoScaling::AutoScalingGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-multiple-instance-types.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-multiple-instance-types.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an Amazon EC2 Auto Scaling group uses multiple instance types\. The control fails if the Auto Scaling group has only one instance type defined\.
+
+You can enhance availability by deploying your application across multiple instance types running in multiple Availability Zones\. Security Hub recommends using multiple instance types so that the Auto Scaling group can launch another instance type if there is insufficient instance capacity in your chosen Availability Zones\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="autoscaling-6-remediation"></a>
+
+For detailed instructions on how to modify the metadata response hop limit for an existing launch configuration, see [Modify instance metadata options for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#configuring-IMDS-existing-instances) in the *Amazon EC2 User Guide for Linux Instances* and [Modify instance metadata options for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html#configuring-IMDS-existing-instances) in the *Amazon EC2 User Guide for Windows Instances*\.
+
+## \[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)<a name="fsbp-cloudformation-1"></a>
+
+**Category:** Detect > Detection services > Application monitoring
+
+**Severity:** Low
+
+**Resource type:** `AWS::CloudFormation::Stack`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudformation-stack-notification-check.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudformation-stack-notification-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ `SNSTopic1`: 30
++ `SNSTopic2`: 30
++ `SNSTopic3`: 30
++ `SNSTopic4`: 30
++ `SNSTopic5`: 30
++ `(Optional): SNS topic ARN`: 30
+
+This control checks whether an Amazon Simple Notification Service notification is integrated with a CloudFormation stack\. The control fails for a CloudFormation stack if there is no SNS notification associated with it\. 
+
+Configuring an SNS notification with your CloudFormation stack helps immediately notify stakeholders of any events or changes occurring with the stack\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+
+### Remediation<a name="cloudformation-1-remediation"></a>
+
+For information about how to update a CloudFormation stack, see [AWS CloudFormation stack updates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks) in the AWS CloudFormation User Guide\.
 
 ## \[CloudFront\.1\] CloudFront distributions should have a default root object configured<a name="fsbp-cloudfront-1"></a>
 
@@ -502,8 +645,7 @@ For detailed remediation instructions, see [Creating an origin group](https://do
 
 **Schedule type:** Change triggered
 
-**Parameters:**
-+ `S3BucketName` \(Optional\) – The S3 bucket to send the logs to
+**Parameters:** None
 
 This control checks whether server access logging is enabled on CloudFront distributions\. The control fails if access logging is not enabled for a distribution\.
 
@@ -530,8 +672,7 @@ For information on how to configure access logging for a CloudFront distribution
 
 **Schedule type:** Change triggered
 
-**Parameters:**
-+ `wafWebAclIds` \(Optional\) \- A comma\-separated list of web ACL IDs \(for AWS WAF\) or web ACL ARNs \(for AWS WAFv2\)\.
+**Parameters:** None
 
 This control checks whether CloudFront distributions are associated with either AWS WAF or AWS WAFv2 web ACLs\. The control fails if the distribution is not associated with a web ACL\.
 
@@ -556,7 +697,7 @@ For information on how to associate a web ACL with a CloudFront distribution, se
 
 **Schedule type:** Change triggered
 
-**Parameters:**None
+**Parameters:** None
 
 This control checks whether CloudFront distributions are using the default SSL/TLS certificate CloudFront provides\. This control passes if the CloudFront distribution uses a custom SSL/TLS certificate\. This control fails if the CloudFront distribution uses the default SSL/TLS certificate\.
 
@@ -567,11 +708,7 @@ This control is only supported in US East \(N\. Virginia\)\.
 
 ### Remediation<a name="cloudfront-7-remediation"></a>
 
-To add an alternate domain name using a custom SSL/TLS certificate for your CloudFront distributions, see [Adding an alternate domain name](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#CreatingCNAME) in the CloudFront Developer Guide\.
-
-### Remediation<a name="cloudfront-7-remediation"></a>
-
-For information on how to associate a web ACL with a CloudFront distribution, see [Using AWS WAF to control access to your content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-awswaf.html) in the *Amazon CloudFront Developer Guide*\.
+To add an alternate domain name using a custom SSL/TLS certificate for your CloudFront distributions, see [Adding an alternate domain name](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#CreatingCNAME) in the *Amazon CloudFront Developer Guide*\.
 
 ## \[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests<a name="fsbp-cloudfront-8"></a>
 
@@ -585,7 +722,7 @@ For information on how to associate a web ACL with a CloudFront distribution, se
 
 **Schedule type:** Change triggered
 
-**Parameters:**None
+**Parameters:** None
 
 This control checks if Amazon CloudFront distributions are using a custom SSL/TLS certificate and are configured to use SNI to serve HTTPS requests\. This control fails if a custom SSL/TLS certificate is associated but the SSL/TLS support method is a dedicated IP address\.
 
@@ -622,6 +759,31 @@ This control is only supported in US East \(N\. Virginia\)\.
 ### Remediation<a name="cloudfront-9-remediation"></a>
 
 To update the Origin Protocol Policy to require encryption for your CloudFront connections, see [Requiring HTTPS for communication between CloudFront and your custom origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-custom-origin.html) in the *Amazon CloudFront Developer Guide*\.
+
+## \[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins<a name="fsbp-cloudfront-10"></a>
+
+**Category:** Protect > Data protection > Encryption of data\-in\-transit
+
+**Severity:** Medium
+
+**Resource type:** `AWS::CloudFront::Distribution`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-no-deprecated-ssl-protocols.html](https://docs.aws.amazon.com/config/latest/developerguide/cloudfront-no-deprecated-ssl-protocols.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon CloudFront distributions are using deprecated SSL protocols for HTTPS communication between CloudFront edge locations and your custom origins\. This control fails if a CloudFront distribution has a `CustomOriginConfig` where `OriginSslProtocols` includes `SSLv3`\.
+
+In 2015, the Internet Engineering Task Force \(IETF\) officially announced that SSL 3\.0 should be deprecated due to the protocol being insufficiently secure\. It is recommended that you use TLSv1\.2 or later for HTTPS communication to your custom origins\. 
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\.
+
+### Remediation<a name="cloudfront-10-remediation"></a>
+
+To update the Origin SSL Protocols for your CloudFront distributions, see [Requiring HTTPS for communication between CloudFront and your custom origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-custom-origin.html) in the *Amazon CloudFront Developer Guide*\.
 
 ## \[CloudTrail\.1\] CloudTrail should be enabled and configured with at least one multi\-Region trail that includes read and write management events<a name="fsbp-cloudtrail-1"></a>
 
@@ -1878,6 +2040,174 @@ This AWS control checks that security groups are attached to Amazon Elastic Comp
 
 To create, assign and delete security groups, see [Security groups](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/working-with-security-groups.html#deleting-security-group) in Amazon EC2 user guide\.
 
+## \[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests<a name="fsbp-ec2-23"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** High 
+
+**Resource type:**`AWS::EC2::TransitGateway`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-transit-gateway-auto-vpc-attach-disabled.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-transit-gateway-auto-vpc-attach-disabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if EC2 Transit Gateways are automatically accepting shared VPC attachments\. This control fails for a Transit Gateway that automatically accepts shared VPC attachment requests\.
+
+Turning on `AutoAcceptSharedAttachments` configures a Transit Gateway to automatically accept any cross\-account VPC attachment requests without verifying the request or the account the attachment is originating from\. To follow the best practices of authorization and authentication, we recommended turning off this feature to ensure that only authorized VPC attachment requests are accepted\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+Middle East \(Bahrain\)
+
+### Remediation<a name="ec2-23-remediation"></a>
+
+For information about how to modify a Transit Gateway, see [Modify a transit gateway](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#tgw-modifying) in the Amazon VPC Developer Guide\.
+
+## \[EC2\.24\] Paravirtual EC2 instance types should not be used<a name="fsbp-ec2-24"></a>
+
+**Category:** Identify > Vulnerability, patch, and version management
+
+**Severity:** Medium 
+
+**Resource type:**`AWS::EC2::Instance`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-paravirtual-instance-check.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-paravirtual-instance-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether the virtualization type of an EC2 instance is paravirtual\. The control fails if the `virtualizationType` of the EC2 instance is set to `paravirtual`\.
+
+Linux Amazon Machine Images \(AMIs\) use one of two types of virtualization: paravirtual \(PV\) or hardware virtual machine \(HVM\)\. The main differences between PV and HVM AMIs are the way in which they boot and whether they can take advantage of special hardware extensions \(CPU, network, and storage\) for better performance\.
+
+Historically, PV guests had better performance than HVM guests in many cases, but because of enhancements in HVM virtualization and the availability of PV drivers for HVM AMIs, this is no longer true\. For more information, see [Linux AMI virtualization types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html) in the Amazon EC2 User Guide for Linux Instances\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Mumbai\)
+Asia Pacific \(Osaka\)
+Asia Pacific \(Seoul\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+Canada \(Central\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(London\)
+Europe \(Milan\)
+Europe \(Paris\)
+Europe \(Stockholm\)
+Middle East \(Bahrain\)
+US East \(Ohio\)
+
+### Remediation<a name="ec2-24-remediation"></a>
+
+For information about how to update an EC2 instance to a new instance type, see [Change the instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+## \[EC2\.27\] Running EC2 Instances should not use key pairs<a name="fsbp-ec2-27"></a>
+
+**Category:** Identify > Resource configuration
+
+**Severity:** High 
+
+**Resource type:**`AWS::EC2::Instance`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-no-amazon-key-pair.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-no-amazon-key-pair.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether running EC2 instances are using key pairs\. The control fails if a running EC2 instance uses a key pair\.
+
+As best practice, we recommend that you reduce the number of credentials in use whenever possible to minimize the risk of compromised credentials and unintended access\. EC2 instances without key pairs can still be accessed using AWS Systems Manager Session Manager or browser\-based SSH connection via [the AWS console](https://console.aws.amazon.com/console/home)\. You can also access EC2 instances with a password, but we do not recommend this because it involves credentials similar to key pairs\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="ec2-27-remediation"></a>
+
+To delete a key pair, see [Delete your public key on Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/delete-key-pair.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+## \[ECR\.1\] ECR private repositories should have image scanning configured<a name="fsbp-ecr-1"></a>
+
+**Category:** Identify > Vulnerability, patch, and version management
+
+**Severity:** High
+
+**Resource type:** `AWS::ECR::Repository`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-image-scanning-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-image-scanning-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether a private ECR repository has image scanning configured\. This control fails if a private ECR repository doesn't have image scanning configured\.
+
+ECR image scanning helps in identifying software vulnerabilities in your container images\. ECR uses the Common Vulnerabilities and Exposures \(CVEs\) database from the [open\-source Clair project ](https://github.com/quay/clair) and provides a list of scan findings\. Enabling image scanning on ECR repositories adds a layer of verification for the integrity and safety of the images being stored\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="ecr-1-remediation"></a>
+
+To configure image scanning for an ECR repository, see [Image scanning](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html) in the *Amazon Elastic Container Registry User Guide*\.
+
+## \[ECR\.2\] ECR private repositories should have tag immutability configured<a name="fsbp-ecr-2"></a>
+
+**Category:** Identify > Inventory > Tagging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ECR::Repository`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-tag-immutability-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/ecr-private-tag-immutability-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether a private ECR repository has tag immutability enabled\. This control fails if a private ECR repository has tag immutability disabled\. This rule passes if tag immutability is enabled and has the value `IMMUTABLE`\.
+
+Amazon ECR Tag Immutability enables customers to rely on the descriptive tags of an image as a reliable mechanism to track and uniquely identify images\. An immutable tag is static, which means each tag refers to a unique image\. This improves reliability and scalability as the use of a static tag will always result in the same image being deployed\. When configured, tag immutability prevents the tags from being overridden, which reduces the attack surface\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="ecr-1-remediation"></a>
+
+To configure image scanning for an ECR repository, see [Image scanning](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html) in the *Amazon Elastic Container Registry User Guide*\.
+
 ## \[ECR\.3\] ECR repositories should have at least one lifecycle policy configured<a name="fsbp-ecr-3"></a>
 
 **Category:** Identify > Resource configuration
@@ -1972,6 +2302,194 @@ This control is not supported in the Asia Pacific \(Osaka\) Region\.
 
 To disable automatic public IP assignment, see [To configure VPC and security group settings for your service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-configure-network.html) in the *Amazon Elastic Container Service Developer Guide*\.
 
+## \[ECS\.3\] ECS task definitions should not share the host's process namespace<a name="fsbp-ecs-3"></a>
+
+**Category:** Identify > Resource configuration
+
+**Severity:** High
+
+**Resource type:** `AWS::ECS::TaskDefinition`
+
+**AWS Configrule:** [ecs\-task\-definition\-pid\-mode\-check](https://docs.aws.amazon.com/config/latest/developerguide/ecs-task-definition-pid-mode-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon ECS task definitions are configured to share a host’s process namespace with its containers\. The control fails if the task definition shares the host's process namespace with the containers running on it\.
+
+A process ID \(PID\) namespace provides separation between processes\. It prevents system processes from being visible, and allows PIDs to be reused, including PID 1\. If the host’s PID namespace is shared with containers, it would allow containers to see all of the processes on the host system\. This reduces the benefit of process level isolation between the host and the containers\. These circumstances could lead to unauthorized access to processes on the host itself, including the ability to manipulate and terminate them\. Customers shouldn’t share the host’s process namespace with containers running on it\.
+
+### Remediation<a name="ecs-3-remediation"></a>
+
+To configure the `pidMode` on a task definition, see [Task definition parameters](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode) in the Amazon Elastic Container Service Developer Guide\.
+
+## \[ECS\.4\] ECS containers should run as non\-privileged<a name="fsbp-ecs-4"></a>
+
+**Category:** Protect > Secure access management > Root user access restrictions
+
+**Severity:** High
+
+**Resource type:** `AWS::ECS::TaskDefinition`
+
+**AWS Configrule:** [ecs\-containers\-nonprivileged](https://docs.aws.amazon.com/config/latest/developerguide/ecs-containers-nonprivileged.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if the `privileged` parameter in the container definition of Amazon ECS Task Definitions is set to `true`\. The control fails if this parameter is equal to `true`\.
+
+We recommend that you remove elevated privileges from your ECS task definitions\. When the privilege parameter is `true`, the container is given elevated privileges on the host container instance \(similar to the root user\)\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="ecs-4-remediation"></a>
+
+To configure the `privileged` parameter on a task definition, see [Advanced container definition parameters](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_security) in the Amazon Elastic Container Service Developer Guide\.
+
+## \[ECS\.5\] ECS containers should be limited to read\-only access to root filesystems<a name="fsbp-ecs-5"></a>
+
+**Category:** Protect > Secure access management
+
+**Severity:** High
+
+**Resource type:** `AWS::ECS::TaskDefinition`
+
+**AWS Configrule:** [ecs\-containers\-readonly\-access](https://docs.aws.amazon.com/config/latest/developerguide/ecs-containers-readonly-access.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if ECS containers are limited to read\-only access to mounted root filesystems\. This control fails if the `ReadonlyRootFilesystem` parameter in the container definition of ECS task definitions is set to `false`\. 
+
+Enabling this option reduces security attack vectors since the container instance’s filesystem cannot be tampered with or written to unless it has explicit read\-write permissions on its filesystem folder and directories\. This control also adheres to the principle of least privilege\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="ecs-5-remediation"></a>
+
+**To edit container definitions to run as non\-privileged**
+
+1. Open the Amazon ECS console at [https://console\.aws\.amazon\.com/ecs/](https://console.aws.amazon.com/ecs/)\.
+
+1. In the left navigation pane, choose **Task Definitions**\.
+
+1. For each task definition that has container definitions that need to be updated, do the following:
+   + Select the container definition that needs to be updated\.
+   + Choose **Edit Container**\. For **Storage and Logging**, select **Read only root file system**\.
+   + Choose **Update** at the bottom of the **Edit Container** tab\.
+   + Choose **Create**\.
+
+## \[ECS\.8\] Secrets should not be passed as container environment variables<a name="fsbp-ecs-8"></a>
+
+**Category:** Protect > Secure development > Credentials not hard\-coded
+
+**Severity:** High
+
+**Resource type:** `AWS::ECS::TaskDefinition`
+
+**AWS Configrule:** [ecs\-no\-environment\-secrets](https://docs.aws.amazon.com/config/latest/developerguide/ecs-no-environment-secrets.html) 
+
+**Schedule type:** Change triggered
+
+**Parameters:** 
++  secretKeys = `AWS_ACCESS_KEY_ID`,`AWS_SECRET_ACCESS_KEY`,`ECS_ENGINE_AUTH_DATA` 
+
+This control checks if the key value of any variables in the `environment` parameter of container definitions includes `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `ECS_ENGINE_AUTH_DATA`\. This control fails if a single environment variable in any container definition equals `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `ECS_ENGINE_AUTH_DATA`\. This control does not cover environmental variables passed in from other locations such as Amazon S3\. 
+
+AWS Systems Manager Parameter Store can help you improve the security posture of your organization\. We recommend using the Parameter Store to store secrets and credentials instead of directing passing them into your container instances or hard coding them into your code\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="ecs-8-remediation"></a>
+
+To create parameters using SSM, see [Creating Systems Manager parameters](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html) in the *AWS Systems Manager User Guide*\. For more information about creating a task definition that specifies a secret, see [Specifying sensitive data using Secrets Manager](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-create-taskdefinition) in the *Amazon Elastic Container Service Developer Guide*\.
+
+## \[ECS\.10\] Fargate services should run on the latest Fargate platform version<a name="fsbp-ecs-10"></a>
+
+**Category:** Identify > Vulnerability, patch, and version management
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ECS::Service`
+
+**AWS Configrule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecs-fargate-latest-platform-version.html](https://docs.aws.amazon.com/config/latest/developerguide/ecs-fargate-latest-platform-version.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if ECS Fargate services are running the latest Fargate platform version\. This control fails if the platform version is not the latest\.
+
+AWS Fargate platform versions refer to a specific runtime environment for Fargate task infrastructure, which is a combination of kernel and container runtime versions\. New platform versions are released as the runtime environment evolves\. For example, a new version may be released for kernel or operating system updates, new features, bug fixes, or security updates\. Security updates and patches are deployed automatically for your Fargate tasks\. If a security issue is found that affects a platform version, AWS patches the platform version\. 
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="ecs-10-remediation"></a>
+
+To update an existing service, including its platform version, see [Updating a service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html) in the *Amazon Elastic Container Service Developer Guide*\.
+
+## \[ECS\.12\] ECS clusters should have Container Insights enabled<a name="fsbp-ecs-12"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ECS::Cluster`
+
+**AWS Configrule:** [https://docs.aws.amazon.com/config/latest/developerguide/ecs-container-insights-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/ecs-container-insights-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if ECS clusters use Container Insights\. This control fails if Container Insights are not set up for a cluster\.
+
+Monitoring is an important part of maintaining the reliability, availability, and performance of Amazon ECS clusters\. Use CloudWatch Container Insights to collect, aggregate, and summarize metrics and logs from your containerized applications and microservices\. CloudWatch automatically collects metrics for many resources, such as CPU, memory, disk, and network\. Container Insights also provides diagnostic information, such as container restart failures, to help you isolate issues and resolve them quickly\. You can also set CloudWatch alarms on metrics that Container Insights collects\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Milan\)
+
+### Remediation<a name="ecs-12-remediation"></a>
+
+To use Container Insights, see [Updating a service](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS.html) in the *Amazon CloudWatch User Guide*\.
+
 ## \[EFS\.1\] Amazon EFS should be configured to encrypt file data at rest using AWS KMS<a name="fsbp-efs-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data at rest
@@ -2045,6 +2563,97 @@ To remediate this issue, update your file system to enable automatic backups\.
 1. Choose **Save changes**\.
 
 To learn more, visit [Using AWS Backup with Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html) in the *Amazon Elastic File System User Guide*\.
+
+## \[EFS\.3\] EFS access points should enforce a root directory<a name="fsbp-efs-3"></a>
+
+**Category:** Protect > Secure access management
+
+**Severity:** Medium
+
+**Resource type:** `AWS::EFS::AccessPoint`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/efs-access-point-enforce-root-directory.html](https://docs.aws.amazon.com/config/latest/developerguide/efs-access-point-enforce-root-directory.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon EFS access points are configured to enforce a root directory\. The control fails if the value of `Path` is set to `/` \(the default root directory of the file system\)\.
+
+When you enforce a root directory, the NFS client using the access point uses the root directory configured on the access point instead of the file system's root directory\. Enforcing a root directory for an access point helps restrict data access by ensuring that users of the access point can only reach files of the specified subdirectory\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="efs-3-remediation"></a>
+
+For instructions on how to enforce a root directory for an EFS access point, see [Enforcing a root directory with an access point](https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html#enforce-root-directory-access-point) in the *Amazon Elastic File System User Guide*\. 
+
+## \[EFS\.4\] EFS access points should enforce a user identity<a name="fsbp-efs-4"></a>
+
+**Category:** Protect > Secure access management
+
+**Severity:** Medium
+
+**Resource type:** `AWS::EFS::AccessPoint`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/efs-access-point-enforce-user-identity.html](https://docs.aws.amazon.com/config/latest/developerguide/efs-access-point-enforce-user-identity.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether Amazon EFS access points are configured to enforce a user identity\. This control fails if a POXIS user identity is not defined while creating the EFS access point\.
+
+Amazon EFS access points are application\-specific entry points into an EFS file system that make it easier to manage application access to shared datasets\. Access points can enforce a user identity, including the user's POSIX groups, for all file system requests that are made through the access point\. Access points can also enforce a different root directory for the file system so that clients can only access data in the specified directory or its subdirectories\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="efs-4-remediation"></a>
+
+To enforce a user identity for an EFS access point, see [Enforcing a user identity using an access point](https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html#enforce-identity-access-points) in the *Amazon Elastic File System User Guide*\. 
+
+## \[EKS\.2\] EKS clusters should run on a supported Kubernetes version<a name="fsbp-eks-2"></a>
+
+**Category:** Identify > Vulnerability, patch, and version management
+
+**Severity:** High
+
+**Resource type:** `AWS::EKS::Cluster`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/eks-cluster-supported-version.html](https://docs.aws.amazon.com/config/latest/developerguide/eks-cluster-supported-version.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ `eks:oldestVersionSupported` \(Current oldest supported version is 1\.19\)
+
+This control checks whether an Amazon EKS cluster is running on a supported Kubernetes version\. The control fails if the EKS cluster is running on an unsupported version\.
+
+If your application doesn't require a specific version of Kubernetes, we recommend that you use the latest available Kubernetes version that's supported by EKS for your clusters\. For more information about supported Kubernetes versions for Amazon EKS, see [Amazon EKS Kubernetes release calendar](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar) and [Amazon EKS version support and FAQ](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#version-deprecation)/para> in the **Amazon EKS User Guide**\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="eks-2-remediation"></a>
+
+To update an EKS cluster, [Updating an Amazon EKS cluster Kubernetes version](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html)/para> in the **Amazon EKS User Guide**\. 
 
 ## \[ElasticBeanstalk\.1\] Elastic Beanstalk environments should have enhanced health reporting enabled<a name="fsbp-elasticbeanstalk-1"></a>
 
@@ -2419,6 +3028,97 @@ China \(Ningxia\)
 
  For information on how to add Availability Zones to a Classic Load Balancer, see [Add or remove Availability Zones](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html) in the *User Guide for Classic Load Balancers*\. 
 
+## \[ELB\.12\] Application Load Balancers should be configured with defensive or strictest desync mitigation mode<a name="fsbp-elb-12"></a>
+
+**Category:** Data protect > Data integrity 
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-desync-mode-check.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-desync-mode-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ desyncMode: defensive, strictest
+
+This control checks whether an Application Load Balancer is configured with defensive or strictest desync mitigation mode\. The control fails if an Application Load Balancer is not configured with defensive or strictest desync mitigation mode\.
+
+HTTP Desync issues can lead to request smuggling and make applications vulnerable to request queue or cache poisoning\. In turn, these vulnerabilities can lead to credential hijacking or execution of unauthorized commands\. Application Load Balancers configured with defensive or strictest desync mitigation mode protect your application from security issues that may be caused by HTTP Desync\. 
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="elb-12-remediation"></a>
+
+To update desync mitigation mode of an Application Load Balancer, see [Desync mitigation mode](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#desync-mitigation-mode) in the *User Guide for Application Load Balancers*\. 
+
+## \[ELB\.13\] Application, Network, and Gateway Load Balancers should span multiple Availability Zones<a name="fsbp-elb-13"></a>
+
+**Category:** Recover > Resilience > High availability 
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ElasticLoadBalancingV2::LoadBalancer`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elbv2-multiple-az.html](https://docs.aws.amazon.com/config/latest/developerguide/elbv2-multiple-az.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an Elastic Load Balancer V2 \(Application, Network, or Gateway Load Balancer\) has registered instances from multiple Availability Zones\. The control fails if an Elastic Load Balancer V2 has instances registered in fewer than two Availability Zones\.
+
+Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones\. Elastic Load Balancing scales your load balancer as your incoming traffic changes over time\. It is recommended to configure at least two availability zones to ensure availability of services, as the Elastic Load Balancer will be able to direct traffic to another availability zone if one becomes unavailable\. Having multiple availability zones configured will help eliminate having a single point of failure for the application\. 
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="elb-13-remediation"></a>
+
+To add an Availability Zone to an Application Load Balancer, see [Availability Zones for your Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-subnets.html) in the *User Guide for Application Load Balancers*\. To add an Availability Zone to an Network Load Balancer, see [Network Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#availability-zones) in the *User Guide for Network Load Balancers*\. To add an Availability Zone to a Gateway Load Balancer, see [Create a Gateway Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/create-load-balancer.html) in the *User Guide for Gateway Load Balancers*\. 
+
+## \[ELB\.14\] Classic Load Balancers should be configured with defensive or strictest desync mitigation mode<a name="fsbp-elb-14"></a>
+
+**Category:** Data Protect > Data Integrity
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/clb-desync-mode-check.html](https://docs.aws.amazon.com/config/latest/developerguide/clb-desync-mode-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ `desyncMode`
+
+This control checks whether a Classic Load Balancer is configured with defensive or strictest desync mitigation mode\. This control will fail if the Application Load Balancer is not configured with defensive or strictest desync mitigation mode\.
+
+HTTP Desync issues can lead to request smuggling and make applications vulnerable to request queue or cache poisoning\. In turn, these vulnerabilities can lead to credential hijacking or execution of unauthorized commands\. Classic Load Balancers configured with defensive or strictest desync mitigation mode protect your application from security issues that may be caused by HTTP Desync\. 
+
+**Note**  
+This control is not supported in the following Regions:  
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="elb-14-remediation"></a>
+
+To update desync mitigation mode of a Classic Load Balancer, see [Modify desync mitigation mode](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-desync-mitigation-mode.html#update-desync-mitigation-mode) in the *User Guide for Classic Load Balancers*\. 
+
 ## \[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS<a name="fsbp-elbv2-1"></a>
 
 **Category:** Protect > Data protection > Encryption of data in transit
@@ -2666,7 +3366,7 @@ An Elasticsearch domain requires at least three data nodes for high availability
 
 1. Choose **Edit domain**\.
 
-1. Under **Data nodes**, set **Number of nodes** to a number greater than or equal to three\.
+1. Under **Data nodes**, set **Number of nodes** to a number greater than or equal to `3`\.
 
    For three Availability Zone deployments, set to a multiple of three to ensure equal distribution across Availability Zones\.
 
@@ -2787,21 +3487,7 @@ You should remove IAM policies that have a statement with `"Effect": "Allow" `wi
 
 ### Remediation<a name="iam-1-remediation"></a>
 
-To remediate this issue, update your IAM policies so that they do not allow full "\*" administrative privileges\.
-
-**To modify an IAM policy**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Policies**\.
-
-1. Choose the button next to the policy to remove\.
-
-1. From **Policy actions**, choose **Detach**\.
-
-1. For each user to detach the policy from, choose the button next to the user, then choose **Detach policy**\.
-
-Confirm that the user that you detached the policy from can still access AWS services and resources as expected\.
+To modify your IAM policies so that they do not allow full "\*" administrative privileges, see [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\.
 
 ## \[IAM\.2\] IAM users should not have IAM policies attached<a name="fsbp-iam-2"></a>
 
@@ -2826,47 +3512,7 @@ IAM users created by Amazon Simple Email Service are automatically created using
 
 ### Remediation<a name="iam-2-remediation"></a>
 
-To resolve this issue, create an IAM group, assign the policy to the group, and then add the users to the group\. The policy is applied to each user in the group\.
-
-**To create an IAM group**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Groups** and then choose **Create New Group**\.
-
-1. Enter a name for the group to create and then choose **Next Step**\.
-
-1. Select each policy to assign to the group and then choose **Next Step**\. The policies that you choose should include any policies currently attached directly to a user account\.
-
-1. Add users to a group and then assign the policies to that group\. Each user in the group is then assigned the policies that are assigned to the group\.
-
-1. Confirm the details on the **Review** page and then choose **Create Group**\.
-
-For more information about creating groups, see [Creating IAM groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html) in the *IAM User Guide*\.
-
-**To add users to an IAM group**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Groups**\.
-
-1. Choose **Group Actions** and then choose **Add Users to Group**\.
-
-1. Select the users to add to the group and then choose **Add Users**\.
-
-For more information about adding users to groups, see [Adding and removing users in an IAM group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html) in the *IAM User Guide*\.
-
-**To remove a policy attached directly to a user**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Users**\.
-
-1. For the user to detach a policy from, choose the name in the **User name** column\.
-
-1. For each policy listed under **Attached directly**, choose the **X** on the right side of the page to remove the policy from the user and then choose **Remove**\.
-
-1. Confirm that the user can still use AWS services as expected\.
+To resolve this issue, [create an IAM group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html), and attach the policy to the group\. Then, [add the users to the group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\. The policy is applied to each user in the group\. To remove a policy attached directly to a user, see [Deleting IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-delete.html) in the *IAM User Guide*\.
 
 ## \[IAM\.3\] IAM users' access keys should be rotated every 90 days or less<a name="fsbp-iam-3"></a>
 
@@ -3217,9 +3863,36 @@ AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="iam-21-remediation"></a>
 
-To remediate this issue, update your IAM policies so that they do not allow full "\*" administrative privileges\.
+To remediate this issue, update your IAM policies so that they do not allow full "\*" administrative privileges\. For details about how to edit an IAM policy, see [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\.
 
-For details on how to edit an IAM policy, see [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\.
+## \[Kinesis\.1\] Kinesis Data Streams should be encrypted at rest<a name="fsbp-kinesis-1"></a>
+
+**Category:** Protect > Data protection > Encryption of data at rest
+
+**Severity:** Medium
+
+**Resource type:** `AWS::Kinesis::Stream`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/kinesis-stream-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/kinesis-stream-encrypted.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None 
+
+This control checks if Kinesis Data Streams are encrypted at rest with server\-side encryption\. This control fails if a Kinesis stream is not encrypted at rest with server\-side encryption\.
+
+Server\-side encryption is a feature in Amazon Kinesis Data Streams that automatically encrypts data before it's at rest by using an AWS KMS key\. Data is encrypted before it's written to the Kinesis stream storage layer, and decrypted after it’s retrieved from storage\. As a result, your data is encrypted at rest within the Amazon Kinesis Data Streams service\.
+
+**Note**  
+This control is not supported in the following Regions:  
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="kinesis-1-remediation"></a>
+
+For information about enabling server\-side encryption for Kinesis streams, see [How Do I Get Started with Server\-Side Encryption?](https://docs.aws.amazon.com/streams/latest/dev/getting-started-with-sse.html) in the *Amazon Kinesis Developer Guide*\.
 
 ## \[KMS\.1\] IAM customer managed policies should not allow decryption and re\-encryption actions on all KMS keys<a name="fsbp-kms-1"></a>
 
@@ -3433,9 +4106,9 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 **Schedule type:** Change triggered
 
 **Parameters:** 
-+ `runtime`: `nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, python3.6, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnet6`
++ `runtime`: `nodejs16.x, nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, python3.6, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnet6`
 
-This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks function settings for the following runtimes: `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, and `dotnet6`\.
+This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks function settings for the following runtimes: `nodejs16.x`, `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, and `dotnet6`\.
 
 The AWS Config rule ignores functions that have a package type of `Image`\.
 
@@ -3490,35 +4163,113 @@ The function execution role must have permissions to call `CreateNetworkInterfac
 
 1. Choose **Save**\.
 
-## \[NetworkFirewall\.6\] Stateless network firewall rule group should not be empty<a name="fsbp-networkfirewall-6"></a>
+## \[Network Firewall\.3\] Network Firewall policies should have at least one rule group associated<a name="fsbp-networkfirewall-3"></a>
 
 **Category:** Protect > Secure Network Configuration
 
 **Severity:** Medium
 
-**Resource type:** `AWS::NetworkFirewall::RuleGroup`
+**Resource type:** `AWS::NetworkFirewall::FirewallPolicy`
 
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/netfw-stateless-rule-group-not-empty.html](https://docs.aws.amazon.com/config/latest/developerguide/netfw-stateless-rule-group-not-empty.html)
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/netfw-policy-rule-group-associated.html](https://docs.aws.amazon.com/config/latest/developerguide/netfw-policy-rule-group-associated.html)
 
 **Schedule type:** Change triggered
 
 **Parameters:** None
 
-This control checks if a Stateless Network Firewall Rule Group contains rules\. The rule will fail if there are no rules in a Stateless Network Firewall Rule Group\.
+This control checks whether a Network Firewall policy has any stateful or stateless rule groups associated\. The control fails if stateless or stateful rule groups are not assigned\.
 
-A rule group contains rules that define how your firewall processes traffic in your VPC\. An empty stateless rule group when present in a firewall policy might give the impression that the rule group will process traffic\. However, when the stateless rule group is empty, it does not process traffic\.
+A firewall policy defines how your firewall monitors and handles traffic in the Amazon VPC \(Virtual Private Cloud\)\. Configuration of stateless and stateful rule groups helps to filter packets and traffic flows, and defines default traffic handling\.
 
-### Remediation<a name="networkfirewall-6-remediation"></a>
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
 
-**To update rule group and add a rule through console:**
+### Remediation<a name="networkfirewall-3-remediation"></a>
 
-1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)
+To add a rule group to a Network Firewall policy, see [Updating a firewall policy](https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policy-updating.html) in the *AWS Network Firewall Developer Guide*\. For information about creating and managing rule groups, see [Rule groups in AWS Network Firewall](https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups.html)\.
 
-1. In the navigation pane, under **Network Firewall**, choose **Network Firewall rule groups**\.
+## \[NetworkFirewall\.4\] The default stateless action for Network Firewall policies should be drop or forward for full packets<a name="fsbp-networkfirewall-4"></a>
 
-1. In the **Network Firewall rule groups** page, choose the name of the firewall rule group that you want to edit\. This takes you to the firewall rule groups details page\. 
+**Category:** Protect > Secure Network Configuration
 
-1. For stateless rule groups, choose **Edit Rules** to add rules to the rule group\.
+**Severity:** Medium
+
+**Resource type:** `AWS::NetworkFirewall::FirewallPolicy`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/netfw-policy-default-action-full-packets.html](https://docs.aws.amazon.com/config/latest/developerguide/netfw-policy-default-action-full-packets.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ `statelessDefaultActions: aws:drop,aws:forward_to_sfe`
+
+This control checks whether the default stateless action for full packets for a Network Firewall policy is drop or forward\. The control passes if Drop or Forward is selected, and fails if Pass is selected\.
+
+A firewall policy defines how your firewall monitors and handles traffic in the VPC\. You configure stateless and stateful rule groups to filter packets and traffic flows\. Defaulting to Pass can allow unintended traffic\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="networkfirewall-4-remediation"></a>
+
+**To change the firewall policy:**
+
+1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+1. In the navigation pane, under **Network Firewall**, choose **Firewall policies**\.
+
+1. Select the name of the firewall policy that you want to edit\. This takes you to the firewall policy’s details page\.
+
+1. In **Stateless Default Actions**, choose **Edit**\. Then choose **Drop** or **Forward to stateful rule groups** as the **Default actions for full packets**\.
+
+## \[NetworkFirewall\.5\] The default stateless action for Network Firewall policies should be drop or forward for fragmented packets<a name="fsbp-networkfirewall-5"></a>
+
+**Category:** Protect > Secure Network Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::NetworkFirewall::FirewallPolicy`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/netfw-policy-default-action-fragment-packets.html](https://docs.aws.amazon.com/config/latest/developerguide/netfw-policy-default-action-fragment-packets.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:**
++ `statelessFragDefaultActions (Required) : aws:drop, aws:forward_to_sfe`
+
+This control checks whether the default stateless action for fragmented packets for a Network Firewall policy is drop or forward\. The control passes if Drop or Forward is selected, and fails if Pass is selected\.
+
+A firewall policy defines how your firewall monitors and handles traffic in the VPC\. You configure stateless and stateful rule groups to filter packets and traffic flows\. Defaulting to Pass can allow unintended traffic\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="networkfirewall-5-remediation"></a>
+
+**To change the firewall policy:**
+
+1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+1. In the navigation pane, under **Network Firewall**, choose **Firewall policies**\.
+
+1. Select the name of the firewall policy that you want to edit\. This takes you to the firewall policy’s details page\.
+
+1. In **Stateless Default Actions**, choose **Edit**\. Then choose **Drop** or **Forward to stateful rule groups** as the **Default actions for fragmented packets**\.
 
 ## \[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled<a name="fsbp-opensearch-1"></a>
 
@@ -3548,7 +4299,7 @@ For information about creating domains, see [Creating and managing Amazon OpenSe
 
 Encryption of data at rest requires Amazon OpenSearch 1\.0 or later\. For more information about encrypting data at rest for Amazon OpenSearch, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the Amazon OpenSearch Service Developer Guide\.
 
-## \[OpenSearch\.2\] OpenSearch should be in a VPC<a name="fsbp-opensearch-2"></a>
+## \[OpenSearch\.2\] OpenSearch domains should be in a VPC<a name="fsbp-opensearch-2"></a>
 
 **Category:** Protect > Secure network configuration > Resources within VPC
 
@@ -3674,9 +4425,42 @@ An OpenSearch domain requires at least three data nodes for high availability an
 
 1. Under **My domains**, choose the name of the domain to edit, and choose **Edit**\.
 
-1. Under **Data nodes** set **Number of nodes** to a number greater than three\. If you are deploying to three Availability Zone, set the number to a multiple of three to ensure equal distribution across Availability Zones\. 
+1. Under **Data nodes** set **Number of nodes** to a number greater than `3`\. If you are deploying to three Availability Zone, set the number to a multiple of three to ensure equal distribution across Availability Zones\. 
 
 1. Choose **Submit**\.
+
+## \[OpenSearch\.7\] OpenSearch domains should have fine\-grained access control enabled<a name="fsbp-opensearch-7"></a>
+
+**Category:** Protect > Secure Access Management > Sensitive API actions restricted
+
+**Severity:** High
+
+**Resource type:** `AWS::OpenSearch::Domain`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/opensearch-access-control-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/opensearch-access-control-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether OpenSearch domains have fine\-grained access control enabled\. The control fails if the fine\-grained access control is not enabled\. Fine\-grained access control requires `advanced-security-options`in the OpenSearch parameter `update-domain-config` to be enabled\.
+
+Fine\-grained access control offers additional ways of controlling access to your data on Amazon OpenSearch Service\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Africa \(Cape Town\)
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+Europe \(Milan\)
+
+### Remediation<a name="opensearch-7-remediation"></a>
+
+To enable fine\-grained access control, see [Fine\-grained access control in Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[OpenSearch\.8\] Connections to OpenSearch domains should be encrypted using TLS 1\.2<a name="fsbp-opensearch-8"></a>
 
@@ -3706,7 +4490,7 @@ To enable TLS encryption, use the [UpdateDomainConfig](https://docs.aws.amazon.c
 
 **Severity:** Critical
 
-**Resource type:** `AWS::RDS::DBSnapshot`
+**Resource type:** `AWS::RDS::DBSnapshot`, `AWS::RDS::DBClusterSnapshot`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-snapshots-public-prohibited.html)
 
@@ -3714,9 +4498,7 @@ To enable TLS encryption, use the [UpdateDomainConfig](https://docs.aws.amazon.c
 
 **Parameters:** None
 
-This control checks whether Amazon RDS snapshots are public\.
-
-This control is intended for RDS instances\. It can also return findings for snapshots of Aurora DB instances, Neptune DB instances, and Amazon DocumentDB clusters, even though they are not evaluated for public accessibility\. If these findings are not useful, you can suppress them\.
+This control checks whether Amazon RDS snapshots are public\. The control fails if RDS snapshots are public\. This control evaluates RDS instances, Aurora DB instances, Neptune DB instances, and Amazon DocumentDB clusters\.
 
 RDS snapshots are used to back up the data on your RDS instances at a specific point in time\. They can be used to restore previous states of RDS instances\.
 
@@ -4212,7 +4994,7 @@ To remediate this issue, update your DB instance to enable IAM authentication\.
 **Parameters:** 
 + `backupRetentionMinimum:` 7
 
-This control checks whether Amazon Relational Database Service instances have automated backups enabled and the backup retention period is greater than or equal to 7 days\. The control fails if backups are not enabled, and if the retention period is less than 7 days\.
+This control checks whether Amazon Relational Database Service instances have automated backups enabled and the backup retention period is greater than or equal to seven days\. The control fails if backups are not enabled, and if the retention period is less than 7 days\.
 
 Backups help you more quickly recover from a security incident and strengthens the resilience of your systems\. Amazon RDS provides an easy way to configure daily full instance volume snapshots\. For more details on Amazon RDS automated backups, see [Working with Backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html) in the Amazon RDS User Guide\.
 
@@ -5028,13 +5810,43 @@ For detailed remediation instructions, see [Enabling enhanced VPC routing](https
 
 **Parameters:** None
 
-: This control checks whether a Amazon Redshift cluster has changed the admin username from its default value\. This control will fail if the admin username for a Redshift cluster is set to `awsuser`\.
+This control checks whether an Amazon Redshift cluster has changed the admin username from its default value\. This control will fail if the admin username for a Redshift cluster is set to `awsuser`\.
 
 When creating a Redshift cluster, you should change the default admin username to a unique value\. Default usernames are public knowledge and should be changed upon configuration\. Changing the default usernames reduces the risk of unintended access\.
 
 ### Remediation<a name="redshift-8-remediation"></a>
 
-You cannot change the admin username for your Amazon Redshift cluster after it is created\. To create a new cluster, follow the instructions [here](https://docs.aws.amazon.com/redshift/latest/gsg/rs-gsg-prereq.html)\.
+You can't change the admin username for your Amazon Redshift cluster after it is created\. To create a new cluster, follow the instructions [here](https://docs.aws.amazon.com/redshift/latest/gsg/rs-gsg-prereq.html)\.
+
+## \[Redshift\.9\] Redshift clusters should not use the default database name<a name="fsbp-redshift-9"></a>
+
+**Category:** Identify > Resource Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::Redshift::Cluster`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-default-db-name-check.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-default-db-name-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an Amazon Redshift cluster has changed the database name from its default value\. The control will fail if the database name for a Redshift cluster is set to `dev`\.
+
+When creating a Redshift cluster, you should change the default database name to a unique value\. Default names are public knowledge and should be changed upon configuration\. As an example, a well\-known name could lead to inadvertent access if it was used in IAM policy conditions\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="redshift-9-remediation"></a>
+
+You can't change the database name for your Amazon Redshift cluster after it is created\. For instructions on creating a new cluster, see [Getting started with Amazon Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html) in the * Amazon Redshift Getting Started Guide*\.
 
 ## \[S3\.1\] S3 Block Public Access setting should be enabled<a name="fsbp-s3-1"></a>
 
@@ -5447,7 +6259,7 @@ China \(Ningxia\)
 
 ### Remediation<a name="s3-11-remediation"></a>
 
-For more information on detecting changes to S3 buckets and objects, see [Amazon S3 Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html) in the *Amazon S3 User Guide*\.
+For information about detecting changes to S3 buckets and objects, see [Amazon S3 Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html) in the *Amazon S3 User Guide*\.
 
 ## \[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets<a name="fsbp-s3-12"></a>
 
@@ -5478,6 +6290,36 @@ China \(Ningxia\)
 ### Remediation<a name="s3-12-remediation"></a>
 
 For more information on managing access to S3 buckets, see [Bucket policies and user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-iam-policies.html)in the *Amazon S3 User Guide*\. For details on how to review your current ACL permissions, see [Access control list \(ACL\) overview](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html) in the *Amazon S3 User Guide*\.
+
+## \[S3\.13\] S3 buckets should have lifecycle policies configured<a name="fsbp-s3-13"></a>
+
+**Category:** Protect > Data protection 
+
+**Severity:** Low
+
+**Resource type:** `AWS::S3::Bucket`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-lifecycle-policy-check.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-lifecycle-policy-check.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if a lifecycle policy is configured for an Amazon S3 bucket\. This control fails if a lifecycle policy is not configured for an S3 bucket\.
+
+Configuring lifecycle rules on your S3 bucket defines actions that you want S3 to take during an object's lifetime\. For example, you can transition objects to another storage class, archive them, or delete them after a specified period of time\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="s3-13-remediation"></a>
+
+For information about configuring lifecycle policies on an Amazon S3 bucket, see [Setting lifecycle configuration on a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/how-to-set-lifecycle-configuration-intro.html) and see [Managing your storage lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)in the *Amazon S3 User Guide*\.
 
 ## \[SageMaker\.1\] SageMaker notebook instances should not have direct internet access<a name="fsbp-sagemaker-1"></a>
 
@@ -5745,6 +6587,39 @@ To remediate this issue, update your SNS topic to enable encryption\.
 1. Choose the KMS key to use to encrypt the topic\.
 
 1. Choose **Save changes**\.
+
+## \[SNS\.2\] Logging of delivery status should be enabled for notification messages sent to a topic<a name="fsbp-sns-2"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::SNS::Topic`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-message-delivery-notification-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-message-delivery-notification-enabled.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether logging is enabled for the delivery status of notification messages sent to an Amazon SNS topic for the endpoints\. This control fails if the delivery status notification for messages is not enabled\.
+
+Logging is an important part of maintaining the reliability, availability, and performance of services\. Logging message delivery status helps provide operational insights, such as the following:
++ Knowing whether a message was delivered to the Amazon SNS endpoint\.
++ Identifying the response sent from the Amazon SNS endpoint to Amazon SNS\.
++ Determining the message dwell time \(the time between the publish timestamp and the hand off to an Amazon SNS endpoint\)\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="sns-2-remediation"></a>
+
+To configure delivery status logging for a topic, see [Amazon SNS message delivery status](https://docs.aws.amazon.com/sns/latest/dg/sns-topic-attributes.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 ## \[SQS\.1\] Amazon SQS queues should be encrypted at rest<a name="fsbp-sqs-1"></a>
 
@@ -6018,3 +6893,201 @@ You can enable logging for a web ACL from the Kinesis Data Firehose console\.
 1. Choose the Kinesis Data Firehose delivery stream that you created earlier\. You must choose a delivery stream that has a name that begins with `aws-waf-logs`\-\.
 
 1. Choose **Enable logging**\.
+
+## \[WAF\.2\] A WAF Regional rule should have at least one condition<a name="fsbp-waf-2"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::WAFRegional::Rule`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/waf-regional-rule-not-empty.html](https://docs.aws.amazon.com/config/latest/developerguide/waf-regional-rule-not-empty.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an AWS WAF Regional rule has at least one condition\. The control fails if no conditions are present within a rule\.
+
+A WAF Regional rule can contain multiple conditions\. The rule's conditions allow for traffic inspection and take a defined action \(allow, block, or count\)\. Without any conditions, the traffic passes without inspection\. A WAF Regional rule with no conditions, but with a name or tag suggesting allow, block, or count, could lead to the wrong assumption that one of those actions is occurring\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="waf-2-remediation"></a>
+
+To add a condition to an empty rule, see [Adding and removing conditions in a rule](https://docs.aws.amazon.com/waf/latest/developerguide/classic-web-acl-rules-editing.html) in the *AWS WAF Developer Guide*\.
+
+## \[WAF\.3\] A WAF Regional rule group should have at least one rule<a name="fsbp-waf-3"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::WAFRegional::RuleGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/waf-regional-rulegroup-not-empty.html](https://docs.aws.amazon.com/config/latest/developerguide/waf-regional-rulegroup-not-empty.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an AWS WAF Regional rule group has at least one rule\. The control fails if no rules are present within a rule group\.
+
+A WAF Regional rule group can contain multiple rules\. The rule's conditions allow for traffic inspection and take a defined action \(allow, block, or count\)\. Without any rules, the traffic passes without inspection\. A WAF Regional rule group with no rules, but with a name or tag suggesting allow, block, or count, could lead to the wrong assumption that one of those actions is occurring\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="waf-3-remediation"></a>
+
+To add rules and rule conditions to an empty rule group, see [Adding and deleting rules from an AWS WAF Classic rule group](https://docs.aws.amazon.com/waf/latest/developerguide/classic-rule-group-editing.html) and [Adding and removing conditions in a rule](https://docs.aws.amazon.com/waf/latest/developerguide/classic-web-acl-rules-editing.html) in the *AWS WAF Developer Guide*\.
+
+## \[WAF\.4\] A WAF Classic Regional web ACL should have at least one rule or rule group<a name="fsbp-waf-4"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::WAFRegional::WebACL`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/waf-regional-webacl-not-empty](https://docs.aws.amazon.com/config/latest/developerguide/waf-regional-webacl-not-empty)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an AWS WAF Classic Regional web ACL contains any WAF rules or WAF rule groups\. This control fails if a web ACL does not contain any WAF rules or rule groups\.
+
+A WAF Regional web ACL can contain a collection of rules and rule groups that inspect and control web requests\. If a web ACL is empty, the web traffic can pass without being detected or acted upon by WAF depending on the default action\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="waf-4-remediation"></a>
+
+**To add rules or rule groups to an empty web ACL**
+
+1. Open the AWS WAF console at [https://console\.aws\.amazon\.com/wafv2/](https://console.aws.amazon.com/wafv2/)\. 
+
+1. In the navigation pane, choose **Switch to AWS WAF Classic**, and then choose **Web ACLs**\.
+
+1. For **Filter**, choose the Region where the empty web ACL is located\.
+
+1. Choose the name of the empty web ACL\.
+
+1. Choose **Rules**, and then choose **Edit web ACL**\.
+
+1. For **Rules**, choose a rule or rule group, and then choose **Add rule to web ACL**\.
+
+1. At this point, you can modify the rule order within the web ACL if you are adding multiple rules or rule groups to the web ACL\.
+
+1. Choose **Update**\.
+
+## \[WAF\.6\] A WAF global rule should have at least one condition<a name="fsbp-waf-6"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::WAF::Rule`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/waf-global-rule-not-empty.html](https://docs.aws.amazon.com/config/latest/developerguide/waf-global-rule-not-empty.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an AWS WAF global rule contains any conditions\. The control fails if no conditions are present within a rule\.
+
+A WAF global rule can contain multiple conditions\. A rule’s conditions allow for traffic inspection and take a defined action \(allow, block, or count\)\. Without any conditions, the traffic passes without inspection\. A WAF global rule with no conditions, but with a name or tag suggesting allow, block, or count, could lead to the wrong assumption that one of those actions is occurring\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\.
+
+### Remediation<a name="waf-6-remediation"></a>
+
+For instructions on creating a rule and adding conditions, see [Creating a rule and adding conditions](https://docs.aws.amazon.com/waf/latest/developerguide/classic-web-acl-rules-creating.html) in the *AWS WAF Developer Guide*\.
+
+## \[WAF\.7\] A WAF global rule group should have at least one rule<a name="fsbp-waf-7"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::WAF::RuleGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/waf-global-rulegroup-not-empty.html](https://docs.aws.amazon.com/config/latest/developerguide/waf-global-rulegroup-not-empty.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an AWS WAF global rule group has at least one rule\. The control fails if no rules are present within a rule group\.
+
+A WAF global rule group can contain multiple rules\. The rule's conditions allow for traffic inspection and take a defined action \(allow, block, or count\)\. Without any rules, the traffic passes without inspection\. A WAF global rule group with no rules, but with a name or tag suggesting allow, block, or count, could lead to the wrong assumption that one of those actions is occurring\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\.
+
+### Remediation<a name="waf-7-remediation"></a>
+
+For instructions on adding a rule to a rule group, see [Creating an AWS WAF Classic rule group](https://docs.aws.amazon.com/waf/latest/developerguide/classic-create-rule-group.html) in the *AWS WAF Developer Guide*\.
+
+## \[WAF\.8\] A WAF global web ACL should have at least one rule or rule group<a name="fsbp-waf-8"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::WAF::WebACL`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/waf-global-webacl-not-empty](https://docs.aws.amazon.com/config/latest/developerguide/waf-global-webacl-not-empty)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an AWS WAF global web ACL contains at least one WAF rule or WAF rule group\. The control fails if a web ACL does not contain any WAF rules or rule groups\.
+
+A WAF global web ACL can contain a collection of rules and rule groups that inspect and control web requests\. If a web ACL is empty, the web traffic can pass without being detected or acted upon by WAF depending on the default action\.
+
+**Note**  
+This control is only supported in US East \(N\. Virginia\)\.
+
+### Remediation<a name="waf-8-remediation"></a>
+
+**To add rules or rule groups to an empty web ACL**
+
+1. Open the AWS WAF console at [https://console\.aws\.amazon\.com/wafv2/](https://console.aws.amazon.com/wafv2/)\. 
+
+1. In the navigation pane, choose **Switch to AWS WAF Classic**, and then choose **Web ACLs**\.
+
+1. For **Filter**, choose **Global \(CloudFront\)**\.
+
+1. Choose the name of the empty web ACL\.
+
+1. Choose **Rules**, and then choose **Edit web ACL**\.
+
+1. For **Rules**, choose a rule or rule group, and then choose **Add rule to web ACL**\.
+
+1. At this point, you can modify the rule order within the web ACL if you are adding multiple rules or rule groups to the web ACL\.
+
+1. Choose **Update**\.

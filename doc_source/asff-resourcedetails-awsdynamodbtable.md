@@ -1,6 +1,6 @@
 # AwsDynamoDbTable<a name="asff-resourcedetails-awsdynamodbtable"></a>
 
-The `AwsDynamoDbTable` object provides details about a DynamoDB table\.
+The `AwsDynamoDbTable` object provides details about an Amazon DynamoDB table\.
 
 The following is an example `AwsDynamoDbTable` finding in the AWS Security Finding Format \(ASFF\)\. To view descriptions of `AwsDynamoDbTable` attributes, see [AwsDynamoDbTableDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsDynamoDbTableDetails.html) in the *AWS Security Hub API Reference*\.
 

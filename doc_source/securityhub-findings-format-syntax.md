@@ -612,6 +612,29 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			"SubjectAlternativeNames": ["string"],
     			"Type": "string"
     		},
+    		"AwsCloudFormationStack": {
+    			"Capabilities": ["string"],
+    			"CreationTime": "string",
+    			"Description": "string",
+    			"DisableRollback": "boolean",
+    			"DriftInformation": {
+    				"StackDriftStatus": "string"
+    			},
+    			"EnableTerminationProtection": "boolean",
+    			"LastUpdatedTime": "string",
+    			"NotificationArns": ["string"],
+    			"Outputs": [{
+    				"Description": "string",
+    				"OutputKey": "string",
+    				"OutputValue": "string"
+    			}],
+    			"RoleArn": "string",
+    			"StackId": "string",
+    			"StackName": "string",
+    			"StackStatus": "string",
+    			"StackStatusReason": "string",
+    			"TimeoutInMinutes": "number" 
+    		},
     		"AwsCloudFrontDistribution": {
     			"CacheBehaviors": {
     				"Items": [{
@@ -643,6 +666,17 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			},
     			"Origins": {
     				"Items": [{
+    					"CustomOriginConfig": {
+    						"HttpPort": "number",
+    						"HttpsPort": "number",
+    						"OriginKeepaliveTimeout": "number",
+    						"OriginProtocolPolicy": "string",
+    						"OriginReadTimeout": "number",
+    						"OriginSslProtocols": {
+    							"Items": ["string"],
+    							"Quantity": "number"
+    						} 
+    					},		
     					"DomainName": "string",
     					"Id": "string",
     					"OriginPath": "string",
@@ -679,6 +713,33 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			"SnsTopicArn": "string",
     			"SnsTopicName": "string",
     			"TrailArn": "string"
+    		},
+    		"AwsCloudWatchAlarm": {
+    			"ActonsEnabled": "boolean",
+    			"AlarmActions": ["string"],
+    			"AlarmArn": "string",
+    			"AlarmConfigurationUpdatedTimestamp": "string",
+    			"AlarmDescription": "string",
+    			"AlarmName": "string",
+    			"ComparisonOperator": "string",
+    			"DatapointsToAlarm": "number",
+    			"Dimensions": [{
+    				"Name": "string",
+    				"Value": "string"
+    			}],
+    			"EvaluateLowSampleCountPercentile": "string",
+    			"EvaluationPeriods": "number",
+    			"ExtendedStatistic": "string",
+    			"InsufficientDataActions": ["string"],
+    			"MetricName": "string",
+    			"Namespace": "string",
+    			"OkActions": ["string"],
+    			"Period": "number",
+    			"Statistic": "string",
+    			"Threshold": "number",
+    			"ThresholdMetricId": "string",
+    			"TreatMissingData": "string",
+    			"Unit": "string"
     		},
     		"AwsCodeBuildProject": {
     			"Artifacts": [{
@@ -860,13 +921,21 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			"IpV6Addresses": ["string"],
     			"KeyName": "string",
     			"LaunchedAt": "string",
-    			"NetworkInterfaces": [{
+    			"MetadataOptions": {
+    				"HttpEndpoint": "string",
+    				"HttpProtocolIpv6": "string",
+    				"HttpPutResponseHopLimit": "number",
+    				"HttpTokens": "string",
+    				"InstanceMetadataTags": "string",
+    			},
+    			"NetworkInterfaces": [{                
     				"NetworkInterfaceId": "string"
     			}],
     			"SubnetId": "string",
-    			"Type": "string",
+    			"Type": "string",    			
+    			"VirtualizationType": "string",
     			"VpcId": "string"
-    		},
+    		},   				
     		"AwsEc2NetworkAcl": {
     			"Associations": [{
     				"NetworkAclAssociationId": "string",
@@ -989,6 +1058,20 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			"SubnetId": "string",
     			"VpcId": "string"
     		},
+    		"AwsEc2TransitGateway": {
+    			"AmazonSideAsn": "number",
+    			"AssociationDefaultRouteTableId": "string",
+    			"AutoAcceptSharedAttachments": "string",
+    			"DefaultRouteTableAssociation": "string",
+    			"DefaultRouteTablePropagation": "string",
+    			"Description": "string",
+    			"DnsSupport": "string",
+    			"Id": "string",
+    			"MulticastSupport": "string",
+    			"PropagationDefaultRouteTableId": "string",
+    			"TransitGatewayCidrBlocks": ["string"],
+    			"VpnEcmpSupport": "string"
+    		},
     		"AwsEc2Volume": {
     			"Attachments": [{
     				"AttachTime": "string",
@@ -997,11 +1080,15 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     				"Status": "string"
     			}],
     			"CreateTime": "string",
+    			"DeviceName": "string",
     			"Encrypted": "boolean",
     			"KmsKeyId": "string",
     			"Size": "number",
     			"SnapshotId": "string",
-    			"Status": "string"
+    			"Status": "string",
+    			"VolumeId": "string",
+    			"VolumeScanStatus": "string",
+    			"VolumeType": "string"
     		},
     		"AwsEc2Vpc": {
     			"CidrBlockAssociationSet": [{
@@ -1031,6 +1118,48 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			"ServiceType": [{
     				"ServiceType": "string"
     			}]
+    		},
+    		"AwsEc2VpcPeeringConnection": {
+    			"AccepterVpcInfo": {
+    				"CidrBlock": "string",
+    				"CidrBlockSet": [{
+    					"CidrBlock": "string"
+    				}],
+    				"Ipv6CidrBlockSet": [{
+    					"Ipv6CidrBlock": "string"
+    				}],
+    				"OwnerId": "string",
+    				"PeeringOptions": {
+    					"AllowDnsResolutionFromRemoteVpc": "boolean",
+    					"AllowEgressFromLocalClassicLinkToRemoteVpc": "boolean",
+    					"AllowEgressFromLocalVpcToRemoteClassicLink": "boolean"
+    				},
+    				"Region": "string",
+    				"VpcId": "string"
+    			},
+    			"ExpirationTime": "string",
+    			"RequesterVpcInfo": {
+    				"CidrBlock": "string",
+    				"CidrBlockSet": [{
+    					"CidrBlock": "string"
+    				}],
+    				"Ipv6CidrBlockSet": [{
+    					"Ipv6CidrBlock": "string"
+    				}],
+    				"OwnerId": "string",
+    				"PeeringOptions": {
+    					"AllowDnsResolutionFromRemoteVpc": "boolean",
+    					"AllowEgressFromLocalClassicLinkToRemoteVpc": "boolean",
+    					"AllowEgressFromLocalVpcToRemoteClassicLink": "boolean"
+    				},
+    				"Region": "string",
+    				"VpcId": "string"
+    			},
+    			"Status": {
+    				"Code": "string",
+    				"Message": "string"
+    			},
+    			"VpcPeeringConnectionId": "string"
     		},
     		"AwsEc2VpnConnection": {
     			"Category": "string",
@@ -1097,7 +1226,10 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			"RepositoryPolicyText": "string"
     		},
     		"AwsEcsCluster": {
+    			"ActiveServicesCount": "number",
     			"CapacityProviders": ["string"],
+    			"ClusterArn": "string",
+    			"ClusterName": "string",
     			"ClusterSettings": [{
     				"Name": "string",
     				"Value": "string"
@@ -1119,7 +1251,19 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     				"Base": "number",
     				"CapacityProvider": "string",
     				"Weight": "number"
-    			}]
+    			}],
+    			"RegisteredContainerInstancesCount": "number",
+    			"RunningTasksCount": "number",
+    			"Status": "string"
+    		},
+    		"AwsEcsContainer": {
+    			"Image": "string",
+    			"MountPoints": [{
+    				"ContainerPath": "string",
+    				"SourceVolume": "string"
+    			}],
+    			"Name": "string",
+    			"Privileged": "boolean"
     		},
     		"AwsEcsService": {
     			"CapacityProviderStrategy": [{
@@ -1179,6 +1323,30 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     				"RegistryArn": "string"
     			}],
     			"TaskDefinition": "string"
+    		},
+    		"AwsEcsTask": {
+    			"CreatedAt": "string",
+    			"ClusterArn": "string",
+    			"Group": "string",
+    			"StartedAt": "string",
+    			"StartedBy": "string",
+    			"TaskDefinitionArn": "string",
+    			"Version": "number",
+    			"Volumes": [{
+    				"Name": "string",
+    				"Host": {
+    					"SourcePath": "string"
+    				}
+    			}],
+    			"Containers": [{
+    				"Image": "string",
+    				"MountPoints": [{
+    					"ContainerPath": "string",
+    					"SourceVolume": "string"
+    				}],
+    				"Name": "string",
+    				"Privileged": "boolean"
+    			}]
     		},
     		"AwsEcsTaskDefinition": {
     			"ContainerDefinitions": [{
@@ -1354,6 +1522,25 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     				},
     				"Name": "string"
     			}]
+    		},
+    		"AwsEfsAccessPoint": {
+    			"AccessPointId": "string",
+    			"Arn": "string",
+    			"ClientToken": "string",
+    			"FileSystemId": "string",
+    			"PosixUser": {
+    				"Gid": "string",
+    				"SecondaryGids": ["string"],
+    				"Uid": "string"
+    			},
+    			"RootDirectory": {
+    				"CreationInfo": {
+    					"OwnerGid": "string",
+    					"OwnerUid": "string",
+    					"Permissions": "string"
+    				},
+    				"Path": "string"
+    			}
     		},
     		"AwsEksCluster": {
     			"Arn": "string",
@@ -1672,6 +1859,16 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     				"PolicyName": "string"
     			}]
     		},
+    		"AwsKinesisStream": {
+    			"Arn": "string",
+    			"Name": "string",
+    			"RetentionPeriodHours": "number",
+    			"ShardCount": "number",
+    			"StreamEncryption": {
+    				"EncryptionType": "string",
+    				"KeyId": "string"
+    			}
+    		},
     		"AwsKmsKey": {
     			"AWSAccountId": "string",
     			"CreationDate": "string",
@@ -1855,6 +2052,15 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     		},
     		"AwsOpenSearchServiceDomain": {
     			"AccessPolicies": "string",
+    			"AdvancedSecurityOptions": {
+    				"Enabled": "boolean",
+    				"InternalUserDatabaseEnabled": "boolean",
+    				"MasterUserOptions": {
+    					"MasterUserArn": "string",
+    					"MasterUserName": "string",
+    					"MasterUserPassword": "string"
+    				}
+    			},
     			"Arn": "string",
     			"ClusterConfig": {
     				"DedicatedMasterCount": "number",
@@ -2413,13 +2619,20 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			}
     		},
     		"AwsSnsTopic": {
-    			"KmsMasterKeyId": "string",
+    			"ApplicationSuccessFeedbackRoleArn": "string",		
+    			"FirehoseFailureFeedbackRoleArn": "string",
+    			"FirehoseSuccessFeedbackRoleArn": "string",
+    			"HttpFailureFeedbackRoleArn": "string",
+    			"HttpSuccessFeedbackRoleArn": "string",
+    			"KmsMasterKeyId": "string",                 
     			"Owner": "string",
+    			"SqsFailureFeedbackRoleArn": "string",
+    			"SqsSuccessFeedbackRoleArn": "string",	
     			"Subscription": {
     				"Endpoint": "string",
     				"Protocol": "string"
     			},
-    			"TopicName": "string"
+    			"TopicName": "string"   			              
     		},
     		"AwsSqsQueue": {
     			"DeadLetterTargetArn": "string",
@@ -2475,6 +2688,73 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			"RateLimit": "number",
     			"RuleId": "string"
     		},
+    		"AwsWafRegionalRule": {
+    			"MetricName": "string",
+    			"Name": "string",
+    			"RuleId": "string",
+    			"PredicateList": [{
+        			"DataId": "string",
+        			"Negated": "boolean",
+        			"Type": "string"
+    			]}
+    		},
+    		"AwsWafRegionalRuleGroup": {
+    			"MetricName": "string",
+    			"Name": "string",
+    			"RuleGroupId": "string",
+    			"Rules": [{
+    				"Action": {
+    					"Type": "string"
+    				},
+    				"Priority": "number",
+    				"RuleId": "string",
+    				"Type": "string"
+    			}]
+    		},
+    		"AwsWafRegionalWebAcl": {
+    			"DefaultAction": "string",
+    			"MetricName" : "string",
+    			"Name": "string",
+    			"RulesList" : [{
+    				"Action": {
+    					"Type": "string"
+    				},
+    				"Priority": "number",
+    				"RuleId": "string",
+    				"Type": "string",
+    				"ExcludedRules": [{
+    					"ExclusionType": "string",
+    					"RuleId": "string"
+    				}],
+    				"OverrideAction": {
+    					"Type": "string"
+    				}
+    			}],
+    			"WebAclId": "string"
+    		},
+    		"AwsWafRule": {
+    			"MetricName": "string",
+    			"Name": "string",
+    			"PredicateList": [{
+    				"DataId": "string",
+    				"Negated": "boolean",
+    				"Type": "string"
+    			}],
+    			"RuleId": "string"
+    		},
+    		"AwsWafRuleGroup": {
+    			"MetricName": "string",
+    			"Name": "string",
+    			"RuleGroupId": "string",
+    			"Rules": [{
+    				"Action": {
+    					"Type": "string"
+    				},
+    				"Priority": "number",
+    				"RuleId": "string",
+    				"Type": "string"
+    			}],
+    		},
     		"AwsWafWebAcl": {
     			"DefaultAction": "string",
     			"Name": "string",
@@ -2500,11 +2780,17 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     			"Type": "string"
     		},
     		"Container": {
+    			"ContainerRuntime": "string",
     			"ImageId": "string",
     			"ImageName": "string",
     			"LaunchedAt": "string",
-    			"Name": "string"
-    		},
+    			"Name": "string",
+    			"Privileged": "boolean",
+    			"VolumeMounts": [{
+    				"Name": "string",
+    				"MountPath": "string"
+    			}],
+    		}, 
     		"Other": {
     			"string": "string"
     		},
@@ -2526,6 +2812,17 @@ To view descriptions of the other top\-level ASFF attributes, see [Other top\-le
     	},
     	"Sample": "boolean",
     	"SourceUrl": "string",
+    	"Threats": [{
+    		"FilePaths": [{
+    			"FileName": "string",
+    			"FilePath": "string",
+    			"Hash": "string",
+    			"ResourceId": "string",
+    		}],
+    		"ItemCount": "number",
+    		"Name": "string",
+    		"Severity": "string"
+    	}],
     	"ThreatIntelIndicators": [{
     		"Category": "string",
     		"LastObservedAt": "string",

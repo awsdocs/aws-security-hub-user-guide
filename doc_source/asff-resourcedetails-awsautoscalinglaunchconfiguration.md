@@ -1,6 +1,6 @@
 # AwsAutoScalingLaunchConfiguration<a name="asff-resourcedetails-awsautoscalinglaunchconfiguration"></a>
 
-The `AwsAutoScalingLaunchConfiguration` object provides details about a launch configuration\.
+The `AwsAutoScalingLaunchConfiguration` object provides details about an Amazon EC2 Auto Scaling launch configuration\.
 
 The following is an example `AwsAutoScalingLaunchConfiguration` finding in the AWS Security Finding Format \(ASFF\)\.
 

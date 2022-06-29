@@ -1,6 +1,6 @@
 # AwsElbLoadBalancer<a name="asff-resourcedetails-awselbloadbalancer"></a>
 
-The `AwsElbLoadBalancer` object contains details about a Classic Load Balancer\.
+The `AwsElbLoadBalancer` object provides details about a Classic Load Balancer\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsElbLoadBalancer` object\. To view descriptions of `AwsElbLoadBalancer` attributes, see [AwsElbLoadBalancerDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsElbLoadBalancerDetails.html) in the *AWS Security Hub API Reference*\.
 

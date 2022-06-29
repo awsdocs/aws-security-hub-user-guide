@@ -1,6 +1,6 @@
 # AwsEcrContainerImage<a name="asff-resourcedetails-awsecrcontainerimage"></a>
 
-The `AwsEcrContainerImage` object provides information about an Amazon ECR image\.
+The `AwsEcrContainerImage` object provides information about an Amazon Elastic Container Registry image\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsEcrContainerImage` object\. To view descriptions of `AwsEcrContainerImage` attributes, see [AwsEcrContainerImageDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsEcrContainerImageDetails.html) in the *AWS Security Hub API Reference*\.
 

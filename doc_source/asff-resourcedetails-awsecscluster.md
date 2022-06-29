@@ -7,35 +7,54 @@ The following example shows the AWS Security Finding Format \(ASFF\) for the `Aw
 **Example**
 
 ```
-    "AwsEcsCluster": {
-        "CapacityProviders": [],
-        "ClusterSettings": [
-            {
-                "Name": "containerInsights",
-                "Value": "enabled"
-            }
-        ],
-        "Configuration": {
-            "ExecuteCommandConfiguration": {
-                "KmsKeyId": "kmsKeyId",
-                "LogConfiguration": {
-                    "CloudWatchEncryptionEnabled": true,
-                    "CloudWatchLogGroupName": "cloudWatchLogGroupName",
-                    "S3BucketName": "s3BucketName",
-                    "S3EncryptionEnabled": true,
-                    "S3KeyPrefix": "s3KeyPrefix"
+"AwsEcsCluster": {
+    "ActiveServicesCount": 1,
+    "CapacityProviders": [{
+        "Type": "AWS::ECS::CapacityProvider",
+        "Properties": {
+            "AutoScalingGroupProvider": {
+                "AutoScalingGroupArn": "arn:aws:autoscaling:us-west-2:123456789012:autoScalingGroup:a1b2c3d4-5678-90ab-cdef-EXAMPLE11111:autoScalingGroupName/MyAutoScalingGroup",
+                "ManagedScaling": {
+                    "MaximumScalingStepSize": 10,
+                    "MinimumScalingStepSize": 1,
+                    "Status": "ENABLED",
+                    "TargetCapacity": 100
                 },
-                "Logging": "DEFAULT"
-            }
+                "ManagedTerminationProtection": "ENABLED"
+            },
+            "Tags": [{
+                "Key": "environment",
+                "Value": "production"
+            }]
+        },
+    "ClusterArn": "arn:aws:ecs:us-west-2:123456789012:cluster/default",
+    "ClusterName": "default",
+    "ClusterSettings": [{
+        "Name": "containerInsights",
+        "Value": "enabled"
+    }],
+    "Configuration": {
+        "ExecuteCommandConfiguration": {
+            "KmsKeyId": "kmsKeyId",
+            "LogConfiguration": {
+                "CloudWatchEncryptionEnabled": true,
+                "CloudWatchLogGroupName": "cloudWatchLogGroupName",
+                "S3BucketName": "s3BucketName",
+                "S3EncryptionEnabled": true,
+                "S3KeyPrefix": "s3KeyPrefix"
+            },
+            "Logging": "DEFAULT"
         }
-        "DefaultCapacityProviderStrategy": [
-            {
-                "Base": 0,
-                "CapacityProvider": "capacityProvider",
-                "Weight": 1
-            }
-        ]
-    }
+    },
+    "DefaultCapacityProviderStrategy": [{
+        "Base": 0,
+        "CapacityProvider": "capacityProvider",
+        "Weight": 1
+    }],
+    "RegisteredContainerInstancesCount": 1,
+    "RunningTasksCount": 1,
+    "Status": "ACTIVE"
+}
 ```
 
 **Contents**

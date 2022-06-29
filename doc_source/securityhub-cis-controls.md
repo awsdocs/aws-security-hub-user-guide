@@ -871,7 +871,7 @@ You can also use an AWS CloudFormation template to automate this process\. For m
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-logging-enabled.html)
 
-**Schedule type:** Change triggered
+**Schedule type:** Periodic
 
 Amazon S3 bucket access logging generates a log that contains access records for each request made to your S3 bucket\. An access log record contains details about the request, such as the request type, the resources specified in the request worked, and the time and date the request was processed\.
 

@@ -1,6 +1,6 @@
 # AwsRdsDbSnapshot<a name="asff-resourcedetails-awsrdsdbsnapshot"></a>
 
-The `AwsRdsDbSnapshot` object contains details about an Amazon RDS DB cluster snapshot\.
+The `AwsRdsDbSnapshot` object contains details about an Amazon RDS database cluster snapshot\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsRdsDbSnapshot` object\. To view descriptions of `AwsRdsDbSnapshot` attributes, see [AwsRdsDbSnapshotDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsRdsDbSnapshotDetails.html) in the *AWS Security Hub API Reference*\.
 

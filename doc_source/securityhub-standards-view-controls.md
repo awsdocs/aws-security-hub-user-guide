@@ -22,10 +22,10 @@ This also applies to administrator accounts\. Administrator accounts that do not
 
 ## Information on the standard details page<a name="standard-details-overview"></a>
 
-At the top of the details page is the overall score for the standard\. The score is the percentage of passed controls relative to the number of enabled controls for the standard that have data\. Security Hub typically generates the initial security score within 30 minutes after the standard status is `READY`\. After that, Security Hub updates the score every 24 hours\. A timestamp indicates when the score was most recently updated\. See [Determining the security score for a security standard](standards-security-score.md)\.
+At the top of the details page is the overall score for the standard\. The score is the percentage of passed controls relative to the number of enabled controls for the standard that have data\. Security Hub typically calculates the initial security score within 30 minutes after your first visit to the **Summary** page or **Security standards** page on the Security Hub console\. Scores are only generated for standards that are enabled when you visit those pages\. To view a list of standards that are currently enabled, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) API operation\. In addition, AWS Config resource recording must be configured for scores to appear\. After first\-time score generation, Security Hub updates the security score every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\. See [Determining the security score for a security standard](standards-security-score.md)\.
 
 **Note**  
-It can take up to 24 hours for initial security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
+It can take up to 24 hours for first\-time security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
 Next to the overall score is a chart that summarizes the control statuses\. The chart shows the percentage of failed and passed controls\. When you pause on the chart, the pop\-up displays the following:
 + The number of failed controls for each severity

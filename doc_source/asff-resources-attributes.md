@@ -1,14 +1,11 @@
 # Resource attributes<a name="asff-resources-attributes"></a>
 
-In the `Resources` object, each resource object can have the following attributes\.
+Here are details and examples for the `Resources` object in the AWS Security Finding Format \(ASFF\)\. To view attributes for the `Resources` object, see [Resource](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Resource.html) in the *AWS Security Hub API Reference*\.
 
 **[`DataClassification`](asff-resources-dataclassification.md)**  
-Optional  
-Used to provide details about sensitive data that was detected on a resource\.  
-**Type:** Object
+Used to provide details about sensitive data that was detected on a resource\.
 
 **`Details`**  
-Optional  
 This field provides additional details about a single resource using the appropriate objects\.  
 Note that if the finding size exceeds the maximum of 240 KB, then the `Details` object is removed from the finding\. For findings for controls that use AWS Config rules, you can view the resource details on the AWS Config console\.  
 Each resource must be provided in a separate resource object in the `Resources` object\.  
@@ -18,21 +15,33 @@ The [`Other`](asff-resourcedetails-other.md) object allows you to provide custom
 + The resource type \(the value of the resource `Type`\) does not have a corresponding details object\. To provide details for the resource, you use the [`Other`](asff-resourcedetails-other.md) details object\.
 + The object for the resource type does not include all of the fields that you want to populate\. In this case, use the details object for the resource type to populate the available fields\. Use the `Other` object to populate the fields that are not in the type\-specific object\.
 + The resource type is not one of the provided types\. In this case, set the resource `Type` to `Other`, and use the [`Other`](asff-resourcedetails-other.md) details object to populate the details\.
-**Type:** Object  
 **Example**  
 
 ```
 "Details": {
   "AwsEc2Instance": {
+    "IamInstanceProfileArn": "arn:aws:iam::123456789012:role/IamInstanceProfileArn",
+    "ImageId": "ami-79fd7eee",
+    "IpV4Addresses": ["1.1.1.1"],
+    "IpV6Addresses": ["2001:db8:1234:1a2b::123"],
+    "KeyName": "testkey",
+    "LaunchedAt": "2018-09-29T01:25:54Z",
+    "MetadataOptions": {
+      "HttpEndpoint": "enabled",
+      "HttpProtocolIpv6": "enabled",
+      "HttpPutResponseHopLimit": 1,
+      "HttpTokens": "optional",
+      "InstanceMetadataTags": "disabled"
+    },
+    "NetworkInterfaces": [
+    {
+      "NetworkInterfaceId": "eni-e5aa89a3"
+    }
+    ],
+    "SubnetId": "PublicSubnet",
     "Type": "i3.xlarge",
-    "ImageId": "ami-abcd1234",
-    "IpV4Addresses": [ "54.194.252.215", "192.168.1.88" ],
-    "IpV6Addresses": [ "2001:db8:1234:1a2b::123" ],
-    "KeyName": "my_keypair",
-    "IamInstanceProfileArn": "arn:aws:iam::111111111111:instance-profile/AdminRole",
-    "VpcId": "vpc-11112222",
-    "SubnetId": "subnet-56f5f633",
-    "LaunchedAt": "2018-05-08T16:46:19.000Z"
+    "VirtualizationType": "hvm",
+    "VpcId": "TestVPCIpv6"
   },
   "AwsS3Bucket": {
     "OwnerId": "da4d66eac431652a4d44d490a00500bded52c97d235b7b4752f9f688566fe6de",
@@ -43,13 +52,10 @@ The [`Other`](asff-resourcedetails-other.md) object allows you to provide custom
 ```
 
 **`Id`**  
-Required  
 The canonical identifier for the given resource type\.  
 For AWS resources that are identified by ARNs, this must be the ARN\.  
 For all other AWS resource types that lack ARNs, this must be the identifier as defined by the AWS service that created the resource\.  
 For non AWS resources, this should be a unique identifier that is associated with the resource\.  
-**Type:** String or ARN  
-**Maximum length:** 512  
 **Example**  
 
 ```
@@ -57,11 +63,7 @@ For non AWS resources, this should be a unique identifier that is associated wit
 ```
 
 **`Partition`**  
-Optional  
 The canonical AWS partition name that the Region is assigned to\.   
-**Type:** Enum  
-**Valid values:**      
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/securityhub/latest/userguide/asff-resources-attributes.html)
 **Example**  
 
 ```
@@ -69,10 +71,7 @@ The canonical AWS partition name that the Region is assigned to\.
 ```
 
 **`Region`**  
-Optional  
-The canonical AWS external Region name where this resource is located\.   
-**Type:** String  
-**Maximum length:** 16  
+The canonical AWS external Region name where this resource is located\.  
 **Example**  
 
 ```
@@ -80,17 +79,10 @@ The canonical AWS external Region name where this resource is located\.
 ```
 
 **`ResourceRole`**  
-Optional  
-Identifies the role of the resource in the finding\. A resource is either the target of the finding activity or the actor that performed the activity\.  
-**Type:** String  
-**Valid values:** `Actor` \| `Target`
+Identifies the role of the resource in the finding\. A resource is either the target of the finding activity or the actor that performed the activity\.
 
 **`Tags`**  
-Optional  
 A list of AWS tags that are associated with a resource at the time the finding was processed\. Include the `Tags` attribute only for resources that have an associated tag\. If a resource has no associated tag, don't include a `Tags` attribute in the finding\.  
-**Type: **Map of tags  
-**Maximum number of tags:** 50  
-**Maximum length per value:** 256  
 The following basic restrictions apply to tags:  
 + You can provide only tags that actually exist on an AWS resource in this field\. To provide data for a resource type that isn't defined in the AWS Security Finding Format, use the `Other` details subfield\.
 + Values are limited to the following characters: A\-Z, a\-z, 0\-9, blank spaces, and \. : \+ = @ \_ / \- \(hyphen\)\.
@@ -105,12 +97,9 @@ The following basic restrictions apply to tags:
 ```
 
 **`Type`**  
-Required  
 The type of the resource that you are providing details for\.  
 Whenever possible, use one of the provided resource types, such as `AwsEc2Instance` or `AwsS3Bucket`\.  
 If the resource type does not match any of the provided resource types, then set the resource `Type` to `Other`, and use the `Other` details subfield to populate the details\.  
-**Type:** String  
-**Maximum length:** 256  
 Supported values are as follows\. If a type has a corresponding `Details` object, then to view the details for the `Details` object, choose the type name\.  
 + `AwsAccount`
 + `AwsApiGatewayMethod`

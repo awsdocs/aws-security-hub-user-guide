@@ -1,6 +1,6 @@
 # Disassociating from your administrator account<a name="securityhub-disassociate-from-admin"></a>
 
-Member accounts that were added by invitation can disassociate themselves from the administrator account\. Member accounts that are managed using Organizations cannot disassociate their accounts from the administrator account\.
+If your account was added as a member account by invitation, you can disassociate the member account from the administrator account\. Once you disassociate a member account, Security Hub doesn't send findings from the account to the administrator account\. Member accounts that are managed using Organizations cannot disassociate their accounts from the administrator account\.
 
 When you disassociate from your administrator account, your account remains in the administrator account's member list with a status of **Resigned**\. However, the administrator account does not receive any findings for your account\.
 

@@ -1,6 +1,6 @@
 # AwsNetworkFirewallFirewallPolicy<a name="asff-resourcedetails-awsnetworkfirewallfirewallpolicy"></a>
 
-The `AwsNetworkFirewallFirewallPolicy` object provides details about a firewall policy\. A firewall policy defines the behavior of a network firewall\.
+The `AwsNetworkFirewallFirewallPolicy` object provides details about an AWS Network Firewall firewall policy\. A firewall policy defines the behavior of a network firewall\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsNetworkFirewallFirewallPolicy` object\. To view descriptions of `AwsNetworkFirewallFirewallPolicy` attributes, see [AwsNetworkFirewallFirewallPolicyDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsNetworkFirewallFirewallPolicyDetails.html) in the *AWS Security Hub API Reference*\.
 

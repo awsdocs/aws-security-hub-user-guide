@@ -1,6 +1,6 @@
 # AwsCloudTrailTrail<a name="asff-resourcedetails-awscloudtrailtrail"></a>
 
-The `AwsCloudTrailTrail` object provides details about a CloudTrail trail\.
+The `AwsCloudTrailTrail` object provides details about a AWS CloudTrail trail\.
 
 The following is an example `AwsCloudTrailTrail` finding in the AWS Security Finding Format \(ASFF\)\. To view descriptions of `AwsCloudTrailTrail` attributes, see [AwsCloudTrailTrailDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsCloudTrailTrailDetails.html) in the *AWS Security Hub API Reference*\.
 

@@ -80,7 +80,7 @@ The event pattern for a **Security Hub Insight Results** event has the following
 }
 ```
 
-In both formats, `<custom action ARN>` is the ARN of a custom action\. You can configure a rule that applies to more than one custom action\.
+In both patterns, `<custom action ARN>` is the ARN of a custom action\. You can configure a rule that applies to more than one custom action\.
 
 The instructions provided here are for the EventBridge console\. When you use the console, EventBridge automatically creates the required resource\-based policy that enables EventBridge to write to CloudWatch Logs\.
 
@@ -96,31 +96,41 @@ You can also use the [https://docs.aws.amazon.com/eventbridge/latest/APIReferenc
 
 1. Enter a name and description for the rule\.
 
-1. For **Event source**, choose **Event Pattern**\.
+1. For **Event bus**, choose the event bus that you want to associate with this rule\. If you want this rule to match events that come from your account, select **default**\. When an AWS service in your account emits an event, it always goes to your account’s default event bus\.
 
-1. For **Event matching** pattern, choose **Pre\-defined pattern by service**\.
+1. For **Rule type**, choose **Rule with an event pattern**\.
 
-1. For **Service provider**, choose **AWS**\.
+1. Choose **Next**\.
 
-1. For **Service name**, choose **Security Hub**\.
+1. For **Event source**, choose **AWS events**\.
 
-1. For **Event type**, to create a rule to apply when you send findings to a custom action, choose **Security Hub Findings \- Custom Action**\.
+1. For **Event pattern**, choose **Event pattern form**\.
 
-   To create a rule to apply when you send insight results to a custom action, choose **Security Hub Insight Results**\.
+1. For **Event source**, choose **AWS services**\.
 
-1. For each custom action that this rule applies to, perform the following steps:
+1. For **AWS service**, choose **Security Hub**\.
 
-   1. Choose **Specific custom action**\.
+1. For **Event type**, do one of the following:
+   + To create a rule to apply when you send findings to a custom action, choose **Security Hub Findings \- Custom Action**\.
+   + To create a rule to apply when you send insight results to a custom action, choose **Security Hub Insight Results**\.
 
-   1. To add a custom action ARN, enter the ARN in the field, and then choose **Add**\.
+1. Choose **Specific custom action ARNs**, add a custom action ARN\.
 
-   1. To remove a custom action ARN, choose **Remove** for that value\.
+   If the rule applies to multiple custom actions, choose **Add** to add more custom action ARNs\.
+
+1. Choose **Next**\.
 
 1. Under **Select targets**, choose and configure the target to invoke when this rule is matched\.
 
-1. Choose **Create**\.
+1. Choose **Next**\.
 
-After this rule is created in EventBridge, when you perform a custom action on findings or insight results in your account, events are generated in EventBridge\.
+1. \(Optional\) Enter one or more tags for the rule\. For more information, see [Amazon EventBridge tags](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-tagging.html) in the *Amazon EventBridge User Guide*\.
+
+1. Choose **Next**\.
+
+1. Review the details of the rule and choose **Create rule**\.
+
+   When you perform a custom action on findings or insight results in your account, events are generated in EventBridge\.
 
 ## Selecting a custom action for findings and insight results<a name="securityhub-cwe-send"></a>
 

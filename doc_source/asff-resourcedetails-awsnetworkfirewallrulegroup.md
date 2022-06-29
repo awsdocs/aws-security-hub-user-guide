@@ -1,6 +1,6 @@
 # AwsNetworkFirewallRuleGroup<a name="asff-resourcedetails-awsnetworkfirewallrulegroup"></a>
 
-The `AwsNetworkFirewallRuleGroup` object provides details about an AWS Network Firewall rule group\. Rule groups are used to inspect and control network traffic\. Stateless rule groups apply to individual packets\. Stateful rule groups apply to packets in the context of their traffic flow\.
+The `AwsNetworkFirewallRuleGroup` object provides details about an AWS Network Firewall rule group\. Rule groups are used to inspect and control network traffic\. * Stateless* rule groups apply to individual packets\. * Stateful* rule groups apply to packets in the context of their traffic flow\.
 
 Rule groups are referenced in firewall policies\.
 

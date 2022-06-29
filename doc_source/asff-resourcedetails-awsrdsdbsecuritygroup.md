@@ -1,6 +1,6 @@
 # AwsRdsDbSecurityGroup<a name="asff-resourcedetails-awsrdsdbsecuritygroup"></a>
 
-The `AwsRdsDbSecurityGroup` object contains information about an Amazon Relational Database Service
+The `AwsRdsDbSecurityGroup` object contains information about an Amazon Relational Database Service security group\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsRdsDbSecurityGroup` object\. To view descriptions of `AwsRdsDbSecurityGroup` attributes, see [AwsRdsDbSecurityGroupDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsRdsDbSecurityGroupDetails.html) in the *AWS Security Hub API Reference*\.
 

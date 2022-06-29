@@ -8,19 +8,27 @@ The following example shows the AWS Security Finding Format \(ASFF\) for the `Aw
 
 ```
 "AwsEc2Instance": { 
-     "IamInstanceProfileArn": "string",
-     "ImageId": "string",
-     "IpV4Addresses": [ "string" ],
-     "IpV6Addresses": [ "string" ],
-     "KeyName": "string",
-     "LaunchedAt": "string",
+     "IamInstanceProfileArn": "arn:aws:iam::123456789012:role/IamInstanceProfileArn",
+     "ImageId": "ami-79fd7eee",
+     "IpV4Addresses": ["1.1.1.1"],
+     "IpV6Addresses": ["2001:db8:1234:1a2b::123"],
+     "KeyName": "testkey",
+     "LaunchedAt": "2018-09-29T01:25:54Z",
+     "MetadataOptions": {
+          "HttpEndpoint": "enabled",
+          "HttpProtocolIpv6": "enabled",
+          "HttpPutResponseHopLimit": 1,
+          "HttpTokens": "optional",
+          "InstanceMetadataTags": "disabled"
+     },
      "NetworkInterfaces": [
        {
-          "NetworkInterfaceId": "string"
+          "NetworkInterfaceId": "eni-e5aa89a3"
        }
      ],
-     "SubnetId": "string",
-     "Type": "string",
-     "VpcId": "string"
+     "SubnetId": "PublicSubnet",
+     "Type": "i3.xlarge",
+     "VirtualizationType": "hvm",
+     "VpcId": "TestVPCIpv6"
 }
 ```
