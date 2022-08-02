@@ -15,7 +15,7 @@ Security scores represent the proportion of **Passed** controls to enabled contr
 
 If your account is an administrator account, security scores account for control findings in all member accounts\.
 
-If you have set an aggregation Region, the overall security score is an aggregated score  that accounts for findings in all linked Regions\. Similarly,  the security score for each standard is an aggregated score that accounts for findings associated  with that standard in all linked Regions\. Note that if your account is an administrator  account, the security scores account for all member accounts and all Regions\.
+If you have set an aggregation Region, the overall security score is an aggregated score that accounts for findings in all linked Regions\. Similarly, the security score for each standard is an aggregated score that accounts for findings associated with that standard in all linked Regions\. Note that if your account is an administrator account, the security scores account for all member accounts and all Regions\.
 
 Security score calculation omits enabled controls that do not have any findings \(overall status is **No data**\)\. For example, a standard has 12 controls enabled\. Six of those controls are in a **Passed** state\. Two controls have no data\. Because the calculation omits the controls without data, the security score is 60%\.
 
@@ -25,7 +25,7 @@ For the administrator account, the overall security score and security scores fo
 
 ## Security scores if you have set an aggregation Region<a name="standard-security-aggregation-region"></a>
 
-If you have set an aggregation Region, the overall security score and the security scores for each standard reflect  findings from all linked Regions\. If your account is an administrator account, the security scores also account for all member accounts\.
+If you have set an aggregation Region, the overall security score and the security scores for each standard reflect findings from all linked Regions\. If your account is an administrator account, the security scores also account for all member accounts\.
 
 ## Security scores on the Summary page<a name="standard-security-score-summary-page"></a>
 
