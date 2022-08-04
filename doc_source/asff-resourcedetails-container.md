@@ -4,7 +4,7 @@ Container details that are related to a finding\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `Container` object\. To view descriptions of `Container` attributes, see [ContainerDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ContainerDetails.html) in the *AWS Security Hub API Reference*\.
 
-Example:
+**Example**
 
 ```
 "Container": {

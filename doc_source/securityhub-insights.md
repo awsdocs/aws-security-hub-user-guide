@@ -14,4 +14,4 @@ An insight only returns results if you have enabled integrations or standards th
 + [Viewing and filtering the list of insights](insights-list.md)
 + [Viewing and taking action on insight results and findings](securityhub-insights-view-take-action.md)
 + [Managed insights](securityhub-managed-insights.md)
-+ [Managing custom insights](securityhub-custom-insights.md)
++ [Custom insights](securityhub-custom-insights.md)

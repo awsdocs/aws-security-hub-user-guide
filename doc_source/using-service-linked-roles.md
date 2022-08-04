@@ -4,7 +4,7 @@ AWS Security Hub uses AWS Identity and Access Management \(IAM\) [service\-linke
 
 A service\-linked role makes setting up Security Hub easier because you don't have to manually add the necessary permissions\. Security Hub defines the permissions of its service\-linked role, and unless the permissions are defined otherwise, only Security Hub can assume the role\. The defined permissions include the trust policy and the permissions policy, and you can't attach that permissions policy to any other IAM entity\.
 
-Security Hub supports using service\-linked roles in all of the Regions where Security Hub is available\. For more information, see [Supported Regions](securityhub-regions.md)\.
+Security Hub supports using service\-linked roles in all of the Regions where Security Hub is available\. For more information, see [Regional limits](securityhub-regions.md)\.
 
 You can delete the Security Hub service\-linked role only after first disabling Security Hub in all Regions where it's enabled\. This protects your Security Hub resources because you can't inadvertently remove permissions to access them\.
 

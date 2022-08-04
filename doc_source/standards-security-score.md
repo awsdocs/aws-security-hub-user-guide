@@ -25,7 +25,7 @@ For the administrator account, the overall security score and security scores fo
 
 ## Security scores if you have set an aggregation Region<a name="standard-security-aggregation-region"></a>
 
-If you have set an aggregation Region, the overall security score and the security scores for each standard reflect findings from all linked Regions\. If your account is an administrator account, the security scores also account for all member accounts\.
+If you have set an aggregation Region, the overall security score and the security scores for each standard reflect  findings from all linked Regions\. If your account is an administrator account, the security scores also account for all member accounts\.
 
 ## Security scores on the Summary page<a name="standard-security-score-summary-page"></a>
 

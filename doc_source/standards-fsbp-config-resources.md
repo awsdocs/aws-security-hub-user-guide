@@ -1,6 +1,6 @@
 # AWS Config resources required for AWS Foundational Security Best Practices controls<a name="standards-fsbp-config-resources"></a>
 
-The AWS Foundational Security Best Practices controls perform checks against the following resources\. For AWS Security Hub to accurately report findings for all of the controls, you must enable recording for these resources in AWS Config\.
+AWS Foundational Security Best Practices controls involve queries against the following resources\. For AWS Security Hub to accurately report findings for all of the controls, you must enable recording for these resources in AWS Config\.
 
 **Note**  
 In Regions where a control is not available, the corresponding resource is not available in AWS Config\.
@@ -19,6 +19,7 @@ In Regions where a control is not available, the corresponding resource is not a
 + `AWS::DynamoDB::Table`
 + `AWS::EC2::Instance`
 + `AWS::EC2::NetworkAcl`
++ `AWS::EC2::NetworkInterface`
 + `AWS::EC2::SecurityGroup`
 + `AWS::EC2::Subnet`
 + `AWS::EC2::TransitGateway`

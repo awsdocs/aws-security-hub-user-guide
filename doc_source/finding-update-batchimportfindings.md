@@ -43,7 +43,7 @@ Finding providers also should not use [https://docs.aws.amazon.com/securityhub/1
 + `Severity`
 + `Types`
 
-Instead, finding providers use the [`FindingProviderFields`](asff-findingproviderfields.md) object to provide values for these attributes\.
+Instead, finding providers use the [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields) object to provide values for these attributes\.
 
 **Example**
 
@@ -65,21 +65,21 @@ Instead, finding providers use the [`FindingProviderFields`](asff-findingprovide
 }
 ```
 
-For [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) requests, Security Hub handles values in the top\-level attributes and in [`FindingProviderFields`](asff-findingproviderfields.md) as follows\.
+For [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) requests, Security Hub handles values in the top\-level attributes and in [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields) as follows\.
 
-**\(Preferred\) [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for an attribute in [`FindingProviderFields`](asff-findingproviderfields.md), but does not provide a value for the corresponding top\-level attribute\.**  
+**\(Preferred\) [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for an attribute in [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields), but does not provide a value for the corresponding top\-level attribute\.**  
 For example, [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides `FindingProviderFields.Confidence`, but does not provide `Confidence`\. This is the preferred option for [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) requests\.  
-Security Hub updates the value of the attribute in [`FindingProviderFields`](asff-findingproviderfields.md)\.  
+Security Hub updates the value of the attribute in [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields)\.  
 It replicates the value to the top\-level attribute only if the attribute was not already updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
-**[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for a top\-level attribute, but does not provide a value for the corresponding attribute in [`FindingProviderFields`](asff-findingproviderfields.md)\.**  
+**[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for a top\-level attribute, but does not provide a value for the corresponding attribute in [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields)\.**  
 For example, [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides `Confidence`, but does not provide `FindingProviderFields.Confidence`\.  
-Security Hub uses the value to update the attribute in [`FindingProviderFields`](asff-findingproviderfields.md)\. It overwrites any existing value\.  
+Security Hub uses the value to update the attribute in [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields)\. It overwrites any existing value\.  
 Security Hub updates the top\-level attribute only if the attribute was not already updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
-**[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for both a top\-level attribute and the corresponding attribute in [`FindingProviderFields`](asff-findingproviderfields.md)\.**  
+**[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides a value for both a top\-level attribute and the corresponding attribute in [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields)\.**  
 For example, [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) provides both `Confidence` and `FindingProviderFields.Confidence`\.  
-For a new finding, Security Hub uses the value in [`FindingProviderFields`](asff-findingproviderfields.md) to populate both the top\-level attribute and the corresponding attribute in [`FindingProviderFields`](asff-findingproviderfields.md)\. It does not use the provided top\-level attribute value\.  
+For a new finding, Security Hub uses the value in [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields) to populate both the top\-level attribute and the corresponding attribute in [`FindingProviderFields`](asff-top-level-attributes.md#asff-findingproviderfields)\. It does not use the provided top\-level attribute value\.  
 For an existing finding, Security Hub uses both values\. However, it updates the top\-level attribute value only if the attribute was not already updated by [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
 ## Using the batch\-import\-findings command from the AWS CLI<a name="batchimportfindings-command-line"></a>

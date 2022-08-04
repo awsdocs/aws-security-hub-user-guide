@@ -3,11 +3,11 @@
 The AWS Foundational Security Best Practices standard contains the following controls\. For each control, the information includes the following information\.
 + The category that the control applies to\. For descriptions of the categories, see [Control categories](control-categories.md)\.
 + The severity
-+ The applicable resource
++ The applicable resource that the control evaluates\. We also list dependent resources for which you should enable AWS Config recording for the control to work\.
 + The required AWS Config rule, and any specific parameter values set by AWS Security Hub
 + Remediation steps
 
-Note that gaps in the control numbers indicate controls that are not yet released\.
+Note that gaps in the control numbers indicate controls that are not yet released\. If a control is noted as **Retired**, Security Hub does not generate findings for that control\.
 
 ## Controls categorized by service<a name="controls-categorized-service"></a>
 
@@ -17,7 +17,7 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 [Amazon EC2 Auto Scaling](#fsbp-autoscaling-1)
 
-[Amazon CloudFront](#fsbp-cloudformation-1)
+[AWS CloudFormation](#fsbp-cloudformation-1)
 
 [Amazon CloudFront](#fsbp-cloudfront-1)
 
@@ -33,13 +33,13 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 [Amazon EC2](#fsbp-ec2-1)
 
-[Amazon ECR](#fsbp-ecr-3)
+[Amazon ECR](#fsbp-ecr-1)
 
 [Amazon ECS](#fsbp-ecs-1)
 
 [Amazon EFS](#fsbp-efs-1)
 
-[Amazon EFS](#fsbp-eks-2)
+[Amazon EKS](#fsbp-eks-2)
 
 [AWS Elastic Beanstalk](#fsbp-elasticbeanstalk-1)
 
@@ -53,7 +53,7 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 [AWS Identity and Access Management](#fsbp-iam-1)
 
-[AWS Identity and Access Management](#fsbp-kinesis-1)
+[Amazon Kinesis](#fsbp-kinesis-1)
 
 [AWS Key Management Service](#fsbp-kms-1)
 
@@ -229,7 +229,7 @@ AWS WAF is a web application firewall that helps protect web applications and AP
 
 **Note**  
 This control is not supported in the following Regions:  
- Asia Pacific \(Osaka\)
+Asia Pacific \(Osaka\)
 China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
@@ -357,7 +357,7 @@ For information on how to add Availability Zones to an existing auto scaling gro
 
 **Parameters:** None
 
-This control checks whether IMDSv2 is enabled on all instances launched by Amazon EC2 Auto Scaling groups\. The control fails if the Metadata version is not included in the launch configuration or if both IMDSv1 and IMDSv2 are enabled\.
+This control checks whether IMDSv2 is enabled on all instances launched by Amazon EC2 Auto Scaling groups\. The control fails if the Instance Metadata Service \(IMDS\) version is not included in the launch configuration or if both IMDSv1 and IMDSv2 are enabled\.
 
 IMDS provides data about your instance that you can use to configure or manage the running instance\.
 
@@ -366,10 +366,10 @@ Version 2 of the IMDS adds new protections that weren't available in IMDSv1 to f
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="autoscaling-3-remediation"></a>
 
@@ -398,10 +398,10 @@ The Time To Live \(TTL\) field in the IP packet is reduced by one on every hop\.
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="autoscaling-4-remediation"></a>
 
@@ -423,10 +423,14 @@ For detailed instructions on how to modify the metadata response hop limit for a
 
 This control checks whether an Auto Scaling group's associated launch configuration assigns a [public IP address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#public-ip-addresses) to the group’s instances\. The control fails if the associated launch configuration assigns a public IP address\.
 
-Amazon EC2 instances in an autoscaling group launch configuration should not have an associated public IP address, except for in limited edge cases\. Amazon EC2 instances should only be accessible from behind a load balancer instead of being directly exposed to the internet\.
+Amazon EC2 instances in an Auto Scaling group launch configuration should not have an associated public IP address, except for in limited edge cases\. Amazon EC2 instances should only be accessible from behind a load balancer instead of being directly exposed to the internet\.
 
 **Note**  
-This control is only supported in US East \(N\. Virginia\)\.
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="autoscaling-5-remediation"></a>
 
@@ -481,10 +485,10 @@ You can enhance availability by deploying your application across multiple insta
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="autoscaling-6-remediation"></a>
 
@@ -520,14 +524,14 @@ Africa \(Cape Town\)
 Asia Pacific \(Hong Kong\)
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
 Europe \(Milan\)
 Europe \(Paris\)
 Europe \(Stockholm\)
 Middle East \(Bahrain\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="cloudformation-1-remediation"></a>
 
@@ -2026,7 +2030,7 @@ For more information about NACLs, see [Network ACLs](https://docs.aws.amazon.com
 
 **Severity:** Medium 
 
-**Resource type:**`AWS::EC2::SecurityGroup`
+**Resource type:**`AWS::EC2::SecurityGroup`, `AWS::EC2::NetworkInterface`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni-periodic.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-security-group-attached-to-eni-periodic.html)
 
@@ -2063,11 +2067,11 @@ This control is not supported in the following Regions:
 Asia Pacific \(Hong Kong\)
 Asia Pacific \(Mumbai\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
 Middle East \(Bahrain\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ec2-23-remediation"></a>
 
@@ -2095,14 +2099,13 @@ Historically, PV guests had better performance than HVM guests in many cases, bu
 
 **Note**  
 This control is not supported in the following Regions:  
+US East \(Ohio\)
 Africa \(Cape Town\)
 Asia Pacific \(Hong Kong\)
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Mumbai\)
 Asia Pacific \(Osaka\)
 Asia Pacific \(Seoul\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 Canada \(Central\)
 China \(Beijing\)
 China \(Ningxia\)
@@ -2111,41 +2114,16 @@ Europe \(Milan\)
 Europe \(Paris\)
 Europe \(Stockholm\)
 Middle East \(Bahrain\)
-US East \(Ohio\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ec2-24-remediation"></a>
 
 For information about how to update an EC2 instance to a new instance type, see [Change the instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-## \[EC2\.27\] Running EC2 Instances should not use key pairs<a name="fsbp-ec2-27"></a>
+## \[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)<a name="fsbp-ec2-27"></a>
 
-**Category:** Identify > Resource configuration
-
-**Severity:** High 
-
-**Resource type:**`AWS::EC2::Instance`
-
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-no-amazon-key-pair.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-no-amazon-key-pair.html)
-
-**Schedule type:** Change triggered
-
-**Parameters:** None
-
-This control checks whether running EC2 instances are using key pairs\. The control fails if a running EC2 instance uses a key pair\.
-
-As best practice, we recommend that you reduce the number of credentials in use whenever possible to minimize the risk of compromised credentials and unintended access\. EC2 instances without key pairs can still be accessed using AWS Systems Manager Session Manager or browser\-based SSH connection via [the AWS console](https://console.aws.amazon.com/console/home)\. You can also access EC2 instances with a password, but we do not recommend this because it involves credentials similar to key pairs\.
-
-**Note**  
-This control is not supported in the following Regions:  
-Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
-China \(Beijing\)
-China \(Ningxia\)
-
-### Remediation<a name="ec2-27-remediation"></a>
-
-To delete a key pair, see [Delete your public key on Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/delete-key-pair.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+This control is retired\.
 
 ## \[ECR\.1\] ECR private repositories should have image scanning configured<a name="fsbp-ecr-1"></a>
 
@@ -2168,10 +2146,10 @@ ECR image scanning helps in identifying software vulnerabilities in your contain
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ecr-1-remediation"></a>
 
@@ -2199,14 +2177,14 @@ Amazon ECR Tag Immutability enables customers to rely on the descriptive tags of
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ecr-1-remediation"></a>
 
-To configure image scanning for an ECR repository, see [Image scanning](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html) in the *Amazon Elastic Container Registry User Guide*\.
+To create a repository with immutable tags configured or to update the image tag mutability settings for an existing repository, see [Image tag mutability](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html) in the *Amazon Elastic Container Registry User Guide*\.
 
 ## \[ECR\.3\] ECR repositories should have at least one lifecycle policy configured<a name="fsbp-ecr-3"></a>
 
@@ -2230,10 +2208,10 @@ Amazon ECR lifecycle policies enable you to specify the lifecycle management of 
 This control is not supported in the following Regions:  
 Asia Pacific \(Osaka\)
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ecr-3-remediation"></a>
 
@@ -2346,10 +2324,10 @@ We recommend that you remove elevated privileges from your ECS task definitions\
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ecs-4-remediation"></a>
 
@@ -2376,14 +2354,14 @@ Enabling this option reduces security attack vectors since the container instanc
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ecs-5-remediation"></a>
 
-**To edit container definitions to run as non\-privileged**
+**To limit container definitions to read\-only access to root filesystems**
 
 1. Open the Amazon ECS console at [https://console\.aws\.amazon\.com/ecs/](https://console.aws.amazon.com/ecs/)\.
 
@@ -2418,10 +2396,10 @@ AWS Systems Manager Parameter Store can help you improve the security posture of
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ecs-8-remediation"></a>
 
@@ -2441,7 +2419,7 @@ To create parameters using SSM, see [Creating Systems Manager parameters](https:
 
 **Parameters:** None
 
-This control checks if ECS Fargate services are running the latest Fargate platform version\. This control fails if the platform version is not the latest\.
+This control checks if Amazon ECS Fargate services are running the latest Fargate platform version\. This control fails if the platform version is not the latest\.
 
 AWS Fargate platform versions refer to a specific runtime environment for Fargate task infrastructure, which is a combination of kernel and container runtime versions\. New platform versions are released as the runtime environment evolves\. For example, a new version may be released for kernel or operating system updates, new features, bug fixes, or security updates\. Security updates and patches are deployed automatically for your Fargate tasks\. If a security issue is found that affects a platform version, AWS patches the platform version\. 
 
@@ -2449,10 +2427,10 @@ AWS Fargate platform versions refer to a specific runtime environment for Fargat
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ecs-10-remediation"></a>
 
@@ -2480,11 +2458,11 @@ Monitoring is an important part of maintaining the reliability, availability, an
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
 Europe \(Milan\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ecs-12-remediation"></a>
 
@@ -2585,14 +2563,14 @@ When you enforce a root directory, the NFS client using the access point uses th
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="efs-3-remediation"></a>
 
-For instructions on how to enforce a root directory for an EFS access point, see [Enforcing a root directory with an access point](https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html#enforce-root-directory-access-point) in the *Amazon Elastic File System User Guide*\. 
+For instructions on how to enforce a root directory for an Amazon EFS access point, see [Enforcing a root directory with an access point](https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html#enforce-root-directory-access-point) in the *Amazon Elastic File System User Guide*\. 
 
 ## \[EFS\.4\] EFS access points should enforce a user identity<a name="fsbp-efs-4"></a>
 
@@ -2608,21 +2586,21 @@ For instructions on how to enforce a root directory for an EFS access point, see
 
 **Parameters:** None
 
-This control checks whether Amazon EFS access points are configured to enforce a user identity\. This control fails if a POXIS user identity is not defined while creating the EFS access point\.
+This control checks whether Amazon EFS access points are configured to enforce a user identity\. This control fails if a POSIX user identity is not defined while creating the EFS access point\.
 
 Amazon EFS access points are application\-specific entry points into an EFS file system that make it easier to manage application access to shared datasets\. Access points can enforce a user identity, including the user's POSIX groups, for all file system requests that are made through the access point\. Access points can also enforce a different root directory for the file system so that clients can only access data in the specified directory or its subdirectories\.
 
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="efs-4-remediation"></a>
 
-To enforce a user identity for an EFS access point, see [Enforcing a user identity using an access point](https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html#enforce-identity-access-points) in the *Amazon Elastic File System User Guide*\. 
+To enforce a user identity for an Amazon EFS access point, see [Enforcing a user identity using an access point](https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html#enforce-identity-access-points) in the *Amazon Elastic File System User Guide*\. 
 
 ## \[EKS\.2\] EKS clusters should run on a supported Kubernetes version<a name="fsbp-eks-2"></a>
 
@@ -2646,10 +2624,10 @@ If your application doesn't require a specific version of Kubernetes, we recomme
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="eks-2-remediation"></a>
 
@@ -2719,7 +2697,7 @@ AWS GovCloud \(US\-West\)
 
 For instructions on how to enable managed platform updates, see [To configure managed platform updates under Managed platform updates](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-platform-update-managed.html) in the *AWS Elastic Beanstalk Developer Guide*\.
 
-## \[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager<a name="fsbp-elb-2"></a>
+## \[ELB\.2\] Classic Load Balancers with HTTPS/SSL listeners should use a certificate provided by AWS Certificate Manager<a name="fsbp-elb-2"></a>
 
 **Category:** Protect > Encryption of data in transit
 
@@ -3019,10 +2997,10 @@ This control checks whether a Classic Load Balancer has been configured to span 
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="elb-10-remediation"></a>
 
@@ -3041,7 +3019,7 @@ China \(Ningxia\)
 **Schedule type:** Change triggered
 
 **Parameters:**
-+ desyncMode: defensive, strictest
++ `desyncMode`: defensive, strictest
 
 This control checks whether an Application Load Balancer is configured with defensive or strictest desync mitigation mode\. The control fails if an Application Load Balancer is not configured with defensive or strictest desync mitigation mode\.
 
@@ -3050,10 +3028,10 @@ HTTP Desync issues can lead to request smuggling and make applications vulnerabl
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="elb-12-remediation"></a>
 
@@ -3080,10 +3058,10 @@ Elastic Load Balancing automatically distributes your incoming traffic across mu
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="elb-13-remediation"></a>
 
@@ -3102,7 +3080,7 @@ To add an Availability Zone to an Application Load Balancer, see [Availability Z
 **Schedule type:** Change triggered
 
 **Parameters:**
-+ `desyncMode`
++ `desyncMode`: defensive, strictest
 
 This control checks whether a Classic Load Balancer is configured with defensive or strictest desync mitigation mode\. This control will fail if the Application Load Balancer is not configured with defensive or strictest desync mitigation mode\.
 
@@ -3110,10 +3088,10 @@ HTTP Desync issues can lead to request smuggling and make applications vulnerabl
 
 **Note**  
 This control is not supported in the following Regions:  
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="elb-14-remediation"></a>
 
@@ -3453,7 +3431,7 @@ China \(Beijing\)
 China \(Ningxia\)
 Europe \(Milan\)
 Middle East \(Bahrain\)
- AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-East\)
 
 ### Remediation<a name="guardduty-1-remediation"></a>
 
@@ -3512,7 +3490,7 @@ IAM users created by Amazon Simple Email Service are automatically created using
 
 ### Remediation<a name="iam-2-remediation"></a>
 
-To resolve this issue, [create an IAM group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html), and attach the policy to the group\. Then, [add the users to the group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\. The policy is applied to each user in the group\. To remove a policy attached directly to a user, see [Deleting IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-delete.html) in the *IAM User Guide*\.
+To resolve this issue, [create an IAM group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html), and attach the policy to the group\. Then, [add the users to the group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\. The policy is applied to each user in the group\. To remove a policy attached directly to a user, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *IAM User Guide*\.
 
 ## \[IAM\.3\] IAM users' access keys should be rotated every 90 days or less<a name="fsbp-iam-3"></a>
 
@@ -3543,7 +3521,7 @@ If you already have an access key, Security Hub recommends that you rotate the a
 
 Access keys consist of an access key ID and a secret access key\. They are used to sign programmatic requests that you make to AWS\. AWS users need their own access keys to make programmatic calls to AWS from the AWS CLI, Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the API operations for individual AWS services\.
 
-If your organization uses AWS Single Sign\-On \(AWS SSO\), your users can sign in to Active Directory, a built\-in AWS SSO directory, or [another identity provider \(IdP\) connected to AWS SSO](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html)\. They can then be mapped to an IAM role that enables them to run AWS CLI commands or call AWS API operations without the need for IAM user access keys\. To learn more, see [Configuring the AWS CLI to use AWS Single Sign\-On](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html) in the *AWS Command Line Interface User Guide*\.
+If your organization uses AWS IAM Identity Center \(successor to AWS Single Sign\-On\) \(IAM Identity Center\), your users can sign in to Active Directory, a built\-in IAM Identity Center directory, or [another identity provider \(IdP\) connected to IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html)\. They can then be mapped to an IAM role that enables them to run AWS CLI commands or call AWS API operations without the need for IAM user access keys\. To learn more, see [Configuring the AWS CLI to use AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html) in the *AWS Command Line Interface User Guide*\.
 
 **Note**  
 This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
@@ -3607,19 +3585,7 @@ This control is not supported in Africa \(Cape Town\)\.
 
 ### Remediation<a name="iam-4-remediation"></a>
 
-To remediate this issue, delete the root user access key\.
-
-**To delete access keys**
-
-1. Log in to your account using the AWS account root user credentials\.
-
-1. Choose the account name near the top\-right corner of the page and then choose **Security Credentials**\.
-
-1. Choose **Access keys \(access key ID and secret access key\)**\. 
-
-1. To permanently delete the key, choose **Delete** and then choose **Yes**\. You cannot recover deleted keys\.
-
-1. If there is more than one root user access key, then repeat steps 4 and 5 for each key\.
+To delete the root user access key, see [Deleting access keys for the root user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_delete-key) in the *IAM User Guide*\.
 
 ## \[IAM\.5\] MFA should be enabled for all IAM users that have a console password<a name="fsbp-iam-5"></a>
 
@@ -3643,23 +3609,7 @@ We recommend that you enable MFA for all accounts that have a console password\.
 
 ### Remediation<a name="iam-5-remediation"></a>
 
-To remediate this issue, add MFA to users that do not yet have it\. 
-
-**To configure MFA for a user**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Users**\.
-
-1. Choose the **User name** of the user to configure MFA for\.
-
-1. Choose **Security credentials**\.
-
-1. Next to **Assigned MFA Device**, choose **Manage**\.
-
-1. Follow the **Manage MFA Device** wizard to assign the type of device appropriate for your environment\. 
-
-To learn how to delegate MFA setup to users, see the blog post [How to delegate management of multi\-factor authentication to AWS IAM users](http://aws.amazon.com/blogs/security/how-to-delegate-management-of-multi-factor-authentication-to-aws-iam-users/)\.
+To add MFA for IAM users, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
 ## \[IAM\.6\] Hardware MFA should be enabled for the root user<a name="fsbp-iam-6"></a>
 
@@ -3690,23 +3640,7 @@ AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="iam-6-remediation"></a>
 
-To remediate this issue, add hardware\-based MFA to the root user\.
-
-**To enable hardware\-based MFA for the root user**
-
-1. Log in to your account using the root user credentials\.
-
-1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
-
-1. In the pop\-up warning, choose **Continue to Security Credentials**\.
-
-1. Choose **Multi\-Factor Authentication \(MFA\)**\.
-
-1. Choose **Activate MFA**\.
-
-1. Choose a hardware\-based \(not virtual\) device to use for MFA and then choose **Continue**\.
-
-1. Complete the steps to configure the device type appropriate to your selection\.
+To add a hardware MFA device for the root user, see [Enable a hardware MFA device for the AWS account root user \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_physical.html#enable-hw-mfa-for-root) in the *IAM User Guide*\.
 
 ## \[IAM\.7\] Password policies for IAM users should have strong configurations<a name="fsbp-iam-7"></a>
 
@@ -3727,40 +3661,17 @@ To remediate this issue, add hardware\-based MFA to the root user\.
 + `RequireNumbers`: `true`
 + `MinimumPasswordLength`: `8`
 
-This control checks whether the account password policy for IAM users uses the following recommended configurations\.
-+ `RequireUppercaseCharacters`: `true`
-+ `RequireLowercaseCharacters`: `true`
-+ `RequireSymbols`: `true`
-+ `RequireNumbers`: `true`
-+ `MinimumPasswordLength`: `8`
+This control checks whether the account password policy for IAM users uses the recommended configurations\.
 
-To access the AWS Management Console, IAM users need passwords\. As a best practice, Security Hub highly recommends that instead of creating IAM users, you use federation\. Federation allows users to use their existing corporate credentials to log into the AWS Management Console\. Use AWS Single Sign\-On \(AWS SSO\) to create or federate the user, and then assume an IAM role into an account\.
+To access the AWS Management Console, IAM users need passwords\. As a best practice, Security Hub highly recommends that instead of creating IAM users, you use federation\. Federation allows users to use their existing corporate credentials to log into the AWS Management Console\. Use AWS IAM Identity Center \(successor to AWS Single Sign\-On\) \(IAM Identity Center\) to create or federate the user, and then assume an IAM role into an account\.
 
-To learn more about identity providers and federation, see [Identity providers and federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html) in the *IAM User Guide*\. To learn more about AWS SSO, see the [https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
+To learn more about identity providers and federation, see [Identity providers and federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html) in the *IAM User Guide*\. To learn more about IAM Identity Center, see the [https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)\.
 
- If you need to use IAM users, Security Hub recommends that you enforce the creation of strong user passwords\. You can set a password policy on your AWS account to specify complexity requirements and mandatory rotation periods for passwords\. When you create or change a password policy, most of the password policy settings are enforced the next time users change their passwords\. Some of the settings are enforced immediately\. To learn more, see [Setting an account password policy for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) in the *IAM User Guide*\.
+ If you need to use IAM users, Security Hub recommends that you enforce the creation of strong user passwords\. You can set a password policy on your AWS account to specify complexity requirements and mandatory rotation periods for passwords\. When you create or change a password policy, most of the password policy settings are enforced the next time users change their passwords\. Some of the settings are enforced immediately\.
 
 ### Remediation<a name="iam-7-remediation"></a>
 
-To remediate this issue, update your password policy to use the recommended configuration\.
-
-**To modify the password policy**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Account settings**\.
-
-1. Select **Requires at least one uppercase letter**\.
-
-1. Select **Requires at least one lowercase letter**\.
-
-1. Select **Requires at least one non\-alphanumeric character**\.
-
-1. Select **Requires at least one number**\.
-
-1. For **Minimum password length**, enter **8**\.
-
-1. Choose **Apply password policy**\.
+To update your password policy to use the recommended configuration, see [Setting an account password policy for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) in the *IAM User Guide*\.
 
 ## \[IAM\.8\] Unused IAM user credentials should be removed<a name="fsbp-iam-8"></a>
 
@@ -3815,7 +3726,8 @@ After you identify the inactive accounts or unused credentials, use the followin
 
 **Schedule type:** Change triggered
 
-**Parameters:** None
+**Parameters:**
++ `excludePermissionBoundaryPolicy`: `True`
 
 This control checks whether the IAM identity\-based policies that you create have Allow statements that use the \* wildcard to grant permissions for all actions on any service\. The control fails if any policy statement includes `"Effect": "Allow"` with `"Action": "Service:*"`\. 
 
@@ -3885,10 +3797,10 @@ Server\-side encryption is a feature in Amazon Kinesis Data Streams that automat
 
 **Note**  
 This control is not supported in the following Regions:  
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="kinesis-1-remediation"></a>
 
@@ -3908,6 +3820,7 @@ For information about enabling server\-side encryption for Kinesis streams, see 
 
 **Parameters:** 
 + `blockedActionsPatterns: kms:ReEncryptFrom, kms:Decrypt`
++ `excludePermissionBoundaryPolicy`: `True`
 
 Checks whether the default version of IAM customer managed policies allow principals to use the AWS KMS decryption actions on all resources\. This control uses [Zelkova](http://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/), an automated reasoning engine, to validate and warn you about policies that may grant broad access to your secrets across AWS accounts\.
 
@@ -4106,9 +4019,9 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 **Schedule type:** Change triggered
 
 **Parameters:** 
-+ `runtime`: `nodejs16.x, nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, python3.6, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnet6`
++ `runtime`: `nodejs16.x, nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnet6`
 
-This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks function settings for the following runtimes: `nodejs16.x`, `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `python3.6`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, and `dotnet6`\.
+This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks function settings for the following runtimes: `nodejs16.x`, `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, and `dotnet6`\.
 
 The AWS Config rule ignores functions that have a package type of `Image`\.
 
@@ -4179,15 +4092,15 @@ The function execution role must have permissions to call `CreateNetworkInterfac
 
 This control checks whether a Network Firewall policy has any stateful or stateless rule groups associated\. The control fails if stateless or stateful rule groups are not assigned\.
 
-A firewall policy defines how your firewall monitors and handles traffic in the Amazon VPC \(Virtual Private Cloud\)\. Configuration of stateless and stateful rule groups helps to filter packets and traffic flows, and defines default traffic handling\.
+A firewall policy defines how your firewall monitors and handles traffic in Amazon Virtual Private Cloud \(Amazon VPC\)\. Configuration of stateless and stateful rule groups helps to filter packets and traffic flows, and defines default traffic handling\.
 
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="networkfirewall-3-remediation"></a>
 
@@ -4208,17 +4121,17 @@ To add a rule group to a Network Firewall policy, see [Updating a firewall polic
 **Parameters:**
 + `statelessDefaultActions: aws:drop,aws:forward_to_sfe`
 
-This control checks whether the default stateless action for full packets for a Network Firewall policy is drop or forward\. The control passes if Drop or Forward is selected, and fails if Pass is selected\.
+This control checks whether the default stateless action for full packets for a Network Firewall policy is drop or forward\. The control passes if `Drop` or `Forward` is selected, and fails if `Pass` is selected\.
 
-A firewall policy defines how your firewall monitors and handles traffic in the VPC\. You configure stateless and stateful rule groups to filter packets and traffic flows\. Defaulting to Pass can allow unintended traffic\.
+A firewall policy defines how your firewall monitors and handles traffic in Amazon VPC\. You configure stateless and stateful rule groups to filter packets and traffic flows\. Defaulting to `Pass` can allow unintended traffic\.
 
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="networkfirewall-4-remediation"></a>
 
@@ -4247,17 +4160,17 @@ China \(Ningxia\)
 **Parameters:**
 + `statelessFragDefaultActions (Required) : aws:drop, aws:forward_to_sfe`
 
-This control checks whether the default stateless action for fragmented packets for a Network Firewall policy is drop or forward\. The control passes if Drop or Forward is selected, and fails if Pass is selected\.
+This control checks whether the default stateless action for fragmented packets for a Network Firewall policy is drop or forward\. The control passes if `Drop` or `Forward` is selected, and fails if `Pass` is selected\.
 
-A firewall policy defines how your firewall monitors and handles traffic in the VPC\. You configure stateless and stateful rule groups to filter packets and traffic flows\. Defaulting to Pass can allow unintended traffic\.
+A firewall policy defines how your firewall monitors and handles traffic in Amazon VPC\. You configure stateless and stateful rule groups to filter packets and traffic flows\. Defaulting to `Pass` can allow unintended traffic\.
 
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="networkfirewall-5-remediation"></a>
 
@@ -4270,6 +4183,36 @@ China \(Ningxia\)
 1. Select the name of the firewall policy that you want to edit\. This takes you to the firewall policy’s details page\.
 
 1. In **Stateless Default Actions**, choose **Edit**\. Then choose **Drop** or **Forward to stateful rule groups** as the **Default actions for fragmented packets**\.
+
+## \[NetworkFirewall\.6\] Stateless Network Firewall rule groups should not be empty<a name="fsbp-networkfirewall-6"></a>
+
+**Category:** Protect > Secure Network Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::NetworkFirewall::RuleGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/netfw-stateless-rule-group-not-empty.html](https://docs.aws.amazon.com/config/latest/developerguide/netfw-stateless-rule-group-not-empty.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if a stateless rule group in AWS Network Firewall contains rules\. The rule will fail if there are no rules in the rule group\.
+
+A rule group contains rules that define how your firewall processes traffic in your VPC\. An empty stateless rule group, when present in a firewall policy, might give the impression that the rule group will process traffic\. However, when the stateless rule group is empty, it does not process traffic\.
+
+### Remediation<a name="networkfirewall-6-remediation"></a>
+
+**To add rules to a Network Firewall rule group:**
+
+1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)
+
+1. In the navigation pane, under **Network Firewall**, choose **Network Firewall rule groups**\.
+
+1. In the **Network Firewall rule groups** page, choose the name of the rule group that you want to edit\. This takes you to the firewall rule groups details page\.
+
+1. For stateless rule groups, choose **Edit Rules** to add rules to the rule group\.
 
 ## \[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled<a name="fsbp-opensearch-1"></a>
 
@@ -4287,9 +4230,9 @@ China \(Ningxia\)
 
 This control checks whether OpenSearch domains have encryption\-at\-rest configuration enabled\. The check fails if encryption at rest is not enabled\.
 
-For an added layer of security for your sensitive data in OpenSearch, you should configure your OpenSearch domain to be encrypted at rest\. OpenSearch domains offer encryption of data at rest\. The feature uses AWS KMS to store and manage your encryption keys\. To perform the encryption, it uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
+For an added layer of security for sensitive data, you should configure your OpenSearch Service domain to be encrypted at rest\. When you configure encryption of data at rest, AWS KMS stores and manages your encryption keys\. To perform the encryption, AWS KMS uses the Advanced Encryption Standard algorithm with 256\-bit keys \(AES\-256\)\.
 
-To learn more about OpenSearch encryption at rest, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the Amazon OpenSearch Service Developer Guide\.
+To learn more about OpenSearch Service encryption at rest, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the *Amazon OpenSearch Service* *Developer Guide*\.
 
 ### Remediation<a name="opensearch-1-remediation"></a>
 
@@ -4297,7 +4240,7 @@ By default, domains do not encrypt data at rest, and you cannot configure existi
 
 For information about creating domains, see [Creating and managing Amazon OpenSearch Service domains](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#es-createdomains) in the Amazon OpenSearch Service Developer Guide\.
 
-Encryption of data at rest requires Amazon OpenSearch 1\.0 or later\. For more information about encrypting data at rest for Amazon OpenSearch, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the Amazon OpenSearch Service Developer Guide\.
+Encryption of data at rest requires Amazon OpenSearch 1\.0 or later\. For more information about encrypting data at rest for Amazon OpenSearch, see [Encryption of data at rest for Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/encryption-at-rest.html) in the *Amazon OpenSearch Service Developer Guide*\.
 
 ## \[OpenSearch\.2\] OpenSearch domains should be in a VPC<a name="fsbp-opensearch-2"></a>
 
@@ -4452,11 +4395,11 @@ This control is not supported in the following Regions:
 Africa \(Cape Town\)
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
 Europe \(Milan\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="opensearch-7-remediation"></a>
 
@@ -4476,13 +4419,13 @@ To enable fine\-grained access control, see [Fine\-grained access control in Ama
 
 **Parameters:** None
 
-TThis control checks whether connections to OpenSearch domains are required to use TLS 1\.2\. The check fails if the OpenSearch domain `TLSSecurityPolicy` is not `Policy-Min-TLS-1-2-2019-07`\.
+This control checks whether connections to OpenSearch domains are required to use TLS 1\.2\. The check fails if the OpenSearch domain `TLSSecurityPolicy` is not `Policy-Min-TLS-1-2-2019-07`\.
 
 HTTPS \(TLS\) can be used to help prevent potential attackers from using person\-in\-the\-middle or similar attacks to eavesdrop on or manipulate network traffic\. Only encrypted connections over HTTPS \(TLS\) should be allowed\. Encrypting data in transit can affect performance\. You should test your application with this feature to understand the performance profile and the impact of TLS\. TLS 1\.2 provides several security enhancements over previous versions of TLS\. 
 
 ### Remediation<a name="opensearch-8-remediation"></a>
 
-To enable TLS encryption, use the [UpdateDomainConfig](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-actions-updatedomainconfig) API operation to configure the [DomainEndpointOptions](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-datatypes-domainendpointoptions) in order to set the `TLSSecurityPolicy`\. For more information, see [Node\-to\-node encryption](https://docs.aws.amazon.com/pensearch-service/latest/developerguide/ntn.html) in the Amazon OpenSearch Service Developer Guide\.
+To enable TLS encryption, use the [UpdateDomainConfig](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-actions-updatedomainconfig) API operation to configure the [DomainEndpointOptions](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/configuration-api.html#configuration-api-datatypes-domainendpointoptions) in order to set the `TLSSecurityPolicy`\. For more information, see [Node\-to\-node encryption](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html) in the Amazon OpenSearch Service Developer Guide\.
 
 ## \[RDS\.1\] RDS snapshots should be private<a name="fsbp-rds-1"></a>
 
@@ -5297,9 +5240,9 @@ Identification and inventory of your IT assets is a crucial aspect of governance
 
 **Parameters:** None
 
-This control checks whether an RDS instance is deployed in a VPC \(EC2\-VPC\)\.
+This control checks whether an Amazon RDS instance is deployed on EC2\-VPC\.
 
-VPCs provide a number of network controls to secure access to RDS resources\. These controls include VPC Endpoints, network ACLs, and security groups\. To take advantage of these controls, we recommend that you move EC2\-Classic RDS instances to EC2\-VPC\.
+VPCs provide a number of network controls to secure access to RDS resources\. These controls include VPC Endpoints, network ACLs, and security groups\. To take advantage of these controls, we recommend that you create your RDS instances on EC2\-VPC\.
 
 ### Remediation<a name="rds-18-remediation"></a>
 
@@ -5839,10 +5782,10 @@ When creating a Redshift cluster, you should change the default database name to
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="redshift-9-remediation"></a>
 
@@ -5998,7 +5941,7 @@ To remediate this issue, update your S3 bucket to remove public access\.
 
 This control checks that your S3 bucket either has Amazon S3 default encryption enabled or that the S3 bucket policy explicitly denies put\-object requests without server\-side encryption\.
 
-For an added layer of security for your sensitive data in S3 buckets, you should configure your buckets with server\-side encryption to protect your data at rest\. Amazon S3 encrypts each object with a unique key\. As an additional safeguard, it encrypts the key itself with a master key that it rotates regularly\. Amazon S3 server\-side encryption uses one of the strongest block ciphers available to encrypt your data, 256\-bit Advanced Encryption Standard \(AES\-256\)\.
+For an added layer of security for your sensitive data in S3 buckets, you should configure your buckets with server\-side encryption to protect your data at rest\. Amazon S3 encrypts each object with a unique key\. As an additional safeguard, Amazon S3 encrypts the key itself with a root key that it rotates regularly\. Amazon S3 server\-side encryption uses one of the strongest block ciphers available to encrypt your data, 256\-bit Advanced Encryption Standard \(AES\-256\)\.
 
 To learn more, see [Protecting data using server\-side encryption with Amazon S3\-managed encryption keys \(SSE\-S3\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) in the *Amazon Simple Storage Service User Guide*\.
 
@@ -6020,7 +5963,7 @@ To remediate this issue, update your S3 bucket to enable default encryption\.
 
 1. For the encryption, choose either **AES\-256** or **AWS\-KMS**\.
    + Choose **AES\-256** to use keys that are managed by Amazon S3 for default encryption\. For more information about using Amazon S3 server\-side encryption to encrypt your data, see the [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)\.
-   + Choose **AWS\-KMS** to use keys that are managed by AWS KMS for default encryption\. Then choose a master key from the list of the AWS KMS master keys that you have created\.
+   + Choose **AWS\-KMS** to use keys that are managed by AWS KMS for default encryption\. Then choose a root key from the list of the AWS KMS root keys that you have created\.
 
      Type the Amazon Resource Name \(ARN\) of the AWS KMS key to use\. You can find the ARN for your AWS KMS key in the IAM console, under **Encryption keys**\. Or, you can choose a key name from the drop\-down list\.
 **Important**  
@@ -6252,10 +6195,10 @@ By enabling Event Notifications, you receive alerts on your Amazon S3 buckets wh
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="s3-11-remediation"></a>
 
@@ -6282,10 +6225,10 @@ ACLs are legacy access control mechanisms that predate IAM\. Instead of ACLs, we
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="s3-12-remediation"></a>
 
@@ -6312,10 +6255,10 @@ Configuring lifecycle rules on your S3 bucket defines actions that you want S3 t
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="s3-13-remediation"></a>
 
@@ -6612,10 +6555,10 @@ Logging is an important part of maintaining the reliability, availability, and p
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="sns-2-remediation"></a>
 
@@ -6835,11 +6778,9 @@ For more information about disabling public access to SSM documents, see [Modify
 
 **Parameters:** None
 
-This control checks whether logging is enabled for an AWS WAF global Web ACL\. This control fails if logging is not enabled for the web ACL\.
+This control checks whether logging is enabled for an AWS WAF global web ACL\. This control fails if logging is not enabled for the web ACL\.
 
 Logging is an important part of maintaining the reliability, availability, and performance of AWS WAF globally\. It is a business and compliance requirement in many organizations, and allows you to troubleshoot application behavior\. It also provides detailed information about the traffic that is analyzed by the web ACL that is attached to AWS WAF\.
-
-NOTE
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -6915,10 +6856,10 @@ A WAF Regional rule can contain multiple conditions\. The rule's conditions allo
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="waf-2-remediation"></a>
 
@@ -6946,10 +6887,10 @@ A WAF Regional rule group can contain multiple rules\. The rule's conditions all
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="waf-3-remediation"></a>
 
@@ -6976,10 +6917,10 @@ A WAF Regional web ACL can contain a collection of rules and rule groups that in
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
-AWS GovCloud \(US\-East\)
-AWS GovCloud \(US\-West\)
 China \(Beijing\)
 China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="waf-4-remediation"></a>
 

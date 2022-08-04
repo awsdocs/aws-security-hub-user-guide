@@ -25,7 +25,7 @@ To disassociate member accounts, you can use the Security Hub API or the AWS Com
 + **AWS CLI –** At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/disassociate-members.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/disassociate-members.html) command\.
 
   ```
-  aws securityhub disassociate-members --account-ids <accountIds>
+  aws securityhub disassociate-members --account-ids "<accountIds>"
   ```
 
   **Example**

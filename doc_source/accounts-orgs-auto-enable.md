@@ -2,15 +2,13 @@
 
 The Security Hub administrator account can configure Security Hub to automatically enable new organization accounts as member accounts\.
 
-When new accounts are added to your organization, they are added to the list on the **Accounts** page\. For organization accounts, **Type** is **By organization**\.
+When new accounts are added to your organization, they are added to the list on the **Accounts** page\. For organization accounts, **Type** is **By organization**\. By default, the new accounts are not enabled as member accounts\. Their status is **Not a member**\.
 
-By default, the new accounts are not enabled as member accounts\. Their status is **Not a member**\.
+When you turn on automatic enablement, Security Hub treats *new* accounts as member accounts when they are added to the organization\. Turning on automatic enablement does not treat *existing* organization accounts as member accounts unless they were already enabled as member accounts\. Security Hub also cannot automatically treat accounts as members if they already belong to another administrator account\.
 
-When you enable the automatic enablement setting, Security Hub begins to enable new accounts as member accounts when they are added to the organization\. It does not enable existing organization accounts that are not enabled as member accounts\. Security Hub also cannot automatically enable accounts that already belong to another administrator account\.
+If an organization account does not have Security Hub enabled, then Security Hub and the [default standards](securityhub-standards-enable-disable.md#securityhub-auto-enabled-standards) are enabled automatically for that account\.
 
-If the account does not have Security Hub enabled, then Security Hub and the default standards are enabled automatically for that account\.
-
-For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to the account\. It only enables the membership\.
+For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to the account\. It only creates the membership\.
 
 Remember that all Security Hub accounts must have AWS Config enabled and configured to record all resources\. For details on the requirement for AWS Config, see [Enabling and configuring AWS Config](securityhub-prereq-config.md)\.
 

@@ -135,19 +135,7 @@ The AWS Config rule used for this check may take up to 4 hours to accurately rep
 
 ### Remediation<a name="cis-1.2-remediation"></a>
 
-**To configure MFA for a user**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Users**\.
-
-1. Choose the **User name** of the user to configure MFA for\.
-
-1. Choose **Security credentials** and then choose **Manage** next to **Assigned MFA device**\.
-
-1. Follow the **Manage MFA Device** wizard to assign the type of device appropriate for your environment\.
-
-To learn how to delegate MFA setup to users, see [How to Delegate Management of Multi\-Factor Authentication to AWS IAM Users](http://aws.amazon.com/blogs/security/how-to-delegate-management-of-multi-factor-authentication-to-aws-iam-users/) on the AWS Security Blog\.
+To add MFA for IAM users, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
 ## 1\.3 – Ensure credentials unused for 90 days or greater are disabled<a name="securityhub-cis-controls-1.3"></a>
 
@@ -405,17 +393,7 @@ This control is not supported in Asia Pacific \(Osaka\)\.
 
 ### Remediation<a name="cis-1.12-remediation"></a>
 
-**To delete access keys**
-
-1. Log in to your account using the root user credentials\.
-
-1. Choose the account name near the top\-right corner of the page and then choose **Security Credentials**\.
-
-1. Choose **Access keys \(access key ID and secret access key\)**\.
-
-1. To permanently delete the key, choose **Delete** and then choose **Yes**\. You cannot recover deleted keys\.
-
-1. If there is more than one root user access key, then repeat steps 4 and 5 for each key\.
+To delete the root user access key, see [Deleting access keys for the root user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_delete-key) in the *IAM User Guide*\.
 
 ## 1\.13 – Ensure MFA is enabled for the root user<a name="securityhub-cis-controls-1.13"></a>
 
@@ -438,23 +416,7 @@ AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="cis-1.13-remediation"></a>
 
-**To enable MFA for the root user**
-
-1. Log in to your account using the root user credentials\.
-
-1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
-
-1. In the pop\-up warning, choose **Continue to Security Credentials**\.
-
-1. Choose **Multi\-factor authentication \(MFA\)**\.
-
-1. Choose **Activate MFA**\.
-
-1. Choose the type of device to use for MFA and then choose **Continue**\.
-
-1. Complete the steps to configure the device type appropriate to your selection\.
-
-   Choose a hardware\-based authentication mechanism for best results in passing the check [1\.14 – Ensure hardware MFA is enabled for the root user ](#securityhub-cis-controls-1.14)\.
+To add MFA to the root user, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
 ## 1\.14 – Ensure hardware MFA is enabled for the root user<a name="securityhub-cis-controls-1.14"></a>
 
@@ -481,21 +443,7 @@ AWS GovCloud \(US\-West\)\.
 
 ### Remediation<a name="cis-1.14-remediation"></a>
 
-**To enable hardware\-based MFA for the root user**
-
-1. Log in to your account using the root user credentials\.
-
-1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\.
-
-1. In the pop\-up warning, choose **Continue to Security Credentials**\.
-
-1. Choose **Multi\-factor authentication \(MFA\)**\.
-
-1. Choose **Activate MFA**\.
-
-1. Choose a hardware\-based \(not virtual\) device to use for MFA and then choose **Continue**\.
-
-1. Complete the steps to configure the device type appropriate to your selection\.
+To add a hardware MFA device for the root user, see [Enable a hardware MFA device for the AWS account root user \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_physical.html#enable-hw-mfa-for-root) in the *IAM User Guide*\.
 
 ## 1\.16 – Ensure IAM policies are attached only to groups or roles<a name="securityhub-cis-controls-1.16"></a>
 
@@ -514,47 +462,7 @@ IAM users created by Amazon Simple Email Service are automatically created using
 
 ### Remediation<a name="cis-1.16-remediation"></a>
 
-To resolve this issue, create an IAM group, assign the policy to the group, and then add the users to the group\. The policy is applied to each user in the group\.
-
-**To create an IAM group**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Groups** and then choose **Create New Group**\.
-
-1. Enter a name for the group to create and then choose **Next Step**\.
-
-1. Select each policy to assign to the group and then choose **Next Step**\.
-
-   The policies that you choose should include any policies currently attached directly to a user account\. The next step to resolve a failed check is to add users to a group and then assign the policies to that group\. Each user in the group gets assigned the policies assigned to the group\.
-
-1. Confirm the details on the **Review** page and then choose **Create Group**\.
-
-For more information about creating groups, see [Creating IAM groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html) in the *IAM User Guide*\.
-
-**To add users to an IAM group**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Groups**\.
-
-1. Choose **Group Actions** and then choose **Add Users to Group**\.
-
-1. Select the users to add to the group and then choose **Add Users**\.
-
-For more information about adding users to groups, see [Adding and removing users in an IAM group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\.
-
-**To remove a policy attached directly to a user**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Users**\.
-
-1. For the user to detach a policy from, choose the name in the **User name** column\.
-
-1. For each policy listed under **Attached directly**, choose the **X** on the right side of the page to remove the policy from the user and then choose **Remove**\.
-
-1. Confirm that the user can still use AWS services as expected\.
+To resolve this issue, [create an IAM group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html), and attach the policy to the group\. Then, [add the users to the group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\. The policy is applied to each user in the group\. To remove a policy attached directly to a user, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *IAM User Guide*\.
 
 ## 1\.20 \- Ensure a support role has been created to manage incidents with AWS Support<a name="securityhub-cis-controls-1.20"></a>
 
@@ -630,19 +538,7 @@ You should remove IAM policies that have a statement with `"Effect": "Allow"` wi
 
 ### Remediation<a name="cis-1.22-remediation"></a>
 
-**To modify an IAM policy**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Policies**\.
-
-1. Select the radio button next to the policy to remove\.
-
-1. From the **Policy actions** drop\-down menu, choose **Detach**\.
-
-1. On the **Detach policy** page, select the radio button next to each user to detach the policy from and then choose **Detach policy**\.
-
-Confirm that the user that you detached the policy from can still access AWS services and resources as expected\.
+To modify your IAM policies so that they do not allow full "\*" administrative privileges, see [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\.
 
 ## 2\.1 – Ensure CloudTrail is enabled in all Regions<a name="securityhub-cis-controls-2.1"></a>
 

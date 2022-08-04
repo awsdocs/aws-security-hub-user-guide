@@ -1,6 +1,6 @@
-# Supported Regions<a name="securityhub-regions"></a>
+# Regional limits<a name="securityhub-regions"></a>
 
-To view the Regions that AWS Security Hub is available in, see [Security Hub Service Endpoints](https://docs.aws.amazon.com/general/latest/gr/sechub.html)\.
+Some AWS Security Hub features are available in only some AWS Regions\. The following sections specify these Regional limits\.
 
 **Contents**
 + [Cross\-Region aggregation restrictions](#securityhub-regions-finding-aggregation-support)
@@ -36,13 +36,15 @@ To view the Regions that AWS Security Hub is available in, see [Security Hub Ser
 
 ## Cross\-Region aggregation restrictions<a name="securityhub-regions-finding-aggregation-support"></a>
 
-[Cross\-Region aggregation](finding-aggregation.md) is not available in the AWS GovCloud \(US\) Region\. In the China Regions, cross\-Region aggregation is only available across the China Regions \(specifically, you can only aggregate data from China \(Beijing\) to China \(Ningxia\), or vice versa\)\.
+In AWS GovCloud \(US\), [cross\-Region aggregation](finding-aggregation.md) is available for findings, finding updates, and insights across AWS GovCloud \(US\) only\. Specifically, you can only aggregate findings, finding updates, and insights between AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)\.
 
-You cannot use a Region that is disabled by default as your aggregation Region\. For a list of Regions that are disabled by default, see [Enabling a Region](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable) in the *AWS General Reference*\.
+In the China Regions, cross\-Region aggregation is available for findings, finding updates, and insights across the China Regions only\. Specifically, you can only aggregate findings, finding updates, and insights between China \(Beijing\) and China \(Ningxia\)\.
+
+You can't use a Region that is disabled by default as your aggregation Region\. For a list of Regions that are disabled by default, see [Enabling a Region](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable) in the *AWS General Reference*\.
 
 ## Integrations not supported in all Regions<a name="securityhub-regions-integration-support"></a>
 
-Some integrations are not available in all Regions\. If an integration is not supported, it is not listed on the **Integrations** page\.
+Some integrations are not available in all Regions\. If an integration is not available in a specific Region, it is not listed on the **Integrations** page of the Security Hub console when you choose that Region\.
 
 ### Integrations that are supported in China \(Beijing\) and China \(Ningxia\)<a name="securityhub-regions-integration-support-china"></a>
 
@@ -50,7 +52,8 @@ The China \(Beijing\) and China \(Ningxia\) Regions only support the following [
 + AWS Firewall Manager
 + Amazon GuardDuty
 + IAM Access Analyzer
-+ Systems Manager Explorer and OpsCenter
++ Systems Manager Explorer
++ Systems Manager OpsCenter
 + Systems Manager Patch Manager
 
 The China \(Beijing\) and China \(Ningxia\) Regions only support the following [third\-party integrations](securityhub-partner-providers.md):
@@ -218,7 +221,7 @@ The following controls are not supported in Africa \(Cape Town\)\.
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[EFS\.1\] Amazon EFS should be configured to encrypt file data at rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
 [\[EFS\.2\] Amazon EFS volumes should be in backup plans](securityhub-standards-fsbp-controls.md#fsbp-efs-2)  
-[\[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
+[\[ELB\.2\] Classic Load Balancers with HTTPS/SSL listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
 [\[ELB\.4\] Application load balancers should be configured to drop HTTP headers](securityhub-standards-fsbp-controls.md#fsbp-elb-4)  
 [\[ELB\.8\] Classic Load Balancers with HTTPS/SSL listeners should use a predefined security policy that has strong configuration](securityhub-standards-fsbp-controls.md#fsbp-elb-8)  
 [\[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-standards-fsbp-controls.md#fsbp-elbv2-1)  
@@ -354,7 +357,7 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[EC2\.21\] Network ACLs should not allow ingress from 0\.0\.0\.0/0 to port 22 or port 3389](securityhub-standards-fsbp-controls.md#fsbp-ec2-21)  
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
+[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -369,7 +372,7 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[EFS\.3\] EFS access points should enforce a root directory](securityhub-standards-fsbp-controls.md#fsbp-efs-3)  
 [\[ElasticBeanstalk\.1\] Elastic Beanstalk environments should have enhanced health reporting enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-1)  
 [\[ElasticBeanstalk\.2\] Elastic Beanstalk managed platform updates should be enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-2)  
-[\[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
+[\[ELB\.2\] Classic Load Balancers with HTTPS/SSL listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
 [\[ELB\.3\] Classic Load Balancer listeners should be configured with HTTPS or TLS termination](securityhub-standards-fsbp-controls.md#fsbp-elb-3)  
 [\[ELB\.4\] Application load balancers should be configured to drop HTTP headers](securityhub-standards-fsbp-controls.md#fsbp-elb-4)  
 [\[ELB\.6\] Application Load Balancer deletion protection should be enabled](securityhub-standards-fsbp-controls.md#fsbp-elb-6)  
@@ -534,7 +537,7 @@ The following controls are not supported in Asia Pacific \(Osaka\)\.
 [\[EKS\.2\] EKS clusters should run on a supported Kubernetes version](securityhub-standards-fsbp-controls.md#fsbp-eks-2)  
 [\[ElasticBeanstalk\.1\] Elastic Beanstalk environments should have enhanced health reporting enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-1)  
 [\[ElasticBeanstalk\.2\] Elastic Beanstalk managed platform updates should be enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-2)  
-[\[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
+[\[ELB\.2\] Classic Load Balancers with HTTPS/SSL listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
 [\[ELB\.4\] Application load balancers should be configured to drop HTTP headers](securityhub-standards-fsbp-controls.md#fsbp-elb-4)  
 [\[ELB\.8\] Classic Load Balancers with HTTPS/SSL listeners should use a predefined security policy that has strong configuration](securityhub-standards-fsbp-controls.md#fsbp-elb-8)  
 [\[ELB\.9\] Classic Load Balancers should have cross\-zone load balancing enabled](securityhub-standards-fsbp-controls.md#fsbp-elb-9)  
@@ -714,7 +717,7 @@ The following controls are not supported in China \(Beijing\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
+[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -730,7 +733,7 @@ The following controls are not supported in China \(Beijing\)\.
 [\[EKS\.2\] EKS clusters should run on a supported Kubernetes version](securityhub-standards-fsbp-controls.md#fsbp-eks-2)  
 [\[ElasticBeanstalk\.1\] Elastic Beanstalk environments should have enhanced health reporting enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-1)  
 [\[ElasticBeanstalk\.2\] Elastic Beanstalk managed platform updates should be enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-2)  
-[\[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
+[\[ELB\.2\] Classic Load Balancers with HTTPS/SSL listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
 [\[ELB\.10\] Classic Load Balancers should span multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-elb-10)  
 [\[ELB\.12\] Application Load Balancers should be configured with defensive or strictest desync mitigation mode](securityhub-standards-fsbp-controls.md#fsbp-elb-12)  
 [\[ELB\.13\] Application, Network, and Gateway Load Balancers should span multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-elb-13)  
@@ -829,7 +832,7 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
+[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -845,7 +848,7 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[EKS\.2\] EKS clusters should run on a supported Kubernetes version](securityhub-standards-fsbp-controls.md#fsbp-eks-2)  
 [\[ElasticBeanstalk\.1\] Elastic Beanstalk environments should have enhanced health reporting enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-1)  
 [\[ElasticBeanstalk\.2\] Elastic Beanstalk managed platform updates should be enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-2)  
-[\[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
+[\[ELB\.2\] Classic Load Balancers with HTTPS/SSL listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
 [\[ELB\.10\] Classic Load Balancers should span multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-elb-10)  
 [\[ELB\.12\] Application Load Balancers should be configured with defensive or strictest desync mitigation mode](securityhub-standards-fsbp-controls.md#fsbp-elb-12)  
 [\[ELB\.13\] Application, Network, and Gateway Load Balancers should span multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-elb-13)  
@@ -1010,7 +1013,7 @@ The following controls are not supported in Europe \(Milan\)\.
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[EFS\.1\] Amazon EFS should be configured to encrypt file data at rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-efs-1)  
 [\[EFS\.2\] Amazon EFS volumes should be in backup plans](securityhub-standards-fsbp-controls.md#fsbp-efs-2)  
-[\[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
+[\[ELB\.2\] Classic Load Balancers with HTTPS/SSL listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
 [\[ELB\.4\] Application load balancers should be configured to drop HTTP headers](securityhub-standards-fsbp-controls.md#fsbp-elb-4)  
 [\[ELB\.8\] Classic Load Balancers with HTTPS/SSL listeners should use a predefined security policy that has strong configuration](securityhub-standards-fsbp-controls.md#fsbp-elb-8)  
 [\[ELBv2\.1\] Application Load Balancer should be configured to redirect all HTTP requests to HTTPS](securityhub-standards-fsbp-controls.md#fsbp-elbv2-1)  
@@ -1199,7 +1202,7 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
+[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -1216,7 +1219,7 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[EKS\.2\] EKS clusters should run on a supported Kubernetes version](securityhub-standards-fsbp-controls.md#fsbp-eks-2)  
 [\[ElasticBeanstalk\.1\] Elastic Beanstalk environments should have enhanced health reporting enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-1)  
 [\[ElasticBeanstalk\.2\] Elastic Beanstalk managed platform updates should be enabled](securityhub-standards-fsbp-controls.md#fsbp-elasticbeanstalk-2)  
-[\[ELB\.2\] Classic Load Balancers with SSL/HTTPS listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
+[\[ELB\.2\] Classic Load Balancers with HTTPS/SSL listeners should use a certificate provided by AWS Certificate Manager](securityhub-standards-fsbp-controls.md#fsbp-elb-2)  
 [\[ELB\.8\] Classic Load Balancers with HTTPS/SSL listeners should use a predefined security policy that has strong configuration](securityhub-standards-fsbp-controls.md#fsbp-elb-8)  
 [\[ELB\.10\] Classic Load Balancers should span multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-elb-10)  
 [\[ELB\.12\] Application Load Balancers should be configured with defensive or strictest desync mitigation mode](securityhub-standards-fsbp-controls.md#fsbp-elb-12)  
@@ -1311,7 +1314,7 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
+[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  

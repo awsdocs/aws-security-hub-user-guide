@@ -1,12 +1,10 @@
-# ASFF syntax<a name="securityhub-findings-format-syntax"></a>
+# AWS Security Finding Format \(ASFF\) syntax<a name="securityhub-findings-format-syntax"></a>
 
-The following is a complete outline of the JSON for a finding in the AWS Security Finding Format \(ASFF\)\.
-
-Choose a linked object name to view an example finding for that object\.
+The following is a complete outline of the JSON for a finding in the AWS Security Finding Format \(ASFF\)\. The format is derived from [JSON Schema](https://json-schema.org/)\. Choose a linked object name to view an example finding for that object\. You can compare your Security Hub findings with the resources and examples shown here to help you interpret your findings\.
 
 To view descriptions of the required ASFF attributes, see [Required attributes](asff-required-attributes.md)\.
 
-To view descriptions of the other top\-level ASFF attributes, see [Other top\-level attributes](asff-top-level-attributes.md)\.
+To view descriptions of the other top\-level ASFF attributes, see [Optional top\-level attributes](asff-top-level-attributes.md)\.
 
 ```
 "Findings": [ 

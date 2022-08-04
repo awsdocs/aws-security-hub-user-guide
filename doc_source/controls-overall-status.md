@@ -12,7 +12,6 @@ It can take up to 24 hours after enabling a control for first\-time control stat
 ## Values for Compliance\.Status<a name="controls-overall-status-compliance-status"></a>
 
 The `Compliance.Status` for each finding is assigned one of the following values\.
-
 + `PASSED` – Automatically sets the Security Hub `Workflow.Status` to `RESOLVED`\.
 
   If `Compliance.Status` for a finding changes from `PASSED` to `FAILED`, `WARNING`, or `NOT_AVAILABLE`; and `Workflow.Status` was either `NOTIFIED` or `RESOLVED`; then Security Hub automatically sets `Workflow.Status` to `NEW`\.
@@ -27,7 +26,6 @@ The `Compliance.Status` for each finding is assigned one of the following values
 Security Hub uses the compliance status of the control findings to calculate an overall control status\. When it calculates the overall control status, Security Hub ignores findings that have a `Workflow.Status` of `SUPPRESSED`\.
 
 The available values for the overall control status are as follows:
-
 + **Passed** – Indicates that all findings have a `Compliance.Status` of `PASSED`\.
 + **Failed** – Indicates that at least one finding has a `Compliance.Status` of `FAILED`\.
 + **Unknown** – Indicates that at least one finding has a `Compliance.Status` of `WARNING` or `NOT_AVAILABLE`\. No findings are `FAILED`\.

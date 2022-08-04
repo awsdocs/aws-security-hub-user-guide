@@ -1158,19 +1158,7 @@ No access keys should be created for the root user\. Doing so might violate the 
 
 ### Remediation<a name="pcidss-iam-1-remediation"></a>
 
-**To delete access keys**
-
-1. Log in to your account using the root user credentials\.
-
-1. Choose the account name near the top\-right corner of the page and then choose **My Security Credentials**\. 
-
-1. In the pop\-up warning, choose **Continue to Security Credentials**\. 
-
-1. Choose **Access keys \(access key ID and secret access key\)**\. 
-
-1. To permanently delete the key, choose **Delete** and then choose **Yes**\. You cannot recover deleted keys\.
-
-1. If there is more than one root user access key, then repeat steps 4 and 5 for each key\.
+To delete the root user access key, see [Deleting access keys for the root user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_delete-key) in the *IAM User Guide*\.
 
 ## \[PCI\.IAM\.2\] IAM users should not have IAM policies attached<a name="pcidss-iam-2"></a>
 
@@ -1204,57 +1192,7 @@ This is a method used to ensure access to systems components that contain cardho
 
 ### Remediation<a name="pcidss-iam-2-remediation"></a>
 
-To resolve this issue, do the following:
-
-1. Create an IAM group
-
-1. Assign the policy to the group
-
-1. Add the users to the group
-
-The policy is applied to each user in the group\. 
-
-**To create an IAM group**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Groups** and then choose **Create New Group**\.
-
-1. Enter a name for the group to create and then choose **Next Step**\.
-
-1. Select each policy to assign to the group and then choose **Next Step**\.
-
-   The policies that you choose should include any policies currently attached directly to a user account\. The next step to resolve a failed check is to add users to a group and then assign the policies to that group\.
-
-   Each user in the group gets assigned the policies assigned to the group\. 
-
-1. Confirm the details on the **Review** page and then choose **Create Group**\. 
-
-For more information about creating IAM groups, see the [https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html)\.
-
-**To add users to an IAM group**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Groups**\.
-
-1. Choose **Group Actions** and then choose **Add Users to Group**\.
-
-1. Choose the users to add to the group and then choose **Add Users**\.
-
-For more information about adding users to groups, see the [https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\.
-
-**To remove a policy attached directly to a user**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Users**\. 
-
-1. For the user to detach a policy from, in the **User name** column, choose the name\. 
-
-1. For each policy listed under **Attached directly**, to remove the policy from the user, choose the **X** on the right side of the page and then choose **Remove**\. 
-
-1. Confirm that the user can still use AWS services as expected\.
+To resolve this issue, [create an IAM group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html), and attach the policy to the group\. Then, [add the users to the group](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_add-remove-users.html)\. The policy is applied to each user in the group\. To remove a policy attached directly to a user, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *IAM User Guide*\.
 
 ## \[PCI\.IAM\.3\] IAM policies should not allow full "\*" administrative privileges<a name="pcidss-iam-3"></a>
 
@@ -1283,19 +1221,7 @@ Providing full administrative privileges instead of restricting to the minimum r
 
 ### Remediation<a name="pcidss-iam-3-remediation"></a>
 
-**To modify an IAM policy**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Policies**\.
-
-1. Choose the radio button next to the policy to remove\.
-
-1. From **Policy actions**, choose **Detach**\.
-
-1. On the **Detach policy** page, choose the radio button next to each user to detach the policy from and then choose **Detach policy**\. 
-
-1. Confirm that the user that you detached the policy from can still access AWS services and resources as expected\.
+To modify your IAM policies so that they do not allow full "\*" administrative privileges, see [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\.
 
 ## \[PCI\.IAM\.4\] Hardware MFA should be enabled for the root user<a name="pcidss-iam-4"></a>
 
@@ -1335,21 +1261,7 @@ Enabling hardware MFA is a method used to incorporate multi\-factor authenticati
 
 ### Remediation<a name="pcidss-iam-4-remediation"></a>
 
-**To enable hardware\-based MFA for the root user**
-
-1. Log in to your account using the root user credentials\.
-
-1. Choose the account name at the top right of the page and then choose **My Security Credentials**\. 
-
-1. In the warning, choose **Continue to Security Credentials**\. 
-
-1. Choose **Multi\-factor authentication \(MFA\)**\. 
-
-1. Choose **Activate MFA**\.
-
-1. Choose a hardware\-based \(not virtual\) device to use for MFA and then choose **Continue**\. 
-
-1. Complete the steps to configure the device type appropriate to your selection\. 
+To add a hardware MFA device for the root user, see [Enable a hardware MFA device for the AWS account root user \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_physical.html#enable-hw-mfa-for-root) in the *IAM User Guide*\.
 
 ## \[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user<a name="pcidss-iam-5"></a>
 
@@ -1387,21 +1299,7 @@ Enabling virtual MFA is a method used to incorporate multi\-factor authenticatio
 
 ### Remediation<a name="pcidss-iam-5-remediation"></a>
 
-**To enable MFA for the root user**
-
-1. Log in to your account using the root user credentials\.
-
-1. Choose the account name at the top\-right of the page and then choose **My Security Credentials**\.
-
-1. In the warning, choose **Continue to Security Credentials**\.
-
-1. Choose **Multi\-factor authentication \(MFA\)**\. 
-
-1. Choose **Activate MFA**\.
-
-1. Choose the type of device to use for MFA and then choose **Continue**\. 
-
-1. Complete the steps to configure the device type appropriate to your selection\.
+To add virtual MFA for the root user, see [Enable a virtual MFA device for your AWS account root user \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root) in the *IAM User Guide*\.
 
 ## \[PCI\.IAM\.6\] MFA should be enabled for all IAM users<a name="pcidss-iam-6"></a>
 
@@ -1426,19 +1324,7 @@ Enabling MFA for all IAM users is a method used to incorporate multi\-factor aut
 
 ### Remediation<a name="pcidss-iam-6-remediation"></a>
 
-**To configure MFA for a user**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Choose **Users**\.
-
-1. Choose the user name of the user to configure MFA for\.
-
-1. Choose **Security credentials** and then choose **Manage** next to **Assigned MFA device**\.
-
-1. Follow the **Manage MFA Device** wizard to assign the type of device appropriate for your environment\. 
-
-To learn how to delegate MFA setup to users, the AWS Security Blog post [How to Delegate Management of Multi\-Factor Authentication to AWS IAM Users](http://aws.amazon.com/blogs/security/how-to-delegate-management-of-multi-factor-authentication-to-aws-iam-users/)\. 
+To add MFA for IAM users, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
 ## \[PCI\.IAM\.7\] IAM user credentials should be disabled if not used within a predefined number of days<a name="pcidss-iam-7"></a>
 
@@ -1530,31 +1416,7 @@ If you have IAM users in your AWS account, the IAM password policy should be con
 
 ### Remediation<a name="pcidss-iam-8-remediation"></a>
 
-You can use the IAM console to modify the password policy\.
-
-**To modify the password policy**
-
-1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-1. Under **Access management**, choose **Account settings**\.
-
-1. Select **Prevent password reuse**\. For **Number of passwords to remember**, enter **24**\.
-
-1. Choose **Change password policy**\.
-
-1. Select **Require at least one uppercase letter from Latin alphabet \(A\-Z\)**\.
-
-1. Select **Require at least one lowercase letter from Latin alphabet \(a\-z\)**\.
-
-1. Select **Require at least one non\-alphanumeric character \(\!@\#$%^&\*\(\)\_\+\-=\[\]\{\}\|'\)**\.
-
-1. Select **Require at least one number**\.
-
-1. For **Enforce minimum password length**, enter **14**\.
-
-1. Select **Enable password expiration**\. For **Expire passwords in day\(s\)**, enter **90**\. 
-
-1. Choose **Save changes**\.
+To update your password policy to use the recommended configuration, see [Setting an account password policy for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) in the *IAM User Guide*\.
 
 ## \[PCI\.KMS\.1\] KMS key rotation should be enabled<a name="pcidss-kms-1"></a>
 

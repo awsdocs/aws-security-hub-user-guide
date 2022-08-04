@@ -1,6 +1,11 @@
-# Managing custom insights<a name="securityhub-custom-insights"></a>
+# Custom insights<a name="securityhub-custom-insights"></a>
 
-In addition to the AWS Security Hub managed insights, you can create custom insights to track issues and resources that are specific to your environment\.
+In addition to the AWS Security Hub managed insights, you can create custom insights in Security Hub to track issues that are specific to your environment\. Custom insights provide a way to track a curated subset of issues\.
+
+Here are some examples of custom insights that may be useful to set up:
++ If you own an administrator account, you can set up a custom insight to track critical and high severity findings that are affecting member accounts\.
++ If you rely on a specific [integrated AWS service](securityhub-internal-providers.md), you can set up a custom insight to track critical and high severity findings from that service\.
++ If you rely on a [third party integration](securityhub-partner-providers.md), you can set up a custom insight to track critical and high severity findings from that integrated product\.
 
 You can create completely new custom insights, or start from an existing custom or managed insight\.
 

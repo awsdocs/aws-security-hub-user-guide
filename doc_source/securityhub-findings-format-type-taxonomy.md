@@ -1,11 +1,11 @@
 # Types taxonomy for ASFF<a name="securityhub-findings-format-type-taxonomy"></a>
 
-The following information describes the first three levels of the `Types` path\. In the list, the top\-level bullets are namespaces, the second\-level bullets are categories, and the third\-level bullets are classifiers\. Finding providers must use defined namespaces\. The defined categories and classifiers are recommended for use, but are not required\. Only the software and configuration checks namespace has defined classifiers\. 
+The following information describes the first three levels of the `Types` path\. In the list, the top\-level bullets are namespaces, the second\-level bullets are categories, and the third\-level bullets are classifiers\. We recommend that finding providers use defined namespaces to help sort and group findings\. The defined categories and classifiers may also be used, but are not required\. Only the software and configuration checks namespace has defined classifiers\. 
 + Namespaces
   + Categories
     + Classifiers
 
-A finding provider might define a partial path for namespace/category/classifier\. For example, the following finding types are all valid\.
+A finding provider may define a partial path for namespace/category/classifier\. For example, the following finding types are all valid:
 + TTPs
 + TTPs/Defense Evasion
 + TTPs/Defense Evasion/CloudTrailStopped
@@ -18,9 +18,10 @@ The tactics, techniques, and procedures categories in the following list align t
     + Network Reachability
     + Runtime Behavior Analysis
   + Industry and Regulatory Standards
+    + AWS Foundational Security Best Practices
     + CIS Host Hardening Benchmarks
     + CIS AWS Foundations Benchmark
-    + PCI\-DSS Controls
+    + PCI\-DSS
     + Cloud Security Alliance Controls
     + ISO 90001 Controls
     + ISO 27001 Controls

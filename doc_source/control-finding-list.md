@@ -21,7 +21,7 @@ You can sort each list using any of the columns\.
 
 ## Downloading the control finding list<a name="control-finding-list-download"></a>
 
-From the control details page, you can download the current page of control findings to a \.csv file\.
+If you navigate to **Security standards** and choose a standard, you see a list of controls for the standard\. Choosing a control from the list takes you to the control details page\. From here, you can download the current page of control findings to a \.csv file\.
 
 If you filtered the finding list, then the download only includes the controls that match the filter\.
 

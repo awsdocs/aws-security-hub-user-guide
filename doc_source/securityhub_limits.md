@@ -1,17 +1,18 @@
-# Security Hub quotas<a name="securityhub_limits"></a>
+# AWS Security Hub quotas<a name="securityhub_limits"></a>
 
 ## Maximum quotas<a name="maximum_quotas"></a>
 
-The following AWS Security Hub quotas are per AWS account per Region\.
+The following Security Hub quotas are per AWS account per Region\.
 
 
 |  Resource  |  Quota  |  Comments  | 
 | --- | --- | --- | 
 |  Number of Security Hub member accounts  |  5,000  |  The maximum number of Security Hub member accounts that can be added per administrator account per Region\. This is a hard quota\. You cannot request an increase to the allowed number of Security Hub member accounts\.  | 
 |  Number of Security Hub outstanding invitations  |  1,000  |  The maximum number of outstanding Security Hub member account invitations that can be sent per administrator account per Region\. This is a hard quota\. You cannot request an increase to the allowed number of Security Hub outstanding invitations\.  | 
-|  Number of custom actions  |  50  |  The maximum number of custom actions that can be created per account per Region\. This is a hard quota\. You cannot request an increase to the number of custom actions\.  | 
-|  Number of Security Hub custom insights  |  100  |  The maximum number of user\-defined custom Security Hub insights that can be created per account per Region\. This is a hard quota\. You cannot request an increase to the allowed number of Security Hub custom insights\.  | 
+|  Number of custom actions  |  50  |  The maximum number of Security Hub custom actions that can be created\. This is a hard quota\. You cannot request an increase to the number of custom actions\.  | 
+|  Number of custom insights  |  100  |  The maximum number of user\-defined custom insights that can be created\. This is a hard quota\. You cannot request an increase to the allowed number of Security Hub custom insights\.  | 
 |  Number of insight results  |  100  |  The maximum number of aggregated results returned for the `GetInsightsResults` API operation\. This is a hard quota\. You cannot request an increase to the number of insight results\.  | 
+|  Number of service\-linked AWS Config rules  |  250  |  The maximum number of service\-linked AWS Config rules that Security Hub creates to perform security checks for controls\. This is a hard quota\. You cannot request an increase to the number of service\-linked AWS Config rules\.  | 
 |  Security Hub finding retention time  |  90 days  |  Findings are deleted 90 days after the most recent update or 90 days after the creation date if no update occurs\. To store findings for longer than 90 days, you can configure a rule in EventBridge that routes findings to your Amazon S3 bucket\.  | 
 
 ## Rate quotas<a name="rate_quotas"></a>

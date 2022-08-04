@@ -37,7 +37,7 @@ The Security Hub administrator account can use the Security Hub API or AWS Comma
 + **AWS CLI –** At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-members.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-members.html) command\.
 
   ```
-  aws securityhub create-members --account-details '[{"AccountId": <account ID>"}]'
+  aws securityhub create-members --account-details '[{"AccountId": "<accountId>"}]'
   ```
 
   **Example**

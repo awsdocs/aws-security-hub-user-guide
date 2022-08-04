@@ -126,9 +126,9 @@ AttackIQ Platform emulates real adversarial behavior aligned with the MITRE ATT&
 
 Barracuda Cloud Security Sentry helps organizations stay secure while building applications in, and moving workloads to, the public cloud\.
 
-[Product link](http://aws.amazon.com/marketplace/pp/B07KF2X7QJ)
+[AWS Marketplace link](http://aws.amazon.com/marketplace/pp/B07KF2X7QJ)
 
-[Partner documentation](https://guardian.barracuda.com/)
+[Product link](https://www.barracuda.com/aws/solutions/csg)
 
 ## BigID – BigID Enterprise \(Sends findings\)<a name="integration-bigid-enterprise"></a>
 
@@ -346,6 +346,18 @@ Forcepoint NGFW lets you connect your AWS environment into your enterprise netwo
 
 [Partner documentation](https://frcpnt.com/ngfw-securityhub)
 
+## Fortinet – FortiCNP \(Receives findings\)<a name="integration-fortinet-forticnp"></a>
+
+**Integration type:** Receive
+
+**Product ARN:** `arn:aws:securityhub:<REGION>::product/fortinet-inc/forticnp-cloud-native-protection`
+
+FortiCNP is a Cloud Native Protection product that aggregates security findings into actionable insights and prioritizes security insights based on risk score to reduce alert fatigue and accelerate remediation\.
+
+[AWS Marketplace link](https://aws.amazon.com/marketplace/pp/prodview-vl24vc3mcb5ak)
+
+[Partner documentation](https://docs.fortinet.com/document/forticnp/22.3.a/online-help/467775/aws-security-hub-configuration)
+
 ## Fugue – Fugue \(Sends findings\)<a name="integration-fugue"></a>
 
 **Integration type:** Send
@@ -413,6 +425,18 @@ IBM QRadar SIEM provides security teams with the ability to quickly and accurate
 [Product link](https://www.ibm.com/security/security-intelligence/qradar/securing-the-cloud)
 
 [Partner documentation](https://www.ibm.com/docs/en/qradar-common?topic=configuration-integrating-aws-security-hub)
+
+## JFrog – Xray \(Sends findings\)<a name="integration-jfrog-xray"></a>
+
+**Integration type:** Send
+
+**Product ARN:** `arn:aws:securityhub:<REGION>::product/jfrog/jfrog-xray`
+
+JFrog Xray is a universal application security Software Composition Analysis \(SCA\) tool that continuously scans binaries for license compliance and security vulnerabilities so that you can run a secure software supply chain\.
+
+[AWS Marketplace link](http://aws.amazon.com/marketplace/seller-profile?id=68002c4f-c9d1-4fa7-b827-fd7204523fb7)
+
+[Partner documentation](https://www.jfrog.com/confluence/display/JFROG/Xray+Integration+with+AWS+Security+Hub)
 
 ## Juniper Networks – vSRX Next Generation Firewall \(Sends findings\)<a name="integration-junipernetworks-vsrxnextgenerationfirewall"></a>
 

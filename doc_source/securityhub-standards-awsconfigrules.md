@@ -12,9 +12,7 @@ For every control that uses an AWS Config service\-linked rule, Security Hub cre
 
 These service\-linked rules are specific to Security Hub\. It creates these service\-linked rules even if other instances of the same rules already exist\. The service\-linked rule adds `securityhub`before the original rule name, and a unique identifier after the rule name\. For example, for the original AWS Config managed rule `vpc-flow-logs-enabled`, the service\-linked rule name would be something like `securityhub-vpc-flow-logs-enabled-12345`\.
 
-For AWS Config managed rules, the quota is 250 rules per account per Region\. The service\-linked AWS Config rules that Security Hub creates do not count towards that quota\. You can enable a security standard even if you already have 250 AWS Config managed rules in your account\.
-
-For service\-linked rules, the quota is 250 rules per account per Region\. This is in addition to the 250\-rule quota on AWS Config managed rules\.
+AWS Config has a [quota for the number of managed rules](https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) per account per Region\. The service\-linked AWS Config rules that Security Hub creates do not count towards that quota\. You can enable a security standard even if you have already reached the AWS Config limit for managed rules in your account\. For service\-linked rules, the quota is 250 rules per account per Region\. This is in addition to the AWS Config quota on managed rules\.
 
 ## Viewing details about the AWS Config rules for controls<a name="securityhub-standards-view-config-rule-details"></a>
 
