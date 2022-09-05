@@ -611,7 +611,7 @@ By default, CloudTrail trails that are created using the AWS Management Console 
 
    1. Choose **Save changes**\.
 
-## 2\.2\. – Ensure CloudTrail log file validation is enabled<a name="securityhub-cis-controls-2.2"></a>
+## 2\.2 – Ensure CloudTrail log file validation is enabled<a name="securityhub-cis-controls-2.2"></a>
 
 **Severity:** Medium
 
