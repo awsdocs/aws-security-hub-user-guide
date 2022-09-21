@@ -4,13 +4,13 @@
 *****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
-Amazon's trademarks and trade dress may not be used in 
-     connection with any product or service that is not Amazon's, 
-     in any manner that is likely to cause confusion among customers, 
-     or in any manner that disparages or discredits Amazon. All other 
-     trademarks not owned by Amazon are the property of their respective
-     owners, who may or may not be affiliated with, connected to, or 
-     sponsored by Amazon.
+Amazon's trademarks and trade dress may not be used in
+connection with any product or service that is not Amazon's,
+in any manner that is likely to cause confusion among customers,
+or in any manner that disparages or discredits Amazon. All other
+trademarks not owned by Amazon are the property of their respective
+owners, who may or may not be affiliated with, connected to, or
+sponsored by Amazon.
 
 -----
 ## Contents
@@ -22,8 +22,6 @@ Amazon's trademarks and trade dress may not be used in
 + [Prerequisites and recommendations](securityhub-setup-prereqs.md)
    + [Using AWS Organizations to manage accounts](securityhub-prereq-orgs.md)
    + [Enabling and configuring AWS Config](securityhub-prereq-config.md)
-+ [AWS Security Hub quotas](securityhub_limits.md)
-+ [Regional limits](securityhub-regions.md)
 + [Setting up AWS Security Hub](securityhub-settingup.md)
    + [Enabling Security Hub manually](securityhub-enable.md)
    + [Service-linked role assigned to Security Hub](security-hub-enable-slr.md)
@@ -81,6 +79,7 @@ Amazon's trademarks and trade dress may not be used in
             + [Resource attributes](asff-resources-attributes.md)
             + [AwsApiGateway](asff-resourcedetails-awsapigateway.md)
             + [AwsAutoScaling](asff-resourcedetails-awsautoscaling.md)
+            + [AwsBackup](asff-resourcedetails-awsbackup.md)
             + [AwsCertificateManager](asff-resourcedetails-awscertificatemanager.md)
             + [AwsCloudFormation](asff-resourcedetails-awscloudformation.md)
             + [AwsCloudFront](asff-resourcedetails-awscloudfront.md)
@@ -162,5 +161,8 @@ Amazon's trademarks and trade dress may not be used in
    + [EventBridge event formats for Security Hub](securityhub-cwe-event-formats.md)
    + [Configuring an EventBridge rule for automatically sent findings](securityhub-cwe-all-findings.md)
    + [Using custom actions to send findings and insight results to EventBridge](securityhub-cwe-custom-actions.md)
-+ [Disabling AWS Security Hub](securityhub-disable.md)
++ [Subscribing to Security Hub announcements with Amazon Simple Notification Service](securityhub-announcements.md)
++ [AWS Security Hub quotas](securityhub_limits.md)
++ [Regional limits](securityhub-regions.md)
++ [Disabling Security Hub](securityhub-disable.md)
 + [Document history for the AWS Security Hub User Guide](doc-history.md)

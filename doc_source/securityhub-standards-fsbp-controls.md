@@ -3,7 +3,7 @@
 The AWS Foundational Security Best Practices standard contains the following controls\. For each control, the information includes the following information\.
 + The category that the control applies to\. For descriptions of the categories, see [Control categories](control-categories.md)\.
 + The severity
-+ The applicable resource that the control evaluates\. We also list dependent resources for which you should enable AWS Config recording for the control to work\.
++ The applicable resource that the control evaluates\. We also list dependent resources for the control\. For change triggered controls, you must record resources in AWS Config for the control to work\. For more information, see [AWS Config resources required for AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)\.
 + The required AWS Config rule, and any specific parameter values set by AWS Security Hub
 + Remediation steps
 
@@ -98,7 +98,7 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 This control checks whether ACM certificates in your account are marked for expiration within 30 days\. It checks both imported certificates and certificates provided by AWS Certificate Manager\.
 
-ACM can automatically renew certificates that use DNS validation\. For certificates that use email validation, you must respond to a domain validation email\. ACM also does not automatically renew certificates that you import\. You must renew imported certificates manually\.
+ACM can automatically renew certificates that use DNS validation\. For certificates that use email validation, you must respond to a domain validation email\. ACM does not automatically renew certificates that you import\. You must renew imported certificates manually\.
 
 For more information about managed renewal for ACM certificates, see [Managed renewal for ACM certificates](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) in the *AWS Certificate Manager User Guide*\.
 
@@ -111,7 +111,7 @@ Europe \(Milan\)
 
 ### Remediation<a name="acm-1-remediation"></a>
 
-ACM provides managed renewal for your Amazon\-issued SSL/TLS certificates\. This means that ACM either renews your certificates automatically \(if you use DNS validation\), or it sends you email notices when the certificate expiration approaches\. These services are provided for both public and private ACM certificates\.
+ACM provides managed renewal for your SSL/TLS certificates issued by Amazon\. This means that ACM either renews your certificates automatically \(if you use DNS validation\), or it sends you email notices when the certificate expiration approaches\. These services are provided for both public and private ACM certificates\.
 
 **For domains validated by email**  
 When a certificate is 45 days from expiration, ACM sends to the domain owner an email for each domain name\. To validate the domains and complete the renewal, you must respond to the email notifications\.  
@@ -492,7 +492,37 @@ AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="autoscaling-6-remediation"></a>
 
-For detailed instructions on how to modify the metadata response hop limit for an existing launch configuration, see [Modify instance metadata options for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#configuring-IMDS-existing-instances) in the *Amazon EC2 User Guide for Linux Instances* and [Modify instance metadata options for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html#configuring-IMDS-existing-instances) in the *Amazon EC2 User Guide for Windows Instances*\.
+For instructions on creating an Auto Scaling group with multiple instance types, see [Auto Scaling groups with multiple instance types and purchase options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the *Amazon EC2 Auto Scaling User Guide*\.
+
+## \[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates<a name="fsbp-autoscaling-9"></a>
+
+**Category:** Identify > Resource Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::AutoScaling::AutoScalingGroup`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-launch-template.html](https://docs.aws.amazon.com/config/latest/developerguide/autoscaling-launch-template.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether an Amazon EC2 Auto Scaling group is created from an EC2 launch template\. This control fails if an Amazon EC2 Auto Scaling group is not created with a launch template or if a launch template is not specified in a mixed instances policy\.
+
+An EC2 Auto Scaling group can be created from either an EC2 launch template or a launch configuration\. However, using a launch template to create an Auto Scaling group ensures that you have access to the latest features and improvements\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="autoscaling-9-remediation"></a>
+
+To create an Auto Scaling group with an EC2 launch template, see [Create an Auto Scaling group using a launch template](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html) in the *Amazon EC2 Auto Scaling User Guide*\. For information about how to replace a launch configuration with a launch template, see [Replace a launch configuration with a launch template](https://docs.aws.amazon.com/autoscaling/ec2/userguide/replace-launch-config.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 ## \[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)<a name="fsbp-cloudformation-1"></a>
 
@@ -1647,11 +1677,11 @@ To require the use of IMDSv2 on a new instance when you launch it, follow the in
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. Choose **Launch instance** and then choose **Launch instance**\.
+1. Choose **Launch instance**, and then choose **Launch instance**\.
 
-1. In the **Configure Instance Details** step, under **Advanced Details**, for **Metadata version**, choose **V2 \(token required\)**\.
+1. Under **Advanced details**, for **Metadata version**, choose **V2 only \(token required\)**\.
 
-1. Choose **Review and Launch**\.
+1. In the Summary panel, review your changes, and then choose **Launch instance**\.
 
 If your software uses IMDSv1, you can reconfigure your software to use IMDSv2\. For details, see [Transitioning to using Instance Metadata Service Version 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2) in the *Amazon EC2 User Guide for Linux Instances*\.
 
@@ -2139,7 +2169,7 @@ This control is retired\.
 
 **Parameters:** None
 
-This control checks whether a private ECR repository has image scanning configured\. This control fails if a private ECR repository doesn't have image scanning configured\.
+This control checks whether a private ECR repository has image scanning configured\. This control fails if a private ECR repository doesn't have image scanning configured\. Note that you must also configure [scan on push](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters) for each repository to pass this control\.
 
 ECR image scanning helps in identifying software vulnerabilities in your container images\. ECR uses the Common Vulnerabilities and Exposures \(CVEs\) database from the [open\-source Clair project ](https://github.com/quay/clair) and provides a list of scan findings\. Enabling image scanning on ECR repositories adds a layer of verification for the integrity and safety of the images being stored\.
 
@@ -2232,7 +2262,7 @@ To configure a lifecycle policy, see [Creating a lifecycle policy preview](https
 **Parameters:**
 + `SkipInactiveTaskDefinitions`: `true`
 
-This control checks whether an active Amazon ECS task definition that has host networking mode also has `privileged` or `user` container definitions\. The control fails for task definitions that have host network mode and container definitions where `privileged=false` or is empty and `user=root` or is empty\.
+This control checks whether an active Amazon ECS task definition that has host networking mode also has `privileged` or `user` container definitions\. The control fails for task definitions that have host network mode and container definitions where `privileged=false` or is empty and `user=root` or is empty\. This control only evaluates the latest active revision of an Amazon ECS task definition\.
 
 If a task definition has elevated privileges, it is because the customer has specifically opted in to that configuration\. This control checks for unexpected privilege escalation when a task definition has host networking enabled but the customer has not opted in to elevated privileges\.
 
@@ -2294,7 +2324,7 @@ To disable automatic public IP assignment, see [To configure VPC and security gr
 
 **Parameters:** None
 
-This control checks if Amazon ECS task definitions are configured to share a host’s process namespace with its containers\. The control fails if the task definition shares the host's process namespace with the containers running on it\.
+This control checks if Amazon ECS task definitions are configured to share a host’s process namespace with its containers\. The control fails if the task definition shares the host's process namespace with the containers running on it\. This control only evaluates the latest active revision of an Amazon ECS task definition\.
 
 A process ID \(PID\) namespace provides separation between processes\. It prevents system processes from being visible, and allows PIDs to be reused, including PID 1\. If the host’s PID namespace is shared with containers, it would allow containers to see all of the processes on the host system\. This reduces the benefit of process level isolation between the host and the containers\. These circumstances could lead to unauthorized access to processes on the host itself, including the ability to manipulate and terminate them\. Customers shouldn’t share the host’s process namespace with containers running on it\.
 
@@ -2316,7 +2346,7 @@ To configure the `pidMode` on a task definition, see [Task definition parameters
 
 **Parameters:** None
 
-This control checks if the `privileged` parameter in the container definition of Amazon ECS Task Definitions is set to `true`\. The control fails if this parameter is equal to `true`\.
+This control checks if the `privileged` parameter in the container definition of Amazon ECS Task Definitions is set to `true`\. The control fails if this parameter is equal to `true`\. This control only evaluates the latest active revision of an Amazon ECS task definition\.
 
 We recommend that you remove elevated privileges from your ECS task definitions\. When the privilege parameter is `true`, the container is given elevated privileges on the host container instance \(similar to the root user\)\.
 
@@ -2347,7 +2377,7 @@ To configure the `privileged` parameter on a task definition, see [Advanced cont
 
 **Parameters:** None
 
-This control checks if ECS containers are limited to read\-only access to mounted root filesystems\. This control fails if the `ReadonlyRootFilesystem` parameter in the container definition of ECS task definitions is set to `false`\. 
+This control checks if Amazon ECS containers are limited to read\-only access to mounted root filesystems\. This control fails if the `ReadonlyRootFilesystem` parameter in the container definition of Amazon ECS task definitions is set to `false`\. This control only evaluates the latest active revision of an Amazon ECS task definition\.
 
 Enabling this option reduces security attack vectors since the container instance’s filesystem cannot be tampered with or written to unless it has explicit read\-write permissions on its filesystem folder and directories\. This control also adheres to the principle of least privilege\.
 
@@ -2388,7 +2418,7 @@ AWS GovCloud \(US\-West\)
 **Parameters:** 
 +  secretKeys = `AWS_ACCESS_KEY_ID`,`AWS_SECRET_ACCESS_KEY`,`ECS_ENGINE_AUTH_DATA` 
 
-This control checks if the key value of any variables in the `environment` parameter of container definitions includes `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `ECS_ENGINE_AUTH_DATA`\. This control fails if a single environment variable in any container definition equals `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `ECS_ENGINE_AUTH_DATA`\. This control does not cover environmental variables passed in from other locations such as Amazon S3\. 
+This control checks if the key value of any variables in the `environment` parameter of container definitions includes `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `ECS_ENGINE_AUTH_DATA`\. This control fails if a single environment variable in any container definition equals `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `ECS_ENGINE_AUTH_DATA`\. This control does not cover environmental variables passed in from other locations such as Amazon S3\. This control only evaluates the latest active revision of an Amazon ECS task definition\.
 
 AWS Systems Manager Parameter Store can help you improve the security posture of your organization\. We recommend using the Parameter Store to store secrets and credentials instead of directing passing them into your container instances or hard coding them into your code\.
 
@@ -2728,7 +2758,7 @@ AWS GovCloud \(US\-East\)
 
 ### Remediation<a name="elb-2-remediation"></a>
 
-For information on how to associate an ACM SSL/TLS certificate with a Classic Load Balancer, see the Knowledge Center article [How can I associate an ACM SSL/TLS certificate with a Classic, Application, or Network Load Balancer?](http://aws.amazon.com/premiumsupport/knowledge-center/associate-acm-certificate-alb-nlb/)
+For information about how to associate an ACM SSL/TLS certificate with a Classic Load Balancer, see the AWS Knowledge Center article [How can I associate an ACM SSL/TLS certificate with a Classic, Application, or Network Load Balancer?](http://aws.amazon.com/premiumsupport/knowledge-center/associate-acm-certificate-alb-nlb/)
 
 ## \[ELB\.3\] Classic Load Balancer listeners should be configured with HTTPS or TLS termination<a name="fsbp-elb-3"></a>
 
@@ -2791,6 +2821,8 @@ To remediate this issue, update your listeners to use the TLS or HTTPS protocol\
 This control evaluates AWS Application Load Balancers to ensure they are configured to drop invalid HTTP headers\. The control fails if the value of `routing.http.drop_invalid_header_fields.enabled` is set to `false`\.
 
 By default, Application Load Balancers are not configured to drop invalid HTTP header values\. Removing these header values prevents HTTP desync attacks\.
+
+Note that you can disable this control if [ELB\.12](#fsbp-elb-12) is enabled\.
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -3023,7 +3055,7 @@ AWS GovCloud \(US\-West\)
 
 This control checks whether an Application Load Balancer is configured with defensive or strictest desync mitigation mode\. The control fails if an Application Load Balancer is not configured with defensive or strictest desync mitigation mode\.
 
-HTTP Desync issues can lead to request smuggling and make applications vulnerable to request queue or cache poisoning\. In turn, these vulnerabilities can lead to credential hijacking or execution of unauthorized commands\. Application Load Balancers configured with defensive or strictest desync mitigation mode protect your application from security issues that may be caused by HTTP Desync\. 
+HTTP Desync issues can lead to request smuggling and make applications vulnerable to request queue or cache poisoning\. In turn, these vulnerabilities can lead to credential stuffing or execution of unauthorized commands\. Application Load Balancers configured with defensive or strictest desync mitigation mode protect your application from security issues that may be caused by HTTP Desync\. 
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -3453,7 +3485,7 @@ For details on how to enable GuardDuty, including how to use AWS Organizations t
 
 **Parameters:** None
 
-This control checks whether the default version of IAM policies \(also known as customer managed policies\) has administrator access that includes a statement with "Effect": "Allow" with "Action": "\*" over "Resource": "\*"\.
+This control checks whether the default version of IAM policies \(also known as customer managed policies\) has administrator access by including a statement with `"Effect": "Allow"` with `"Action": "*"` over `"Resource": "*"`\. The control fails if you have IAM policies with such a statement\.
 
 The control only checks the customer managed policies that you create\. It does not check inline and AWS managed policies\.
 
@@ -3611,6 +3643,8 @@ We recommend that you enable MFA for all accounts that have a console password\.
 
 To add MFA for IAM users, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
+We are offering a free MFA security key to eligible customers\. [See if you quality, and order your free key](https://console.aws.amazon.com/securityhub/home/?region=us-east-1#/free-mfa-security-key/faq/)\.
+
 ## \[IAM\.6\] Hardware MFA should be enabled for the root user<a name="fsbp-iam-6"></a>
 
 **Category:** Protect > Secure access management
@@ -3641,6 +3675,8 @@ AWS GovCloud \(US\-West\)\.
 ### Remediation<a name="iam-6-remediation"></a>
 
 To add a hardware MFA device for the root user, see [Enable a hardware MFA device for the AWS account root user \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_physical.html#enable-hw-mfa-for-root) in the *IAM User Guide*\.
+
+We are offering a free MFA security key to eligible customers\. [See if you quality, and order your free key](https://console.aws.amazon.com/securityhub/home/?region=us-east-1#/free-mfa-security-key/faq/)\.
 
 ## \[IAM\.7\] Password policies for IAM users should have strong configurations<a name="fsbp-iam-7"></a>
 
@@ -4076,7 +4112,7 @@ The function execution role must have permissions to call `CreateNetworkInterfac
 
 1. Choose **Save**\.
 
-## \[Network Firewall\.3\] Network Firewall policies should have at least one rule group associated<a name="fsbp-networkfirewall-3"></a>
+## \[NetworkFirewall\.3\] Network Firewall policies should have at least one rule group associated<a name="fsbp-networkfirewall-3"></a>
 
 **Category:** Protect > Secure Network Configuration
 
@@ -4914,7 +4950,7 @@ To remediate this issue, update your DB instance to enable IAM authentication\.
 
 1. Choose **Modify**\. 
 
-1. Under **Database options**, choose **Enable IAM DB authentication**\.
+1. Under **Database authentication**, choose **Password and IAM database authentication**\.
 
 1. Choose **Continue**\.
 
@@ -4966,7 +5002,7 @@ This control is not supported in Asia Pacific \(Osaka\)\.
 
 **Severity:** Medium
 
-**Resource type:** `AWS::RDS::DBCluster`, `AWS::RDS::DBInstance`
+**Resource type:** `AWS::RDS::DBCluster`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-iam-authentication-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-cluster-iam-authentication-enabled.html)
 
@@ -5566,7 +5602,7 @@ To remediate this issue, update your Amazon Redshift cluster to disable public a
 
 **Severity:** Medium
 
-**Resource type:** `AWS::Redshift::Cluster`
+**Resource type:** `AWS::Redshift::Cluster`, `AWS::Redshift::ClusterParameterGroup`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/redshift-require-tls-ssl.html](https://docs.aws.amazon.com/config/latest/developerguide/redshift-require-tls-ssl.html)
 
@@ -5827,9 +5863,10 @@ To learn more, see [Using Amazon S3 Block Public Access](https://docs.aws.amazon
 
 **Note**  
 This control is not supported in the following Regions:  
-Africa \(Cape Town\)
-Europe \(Milan\)
-Middle East \(Bahrain\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="s3-1-remediation"></a>
 

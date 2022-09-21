@@ -1473,7 +1473,7 @@ This is a method used to change cryptographic keys once they have reached the en
 
 This control checks whether the Lambda function resource\-based policy prohibits public access\.
 
-It does not check for access to the Lambda function by internal principals, such as IAM roles\. You should ensure that access to the Lambda function is restricted to authorized principals only by using least privilege Lambda resource\-based policies\.
+It does not check for access to the Lambda function by internal principals, such as IAM roles\. You should ensure that access to the Lambda function is restricted to authorized principals only by using least privilege Lambda resource\-based policies\. Note that you must use `AWS:SourceAccount` in your Lambda function policy to pass this control\.
 
 For more information about using resource\-based policies for AWS Lambda, see the [https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html)\.
 

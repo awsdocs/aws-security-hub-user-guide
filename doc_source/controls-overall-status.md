@@ -30,4 +30,4 @@ The available values for the overall control status are as follows:
 + **Failed** – Indicates that at least one finding has a `Compliance.Status` of `FAILED`\.
 + **Unknown** – Indicates that at least one finding has a `Compliance.Status` of `WARNING` or `NOT_AVAILABLE`\. No findings are `FAILED`\.
 + **No data** – Indicates that there are no findings for the control\. For example, a new control has this status until it begins to generate findings\. A control also has this status if all of the findings are `SUPPRESSED`\.
-+ **Disabled** – Indicates that the control is deactivated in the current account and Region\. This means that no security checks are currently being performed for this control is this account and Region\.
++ **Disabled** – Indicates that the control is deactivated in the current account and Region\. This means that no security checks are currently being performed for this control is this account and Region\. However, a disabled control may have a value for `Compliance.Status` for up to 24 hours after disablement\.

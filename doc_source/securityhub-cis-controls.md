@@ -78,23 +78,13 @@ Finally, create the metric filter and alarm\.
 
    1. Choose **Next**\.
 
-1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then choose **Create metric filter**\.
+1. Under **Review and create**, verify the information that you provided for the new metric filter\. Then, choose **Create metric filter**\.
 
-1. In the navigation pane, choose **Alarms** and then **All alarms**\.
+1. In the navigation pane, choose **Log groups**, and then choose the filter you created under **Metric filters**\.
 
-1. Choose **Create Alarm**\.
+1. Select the check box for the filter\. Choose **Create alarm**\.
 
 1. Under **Specify metric and conditions**, do the following:
-
-   1. Choose **Select metric**\.
-
-   1. On the **Select metric** panel, scroll down to **Metrics**\. Choose the **LogMetrics** namespace\. You can also use the search bar to search for it\.
-
-   1. Choose **Metrics with no dimensions**\.
-
-   1. Select the check box for the metric that you created\. Then choose **Select metric**\.
-
-   1. Under **Metric**, leave the default values\.
 
    1. Under **Conditions**, for **Threshold**, choose **Static**\.
 
@@ -530,6 +520,10 @@ The administrator of the specified account can grant permission to assume this r
 
 **Schedule type:** Change triggered
 
+This control checks whether the default version of IAM policies \(also known as customer managed policies\) has administrator access by including a statement with `"Effect": "Allow"` with `"Action": "*"` over `"Resource": "*"`\. The control fails if you have IAM policies with such a statement\.
+
+The control only checks the customer managed policies that you create\. It does not check inline and AWS managed policies\.
+
 IAM policies define a set of privileges granted to users, groups, or roles\. It's recommended and considered a standard security advice to grant least privilege—that is, granting only the permissions required to perform a task\. Determine what users need to do and then craft policies that let the users perform only those tasks, instead of allowing full administrative privileges\.
 
 It's more secure to start with a minimum set of permissions and grant additional permissions as necessary, rather than starting with permissions that are too lenient and then trying to tighten them later\. Providing full administrative privileges instead of restricting to the minimum set of permissions that the user is required to do exposes the resources to potentially unwanted actions\.
@@ -575,7 +569,7 @@ By default, CloudTrail trails that are created using the AWS Management Console 
    + To create a new S3 bucket for CloudTrail logs, choose **Create new S3 bucket** and then enter a name for the bucket\.
    + Choose **Use existing S3 bucket** and then select the bucket to use\.
 
-1. Choose **Additional settings** and, for **Log file validation**, choose **Enabled** to pass [2\.2\. – Ensure CloudTrail log file validation is enabled ](#securityhub-cis-controls-2.2) \.
+1. Choose **Additional settings** and, for **Log file validation**, choose **Enabled** to pass [2\.2 – Ensure CloudTrail log file validation is enabled ](#securityhub-cis-controls-2.2) \.
 
 1. To pass [2\.4 – Ensure CloudTrail trails are integrated with Amazon CloudWatch Logs](#securityhub-cis-controls-2.4), you must enable CloudWatch Logs\.
 
@@ -847,7 +841,7 @@ You might need to modify the policy for CloudTrail to successfully interact with
 
 AWS KMS enables customers to rotate the backing key, which is key material stored in AWS KMS and is tied to the key ID of the KMS key\. It's the backing key that is used to perform cryptographic operations such as encryption and decryption\. Automated key rotation currently retains all previous backing keys so that decryption of encrypted data can take place transparently\.
 
-CIS recommends that you enable KMS key key rotation\. Rotating encryption keys helps reduce the potential impact of a compromised key because data encrypted with a new key can't be accessed with a previous key that might have been exposed\.
+CIS recommends that you enable KMS key rotation\. Rotating encryption keys helps reduce the potential impact of a compromised key because data encrypted with a new key can't be accessed with a previous key that might have been exposed\.
 
 ### Remediation<a name="cis-2.8-remediation"></a>
 

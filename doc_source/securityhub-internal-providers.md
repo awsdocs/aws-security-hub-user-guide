@@ -4,28 +4,55 @@ AWS Security Hub supports integrations with several AWS services\.
 
 **Note**  
 Some integrations are only available in select Regions\.  
-If an integration is not supported, it is not listed on the **Integrations** page\.  
+If an integration is not supported, it is not listed on the **Integrations** page of the Security Hub console\.  
 See also [Integrations that are supported in China \(Beijing\) and China \(Ningxia\)](securityhub-regions.md#securityhub-regions-integration-support-china) and [Integrations that are supported in AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)](securityhub-regions.md#securityhub-regions-integration-support-govcloud)\.
 
 With the exception of sensitive data findings from Amazon Macie, you're automatically opted in to all other AWS service integrations with Security Hub\. If you've turned on Security Hub and the other service, no other step is needed to activate the integration between the two services\.
 
-The following sections provide details about each AWS service integration with Security Hub\.
+## Overview of AWS service integrations with Security Hub<a name="internal-integrations-summary"></a>
 
-## AWS Audit Manager \(Receives findings\)<a name="integration-aws-audit-manager"></a>
+Here is an overview of AWS services that send findings to Security Hub or receive findings from Security Hub\.
 
-AWS Audit Manager receives findings from Security Hub\. These findings help Audit Manager users to prepare for audits\.
 
-To learn more about Audit Manager, see the [https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html](https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html)\. [AWS Security Hub checks supported by AWS Audit Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html) lists the controls for which Security Hub sends findings to Audit Manager\.
+| Integrated AWS service | Direction | 
+| --- | --- | 
+|  AWS Chatbot  |  Sends findings  | 
+|  AWS Firewall Manager  |  Sends findings  | 
+|  AWS Config  |  Sends findings  | 
+|  Amazon GuardDuty  |  Sends findings  | 
+|  AWS Health  |  Sends findings  | 
+|  AWS Identity and Access Management Access Analyzer  |  Sends findings  | 
+|  Amazon Inspector  |  Sends findings  | 
+|  Amazon Macie  |  Sends findings  | 
+|  AWS Systems Manager Patch Manager  |  Sends findings  | 
+|  AWS Audit Manager  |  Receives findings  | 
+|  Amazon Detective  |  Receives findings  | 
+|  AWS Systems Manager Explorer and OpsCenter  |  Receives and updates findings  | 
+|  AWS Trusted Advisor  |  Receives findings  | 
 
-## AWS Chatbot \(Sends findings\)<a name="integration-chatbot"></a>
+## AWS services that send findings to Security Hub<a name="integrations-internal-send"></a>
+
+The following AWS services integrate with Security Hub by sending findings to Security Hub\. Security Hub transforms the findings into the [AWS Security Finding Format](securityhub-findings-format-syntax.md)\.
+
+### AWS Chatbot \(Receives findings\)<a name="integration-chatbot"></a>
 
 AWS Chatbot is an interactive agent that helps you to monitor and interact with your AWS resources in your Slack channels and Amazon Chime chat rooms\.
 
-Security Hub sends findings to AWS Chatbot\.
+AWS Chatbot receives findings from Security Hub\.
 
 To learn more about the AWS Chatbot integration with Security Hub, see the [Security Hub integration overview](https://docs.aws.amazon.com/chatbot/latest/adminguide/related-services.html#security-hub) in the *AWS Chatbot Administrator Guide*\.
 
-## AWS Config \(Sends findings\)<a name="integration-config"></a>
+### AWS Firewall Manager \(Sends findings\)<a name="integration-aws-firewall-manager"></a>
+
+Firewall Manager sends findings to Security Hub when a web application firewall \(WAF\) policy for resources or a web access control list \(web ACL\) rule is not in compliance\. Firewall Manager also sends findings when AWS Shield Advanced is not protecting resources, or when an attack is identified\.
+
+If you are already using Firewall Manager, Security Hub automatically enables this integration\. You do not need to take any additional action to begin to receive findings from Firewall Manager\.
+
+To learn more about the integration, view the **Integrations** page in the Security Hub console\.
+
+To learn more about Firewall Manager, see the [https://docs.aws.amazon.com/waf/latest/developerguide/](https://docs.aws.amazon.com/waf/latest/developerguide/)\.
+
+### AWS Config \(Sends findings\)<a name="integration-config"></a>
 
 AWS Config is a service that allows you to assess, audit, and evaluate the configurations of your AWS resources\. AWS Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations\.
 
@@ -35,41 +62,41 @@ AWS Config uses Amazon EventBridge to send AWS Config rule evaluations to Securi
 
 For more information about this integration, see the following sections\.
 
-### How AWS Config sends findings to Security Hub<a name="integration-config-how"></a>
+#### How AWS Config sends findings to Security Hub<a name="integration-config-how"></a>
 
 All findings in Security Hub use the standard JSON format of ASFF\. ASFF includes details about the origin of the finding, the affected resource, and the current status of the finding\. AWS Config sends managed and custom rule evaluations to Security Hub via EventBridge\. Security Hub transforms the rule evaluations into findings that follow ASFF and enriches the findings on a best effort basis\.
 
-#### Types of findings that AWS Config sends to Security Hub<a name="integration-config-how-types"></a>
+##### Types of findings that AWS Config sends to Security Hub<a name="integration-config-how-types"></a>
 
 Once the integration is activated, AWS Config sends evaluations of all AWS Config managed rules and custom rules to Security Hub\. Only evaluations from [service\-linked AWS Config rules](securityhub-standards-awsconfigrules.md), such as those used to run checks on security controls, are excluded\.
 
-#### Sending AWS Config findings to Security Hub<a name="integration-config-how-types-send-findings"></a>
+##### Sending AWS Config findings to Security Hub<a name="integration-config-how-types-send-findings"></a>
 
 When the integration is activated, Security Hub will automatically assign the permissions necessary to receive findings from AWS Config\. Security Hub uses service\-to\-service level permissions that provide you with a safe way to activate this integration and import findings from AWS Config via Amazon EventBridge\.
 
-#### Latency for sending findings<a name="integration-config-how-types-latency"></a>
+##### Latency for sending findings<a name="integration-config-how-types-latency"></a>
 
 When AWS Config creates a new finding, you can usually view the finding in Security Hub within five minutes\.
 
-#### Retrying when Security Hub is not available<a name="integration-config-how-types-retrying"></a>
+##### Retrying when Security Hub is not available<a name="integration-config-how-types-retrying"></a>
 
 AWS Config sends findings to Security Hub on a best\-effort basis through EventBridge\. When an event isn't successfully delivered to Security Hub, EventBridge retries delivery for up to 24 hours or 185 times, whichever comes first\.
 
-#### Updating existing AWS Config findings in Security Hub<a name="integration-config-how-types-updating"></a>
+##### Updating existing AWS Config findings in Security Hub<a name="integration-config-how-types-updating"></a>
 
 After AWS Config sends a finding to Security Hub, it can send updates to the same finding to Security Hub to reflect additional observations of the finding activity\.
 
-#### Regions in which AWS Config findings exist<a name="integration-config-how-types-regions"></a>
+##### Regions in which AWS Config findings exist<a name="integration-config-how-types-regions"></a>
 
 AWS Config findings occur on a Regional basis\. AWS Config sends findings to Security Hub in the same Region or Regions where the findings occur\.
 
-## Viewing AWS Config findings in Security Hub<a name="integration-config-view"></a>
+### Viewing AWS Config findings in Security Hub<a name="integration-config-view"></a>
 
 To view your AWS Config findings, choose **Findings** from the Security Hub navigation pane\. To filter the findings to display only AWS Config findings, choose **Product name** in the search bar drop down\. Enter **Config**, and choose **Apply**\.
 
-### Interpreting AWS Config finding names in Security Hub<a name="integration-config-view-interpret-finding-names"></a>
+#### Interpreting AWS Config finding names in Security Hub<a name="integration-config-view-interpret-finding-names"></a>
 
-Security Hub transforms AWS Config rule evaluations into findings that follow the [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\. AWS Config rule evaluations use a different event pattern compared to ASFF\. The table below maps the AWS Config rule evaluation fields with their ASFF counterpart as they appear in Security Hub\.
+Security Hub transforms AWS Config rule evaluations into findings that follow the [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\. AWS Config rule evaluations use a different event pattern compared to ASFF\. The following table maps the AWS Config rule evaluation fields with their ASFF counterpart as they appear in Security Hub\.
 
 
 | Config rule evaluation finding type | ASFF finding type | Hardcoded value | 
@@ -94,12 +121,13 @@ Security Hub transforms AWS Config rule evaluations into findings that follow th
 |  | Severity\.Label | See "Interpreting Severity Label" below | 
 |  | Types | \["Software and Configuration Checks"\] | 
 | detail\.newEvaluationResult\.complianceType | Compliance\.Status | "FAILED", "NOT\_AVAILABLE", "PASSED", or "WARNING" | 
+|  | Workflow\.Status | "RESOLVED" if an AWS Config finding is generated with a Compliance\.Status of "PASSED," or if the Compliance\.Status changes from "FAILED" to "PASSED\." Otherwise, Workflow\.Status will be "NEW\." You can change this value with the [BatchUpdateFindings](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) API operation\. | 
 
-### Interpreting severity label<a name="integration-config-view-interpret-severity"></a>
+#### Interpreting severity label<a name="integration-config-view-interpret-severity"></a>
 
 All findings from AWS Config rule evaluations have a default severity label of **MEDIUM** in the ASFF\. You can update the severity label of a finding with the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) API operation\.
 
-### Typical finding from AWS Config<a name="integration-config-view-typical-finding"></a>
+#### Typical finding from AWS Config<a name="integration-config-view-typical-finding"></a>
 
 Security Hub transforms AWS Config rule evaluations into findings that follow the ASFF\. The following is an example of a typical finding from AWS Config in the ASFF\.
 
@@ -166,31 +194,19 @@ If the description is more than 1024 characters, it will be truncated to 1024 ch
 }
 ```
 
-## Enabling and configuring the integration<a name="integration-config-enable"></a>
+### Enabling and configuring the integration<a name="integration-config-enable"></a>
 
 To use the AWS Config integration with Security Hub, you must set up both services and add at least one managed or custom rule in AWS Config\. For information about how to set up AWS Config, see [Getting Started](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\. For information about how to set up Security Hub, see [Setting up AWS Security Hub](securityhub-settingup.md)\.
 
 After you set up both AWS Config and Security Hub, the integration is activated automatically\. AWS Config immediately begins to send findings to Security Hub\.
 
-## Stopping the publication of findings to Security Hub<a name="integration-config-stop"></a>
+### Stopping the publication of findings to Security Hub<a name="integration-config-stop"></a>
 
 To stop sending findings to Security Hub, you can use the Security Hub console, the Security Hub API, or the AWS CLI\.
 
 See [Disabling and enabling the flow of findings from an integration \(console\)](securityhub-integrations-managing.md#securityhub-integration-findings-flow-console) or [Disabling the flow of findings from an integration \(Security Hub API, AWS CLI\)](securityhub-integrations-managing.md#securityhub-integration-findings-flow-disable-api)\.
 
-## Amazon Detective \(Linked from Security Hub\)<a name="integration-amazon-detective"></a>
-
-Detective automatically collects log data from your AWS resources and uses machine learning, statistical analysis, and graph theory to help you visualize and conduct faster and more efficient security investigations\.
-
-The Security Hub integration with Detective allows you to pivot from Amazon GuardDuty findings in Security Hub into Detective\. You can then use the Detective tools and visualizations to investigate them\. The integration does not require any additional configuration in Security Hub or Detective\.
-
-For GuardDuty finding types, the finding details include an **Investigate in Detective** subsection\. That subsection contains the link to Detective\. See [Pivoting to an entity profile or finding overview from Amazon GuardDuty or AWS Security Hub](https://docs.aws.amazon.com/detective/latest/userguide/profile-pivot-from-service.html) in the *Amazon Detective User Guide*\.
-
-If cross\-Region aggregation is enabled, then when you pivot from the aggregation Region, Detective opens in the Region where the finding originated\.
-
-If a link does not work, then for troubleshooting advice, see [Troubleshooting the pivot](https://docs.aws.amazon.com/detective/latest/userguide/profile-pivot-from-service.html#profile-pivot-troubleshooting)\.
-
-## AWS Firewall Manager \(Sends findings\)<a name="integration-aws-firewall-manager"></a>
+### AWS Firewall Manager \(Sends findings\)<a name="integration-aws-firewall-manager"></a>
 
 Firewall Manager sends findings to Security Hub when a web application firewall \(WAF\) policy for resources or a web access control list \(web ACL\) rule is not in compliance\. Firewall Manager also sends findings when AWS Shield Advanced is not protecting resources, or when an attack is identified\.
 
@@ -200,7 +216,7 @@ To learn more about the integration, view the **Integrations** page in the Secur
 
 To learn more about Firewall Manager, see the [https://docs.aws.amazon.com/waf/latest/developerguide/](https://docs.aws.amazon.com/waf/latest/developerguide/)\.
 
-## Amazon GuardDuty \(Sends findings\)<a name="integration-amazon-guardduty"></a>
+### Amazon GuardDuty \(Sends findings\)<a name="integration-amazon-guardduty"></a>
 
 GuardDuty sends findings to Security Hub for all of the supported finding types\.
 
@@ -210,7 +226,7 @@ When you generate GuardDuty sample findings using the GuardDuty **Settings** pag
 
 For more information about the GuardDuty integration, see [Integration with AWS Security Hub](https://docs.aws.amazon.com/guardduty/latest/ug/securityhub-integration.html) in the *Amazon GuardDuty User Guide*\.
 
-## AWS Health \(Sends findings\)<a name="integration-health"></a>
+### AWS Health \(Sends findings\)<a name="integration-health"></a>
 
 AWS Health provides ongoing visibility into your resource performance and the availability of your AWS services and accounts\. You can use AWS Health events to learn how service and resource changes might affect your applications that run on AWS\.
 
@@ -218,7 +234,7 @@ The integration with AWS Health does not use `BatchImportFindings`\. Instead, AW
 
 For more information about the integration, see the following sections\.
 
-### How AWS Health sends findings to Security Hub<a name="integration-health-how"></a>
+#### How AWS Health sends findings to Security Hub<a name="integration-health-how"></a>
 
 In Security Hub, security issues are tracked as findings\. Some findings come from issues that are detected by other AWS services or by third\-party partners\. Security Hub also has a set of rules that it uses to detect security issues and generate findings\.
 
@@ -228,7 +244,7 @@ All findings in Security Hub use a standard JSON format called the [AWS Security
 
 AWS Health is one of the AWS services that sends findings to Security Hub\.
 
-#### Types of findings that AWS Health sends to Security Hub<a name="integration-health-how-types"></a>
+##### Types of findings that AWS Health sends to Security Hub<a name="integration-health-how-types"></a>
 
 Once the integration is enabled, AWS Health sends all security\-related findings it generates to Security Hub\. The findings are sent to Security Hub using the [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\. Security\-related findings are defined as the following:
 + Any finding associated with an AWS security service
@@ -255,11 +271,11 @@ After AWS Health sends a finding to Security Hub, it can send updates to the sam
 
 For global events, AWS Health sends findings to Security Hub in us\-east\-1 \(AWS partition\), cn\-northwest\-1 \(China partition\), and gov\-us\-west\-1 \(GovCloud partition\)\. AWS Health sends Region\-specific events to Security Hub in the same Region or Regions where the events occur\.
 
-### Viewing AWS Health findings in Security Hub<a name="integration-health-view"></a>
+#### Viewing AWS Health findings in Security Hub<a name="integration-health-view"></a>
 
 To view your AWS Health findings in Security Hub, choose **Findings** from the navigation panel\. To filter the findings to display only AWS Health findings, choose **Health** from the **Product name** field\.
 
-#### Interpreting AWS Health finding names in Security Hub<a name="integration-health-view-interpret-finding-names"></a>
+##### Interpreting AWS Health finding names in Security Hub<a name="integration-health-view-interpret-finding-names"></a>
 
 AWS Health sends the findings to Security Hub using the [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\. AWS Health finding uses a different event pattern compared to Security Hub ASFF format\. The table below details all the AWS Health finding fields with their ASFF counterpart as they appear in Security Hub\.
 
@@ -281,7 +297,7 @@ AWS Health sends the findings to Security Hub using the [AWS Security Finding Fo
 | event\.time | UpdatedAt |   | 
 | URL of the event on Health console | SourceUrl |   | 
 
-#### Interpreting severity label<a name="integration-health-view-interpret-severity"></a>
+##### Interpreting severity label<a name="integration-health-view-interpret-severity"></a>
 
 The severity label in the ASFF finding is determined using the following logic:
 + Severity **CRITICAL** if:
@@ -300,7 +316,7 @@ The severity label in the ASFF finding is determined using the following logic:
   + The **typeCode** field in the AWS Health finding contains the value `CERTIFICATE`
   + The **typeCode** field in the AWS Health finding contains the value `END_OF_SUPPORT`
 
-#### Typical finding from AWS Health<a name="integration-health-view-typical-finding"></a>
+##### Typical finding from AWS Health<a name="integration-health-view-typical-finding"></a>
 
 AWS Health sends findings to Security Hub using the [AWS Security Finding Format \(ASFF\)](securityhub-findings-format.md)\. The following is an example of a typical finding from AWS Health\.
 
@@ -355,17 +371,17 @@ If the description is more than 1024 characters, it will be truncated to 1024 ch
 }
 ```
 
-### Enabling and configuring the integration<a name="integration-health-enable"></a>
+#### Enabling and configuring the integration<a name="integration-health-enable"></a>
 
 When you set up Security Hub, the integration with AWS Health is activated automatically\. AWS Health immediately begins to send findings to Security Hub\.
 
-### Stopping the publication of findings to Security Hub<a name="integration-health-stop"></a>
+#### Stopping the publication of findings to Security Hub<a name="integration-health-stop"></a>
 
 To stop sending findings to Security Hub, you can use the Security Hub console, Security Hub API, or AWS CLI\.
 
 See [Disabling and enabling the flow of findings from an integration \(console\)](securityhub-integrations-managing.md#securityhub-integration-findings-flow-console) or [Disabling the flow of findings from an integration \(Security Hub API, AWS CLI\)](securityhub-integrations-managing.md#securityhub-integration-findings-flow-disable-api)\.
 
-## IAM Access Analyzer \(Sends findings\)<a name="integration-iam-access-analyzer"></a>
+### AWS Identity and Access Management Access Analyzer \(Sends findings\)<a name="integration-iam-access-analyzer"></a>
 
 With IAM Access Analyzer, all findings are sent to Security Hub\.
 
@@ -373,7 +389,7 @@ IAM Access Analyzer uses logic\-based reasoning to analyze resource\-based polic
 
 To learn more, see [Integration with AWS Security Hub](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-securityhub-integration.html) in the *IAM User Guide*\.
 
-## Amazon Inspector \(Sends findings\)<a name="integration-amazon-inspector"></a>
+### Amazon Inspector \(Sends findings\)<a name="integration-amazon-inspector"></a>
 
 Amazon Inspector is a vulnerability management service that continuously scans your AWS workloads for vulnerabilities\. Amazon Inspector automatically discovers and scans Amazon EC2 instances and container images that reside in the Amazon Elastic Container Registry\. The scan looks for software vulnerabilities and unintended network exposure\.
 
@@ -391,7 +407,7 @@ Findings for Amazon Inspector and Amazon Inspector Classic use the same product 
 "aws/inspector/ProductVersion": "2",
 ```
 
-## Amazon Macie \(Sends findings\)<a name="integration-amazon-macie"></a>
+### Amazon Macie \(Sends findings\)<a name="integration-amazon-macie"></a>
 
 A finding from Macie can indicate that there is a potential policy violation or that sensitive data, such as personally identifiable information \(PII\), is present in data that your organization stores in Amazon S3\.
 
@@ -403,7 +419,37 @@ Macie also sends generated sample findings to Security Hub\. For sample findings
 
 For more information, see [Amazon Macie integration with AWS Security Hub](https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html) in the *Amazon Macie User Guide*\.
 
-## AWS Systems Manager Explorer and OpsCenter \(Receives and updates findings\)<a name="integration-ssm-explorer-opscenter"></a>
+### AWS Systems Manager Patch Manager \(Sends findings\)<a name="patch-manager"></a>
+
+AWS Systems Manager Patch Manager sends findings to Security Hub when instances in a customer's fleet go out of compliance with their patch compliance standard\.
+
+Patch Manager automates the process of patching managed instances with both security related and other types of updates\. 
+
+For more information about using Patch Manager, see [AWS Systems Manager Patch Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-patch.html) in the *AWS Systems Manager User Guide*\.
+
+## AWS services that receive findings from Security Hub<a name="integrations-internal-receive"></a>
+
+The following AWS services are integrated with Security Hub and receive findings from Security Hub\. Where noted, the integrated service may also update findings\. In this case, finding updates that you make in the integrated service will also be reflected in Security Hub\.
+
+### AWS Audit Manager \(Receives findings\)<a name="integration-aws-audit-manager"></a>
+
+AWS Audit Manager receives findings from Security Hub\. These findings help Audit Manager users to prepare for audits\.
+
+To learn more about Audit Manager, see the [https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html](https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html)\. [AWS Security Hub checks supported by AWS Audit Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html) lists the controls for which Security Hub sends findings to Audit Manager\.
+
+### Amazon Detective \(Receives findings\)<a name="integration-amazon-detective"></a>
+
+Detective automatically collects log data from your AWS resources and uses machine learning, statistical analysis, and graph theory to help you visualize and conduct faster and more efficient security investigations\.
+
+The Security Hub integration with Detective allows you to pivot from Amazon GuardDuty findings in Security Hub into Detective\. You can then use the Detective tools and visualizations to investigate them\. The integration does not require any additional configuration in Security Hub or Detective\.
+
+For GuardDuty finding types, the finding details include an **Investigate in Detective** subsection\. That subsection contains the link to Detective\. See [Pivoting to an entity profile or finding overview from Amazon GuardDuty or AWS Security Hub](https://docs.aws.amazon.com/detective/latest/userguide/profile-pivot-from-service.html) in the *Amazon Detective User Guide*\.
+
+If cross\-Region aggregation is enabled, then when you pivot from the aggregation Region, Detective opens in the Region where the finding originated\.
+
+If a link does not work, then for troubleshooting advice, see [Troubleshooting the pivot](https://docs.aws.amazon.com/detective/latest/userguide/profile-pivot-from-service.html#profile-pivot-troubleshooting)\.
+
+### AWS Systems Manager Explorer and OpsCenter \(Receives and updates findings\)<a name="integration-ssm-explorer-opscenter"></a>
 
 AWS Systems Manager Explorer and OpsCenter receive findings from Security Hub, and update those findings in Security Hub\.
 
@@ -413,15 +459,7 @@ OpsCenter provides you with a central location to view, investigate, and resolve
 
 For more information about Explorer and OpsCenter, see [Operations management](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-ops-center.html) in the *AWS Systems Manager User Guide*\.
 
-## AWS Systems Manager Patch Manager \(Sends findings\)<a name="patch-manager"></a>
-
-AWS Systems Manager Patch Manager sends findings to Security Hub when instances in a customer's fleet go out of compliance with their patch compliance standard\.
-
-Patch Manager automates the process of patching managed instances with both security related and other types of updates\. 
-
-For more information about using Patch Manager, see [AWS Systems Manager Patch Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-patch.html) in the *AWS Systems Manager User Guide*\.
-
-## AWS Trusted Advisor \(Receives findings\)<a name="integration-trusted-advisor"></a>
+### AWS Trusted Advisor \(Receives findings\)<a name="integration-trusted-advisor"></a>
 
 Trusted Advisor draws upon best practices learned from serving hundreds of thousands of AWS customers\. Trusted Advisor inspects your AWS environment, and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps\.
 

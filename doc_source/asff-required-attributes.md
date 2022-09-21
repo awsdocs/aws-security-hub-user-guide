@@ -137,13 +137,13 @@ The schema version that a finding is formatted for\. The value of this field mus
 
 Defines the importance of a finding\. For details about this object, see [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Severity.html) in the *AWS Security Hub API Reference*\.
 
-To designate severity, the finding must have either the `Label` or `Normalized` field populated\. `Label` is the preferred attribute\. If neither attribute is populated, then the finding is invalid\.
+To designate severity, the finding must have either the `Label` or `Normalized` field populated\. `Label` is the preferred attribute\. If neither attribute is populated, then the finding is not valid\.
 
 To provide severity information, finding providers should use the `Severity` object under `FindingProviderFields` when making a [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) API request\. If a `BatchImportFindings` request for a new finding only provides ` Label` or only provides `Normalized`, then Security Hub automatically populates the value of the other field\.
 
 The value of the `Severity` object for a finding should only be updated by the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) API operation\.
 
-The finding severity does not consider the criticality of the involved assets or the underlying resource\. Criticality is defined as the level of importance of the resources that are associated with the finding\. For example, a resource that is associated with a mission critical application versus one that is associated with nonproduction testing\. To capture information about resource criticality, use the Criticality field\.
+The finding severity does not consider the criticality of the involved assets or the underlying resource\. Criticality is defined as the level of importance of the resources that are associated with the finding\. For example, a resource that is associated with a mission critical application has higher criticality than one that is associated with nonproduction testing\. To capture information about resource criticality, use the `Criticality` field\.
 
 We recommend using the following guidance when translating findings' native severity scores to the value of `Severity.Label` in the ASFF\.
 + `INFORMATIONAL` – This category may include a finding for a `PASSED`, `WARNING`, or `NOT AVAILABLE` check or a sensitive data identification\.

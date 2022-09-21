@@ -99,7 +99,7 @@ The Security Hub administrator account can enable any organization account as a 
 A published statement on a topic specifying the characteristics, usually measurable and in the form of controls, that must be satisfied or achieved for compliance\. Security standards can be based on regulatory frameworks, best practices, or internal company policies\. To learn more about security standards in Security Hub, see [Security standards and controls in AWS Security Hub](securityhub-standards.md)\.
 
 **Severity**  
-The severity assigned to a Security Hub control identifies the importance of the control\. The severity of a control can be **Critical**, **High**, **Medium**, **Low**, or **Informational**\. The severity assigned to control findings is equal to the severity of the control itself\. To learn about how Security Hub assigns severity to a control, see [Severity](controls-findings-create-update.md#control-findings-severity)\.
+The severity assigned to a Security Hub control identifies the importance of the control\. The severity of a control can be **Critical**, **High**, **Medium**, **Low**, or **Informational**\. The severity assigned to control findings is equal to the severity of the control itself\. To learn about how Security Hub assigns severity to a control, see [Assigning severity to control findings](controls-findings-create-update.md#control-findings-severity)\.
 
 **Workflow status**  
 The status of an investigation into a finding\. Tracked using the `Workflow.Status` attribute\.  

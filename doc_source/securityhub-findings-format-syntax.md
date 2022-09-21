@@ -551,6 +551,89 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     			"SpotPrice": "string",
     			"UserData": "string"
     		},
+    		"AwsBackupBackupPlan": {
+    			"BackupPlan": {
+    				"AdvancedBackupSettings": [{
+    					"BackupOptions": {
+    						"WindowsVSS":"string"
+    					},
+    					"ResourceType":"string"
+    				}],
+    				"BackupPlanName": "string",
+    				"BackupPlanRule": [{
+    					"CompletionWindowMinutes": "integer",
+    					"CopyActions": [{
+    						"DestinationBackupVaultArn": "string",
+    						"Lifecycle": {
+    							"DeleteAfterDays": "integer",
+    							"MoveToColdStorageAfterDays": "integer"
+    						}
+    					}],
+    					"Lifecycle": {
+    						"DeleteAfterDays": "integer"
+    					},
+    					"RuleName": "string",
+    					"ScheduleExpression": "string",
+    					"StartWindowMinutes": "integer",
+    					"TargetBackupVault": "string"
+    				}]
+    			},
+    			"BackupPlanArn": "string",
+    			"BackupPlanId": "string",
+    			"VersionId": "string"
+    	},
+    		"AwsBackupBackupVault": {
+    			"AccessPolicy": {
+    				"Statement": [{
+    					"Action": ["string"],
+    					"Effect": "string",
+    					"Principal": {
+    						"AWS": "string"
+    					},
+    					"Resource": "string"
+    				}],
+    				"Version": "string"
+    			},
+    			"BackupVaultArn": "string",
+    			"BackupVaultName": "string",
+    			"EncrytionKeyArn": "string",
+    			"Notifications": {
+    				"BackupVaultEvents": ["string"],
+    				"SNSTopicArn": "string"
+    			}
+    		},
+    		"AwsBackupRecoveryPoint": {
+    			"BackupSizeInBytes": "integer",
+    			"BackupVaultName": "string",
+    			"BackupVaultArn": "string",
+    			"CalculatedLifecycle": {
+    				"DeleteAt": "string",
+    				"MoveToColdStorageAt": "string"
+    			},
+    			"CompletionDate": "string",
+    			"CreatedBy": {
+    				"BackupPlanArn": "string",
+    				"BackupPlanId": "string",
+    				"BackupPlanVersion": "string",
+    				"BackupRuleId": "string"
+    			},
+    			"CreationDate": "string",
+    			"EncryptionKeyArn": "string",
+    			"IamRoleArn": "string",
+    			"IsEncrypted": "boolean",
+    			"LastRestoreTime": "string",
+    			"Lifecycle": {
+    				"DeleteAfterDays": "integer",
+    				"MoveToColdStorageAfterDays": "integer"
+    			},
+    			"RecoveryPointArn": "string",
+    			"ResourceArn": "string",
+    			"ResourceType": "string",
+    			"SourceBackupVaultArn": "string",
+    			"Status": "string",
+    			"StatusMessage": "string",
+    			"StorageClass": "string"
+    		},
     		"AwsCertificateManagerCertificate": {
     			"CertificateAuthorityArn": "string",
     			"CreatedAt": "string",
@@ -2847,6 +2930,7 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     			"Source": "string",
     			"Version": "string"
     		}],
+    		"FixAvailable": "string",
     		"Id": "string",
     		"ReferenceUrls": ["string"],
     		"RelatedVulnerabilities": ["string"],
@@ -2861,9 +2945,11 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     			"Architecture": "string",
     			"Epoch": "string",
     			"FilePath": "string",
+    			"FixedInVersion": "string",
     			"Name": "string",
     			"PackageManager": "string",
     			"Release": "string",
+    			"Remediation": "string",
     			"Version": "string"
     		}]
     	}],

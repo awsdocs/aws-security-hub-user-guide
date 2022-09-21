@@ -63,7 +63,7 @@ If you no longer need to use a feature or service that requires a service\-linke
 
 **Important**  
 To delete the `AWSServiceRoleForSecurityHub` service\-linked role, you must first disable Security Hub in all Regions where it's enabled\.  
-If Security Hub isn't disabled when you try to delete the service\-linked role, the deletion fails\. For more information, see [Disabling AWS Security Hub](securityhub-disable.md)\.
+If Security Hub isn't disabled when you try to delete the service\-linked role, the deletion fails\. For more information, see [Disabling Security Hub](securityhub-disable.md)\.
 
 When you disable Security Hub, the `AWSServiceRoleForSecurityHub` service\-linked role is *not* automatically deleted\. If you enable Security Hub again, it starts using the existing `AWSServiceRoleForSecurityHub` service\-linked role\.
 

@@ -87,7 +87,7 @@ The likelihood that a finding accurately identifies the behavior or issue that i
 
 Finding providers who want to provide a value for `Confidence` should use the `Confidence` attribute under `FindingProviderFields`\. See [Using FindingProviderFields](finding-update-batchimportfindings.md#batchimportfindings-findingproviderfields)\.
 
-`Confidence` is scored on a 0–100 basis using a ratio scale, where 0 means 0\-percent confidence and 100 means 100\-percent confidence\. For example, a data exfiltration detection based on a statistical deviation of network traffic has low confidence because an actual exfiltration hasn't been verified\.
+`Confidence` is scored on a 0–100 basis using a ratio scale\. 0 means 0 percent confidence, and 100 means 100 percent confidence\. For example, a data exfiltration detection based on a statistical deviation of network traffic has low confidence because an actual exfiltration hasn't been verified\.
 
 **Example**
 
@@ -99,7 +99,7 @@ Finding providers who want to provide a value for `Confidence` should use the `C
 
 The level of importance that is assigned to the resources that are associated with a finding\.
 
-`Criticality` should only be updated by calling the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) API operation\. You should not update this object with [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.
+`Criticality` should only be updated by calling the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) API operation\. Don't update this object with [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)\.
 
 Finding providers who want to provide a value for `Criticality` should use the `Criticality` attribute under `FindingProviderFields`\. See [Using FindingProviderFields](finding-update-batchimportfindings.md#batchimportfindings-findingproviderfields)\.
 
@@ -199,11 +199,11 @@ The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Malware.html](
 ]
 ```
 
-## Network \(Deprecated\)<a name="asff-network"></a>
+## Network \(Retired\)<a name="asff-network"></a>
 
 The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Network.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Network.html) object provides network\-related information about a finding\.
 
-This object is deprecated\. To provide this data, you can either map the data to a resource in `Resources`, or use the `Action` object\.
+This object is retired\. To provide this data, you can either map the data to a resource in `Resources`, or use the `Action` object\.
 
 **Example**
 
@@ -536,6 +536,7 @@ The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Vulnerability.
                 "Version": "V2"
             }
         ],
+        "FixAvailable": "YES",
         "Id": "CVE-2020-12345",
         "ReferenceUrls":[
            "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12418",
@@ -553,8 +554,12 @@ The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Vulnerability.
             {
                 "Architecture": "x86_64",
                 "Epoch": "1",
+                "FilePath": "/tmp",
+                "FixedInVersion": "0.14.0",
                 "Name": "openssl",
+                "PackageManager": "OS",
                 "Release": "16.amzn2.0.3",
+                "Remediation": "Update aws-crt to 0.14.0",
                 "Version": "1.0.2k"
             }
         ]
@@ -578,9 +583,9 @@ You can only update the `Workflow` field with [https://docs.aws.amazon.com/secur
 }
 ```
 
-## WorkflowState \(Deprecated\)<a name="asff-workflowstate"></a>
+## WorkflowState \(Retired\)<a name="asff-workflowstate"></a>
 
-This object is deprecated and has been replaced by the `Status` field of the `Workflow` object\.
+This object is retired and has been replaced by the `Status` field of the `Workflow` object\.
 
 This field provides the workflow state of a finding\. Findings products can provide the value of `NEW` for this field\. A findings product can provide a value for this field if there is a meaningful analog in the findings product's system\.
 

@@ -23,29 +23,28 @@ When you enable Security Hub, Security Hub calculates the initial security score
 **Note**  
 It can take up to 24 hours for first\-time security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
-## Auto\-enabled standards for new organization accounts<a name="securityhub-auto-enabled-standards"></a>
+## Auto\-enabled security standards<a name="securityhub-auto-enabled-standards"></a>
 
-If you are using the integration with AWS Organizations, Security Hub automatically enables default security standards for new member accounts\.
+Security Hub automatically enables default security standards for new accounts\. In addition, if you use the integration with AWS Organizations, Security Hub automatically enables default security standards for new member accounts\. You can opt of auto\-enabled standards\.
 
-Currently, the default security standards that are automatically enabled are the AWS Foundational Security Best Practices \(FSBP\) standard and the Center for Internet Security \(CIS\) AWS Foundations Benchmark standard\. For more information, see [Available security standards in AWS Security Hub](https://docs.aws.amazon.com/securityhub/latest/userguide/standards-available.html)\.
-
-**Note**  
-In order to auto\-enable standards, you must first automatically enable Security Hub for new member accounts in your organization\. If you turn off automatic enablement of Security Hub in new member accounts, Security Hub automatically turns off automatic enablement of default standards in new member accounts\. See [Automatically enabling new organization accounts](accounts-orgs-auto-enable.md)\.
+Currently, the default security standards that are automatically enabled are the AWS Foundational Security Best Practices \(FSBP\) standard and the Center for Internet Security \(CIS\) v1\.2\.0 AWS Foundations Benchmark\.
 
 ### Opt out of auto\-enabled standards<a name="Opt-out-of-auto-enabled-standards"></a>
 
-If you do not want to auto\-enable the default security standards on new member accounts, follow these steps\.
+The following opt\-out steps apply only if you use the integration with AWS Organizations\. If you do not use this integration, you can opt out of a default standard when you first enable Security Hub, or you can follow the steps for [disabling a standard](#securityhub-standard-disable-console)\.
 
 **To opt out of auto\-enabled standards \(console\)**
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
+
+1. Log into the administrator account\.
 
 1. On the Security Hub navigation bar, choose **Settings**\.
 
 1. On the **Accounts** tab, turn off **Auto\-enable standards**\.
 
 **To opt out of auto\-enabled standards \(Security Hub API, AWS CLI\)**
-+ **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateOrganizationConfiguration.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateOrganizationConfiguration.html) operation from your Security Hub administrator account\. The default value for the `AutoEnabledStandards` parameter is equal to `DEFAULT`\. To opt out of auto\-enabled standards in new member accounts, set `AutoEnableStandards` equal to `NONE`\.
++ **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateOrganizationConfiguration.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateOrganizationConfiguration.html) operation from the Security Hub administrator account\. The default value for the `AutoEnabledStandards` parameter is equal to `DEFAULT`\. To opt out of auto\-enabled standards in new member accounts, set `AutoEnableStandards` equal to `NONE`\.
 + **AWS CLI** – At the command line, run the `update-organization-configuration` command\.
 
   ```

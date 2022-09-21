@@ -44,6 +44,7 @@ It contains an array of up to 32 resource objects\.
 + [Resource attributes](asff-resources-attributes.md)
 + [AwsApiGateway](asff-resourcedetails-awsapigateway.md)
 + [AwsAutoScaling](asff-resourcedetails-awsautoscaling.md)
++ [AwsBackup](asff-resourcedetails-awsbackup.md)
 + [AwsCertificateManager](asff-resourcedetails-awscertificatemanager.md)
 + [AwsCloudFormation](asff-resourcedetails-awscloudformation.md)
 + [AwsCloudFront](asff-resourcedetails-awscloudfront.md)

@@ -73,9 +73,11 @@ The China \(Beijing\) and China \(Ningxia\) Regions only support the following [
 ### Integrations that are supported in AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)<a name="securityhub-regions-integration-support-govcloud"></a>
 
 The AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions only support the following [integrations with AWS services](securityhub-internal-providers.md):
++ AWS Config
 + Amazon Detective
 + AWS Firewall Manager
 + Amazon GuardDuty
++ AWS Health
 + Amazon Inspector
 + IAM Access Analyzer
 
@@ -85,18 +87,19 @@ The AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions only support
 + Caveonix Cloud
 + Cloud Custodian
 + Cloud Storage Security Antivirus for Amazon S3
-+ cloudtamer\.io
 + CrowdStrike Falcon
 + FireEye Helix
 + Forcepoint CASB
 + Forcepoint DLP
 + Forcepoint NGFW
++ Fugue
++ Kion
 + MicroFocus ArcSight
 + NETSCOUT Cyber Investigator
 + PagerDuty
 + Palo Alto Networks – Prisma Cloud Compute
 + Palo Alto Networks – Prisma Cloud Enterprise
-+ Palo Alto Networks – VM\-Series
++ Palo Alto Networks – VM\-Series \(available only in AWS GovCloud \(US\-West\)\)
 + Prowler
 + Rackspace Technology – Cloud Native Security
 + Rapid7 InsightConnect
@@ -322,6 +325,7 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
 [\[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
 [\[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-6)  
+[\[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-9)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
 [\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
 [\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
@@ -392,7 +396,7 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[KMS\.1\] IAM customer managed policies should not allow decryption and re\-encryption actions on all KMS keys](securityhub-standards-fsbp-controls.md#fsbp-kms-1)  
 [\[KMS\.2\] IAM principals should not have IAM inline policies that allow decryption and re\-encryption actions on all KMS keys ](securityhub-standards-fsbp-controls.md#fsbp-kms-2)  
 [\[Lambda\.5\] VPC Lambda functions should operate in more than one Availability Zone](securityhub-standards-fsbp-controls.md#fsbp-lambda-5)  
-[\[Network Firewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
+[\[NetworkFirewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
 [\[NetworkFirewall\.4\] The default stateless action for Network Firewall policies should be drop or forward for full packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-4)  
 [\[NetworkFirewall\.5\] The default stateless action for Network Firewall policies should be drop or forward for fragmented packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-5)  
 [\[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled](securityhub-standards-fsbp-controls.md#fsbp-opensearch-1)  
@@ -697,6 +701,7 @@ The following controls are not supported in China \(Beijing\)\.
 [\[AutoScaling\.3\] Auto Scaling group should configure EC2 instances to require Instance Metadata Service Version 2 \(IMDSv2\)](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-3)  
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
 [\[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-6)  
+[\[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-9)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
 [\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
 [\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
@@ -747,7 +752,7 @@ The following controls are not supported in China \(Beijing\)\.
 [\[Lambda\.1\] Lambda function policies should prohibit public access](securityhub-standards-fsbp-controls.md#fsbp-lambda-1)  
 [\[Lambda\.2\] Lambda functions should use supported runtimes](securityhub-standards-fsbp-controls.md#fsbp-lambda-2)  
 [\[Lambda\.5\] VPC Lambda functions should operate in more than one Availability Zone](securityhub-standards-fsbp-controls.md#fsbp-lambda-5)  
-[\[Network Firewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
+[\[NetworkFirewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
 [\[NetworkFirewall\.4\] The default stateless action for Network Firewall policies should be drop or forward for full packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-4)  
 [\[NetworkFirewall\.5\] The default stateless action for Network Firewall policies should be drop or forward for fragmented packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-5)  
 [\[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled](securityhub-standards-fsbp-controls.md#fsbp-opensearch-1)  
@@ -770,6 +775,7 @@ The following controls are not supported in China \(Beijing\)\.
 [\[Redshift\.7\] Amazon Redshift clusters should use enhanced VPC routing](securityhub-standards-fsbp-controls.md#fsbp-redshift-7)  
 [\[Redshift\.8\] Amazon Redshift clusters should not use the default Admin username](securityhub-standards-fsbp-controls.md#fsbp-redshift-8)  
 [\[Redshift\.9\] Redshift clusters should not use the default database name](securityhub-standards-fsbp-controls.md#fsbp-redshift-9)  
+[\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[S3\.8\] S3 Block Public Access setting should be enabled at the bucket level](securityhub-standards-fsbp-controls.md#fsbp-s3-8)  
 [\[S3\.11\] S3 buckets should have event notifications enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-11)  
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  
@@ -812,6 +818,7 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[AutoScaling\.3\] Auto Scaling group should configure EC2 instances to require Instance Metadata Service Version 2 \(IMDSv2\)](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-3)  
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
 [\[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-6)  
+[\[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-9)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
 [\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
 [\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
@@ -862,7 +869,7 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[Lambda\.1\] Lambda function policies should prohibit public access](securityhub-standards-fsbp-controls.md#fsbp-lambda-1)  
 [\[Lambda\.2\] Lambda functions should use supported runtimes](securityhub-standards-fsbp-controls.md#fsbp-lambda-2)  
 [\[Lambda\.5\] VPC Lambda functions should operate in more than one Availability Zone](securityhub-standards-fsbp-controls.md#fsbp-lambda-5)  
-[\[Network Firewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
+[\[NetworkFirewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
 [\[NetworkFirewall\.4\] The default stateless action for Network Firewall policies should be drop or forward for full packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-4)  
 [\[NetworkFirewall\.5\] The default stateless action for Network Firewall policies should be drop or forward for fragmented packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-5)  
 [\[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled](securityhub-standards-fsbp-controls.md#fsbp-opensearch-1)  
@@ -886,6 +893,7 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[Redshift\.7\] Amazon Redshift clusters should use enhanced VPC routing](securityhub-standards-fsbp-controls.md#fsbp-redshift-7)  
 [\[Redshift\.8\] Amazon Redshift clusters should not use the default Admin username](securityhub-standards-fsbp-controls.md#fsbp-redshift-8)  
 [\[Redshift\.9\] Redshift clusters should not use the default database name](securityhub-standards-fsbp-controls.md#fsbp-redshift-9)  
+[\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[S3\.8\] S3 Block Public Access setting should be enabled at the bucket level](securityhub-standards-fsbp-controls.md#fsbp-s3-8)  
 [\[S3\.11\] S3 buckets should have event notifications enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-11)  
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  
@@ -1178,6 +1186,7 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
 [\[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
 [\[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-6)  
+[\[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-9)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
 [\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
 [\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
@@ -1210,6 +1219,7 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[ECS\.2\] Amazon ECS services should not have public IP addresses assigned to them automatically](securityhub-standards-fsbp-controls.md#fsbp-ecs-2)  
 [\[ECS\.3\] ECS task definitions should not share the host's process namespace](securityhub-standards-fsbp-controls.md#fsbp-ecs-3)  
 [\[ECS\.4\] ECS containers should run as non\-privileged](securityhub-standards-fsbp-controls.md#fsbp-ecs-4)  
+[\[ECS\.5\] ECS containers should be limited to read\-only access to root filesystems](securityhub-standards-fsbp-controls.md#fsbp-ecs-5)  
 [\[ECS\.8\] Secrets should not be passed as container environment variables](securityhub-standards-fsbp-controls.md#fsbp-ecs-8)  
 [\[ECS\.10\] Fargate services should run on the latest Fargate platform version](securityhub-standards-fsbp-controls.md#fsbp-ecs-10)  
 [\[ECS\.12\] ECS clusters should have Container Insights enabled](securityhub-standards-fsbp-controls.md#fsbp-ecs-12)  
@@ -1231,7 +1241,7 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[IAM\.21\] IAM customer managed policies that you create should not allow wildcard actions for services](securityhub-standards-fsbp-controls.md#fsbp-iam-21)  
 [\[Kinesis\.1\] Kinesis Data Streams should be encrypted at rest](securityhub-standards-fsbp-controls.md#fsbp-kinesis-1)  
 [\[Lambda\.5\] VPC Lambda functions should operate in more than one Availability Zone](securityhub-standards-fsbp-controls.md#fsbp-lambda-5)  
-[\[Network Firewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
+[\[NetworkFirewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
 [\[NetworkFirewall\.4\] The default stateless action for Network Firewall policies should be drop or forward for full packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-4)  
 [\[NetworkFirewall\.5\] The default stateless action for Network Firewall policies should be drop or forward for fragmented packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-5)  
 [\[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled](securityhub-standards-fsbp-controls.md#fsbp-opensearch-1)  
@@ -1251,6 +1261,7 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[Redshift\.7\] Amazon Redshift clusters should use enhanced VPC routing](securityhub-standards-fsbp-controls.md#fsbp-redshift-7)  
 [\[Redshift\.8\] Amazon Redshift clusters should not use the default Admin username](securityhub-standards-fsbp-controls.md#fsbp-redshift-8)  
 [\[Redshift\.9\] Redshift clusters should not use the default database name](securityhub-standards-fsbp-controls.md#fsbp-redshift-9)  
+[\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[S3\.8\] S3 Block Public Access setting should be enabled at the bucket level](securityhub-standards-fsbp-controls.md#fsbp-s3-8)  
 [\[S3\.11\] S3 buckets should have event notifications enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-11)  
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  
@@ -1290,6 +1301,7 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
 [\[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
 [\[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-6)  
+[\[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-9)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
 [\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
 [\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
@@ -1322,6 +1334,7 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[ECS\.2\] Amazon ECS services should not have public IP addresses assigned to them automatically](securityhub-standards-fsbp-controls.md#fsbp-ecs-2)  
 [\[ECS\.3\] ECS task definitions should not share the host's process namespace](securityhub-standards-fsbp-controls.md#fsbp-ecs-3)  
 [\[ECS\.4\] ECS containers should run as non\-privileged](securityhub-standards-fsbp-controls.md#fsbp-ecs-4)  
+[\[ECS\.5\] ECS containers should be limited to read\-only access to root filesystems](securityhub-standards-fsbp-controls.md#fsbp-ecs-5)  
 [\[ECS\.8\] Secrets should not be passed as container environment variables](securityhub-standards-fsbp-controls.md#fsbp-ecs-8)  
 [\[ECS\.10\] Fargate services should run on the latest Fargate platform version](securityhub-standards-fsbp-controls.md#fsbp-ecs-10)  
 [\[ECS\.12\] ECS clusters should have Container Insights enabled](securityhub-standards-fsbp-controls.md#fsbp-ecs-12)  
@@ -1340,7 +1353,7 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[IAM\.21\] IAM customer managed policies that you create should not allow wildcard actions for services](securityhub-standards-fsbp-controls.md#fsbp-iam-21)  
 [\[Kinesis\.1\] Kinesis Data Streams should be encrypted at rest](securityhub-standards-fsbp-controls.md#fsbp-kinesis-1)  
 [\[Lambda\.5\] VPC Lambda functions should operate in more than one Availability Zone](securityhub-standards-fsbp-controls.md#fsbp-lambda-5)  
-[\[Network Firewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
+[\[NetworkFirewall\.3\] Network Firewall policies should have at least one rule group associated](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-3)  
 [\[NetworkFirewall\.4\] The default stateless action for Network Firewall policies should be drop or forward for full packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-4)  
 [\[NetworkFirewall\.5\] The default stateless action for Network Firewall policies should be drop or forward for fragmented packets](securityhub-standards-fsbp-controls.md#fsbp-networkfirewall-5)  
 [\[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled](securityhub-standards-fsbp-controls.md#fsbp-opensearch-1)  
@@ -1360,6 +1373,7 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[Redshift\.7\] Amazon Redshift clusters should use enhanced VPC routing](securityhub-standards-fsbp-controls.md#fsbp-redshift-7)  
 [\[Redshift\.8\] Amazon Redshift clusters should not use the default Admin username](securityhub-standards-fsbp-controls.md#fsbp-redshift-8)  
 [\[Redshift\.9\] Redshift clusters should not use the default database name](securityhub-standards-fsbp-controls.md#fsbp-redshift-9)  
+[\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[S3\.8\] S3 Block Public Access setting should be enabled at the bucket level](securityhub-standards-fsbp-controls.md#fsbp-s3-8)  
 [\[S3\.11\] S3 buckets should have event notifications enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-11)  
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  

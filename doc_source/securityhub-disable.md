@@ -1,4 +1,4 @@
-# Disabling AWS Security Hub<a name="securityhub-disable"></a>
+# Disabling Security Hub<a name="securityhub-disable"></a>
 
 To disable AWS Security Hub, you can use the Security Hub console or the Security Hub API\.
 
