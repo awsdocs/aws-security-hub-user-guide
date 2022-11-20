@@ -62,7 +62,7 @@ When you use the Security Hub console to filter findings by company name, you us
 
 ## Compliance<a name="asff-compliance"></a>
 
-The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Compliance.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Compliance.html) object provides finding details related to a control\. This attribute is only returned for findings generated from a Security Hub control\.
+The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Compliance.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Compliance.html) object provides finding details related to a control\. This attribute is returned for findings generated from a Security Hub control and for findings that AWS Config sends to Security Hub\.
 
 **Example**
 
@@ -338,6 +338,8 @@ This field should not contain redundant data and must not contain data that conf
 The "`aws/`" prefix represents a reserved namespace for AWS products and services only and must not be submitted with findings from third\-party integrations\.
 
 Although not required, products should format field names as `company-id/product-id/field-name`, where the `company-id` and `product-id` match those supplied in the `ProductArn` of the finding\.
+
+This field may also include information about the standard that includes the control which produced the finding\.
 
 **Example**
 

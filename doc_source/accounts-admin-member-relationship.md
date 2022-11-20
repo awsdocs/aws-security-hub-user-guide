@@ -2,7 +2,7 @@
 
 An administrator account is granted permission to view the findings that are associated with their member accounts\. This also allows the administrator account to view insight results and control statuses from across their member accounts\. Administrator accounts can also take action on their member accounts' findings\.
 
-Security Hub does not copy member account findings into the administrator account\. Administrator accounts also cannot change the Security Hub configuration for member accounts\. See [Allowed actions for accounts](securityhub-accounts-allowed-actions.md)\.
+Security Hub does not copy member account findings into the administrator account\. Administrator accounts also cannot change the Security Hub configuration for member accounts\. For more information, see [Allowed actions for accounts](securityhub-accounts-allowed-actions.md)\.
 
 In Security Hub, all findings are ingested into a specific Region for a specific account\.
 

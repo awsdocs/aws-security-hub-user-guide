@@ -52,6 +52,7 @@ The China \(Beijing\) and China \(Ningxia\) Regions only support the following [
 + AWS Firewall Manager
 + Amazon GuardDuty
 + IAM Access Analyzer
++ AWS IoT Device Defender
 + Systems Manager Explorer
 + Systems Manager OpsCenter
 + Systems Manager Patch Manager
@@ -78,11 +79,13 @@ The AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions only support
 + AWS Firewall Manager
 + Amazon GuardDuty
 + AWS Health
-+ Amazon Inspector
 + IAM Access Analyzer
++ Amazon Inspector
++ AWS IoT Device Defender
 
 The AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions only support the following [third\-party integrations](securityhub-partner-providers.md):
-+ Atlassian Jira Service Manager
++ Atlassian Jira Service Management
++ Atlassian Jira Service Management Cloud
 + Atlassian OpsGenie
 + Caveonix Cloud
 + Cloud Custodian
@@ -179,11 +182,15 @@ The following controls are not supported in US West \(Oregon\)\.
 
 The following controls are not supported in Africa \(Cape Town\)\.
 
-**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
 [1\.4 – Ensure access keys are rotated every 90 days or less ](securityhub-cis-controls.md#securityhub-cis-controls-1.4)  
-[1\.20 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
+[1\.20 – Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
 [4\.1 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22 ](securityhub-cis-controls.md#securityhub-cis-controls-4.1)  
 [4\.2 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389 ](securityhub-cis-controls.md#securityhub-cis-controls-4.2)
+
+**[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
+[1\.14 – Ensure access keys are rotated every 90 days or less ](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.14)  
+[1\.17 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.17)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
@@ -232,14 +239,12 @@ The following controls are not supported in Africa \(Cape Town\)\.
 [\[ES\.3\] Elasticsearch domains should encrypt data sent between nodes](securityhub-standards-fsbp-controls.md#fsbp-es-3)  
 [\[GuardDuty\.1\] GuardDuty should be enabled](securityhub-standards-fsbp-controls.md#fsbp-guardduty-1)  
 [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](securityhub-standards-fsbp-controls.md#fsbp-iam-3)  
-[\[IAM\.4\] IAM root user access key should not exist](securityhub-standards-fsbp-controls.md#fsbp-iam-4)  
 [\[OpenSearch\.7\] OpenSearch domains should have fine\-grained access control enabled](securityhub-standards-fsbp-controls.md#fsbp-opensearch-7)  
 [\[RDS\.1\] RDS snapshots should be private](securityhub-standards-fsbp-controls.md#fsbp-rds-1)  
 [\[RDS\.9\] Database logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-9)  
 [\[RDS\.10\] IAM authentication should be configured for RDS instances](securityhub-standards-fsbp-controls.md#fsbp-rds-10)  
 [\[RDS\.14\] Amazon Aurora clusters should have backtracking enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-14)  
 [\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)  
-[\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
 [\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)  
 [\[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT](securityhub-standards-fsbp-controls.md#fsbp-ssm-3)  
@@ -284,13 +289,16 @@ The following controls are not supported in Asia Pacific \(Hong Kong\)\.
 
 The following controls are not supported in Asia Pacific \(Jakarta\)\.
 
-**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
 [1\.12 – Ensure no root user access key exists](securityhub-cis-controls.md#securityhub-cis-controls-1.12)  
-[1\.20 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
+[1\.20 – Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
 [2\.9 – Ensure VPC flow logging is enabled in all VPCs ](securityhub-cis-controls.md#securityhub-cis-controls-2.9)  
 [4\.1 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22 ](securityhub-cis-controls.md#securityhub-cis-controls-4.1)  
 [4\.2 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389 ](securityhub-cis-controls.md#securityhub-cis-controls-4.2)  
 [4\.3 – Ensure the default security group of every VPC restricts all traffic](securityhub-cis-controls.md#securityhub-cis-controls-4.3)
+
+**[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
+[2\.2\.1 – Ensure EBS volume encryption is enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.2.1)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
@@ -358,10 +366,8 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[EC2\.17\] EC2 instances should not use multiple ENIs](securityhub-standards-fsbp-controls.md#fsbp-ec2-17)  
 [\[EC2\.18\] Security groups should only allow unrestricted incoming traffic for authorized ports](securityhub-standards-fsbp-controls.md#fsbp-ec2-18)  
 [\[EC2\.20\] Both VPN tunnels for an AWS Site\-to\-Site VPN connection should be up](securityhub-standards-fsbp-controls.md#fsbp-ec2-20)  
-[\[EC2\.21\] Network ACLs should not allow ingress from 0\.0\.0\.0/0 to port 22 or port 3389](securityhub-standards-fsbp-controls.md#fsbp-ec2-21)  
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -477,11 +483,17 @@ The following controls are not supported in Asia Pacific \(Mumbai\)\.
 
 The following controls are not supported in Asia Pacific \(Osaka\)\.
 
-**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
 [1\.12 – Ensure no root user access key exists](securityhub-cis-controls.md#securityhub-cis-controls-1.12)  
-[1\.20 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
+[1\.20 – Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
 [4\.1 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22 ](securityhub-cis-controls.md#securityhub-cis-controls-4.1)  
 [4\.2 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389 ](securityhub-cis-controls.md#securityhub-cis-controls-4.2)
+
+**[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
+[1\.4 – Ensure no root user account access key exists](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.4)  
+[1\.17 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.17)  
+[2\.2\.1 – Ensure EBS volume encryption is enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.2.1)  
+[2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
@@ -529,6 +541,7 @@ The following controls are not supported in Asia Pacific \(Osaka\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
+[\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECS\.1\] Amazon ECS task definitions should have secure networking modes and user definitions](securityhub-standards-fsbp-controls.md#fsbp-ecs-1)  
 [\[ECS\.2\] Amazon ECS services should not have public IP addresses assigned to them automatically](securityhub-standards-fsbp-controls.md#fsbp-ecs-2)  
@@ -545,8 +558,12 @@ The following controls are not supported in Asia Pacific \(Osaka\)\.
 [\[ELB\.4\] Application load balancers should be configured to drop HTTP headers](securityhub-standards-fsbp-controls.md#fsbp-elb-4)  
 [\[ELB\.8\] Classic Load Balancers with HTTPS/SSL listeners should use a predefined security policy that has strong configuration](securityhub-standards-fsbp-controls.md#fsbp-elb-8)  
 [\[ELB\.9\] Classic Load Balancers should have cross\-zone load balancing enabled](securityhub-standards-fsbp-controls.md#fsbp-elb-9)  
+[\[IAM\.4\] IAM root user access key should not exist](securityhub-standards-fsbp-controls.md#fsbp-iam-4)  
 [\[IAM\.21\] IAM customer managed policies that you create should not allow wildcard actions for services](securityhub-standards-fsbp-controls.md#fsbp-iam-21)  
+[\[KMS\.1\] IAM customer managed policies should not allow decryption and re\-encryption actions on all KMS keys](securityhub-standards-fsbp-controls.md#fsbp-kms-1)  
+[\[KMS\.2\] IAM principals should not have IAM inline policies that allow decryption and re\-encryption actions on all KMS keys ](securityhub-standards-fsbp-controls.md#fsbp-kms-2)  
 [\[KMS\.3\] AWS KMS keys should not be unintentionally deleted](securityhub-standards-fsbp-controls.md#fsbp-kms-3)  
+[\[Lambda\.2\] Lambda functions should use supported runtimes](securityhub-standards-fsbp-controls.md#fsbp-lambda-2)  
 [\[Lambda\.5\] VPC Lambda functions should operate in more than one Availability Zone](securityhub-standards-fsbp-controls.md#fsbp-lambda-5)  
 [\[OpenSearch\.1 \] OpenSearch domains should have encryption at rest enabled](securityhub-standards-fsbp-controls.md#fsbp-opensearch-1)  
 [\[OpenSearch\.2\] OpenSearch domains should be in a VPC](securityhub-standards-fsbp-controls.md#fsbp-opensearch-2)  
@@ -565,6 +582,7 @@ The following controls are not supported in Asia Pacific \(Osaka\)\.
 [\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)  
 [\[Redshift\.7\] Amazon Redshift clusters should use enhanced VPC routing](securityhub-standards-fsbp-controls.md#fsbp-redshift-7)  
 [\[S3\.8\] S3 Block Public Access setting should be enabled at the bucket level](securityhub-standards-fsbp-controls.md#fsbp-s3-8)  
+[\[SecretsManager\.1\] Secrets Manager secrets should have automatic rotation enabled](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-1)  
 [\[SecretsManager\.3\] Remove unused Secrets Manager secrets](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-3)  
 [\[SecretsManager\.4\] Secrets Manager secrets should be rotated within a specified number of days](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-4)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
@@ -680,9 +698,16 @@ The following controls are not supported in Canada \(Central\)\.
 
 The following controls are not supported in China \(Beijing\)\.
 
-**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
 [1\.13 – Ensure MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
+
+**[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
+[1\.5 – Ensure MFA is enabled for the 'root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
+[1\.6 – Ensure hardware MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.6)  
+[2\.1\.5\.1 – S3 Block Public Access setting should be enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.1)  
+[2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)  
+[5\.1 – Ensure no Network ACLs allow ingress from 0\.0\.0\.0/0 to remote server administration ports](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-5.1)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
@@ -722,7 +747,6 @@ The following controls are not supported in China \(Beijing\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -784,7 +808,6 @@ The following controls are not supported in China \(Beijing\)\.
 [\[SecretsManager\.3\] Remove unused Secrets Manager secrets](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-3)  
 [\[SecretsManager\.4\] Secrets Manager secrets should be rotated within a specified number of days](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-4)  
 [\[SNS\.2\] Logging of delivery status should be enabled for notification messages sent to a topic](securityhub-standards-fsbp-controls.md#fsbp-sns-2)  
-[\[SSM\.4\] SSM documents should not be public](securityhub-standards-fsbp-controls.md#fsbp-ssm-4)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.2\] A WAF Regional rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-2)  
 [\[WAF\.3\] A WAF Regional rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-3)  
@@ -797,9 +820,16 @@ The following controls are not supported in China \(Beijing\)\.
 
 The following controls are not supported in China \(Ningxia\)\.
 
-**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
 [1\.13 – Ensure MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
+
+**[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
+[1\.5 – Ensure MFA is enabled for the 'root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
+[1\.6 – Ensure hardware MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.6)  
+[2\.1\.5\.1 – S3 Block Public Access setting should be enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.1)  
+[2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)  
+[5\.1 – Ensure no Network ACLs allow ingress from 0\.0\.0\.0/0 to remote server administration ports](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-5.1)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.GuardDuty\.1\] GuardDuty should be enabled](securityhub-pci-controls.md#pcidss-guardduty-1)  
@@ -839,7 +869,6 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -902,7 +931,6 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[SecretsManager\.3\] Remove unused Secrets Manager secrets](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-3)  
 [\[SecretsManager\.4\] Secrets Manager secrets should be rotated within a specified number of days](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-4)  
 [\[SNS\.2\] Logging of delivery status should be enabled for notification messages sent to a topic](securityhub-standards-fsbp-controls.md#fsbp-sns-2)  
-[\[SSM\.4\] SSM documents should not be public](securityhub-standards-fsbp-controls.md#fsbp-ssm-4)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.2\] A WAF Regional rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-2)  
 [\[WAF\.3\] A WAF Regional rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-3)  
@@ -976,11 +1004,15 @@ The following controls are not supported in Europe \(London\)\.
 
 The following controls are not supported in Europe \(Milan\)\.
 
-**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
 [1\.4 – Ensure access keys are rotated every 90 days or less ](securityhub-cis-controls.md#securityhub-cis-controls-1.4)  
-[1\.20 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
+[1\.20 – Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls.md#securityhub-cis-controls-1.20)  
 [4\.1 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22 ](securityhub-cis-controls.md#securityhub-cis-controls-4.1)  
 [4\.2 – Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389 ](securityhub-cis-controls.md#securityhub-cis-controls-4.2)
+
+**[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
+[1\.14 – Ensure access keys are rotated every 90 days or less ](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.14)  
+[1\.17 \- Ensure a support role has been created to manage incidents with AWS Support ](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.17)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
@@ -1043,7 +1075,6 @@ The following controls are not supported in Europe \(Milan\)\.
 [\[RDS\.14\] Amazon Aurora clusters should have backtracking enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-14)  
 [\[Redshift\.2\] Connections to Amazon Redshift clusters should be encrypted in transit](securityhub-standards-fsbp-controls.md#fsbp-redshift-2)  
 [\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)  
-[\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
 [\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)  
 [\[SSM\.3\] Instances managed by Systems Manager should have an association compliance status of COMPLIANT](securityhub-standards-fsbp-controls.md#fsbp-ssm-3)  
@@ -1128,7 +1159,6 @@ The following controls are not supported in Middle East \(Bahrain\)\.
 [\[RDS\.16\] RDS DB clusters should be configured to copy tags to snapshots](securityhub-standards-fsbp-controls.md#fsbp-rds-16)  
 [\[RDS\.24\] RDS database clusters should use a custom administrator username](securityhub-standards-fsbp-controls.md#fsbp-rds-24)  
 [\[Redshift\.6\] Amazon Redshift should have automatic upgrades to major versions enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-6)  
-[\[S3\.1\] S3 Block Public Access setting should be enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-1)  
 [\[SSM\.2\] All EC2 instances managed by Systems Manager should be compliant with patching requirements](securityhub-standards-fsbp-controls.md#fsbp-ssm-2)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
@@ -1165,9 +1195,16 @@ The following controls are not supported in South America \(São Paulo\)\.
 
 The following controls are not supported in AWS GovCloud \(US\-East\)\.
 
-**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
 [1\.13 – Ensure MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
+
+**[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
+[1\.5 – Ensure MFA is enabled for the 'root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
+[1\.6 – Ensure hardware MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.6)  
+[2\.1\.5\.1 – S3 Block Public Access setting should be enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.1)  
+[2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)  
+[5\.1 – Ensure no Network ACLs allow ingress from 0\.0\.0\.0/0 to remote server administration ports](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-5.1)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
@@ -1211,7 +1248,6 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -1282,9 +1318,16 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 
 The following controls are not supported in AWS GovCloud \(US\-West\)\.
 
-**[CIS AWS Foundations Benchmark standard](securityhub-standards-cis.md)**  
+**[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
 [1\.13 – Ensure MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
+
+**[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
+[1\.5 – Ensure MFA is enabled for the 'root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
+[1\.6 – Ensure hardware MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.6)  
+[2\.1\.5\.1 – S3 Block Public Access setting should be enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.1)  
+[2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)  
+[5\.1 – Ensure no Network ACLs allow ingress from 0\.0\.0\.0/0 to remote server administration ports](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-5.1)
 
 **[Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)**  
 [\[PCI\.CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-pci-controls.md#pcidss-codebuild-1)  
@@ -1326,7 +1369,6 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
-[\[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)](securityhub-standards-fsbp-controls.md#fsbp-ec2-27)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  

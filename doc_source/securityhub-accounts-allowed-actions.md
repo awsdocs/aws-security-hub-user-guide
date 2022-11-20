@@ -22,4 +22,6 @@ This table reflects the default permissions for administrator and member account
 |  Enable and disable controls  |  Self  |  Self  |  Self  |  Self  | 
 |  Enable and disable standards  |  Self  |  Self  |  Self  |  Self  | 
 |  Enable and disable integrations  |  Self  |  Self  |  Self  |  Self  | 
+|  Configure cross\-Region aggregation  |  Any  |  Any  |  \-  |  \-  | 
 |  Configure custom actions  |  Self  |  Self  |  Self  |  Self  | 
+|  Configure custom insights  |  Self  |  Self  |  Self  |  Self  | 

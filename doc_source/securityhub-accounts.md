@@ -1,6 +1,6 @@
 # Managing administrator and member accounts<a name="securityhub-accounts"></a>
 
-An administrator account can view data from and manage configuration for its member accounts\. The administrator\-member relationship is established differently based on whether you use the integration with AWS Organizations\.
+An administrator account can view data from its member accounts\. The administrator\-member relationship is established differently based on whether you use the integration with AWS Organizations\.
 
 If you are integrated with Organizations, the organization management account designates the Security Hub administrator account\. See [Designating a Security Hub administrator account](designate-orgs-admin-account.md)\. The Security Hub administrator account automatically has access to all of the accounts in the organization\. The Security Hub administrator account determines which organization accounts to enable as member accounts\. See [Managing member accounts that belong to an organization](securityhub-accounts-orgs.md)\. These member accounts cannot disassociate themselves from the administrator account\.
 

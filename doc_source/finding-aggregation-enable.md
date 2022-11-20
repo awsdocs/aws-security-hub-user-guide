@@ -1,6 +1,6 @@
 # Enabling cross\-Region aggregation<a name="finding-aggregation-enable"></a>
 
-You must enable cross\-Region aggregation from the Region that will be the aggregation Region\.
+You must enable cross\-Region aggregation from the AWS Region that will be the aggregation Region\.
 
 You cannot use a Region that is disabled by default as your aggregation Region\. For a list of Regions that are disabled by default, see [Enabling a Region](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable) in the *AWS General Reference*\.
 
@@ -39,7 +39,7 @@ To enable cross\-Region aggregation from the Security Hub API, you create a find
   + `ALL_REGIONS` – Security Hub aggregates data from all Regions\. Security Hub also aggregates data from new Regions as they are supported and you opt into them\.
   + `ALL_REGIONS_EXCEPT_SPECIFIED` – Security Hub aggregates data from all Regions except for Regions that you want to exclude\. Security Hub also aggregates data from new Regions as they are supported and you opt into them\. Use `Regions` to provide the list of Regions to exclude from aggregation\.
   + `SPECIFIED_REGIONS` – Security Hub aggregates data from a selected list of Regions\. Security Hub does not aggregate data automatically from new Regions\. Use `Regions` to provide the list of Regions to aggregate from\.
-+ **AWS CLI:** At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-finding-aggregator.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-finding-aggregator.html) command\.
++ **AWS CLI:** At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-finding-aggregator.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-finding-aggregator.html) command\. Separate each Region with a space\.
 
   ```
   aws securityhub create-finding-aggregator --region <aggregation Region> --region-linking-mode ALL_REGIONS | ALL_REGIONS_EXCEPT_SPECIFIED | SPECIFIED_REGIONS --regions <Region list>
@@ -48,5 +48,5 @@ To enable cross\-Region aggregation from the Security Hub API, you create a find
   In the following example, cross\-Region aggregation is configured for selected Regions\. The aggregation Region is US East \(N\. Virginia\)\. The linked Regions are US West \(N\. California\) and US West \(Oregon\)\.
 
   ```
-  aws securityhub create-finding-aggregator --region us-east-1 --region-linking-mode SPECIFIED_REGIONS --regions us-west-1,us-west-2
+  aws securityhub create-finding-aggregator --region us-east-1 --region-linking-mode SPECIFIED_REGIONS --regions us-west-1 us-west-2
   ```

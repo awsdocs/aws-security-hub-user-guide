@@ -1,6 +1,6 @@
 # Updating the cross\-Region aggregation configuration<a name="finding-aggregation-update"></a>
 
-You can update the cross\-Region aggregation configuration to change the linked Regions for the current aggregation Region\. You can also change whether to automatically aggregate findings, insights, control statuses, and security scores from new Regions\.
+You can update the cross\-Region aggregation configuration to change the linked AWS Regions for the current aggregation Region\. You can also change whether to automatically aggregate findings, insights, control statuses, and security scores from new Regions\.
 
 When you stop aggregating data from a linked Region, Security Hub does not remove any existing aggregated data from the aggregation Region\.
 
@@ -16,7 +16,7 @@ You cannot use the update process to change the aggregation Region\. To change t
 
 You must update the cross\-Region aggregation configuration from the current aggregation Region\.
 
-In Regions other than the aggregation Region, the **Finding aggregation** panel displays a message that you must edit the configuration in the aggregation Region\. Choose this message to display a link to navigate to the aggregation Region\.
+In AWS Regions other than the aggregation Region, the **Finding aggregation** panel displays a message that you must edit the configuration in the aggregation Region\. Choose this message to display a link to navigate to the aggregation Region\.
 
 **To change the linked Regions for the current aggregation Region**
 
@@ -46,7 +46,7 @@ When you change the list of excluded or included Regions, you must provide the f
 + **Security Hub API:** Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateFindingAggregator.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateFindingAggregator.html) API operation\. To identify the finding aggregator, you must provide the finding aggregator ARN\. To obtain the finding aggregator ARN, use [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListFindingAggregators.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListFindingAggregators.html)\.
 
   You provide the Region linking mode and the updated list of excluded or included Regions\.
-+ **AWS CLI:** At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-finding-aggregator.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-finding-aggregator.html) command\.
++ **AWS CLI:** At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-finding-aggregator.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-finding-aggregator.html) command\. Separate each Region with a space\.
 
   ```
   aws securityhub update-finding-aggregator --region <aggregation Region> --finding-aggregator-arn <finding aggregator ARN> --region-linking-mode ALL_REGIONS | ALL_REGIONS_EXCEPT_SPECIFIED | SPECIFIED_REGIONS --regions <Region list>
@@ -55,5 +55,5 @@ When you change the list of excluded or included Regions, you must provide the f
   In the following example, the cross\-Region aggregation configuration is changed to aggregation for selected Regions\. The command is run from the current aggregation Region, which is US East \(N\. Virginia\)\. The linked Regions are US West \(N\. California\) and US West \(Oregon\)\.
 
   ```
-  aws securityhub update-finding-aggregator --region us-east-1 --finding-aggregator-arn arn:aws:securityhub:us-east-1:222222222222:finding-aggregator/123e4567-e89b-12d3-a456-426652340000 --region-linking-mode SPECIFIED_REGIONS --regions us-west-1,us-west-2
+  aws securityhub update-finding-aggregator --region us-east-1 --finding-aggregator-arn arn:aws:securityhub:us-east-1:222222222222:finding-aggregator/123e4567-e89b-12d3-a456-426652340000 --region-linking-mode SPECIFIED_REGIONS --regions us-west-1 us-west-2
   ```

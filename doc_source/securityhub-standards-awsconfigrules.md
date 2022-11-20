@@ -16,9 +16,13 @@ AWS Config has a [quota for the number of managed rules](https://docs.aws.amazon
 
 ## Viewing details about the AWS Config rules for controls<a name="securityhub-standards-view-config-rule-details"></a>
 
-For controls that use AWS Config managed rules, the control description includes a link to the AWS Config rule details for the associated AWS Config rule\. See [CIS AWS Foundations Benchmark controls](securityhub-cis-controls.md), [PCI DSS controls](securityhub-pci-controls.md), and [AWS Config resources required for AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)\. Custom rules are not linked from the control description\.
+For controls that use AWS Config managed rules, the control description includes a link to the AWS Config rule details\. Custom rules aren't linked from the control description\. For control descriptions from each standard, see the following:
++ [CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)
++ [CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)
++ [PCI DSS controls](securityhub-pci-controls.md)
++ [AWS Foundational Security Best Practices controls](securityhub-standards-fsbp-controls.md)
 
-For findings generated from those controls, the finding details include a link to the associated AWS Config rule\. Note that to navigate to the AWS Config rule from finding details, you must also have an IAM permission in the selected account to navigate to AWS Config\.
+For findings generated from controls, the finding details include a link to the associated AWS Config rule\. Note that to navigate to the AWS Config rule from finding details, you must also have an IAM permission in the selected account to navigate to AWS Config\.
 
 The finding details on the **Findings** page, **Insights** page, and **Integrations** page include a **Rules** link to the AWS Config rule details\. See [Viewing finding details \(console\)](finding-view-details.md)\.
 

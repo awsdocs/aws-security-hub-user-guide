@@ -27,7 +27,7 @@ It can take up to 24 hours for first\-time security scores to be generated in th
 
 Security Hub automatically enables default security standards for new accounts\. In addition, if you use the integration with AWS Organizations, Security Hub automatically enables default security standards for new member accounts\. You can opt of auto\-enabled standards\.
 
-Currently, the default security standards that are automatically enabled are the AWS Foundational Security Best Practices \(FSBP\) standard and the Center for Internet Security \(CIS\) v1\.2\.0 AWS Foundations Benchmark\.
+Currently, the default security standards that are automatically enabled are the AWS Foundational Security Best Practices \(FSBP\) standard and the Center for Internet Security \(CIS\) AWS Foundations Benchmark v1\.2\.0\.
 
 ### Opt out of auto\-enabled standards<a name="Opt-out-of-auto-enabled-standards"></a>
 

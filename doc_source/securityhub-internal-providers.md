@@ -16,41 +16,24 @@ Here is an overview of AWS services that send findings to Security Hub or receiv
 
 | Integrated AWS service | Direction | 
 | --- | --- | 
-|  AWS Chatbot  |  Sends findings  | 
-|  AWS Firewall Manager  |  Sends findings  | 
-|  AWS Config  |  Sends findings  | 
-|  Amazon GuardDuty  |  Sends findings  | 
-|  AWS Health  |  Sends findings  | 
-|  AWS Identity and Access Management Access Analyzer  |  Sends findings  | 
-|  Amazon Inspector  |  Sends findings  | 
-|  Amazon Macie  |  Sends findings  | 
-|  AWS Systems Manager Patch Manager  |  Sends findings  | 
-|  AWS Audit Manager  |  Receives findings  | 
-|  Amazon Detective  |  Receives findings  | 
-|  AWS Systems Manager Explorer and OpsCenter  |  Receives and updates findings  | 
-|  AWS Trusted Advisor  |  Receives findings  | 
+|  [AWS Config](#integration-config)  |  Sends findings  | 
+|  [AWS Firewall Manager](#integration-aws-firewall-manager)  |  Sends findings  | 
+|  [Amazon GuardDuty](#integration-amazon-guardduty)  |  Sends findings  | 
+|  [AWS Health](#integration-health)  |  Sends findings  | 
+|  [AWS Identity and Access Management Access Analyzer](#integration-iam-access-analyzer)  |  Sends findings  | 
+|  [Amazon Inspector](#integration-amazon-inspector)  |  Sends findings  | 
+|  [AWS IoT Device Defender](#integration-iot-device-defender)  |  Sends findings  | 
+|  [Amazon Macie](#integration-amazon-macie)  |  Sends findings  | 
+|  [AWS Systems Manager Patch Manager](#patch-manager)  |  Sends findings  | 
+|  [AWS Audit Manager](#integration-aws-audit-manager)  |  Receives findings  | 
+|  [AWS Chatbot](#integration-chatbot)  |  Receives findings  | 
+|  [Amazon Detective](#integration-amazon-detective)  |  Receives findings  | 
+|  [AWS Systems Manager Explorer and OpsCenter](#integration-ssm-explorer-opscenter)  |  Receives and updates findings  | 
+|  [AWS Trusted Advisor](#integration-trusted-advisor)  |  Receives findings  | 
 
 ## AWS services that send findings to Security Hub<a name="integrations-internal-send"></a>
 
 The following AWS services integrate with Security Hub by sending findings to Security Hub\. Security Hub transforms the findings into the [AWS Security Finding Format](securityhub-findings-format-syntax.md)\.
-
-### AWS Chatbot \(Receives findings\)<a name="integration-chatbot"></a>
-
-AWS Chatbot is an interactive agent that helps you to monitor and interact with your AWS resources in your Slack channels and Amazon Chime chat rooms\.
-
-AWS Chatbot receives findings from Security Hub\.
-
-To learn more about the AWS Chatbot integration with Security Hub, see the [Security Hub integration overview](https://docs.aws.amazon.com/chatbot/latest/adminguide/related-services.html#security-hub) in the *AWS Chatbot Administrator Guide*\.
-
-### AWS Firewall Manager \(Sends findings\)<a name="integration-aws-firewall-manager"></a>
-
-Firewall Manager sends findings to Security Hub when a web application firewall \(WAF\) policy for resources or a web access control list \(web ACL\) rule is not in compliance\. Firewall Manager also sends findings when AWS Shield Advanced is not protecting resources, or when an attack is identified\.
-
-If you are already using Firewall Manager, Security Hub automatically enables this integration\. You do not need to take any additional action to begin to receive findings from Firewall Manager\.
-
-To learn more about the integration, view the **Integrations** page in the Security Hub console\.
-
-To learn more about Firewall Manager, see the [https://docs.aws.amazon.com/waf/latest/developerguide/](https://docs.aws.amazon.com/waf/latest/developerguide/)\.
 
 ### AWS Config \(Sends findings\)<a name="integration-config"></a>
 
@@ -407,6 +390,16 @@ Findings for Amazon Inspector and Amazon Inspector Classic use the same product 
 "aws/inspector/ProductVersion": "2",
 ```
 
+### AWS IoT Device Defender \(Sends findings\)<a name="integration-iot-device-defender"></a>
+
+AWS IoT Device Defender is a security service that audits the configuration of your IoT devices, monitors connected devices to detect abnormal behavior, and helps mitigate security risks\.
+
+After enabling both AWS IoT Device Defender and Security Hub, visit the [Integrations page of the Security Hub console](https://console.aws.amazon.com/securityhub/home#/integrations), and choose **Accept findings** for Audit, Detect, or both\. AWS IoT Device Defender Audit and Detect begin to send all findings to Security Hub\.
+
+AWS IoT Device Defender Audit sends check summaries to Security Hub, which contain general information for a specific audit check type and audit task\. AWS IoT Device Defender Detect sends violation findings for machine learning \(ML\), statistical, and static behaviors to Security Hub\. Audit also sends finding updates to Security Hub\.
+
+For more information about this integration, see [Integration with AWS Security Hub](https://docs.aws.amazon.com/iot/latest/developerguide/securityhub-integration.html) in the *AWS IoT Developer Guide*\.
+
 ### Amazon Macie \(Sends findings\)<a name="integration-amazon-macie"></a>
 
 A finding from Macie can indicate that there is a potential policy violation or that sensitive data, such as personally identifiable information \(PII\), is present in data that your organization stores in Amazon S3\.
@@ -436,6 +429,14 @@ The following AWS services are integrated with Security Hub and receive findings
 AWS Audit Manager receives findings from Security Hub\. These findings help Audit Manager users to prepare for audits\.
 
 To learn more about Audit Manager, see the [https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html](https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html)\. [AWS Security Hub checks supported by AWS Audit Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html) lists the controls for which Security Hub sends findings to Audit Manager\.
+
+### AWS Chatbot \(Receives findings\)<a name="integration-chatbot"></a>
+
+AWS Chatbot is an interactive agent that helps you to monitor and interact with your AWS resources in your Slack channels and Amazon Chime chat rooms\.
+
+AWS Chatbot receives findings from Security Hub\.
+
+To learn more about the AWS Chatbot integration with Security Hub, see the [Security Hub integration overview](https://docs.aws.amazon.com/chatbot/latest/adminguide/related-services.html#security-hub) in the *AWS Chatbot Administrator Guide*\.
 
 ### Amazon Detective \(Receives findings\)<a name="integration-amazon-detective"></a>
 

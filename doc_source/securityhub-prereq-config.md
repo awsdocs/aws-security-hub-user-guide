@@ -47,6 +47,9 @@ If you do not record global resources in all Regions, then in the Regions where 
 Note that if you use the [multi\-account script](https://github.com/awslabs/aws-securityhub-multiaccount-scripts) to enable Security Hub, it automatically enables resource recording for all resources, including global resources, in all Regions\. It does not limit recording of global resources to a single Region\. You can then update the configuration to only record global resources in a single Region\. See [Selecting which resources AWS Config records](https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html) in the *AWS Config Developer Guide*\.
 
 The following topics list the required resources for each standard\. You can enable recording only for the required resources\. However, Security Hub continues to add new controls and support new resources\.
+
+**Note**  
+To generate new findings after security checks and avoid stale findings, you must have sufficient permissions for the IAM role that is attached to the configuration recorder to evaluate the underlying resources\.
 + [AWS Config resources required for CIS controls](securityhub-standards-cis-config-resources.md)
 + [AWS Config resources required for PCI DSS controls](securityhub-standards-pci-config-resources.md)
 + [AWS Config resources required for AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)

@@ -14,7 +14,7 @@ After subscribing, you will receive notifications about the following events \(n
 + `NEW_FEATURE` – New Security Hub features are available\.
 + `UPDATED_FEATURE` – Existing Security Hub features have been updated\.
 
-Notifications are available in all formats that Amazon SNS supports\. You can subscribe to Security Hub announcements in all Regions except AWS GovCloud \(US\)\.
+Notifications are available in all formats that Amazon SNS supports\. You can subscribe to Security Hub announcements in all [AWS Regions that Security Hub is available in](https://docs.aws.amazon.com/general/latest/gr/sechub.html)\.
 
 Your user account must have `sns::subscribe` IAM permissions to subscribe to an Amazon SNS topic\.
 
@@ -54,6 +54,8 @@ The Amazon SNS topic ARNs for each Region are as follows\.
 | Europe \(Stockholm\) | arn:aws:sns:eu\-north\-1:191971010772:SecurityHubAnnouncements | 
 | Middle East \(Bahrain\) | arn:aws:sns:me\-south\-1:585146626860:SecurityHubAnnouncements | 
 | South America \(São Paulo\) | arn:aws:sns:sa\-east\-1:359811883282:SecurityHubAnnouncements | 
+| AWS GovCloud \(US\-East\) | arn:aws\-us\-gov:sns:us\-gov\-east\-1:239368469855:SecurityHubAnnouncements | 
+| AWS GovCloud \(US\-West\) | arn:aws\-us\-gov:sns:us\-gov\-west\-1:239334163374:SecurityHubAnnouncements | 
 
 Messages are typically the same across Regions within a [partition](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html), so you can subscribe to one Region in each partition to receive announcements that affect all Regions in that partition\. Announcements associated with member accounts are not replicated in the administrator account\. As a result, each account, including the administrator account, will only have one copy of each announcement\. You can decide which account you want to use to subscribe to Security Hub announcements\.
 

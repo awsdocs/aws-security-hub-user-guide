@@ -2,6 +2,8 @@
 
 PCI DSS in Security Hub supports the following controls\. For each control, the information includes the severity, the resource type, the AWS Config rule, and the remediation steps\.
 
+If a control is noted as **Retired**, Security Hub removed it within the last 90 days and doesn't generate findings for that control\. Older retired controls aren't noted in the documentation\.
+
 ## \[PCI\.AutoScaling\.1\] Auto Scaling groups associated with a load balancer should use health checks<a name="pcidss-autoscaling-1"></a>
 
 **Severity:** Low
@@ -522,7 +524,7 @@ You should also ensure that CloudTrail is enabled to keep an audit trail of acti
 
 The steps to remediate this issue include setting up an Amazon SNS topic, a metric filter, and an alarm for the metric filter\.
 
-These are the same steps to remediate findings for [3\.3 – Ensure a log metric filter and alarm exist for usage of root user ](securityhub-cis-controls.md#securityhub-cis-controls-3.3)\. 
+These are the same steps to remediate findings for [3\.3 – Ensure a log metric filter and alarm exist for usage of 'root' account](securityhub-cis-controls.md#securityhub-cis-controls-3.3)\. 
 
 **To create an Amazon SNS topic**
 
@@ -770,10 +772,6 @@ After you assign the new security groups to the resources, remove the inbound an
 1. Repeat the previous step for each default security group\.
 
 For more information about working with security groups in Amazon VPC, see the [https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#WorkingWithSecurityGroups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#WorkingWithSecurityGroups)\.
-
-## \[PCI\.EC2\.3\] Unused EC2 security groups should be removed \(Retired\)<a name="pcidss-ec2-3"></a>
-
-This control is retired\.
 
 ## \[PCI\.EC2\.4\] Unused EC2 EIPs should be removed<a name="pcidss-ec2-4"></a>
 

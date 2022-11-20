@@ -7,7 +7,7 @@ The AWS Foundational Security Best Practices standard contains the following con
 + The required AWS Config rule, and any specific parameter values set by AWS Security Hub
 + Remediation steps
 
-Note that gaps in the control numbers indicate controls that are not yet released\. If a control is noted as **Retired**, Security Hub does not generate findings for that control\.
+Note that gaps in the control numbers indicate controls that are not yet released\. If a control is noted as **Retired**, Security Hub removed it within the last 90 days and doesn't generate findings for that control\. Older retired controls aren't noted in the documentation\.
 
 ## Controls categorized by service<a name="controls-categorized-service"></a>
 
@@ -1003,7 +1003,7 @@ CloudTrail uses Amazon S3 for log file storage and delivery\. You can capture Cl
 
 For a trail that is enabled in all Regions in an account, CloudTrail sends log files from all of those Regions to a CloudWatch Logs log group\.
 
-Security Hub recommends that you send CloudTrail logs to CloudWatch Logs\. Note that this recommendation is intended to ensure that account activity is captured, monitored, and has appropriately alarms\. You can use CloudWatch Logs to set this up with your AWS services\. This recommendation does not preclude the use of a different solution\.
+Security Hub recommends that you send CloudTrail logs to CloudWatch Logs\. Note that this recommendation is intended to ensure that account activity is captured, monitored, and appropriately alarmed on\. You can use CloudWatch Logs to set this up with your AWS services\. This recommendation does not preclude the use of a different solution\.
 
 Sending CloudTrail logs to CloudWatch Logs facilitates real\-time and historic activity logging based on user, API, resource, and IP address\. You can use this approach to establish alarms and notifications for anomalous or sensitivity account activity\.
 
@@ -1227,8 +1227,10 @@ The AWS Config service performs configuration management of supported AWS resour
 Security Hub recommends that you enable AWS Config in all Regions\. The AWS configuration item history that AWS Config captures enables security analysis, resource change tracking, and compliance auditing\. 
 
 **Note**  
+Config\.1 requires that AWS Config is enabled in all Regions in which you use Security Hub\.  
 Because Security Hub is a Regional service, the check performed for this control checks only the current Region for the account\. It does not check all Regions\.   
-To allow security checks against global resources in each Region, you also must record global resources\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
+To allow security checks against global resources in each Region, you also must record global resources\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.  
+You may also consider disabling IAM\.1, IAM\.2, IAM\.3, IAM\.5, IAM\.8, and IAM\.21 in Regions in which global resource recording not enabled\. Since IAM is a global service, IAM resources will only be recorded in the Region in which global resource recording is enabled\.
 
 To learn more, see [Getting started with AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/getting-started.html) in the *AWS Config Developer Guide*\.
 
@@ -1618,6 +1620,9 @@ When encryption is enabled for your account, Amazon EBS volumes and snapshot cop
 
 Note that following instance types do not support encryption: R1, C1, and M1\.
 
+**Note**  
+This control is not supported in Asia Pacific \(Jakarta\) or Asia Pacific \(Osaka\)\.
+
 ### Remediation<a name="ec2-7-remediation"></a>
 
 You can use the Amazon EC2 console to enable default encryption for Amazon EBS volumes\.
@@ -1879,7 +1884,7 @@ AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ec2-16-remediation"></a>
 
-For instructions on how to delete an unused network ACL, see [Deleting a network ACL](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#DeleteNetworkACL) in the *Amazon VPC User Guide*\.
+For instructions on how to delete an unused network ACL, see [Deleting a network ACL](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#DeleteNetworkACL) in the *Amazon VPC User Guide*\. You cannot delete the default network ACL or an ACL that is associated with subnets\.
 
 ## \[EC2\.17\] EC2 instances should not use multiple ENIs<a name="fsbp-ec2-17"></a>
 
@@ -2046,9 +2051,16 @@ To modify VPN tunnel options, see [Modifying Site\-to\-Site VPN tunnel options](
 
 **Parameters:** None
 
-This control checks whether a network access control list \(NACL\) allows unrestricted access to the default ports for SSH/RDP ingress traffic\. The rule fails if a NACL inbound entry allows a source CIDR block of '0\.0\.0\.0/0' or '::/0' for ports 22 or 3389\.
+This control checks whether a network access control list \(NACL\) allows unrestricted access to the default TCP ports for SSH/RDP ingress traffic\. The rule fails if a NACL inbound entry allows a source CIDR block of '0\.0\.0\.0/0' or '::/0' for TCP ports 22 or 3389\.
 
 Access to remote server administration ports, such as port 22 \(SSH\) and port 3389 \(RDP\), should not be publicly accessible, as this may allow unintended access to resources within your VPC\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="ec2-21-remediation"></a>
 
@@ -2151,10 +2163,6 @@ AWS GovCloud \(US\-West\)
 
 For information about how to update an EC2 instance to a new instance type, see [Change the instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-## \[EC2\.27\] Running EC2 Instances should not use key pairs \(Retired\)<a name="fsbp-ec2-27"></a>
-
-This control is retired\.
-
 ## \[ECR\.1\] ECR private repositories should have image scanning configured<a name="fsbp-ecr-1"></a>
 
 **Category:** Identify > Vulnerability, patch, and version management
@@ -2176,6 +2184,7 @@ ECR image scanning helps in identifying software vulnerabilities in your contain
 **Note**  
 This control is not supported in the following Regions:  
 Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
 China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
@@ -2212,7 +2221,7 @@ China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
 
-### Remediation<a name="ecr-1-remediation"></a>
+### Remediation<a name="ecr-2-remediation"></a>
 
 To create a repository with immutable tags configured or to update the image tag mutability settings for an existing repository, see [Image tag mutability](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html) in the *Amazon Elastic Container Registry User Guide*\.
 
@@ -2236,7 +2245,6 @@ Amazon ECR lifecycle policies enable you to specify the lifecycle management of 
 
 **Note**  
 This control is not supported in the following Regions:  
-Asia Pacific \(Osaka\)
 Asia Pacific \(Jakarta\)
 China \(Beijing\)
 China \(Ningxia\)
@@ -3495,6 +3503,9 @@ Instead of allowing full administrative privileges, determine what users need to
 
 You should remove IAM policies that have a statement with `"Effect": "Allow" `with `"Action": "*"` over `"Resource": "*"`\.
 
+**Note**  
+AWS Config should be enabled in all Regions in which you use Security Hub\. However, global resource recording can be enabled in a single Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
+
 ### Remediation<a name="iam-1-remediation"></a>
 
 To modify your IAM policies so that they do not allow full "\*" administrative privileges, see [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html) in the *IAM User Guide*\.
@@ -3518,7 +3529,8 @@ This control checks that none of your IAM users have policies attached\. Instead
 By default, IAM users, groups, and roles have no access to AWS resources\. IAM policies grant privileges to users, groups, or roles\. We recommend that you apply IAM policies directly to groups and roles but not to users\. Assigning privileges at the group or role level reduces the complexity of access management as the number of users grows\. Reducing access management complexity might in turn reduce the opportunity for a principal to inadvertently receive or retain excessive privileges\. 
 
 **Note**  
-IAM users created by Amazon Simple Email Service are automatically created using inline policies\. Security Hub automatically exempts these users from this control\.
+IAM users created by Amazon Simple Email Service are automatically created using inline policies\. Security Hub automatically exempts these users from this control\.  
+AWS Config should be enabled in all Regions in which you use Security Hub\. However, global resource recording can be enabled in a single Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
 
 ### Remediation<a name="iam-2-remediation"></a>
 
@@ -3556,7 +3568,8 @@ Access keys consist of an access key ID and a secret access key\. They are used 
 If your organization uses AWS IAM Identity Center \(successor to AWS Single Sign\-On\) \(IAM Identity Center\), your users can sign in to Active Directory, a built\-in IAM Identity Center directory, or [another identity provider \(IdP\) connected to IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html)\. They can then be mapped to an IAM role that enables them to run AWS CLI commands or call AWS API operations without the need for IAM user access keys\. To learn more, see [Configuring the AWS CLI to use AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html) in the *AWS Command Line Interface User Guide*\.
 
 **Note**  
-This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.
+This control is not supported in Africa \(Cape Town\) or Europe \(Milan\)\.  
+AWS Config should be enabled in all Regions in which you use Security Hub\. However, global resource recording can be enabled in a single Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
 
 ### Remediation<a name="iam-3-remediation"></a>
 
@@ -3613,7 +3626,7 @@ The root user is the most privileged user in an AWS account\. AWS access keys pr
 Security Hub recommends that you remove all access keys that are associated with the root user\. This limits that vectors that can be used to compromise your account\. It also encourages the creation and use of role\-based accounts that are least privileged\. 
 
 **Note**  
-This control is not supported in Africa \(Cape Town\)\.
+This control is not supported in Asia Pacific \(Jakarta\) or Asia Pacific \(Osaka\)\.
 
 ### Remediation<a name="iam-4-remediation"></a>
 
@@ -3637,13 +3650,16 @@ This control checks whether AWS multi\-factor authentication \(MFA\) is enabled 
 
 Multi\-factor authentication \(MFA\) adds an extra layer of protection on top of a user name and password\. With MFA enabled, when a user signs in to an AWS website, they are prompted for their user name and password\. In addition, they are prompted for an authentication code from their AWS MFA device\.
 
-We recommend that you enable MFA for all accounts that have a console password\. MFA is designed to provide increased security for console access\. The authenticating principal must possess a device that emits a time\-sensitive key and must have knowledge of a credential\. 
+We recommend that you enable MFA for all accounts that have a console password\. MFA is designed to provide increased security for console access\. The authenticating principal must possess a device that emits a time\-sensitive key and must have knowledge of a credential\.
+
+**Note**  
+AWS Config should be enabled in all Regions in which you use Security Hub\. However, global resource recording can be enabled in a single Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
 
 ### Remediation<a name="iam-5-remediation"></a>
 
 To add MFA for IAM users, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
-We are offering a free MFA security key to eligible customers\. [See if you quality, and order your free key](https://console.aws.amazon.com/securityhub/home/?region=us-east-1#/free-mfa-security-key/faq/)\.
+We are offering a free MFA security key to eligible customers\. [See if you quality, and order your free key](https://console.aws.amazon.com/securityhub/home/?region=us-east-1#/free-mfa-security-key/)\.
 
 ## \[IAM\.6\] Hardware MFA should be enabled for the root user<a name="fsbp-iam-6"></a>
 
@@ -3676,7 +3692,7 @@ AWS GovCloud \(US\-West\)\.
 
 To add a hardware MFA device for the root user, see [Enable a hardware MFA device for the AWS account root user \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_physical.html#enable-hw-mfa-for-root) in the *IAM User Guide*\.
 
-We are offering a free MFA security key to eligible customers\. [See if you quality, and order your free key](https://console.aws.amazon.com/securityhub/home/?region=us-east-1#/free-mfa-security-key/faq/)\.
+We are offering a free MFA security key to eligible customers\. [See if you quality, and order your free key](https://console.aws.amazon.com/securityhub/home/?region=us-east-1#/free-mfa-security-key/)\.
 
 ## \[IAM\.7\] Password policies for IAM users should have strong configurations<a name="fsbp-iam-7"></a>
 
@@ -3729,6 +3745,9 @@ This control checks whether your IAM users have passwords or active access keys 
 IAM users can access AWS resources using different types of credentials, such as passwords or access keys\. 
 
 Security Hub recommends that you remove or deactivate all credentials that were unused for 90 days or more\. Disabling or removing unnecessary credentials reduces the window of opportunity for credentials associated with a compromised or abandoned account to be used\.
+
+**Note**  
+AWS Config should be enabled in all Regions in which you use Security Hub\. However, global resource recording can be enabled in a single Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
 
 ### Remediation<a name="iam-8-remediation"></a>
 
@@ -3808,6 +3827,7 @@ China \(Beijing\)
 China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
+AWS Config should be enabled in all Regions in which you use Security Hub\. However, global resource recording can be enabled in a single Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
 
 ### Remediation<a name="iam-21-remediation"></a>
 
@@ -3868,6 +3888,9 @@ With AWS KMS, you control who can use your KMS keys and gain access to your encr
 
 Instead of granting permissions for all keys, determine the minimum set of keys that users need to access encrypted data\. Then design policies that allow users to use only those keys\. For example, do not allow `kms:Decrypt` permission on all KMS keys\. Instead, allow `kms:Decrypt` only on keys in a particular Region for your account\. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data\.
 
+**Note**  
+This control is not supported in Asia Pacific \(Jakarta\) or Asia Pacific \(Osaka\)\.
+
 ### Remediation<a name="kms-1-remediation"></a>
 
 To remediate this issue, you modify the IAM customer managed policies to restrict access to the keys\.
@@ -3917,6 +3940,9 @@ This control fails if the policy is open enough to allow `kms:Decrypt` or `kms:R
 With AWS KMS, you control who can use your KMS keys and gain access to your encrypted data\. IAM policies define which actions an identity \(user, group, or role\) can perform on which resources\. Following security best practices, AWS recommends that you allow least privilege\. In other words, you should grant to identities only the permissions they need and only for keys that are required to perform a task\. Otherwise, the user might use keys that are not appropriate for your data\.
 
 Instead of granting permission for all keys, determine the minimum set of keys that users need to access encrypted data\. Then design policies that allow the users to use only those keys\. For example, do not allow `kms:Decrypt` permission on all KMS keys\. Instead, allow the permission only on specific keys in a specific Region for your account\. By adopting the principle of least privilege, you can reduce the risk of unintended disclosure of your data\.
+
+**Note**  
+This control is not supported in Asia Pacific \(Jakarta\) or Asia Pacific \(Osaka\)\.
 
 ### Remediation<a name="kms-2-remediation"></a>
 
@@ -4055,9 +4081,9 @@ For more information, see [Using resource\-based policies for AWS Lambda](https:
 **Schedule type:** Change triggered
 
 **Parameters:** 
-+ `runtime`: `nodejs16.x, nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnet6`
++ `runtime`: `nodejs18.x, nodejs16.x, nodejs14.x, nodejs12.x, python3.9, python3.8, python3.7, ruby2.7, java11, java8, java8.al2, go1.x, dotnetcore3.1, dotnet6`
 
-This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks function settings for the following runtimes: `nodejs16.x`, `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, and `dotnet6`\.
+This control checks that the Lambda function settings for runtimes match the expected values set for the supported runtimes for each language\. This control checks function settings for the following runtimes: `nodejs18.x,`, `nodejs16.x`, `nodejs14.x`, `nodejs12.x`, `python3.9`, `python3.8`, `python3.7`, `ruby2.7`, `java11`, `java8`, `java8.al2`, `go1.x`, `dotnetcore3.1`, and `dotnet6`\.
 
 The AWS Config rule ignores functions that have a package type of `Image`\.
 
@@ -4066,15 +4092,11 @@ The AWS Config rule ignores functions that have a package type of `Image`\.
 To learn more about the supported runtimes that this control checks for the supported languages, see [AWS Lambda runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) in the *AWS Lambda Developer Guide*\.
 
 **Note**  
-This control is not supported in the China \(Beijing\) or China \(Ningxia\) Regions\.
+This control is not supported in Asia Pacific \(Osaka\)or China \(Ningxia\)\.
 
 ### Remediation<a name="lambda-2-remediation"></a>
 
 For more information on supported runtimes and deprecation schedules, see the [Runtime support policy](https://docs.aws.amazon.com/lambda/latest/dg/runtime-support-policy.html) section of the *AWS Lambda Developer Guide*\. When you migrate your runtimes to the latest version, follow the syntax and guidance from the publishers of the language\.
-
-## \[Lambda\.4\] Lambda functions should have a dead\-letter queue configured \(Retired\)<a name="fsbp-lambda-4"></a>
-
-This control is retired\.
 
 ## \[Lambda\.5\] VPC Lambda functions should operate in more than one Availability Zone<a name="fsbp-lambda-5"></a>
 
@@ -4508,7 +4530,7 @@ To remediate this issue, update your RDS snapshots to remove public access\.
 
 1. Choose **Save**\.
 
-## \[RDS\.2\] Amazon RDS DB instances should prohibit public access, determined by the PubliclyAccessible configuration<a name="fsbp-rds-2"></a>
+## \[RDS\.2\] Amazon RDS DB instances should prohibit public access, as determined by the PubliclyAccessible configuration<a name="fsbp-rds-2"></a>
 
 **Category:** Protect > Secure network configuration
 
@@ -5156,6 +5178,7 @@ RDS DB clusters should be configured for multiple Availability Zones to ensure a
 
 **Note**  
 This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
 China \(Beijing\)
 China \(Ningxia\)
@@ -5183,6 +5206,9 @@ To remediate this control, configure your DB cluster for multiple Availability Z
 1. \(Optional\) Choose **Apply immediately** to apply the changes immediately\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately setting](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.ApplyImmediately) in the *Amazon RDS User Guide*\.
 
    On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance**\.
+
+**Note**  
+Remediation steps differ for Aurora global databases\. To configure multiple Availability Zones for an Aurora global database, select your DB cluster\. Then, choose **Actions** and **Add reader**\. For more information, see [Adding Aurora Replicas to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-replicas-adding.html) in the *Amazon Aurora User Guide*\.
 
 ## \[RDS\.16\] RDS DB clusters should be configured to copy tags to snapshots<a name="fsbp-rds-16"></a>
 
@@ -5530,7 +5556,7 @@ When you change the port, you must also update the existing connection strings t
 
 **Parameters:** None
 
-This control checks whether an Amazon RDS database cluster has changed the admin username from its default value\. This rule will fail if the admin username is set to the default value\.
+This control checks whether an Amazon RDS database cluster has changed the admin username from its default value\. The control does not apply to engines of the type neptune \(Neptune DB\) or docdb \(DocumentDB\)\. This rule will fail if the admin username is set to the default value\.
 
 When creating an Amazon RDS database, you should change the default admin username to a unique value\. Default usernames are public knowledge and should be changed during RDS database creation\. Changing the default usernames reduces the risk of unintended access\.
 
@@ -5552,7 +5578,7 @@ For changing the admin username associated with the Amazon RDS database cluster,
 
 **Parameters:** None
 
-This control checks whether you've changed the administrative username for Amazon Relational Database Service \(Amazon RDS\) database instances from the default value\. The control fails if the administrative username is set to the default value\.
+This control checks whether you’ve changed the administrative username for Amazon Relational Database Service \(Amazon RDS\) database instances from the default value\. The control does not apply to engines of the type neptune \(Neptune DB\) or docdb \(DocumentDB\)\. The control fails if the administrative username is set to the default value\.
 
 Default administrative usernames on Amazon RDS databases are public knowledge\. When creating an Amazon RDS database, you should change the default administrative username to a unique value to reduce the risk of unintended access\.
 
@@ -5652,7 +5678,7 @@ To remediate this issue, update the parameter group to require encryption\.
 
 This control checks whether Amazon Redshift clusters have automated snapshots enabled\. It also checks whether the snapshot retention period is greater than or equal to seven\.
 
-Backups help you to recover more quickly from a security incident\. They strengthen the resilience of your systems\. Amazon Redshift takes periodic snapshots by default\. This control checks whether automatic snapshots are enabled and retained for at least seven days\. For more details on Amazon Redshift automated snapshots, see [Automated snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html#about-automated-snapshots) in the *Amazon Redshift Cluster Management Guide*\.
+Backups help you to recover more quickly from a security incident\. They strengthen the resilience of your systems\. Amazon Redshift takes periodic snapshots by default\. This control checks whether automatic snapshots are enabled and retained for at least seven days\. For more details on Amazon Redshift automated snapshots, see [Automated snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html#about-automated-snapshots) in the *Amazon Redshift Management Guide*\.
 
 **Note**  
 This control is not supported in the following Regions:  
@@ -5695,7 +5721,7 @@ To remediate this issue, update the snapshot retention period to at least 7\.
 
 This control checks whether an Amazon Redshift cluster has audit logging enabled\.
 
-Amazon Redshift audit logging provides additional information about connections and user activities in your cluster\. This data can be stored and secured in Amazon S3 and can be helpful in security audits and investigations\. For more information, see [Database audit logging](https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html) in the *Amazon Redshift Cluster Management Guide*\.
+Amazon Redshift audit logging provides additional information about connections and user activities in your cluster\. This data can be stored and secured in Amazon S3 and can be helpful in security audits and investigations\. For more information, see [Database audit logging](https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html) in the *Amazon Redshift Management Guide*\.
 
 ### Remediation<a name="redshift-4-remediation"></a>
 
@@ -5773,7 +5799,7 @@ AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="redshift-7-remediation"></a>
 
-For detailed remediation instructions, see [Enabling enhanced VPC routing](https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-enabling-cluster.html) in the *Amazon Redshift Cluster Management Guide*\.
+For detailed remediation instructions, see [Enabling enhanced VPC routing](https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-enabling-cluster.html) in the *Amazon Redshift Management Guide*\.
 
 ## \[Redshift\.8\] Amazon Redshift clusters should not use the default Admin username<a name="fsbp-redshift-8"></a>
 
@@ -6373,6 +6399,9 @@ Secrets Manager helps you improve the security posture of your organization\. Se
 
 Secrets Manager can rotate secrets\. You can use rotation to replace long\-term secrets with short\-term ones\. Rotating your secrets limits how long an unauthorized user can use a compromised secret\. For this reason, you should rotate your secrets frequently\. To learn more about rotation, see [Rotating your AWS Secrets Manager secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html) in the *AWS Secrets Manager User Guide*\.
 
+**Note**  
+This control is not supported in Asia Pacific \(Jakarta\) or Asia Pacific \(Osaka\)\.
+
 ### Remediation<a name="secretsmanager-1-remediation"></a>
 
 To remediate this issue, you enable automatic rotation for your secrets\.
@@ -6790,8 +6819,6 @@ Unless your use case requires public sharing to be enabled, Security Hub recomme
 
 **Note**  
 This control is not supported in the following Regions:  
-China \(Beijing\)
-China \(Ningxia\)
 AWS GovCloud \(US\-East\)
 AWS GovCloud \(US\-West\)
 
