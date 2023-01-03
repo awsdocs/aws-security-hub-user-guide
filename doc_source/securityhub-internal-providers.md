@@ -28,6 +28,7 @@ Here is an overview of AWS services that send findings to Security Hub or receiv
 |  [AWS Audit Manager](#integration-aws-audit-manager)  |  Receives findings  | 
 |  [AWS Chatbot](#integration-chatbot)  |  Receives findings  | 
 |  [Amazon Detective](#integration-amazon-detective)  |  Receives findings  | 
+|  [Amazon Security Lake](#integration-security-lake)  |  Receives findings  | 
 |  [AWS Systems Manager Explorer and OpsCenter](#integration-ssm-explorer-opscenter)  |  Receives and updates findings  | 
 |  [AWS Trusted Advisor](#integration-trusted-advisor)  |  Receives findings  | 
 
@@ -201,7 +202,7 @@ To learn more about Firewall Manager, see the [https://docs.aws.amazon.com/waf/l
 
 ### Amazon GuardDuty \(Sends findings\)<a name="integration-amazon-guardduty"></a>
 
-GuardDuty sends findings to Security Hub for all of the supported finding types\.
+GuardDuty sends findings to Security Hub for all of the supported finding types\. GuardDuty RDS Protection findings aren't available in Security Hub\.
 
 New findings from GuardDuty are sent to Security Hub within five minutes\. Updates to findings are sent based on the **Updated findings** setting for Amazon EventBridge in GuardDuty settings\.
 
@@ -449,6 +450,16 @@ For GuardDuty finding types, the finding details include an **Investigate in Det
 If cross\-Region aggregation is enabled, then when you pivot from the aggregation Region, Detective opens in the Region where the finding originated\.
 
 If a link does not work, then for troubleshooting advice, see [Troubleshooting the pivot](https://docs.aws.amazon.com/detective/latest/userguide/profile-pivot-from-service.html#profile-pivot-troubleshooting)\.
+
+### Amazon Security Lake \(Receives findings\)<a name="integration-security-lake"></a>
+
+Security Lake is a fully\-managed security data lake service\. You can use Security Lake to automatically centralize security data from cloud, on\-premises, and custom sources into a data lake that's stored in your account\. Subscribers can consume data from Security Lake for investigative and analytics use cases\.
+
+To activate this integration, you must enable both services and add Security Hub as a source in the Security Lake console, Security Lake API, or AWS CLI\. Once you complete these steps, Security Hub begins to send all findings to Security Lake\.
+
+Security Lake automatically normalizes Security Hub findings and converts them to a standardized open\-source schema called Open Cybersecurity Schema Framework \(OCSF\)\. In Security Lake, you can add one or more subscribers to consume Security Hub findings\.
+
+For more information about this integration, including instructions on adding Security Hub as a source and creating subscribers, see [Integration with AWS Security Hub](https://docs.aws.amazon.com/security-lake/latest/userguide/securityhub-integration.html) in the *Amazon Security Lake User Guide*\.
 
 ### AWS Systems Manager Explorer and OpsCenter \(Receives and updates findings\)<a name="integration-ssm-explorer-opscenter"></a>
 

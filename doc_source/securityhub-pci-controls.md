@@ -1202,7 +1202,8 @@ To resolve this issue, [create an IAM group](https://docs.aws.amazon.com/IAM/lat
 
 **Schedule type:** Change triggered
 
-**Parameters:** None
+**Parameters:**
++ `excludePermissionBoundaryPolicy: true`
 
 This control checks whether the default version of AWS Identity and Access Management policies \(also known as customer managed policies\) do not have administrator access with a statement that has `"Effect": "Allow" with "Action": "*"` over `"Resource": "*"`\.
 

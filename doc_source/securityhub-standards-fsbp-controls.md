@@ -2,14 +2,17 @@
 
 The AWS Foundational Security Best Practices standard contains the following controls\. For each control, the information includes the following information\.
 + The category that the control applies to\. For descriptions of the categories, see [Control categories](control-categories.md)\.
-+ The severity
++ The severity of the control, which defines the importance of the control and control findings\.
 + The applicable resource that the control evaluates\. We also list dependent resources for the control\. For change triggered controls, you must record resources in AWS Config for the control to work\. For more information, see [AWS Config resources required for AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)\.
-+ The required AWS Config rule, and any specific parameter values set by AWS Security Hub
-+ Remediation steps
++ The required AWS Config rule, and any specific parameter values set by AWS Security Hub\.
++ Remediation steps that explain how to resolve a failed finding for the control\.
 
-Note that gaps in the control numbers indicate controls that are not yet released\. If a control is noted as **Retired**, Security Hub removed it within the last 90 days and doesn't generate findings for that control\. Older retired controls aren't noted in the documentation\.
+**Note**  
+Gaps in the control numbers indicate controls that Security Hub hasn't released yet\.
 
 ## Controls categorized by service<a name="controls-categorized-service"></a>
+
+[AWS account](#fsbp-account-1)
 
 [AWS Certificate Manager](#fsbp-acm-1)
 
@@ -77,9 +80,38 @@ Note that gaps in the control numbers indicate controls that are not yet release
 
 [Amazon Simple Queue Service](#fsbp-sqs-1)
 
-[Amazon EC2 Systems Manager](#fsbp-ssm-1)
+[AWS Systems Manager](#fsbp-ssm-1)
 
 [AWS WAF](#fsbp-waf-1)
+
+## \[Account\.1\] Security contact information should be provided for an AWS account<a name="fsbp-account-1"></a>
+
+**Category:** Identify > Resource Configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::::Account`
+
+**AWS Config rule:** `security-account-information-provided`
+
+**Schedule type:** Periodic
+
+**Parameters:** None
+
+This control checks if an Amazon Web Services \(AWS\) account has security contact information\. The control fails if security contact information is not provided for the account\.
+
+Alternate security contacts allow AWS to contact another person about issues with your account in case you're unavailable\. Notifications can be from AWS Support, or other AWS service teams about security\-related topics associated with your AWS account usage\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="account-1-remediation"></a>
+
+To add an alternate contact as a security contact to your AWS account, see [Adding, changing, or removing alternate contacts](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-account-payment.html#manage-account-payment-alternate-contacts) in the *AWS Billing and Cost Management User Guide*\.
 
 ## \[ACM\.1\] Imported and ACM\-issued certificates should be renewed after a specified time period<a name="fsbp-acm-1"></a>
 
@@ -103,7 +135,7 @@ ACM can automatically renew certificates that use DNS validation\. For certifica
 For more information about managed renewal for ACM certificates, see [Managed renewal for ACM certificates](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) in the *AWS Certificate Manager User Guide*\.
 
 **Note**  
-This control is not supported in the following Regions\.  
+This control is not supported in the following Regions:  
 Africa \(Cape Town\) 
 China \(Beijing\)
 China \(Ningxia\)
@@ -281,7 +313,69 @@ To remediate this control, configure the stage to encrypt the cache data\.
 
 1. Choose **Save Changes**\.
 
-## \[AutoScaling\.1\] Auto Scaling groups associated with a load balancer should use load balancer health checks<a name="fsbp-autoscaling-1"></a>
+## \[APIGateway\.8\] API Gateway routes should specify an authorization type<a name="fsbp-apigateway-8"></a>
+
+**Category:** Protect > Secure Access Management
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ApiGatewayV2::Route`
+
+AWS Config rule: `api-gwv2-authorization-type-configured`
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon API Gateway routes have an authorization type\. The control fails if the API Gateway route does not specify an authorization type\.
+
+API Gateway supports multiple mechanisms for controlling and managing access to your API\. By specifying an authorization type, you can restrict access to your API to only authorized users or processes\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="apigateway-8-remediation"></a>
+
+To set an authorization type for HTTP APIs, see [Controlling and managing access to an HTTP API in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-access-control.html) in the *API Gateway Developer Guide*\. To set an authorization type for WebSocket APIs, see [Controlling and managing access to a WebSocket API in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-control-access.html) in the *API Gateway Developer Guide*\.
+
+## \[APIGateway\.9\] Access logging should be configured for API Gateway V2 Stages<a name="fsbp-apigateway-9"></a>
+
+**Category:** Identify > Logging
+
+**Severity:** Medium
+
+**Resource type:** `AWS::ApiGatewayV2::Stage`
+
+AWS Config rule: `api-gwv2-access-logs-enabled`
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon API Gateway V2 stages have access logging configured\. This control fails if access log settings aren't defined\.
+
+API Gateway access logs provide detailed information about who has accessed your API and how the caller accessed the API\. These logs are useful for applications such as security and access audits and forensics investigation\. Enable these access logs to analyze traffic patterns and to troubleshoot issues\.
+
+For additional best practices, see [Monitoring REST APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-monitor.html) in the *API Gateway Developer Guide*\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="apigateway-9-remediation"></a>
+
+To set up access logging, see [Set up CloudWatch API logging using the API Gateway console](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html#set-up-access-logging-using-console) in the *API Gateway Developer Guide*\. 
+
+## \[AutoScaling\.1\] Auto Scaling groups associated with a Classic Load Balancer should use load balancer health checks<a name="fsbp-autoscaling-1"></a>
 
 **Category:** Identify > Inventory
 
@@ -295,7 +389,7 @@ To remediate this control, configure the stage to encrypt the cache data\.
 
 **Parameters:** None
 
-This control checks whether your Auto Scaling groups that are associated with a load balancer are using Elastic Load Balancing health checks\.
+This control checks whether your Auto Scaling groups that are associated with a Classic Load Balancer are using Elastic Load Balancing health checks\.
 
 This ensures that the group can determine an instance's health based on additional tests provided by the load balancer\. Using Elastic Load Balancing health checks can help support the availability of applications that use EC2 Auto Scaling groups\. 
 
@@ -407,7 +501,7 @@ AWS GovCloud \(US\-West\)
 
 For detailed instructions on how to modify the metadata response hop limit for an existing launch configuration, see [Modify instance metadata options for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#configuring-IMDS-existing-instances) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-## \[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses<a name="fsbp-autoscaling-5"></a>
+## \[Autoscaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses<a name="fsbp-autoscaling-5"></a>
 
 **Category:** Protect > Secure network configuration
 
@@ -819,6 +913,34 @@ This control is only supported in US East \(N\. Virginia\)\.
 
 To update the Origin SSL Protocols for your CloudFront distributions, see [Requiring HTTPS for communication between CloudFront and your custom origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-custom-origin.html) in the *Amazon CloudFront Developer Guide*\.
 
+## \[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.<a name="fsbp-cloudfront-12"></a>
+
+**Category:** Identify > Resource configuration
+
+**Severity:** High
+
+**Resource type:** `AWS::CloudFront::Distribution`
+
+**AWS Config rule:** `cloudfront-s3-origin-non-existent-bucket`
+
+**Schedule type:** Periodic
+
+**Parameters:** None
+
+This control checks whether Amazon CloudFront distributions are pointing to non\-existent Amazon S3 origins\. The control fails for a CloudFront distribution if the origin is configured to point to a non\-existent bucket\. This control only applies to CloudFront distributions where an S3 bucket without static website hosting is the S3 origin\.
+
+When a CloudFront distribution in your account is configured to point to a non\-existent bucket, a malicious third party can create the referenced bucket and serve their own content through your distribution\. We recommend checking all origins regardless of routing behavior to ensure that your distributions are pointing to appropriate origins\. 
+
+**Note**  
+This control is not supported in the following Regions:  
+US East \(N\. Virginia\)
+China \(Beijing\)
+China \(Ningxia\)
+
+### Remediation<a name="cloudfront-12-remediation"></a>
+
+To modify your CloudFront distribution to point to a new origin, see [Updating a distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToUpdateDistribution.html) in the *Amazon CloudFront Developer Guide*\.
+
 ## \[CloudTrail\.1\] CloudTrail should be enabled and configured with at least one multi\-Region trail that includes read and write management events<a name="fsbp-cloudtrail-1"></a>
 
 **Category:** Identify > Logging
@@ -1132,7 +1254,7 @@ To remediate this issue, update your CodeBuild project to remove the environment
 
 1. Choose **Update environment**\.
 
-**To store sensitive values in the Amazon EC2 Systems Manager Parameter Store and then retrieve them from your build spec**
+**To store sensitive values in the AWS Systems Manager Parameter Store and then retrieve them from your build spec**
 
 1. Open the CodeBuild console at [https://console\.aws\.amazon\.com/codebuild/](https://console.aws.amazon.com/codebuild/)\.
 
@@ -1161,6 +1283,37 @@ To remediate this issue, update your CodeBuild project to remove the environment
 1. Choose **Update environment**\.
 
 For more information, see [Environment variables in build environments](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html) in the *AWS CodeBuild User Guide*\.
+
+## \[CodeBuild\.3\] CodeBuild S3 logs should be encrypted<a name="fsbp-codebuild-3"></a>
+
+**Category:** Protect > Data protection > Encryption of data\-at\-rest
+
+**Severity:** Low
+
+**Resource type:** `AWS::CodeBuild::Project`
+
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-s3-logs-encrypted.html](https://docs.aws.amazon.com/config/latest/developerguide/codebuild-project-s3-logs-encrypted.html)
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon S3 logs for an AWS CodeBuild project are encrypted\. The control fails if encryption is deactivated for S3 logs for a CodeBuild project\.
+
+Encryption of data at rest is a recommended best practice to add a layer of access management around your data\. Encrypting the logs at rest reduces the risk that a user not authenticated by AWS will access the data stored on disk\. It adds another set of access controls to limit the ability of unauthorized users to access the data\. 
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="codebuild-3-remediation"></a>
+
+To change the encryption settings for CodeBuild project S3 logs, see [Change a build project's settings in AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html) in the *AWS CodeBuild User Guide*\.
 
 ## \[CodeBuild\.4\] CodeBuild project environments should have a logging configuration<a name="fsbp-codebuild-4"></a>
 
@@ -2163,6 +2316,35 @@ AWS GovCloud \(US\-West\)
 
 For information about how to update an EC2 instance to a new instance type, see [Change the instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
+## \[EC2\.25\] EC2 launch templates should not assign public IPs to network interfaces<a name="fsbp-ec2-25"></a>
+
+**Category:** Protect > Secure network configuration > Resources not publicly accessible
+
+**Severity:** High 
+
+**Resource type:**`AWS::EC2::LaunchTemplate`
+
+**AWS Config rule:** `ec2-launch-template-public-ip-disabled`
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if Amazon EC2 launch templates are configured to assign public IP addresses to network interfaces upon launch\. The control fails if an EC2 launch template is configured to assign a public IP address to network interfaces or if there is at least one network interface that has a public IP address\.
+
+A public IP address is one that is reachable from the internet\. If you configure your network interfaces with a public IP address, then the resources associated with those network interfaces may be reachable from the internet\. EC2 resources shouldn’t be publicly accessible because this may permit unintended access to your workloads\.
+
+**Note**  
+This control is not supported in the following Regions:  
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="ec2-25-remediation"></a>
+
+To update an EC2 launch template, see [Change the default network interface settings](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html#change-network-interface) in the *Amazon EC2 Auto Scaling User Guide*\.
+
 ## \[ECR\.1\] ECR private repositories should have image scanning configured<a name="fsbp-ecr-1"></a>
 
 **Category:** Identify > Vulnerability, patch, and version management
@@ -2818,7 +3000,7 @@ To remediate this issue, update your listeners to use the TLS or HTTPS protocol\
 
 **Severity:** Medium
 
-**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+**Resource type:** `AWS::ElasticLoadBalancingV2::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-http-drop-invalid-header-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-http-drop-invalid-header-enabled.html)
 
@@ -2862,7 +3044,7 @@ To remediate this issue, configure your load balancer to drop invalid header fie
 
 **Severity:** Medium
 
-**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`, `AWS::ElasticLoadBalancingV2::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/elb-logging-enabled.html](https://docs.aws.amazon.com/config/latest/developerguide/elb-logging-enabled.html)
 
@@ -2886,7 +3068,7 @@ To remediate this issue, update your load balancers to enable logging\.
 
 1. In the navigation pane, choose **Load balancers**\. 
 
-1. Choose an Application Load Balancer\.
+1. Choose an Application Load Balancer or Classic Load Balancer\.
 
 1. From **Actions**, choose **Edit attributes**\.
 
@@ -3052,7 +3234,7 @@ AWS GovCloud \(US\-West\)
 
 **Severity:** Medium
 
-**Resource type:** `AWS::ElasticLoadBalancing::LoadBalancer`
+**Resource type:** `AWS::ElasticLoadBalancingV2::LoadBalancer`
 
 **AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/alb-desync-mode-check.html](https://docs.aws.amazon.com/config/latest/developerguide/alb-desync-mode-check.html)
 
@@ -3491,7 +3673,8 @@ For details on how to enable GuardDuty, including how to use AWS Organizations t
 
 **Schedule type:** Change triggered
 
-**Parameters:** None
+**Parameters:**
++ `excludePermissionBoundaryPolicy: true`
 
 This control checks whether the default version of IAM policies \(also known as customer managed policies\) has administrator access by including a statement with `"Effect": "Allow"` with `"Action": "*"` over `"Resource": "*"`\. The control fails if you have IAM policies with such a statement\.
 
@@ -4946,7 +5129,7 @@ To enable and publish MariaDB, MySQL, or PostgreSQL logs to CloudWatch Logs from
 
 **Parameters:** None
 
-This control checks whether an RDS DB instance has IAM database authentication enabled\.
+This control checks whether an RDS DB instance has IAM database authentication enabled\. The control fails if IAM authentication is not configured for RDS DB instances\. This control only evaluates RDS instances with the following engine types: `mysql`, `postgres`, `aurora`, `aurora-mysql`, `aurora-postgresql`, and `mariadb`\. An RDS instance must also be in one of the following states for a finding to be generated: `available`, `backing-up`, `storage-optimization`, or `storage-full`\.
 
 IAM database authentication allows authentication to database instances with an authentication token instead of a password\. Network traffic to and from the database is encrypted using SSL\. For more information, see [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon Aurora User Guide*\.
 
@@ -6379,6 +6562,66 @@ Note that you cannot change the internet access setting after a notebook instanc
 
 For more information, see [Connect a notebook instance to resources in a VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html) in the *Amazon SageMaker Developer Guide*\.
 
+## \[SageMaker\.2\] SageMaker notebook instances should be launched in a custom VPC<a name="fsbp-sagemaker-2"></a>
+
+**Category:** Protect > Secure network configuration > Resources within VPC
+
+**Severity:** High
+
+**Resource type:** `AWS::SageMaker::NotebookInstance`
+
+**AWS Config rule:** `sagemaker-notebook-instance-inside-vpc`
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks if an Amazon SageMaker notebook instance is launched within a custom virtual private cloud \(VPC\)\. This control fails if a SageMaker notebook instance is not launched within a custom VPC or if it is launched in the SageMaker service VPC\.
+
+Subnets are a range of IP addresses within a VPC\. We recommend keeping your resources inside a custom VPC whenever possible to ensure secure network protection of your infrastructure\. An Amazon VPC is a virtual network dedicated to your AWS account\. With an Amazon VPC, you can control the network access and internet connectivity of your SageMaker Studio and notebook instances\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="sagemaker-2-remediation"></a>
+
+You can't change the VPC setting after creating a notebook instance\. Instead, you can delete and recreate the instance\. For instructions on deleting and creating a notebook instance, see [Get started with Amazon SageMaker notebook instances](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-console.html) in the *Amazon SageMaker Developer Guide*\.
+
+## \[SageMaker\.3\] Users should not have root access to SageMaker notebook instances<a name="fsbp-sagemaker-3"></a>
+
+**Category:** Protect > Secure access management > Root user access restrictions
+
+**Severity:** High
+
+**Resource type:** `AWS::SageMaker::NotebookInstance`
+
+**AWS Config rule:** `sagemaker-notebook-instance-root-access-check`
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether root access is turned on for an Amazon SageMaker notebook instance\. The control fails if root access is turned on for a SageMaker notebook instance\.
+
+In adherence to the principal of least privilege, it is a recommended security best practice to restrict root access to instance resources to avoid unintentionally over provisioning permissions\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="sagemaker-3-remediation"></a>
+
+To restrict root access to SageMaker notebook instances, see [Control root access to a SageMaker notebook instance](https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-root-access.html) in the *Amazon SageMaker Developer Guide*\.
+
 ## \[SecretsManager\.1\] Secrets Manager secrets should have automatic rotation enabled<a name="fsbp-secretsmanager-1"></a>
 
 **Category:** Protect > Secure development
@@ -6529,6 +6772,7 @@ Security Hub recommends that you enable rotation for your Secrets Manager secret
 
 **Note**  
 This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
 Asia Pacific \(Osaka\)
 China \(Beijing\)
 China \(Ningxia\)
@@ -6714,7 +6958,7 @@ To determine whether your instances support Systems Manager associations, see [S
 
 **Parameters:** None
 
-This control checks whether the compliance status of the Amazon EC2 Systems Manager patch compliance is `COMPLIANT` or `NON_COMPLIANT` after the patch installation on the instance\. It only checks instances that are managed by Systems Manager Patch Manager\.
+This control checks whether the compliance status of Systems Manager patch compliance is `COMPLIANT` or `NON_COMPLIANT` after the patch installation on the instance\. It only checks instances that are managed by Systems Manager Patch Manager\.
 
 Having your EC2 instances fully patched as required by your organization reduces the attack surface of your AWS accounts\.
 
@@ -6988,23 +7232,7 @@ AWS GovCloud \(US\-West\)
 
 ### Remediation<a name="waf-4-remediation"></a>
 
-**To add rules or rule groups to an empty web ACL**
-
-1. Open the AWS WAF console at [https://console\.aws\.amazon\.com/wafv2/](https://console.aws.amazon.com/wafv2/)\. 
-
-1. In the navigation pane, choose **Switch to AWS WAF Classic**, and then choose **Web ACLs**\.
-
-1. For **Filter**, choose the Region where the empty web ACL is located\.
-
-1. Choose the name of the empty web ACL\.
-
-1. Choose **Rules**, and then choose **Edit web ACL**\.
-
-1. For **Rules**, choose a rule or rule group, and then choose **Add rule to web ACL**\.
-
-1. At this point, you can modify the rule order within the web ACL if you are adding multiple rules or rule groups to the web ACL\.
-
-1. Choose **Update**\.
+To add rules or rule groups to an empty Classic Regional web ACL, see [Editing a Web ACL](https://docs.aws.amazon.com/waf/latest/developerguide/classic-web-acl-editing.html) in the *AWS WAF Developer Guide*\.
 
 ## \[WAF\.6\] A WAF global rule should have at least one condition<a name="fsbp-waf-6"></a>
 
@@ -7096,3 +7324,34 @@ This control is only supported in US East \(N\. Virginia\)\.
 1. At this point, you can modify the rule order within the web ACL if you are adding multiple rules or rule groups to the web ACL\.
 
 1. Choose **Update**\.
+
+## \[WAF\.10\] A WAFV2 web ACL should have at least one rule or rule group<a name="fsbp-waf-10"></a>
+
+**Category:** Protect > Secure network configuration
+
+**Severity:** Medium
+
+**Resource type:** `AWS::WAFv2::WebACL`
+
+**AWS Config rule:** `wafv2-webacl-not-empty`
+
+**Schedule type:** Change triggered
+
+**Parameters:** None
+
+This control checks whether a WAFV2 web access control list \(web ACL\) contains at least one WAF rule or WAF rule group\. The control fails if a web ACL does not contain any WAF rules or rule groups\.
+
+A web ACL gives you fine\-grained control over all of the HTTP\(S\) web requests that your protected resource responds to\. A web ACL should contain a collection of rules and rule groups that inspect and control web requests\. If a web ACL is empty, the web traffic can pass without being detected or acted upon by WAF depending on the default action\.
+
+**Note**  
+This control is not supported in the following Regions:  
+Asia Pacific \(Jakarta\)
+Asia Pacific \(Osaka\)
+China \(Beijing\)
+China \(Ningxia\)
+AWS GovCloud \(US\-East\)
+AWS GovCloud \(US\-West\)
+
+### Remediation<a name="waf-10-remediation"></a>
+
+To add rules or rule groups to an empty WAFV2 web ACL, see [Editing a Web ACL](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-editing.html) in the *AWS WAF Developer Guide*\.

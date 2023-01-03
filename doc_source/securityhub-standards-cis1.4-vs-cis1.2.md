@@ -19,7 +19,6 @@ The following controls were added in CIS AWS Foundations Benchmark v1\.4\.0\. Th
 |  [2\.1\.5\.2](securityhub-cis-controls-1.4.0.md#cis1.4-2.1.5.2-remediation)  |  S3 Block Public Access setting should be enabled at the bucket level  | 
 |  [2\.2\.1](securityhub-cis-controls-1.4.0.md#cis1.4-2.2.1-remediation)  |  Ensure EBS volume encryption is enabled  | 
 |  [2\.3\.1](securityhub-cis-controls-1.4.0.md#cis1.4-2.3.1-remediation)  |  Ensure that encryption is enabled for RDS Instances  | 
-|  [3\.6](securityhub-cis-controls-1.4.0.md#cis1.4-3.6-remediation)  |  S3 bucket server access logging should be enabled  | 
 |  [5\.1](securityhub-cis-controls-1.4.0.md#cis1.4-5.1-remediation)  |  Ensure no Network ACLs allow ingress from 0\.0\.0\.0/0 to remote server administration ports  | 
 
 ## Controls that exist in CIS AWS Foundations Benchmark v1\.2\.0, but not in v1\.4\.0<a name="cis1.2-only"></a>
@@ -27,22 +26,20 @@ The following controls were added in CIS AWS Foundations Benchmark v1\.4\.0\. Th
 The following controls exist only in CIS AWS Foundations Benchmark v1\.2\.0\. These controls are *not* included in CIS AWS Foundations Benchmark v1\.4\.0\.
 
 
-| CISv1\.2\.0 requirement | Control title | 
-| --- | --- | 
-|  [1\.1](securityhub-cis-controls.md#cis-1.1-remediation)  |  Avoid the use of the root user  | 
-|  [1\.3](securityhub-cis-controls.md#cis-1.3-remediation)  |  Ensure credentials unused for 90 days or greater are disabled  | 
-|  [1\.5](securityhub-cis-controls.md#cis-1.5-remediation)  |  Ensure IAM password policy requires at least one uppercase letter  | 
-|  [1\.6](securityhub-cis-controls.md#cis-1.6-remediation)  |  Ensure IAM password policy requires at least one lowercase letter  | 
-|  [1\.7](securityhub-cis-controls.md#cis-1.7-remediation)  |  Ensure IAM password policy requires at least one symbol  | 
-|  [1\.8](securityhub-cis-controls.md#cis-1.8-remediation)  |  Ensure IAM password policy requires at least one number  | 
-|  [1\.11](securityhub-cis-controls.md#cis-1.11-remediation)  |  Ensure IAM password policy expires passwords within 90 days or less  | 
-|  [1\.16](securityhub-cis-controls.md#cis-1.16-remediation)  |  Ensure IAM policies are attached only to groups or roles  | 
-|  [2\.3](securityhub-cis-controls.md#cis-2.3-remediation)  |  Ensure the S3 bucket used to store CloudTrail logs is not publicly accessible  | 
-|  [2\.6](securityhub-cis-controls.md#cis-2.6-remediation)  |  Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket  | 
-|  [3\.1](securityhub-cis-controls.md#cis-3.1-remediation)  |  Ensure a log metric filter and alarm exist for unauthorized API calls  | 
-|  [3\.2](securityhub-cis-controls.md#cis-3.2-remediation)  |  Ensure a log metric filter and alarm exist for AWS Management Console sign\-in without MFA  | 
-|  [4\.1](securityhub-cis-controls.md#cis-4.1-remediation)  |  Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22  | 
-|  [4\.2](securityhub-cis-controls.md#cis-4.2-remediation)  |  Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389  | 
+| CISv1\.2\.0 requirement | Control title | Reason not included in v1\.4\.0 | 
+| --- | --- | --- | 
+|  [1\.1](securityhub-cis-controls.md#cis-1.1-remediation)  |  Avoid the use of the root user  |  See instead, [1\.7 – Eliminate use of the 'root user for administrative and daily tasks](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.7)  | 
+|  [1\.3](securityhub-cis-controls.md#cis-1.3-remediation)  |  Ensure credentials unused for 90 days or greater are disabled  |  See instead, [1\.12 – Ensure credentials unused for 45 days or greater are disabled ](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.12)  | 
+|  [1\.5](securityhub-cis-controls.md#cis-1.5-remediation)  |  Ensure IAM password policy requires at least one uppercase letter  |  Not a requirement in CISv1\.4\.0  | 
+|  [1\.6](securityhub-cis-controls.md#cis-1.6-remediation)  |  Ensure IAM password policy requires at least one lowercase letter  |  Not a requirement in CISv1\.4\.0  | 
+|  [1\.7](securityhub-cis-controls.md#cis-1.7-remediation)  |  Ensure IAM password policy requires at least one symbol  |  Not a requirement in CISv1\.4\.0  | 
+|  [1\.8](securityhub-cis-controls.md#cis-1.8-remediation)  |  Ensure IAM password policy requires at least one number  |  Not a requirement in CISv1\.4\.0  | 
+|  [1\.11](securityhub-cis-controls.md#cis-1.11-remediation)  |  Ensure IAM password policy expires passwords within 90 days or less  |  Not a requirement in CISv1\.4\.0  | 
+|  [1\.16](securityhub-cis-controls.md#cis-1.16-remediation)  |  Ensure IAM policies are attached only to groups or roles  |  Automated check that Security Hub doesn't support  | 
+|  [3\.1](securityhub-cis-controls.md#cis-3.1-remediation)  |  Ensure a log metric filter and alarm exist for unauthorized API calls  |  Automated check that Security Hub doesn't support  | 
+|  [3\.2](securityhub-cis-controls.md#cis-3.2-remediation)  |  Ensure a log metric filter and alarm exist for AWS Management Console sign\-in without MFA  |  Automated check that Security Hub doesn't support  | 
+|  [4\.1](securityhub-cis-controls.md#cis-4.1-remediation)  |  Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 22  |  See instead, [5\.1 – Ensure no Network ACLs allow ingress from 0\.0\.0\.0/0 to remote server administration ports](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-5.1)  | 
+|  [4\.2](securityhub-cis-controls.md#cis-4.2-remediation)  |  Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389  |  Automated check that Security Hub doesn't support  | 
 
 ## Controls that exist in CIS AWS Foundations Benchmark v1\.2\.0 and v1\.4\.0<a name="cis-controls-all-versions"></a>
 
@@ -65,6 +62,7 @@ The following controls exist in both CIS AWS Foundations Benchmark v1\.2\.0 and 
 |  [2\.3](securityhub-cis-controls.md#cis-2.3-remediation)  |  Ensure the S3 bucket used to store CloudTrail logs is not publicly accessible  |  [3\.3](securityhub-cis-controls-1.4.0.md#cis1.4-3.3-remediation)  |  Ensure the S3 bucket used to store CloudTrail logs is not publicly accessible  | 
 |  [2\.4](securityhub-cis-controls.md#cis-2.4-remediation)  |  Ensure CloudTrail trails are integrated with CloudWatch Logs  |  [3\.4](securityhub-cis-controls-1.4.0.md#cis1.4-3.4-remediation)  |  Ensure CloudTrail trails are integrated with CloudWatch Logs  | 
 |  [2\.5](securityhub-cis-controls.md#cis-2.5-remediation)  |  Ensure AWS Config is enabled  |  [3\.5](securityhub-cis-controls-1.4.0.md#cis1.4-3.5-remediation)  |  Ensure AWS Config is enabled in all Regions  | 
+|  [2\.6](securityhub-cis-controls.md#cis-2.6-remediation)  |  Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket  |  [3\.6](securityhub-cis-controls-1.4.0.md#cis1.4-3.6-remediation)  |  Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket  | 
 |  [2\.7](securityhub-cis-controls.md#cis-2.7-remediation)  |  Ensure CloudTrail logs are encrypted at rest using AWS KMS keys  |  [3\.7](securityhub-cis-controls-1.4.0.md#cis1.4-3.7-remediation)  |  Ensure CloudTrail logs are encrypted at rest using AWS KMS keys  | 
 |  [2\.8](securityhub-cis-controls.md#cis-2.8-remediation)  |  Ensure rotation for customer\-created KMS keys is enabled  |  [3\.8](securityhub-cis-controls-1.4.0.md#cis1.4-3.8-remediation)  |  Ensure rotation for customer\-created KMS keys is enabled  | 
 |  [2\.9](securityhub-cis-controls.md#cis-2.9-remediation)  |  Ensure VPC flow logging is enabled in all VPCs  |  [3\.9](securityhub-cis-controls-1.4.0.md#cis1.4-3.9-remediation)  |  Ensure VPC flow logging is enabled in all VPCs  | 

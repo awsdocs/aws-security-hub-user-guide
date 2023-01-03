@@ -174,6 +174,53 @@ The following is an example `AwsWafRuleGroup` finding in the AWS Security Findin
 }
 ```
 
+## AwsWafv2RuleGroup<a name="asff-resourcedetails-awswafv2rulegroup"></a>
+
+The `AwsWafv2RuleGroup` object provides details about an AWS WAFV2 rule group\.
+
+The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsWafv2RuleGroup` object\. To view descriptions of `AwsWafv2RuleGroup` attributes, see [AwsWafv2RuleGroupDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsWafv2RuleGroupDetails.html) in the *AWS Security Hub API Reference*\.
+
+**Example**
+
+```
+"AwsWafv2RuleGroup": {
+    "Arn": "arn:aws:wafv2:us-east-1:123456789012:global/rulegroup/wafv2rulegroupasff/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    "Capacity": 1000,
+    "Description": "Resource for ASFF",
+    "Id": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    "Name": "wafv2rulegroupasff",
+    "Rules": [{
+    	"Action": {
+    	"Allow": {
+    		"CustomRequestHandling": {
+    			"InsertHeaders": [
+    				{
+    				"Name": "AllowActionHeader1Name",
+    				"Value": "AllowActionHeader1Value"
+    				},
+    				{
+    				"Name": "AllowActionHeader2Name",
+    				"Value": "AllowActionHeader2Value"
+    				}
+    			]
+    		}
+    	},
+    	"Name": "RuleOne",
+    	"Priority": 1,
+    	"VisibilityConfig": {
+    		"CloudWatchMetricsEnabled": true,
+    		"MetricName": "rulegroupasff",
+    		"SampledRequestsEnabled": false
+    	}
+    }],
+    "VisibilityConfig": {
+    	"CloudWatchMetricsEnabled": true,
+    	"MetricName": "rulegroupasff",
+    	"SampledRequestsEnabled": false
+    }
+}
+```
+
 ## AwsWafWebAcl<a name="asff-resourcedetails-awswafwebacl"></a>
 
 The `AwsWafWebAcl` object provides details about an AWS WAF web ACL\.
@@ -205,5 +252,50 @@ The following example shows the AWS Security Finding Format \(ASFF\) for the `Aw
         }
     ],
     "WebAclId": "waf-1234567890"
+}
+```
+
+## AwsWafv2WebAcl<a name="asff-resourcedetails-awswafv2webacl"></a>
+
+The `AwsWafv2WebAcl` object provides details about an AWS WAFV2 web ACL\.
+
+The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsWafv2WebAcl` object\. To view descriptions of `AwsWafv2WebAcl` attributes, see [AwsWafv2WebAclDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsWafv2WebAclDetails.html) in the *AWS Security Hub API Reference*\.
+
+**Example**
+
+```
+"AwsWafv2WebAcl": {
+    "Arn": "arn:aws:wafv2:us-east-1:123456789012:regional/webacl/WebACL-RoaD4QexqSxG/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    "Capacity": 1326,
+    "CaptchaConfig": {
+    	"ImmunityTimeProperty": {
+    		"ImmunityTime": 500
+    	}
+    },
+    "DefaultAction": {
+    	"Block": {}
+    },
+    "Description": "Web ACL for JsonBody testing",
+    "ManagedbyFirewallManager": false,
+    "Name": "WebACL-RoaD4QexqSxG",
+    "Rules": [{
+    	"Action": {
+    		"RuleAction": {
+    			"Block": {}
+    		}
+    	},
+    	"Name": "TestJsonBodyRule",
+    	"Priority": 1,
+    	"VisibilityConfig": {
+    		"SampledRequestsEnabled": true,
+    		"CloudWatchMetricsEnabled": true,
+    		"MetricName": "JsonBodyMatchMetric"
+    	}
+    }],
+    "VisibilityConfig": {
+    	"SampledRequestsEnabled": true,
+    	"CloudWatchMetricsEnabled": true,
+    	"MetricName": "TestingJsonBodyMetric"
+    }
 }
 ```

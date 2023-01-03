@@ -36,7 +36,7 @@ This control is not supported in the Asia Pacific \(Osaka\) Region\.
 
 1. If there is more than one root user access key, then repeat steps 4 and 5 for each key\.
 
-## 1\.5 – Ensure MFA is enabled for the 'root user account<a name="securityhub-cis1.4-controls-1.5"></a>
+## 1\.5 – Ensure MFA is enabled for the root user account<a name="securityhub-cis1.4-controls-1.5"></a>
 
 **Severity:** Critical
 
@@ -405,11 +405,16 @@ This control is not supported in the Africa \(Cape Town\) or Europe \(Milan\) Re
 
 **Schedule type:** Change triggered
 
+This control checks whether the default version of IAM policies \(also known as customer managed policies\) has administrator access by including a statement with `"Effect": "Allow"` with `"Action": "*"` over `"Resource": "*"`\. This control also has the `excludePermissionBoundaryPolicy` parameter set to `true` to exclude permission boundary policies\. The control fails if you have IAM policies with such a statement\.
+
+The control only checks the customer managed policies that you create\. It does not check inline and AWS managed policies\.
+
 IAM policies define a set of privileges granted to users, groups, or roles\. It's recommended and considered a standard security advice to grant least privilege—that is, granting only the permissions required to perform a task\. Determine what users need to do and then craft policies that let the users perform only those tasks, instead of allowing full administrative privileges\.
 
 It's more secure to start with a minimum set of permissions and grant additional permissions as necessary, rather than starting with permissions that are too lenient and then trying to tighten them later\. Providing full administrative privileges instead of restricting to the minimum set of permissions that the user is required to do exposes the resources to potentially unwanted actions\.
 
-You should remove IAM policies that have a statement with `"Effect": "Allow"` with `"Action": "*"` over `"Resource": "*"`\.
+**Note**  
+AWS Config should be enabled in all Regions in which you use Security Hub\. However, you can enable recording of global resources in a single Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
 
 ### Remediation<a name="cis1.4-1.16-remediation"></a>
 
@@ -758,6 +763,9 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 
 By default, CloudTrail trails that are created using the AWS Management Console are multi\-Region trails\.
 
+**Note**  
+If you use the Security Hub integration with AWS Organizations, and a member account does not own any CloudTrail trails that match the conditions described in this control, Security Hub will not generate findings for the member account for CIS v1\.4\.0 4\.x controls and [1\.7 – Eliminate use of the 'root user for administrative and daily tasks](#securityhub-cis1.4-controls-1.7)\.
+
 ### Remediation<a name="cis1.4-3.1-remediation"></a>
 
 **To create a new trail in CloudTrail**
@@ -960,7 +968,7 @@ For more information about using AWS Config from the AWS Command Line Interface,
 
 You can also use an AWS CloudFormation template to automate this process\. For more information, see the [AWS CloudFormation StackSets sample template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-sampletemplates.html) in the *AWS CloudFormation User Guide*\.
 
-## 3\.6 – S3 bucket server access logging should be enabled on the CloudTrail S3 bucket<a name="securityhub-cis1.4-controls-3.6"></a>
+## 3\.6 – Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket<a name="securityhub-cis1.4-controls-3.6"></a>
 
 **Severity:** Low
 

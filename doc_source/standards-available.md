@@ -14,6 +14,7 @@ The information for each standard includes the list of controls in the standard\
 AWS Security Hub supports the security standards listed below\. If you are using the integration with AWS Organizations, the CIS and Foundational Security Best Practices standards are auto\-enabled in new member accounts by default\. For more information about auto\-enabled standards, see [Auto\-enabled security standards](securityhub-standards-enable-disable.md#securityhub-auto-enabled-standards)\.
 
 **Topics**
++ [AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)
 + [CIS AWS Foundations Benchmark](securityhub-standards-cis.md)
 + [Payment Card Industry Data Security Standard \(PCI DSS\)](securityhub-standards-pcidss.md)
-+ [AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)
++ [Service\-managed standards](service-managed-standards.md)

@@ -12,48 +12,52 @@ The following example shows the AWS Security Finding Format \(ASFF\) for the `Aw
 
 ```
 "AwsLambdaFunction": {
-                        "Code": {
-                            "S3Bucket": "string",
-                            "S3Key": "string",
-                            "S3ObjectVersion": "string",
-                            "ZipFile": "string"
-                         },
-                         "CodeSha256": "string",
-                         "DeadLetterConfig": {
-                              "TargetArn": "string"
-                          },
-                         "Environment": {
-                            "Variables": {
-                                "string": "string"
-                            },
-                            "Error": {
-                                "ErrorCode": "string",
-                                "Message": "string"
-                            }
-                         },
-                        "FunctionName": "string",
-                        "Handler": "string",
-                        "KmsKeyArn": "string",
-                        "LastModified": "string",
-                        "Layers": {
-                            "Arn": "string",
-                            "CodeSize": number
-                        },
-                        "RevisionId": "string",
-                        "Role": "string",
-                        "Runtime": "string",
-                        "Timeout": "integer",
-                        "TracingConfig": {
-                            "Mode": "string"
-                        },
-                        "Version": "string",
-                        "VpcConfig": {
-                            "SecurityGroupIds": [ "string" ],
-                            "SubnetIds": [ "string" ]
-                        },
-                        "MasterArn": "string",
-                        "MemorySize": number
-                    }
+    "Architectures": [
+        "x86_64"
+    ],
+    "Code": {
+        "S3Bucket": "DOC-EXAMPLE-BUCKET",
+        "S3Key": "samplekey",
+        "S3ObjectVersion": "2",
+        "ZipFile": "myzip.zip"
+    },
+    "CodeSha256": "1111111111111abcdef",
+    "DeadLetterConfig": {
+        "TargetArn": "arn:aws:lambda:us-east-2:123456789012:queue:myqueue:2"
+    },
+    "Environment": {
+        "Variables": {
+            "Stage": "foobar"
+         },
+        "Error": {
+            "ErrorCode": "Sample-error-code",
+            "Message": "Caller principal is a manager."
+         }
+     },
+    "FunctionName": "CheckOut",
+    "Handler": "main.py:lambda_handler",
+    "KmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/mykey",
+    "LastModified": "2001-09-11T09:00:00Z",
+    "Layers": {
+        "Arn": "arn:aws:lambda:us-east-2:123456789012:layer:my-layer:3",
+        "CodeSize": 169
+    },
+    "PackageType": "Zip",
+    "RevisionId": "23",
+    "Role": "arn:aws:iam::123456789012:role/Accounting-Role",
+    "Runtime": "go1.7",
+    "Timeout": 15,
+    "TracingConfig": {
+        "Mode": "Active"
+    },
+    "Version": "$LATEST$",
+    "VpcConfig": {
+        "SecurityGroupIds": ["sg-085912345678492fb", "sg-08591234567bdgdc"],
+         "SubnetIds": ["subnet-071f712345678e7c8", "subnet-07fd123456788a036"]
+    },
+    "MasterArn": "arn:aws:lambda:us-east-2:123456789012:\$LATEST",
+    "MemorySize": 2048
+}
 ```
 
 ## AwsLambdaLayerVersion<a name="asff-resourcedetails-awslambdalayerversion"></a>

@@ -69,6 +69,7 @@ It contains an array of up to 32 resource objects\.
 + [AwsRds](asff-resourcedetails-awsrds.md)
 + [AwsRedshift](asff-resourcedetails-awsredshift.md)
 + [AwsS3](asff-resourcedetails-awss3.md)
++ [AwsSageMaker](asff-resourcedetails-awssagemaker.md)
 + [AwsSecretsManager](asff-resourcedetails-awssecretsmanager.md)
 + [AwsSns](asff-resourcedetails-awssns.md)
 + [AwsSqs](asff-resourcedetails-awssqs.md)

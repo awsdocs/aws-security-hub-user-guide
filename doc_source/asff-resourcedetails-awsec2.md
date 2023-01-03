@@ -52,6 +52,50 @@ The following example shows the AWS Security Finding Format \(ASFF\) for the `Aw
 }
 ```
 
+## AwsEc2LaunchTemplate<a name="asff-resourcedetails-awsec2launchtemplate"></a>
+
+The `AwsEc2LaunchTemplate` object contains details about an Amazon Elastic Compute Cloud launch template that specifies instance configuration information\.
+
+The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsEc2LaunchTemplate` object\. To view descriptions of `AwsEc2LaunchTemplate` attributes, see [AwsEc2LaunchTemplateDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsEc2LaunchTemplateDetals.html) in the *AWS Security Hub API Reference*\.
+
+**Example**
+
+```
+"AwsEc2LaunchTemplate": {
+    "DefaultVersionNumber": "1",
+    "ElasticGpuSpecifications": ["string"],
+    "ElasticInferenceAccelerators": ["string"],
+    "Id": "lt-0a16e9802800bdd85",
+    "ImageId": "ami-0d5eff06f840b45e9",
+    "LatestVersionNumber": "1",
+    "LaunchTemplateData": {
+    	"BlockDeviceMappings": [{
+    		"DeviceName": "/dev/xvda",
+    		"Ebs": {
+    			"DeleteonTermination": true,
+    			"Encrypted": true,
+    			"SnapshotId": "snap-01047646ec075f543",
+    			"VolumeSize": 8,
+    			"VolumeType:" "gp2"
+    		}
+    	}],
+    	"MetadataOptions": {
+    		"HttpTokens": "enabled",
+    		"HttpPutResponseHopLimit" : 1
+    	},
+    	"Monitoring": {
+    		"Enabled": true,
+    	"NetworkInterfaces": [{
+    		"AssociatePublicIpAddress" : true,
+    	}],
+    "LaunchTemplateName": "string",
+    "LicenseSpecifications": ["string"],
+    "SecurityGroupIds": ["sg-01fce87ad6e019725"],
+    "SecurityGroups": ["string"],
+    "TagSpecifications": ["string"]
+}
+```
+
 ## AwsEc2NetworkAcl<a name="asff-resourcedetails-awsec2networkacl"></a>
 
 The `AwsEc2NetworkAcl` object contains details about an Amazon EC2 network access control list \(ACL\)\.
@@ -61,7 +105,7 @@ The following example shows the AWS Security Finding Format \(ASFF\) for the `Aw
 **Example**
 
 ```
-AwsEc2NetworkAcl: {
+"AwsEc2NetworkAcl": {
     "IsDefault": false,
     "NetworkAclId": "acl-1234567890abcdef0",
     "OwnerId": "123456789012",

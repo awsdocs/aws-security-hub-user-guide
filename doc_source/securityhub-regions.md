@@ -4,10 +4,11 @@ Some AWS Security Hub features are available in only some AWS Regions\. The foll
 
 **Contents**
 + [Cross\-Region aggregation restrictions](#securityhub-regions-finding-aggregation-support)
-+ [Integrations not supported in all Regions](#securityhub-regions-integration-support)
++ [Availability of integrations by Region](#securityhub-regions-integration-support)
   + [Integrations that are supported in China \(Beijing\) and China \(Ningxia\)](#securityhub-regions-integration-support-china)
   + [Integrations that are supported in AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)](#securityhub-regions-integration-support-govcloud)
-+ [Controls not supported in all Regions](#securityhub-regions-control-support)
++ [Availability of standards by Region](#securityhub-regions-standards-support)
++ [Availability of controls by Region](#securityhub-regions-control-support)
   + [US East \(Ohio\)](#securityhub-control-support-useast2)
   + [US West \(N\. California\)](#securityhub-control-support-uswest1)
   + [US West \(Oregon\)](#securityhub-control-support-uswest2)
@@ -42,7 +43,7 @@ In the China Regions, cross\-Region aggregation is available for findings, findi
 
 You can't use a Region that is disabled by default as your aggregation Region\. For a list of Regions that are disabled by default, see [Enabling a Region](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable) in the *AWS General Reference*\.
 
-## Integrations not supported in all Regions<a name="securityhub-regions-integration-support"></a>
+## Availability of integrations by Region<a name="securityhub-regions-integration-support"></a>
 
 Some integrations are not available in all Regions\. If an integration is not available in a specific Region, it is not listed on the **Integrations** page of the Security Hub console when you choose that Region\.
 
@@ -113,7 +114,13 @@ The AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions only support
 + ThreatModeler
 + Vectra AI Cognito Detect
 
-## Controls not supported in all Regions<a name="securityhub-regions-control-support"></a>
+## Availability of standards by Region<a name="securityhub-regions-standards-support"></a>
+
+Service\-Managed Standard: AWS Control Tower is only available in Regions that AWS Control Tower supports, including AWS GovCloud \(US\)\. For a list of Regions that AWS Control Tower supports, see [How AWS Regions Work With AWS Control Tower](https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html) in the *AWS Control Tower User Guide*\.
+
+Other security standards are available in all Regions\.
+
+## Availability of controls by Region<a name="securityhub-regions-control-support"></a>
 
 The following Regions do not support all of the Security Hub controls\. For each Region, this list shows the controls that are not supported\.
 
@@ -132,6 +139,7 @@ The following controls are not supported in US East \(Ohio\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
@@ -153,6 +161,7 @@ The following controls are not supported in US West \(N\. California\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
@@ -173,6 +182,7 @@ The following controls are not supported in US West \(Oregon\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
@@ -221,6 +231,7 @@ The following controls are not supported in Africa \(Cape Town\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
 [\[DMS\.1\] AWS Database Migration Service replication instances should not be public](securityhub-standards-fsbp-controls.md#fsbp-dms-1)  
@@ -276,6 +287,7 @@ The following controls are not supported in Asia Pacific \(Hong Kong\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[RDS\.10\] IAM authentication should be configured for RDS instances](securityhub-standards-fsbp-controls.md#fsbp-rds-10)  
@@ -328,10 +340,12 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[APIGateway\.2\] API Gateway REST API stages should be configured to use SSL certificates for backend authentication](securityhub-standards-fsbp-controls.md#fsbp-apigateway-2)  
 [\[APIGateway\.3\] API Gateway REST API stages should have AWS X\-Ray tracing enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-3)  
 [\[APIGateway\.4\] API Gateway should be associated with an AWS WAF web ACL](securityhub-standards-fsbp-controls.md#fsbp-apigateway-4)  
+[\[APIGateway\.8\] API Gateway routes should specify an authorization type](securityhub-standards-fsbp-controls.md#fsbp-apigateway-8)  
+[\[APIGateway\.9\] Access logging should be configured for API Gateway V2 Stages](securityhub-standards-fsbp-controls.md#fsbp-apigateway-9)  
 [\[AutoScaling\.2\] Amazon EC2 Auto Scaling group should cover multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-2)  
 [\[AutoScaling\.3\] Auto Scaling group should configure EC2 instances to require Instance Metadata Service Version 2 \(IMDSv2\)](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-3)  
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
-[\[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
+[\[Autoscaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
 [\[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-6)  
 [\[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-9)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
@@ -345,8 +359,10 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
+[\[CodeBuild\.3\] CodeBuild S3 logs should be encrypted ](securityhub-standards-fsbp-controls.md#fsbp-codebuild-3)  
 [\[CodeBuild\.4\] CodeBuild project environments should have a logging configuration](securityhub-standards-fsbp-controls.md#fsbp-codebuild-4)  
 [\[CodeBuild\.5\] CodeBuild project environments should not have privileged mode enabled](securityhub-standards-fsbp-controls.md#fsbp-codebuild-5)  
 [\[DMS\.1\] AWS Database Migration Service replication instances should not be public](securityhub-standards-fsbp-controls.md#fsbp-dms-1)  
@@ -440,9 +456,12 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  
 [\[S3\.13\] S3 buckets should have lifecycle policies configured](securityhub-standards-fsbp-controls.md#fsbp-s3-13)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
+[\[SageMaker\.2\] SageMaker notebook instances should be launched in a custom VPC](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-2)  
+[\[SageMaker\.3\] Users should not have root access to SageMaker notebook instances](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-3)  
 [\[SecretsManager\.1\] Secrets Manager secrets should have automatic rotation enabled](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-1)  
 [\[SecretsManager\.2\] Secrets Manager secrets configured with automatic rotation should rotate successfully](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-2)  
 [\[SecretsManager\.3\] Remove unused Secrets Manager secrets](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-3)  
+[\[SecretsManager\.4\] Secrets Manager secrets should be rotated within a specified number of days](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-4)  
 [\[SNS\.1\] SNS topics should be encrypted at rest using AWS KMS](securityhub-standards-fsbp-controls.md#fsbp-sns-1)  
 [\[SNS\.2\] Logging of delivery status should be enabled for notification messages sent to a topic](securityhub-standards-fsbp-controls.md#fsbp-sns-2)  
 [\[SQS\.1\] Amazon SQS queues should be encrypted at rest](securityhub-standards-fsbp-controls.md#fsbp-sqs-1)  
@@ -455,7 +474,8 @@ The following controls are not supported in Asia Pacific \(Jakarta\)\.
 [\[WAF\.4\] A WAF Classic Regional web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-4)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
-[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)
+[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)  
+[\[WAF\.10\] A WAFV2 web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-10)
 
 ### Asia Pacific \(Mumbai\)<a name="securityhub-control-support-apsouth1"></a>
 
@@ -519,7 +539,7 @@ The following controls are not supported in Asia Pacific \(Osaka\)\.
 [\[APIGateway\.2\] API Gateway REST API stages should be configured to use SSL certificates for backend authentication](securityhub-standards-fsbp-controls.md#fsbp-apigateway-2)  
 [\[APIGateway\.3\] API Gateway REST API stages should have AWS X\-Ray tracing enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-3)  
 [\[APIGateway\.4\] API Gateway should be associated with an AWS WAF web ACL](securityhub-standards-fsbp-controls.md#fsbp-apigateway-4)  
-[\[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
+[\[Autoscaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
 [\[CloudFront\.1\] CloudFront distributions should have a default root object configured](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-1)  
 [\[CloudFront\.2\] CloudFront distributions should have origin access identity enabled](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-2)  
@@ -531,6 +551,8 @@ The following controls are not supported in Asia Pacific \(Osaka\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
+[\[CodeBuild\.3\] CodeBuild S3 logs should be encrypted ](securityhub-standards-fsbp-controls.md#fsbp-codebuild-3)  
 [\[CodeBuild\.4\] CodeBuild project environments should have a logging configuration](securityhub-standards-fsbp-controls.md#fsbp-codebuild-4)  
 [\[CodeBuild\.5\] CodeBuild project environments should not have privileged mode enabled](securityhub-standards-fsbp-controls.md#fsbp-codebuild-5)  
 [\[EC2\.15\] EC2 subnets should not automatically assign public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-ec2-15)  
@@ -589,7 +611,8 @@ The following controls are not supported in Asia Pacific \(Osaka\)\.
 [\[WAF\.3\] A WAF Regional rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-3)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
-[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)
+[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)  
+[\[WAF\.10\] A WAFV2 web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-10)
 
 ### Asia Pacific \(Seoul\)<a name="securityhub-control-support-apnortheast2"></a>
 
@@ -606,6 +629,7 @@ The following controls are not supported in Asia Pacific \(Seoul\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
@@ -627,6 +651,7 @@ The following controls are not supported in Asia Pacific \(Singapore\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
@@ -647,6 +672,7 @@ The following controls are not supported in Asia Pacific \(Sydney\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[Redshift\.3\] Amazon Redshift clusters should have automatic snapshots enabled](securityhub-standards-fsbp-controls.md#fsbp-redshift-3)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
@@ -668,6 +694,7 @@ The following controls are not supported in Asia Pacific \(Tokyo\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
@@ -688,6 +715,7 @@ The following controls are not supported in Canada \(Central\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
@@ -699,11 +727,11 @@ The following controls are not supported in Canada \(Central\)\.
 The following controls are not supported in China \(Beijing\)\.
 
 **[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
-[1\.13 – Ensure MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
+[1\.13 – Ensure MFA is enabled for the root user](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
 
 **[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
-[1\.5 – Ensure MFA is enabled for the 'root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
+[1\.5 – Ensure MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
 [1\.6 – Ensure hardware MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.6)  
 [2\.1\.5\.1 – S3 Block Public Access setting should be enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.1)  
 [2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)  
@@ -718,10 +746,13 @@ The following controls are not supported in China \(Beijing\)\.
 [\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[Account\.1\] Security contact information should be provided for an AWS account](securityhub-standards-fsbp-controls.md#fsbp-account-1)  
 [\[ACM\.1\] Imported and ACM\-issued certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
 [\[APIGateway\.2\] API Gateway REST API stages should be configured to use SSL certificates for backend authentication](securityhub-standards-fsbp-controls.md#fsbp-apigateway-2)  
 [\[APIGateway\.3\] API Gateway REST API stages should have AWS X\-Ray tracing enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-3)  
 [\[APIGateway\.4\] API Gateway should be associated with an AWS WAF web ACL](securityhub-standards-fsbp-controls.md#fsbp-apigateway-4)  
+[\[APIGateway\.8\] API Gateway routes should specify an authorization type](securityhub-standards-fsbp-controls.md#fsbp-apigateway-8)  
+[\[APIGateway\.9\] Access logging should be configured for API Gateway V2 Stages](securityhub-standards-fsbp-controls.md#fsbp-apigateway-9)  
 [\[AutoScaling\.2\] Amazon EC2 Auto Scaling group should cover multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-2)  
 [\[AutoScaling\.3\] Auto Scaling group should configure EC2 instances to require Instance Metadata Service Version 2 \(IMDSv2\)](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-3)  
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
@@ -738,6 +769,8 @@ The following controls are not supported in China \(Beijing\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
+[\[CodeBuild\.3\] CodeBuild S3 logs should be encrypted ](securityhub-standards-fsbp-controls.md#fsbp-codebuild-3)  
 [\[CodeBuild\.4\] CodeBuild project environments should have a logging configuration](securityhub-standards-fsbp-controls.md#fsbp-codebuild-4)  
 [\[CodeBuild\.5\] CodeBuild project environments should not have privileged mode enabled](securityhub-standards-fsbp-controls.md#fsbp-codebuild-5)  
 [\[EC2\.15\] EC2 subnets should not automatically assign public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-ec2-15)  
@@ -747,6 +780,7 @@ The following controls are not supported in China \(Beijing\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
+[\[EC2\.25\] EC2 launch templates should not assign public IPs to network interfaces](securityhub-standards-fsbp-controls.md#fsbp-ec2-25)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -805,6 +839,8 @@ The following controls are not supported in China \(Beijing\)\.
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  
 [\[S3\.13\] S3 buckets should have lifecycle policies configured](securityhub-standards-fsbp-controls.md#fsbp-s3-13)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
+[\[SageMaker\.2\] SageMaker notebook instances should be launched in a custom VPC](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-2)  
+[\[SageMaker\.3\] Users should not have root access to SageMaker notebook instances](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-3)  
 [\[SecretsManager\.3\] Remove unused Secrets Manager secrets](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-3)  
 [\[SecretsManager\.4\] Secrets Manager secrets should be rotated within a specified number of days](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-4)  
 [\[SNS\.2\] Logging of delivery status should be enabled for notification messages sent to a topic](securityhub-standards-fsbp-controls.md#fsbp-sns-2)  
@@ -814,18 +850,19 @@ The following controls are not supported in China \(Beijing\)\.
 [\[WAF\.4\] A WAF Classic Regional web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-4)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
-[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)
+[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)  
+[\[WAF\.10\] A WAFV2 web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-10)
 
 ### China \(Ningxia\)<a name="securityhub-control-support-cnnorthwest1"></a>
 
 The following controls are not supported in China \(Ningxia\)\.
 
 **[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
-[1\.13 – Ensure MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
+[1\.13 – Ensure MFA is enabled for the root user](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
 
 **[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
-[1\.5 – Ensure MFA is enabled for the 'root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
+[1\.5 – Ensure MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
 [1\.6 – Ensure hardware MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.6)  
 [2\.1\.5\.1 – S3 Block Public Access setting should be enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.1)  
 [2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)  
@@ -840,10 +877,13 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[Account\.1\] Security contact information should be provided for an AWS account](securityhub-standards-fsbp-controls.md#fsbp-account-1)  
 [\[ACM\.1\] Imported and ACM\-issued certificates should be renewed after a specified time period](securityhub-standards-fsbp-controls.md#fsbp-acm-1)  
 [\[APIGateway\.2\] API Gateway REST API stages should be configured to use SSL certificates for backend authentication](securityhub-standards-fsbp-controls.md#fsbp-apigateway-2)  
 [\[APIGateway\.3\] API Gateway REST API stages should have AWS X\-Ray tracing enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-3)  
 [\[APIGateway\.4\] API Gateway should be associated with an AWS WAF web ACL](securityhub-standards-fsbp-controls.md#fsbp-apigateway-4)  
+[\[APIGateway\.8\] API Gateway routes should specify an authorization type](securityhub-standards-fsbp-controls.md#fsbp-apigateway-8)  
+[\[APIGateway\.9\] Access logging should be configured for API Gateway V2 Stages](securityhub-standards-fsbp-controls.md#fsbp-apigateway-9)  
 [\[AutoScaling\.2\] Amazon EC2 Auto Scaling group should cover multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-2)  
 [\[AutoScaling\.3\] Auto Scaling group should configure EC2 instances to require Instance Metadata Service Version 2 \(IMDSv2\)](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-3)  
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
@@ -860,6 +900,8 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
+[\[CodeBuild\.3\] CodeBuild S3 logs should be encrypted ](securityhub-standards-fsbp-controls.md#fsbp-codebuild-3)  
 [\[CodeBuild\.4\] CodeBuild project environments should have a logging configuration](securityhub-standards-fsbp-controls.md#fsbp-codebuild-4)  
 [\[CodeBuild\.5\] CodeBuild project environments should not have privileged mode enabled](securityhub-standards-fsbp-controls.md#fsbp-codebuild-5)  
 [\[EC2\.15\] EC2 subnets should not automatically assign public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-ec2-15)  
@@ -869,6 +911,7 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
+[\[EC2\.25\] EC2 launch templates should not assign public IPs to network interfaces](securityhub-standards-fsbp-controls.md#fsbp-ec2-25)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -928,6 +971,8 @@ The following controls are not supported in China \(Ningxia\)\.
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  
 [\[S3\.13\] S3 buckets should have lifecycle policies configured](securityhub-standards-fsbp-controls.md#fsbp-s3-13)  
 [\[SageMaker\.1\] SageMaker notebook instances should not have direct internet access](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-1)  
+[\[SageMaker\.2\] SageMaker notebook instances should be launched in a custom VPC](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-2)  
+[\[SageMaker\.3\] Users should not have root access to SageMaker notebook instances](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-3)  
 [\[SecretsManager\.3\] Remove unused Secrets Manager secrets](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-3)  
 [\[SecretsManager\.4\] Secrets Manager secrets should be rotated within a specified number of days](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-4)  
 [\[SNS\.2\] Logging of delivery status should be enabled for notification messages sent to a topic](securityhub-standards-fsbp-controls.md#fsbp-sns-2)  
@@ -954,6 +999,7 @@ The following controls are not supported in Europe \(Frankfurt\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
@@ -974,6 +1020,7 @@ The following controls are not supported in Europe \(Ireland\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
@@ -994,6 +1041,7 @@ The following controls are not supported in Europe \(London\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
@@ -1043,6 +1091,7 @@ The following controls are not supported in Europe \(Milan\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
 [\[DMS\.1\] AWS Database Migration Service replication instances should not be public](securityhub-standards-fsbp-controls.md#fsbp-dms-1)  
@@ -1099,6 +1148,7 @@ The following controls are not supported in Europe \(Paris\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
@@ -1121,6 +1171,7 @@ The following controls are not supported in Europe \(Stockholm\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
 [\[RDS\.14\] Amazon Aurora clusters should have backtracking enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-14)  
 [\[WAF\.1\] AWS WAF Classic global web ACL logging should be enabled](securityhub-standards-fsbp-controls.md#fsbp-waf-1)  
@@ -1148,6 +1199,7 @@ The following controls are not supported in Middle East \(Bahrain\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[EC2\.20\] Both VPN tunnels for an AWS Site\-to\-Site VPN connection should be up](securityhub-standards-fsbp-controls.md#fsbp-ec2-20)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
@@ -1180,6 +1232,7 @@ The following controls are not supported in South America \(São Paulo\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[RDS\.7\] RDS clusters should have deletion protection enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-7)  
 [\[RDS\.12\] IAM authentication should be configured for RDS clusters](securityhub-standards-fsbp-controls.md#fsbp-rds-12)  
 [\[RDS\.14\] Amazon Aurora clusters should have backtracking enabled](securityhub-standards-fsbp-controls.md#fsbp-rds-14)  
@@ -1196,11 +1249,11 @@ The following controls are not supported in South America \(São Paulo\)\.
 The following controls are not supported in AWS GovCloud \(US\-East\)\.
 
 **[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
-[1\.13 – Ensure MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
+[1\.13 – Ensure MFA is enabled for the root user](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
 
 **[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
-[1\.5 – Ensure MFA is enabled for the 'root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
+[1\.5 – Ensure MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
 [1\.6 – Ensure hardware MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.6)  
 [2\.1\.5\.1 – S3 Block Public Access setting should be enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.1)  
 [2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)  
@@ -1215,13 +1268,16 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[PCI\.SageMaker\.1\] Amazon SageMaker notebook instances should not have direct internet access](securityhub-pci-controls.md#pcidss-sagemaker-1)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[Account\.1\] Security contact information should be provided for an AWS account](securityhub-standards-fsbp-controls.md#fsbp-account-1)  
 [\[APIGateway\.2\] API Gateway REST API stages should be configured to use SSL certificates for backend authentication](securityhub-standards-fsbp-controls.md#fsbp-apigateway-2)  
 [\[APIGateway\.3\] API Gateway REST API stages should have AWS X\-Ray tracing enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-3)  
 [\[APIGateway\.4\] API Gateway should be associated with an AWS WAF web ACL](securityhub-standards-fsbp-controls.md#fsbp-apigateway-4)  
+[\[APIGateway\.8\] API Gateway routes should specify an authorization type](securityhub-standards-fsbp-controls.md#fsbp-apigateway-8)  
+[\[APIGateway\.9\] Access logging should be configured for API Gateway V2 Stages](securityhub-standards-fsbp-controls.md#fsbp-apigateway-9)  
 [\[AutoScaling\.2\] Amazon EC2 Auto Scaling group should cover multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-2)  
 [\[AutoScaling\.3\] Auto Scaling group should configure EC2 instances to require Instance Metadata Service Version 2 \(IMDSv2\)](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-3)  
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
-[\[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
+[\[Autoscaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
 [\[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-6)  
 [\[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-9)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
@@ -1235,8 +1291,10 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
+[\[CodeBuild\.3\] CodeBuild S3 logs should be encrypted ](securityhub-standards-fsbp-controls.md#fsbp-codebuild-3)  
 [\[CodeBuild\.4\] CodeBuild project environments should have a logging configuration](securityhub-standards-fsbp-controls.md#fsbp-codebuild-4)  
 [\[CodeBuild\.5\] CodeBuild project environments should not have privileged mode enabled](securityhub-standards-fsbp-controls.md#fsbp-codebuild-5)  
 [\[DynamoDB\.1\] DynamoDB tables should automatically scale capacity with demand](securityhub-standards-fsbp-controls.md#fsbp-dynamodb-1)  
@@ -1248,6 +1306,7 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
+[\[EC2\.25\] EC2 launch templates should not assign public IPs to network interfaces](securityhub-standards-fsbp-controls.md#fsbp-ec2-25)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -1302,6 +1361,8 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[S3\.11\] S3 buckets should have event notifications enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-11)  
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  
 [\[S3\.13\] S3 buckets should have lifecycle policies configured](securityhub-standards-fsbp-controls.md#fsbp-s3-13)  
+[\[SageMaker\.2\] SageMaker notebook instances should be launched in a custom VPC](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-2)  
+[\[SageMaker\.3\] Users should not have root access to SageMaker notebook instances](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-3)  
 [\[SecretsManager\.3\] Remove unused Secrets Manager secrets](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-3)  
 [\[SecretsManager\.4\] Secrets Manager secrets should be rotated within a specified number of days](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-4)  
 [\[SNS\.2\] Logging of delivery status should be enabled for notification messages sent to a topic](securityhub-standards-fsbp-controls.md#fsbp-sns-2)  
@@ -1312,18 +1373,19 @@ The following controls are not supported in AWS GovCloud \(US\-East\)\.
 [\[WAF\.4\] A WAF Classic Regional web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-4)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
-[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)
+[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)  
+[\[WAF\.10\] A WAFV2 web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-10)
 
 ### AWS GovCloud \(US\-West\)<a name="securityhub-control-support-govuswest1"></a>
 
 The following controls are not supported in AWS GovCloud \(US\-West\)\.
 
 **[CIS AWS Foundations Benchmark v1\.2\.0](securityhub-cis-controls.md)**  
-[1\.13 – Ensure MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
+[1\.13 – Ensure MFA is enabled for the root user](securityhub-cis-controls.md#securityhub-cis-controls-1.13)  
 [1\.14 – Ensure hardware MFA is enabled for the root user ](securityhub-cis-controls.md#securityhub-cis-controls-1.14)
 
 **[CIS AWS Foundations Benchmark v1\.4\.0](securityhub-cis-controls-1.4.0.md)**  
-[1\.5 – Ensure MFA is enabled for the 'root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
+[1\.5 – Ensure MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.5)  
 [1\.6 – Ensure hardware MFA is enabled for the root user account](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-1.6)  
 [2\.1\.5\.1 – S3 Block Public Access setting should be enabled](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.1)  
 [2\.1\.5\.2 – S3 Block Public Access setting should be enabled at the bucket level](securityhub-cis-controls-1.4.0.md#securityhub-cis1.4-controls-2.1.5.2)  
@@ -1336,13 +1398,16 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[PCI\.IAM\.5\] Virtual MFA should be enabled for the root user](securityhub-pci-controls.md#pcidss-iam-5)
 
 **[AWS Foundational Security Best Practices standard](securityhub-standards-fsbp.md)**  
+[\[Account\.1\] Security contact information should be provided for an AWS account](securityhub-standards-fsbp-controls.md#fsbp-account-1)  
 [\[APIGateway\.2\] API Gateway REST API stages should be configured to use SSL certificates for backend authentication](securityhub-standards-fsbp-controls.md#fsbp-apigateway-2)  
 [\[APIGateway\.3\] API Gateway REST API stages should have AWS X\-Ray tracing enabled](securityhub-standards-fsbp-controls.md#fsbp-apigateway-3)  
 [\[APIGateway\.4\] API Gateway should be associated with an AWS WAF web ACL](securityhub-standards-fsbp-controls.md#fsbp-apigateway-4)  
+[\[APIGateway\.8\] API Gateway routes should specify an authorization type](securityhub-standards-fsbp-controls.md#fsbp-apigateway-8)  
+[\[APIGateway\.9\] Access logging should be configured for API Gateway V2 Stages](securityhub-standards-fsbp-controls.md#fsbp-apigateway-9)  
 [\[AutoScaling\.2\] Amazon EC2 Auto Scaling group should cover multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-2)  
 [\[AutoScaling\.3\] Auto Scaling group should configure EC2 instances to require Instance Metadata Service Version 2 \(IMDSv2\)](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-3)  
 [\[AutoScaling\.4\] Auto Scaling group launch configuration should not have metadata response hop limit greater than `1`](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-4)  
-[\[AutoScaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
+[\[Autoscaling\.5\] Amazon EC2 instances launched using Auto Scaling group launch configurations should not have Public IP addresses](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-5)  
 [\[AutoScaling\.6\] Auto Scaling groups should use multiple instance types in multiple Availability Zones](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-6)  
 [\[AutoScaling\.9\] EC2 Auto Scaling groups should use EC2 launch templates](securityhub-standards-fsbp-controls.md#fsbp-autoscaling-9)  
 [\[CloudFormation\.1\] CloudFormation stacks should be integrated with Simple Notification Service \(SNS\)](securityhub-standards-fsbp-controls.md#fsbp-cloudformation-1)  
@@ -1356,8 +1421,10 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[CloudFront\.8\] CloudFront distributions should use SNI to serve HTTPS requests](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-8)  
 [\[CloudFront\.9\] CloudFront distributions should encrypt traffic to custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-9)  
 [\[CloudFront\.10\] CloudFront distributions should not use deprecated SSL protocols between edge locations and custom origins](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-10)  
+[\[CloudFront\.12\] CloudFront distributions should not point to non\-existent S3 origins\.](securityhub-standards-fsbp-controls.md#fsbp-cloudfront-12)  
 [\[CodeBuild\.1\] CodeBuild GitHub or Bitbucket source repository URLs should use OAuth](securityhub-standards-fsbp-controls.md#fsbp-codebuild-1)  
 [\[CodeBuild\.2\] CodeBuild project environment variables should not contain clear text credentials](securityhub-standards-fsbp-controls.md#fsbp-codebuild-2)  
+[\[CodeBuild\.3\] CodeBuild S3 logs should be encrypted ](securityhub-standards-fsbp-controls.md#fsbp-codebuild-3)  
 [\[CodeBuild\.4\] CodeBuild project environments should have a logging configuration](securityhub-standards-fsbp-controls.md#fsbp-codebuild-4)  
 [\[CodeBuild\.5\] CodeBuild project environments should not have privileged mode enabled](securityhub-standards-fsbp-controls.md#fsbp-codebuild-5)  
 [\[DynamoDB\.1\] DynamoDB tables should automatically scale capacity with demand](securityhub-standards-fsbp-controls.md#fsbp-dynamodb-1)  
@@ -1369,6 +1436,7 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[EC2\.22\] Unused EC2 security groups should be removed](securityhub-standards-fsbp-controls.md#fsbp-ec2-22)  
 [\[EC2\.23\] EC2 Transit Gateways should not automatically accept VPC attachment requests](securityhub-standards-fsbp-controls.md#fsbp-ec2-23)  
 [\[EC2\.24\] Paravirtual EC2 instance types should not be used](securityhub-standards-fsbp-controls.md#fsbp-ec2-24)  
+[\[EC2\.25\] EC2 launch templates should not assign public IPs to network interfaces](securityhub-standards-fsbp-controls.md#fsbp-ec2-25)  
 [\[ECR\.1\] ECR private repositories should have image scanning configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-1)  
 [\[ECR\.2\] ECR private repositories should have tag immutability configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-2)  
 [\[ECR\.3\] ECR repositories should have at least one lifecycle policy configured](securityhub-standards-fsbp-controls.md#fsbp-ecr-3)  
@@ -1420,6 +1488,8 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[S3\.11\] S3 buckets should have event notifications enabled](securityhub-standards-fsbp-controls.md#fsbp-s3-11)  
 [\[S3\.12\] S3 access control lists \(ACLs\) should not be used to manage user access to buckets](securityhub-standards-fsbp-controls.md#fsbp-s3-12)  
 [\[S3\.13\] S3 buckets should have lifecycle policies configured](securityhub-standards-fsbp-controls.md#fsbp-s3-13)  
+[\[SageMaker\.2\] SageMaker notebook instances should be launched in a custom VPC](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-2)  
+[\[SageMaker\.3\] Users should not have root access to SageMaker notebook instances](securityhub-standards-fsbp-controls.md#fsbp-sagemaker-3)  
 [\[SecretsManager\.3\] Remove unused Secrets Manager secrets](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-3)  
 [\[SecretsManager\.4\] Secrets Manager secrets should be rotated within a specified number of days](securityhub-standards-fsbp-controls.md#fsbp-secretsmanager-4)  
 [\[SNS\.2\] Logging of delivery status should be enabled for notification messages sent to a topic](securityhub-standards-fsbp-controls.md#fsbp-sns-2)  
@@ -1430,4 +1500,5 @@ The following controls are not supported in AWS GovCloud \(US\-West\)\.
 [\[WAF\.4\] A WAF Classic Regional web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-4)  
 [\[WAF\.6\] A WAF global rule should have at least one condition](securityhub-standards-fsbp-controls.md#fsbp-waf-6)  
 [\[WAF\.7\] A WAF global rule group should have at least one rule](securityhub-standards-fsbp-controls.md#fsbp-waf-7)  
-[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)
+[\[WAF\.8\] A WAF global web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-8)  
+[\[WAF\.10\] A WAFV2 web ACL should have at least one rule or rule group](securityhub-standards-fsbp-controls.md#fsbp-waf-10)

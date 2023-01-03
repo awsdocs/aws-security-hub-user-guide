@@ -5,7 +5,7 @@ For CIS AWS Foundations Benchmark v1\.2\.0, Security Hub supports the following 
 **Note**  
 We recommend upgrading to CIS AWS Foundations Benchmark v1\.4\.0 to stay current on security best practices, but you may have both v1\.4\.0 and v1\.2\.0 enabled at the same time\. For more information, see [Disabling or enabling a security standard](securityhub-standards-enable-disable.md)\. If you want to upgrade to v1\.4\.0, it's best to enable v1\.4\.0 first before disabling v1\.2\.0\. If you use the Security Hub integration with AWS Organizations to centrally manage multiple accounts and wish to batch enable v1\.4\.0 across all accounts \(and disable v1\.2\.0 if you wish\), you can use a [Security Hub multi\-account script](https://github.com/awslabs/aws-securityhub-multiaccount-scripts)\. 
 
-## 1\.1 – Avoid the use of the root user<a name="securityhub-standards-cis-controls-1.1"></a>
+## 1\.1 – Avoid the use of the root user<a name="securityhub-cis-controls-1.1"></a>
 
 **Severity:** Low
 
@@ -531,15 +531,13 @@ The administrator of the specified account can grant permission to assume this r
 
 **Schedule type:** Change triggered
 
-This control checks whether the default version of IAM policies \(also known as customer managed policies\) has administrator access by including a statement with `"Effect": "Allow"` with `"Action": "*"` over `"Resource": "*"`\. The control fails if you have IAM policies with such a statement\.
+This control checks whether the default version of IAM policies \(also known as customer managed policies\) has administrator access by including a statement with `"Effect": "Allow"` with `"Action": "*"` over `"Resource": "*"`\. This control also has the `excludePermissionBoundaryPolicy` parameter set to `true` to exclude permission boundary policies\. The control fails if you have IAM policies with such a statement\.
 
 The control only checks the customer managed policies that you create\. It does not check inline and AWS managed policies\.
 
 IAM policies define a set of privileges granted to users, groups, or roles\. It's recommended and considered a standard security advice to grant least privilege—that is, granting only the permissions required to perform a task\. Determine what users need to do and then craft policies that let the users perform only those tasks, instead of allowing full administrative privileges\.
 
 It's more secure to start with a minimum set of permissions and grant additional permissions as necessary, rather than starting with permissions that are too lenient and then trying to tighten them later\. Providing full administrative privileges instead of restricting to the minimum set of permissions that the user is required to do exposes the resources to potentially unwanted actions\.
-
-You should remove IAM policies that have a statement with `"Effect": "Allow"` with `"Action": "*"` over `"Resource": "*"`\.
 
 **Note**  
 AWS Config should be enabled in all Regions in which you use Security Hub\. However, you can enable recording of global resources in a single Region\. If you only record global resources in a single Region, then you can disable this control in all Regions except the Region where you record global resources\.
@@ -566,6 +564,9 @@ The AWS API call history produced by CloudTrail enables security analysis, resou
 + For a multi\-Region trail, ensuring that management events configured for all type of Read/Writes ensures recording of management operations that are performed on all resources in an AWS account\.
 
 By default, CloudTrail trails that are created using the AWS Management Console are multi\-Region trails\.
+
+**Note**  
+If you use the Security Hub integration with AWS Organizations, and a member account does not own any CloudTrail trails that match the conditions described in this control, Security Hub will not generate findings for the member account for CIS 3\.x controls and [1\.1 – Avoid the use of the root user](#securityhub-cis-controls-1.1)\.
 
 ### Remediation<a name="cis-2.1-remediation"></a>
 

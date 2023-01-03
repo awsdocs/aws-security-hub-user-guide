@@ -562,6 +562,8 @@ The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Vulnerability.
                 "PackageManager": "OS",
                 "Release": "16.amzn2.0.3",
                 "Remediation": "Update aws-crt to 0.14.0",
+                "SourceLayerArn": "arn:aws:lambda:us-west-2:123456789012:layer:id",
+                "SourceLayerHash": "sha256:c1962c35b63a6ff6ce7df6e042ee82371a605ca9515569edec46ff14f926f001",
                 "Version": "1.0.2k"
             }
         ]

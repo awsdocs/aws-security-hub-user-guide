@@ -3,9 +3,10 @@
 AWS Foundational Security Best Practices controls involve queries against the following resources\. For AWS Security Hub to accurately report findings for controls with a schedule type of *Change triggered*, you must enable recording for these resources in AWS Config\. You do not need to record resources for controls that have a *Periodic* schedule type\.
 
 **Note**  
-In Regions where a control is not available, the corresponding resource or resources are not available in AWS Config\.
+In AWS Regions where a control is not available, the corresponding resource or resources are not available in AWS Config\.
 + `AWS::ACM::Certificate`
 + `AWS::ApiGateway::Stage`
++ `AWS::ApiGatewayV2::Route`
 + `AWS::ApiGatewayV2::Stage`
 + `AWS::AutoScaling::AutoScalingGroup`
 + `AWS::AutoScaling::LaunchConfiguration`
@@ -14,6 +15,7 @@ In Regions where a control is not available, the corresponding resource or resou
 + `AWS::CodeBuild::Project`
 + `AWS::DynamoDB::Table`
 + `AWS::EC2::Instance`
++ `AWS::EC2::LaunchTemplate`
 + `AWS::EC2::NetworkAcl`
 + `AWS::EC2::SecurityGroup`
 + `AWS::EC2::Subnet`
@@ -45,6 +47,7 @@ In Regions where a control is not available, the corresponding resource or resou
 + `AWS::RDS::EventSubscription`
 + `AWS::Redshift::Cluster`
 + `AWS::S3::Bucket`
++ `AWS::SageMaker::NotebookInstance`
 + `AWS::SecretsManager::Secret`
 + `AWS::SNS::Topic`
 + `AWS::SQS::Queue`
@@ -56,3 +59,4 @@ In Regions where a control is not available, the corresponding resource or resou
 + `AWS::WAF::Rule`
 + `AWS::WAF::RuleGroup`
 + `AWS::WAF::WebACL`
++ `AWS::WAFv2::WebACL`

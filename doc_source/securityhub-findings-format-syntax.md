@@ -1016,7 +1016,40 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     			"Type": "string",    			
     			"VirtualizationType": "string",
     			"VpcId": "string"
-    		},   				
+    		},   
+    		"AwsEc2LaunchTemplate": {
+    			"DefaultVersionNumber": "string",
+    			"ElasticGpuSpecifications": ["string"],
+    			"ElasticInferenceAccelerators": ["string"],
+    			"Id": "string",
+    			"ImageId": "string",
+    			"LatestVersionNumber": "string",
+    			"LaunchTemplateData": {
+    				"BlockDeviceMappings": [{
+    					"DeviceName": "string",
+    					"Ebs": {
+    						"DeleteonTermination": "boolean",
+    						"Encrypted": "boolean",
+    						"SnapshotId": "string",
+    						"VolumeSize": "number",
+    						"VolumeType:" "string"
+    					}
+    				}],
+    				"MetadataOptions": {
+    					"HttpTokens": "string",
+    					"HttpPutResponseHopLimit" : "number"
+    				},
+    				"Monitoring": {
+    					"Enabled": "boolean",
+    				"NetworkInterfaces": [{
+    					"AssociatePublicIpAddress" : "boolean",
+    				}],
+    			"LaunchTemplateName": "string",
+    			"LicenseSpecifications": ["string"],
+    			"SecurityGroupIds": ["string"],
+    			"SecurityGroups": ["string"],
+    			"TagSpecifications": ["string"]
+    		},
     		"AwsEc2NetworkAcl": {
     			"Associations": [{
     				"NetworkAclAssociationId": "string",
@@ -1961,6 +1994,9 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     			"Origin": "string"
     		},
     		"AwsLambdaFunction": {
+    			"Architectures": [
+    				"string"
+    			],
     			"Code": {
     				"S3Bucket": "string",
     				"S3Key": "string",
@@ -1973,7 +2009,7 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     			},
     			"Environment": {
     				"Variables": {
-    					"string": "string"
+    					"Stage": "string"
     				},
     				"Error": {
     					"ErrorCode": "string",
@@ -1988,6 +2024,7 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     				"Arn": "string",
     				"CodeSize": "number"
     			},
+    			"PackageType": "string",
     			"RevisionId": "string",
     			"Role": "string",
     			"Runtime": "string",
@@ -2687,6 +2724,25 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     			"SSEKMSKeyId": "string",
     			"VersionId": "string"
     		},
+    		"AwsSagemakerNotebookInstance": {
+    			"DirectInternetAccess": "string",
+    			"InstanceMetadataServiceConfiguration": {
+    				"MinimumInstanceMetadataServiceVersion": "string",
+    			},
+    			"InstanceType": "string",
+    			"LastModifiedTime": "string",
+    			"NetworkInterfaceId": "string",
+    			"NotebookInstanceArn": "string",
+    			"NotebookInstanceName": "string",
+    			"NotebookInstanceStatus": "string",
+    			"PlatformIdentifier": "string",
+    			"RoleArn": "string",
+    			"RootAccess": "string",
+    			"SecurityGroups": ["string"],
+    			"SubnetId": "string",
+    			"Url": "string",
+    			"VolumeSizeInGB": "number"
+    		},
     		"AwsSecretsManagerSecret": {
     			"Deleted": "boolean",
     			"Description": "string",
@@ -2836,6 +2892,44 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     				"Type": "string"
     			}],
     		},
+    		"AwsWafv2RuleGroup": {
+    			"Arn": "string",
+    			"Capacity": "number",
+    			"Description": "string",
+    			"Id": "string",
+    			"Name": "string",
+    			"Rules": [{
+    				"Action": {
+    				"Allow": {
+    					"CustomRequestHandling": {
+    						"InsertHeaders": [
+    							{
+    							"Name": "string",
+    							"Value": "string"
+    							},
+    							{
+    							"Name": "string",
+    							"Value": "string"
+    							}
+    						]
+    					}
+    				}
+    				},
+    				"Name": "string",
+    				"Priority": "number",
+    				"VisibilityConfig": {
+    					"CloudWatchMetricsEnabled": "boolean",
+    					"MetricName": "string",
+    					"SampledRequestsEnabled": "boolean"
+    				}
+    			}
+    			]
+    			"VisibilityConfig": {
+    				"CloudWatchMetricsEnabled": "boolean",
+    				"MetricName": "string",
+    				"SampledRequestsEnabled": "boolean"
+    			}
+    		},
     		"AwsWafWebAcl": {
     			"DefaultAction": "string",
     			"Name": "string",
@@ -2854,6 +2948,40 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     				"Type": "string"
     			}],
     			"WebAclId": "string"
+    		},
+    		"AwsWafv2WebAcl": {
+    			"Arn": "string",
+    			"Capacity": "number",
+    			"CaptchaConfig": {
+    				"ImmunityTimeProperty": {
+    					"ImmunityTime": "number"
+    				}
+    			},
+    			"DefaultAction": {
+    				"Block": {}
+    			},
+    			"Description": "string",
+    			"ManagedbyFirewallManager": "boolean",
+    			"Name": "string",
+    			"Rules": [{
+    				"Action": {
+    					"RuleAction": {
+    						"Block": {}
+    					}
+    				},
+    				"Name": "string",
+    				"Priority": "number",
+    				"VisibilityConfig": {
+    					"SampledRequestsEnabled": "boolean",
+    					"CloudWatchMetricsEnabled": "boolean",
+    					"MetricName": "string"
+    				}
+    			}],
+    			"VisibilityConfig": {
+    				"SampledRequestsEnabled": "boolean",
+    				"CloudWatchMetricsEnabled": "boolean",
+    				"MetricName": "string"
+    			}
     		},
     		"AwsXrayEncryptionConfig": {
     			"KeyId": "string",
@@ -2950,6 +3078,8 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     			"PackageManager": "string",
     			"Release": "string",
     			"Remediation": "string",
+    			"SourceLayerArn": "string",
+    			"SourceLayerHash": "string",
     			"Version": "string"
     		}]
     	}],

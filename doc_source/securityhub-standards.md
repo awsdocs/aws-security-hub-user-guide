@@ -12,6 +12,7 @@ Security Hub provides controls for the following standards\.
 For information on Security Hub pricing for security checks, see [Security Hub pricing](http://aws.amazon.com/security-hub/pricing/)\.
 
 **Topics**
++ [Upcoming features: consolidated controls view and consolidated control findings](prepare-upcoming-features.md)
 + [How AWS Security Hub runs and uses security checks](securityhub-controls-finding-generation.md)
 + [Viewing and managing security standards](standards-view-manage.md)
 + [Viewing and managing controls](controls-view-manage.md)

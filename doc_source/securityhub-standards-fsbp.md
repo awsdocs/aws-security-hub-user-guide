@@ -2,9 +2,9 @@
 
 The AWS Foundational Security Best Practices standard is a set of controls that detect when your deployed accounts and resources deviate from security best practices\.
 
-The standard allows you to continuously evaluate all of your AWS accounts and workloads to quickly identify areas of deviation from best practices\. It provides actionable and prescriptive guidance on how to improve and maintain your organization’s security posture\.
+This standard helps you continuously evaluate all of your AWS accounts and workloads, and quickly identify areas of deviation from best practices\. It provides actionable and prescriptive guidance about how to improve and maintain your organization’s security posture\.
 
-The controls include best practices from across multiple AWS services\. Each control is assigned a category that reflects the security function that it applies to\. See [Control categories](control-categories.md)\.
+The controls include best practices from multiple AWS services\. Each control is assigned a category that reflects its security function\. For more information, see [Control categories](control-categories.md)\.
 
 **Topics**
 + [AWS Config resources required for AWS Foundational Security Best Practices controls](standards-fsbp-config-resources.md)

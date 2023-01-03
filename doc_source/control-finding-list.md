@@ -21,10 +21,12 @@ You can sort each list using any of the columns\.
 
 ## Downloading the control finding list<a name="control-finding-list-download"></a>
 
-If you navigate to **Security standards** and choose a standard, you see a list of controls for the standard\. Choosing a control from the list takes you to the control details page\. From here, you can download the current page of control findings to a \.csv file\.
+If you navigate to **Security standards** and choose a standard, you see a list of controls for the standard\. Choosing a control from the list takes you to the control details page\. From here, you can download control findings to a \.csv file\.
 
 If you filtered the finding list, then the download only includes the controls that match the filter\.
 
 If you selected specific findings from the list, then the download only includes the selected findings\.
 
-To download the current page of the list or the selected findings, choose **Download**\.
+To download the findings, choose **Download**\.
+
+Downloading findings calls the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html#securityhub-GetFindings-request-MaxResults](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindings.html#securityhub-GetFindings-request-MaxResults) API\. Use the `MaxResults` parameter to limit the number of findings that are returned if you have a large number of findings in your account\.

@@ -91,21 +91,12 @@ You provide each finding as a JSON object\.
 **Example**
 
 ```
-aws securityhub batch-import-findings --findings '                  
+aws securityhub batch-import-findings --findings                  
     [{
         "AwsAccountId": "123456789012",
         "CreatedAt": "2019-08-07T17:05:54.832Z",
         "Description": "Vulnerability in a CloudTrail trail",
-        "FindingProviderFields": {
-            "Severity": {
-                "Label": "INFORMATIONAL",
-                "Original": "0"
-            },
-            "Types": [
-                "Software and Configuration Checks/Vulnerabilities/CVE"
-            ]
-        },
-        "GeneratorId": "TestGeneratorId",
+        "GeneratorId": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0/rule/2.2",
         "Id": "Id1",
         "ProductArn": "arn:aws:securityhub:us-west-1:123456789012:product/123456789012/default",
         "Resources": [
@@ -118,6 +109,13 @@ aws securityhub batch-import-findings --findings '
         ],
         "SchemaVersion": "2018-10-08",
         "Title": "CloudTrail trail vulnerability",
-        "UpdatedAt": "2020-06-02T16:05:54.832Z"
+        "UpdatedAt": "2020-06-02T16:05:54.832Z",
+        "Types": [
+            "Software and Configuration Checks/Vulnerabilities/CVE"
+        ],
+        "Severity": {
+            "Label": "INFORMATIONAL",
+            "Original": "0"
+        }
     }]'
 ```

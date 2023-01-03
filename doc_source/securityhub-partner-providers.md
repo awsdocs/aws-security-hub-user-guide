@@ -72,7 +72,6 @@ Here's an overview of the third party integrations that send findings to Securit
 |  [Atlassian – Opsgenie](#integration-atlassian-opsgenie)  |  Receives findings  |  Not applicable  | 
 |  [FireEye – FireEye Helix](#integration-fireeye-helix)  |  Receives findings  |  Not applicable  | 
 |  [Fortinet – FortiCNP](#integration-fortinet-forticnp)  |  Receives findings  |  Not applicable  | 
-|  [Helecloud – Managed Security](#integration-helecloud-managed-security)  |  Receives findings  |  Not applicable  | 
 |  [IBM – QRadar](#integration-ibm-qradar)  |  Receives findings  | Not applicable | 
 |  [Logz\.io Cloud SIEM](#integration-logzio-cloud-siem)  |  Receives findings  |  Not applicable  | 
 |  [MicroFocus – MicroFocus Arcsight](#integration-microfocus-arcsight)  |  Receives findings  |  Not applicable  | 
@@ -718,14 +717,6 @@ FortiCNP is a Cloud Native Protection product that aggregates security findings 
 [AWS Marketplace link](https://aws.amazon.com/marketplace/pp/prodview-vl24vc3mcb5ak)
 
 [Partner documentation](https://docs.fortinet.com/document/forticnp/22.3.a/online-help/467775/aws-security-hub-configuration)
-
-### Helecloud – Managed Security<a name="integration-helecloud-managed-security"></a>
-
-**Integration type:** Receive
-
-HeleCloud is a Managed Services Provider, taking care of your AWS infrastructure so that you can focus on your core business\.
-
-[Product link](https://helecloud.com/managed-security-and-compliance-services/)
 
 ### IBM – QRadar<a name="integration-ibm-qradar"></a>
 
