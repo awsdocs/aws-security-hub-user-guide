@@ -73,10 +73,24 @@ On the **Security standards** page, each enabled standard includes an option to 
   aws securityhub batch-disable-standards --standards-subscription-arns <subscription ARN>
   ```
 
-  **Example**
+  **Example of listing enabled standards in a region**
+
+  ```
+  aws securityhub get-enabled-standards --region us-east-1"
+  ```
+
+
+  **Example of disabling standards**
 
   ```
   aws securityhub batch-disable-standards --standards-subscription-arns "arn:aws:securityhub:us-west-1:123456789012:subscription/aws-foundational-security-best-practices/v/1.0.0"
+  ```
+
+
+**Example of disabling a standards across an entire region**
+
+  ```
+  aws securityhub batch-disable-standards --region us-east-1 --standards-subscription-arns arn:aws:securityhub:us-east-1:123456789012:subscription/cis-aws-foundations-benchmark/v/1.2.0
   ```
 
 ## Enabling a security standard<a name="securityhub-standard-enable-console"></a>
