@@ -68,7 +68,19 @@ The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Compliance.htm
 
 ```
 "Compliance": {
-    "RelatedRequirements": ["Req1", "Req2"],
+    "AssociatedStandards": [
+       {"StandardsId": "standards/aws-foundational-security-best-practices/v/1.0.0"},
+       {"StandardsId": "standards/pci-dss/v/3.2.1"},
+       {"StandardsId": "ruleset/cis-aws-foundations-benchmark/v/1.2.0"},
+       {"StandardsId": "standards/cis-aws-foundations-benchmark/v/1.4.0"},
+       {"StandardsId": "standards/service-managed-aws-control-tower/v/1.0.0"}
+    ],
+    "RelatedRequirements": [
+       "PCI DSS v3.2.1/3.4",
+       "CIS AWS Foundations Benchmark v1.2.0/2.7",
+       "CIS AWS Foundations Benchmark v1.4.0/3.7"
+    ],
+    "SecurityControlId": "CloudTrail.2",
     "Status": "PASSED",
     "StatusReasons": [
         {
@@ -339,6 +351,8 @@ The "`aws/`" prefix represents a reserved namespace for AWS products and service
 
 Although not required, products should format field names as `company-id/product-id/field-name`, where the `company-id` and `product-id` match those supplied in the `ProductArn` of the finding\.
 
+The fields referencing `Archival` are used when Security Hub archives an existing finding\. For example, Security Hub archives existing findings when you disable a control or standard and when you turn [consolidated control findings](controls-findings-create-update.md#consolidated-control-findings) on or off\.
+
 This field may also include information about the standard that includes the control which produced the finding\.
 
 **Example**
@@ -346,6 +360,8 @@ This field may also include information about the standard that includes the con
 ```
 "ProductFields": {
     "API", "DeleteTrail",
+    "ArchivalReasons:0/Description": "The finding is in an ARCHIVED state because consolidated control findings has been turned on or off. This causes findings in the previous state to be archived when new findings are being generated.",
+    "ArchivalReasons:0/ReasonCode": "CONSOLIDATED_CONTROL_FINDINGS_UPDATE",
     "aws/inspector/AssessmentTargetName": "My prod env",
     "aws/inspector/AssessmentTemplateName": "My daily CVE assessment",
     "aws/inspector/RulesPackageName": "Common Vulnerabilities and Exposures",
@@ -429,8 +445,8 @@ The [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Remediation.ht
 ```
 "Remediation": {
     "Recommendation": {
-        "Text": "Run sudo yum update and cross your fingers and toes.",
-        "Url": "http://myfp.com/recommendations/dangerous_things_and_how_to_fix_them.html"
+        "Text": "For instructions on how to fix this issue, see the AWS Security Hub documentation for EC2.2.",
+        "Url": "https://docs.aws.amazon.com/console/securityhub/EC2.2/remediation"
     }
 }
 ```

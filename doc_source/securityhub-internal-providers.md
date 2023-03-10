@@ -68,7 +68,7 @@ AWS Config sends findings to Security Hub on a best\-effort basis through EventB
 
 ##### Updating existing AWS Config findings in Security Hub<a name="integration-config-how-types-updating"></a>
 
-After AWS Config sends a finding to Security Hub, it can send updates to the same finding to Security Hub to reflect additional observations of the finding activity\.
+After AWS Config sends a finding to Security Hub, it can send updates to the same finding to Security Hub to reflect additional observations of the finding activity\. Updates are only sent for `ComplianceChangeNotification` events\. If no compliance change occurs, updates aren't sent to Security Hub\. Security Hub deletes findings 90 days after the most recent update or 90 days after creation if no update occurs\.
 
 ##### Regions in which AWS Config findings exist<a name="integration-config-how-types-regions"></a>
 

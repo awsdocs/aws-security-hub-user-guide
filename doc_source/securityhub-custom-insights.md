@@ -47,23 +47,80 @@ From the console, you can create a completely new insight\.
 
 1. Enter an **Insight name**, then choose **Create insight**\.
 
-## Creating a custom insight \(Security Hub API, AWS CLI\)<a name="securityhub-custom-insight-create-api"></a>
+## Creating a custom insight \(programmatic\)<a name="securityhub-custom-insight-create-api"></a>
 
-To create a custom insight, you can use an API call or the AWS Command Line Interface\.
+Choose your preferred method, and follow the steps to programmatically create a custom insight in Security Hub\. You can specify filters to narrow down the collection of findings in the insight to a specific subset\.
 
-**To create a custom insight \(Security Hub API, AWS CLI\)**
-+ **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateInsight.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateInsight.html) operation\. When you create a custom insight, you must provide the name, the filters, and the grouping attribute\.
-+ **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-insight.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-insight.html) command\.
+The following tabs include instructions in a few languages for creating a custom insight\. For support in additional languages, see [Using Security Hub with an AWS SDK](sdk-general-information-section.md)\.
 
-  ```
-  aws securityhub create-insight --name <insight name> --filters <filter values> --group-by-attribute <attribute name>
-  ```
+------
+#### [ Security Hub API ]
 
-  **Example**
+1. Run the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateInsight.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_CreateInsight.html) operation\.
 
-  ```
-  aws securityhub create-insight --filters '{"ResourceType": [{ "Comparison": "EQUALS", "Value": "AwsIamRole"}], "SeverityLabel": [{"Comparison": "EQUALS", "Value": "CRITICAL"}]}' --group-by-attribute "ResourceId" --name "Critical role findings"
-  ```
+1. Populate the `Name` parameter with a name for your custom insight\.
+
+1. Populate the `Filters` parameter to specify which findings to include in the insight\.
+
+1. Populate the `GroupByAttribute` parameter to specify which attribute is used to group the findings that are included in the insight\.
+
+1. Optionally, populate the `SortCriteria` parameter to sort the findings by a specific field\.
+
+If you've enabled [cross\-region aggregation](finding-aggregation.md) and call this API from the aggregation Region, the insight applies to matching findings in the aggregation and linked Regions\.
+
+------
+#### [ AWS CLI ]
+
+1. At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-insight.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/create-insight.html) command\.
+
+1. Populate the `name` parameter with a name for your custom insight\.
+
+1. Populate the `filters` parameter to specify which findings to include in the insight\.
+
+1. Populate the `group-by-attribute` parameter to specify which attribute is used to group the findings that are included in the insight\.
+
+If you've enabled [cross\-region aggregation](finding-aggregation.md) and run this command from the aggregation Region, the insight applies to matching findings from the aggregation and linked Regions\.
+
+```
+aws securityhub create-insight --name <insight name> --filters <filter values> --group-by-attribute <attribute name>
+```
+
+**Example**
+
+```
+aws securityhub create-insight --name "Critical role findings" --filters '{"ResourceType": [{ "Comparison": "EQUALS", "Value": "AwsIamRole"}], "SeverityLabel": [{"Comparison": "EQUALS", "Value": "CRITICAL"}]}' --group-by-attribute "ResourceId"
+```
+
+------
+#### [ PowerShell ]
+
+1. Use the `New-SHUBInsight` cmdlet\.
+
+1. Populate the `Name` parameter with a name for your custom insight\.
+
+1. Populate the `Filter` parameter to specify which findings to include in the insight\.
+
+1. Populate the `GroupByAttribute` parameter to specify which attribute is used to group the findings that are included in the insight\.
+
+If you've enabled [cross\-region aggregation](finding-aggregation.md) and use this cmdlet from the aggregation Region, the insight applies to matching findings from the aggregation and linked Regions\.
+
+**Example**
+
+```
+$Filter = @{
+    AwsAccountId = [Amazon.SecurityHub.Model.StringFilter]@{
+        Comparison = "EQUALS"
+        Value = "XXX"
+    }
+    ComplianceStatus = [Amazon.SecurityHub.Model.StringFilter]@{
+        Comparison = "EQUALS"
+        Value = 'FAILED'
+    }
+}
+New-SHUBInsight -Filter $Filter -Name TestInsight -GroupByAttribute ResourceId
+```
+
+------
 
 ## Modifying a custom insight \(console\)<a name="securityhub-custom-insight-modify-console"></a>
 
@@ -102,23 +159,65 @@ You can modify an existing custom insight to change the grouping value and filte
    + To update the existing insight to reflect your changes, choose **Update *<Insight\_Name>*** and then choose **Save insight**\.
    + To create a new insight with the updates, choose **Save new insight**\. Enter an **Insight name**, and then choose **Save insight**\.
 
-## Modifying a custom insight \(Security Hub API, AWS CLI\)<a name="securityhub-custom-insight-modify-api"></a>
+## Modifying a custom insight \(programmatic\)<a name="securityhub-custom-insight-modify-api"></a>
 
-To modify a custom insight, you can use an API call or the AWS Command Line Interface\.
+To modify a custom insight, choose your preferred method, and follow the instructions\.
 
-**To modify a custom insight \(Security Hub API, AWS CLI\)**
-+ **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateInsight.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateInsight.html) operation\. To identify the custom insight, you provide the insight ARN\. To obtain the insight ARNs for custom insights, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetInsights.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetInsights.html) operation\. You can then update the name, the filters, and the grouping value\.
-+ **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-insight.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-insight.html) command\.
+------
+#### [ Security Hub API ]
 
-  ```
-  aws securityhub update-insight --insight-arn <insight ARN> [--name <new name>] [--filters <new filters>] [--group-by-attribute <new grouping attribute>]
-  ```
+1. Run the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateInsight.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateInsight.html) operation\.
 
-  **Example**
+1. To identify the custom insight, provide the insight's Amazon Resource Name \(ARN\)\. To get the ARN of a custom insight, run the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetInsights.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetInsights.html) operation\.
 
-  ```
-  aws securityhub update-insight --insight-arn "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111" --filters '{"ResourceType": [{ "Comparison": "EQUALS", "Value": "AwsIamRole"}], "SeverityLabel": [{"Comparison": "EQUALS", "Value": "HIGH"}]}' --name "High severity role findings"
-  ```
+1. Update the `Name`, `Filters`, and `GroupByAttribute` parameters as needed\.
+
+------
+#### [ AWS CLI ]
+
+1. At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-insight.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-insight.html) command\.
+
+1. To identify the custom insight, provide the insight's Amazon Resource Name \(ARN\)\. To get the ARN of a custom insight, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/get-insights.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/get-insights.html) command\.
+
+1. Update the `name`, `filters`, and `group-by-attribute` parameters as needed\.
+
+```
+aws securityhub update-insight --insight-arn <insight ARN> [--name <new name>] [--filters <new filters>] [--group-by-attribute <new grouping attribute>]
+```
+
+**Example**
+
+```
+aws securityhub update-insight --insight-arn "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111" --filters '{"ResourceType": [{ "Comparison": "EQUALS", "Value": "AwsIamRole"}], "SeverityLabel": [{"Comparison": "EQUALS", "Value": "HIGH"}]}' --name "High severity role findings"
+```
+
+------
+#### [ PowerShell ]
+
+1. Use the `Update-SHUBInsight` cmdlet\.
+
+1. To identify the custom insight, provide the insight's Amazon Resource Name \(ARN\)\. To get the ARN of a custom insight, use the `Get-SHUBInsight` cmdlet\.
+
+1. Update the `Name`, `Filter`, and `GroupByAttribute` parameters as needed\.
+
+**Example**
+
+```
+$Filter = @{
+    ResourceType = [Amazon.SecurityHub.Model.StringFilter]@{
+        Comparison = "EQUALS"
+        Value = "AwsIamRole"
+    }
+    SeverityLabel = [Amazon.SecurityHub.Model.StringFilter]@{
+        Comparison = "EQUALS"
+        Value = "HIGH"
+    }
+}
+
+Update-SHUBInsight -InsightArn "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111" -Filter $Filter -Name "High severity role findings"
+```
+
+------
 
 ## Creating a new custom insight from a managed insight \(console\)<a name="securityhub-custom-insight-frrom-managed"></a>
 
@@ -171,20 +270,45 @@ When you no longer want a custom insight, you can delete it\. You cannot delete 
 
 1. Choose **Delete**\.
 
-## Deleting a custom insight \(Security Hub API, AWS CLI\)<a name="securityhub-custom-insight-delete-api"></a>
+## Deleting a custom insight \(programmatic\)<a name="securityhub-custom-insight-delete-api"></a>
 
-To delete a custom insight, you can use an API call or the AWS Command Line Interface\.
+To delete a custom insight, choose your preferred method, and follow the instructions\.
 
-**To delete a custom insight \(Security Hub API, AWS CLI\)**
-+ **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DeleteInsight.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DeleteInsight.html) operation\. To identify the custom insight to delete, you provide the insight ARN\. To obtain the insight ARNs for custom insights, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetInsights.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetInsights.html) operation\.
-+ **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/delete-insight.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/delete-insight.html) command\.
+------
+#### [ Security Hub API ]
 
-  ```
-  aws securityhub delete-insight --insight-arn <insight ARN>
-  ```
+1. Run the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DeleteInsight.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DeleteInsight.html) operation\.
 
-  **Example**
+1. To identify the custom insight to delete, provide the insight's ARN\. To get the ARN of a custom insight, run the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetInsights.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetInsights.html) operation\.
 
-  ```
-  aws securityhub delete-insight --insight-arn "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
-  ```
+------
+#### [ AWS CLI ]
+
+1. At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/delete-insight.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/delete-insight.html) command\.
+
+1. To identify the custom insight, provide the insight's ARN\. To get the ARN of a custom insight, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/get-insights.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/get-insights.html) command\.
+
+```
+aws securityhub delete-insight --insight-arn <insight ARN>
+```
+
+**Example**
+
+```
+aws securityhub delete-insight --insight-arn "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+```
+
+------
+#### [ PowerShell ]
+
+1. Use the `Remove-SHUBInsight` cmdlet\.
+
+1. To identify the custom insight, provide the insight's ARN\. To get the ARN of a custom insight, use the `Get-SHUBInsight` cmdlet\.
+
+**Example**
+
+```
+-InsightArn "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+```
+
+------

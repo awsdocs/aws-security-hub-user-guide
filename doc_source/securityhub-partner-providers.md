@@ -22,28 +22,28 @@ Here's an overview of the third party integrations that send findings to Securit
 | Integration | Direction | ARN \(if applicable\) | 
 | --- | --- | --- | 
 |  [3CORESec – 3CORESec NTA](#integration-3coresec-nta)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/3coresec/3coresec`  | 
-|  [Alert Logic – SIEMless Threat Management](#integration-alert-logic-siemless)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/alertlogic/althreatmanagement`  | 
+|  [Alert Logic – SIEMless Threat Management](#integration-alert-logic-siemless)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:733251395267:product/alertlogic/althreatmanagement`  | 
 |  [Aqua Security – Aqua Cloud Native Security Platform](#integration-aqua-security-cloud-native-security-platform)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/aquasecurity/aquasecurity`  | 
 |  [Aqua Security – Kube\-bench](#integration-aqua-security-kubebench)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/aqua-security/kube-bench`  | 
-|  [Armor – Armor Anywhere](#integration-armor-anywhere)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/armordefense/armoranywhere`  | 
+|  [Armor – Armor Anywhere](#integration-armor-anywhere)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:679703615338:product/armordefense/armoranywhere`  | 
 |  [AttackIQ – AttackIQ](#integration-attackiq)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/attackiq/attackiq-platform`  | 
-|  [Barracuda Networks – Cloud Security Guardian](#integration-barracuda-cloud-security-guardian)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/barracuda/cloudsecurityguardian`  | 
+|  [Barracuda Networks – Cloud Security Guardian](#integration-barracuda-cloud-security-guardian)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:151784055945:product/barracuda/cloudsecurityguardian`  | 
 |  [BigID – BigID Enterprise](#integration-bigid-enterprise)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/bigid/bigid-enterprise`  | 
 |  [Blue Hexagon – Blue Hexagon forAWS](#integration-blue-hexagon-for-aws)  |  Sends findings  |   `arn:aws:securityhub:<REGION>::product/blue-hexagon/blue-hexagon-for-aws`  | 
 |  [Capitis Solutions – C2VS](#integration-capitis-c2vs)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/capitis/c2vs`  | 
-|  [Check Point – CloudGuard IaaS](#integration-checkpoint-cloudguard-iaas)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/checkpoint/cloudguard-iaas`  | 
-|  [Check Point – CloudGuard Posture Management](#integration-checkpoint-cloudguard-posture-management)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/checkpoint/dome9-arc`  | 
+|  [Check Point – CloudGuard IaaS](#integration-checkpoint-cloudguard-iaas)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:758245563457:product/checkpoint/cloudguard-iaas`  | 
+|  [Check Point – CloudGuard Posture Management](#integration-checkpoint-cloudguard-posture-management)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:634729597623:product/checkpoint/dome9-arc`  | 
 |  [Cloud Storage Security – Antivirus for Amazon S3](#integration-checkpoint-cloudguard-posture-management)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/cloud-storage-security/antivirus-for-amazon-s3`  | 
-|  [CrowdStrike – CrowdStrike Falcon](#integration-crowdstrike-falcon)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/crowdstrike/crowdstrike-falcon`  | 
-|  [CyberArk – Privileged Threat Analytics](#integration-cyberark-privileged-threat-analytics)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/cyberark/cyberark-pta`  | 
+|  [CrowdStrike – CrowdStrike Falcon](#integration-crowdstrike-falcon)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:517716713836:product/crowdstrike/crowdstrike-falcon`  | 
+|  [CyberArk – Privileged Threat Analytics](#integration-cyberark-privileged-threat-analytics)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:749430749651:product/cyberark/cyberark-pta`  | 
 |  [Data Theorem – Data Theorem](#integration-data-theorem)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/data-theorem/api-cloud-web-secure`  | 
-|  [Forcepoint – Forcepoint CASB](#integration-forcepoint-casb)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-casb`  | 
+|  [Forcepoint – Forcepoint CASB](#integration-forcepoint-casb)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-casb`  | 
 |  [Forcepoint – Forcepoint Cloud Security Gateway](#integration-forcepoint-cloud-security-gateway)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-cloud-security-gateway`  | 
-|  [Forcepoint – Forcepoint DLP](#integration-forcepoint-dlp)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-dlp`  | 
-|  [Forcepoint – Forcepoint NGFW](#integration-forcepoint-ngfw)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-ngfw`  | 
+|  [Forcepoint – Forcepoint DLP](#integration-forcepoint-dlp)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-dlp`  | 
+|  [Forcepoint – Forcepoint NGFW](#integration-forcepoint-ngfw)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-ngfw`  | 
 |  [Fugue – Fugue](#integration-fugue)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/fugue/fugue`  | 
 |  [Guardicore – Centra 4\.0](#integration-guardicore-centra)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/guardicore/guardicore`  | 
-|  [Guardicore – Infection Monkey](#integration-guardicore-infection-monkey)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/guardicore/aws-infection-monkey`  | 
+|  [Guardicore – Infection Monkey](#integration-guardicore-infection-monkey)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:324264561773:product/guardicore/aws-infection-monkey`  | 
 |  [HackerOne – Vulnerability Intelligence](#integration-hackerone-vulnerability-intelligence)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/hackerone/vulnerability-intelligence`  | 
 |  [JFrog – Xray](#integration-jfrog-xray)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/jfrog/jfrog-xray`  | 
 |  [Juniper Networks – vSRX Next Generation Firewall](#integration-junipernetworks-vsrxnextgenerationfirewall)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/juniper-networks/vsrx-next-generation-firewall`  | 
@@ -51,21 +51,20 @@ Here's an overview of the third party integrations that send findings to Securit
 |  [Lacework – Lacework](#integration-lacework)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/lacework/lacework`  | 
 |  [McAfee – MVISION Cloud Native Application Protection Platform \(CNAPP\)](#integration-mcafee-mvision-cnapp)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/mcafee-skyhigh/mcafee-mvision-cloud-aws`  | 
 |  [NETSCOUT – NETSCOUT Cyber Investigator](#integration-netscout-cyber-investigator)  |  Sends findings  |  `arn:aws:securityhub:us-east-1::product/netscout/netscout-cyber-investigator`  | 
-|  [Palo Alto Networks – Prisma Cloud Compute](#integration-palo-alto-prisma-cloud-compute)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/twistlock/twistlock-enterprise`  | 
-|  [Palo Alto Networks – Prisma Cloud Enterprise](#integration-palo-alto-prisma-cloud-enterprise)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/paloaltonetworks/redlock`  | 
+|  [Palo Alto Networks – Prisma Cloud Compute](#integration-palo-alto-prisma-cloud-compute)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:496947949261:product/twistlock/twistlock-enterprise`  | 
+|  [Palo Alto Networks – Prisma Cloud Enterprise](#integration-palo-alto-prisma-cloud-enterprise)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:188619942792:product/paloaltonetworks/redlock`  | 
 |  [Prowler – Prowler](#integration-prowler)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/prowler/prowler`  | 
-|  [Qualys – Vulnerability Management](#integration-qualys-vulnerability-management)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/qualys/qualys-vm`  | 
-|  [Rapid7 – InsightVM](#integration-rapid7-insightvm)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/rapid7/insightvm`  | 
+|  [Qualys – Vulnerability Management](#integration-qualys-vulnerability-management)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:805950163170:product/qualys/qualys-vm`  | 
+|  [Rapid7 – InsightVM](#integration-rapid7-insightvm)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:336818582268:product/rapid7/insightvm`  | 
 |  [SecureCloudDB – SecureCloudDB](#integration-secureclouddb)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/secureclouddb/secureclouddb`  | 
 |  [SentinelOne – SentinelOne](#integration-sentinelone)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/sentinelone/endpoint-protection`  | 
 |  [Sonrai Security – Sonrai Dig](#integration-sonrai-dig)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/sonrai-security/sonrai-dig`  | 
-|  [Sophos – Server Protection](#integration-sophos-server-protection)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/sophos/sophos-server-protection`  | 
+|  [Sophos – Server Protection](#integration-sophos-server-protection)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:062897671886:product/sophos/sophos-server-protection`  | 
 |  [StackRox – StackRox Kubernetes Security](#integration-stackrox-kubernetes-security)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/stackrox/kubernetes-security`  | 
-|  [Sumo Logic – Machine Data Analytics](#integration-sumologic-machine-data-analytics)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/sumologicinc/sumologic-mda`  | 
-|  [Symantec – Cloud Workload Protection](#integration-symantec-cloud-workload-protection)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/symantec-corp/symantec-cwp`  | 
-|  [Sysdig – Sysdig Secure for cloud](#integration-sysdig-secure)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/sysdig/sysdig-secure-for-cloud`  | 
-|  [Tenable – Tenable\.io](#integration-tenable-tenableio)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/tenable/tenable-io`  | 
-|  [Vectra Detect](#integration-vectra-ai-cognito-detect)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/vectra-ai/cognito-detect`  | 
+|  [Sumo Logic – Machine Data Analytics](#integration-sumologic-machine-data-analytics)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:956882708938:product/sumologicinc/sumologic-mda`  | 
+|  [Symantec – Cloud Workload Protection](#integration-symantec-cloud-workload-protection)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:754237914691:product/symantec-corp/symantec-cwp`  | 
+|  [Tenable – Tenable\.io](#integration-tenable-tenableio)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:422820575223:product/tenable/tenable-io`  | 
+|  [Vectra – Cognito Detect](#integration-vectra-ai-cognito-detect)  |  Sends findings  |  `arn:aws:securityhub:<REGION>:978576646331:product/vectra-ai/cognito-detect`  | 
 |  [Wiz](#integration-wiz)  |  Sends findings  |  `arn:aws:securityhub:<REGION>::product/wiz-security/wiz-security`  | 
 |  [Atlassian \- Jira Service Management](#integration-atlassian-jira-service-management)  |  Receives and updates findings  |  Not applicable  | 
 |  [Atlassian \- Jira Service Management Cloud](#integration-atlassian-jira-service-management-cloud)  |  Receives and updates findings  |  Not applicable  | 
@@ -74,6 +73,7 @@ Here's an overview of the third party integrations that send findings to Securit
 |  [Fortinet – FortiCNP](#integration-fortinet-forticnp)  |  Receives findings  |  Not applicable  | 
 |  [IBM – QRadar](#integration-ibm-qradar)  |  Receives findings  | Not applicable | 
 |  [Logz\.io Cloud SIEM](#integration-logzio-cloud-siem)  |  Receives findings  |  Not applicable  | 
+|  [MetricStream](#integration-metricstream)  |  Receives findings  |  Not applicable  | 
 |  [MicroFocus – MicroFocus Arcsight](#integration-microfocus-arcsight)  |  Receives findings  |  Not applicable  | 
 |  [PagerDuty – PagerDuty](#integration-pagerduty)  |  Receives findings  |  Not applicable  | 
 |  [Palo Alto Networks – Cortex XSOAR](#integration-palo-alto-cortex-xsoar)  |  Receives findings  |  Not applicable  | 
@@ -90,7 +90,7 @@ Here's an overview of the third party integrations that send findings to Securit
 |  [Cloud Custodian – Cloud Custodian](#integration-cloud-custodian)  |  Sends and receives findings  |  `arn:aws:securityhub:<REGION>::product/cloud-custodian/cloud-custodian`  | 
 |  [DisruptOps, Inc\. – DisruptOPS](#integration-disruptops)  |  Sends and receives findings  |  `arn:aws:securityhub:<REGION>::product/disruptops-inc/disruptops`  | 
 |  [Kion](#integration-kion)  |  Sends and receives findings  |  `arn:aws:securityhub:<REGION>::product/cloudtamerio/cloudtamerio`  | 
-|  [Turbot – Turbot](#integration-turbot)  |  Sends and receives findings  |  `arn:aws:securityhub:<REGION>::product/turbot/turbot`  | 
+|  [Turbot – Turbot](#integration-turbot)  |  Sends and receives findings  |  `arn:aws:securityhub:<REGION>:453761072151:product/turbot/turbot`  | 
 
 ## Third\-party integrations that send findings to Security Hub<a name="integrations-third-party-send"></a>
 
@@ -112,7 +112,7 @@ The following third party partner product integrations send findings to Security
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/alertlogic/althreatmanagement`
+**Product ARN:** `arn:aws:securityhub:<REGION>:733251395267:product/alertlogic/althreatmanagement`
 
 Get the right level of coverage: vulnerability and asset visibility, threat detection and incident management, AWS WAF, and assigned SOC analyst options\.
 
@@ -148,7 +148,7 @@ Kube\-bench is an open\-source tool that runs the Center for Internet Security \
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/armordefense/armoranywhere`
+**Product ARN:** `arn:aws:securityhub:<REGION>:679703615338:product/armordefense/armoranywhere`
 
 Armor Anywhere delivers managed security and compliance for AWS\.
 
@@ -172,7 +172,7 @@ AttackIQ Platform emulates real adversarial behavior aligned with the MITRE ATT&
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/barracuda/cloudsecurityguardian`
+**Product ARN:** `arn:aws:securityhub:<REGION>:151784055945:product/barracuda/cloudsecurityguardian`
 
 Barracuda Cloud Security Sentry helps organizations stay secure while building applications in, and moving workloads to, the public cloud\.
 
@@ -220,7 +220,7 @@ C2VS is a customizable compliance solution designed to automatically identify yo
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/checkpoint/cloudguard-iaas`
+**Product ARN:** `arn:aws:securityhub:<REGION>:758245563457:product/checkpoint/cloudguard-iaas`
 
 Check Point CloudGuard easily extends comprehensive threat prevention security to AWS while protecting assets in the cloud\.
 
@@ -232,7 +232,7 @@ Check Point CloudGuard easily extends comprehensive threat prevention security t
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/checkpoint/dome9-arc`
+**Product ARN:** `arn:aws:securityhub:<REGION>:634729597623:product/checkpoint/dome9-arc`
 
 A SaaS platform that delivers verifiable cloud network security, advanced IAM protection, and comprehensive compliance and governance\.
 
@@ -258,7 +258,7 @@ Antivirus for Amazon S3 offers real time and scheduled scans of objects and file
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/crowdstrike/crowdstrike-falcon`
+**Product ARN:** `arn:aws:securityhub:<REGION>:517716713836:product/crowdstrike/crowdstrike-falcon`
 
 The CrowdStrike Falcon single, lightweight sensor unifies next\-generation antivirus, endpoint detection and response, and 24/7 managed hunting through the cloud\.
 
@@ -270,7 +270,7 @@ The CrowdStrike Falcon single, lightweight sensor unifies next\-generation antiv
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/cyberark/cyberark-pta`
+**Product ARN:** `arn:aws:securityhub:<REGION>:749430749651:product/cyberark/cyberark-pta`
 
 Privileged Threat Analytics collect, detect, alert, and respond to high\-risk activity and behavior of privileged accounts to contain in\-progress attacks\.
 
@@ -294,7 +294,7 @@ Data Theorem continuously scans web applications, APIs, and cloud resources in s
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-casb`
+**Product ARN:** `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-casb`
 
 Forcepoint CASB allows you to discover cloud application use, analyze risk, and enforce appropriate controls for SaaS and custom applications\.
 
@@ -318,7 +318,7 @@ Forcepoint Cloud Security Gateway is a converged cloud security service that pro
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-dlp`
+**Product ARN:** `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-dlp`
 
 Forcepoint DLP addresses human\-centric risk with visibility and control everywhere your people work and everywhere your data resides\.
 
@@ -330,7 +330,7 @@ Forcepoint DLP addresses human\-centric risk with visibility and control everywh
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/forcepoint/forcepoint-ngfw`
+**Product ARN:** `arn:aws:securityhub:<REGION>:365761988620:product/forcepoint/forcepoint-ngfw`
 
 Forcepoint NGFW lets you connect your AWS environment into your enterprise network with the scalability, protection, and insights needed to manage your network and respond to threats\.
 
@@ -366,7 +366,7 @@ Guardicore Centra provides flow visualization, micro\-segmentation, and breach d
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/guardicore/aws-infection-monkey`
+**Product ARN:** `arn:aws:securityhub:<REGION>:324264561773:product/guardicore/aws-infection-monkey`
 
 Infection Monkey is an attack simulation tool designed to test networks against attackers\.
 
@@ -396,7 +396,7 @@ JFrog Xray is a universal application security Software Composition Analysis \(S
 
 [AWS Marketplace link](http://aws.amazon.com/marketplace/seller-profile?id=68002c4f-c9d1-4fa7-b827-fd7204523fb7)
 
-[Partner documentation](https://www.jfrog.com/confluence/display/JFROG/Xray+Integration+with+AWS+SecurityHub)
+[Partner documentation](https://www.jfrog.com/confluence/display/JFROG/Xray+Integration+with+AWS+Security+Hub)
 
 ### Juniper Networks – vSRX Next Generation Firewall<a name="integration-junipernetworks-vsrxnextgenerationfirewall"></a>
 
@@ -418,7 +418,7 @@ Juniper Networks' vSRX Virtual Next Generation Firewall delivers a complete clou
 
 **Product ARN:** `arn:aws:securityhub:<REGION>::product/k9-security/access-analyzer`
 
-k9 Security notifies you when important access changes occur in your AWS Identity and Access Management account\. With k9 Security, you can understand the access that each IAM user and role has to critical AWS services and your data\.
+k9 Security notifies you when important access changes occur in your AWS Identity and Access Management account\. With k9 Security, you can understand the access that users and IAM roles have to critical AWS services and your data\.
 
 k9 Security is built for continuous delivery, allowing you to operationalize IAM with actionable access audits and simple policy automation for AWS CDK and Terraform\.
 
@@ -466,7 +466,7 @@ NETSCOUT Cyber Investigator is an enterprise\-wide network threat, risk investig
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/twistlock/twistlock-enterprise`
+**Product ARN:** `arn:aws:securityhub:<REGION>:496947949261:product/twistlock/twistlock-enterprise`
 
 Prisma Cloud Compute is a cloud native cybersecurity platform that protects VMs, containers, and serverless platforms\.
 
@@ -478,7 +478,7 @@ Prisma Cloud Compute is a cloud native cybersecurity platform that protects VMs,
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/paloaltonetworks/redlock`
+**Product ARN:** `arn:aws:securityhub:<REGION>:188619942792:product/paloaltonetworks/redlock`
 
 Protects your AWS deployment with cloud security analytics, advanced threat detection, and compliance monitoring\.
 
@@ -502,7 +502,7 @@ Prowler is an open source security tool to perform AWS checks related to securit
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/qualys/qualys-vm`
+**Product ARN:** `arn:aws:securityhub:<REGION>:805950163170:product/qualys/qualys-vm`
 
 Qualys Vulnerability Management \(VM\) continuously scans and identifies vulnerabilities, protecting your assets\.
 
@@ -514,7 +514,7 @@ Qualys Vulnerability Management \(VM\) continuously scans and identifies vulnera
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/rapid7/insightvm`
+**Product ARN:** `arn:aws:securityhub:<REGION>:336818582268:product/rapid7/insightvm`
 
 Rapid7 InsightVM provides vulnerability management for modern environments, allowing you to efficiently find, prioritize, and remediate vulnerabilities\.
 
@@ -564,7 +564,7 @@ Sonrai Dig monitors and remediates cloud misconfigurations and policy violations
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/sophos/sophos-server-protection`
+**Product ARN:** `arn:aws:securityhub:<REGION>:062897671886:product/sophos/sophos-server-protection`
 
 Sophos Server Protection defends the critical applications and data at the core of your organization, using comprehensive defense\-in\-depth techniques\.
 
@@ -588,7 +588,7 @@ StackRox helps enterprises secure their container and Kubernetes deployments at 
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/sumologicinc/sumologic-mda`
+**Product ARN:** `arn:aws:securityhub:<REGION>:956882708938:product/sumologicinc/sumologic-mda`
 
 Sumo Logic is a secure, machine data analytics platform that enables development and security operations teams to build, run, and secure their AWS applications\.
 
@@ -600,7 +600,7 @@ Sumo Logic is a secure, machine data analytics platform that enables development
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/symantec-corp/symantec-cwp`
+**Product ARN:** `arn:aws:securityhub:<REGION>:754237914691:product/symantec-corp/symantec-cwp`
 
 Cloud Workload Protection provides complete protection for your Amazon EC2 instances with antimalware, intrusion prevention, and file integrity monitoring\.
 
@@ -608,23 +608,11 @@ Cloud Workload Protection provides complete protection for your Amazon EC2 insta
 
 [Partner documentation](https://help.symantec.com/cs/scwp/SCWP/v130271667_v111037498/Intergration-with-AWS-Security-Hub/?locale=EN_US&sku=CWP_COMPUTE)
 
-### Sysdig – Sysdig Secure for cloud<a name="integration-sysdig-secure"></a>
-
-**Integration type:** Send
-
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/sysdig/sysdig-secure-for-cloud`
-
-Sysdig Secure for cloud supports asset discovery, risk management, Cloud Security Posture Management \(CSPM\), compliance, automatic vulnerability scanning for Amazon Elastic Container Registry \(ECR\) and Fargate, and threat detection based on CloudTrail\. You can deploy all of these as a single security platform\.
-
-[Product link](https://cloudsec.sysdig.com/aws/)
-
-[Partner documentation](https://cloudsec.sysdig.com/aws/security_hub)
-
 ### Tenable – Tenable\.io<a name="integration-tenable-tenableio"></a>
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/tenable/tenable-io`
+**Product ARN:** `arn:aws:securityhub:<REGION>:422820575223:product/tenable/tenable-io`
 
 Accurately identify, investigate, and prioritize vulnerabilities\. Managed in the cloud\.
 
@@ -632,11 +620,11 @@ Accurately identify, investigate, and prioritize vulnerabilities\. Managed in th
 
 [Partner documentation](https://github.com/tenable/Security-Hub)
 
-### Vectra Detect<a name="integration-vectra-ai-cognito-detect"></a>
+### Vectra – Cognito Detect<a name="integration-vectra-ai-cognito-detect"></a>
 
 **Integration type:** Send
 
-**Product ARN:** `arn:aws:securityhub:<REGION>::product/vectra-ai/cognito-detect`
+**Product ARN:** `arn:aws:securityhub:<REGION>:978576646331:product/vectra-ai/cognito-detect`
 
 Vectra is transforming cybersecurity by applying advanced AI to detect and respond to hidden cyberattackers before they can steal or cause damage\.
 
@@ -737,6 +725,16 @@ Logz\.io is a provider of Cloud SIEM that provides advanced correlation of log a
 [Product link](https://logz.io/solutions/cloud-monitoring-aws/)
 
 [Partner documentation](https://docs.logz.io/shipping/security-sources/aws-security-hub.html)
+
+### MetricStream – CyberGRC<a name="integration-metricstream"></a>
+
+**Integration type:** Receive
+
+MetricStream CyberGRC helps you manage, measure, and mitigate cybersecurity risks\. By receiving Security Hub findings, CyberGRC provides more visibility into these risks, so you can prioritize cybersecurity investments and comply with IT policies\.
+
+[AWS Marketplace link](http://aws.amazon.com/marketplace/pp/prodview-5ph5amfrrmyx4?qid=1616170904192&sr=0-1&ref_=srh_res_product_title)
+
+[Product link](https://www.metricstream.com/)
 
 ### MicroFocus – MicroFocus Arcsight<a name="integration-microfocus-arcsight"></a>
 

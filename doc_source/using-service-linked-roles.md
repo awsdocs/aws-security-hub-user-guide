@@ -19,7 +19,7 @@ The `AWSServiceRoleForSecurityHub` service\-linked role trusts the following ser
 
 The `AWSServiceRoleForSecurityHub` service\-linked role uses the managed policy [`AWSSecurityHubServiceRolePolicy`](security-iam-awsmanpol.md#security-iam-awsmanpol-awssecurityhubservicerolepolicy)\.
 
-You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\. For the `AWSServiceRoleForSecurityHub` service\-linked role to be successfully created, the IAM identity that you use Security Hub with must have the required permissions\. To grant the required permissions, attach the following policy to this IAM user, group, or role\.
+You must grant permissions to allow an IAM identity \(such as a role, group, or user\) to create, edit, or delete a service\-linked role\. For the `AWSServiceRoleForSecurityHub` service\-linked role to be successfully created, the IAM identity that you use to access Security Hub must have the required permissions\. To grant the required permissions, attach the following policy to the role, group, or user\.
 
 ```
 {

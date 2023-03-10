@@ -22,7 +22,7 @@ To display information about the resource, choose the resource identifier\. For 
 
 If you have permission to view the resource in its original service, then the resource identifier displays a link to the service\. For example, for an AWS user, the resource details provide a link to the view the user details in IAM\.
 
-Security Hub displays a message to notify you if the resource is in a different account\.
+If the resource is in a different account, Security Hub displays a message to notify you\.
 
 ## Viewing the configuration timeline for a finding resource<a name="control-finding-config-timeline"></a>
 

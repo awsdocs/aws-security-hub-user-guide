@@ -1,13 +1,15 @@
 # Determining the security score for a security standard<a name="standards-security-score"></a>
 
-On the **Security standards** page, Security Hub displays a security score from 0–100% for each enabled standard\. The **Summary** page also displays the overall security score across all enabled standards\.
+On the **Security standards** page, Security Hub displays a security score from 0–100 percent for each enabled standard\. The **Summary** page also displays the overall security score across all enabled standards\.
 
 When you enable Security Hub, Security Hub calculates the initial security score for a standard within 30 minutes after your first visit to the **Summary** page or **Security standards** page on the Security Hub console\. Scores are only generated for standards that are enabled when you visit those pages\. To view a list of standards that are currently enabled, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) API operation\. In addition, AWS Config resource recording must be configured for scores to appear\. The overall security score is the average of the standard security scores\.
 
-After first\-time score generation, Security Hub updates the security score every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\.
+After first\-time score generation, Security Hub updates security scores every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\.
 
 **Note**  
 It can take up to 24 hours for first\-time security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
+
+If you opt into [consolidated control findings](controls-findings-create-update.md#consolidated-control-findings), it can take up to 24 hours for your security scores to reflect the new deduplicated control findings\.
 
 ## How security scores are calculated<a name="standard-security-score-calculation"></a>
 
@@ -29,4 +31,4 @@ If you have set an aggregation Region, the overall security score and the securi
 
 ## Security scores on the Summary page<a name="standard-security-score-summary-page"></a>
 
-On the **Summary** page, the **Security standards** card displays the security scores for each enabled standard\. It also displays a consolidated security score that represents the proportion of passed controls to enabled controls across all of the enabled standards\.
+On the **Summary** page, the **Security standards** card displays the security scores for each enabled standard\. It also displays a consolidated security score that represents the proportion of passed controls to enabled controls with data across all of the enabled standards\.

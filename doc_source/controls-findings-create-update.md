@@ -1,17 +1,134 @@
 # Generating and updating control findings<a name="controls-findings-create-update"></a>
 
-AWS Security Hub generates findings by running checks against the rules in security controls\. These findings use the AWS Security Finding Format \(ASFF\)\. Note that if the finding size exceeds the maximum of 240 KB, then the `Resource.Details` object is removed\. For findings for controls that use AWS Config rules, you can view the resource details on the AWS Config console\.
+AWS Security Hub generates findings by running checks against security controls\. These findings use the AWS Security Finding Format \(ASFF\)\. Note that if the finding size exceeds the maximum of 240 KB, then the `Resource.Details` object is removed\. For controls that are backed by AWS Config resources, you can view the resource details on the AWS Config console\.
 
-Security Hub normally charges for each security check for a control\. However, if multiple controls use the same AWS Config rule, then Security Hub only charges once for each check against the AWS Config rule\. It generates separate findings for each control based on the check\.
+Security Hub normally charges for each security check for a control\. However, if multiple controls use the same AWS Config rule, then Security Hub only charges once for each check against the AWS Config rule\. If you turn on [consolidated control findings](#consolidated-control-findings), Security Hub generates a single finding for a security check even when the control is included in multiple enabled standards\.
 
-For example, the AWS Config rule `iam-password-policy` is used by multiple controls in the Center for Internet Security \(CIS\) AWS Foundations Benchmark and by IAM\.7 in the AWS Foundational Security Best Practices \(FSBP\) standard\. Each time Security Hub runs a check against that AWS Config rule, it generates a separate finding for each related control, but only charges once for the check\.
+For example, the AWS Config rule `iam-password-policy` is used by multiple controls in the Center for Internet Security \(CIS\) AWS Foundations Benchmark standard and the Foundational Security Best Practices standard\. Each time Security Hub runs a check against that AWS Config rule, it generates a separate finding for each related control, but only charges once for the check\.
+
+## Consolidated control findings<a name="consolidated-control-findings"></a>
+
+When consolidated control findings is turned on in your account, Security Hub generates a single new finding or finding update for each security check of a control, even if a control applies to multiple enabled standards\. To see a list of controls and the standards they apply to, see [Security Hub controls reference](securityhub-controls-reference.md)\. You can turn consolidated control findings on or off\. We recommend turning it on to reduce finding noise\.
+
+**Note**  
+Consolidated control findings isn't currently supported in the AWS GovCloud \(US\) Region and China Regions\. In these Regions, you receive separate findings for each standard when a control applies to multiple standards\. In addition, control IDs, titles, and other ASFF fields remain the same in these Regions and may reference specific standards\. For a list of control IDs and titles in these Regions, see the second and third columns in [How consolidation impacts control IDs and titles](asff-changes-consolidation.md#securityhub-findings-format-changes-ids-titles)\.
+
+If you enabled Security Hub for an AWS account before February 23, 2023, you must turn on consolidated control findings by following the instructions later in this section\. If you enable Security Hub on or after February 23, 2023, consolidated control findings is automatically turned on in your account\. However, if you use the [Security Hub integration with AWS Organizations](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts.html) or invited member accounts through a [manual invitation process](https://docs.aws.amazon.com/securityhub/latest/userguide/account-management-manual.html), consolidated control findings is turned on in member accounts only if it's turned on in the administrator account\. If the feature is turned off in the administrator account, it's turned off in member accounts\. This behavior applies to new and existing member accounts\. 
+
+If you turn off consolidated control findings in your account, Security Hub generates a separate finding per security check for each enabled standard that includes a control\. For example, if four enabled standards share a control with the same underlying AWS Config rule, you receive four separate findings after a security check of the control\. If you turn on consolidated control findings, you receive only one finding\. For more information about how consolidation affects your findings, see [Sample control findings](sample-control-findings.md)\.
+
+When you turn on consolidated control findings, Security Hub creates new standard\-agnostic findings and archives the original standard\-based findings\. Some control finding fields and values will change and may impact existing workflows\. For more information about these changes, see [Consolidated control findings – ASFF changes](asff-changes-consolidation.md#securityhub-findings-format-consolidated-control-findings)\.
+
+Turning on consolidated control findings may also affect findings that [third\-party integrations](securityhub-partner-providers.md) receive from Security Hub\.
+
+## Turning on consolidated control findings<a name="turn-on-consolidated-control-findings"></a>
+
+To turn on consolidated control findings, you must be signed in to an administrator account or a standalone account\.
+
+**Note**  
+After turning on consolidated control findings, it may take up to 18 hours for Security Hub for generate new, consolidated findings and archive the original, standard\-based findings\. During that time, you may see a mix of standard\-agnostic and standard\-based findings in your account\.
+
+------
+#### [ Security Hub console ]
+
+1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
+
+1. In the navigation pane, choose **Settings**\.
+
+1. Choose the **General** tab\.
+
+1. For **Controls**, turn on **Consolidated control findings**\.
+
+1. Choose **Save**\.
+
+------
+#### [ Security Hub API ]
+
+1. Run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateSecurityHubConfiguration.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateSecurityHubConfiguration.html)\.
+
+1. Set `ControlFindingGenerator` equal to `SECURITY_CONTROL`\.
+
+   **Example request:**
+
+   ```
+   {
+      "ControlFindingGenerator": "SECURITY_CONTROL"
+   }
+   ```
+
+------
+#### [ AWS CLI ]
+
+1. Run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-security-hub-configuration.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-security-hub-configuration.html) command\.
+
+1. Set `control-finding-generator` equal to `SECURITY_CONTROL`\.
+
+   ```
+   aws securityhub  --region us-east-1 update-security-hub-configuration --control-finding-generator SECURITY_CONTROL
+   ```
+
+------
+
+## Turning off consolidated control findings<a name="turn-off-consolidated-control-findings"></a>
+
+To turn off consolidated control findings, you must be signed in to an administrator account or a standalone account\.
+
+**Note**  
+After turning off consolidated control findings, it may take up to 18 hours for Security Hub for generate new, standard\-based findings and archive the consolidated findings\. During that time, you may see a mix of standard\-based and consolidated findings in your account\.
+
+------
+#### [ Security Hub console ]
+
+1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
+
+1. In the navigation pane, choose **Settings**\.
+
+1. Choose the **General** tab\.
+
+1. For **Controls**, choose **Edit** and turn off **Consolidated control findings**\.
+
+1. Choose **Save**\.
+
+------
+#### [ Security Hub API ]
+
+1. Run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateSecurityHubConfiguration.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateSecurityHubConfiguration.html)\.
+
+1. Set `ControlFindingGenerator` equal to `STANDARD_CONTROL`\.
+
+   **Example request:**
+
+   ```
+   {
+      "ControlFindingGenerator": "STANDARD_CONTROL"
+   }
+   ```
+
+------
+#### [ AWS CLI ]
+
+1. Run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-security-hub-configuration.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-security-hub-configuration.html) command\.
+
+1. Set `control-finding-generator` equal to `STANDARD_CONTROL`\.
+
+   ```
+   aws securityhub  --region us-east-1 update-security-hub-configuration --control-finding-generator STANDARD_CONTROL
+   ```
+
+------
 
 ## `Compliance` details for control findings<a name="control-findings-asff-compliance"></a>
 
-For findings generated by security checks of controls, the [`Compliance`](asff-top-level-attributes.md#asff-compliance) field in the AWS Security Finding Format \(ASFF\) contains the control\-related findings details\. The [`Compliance`](asff-top-level-attributes.md#asff-compliance) field includes the following information\.
+For findings generated by security checks of controls, the [`Compliance`](asff-top-level-attributes.md#asff-compliance) field in the AWS Security Finding Format \(ASFF\) contains details related to control findings\. The [`Compliance`](asff-top-level-attributes.md#asff-compliance) field includes the following information\.
+
+`AssociatedStandards`  
+The enabled standards that a control is enabled in\.
 
 `RelatedRequirements`  
-The list of related requirements for the control\. The requirements are from the third\-party security framework for the control, such as the Payment Card Industry Data Security Standard\.
+The list of related requirements for the control in all enabled standards\. The requirements are from the third\-party security framework for the control, such as the Payment Card Industry Data Security Standard \(PCI DSS\)\.
+
+`SecurityControlId`  
+The identifier for a control across security standards that Security Hub supports\.
 
 `Status`  
 The result of the most recent check that Security Hub ran for a given control\. The results of the previous checks are kept in an archived state for 90 days\.
@@ -19,7 +136,7 @@ The result of the most recent check that Security Hub ran for a given control\. 
 `StatusReasons`  
 Contains a list of reasons for the value of `Compliance.Status`\. For each reason, `StatusReasons` includes the reason code and a description\.
 
-The following table lists the available status reason codes and descriptions\. The remediation steps for a reason code depend on which control generated a finding with the reason code\. You can see remediation steps for FSBP controls at [AWS Foundational Security Best Practices controls](securityhub-standards-fsbp-controls.md)\.
+The following table lists the available status reason codes and descriptions\. The remediation steps depend on which control generated a finding with the reason code\. Choose a control from the [Security Hub controls reference](securityhub-controls-reference.md) to see remediation steps for that control\.
 
 
 |  Reason code  |  Compliance\.Status  |  Description  | 
@@ -46,27 +163,36 @@ The following table lists the available status reason codes and descriptions\. T
 
 ## `ProductFields` details for control findings<a name="control-findings-asff-productfields"></a>
 
-The `ProductFields` attribute in ASFF includes additional details about findings generated by security checks of controls\.
+When Security Hub runs security checks and generates control findings, the `ProductFields` attribute in ASFF includes the following fields:
 
-For findings generated by security checks, `ProductFields` includes the following fields:
+`ArchivalReasons:0/Description`  
+Describes why Security Hub has archived existing findings\.  
+For example, Security Hub archives existing findings when you disable a control or standard and when you turn [consolidated control findings](#consolidated-control-findings) on or off\.
+
+`ArchivalReasons:0/ReasonCode`  
+Provides the reason why Security Hub has archived existing findings\.  
+For example, Security Hub archives existing findings when you disable a control or standard and when you turn [consolidated control findings](#consolidated-control-findings) on or off\.
 
 `StandardsGuideArn` or `StandardsArn`  
 The ARN of the standard associated with the control\.  
 For the CIS AWS Foundations Benchmark standard, the field is `StandardsGuideArn`\.  
-For PCI DSS and AWS Foundational Security Best Practices standards, the field is `StandardsArn`\.
+For PCI DSS and AWS Foundational Security Best Practices standards, the field is `StandardsArn`\.  
+These fields are removed in favor of `Compliance.AssociatedStandards` if you turn on [consolidated control findings](#consolidated-control-findings)\.
 
 `StandardsGuideSubscriptionArn` or `StandardsSubscriptionArn`  
 The ARN of the account's subscription to the standard\.  
 For the CIS AWS Foundations Benchmark standard, the field is `StandardsGuideSubscriptionArn`\.  
-For the PCI DSS and AWS Foundational Security Best Practices standards, the field is `StandardsSubscriptionArn`\.
+For the PCI DSS and AWS Foundational Security Best Practices standards, the field is `StandardsSubscriptionArn`\.  
+These fields are removed if you turn on [consolidated control findings](#consolidated-control-findings)\.
 
 `RuleId` or `ControlId`  
 The identifier of the control\.  
 For the CIS AWS Foundations Benchmark standard, the field is `RuleId`\.  
-For the PCI DSS and AWS Foundational Security Best Practices standards, the field is `ControlId`\.
+For other standards, the field is `ControlId`\.  
+These fields are removed in favor of `Compliance.SecurityControlId` if you turn on [consolidated control findings](#consolidated-control-findings)\.
 
 `RecommendationUrl`  
-The URL to the remediation information for the control\.
+The URL to the remediation information for the control\. This field is removed in favor of `Remediation.Recommendation.Url` if you turn on [consolidated control findings](#consolidated-control-findings)\.
 
 `RelatedAWSResources:0/name`  
 The name of the resource associated with the finding\.
@@ -75,7 +201,7 @@ The name of the resource associated with the finding\.
 The type of resource associated with the control\.
 
 `StandardsControlArn`  
-The ARN of the control\.
+The ARN of the control\. This field is removed if you turn on [consolidated control findings](#consolidated-control-findings)\.
 
 `aws/securityhub/ProductName`  
 For control\-based findings, the product name is Security Hub\.
@@ -87,7 +213,7 @@ For control\-based findings, the company name is AWS\.
 A description of the issue uncovered by the control\.
 
 `aws/securityhub/FindingId`  
-The identifier of the finding\.
+The identifier of the finding\. This field doesn't reference a standard if you turn on [consolidated control findings](#consolidated-control-findings)\.
 
 ## Assigning severity to control findings<a name="control-findings-severity"></a>
 
@@ -106,12 +232,12 @@ The severity of a control is determined based on an assessment of the following 
   The likelihood of compromise indicates how likely it is that the threat scenario will result in a disruption or breach of your AWS services or resources\.
 
 As an example, consider the following configuration weaknesses:
-+ IAM user access keys are not rotated every 90 days\.
-+ IAM root access key exists\.
++ User access keys are not rotated every 90 days\.
++ IAM root user key exists\.
 
 Both weaknesses are equally difficult for an adversary to take advantage of\. In both cases, the adversary can use credential theft or some other method to acquire a user key\. They can then use it to access your resources in an unauthorized way\.
 
-However, the likelihood of a compromise is much higher if the threat actor acquires the root user access key, because the root key gives them greater access\. As a result, the root user key weakness has a higher severity\.
+However, the likelihood of a compromise is much higher if the threat actor acquires the root user access key because this gives them greater access\. As a result, the root user key weakness has a higher severity\.
 
 The severity does not take into account the criticality of the underlying resource\. Criticality is the level of importance of the resources that are associated with the finding\. For example, a resource that is associated with a mission critical application is more critical than one that is associated with nonproduction testing\. To capture resource criticality information, use the `Criticality` field of the AWS Security Finding Format \(ASFF\)\.
 
@@ -131,7 +257,7 @@ The following table maps the difficulty to exploit and the likelihood of comprom
 The severity labels are defined as follows\.
 
 **Critical – The issue should be remediated immediately to avoid it escalating\.**  
-For example, an open S3 bucket is considered a critical severity finding\. Because so many actors scan for open S3 buckets, data in exposed S3 buckets is likely to be discovered and accessed by others\.  
+For example, an open S3 bucket is considered a critical severity finding\. Because so many threat actors scan for open S3 buckets, data in exposed S3 buckets is likely to be discovered and accessed by others\.  
 In general, resources that are publicly accessible are considered critical security issues\. You should treat critical findings with the utmost urgency\. You also should consider the criticality of the resource\.
 
 **High – The issue must be addressed as a near\-term priority\.**  
@@ -152,7 +278,7 @@ There is no recommended action\. Informational findings help customers to demons
 
 ## Rules for updating control findings<a name="securityhub-standards-results-updating"></a>
 
-A subsequent check against a given rule might generate a new result\. For example, the status of "Avoid the use of the root account" could change from `FAILED` to `PASSED`\. In that case, a new finding is generated that contains the most recent result\.
+A subsequent check against a given rule might generate a new result\. For example, the status of "Avoid the use of the root user" could change from `FAILED` to `PASSED`\. In that case, a new finding is generated that contains the most recent result\.
 
 If a subsequent check against a given rule generates a result that is identical to the current result, the existing finding is updated\. No new finding is generated\.
 

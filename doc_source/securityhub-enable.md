@@ -30,7 +30,7 @@ When you enable Security Hub from the console, you also have the option to enabl
 
    To disable a standard, clear its check box\.
 
-   You can enable or disable a standard or its individual controls at any time\. For information about the security standards and how to manage them, see [Security standards and controls in AWS Security Hub](securityhub-standards.md)\.
+   You can enable or disable a standard or its individual controls at any time\. For information about the security standards and how to manage them, see [Security controls and standards in AWS Security Hub](securityhub-standards.md)\.
 
 1. Choose **Enable Security Hub**\.
 
@@ -58,7 +58,7 @@ To enable Security Hub, you can use an API call or the AWS Command Line Interfac
   aws securityhub enable-security-hub --enable-default-standards --tags '{"Department": "Security"}'
   ```
 
-After you enable Security Hub, you can enable or disable standards\. See [Disabling or enabling a security standard](securityhub-standards-enable-disable.md)\.
+After you enable Security Hub, you can enable or disable standards\. See [Enabling and disabling security standards](securityhub-standards-enable-disable.md)\.
 
 ## Enabling Security Hub \(Multi\-account script\)<a name="securityhub-enable-multiaccount-script"></a>
 

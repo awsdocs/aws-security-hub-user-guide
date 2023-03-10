@@ -1,6 +1,6 @@
 # Subscribing to Security Hub announcements with Amazon Simple Notification Service<a name="securityhub-announcements"></a>
 
-This section provides information about subscribing to Security Hub announcements with Amazon Simple Notification Service \(Amazon SNS\) to receive notifications about Security Hub\. 
+This section provides information about subscribing to AWS Security Hub announcements with Amazon Simple Notification Service \(Amazon SNS\) to receive notifications about Security Hub\. 
 
 After subscribing, you will receive notifications about the following events \(note the corresponding `AnnouncementType` for each event\):
 + `GENERAL` – General notifications about the Security Hub service\.
@@ -16,10 +16,10 @@ After subscribing, you will receive notifications about the following events \(n
 
 Notifications are available in all formats that Amazon SNS supports\. You can subscribe to Security Hub announcements in all [AWS Regions that Security Hub is available in](https://docs.aws.amazon.com/general/latest/gr/sechub.html)\.
 
-Your user account must have `sns::subscribe` IAM permissions to subscribe to an Amazon SNS topic\.
+A user must have `Subscribe` permissions to subscribe to an Amazon SNS topic\. You can achieve this with Amazon SNS policies, IAM policies, or both\. For more information, see [IAM and Amazon SNS policies together](https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html#iam-and-sns-policies) in the *Amazon Simple Notification Service Developer Guide*\.
 
 **Note**  
-Security Hub sends Amazon SNS announcements about updates to the Security Hub service across AWS to any subscribed account\. To receive notifications about findings within your Security Hub account, see [Viewing finding lists and details in AWS Security Hub](securityhub-findings-viewing.md)\.
+Security Hub sends Amazon SNS announcements about updates to the Security Hub service to any subscribed AWS account\. To receive notifications about Security Hub findings, see [Viewing finding lists and details in AWS Security Hub](securityhub-findings-viewing.md)\.
 
 You can subscribe to an Amazon Simple Queue Service \(Amazon SQS\) queue for an Amazon SNS topic, but you must use an Amazon SNS topic Amazon Resource Name \(ARN\) that is in the same Region\. For more information, see [Tutorial: Subscribing an Amazon SQS queue to an Amazon SNS topic](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-subscribe-queue-sns-topic.html) in the *Amazon Simple Queue Service Developer Guide*\.
 
@@ -53,6 +53,7 @@ The Amazon SNS topic ARNs for each Region are as follows\.
 | Europe \(Paris\) | arn:aws:sns:eu\-west\-3:313420042571:SecurityHubAnnouncements | 
 | Europe \(Stockholm\) | arn:aws:sns:eu\-north\-1:191971010772:SecurityHubAnnouncements | 
 | Middle East \(Bahrain\) | arn:aws:sns:me\-south\-1:585146626860:SecurityHubAnnouncements | 
+| Middle East \(UAE\) | arn:aws:sns:me\-central\-1:431548502100:SecurityHubAnnouncements | 
 | South America \(São Paulo\) | arn:aws:sns:sa\-east\-1:359811883282:SecurityHubAnnouncements | 
 | AWS GovCloud \(US\-East\) | arn:aws\-us\-gov:sns:us\-gov\-east\-1:239368469855:SecurityHubAnnouncements | 
 | AWS GovCloud \(US\-West\) | arn:aws\-us\-gov:sns:us\-gov\-west\-1:239334163374:SecurityHubAnnouncements | 

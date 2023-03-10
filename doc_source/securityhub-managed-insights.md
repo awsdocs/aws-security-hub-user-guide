@@ -6,7 +6,7 @@ You cannot edit or delete Security Hub managed insights\. You can [view and take
 
 As with all insights, a managed insight only returns results if you have enabled product integrations or security standards that can produce matching findings\.
 
-For insights that are grouped by resource identifier, the results include the identifiers of all of the resources in the matching findings\. This includes resources that have a different type from the resource type in the filter criteria\. For example, insight 2 identifies findings that are associated with S3 buckets\. If a matching finding contains both an S3 bucket resource and an IAM access key resource, then the insight results include both resources\.
+For insights that are grouped by resource identifier, the results include the identifiers of all of the resources in the matching findings\. This includes resources that have a different type from the resource type in the filter criteria\. For example, insight 2 identifies findings that are associated with Amazon S3 buckets\. If a matching finding contains both an S3 bucket resource and an IAM access key resource, then the insight results include both resources\.
 
 In the current release, Security Hub offers the following managed insights:
 
@@ -117,7 +117,7 @@ In the current release, Security Hub offers the following managed insights:
 + Type starts with `Unusual Behaviors`
 + Resource type is `AwsEc2Instance`
 + Record state is `ACTIVE`
-+ Workflow status is `NEW` or `NOTIFIED`\.
++ Workflow status is `NEW` or `NOTIFIED`
 
 **14\. EC2 instances that have ports accessible from the Internet**  
 **ARN:** `arn:aws:securityhub:::insight/securityhub/default/18`  
@@ -246,7 +246,7 @@ In the current release, Security Hub offers the following managed insights:
 
 **28\. Top IAM users by counts of findings**  
 **ARN:** `arn:aws:securityhub:::insight/securityhub/default/33`  
-**Grouped by:** IAM access key user name  
+**Grouped by:** IAM access key ID  
 **Finding filters:**  
 + Resource type is `AwsIamAccessKey`
 + Record state is `ACTIVE`
@@ -280,7 +280,7 @@ In the current release, Security Hub offers the following managed insights:
 
 **32\. IAM users with suspicious activity**  
 **ARN:** `arn:aws:securityhub:::insight/securityhub/default/37`  
-**Grouped by:** IAM user name  
+**Grouped by:** IAM user  
 **Finding filters:**  
 + Resource type is `AwsIamUser`
 + Record state is `ACTIVE`

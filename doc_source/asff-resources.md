@@ -4,6 +4,8 @@ The `Resources` object provides information about the resources involved in a fi
 
 It contains an array of up to 32 resource objects\.
 
+To determine how resource names are formatted, see [AWS Security Finding Format \(ASFF\) syntax](securityhub-findings-format-syntax.md)\.
+
 **Example**
 
 ```

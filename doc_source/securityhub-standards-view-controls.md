@@ -1,18 +1,17 @@
 # Viewing details for a standard<a name="securityhub-standards-view-controls"></a>
 
-The details page for a standard contains the list of controls in the standard\. It also shows the overall score for the standard\.
+On the AWS Security Hub console, the details page for a standard includes the following information:
++ The standard security score and a visual summary of security checks for the controls that are enabled for the standard
++ The settings to [enable or disable a control](securityhub-standards-enable-disable-controls.md) that applies to the standard
++ A list of controls that apply to the standard and their latest compliance statuses
 
-You can view and filter the list of controls, and perform the following actions:
-+ [Enable or disable a control](securityhub-standards-enable-disable-controls.md)
-+ [View the details for a control](securityhub-standards-control-details.md)\. The control details page includes the list of findings for the control\. See [Viewing and taking action on control findings](securityhub-control-manage-findings.md)\.
+You can also use the Security Hub API and AWS CLI to retrieve details for a standard\. The following sections explain how to get details for a standard\.
 
 ## Displaying the details page for an enabled standard \(console\)<a name="standard-details-display-console"></a>
 
-From the **Security standards** page, you can display a details page for the standard\. You can only display details for an enabled standard\. You cannot display details for a disabled standard\.
+From the **Security standards** page, you can display the details page for an enabled standard\.
 
-This also applies to administrator accounts\. Administrator accounts that do not have a standard enabled for their individual account cannot view the details for that standard\. They cannot see the aggregated security score and status information across the member accounts that do have the standard enabled\.
-
-**To display the list of controls for an enabled standard \(console\)**
+If you are logged into an administrator account, you can view details for any standard that is enabled in at least one member account\.
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
@@ -20,90 +19,118 @@ This also applies to administrator accounts\. Administrator accounts that do not
 
 1. For the standard that you want to display the details for, choose **View results**\.
 
-## Information on the standard details page<a name="standard-details-overview"></a>
+## Standard security score and security checks summary<a name="standard-details-overview"></a>
 
-At the top of the details page is the overall score for the standard\. The score is the percentage of passed controls relative to the number of enabled controls for the standard that have data\. Security Hub typically calculates the initial security score within 30 minutes after your first visit to the **Summary** page or **Security standards** page on the Security Hub console\. Scores are only generated for standards that are enabled when you visit those pages\. To view a list of standards that are currently enabled, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) API operation\. In addition, AWS Config resource recording must be configured for scores to appear\. After first\-time score generation, Security Hub updates the security score every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\. See [Determining the security score for a security standard](standards-security-score.md)\.
+At the top of the standard details page is the security score for the standard\. The score is the percentage of passed controls relative to the number of enabled controls \(that have data\) for the standard\.
+
+Security Hub typically calculates the initial security score within 30 minutes after your first visit to the **Summary** page or **Security standards** page on the Security Hub console\. Scores are only generated for standards that are enabled when you visit those pages\. To view a list of standards that are currently enabled, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) API operation\. In addition, AWS Config resource recording must be configured for scores to appear\. After first\-time score generation, Security Hub updates the security score every 24 hours\. Security Hub displays a timestamp to indicate when a security score was last updated\. For more information, see [Determining the security score for a security standard](standards-security-score.md)\.
 
 **Note**  
 It can take up to 24 hours for first\-time security scores to be generated in the China Regions and AWS GovCloud \(US\) Region\.
 
-Next to the overall score is a chart that summarizes the control statuses\. The chart shows the percentage of failed and passed controls\. When you pause on the chart, the pop\-up displays the following:
-+ The number of failed controls for each severity
-+ The number of controls with a status of **Unknown** 
-+ The number of passed controls
+Next to the score is a chart that summarizes security checks for controls that are enabled for the standard\. The chart shows the percentage of failed and passed security checks\. When you pause on the chart, the pop\-up displays the following:
++ The number of failed security checks for controls of each severity
++ The number of security checks for controls with a status of **Unknown** 
++ The number of security checks that passed
 
-At the bottom of the details page is the list of controls for the standard\. The control list is organized and sorted based on the current overall status of the control and the severity assigned to each control\. Security Hub updates the control statuses every 24 hours\. A timestamp on each tab indicates when the control statuses were most recently updated\. See [Determining the overall status of a control from its findings](controls-overall-status.md)\.
+For administrator accounts, the standard score and chart are aggregated across the administrator account and all member accounts\.
 
-For administrator accounts, the score and statuses are aggregated across the administrator account and all member accounts\.
+All of the data on the **Security standards** details pages is specific to the current Region unless you have set an aggregation Region\. If you have set an aggregation Region, the security scores apply across Regions and include findings in all linked Regions\. The compliance status of controls on the standards details pages also reflect findings from linked Regions, and the number of security checks includes findings from linked Regions\.
 
-All of the data on the **Security standards** details pages is specific to the current Region unless you have set an aggregation Region\. If you have set an aggregation Region, the security scores are cross\-regional and account for findings in all linked Regions\. The compliance status of controls on the standards details pages also reflect findings from linked Regions, and the number of security checks includes findings from linked Regions\.
+## Viewing the controls in enabled standards<a name="standard-controls-list"></a>
 
-## Filtering and sorting the controls<a name="standard-details-filter-controls"></a>
+When you visit the details page for a standard, you can view a list of security controls that apply to the standard\. This list is sorted based on the compliance status of the control and the severity assigned to each control\. Security Hub updates the control statuses and security check count every 24 hours\. A timestamp on each tab indicates when the control statuses and security check count were most recently updated\. For more information, see [Determining the overall status of a control from its findings](controls-overall-status.md)\.
 
-The control list for a standard uses tabs to provide built\-in filtering for the list based on the control status\. You can also filter the list based on the ID, title, and severity\.
+For administrator accounts, the control compliance statuses and number of security checks are aggregated across the administrator account and all member accounts\.
 
-The **All enabled** tab lists all of the enabled controls for the standard\. For administrator accounts, **All enabled** contains controls that are enabled in either their account or in any member account\.
+The **All enabled** tab lists all of the controls that are currently enabled in the standard\. For administrator accounts, the **All enabled** tab includes controls that are enabled in the standard in their account or at least one member account\.
 
-On the **Failed**, **Unknown**, **No data**, and **Passed** tabs, the controls from the **All enabled** tab are filtered to only include controls with that status\.
+On the **Failed**, **Unknown**, **No data**, and **Passed** tabs, the controls from the **All enabled** tab are filtered to include only enabled controls with a specific status\.
 
-The **Disabled** tab contains the list of disabled controls\. For administrator accounts, the **Disabled** tab lists controls that are not enabled in either their account or any of their member accounts\.
+The **Disabled** tab contains the list of controls that are disabled in the standard\. For administrator accounts, the **Disabled** tab includes controls that are disabled in the standard in their account and all member accounts\.
 
-For standalone accounts and member accounts, the lists of enabled and disabled controls are updated in real time to reflect which controls are enabled and disabled\. The overall status and the number of passed and failed checks for each control are updated every 24 hours\.
-
-For administrator accounts, all of the information, including the lists, is updated every 24 hours\.
-
-For each control, the control list contains the following information:
-+ The overall status of the control \(see [Determining the overall status of a control from its findings](controls-overall-status.md)\)
+For each control, the tabs display the following information:
++ The status of the control \(see [Determining the overall status of a control from its findings](controls-overall-status.md)\)
 + The severity assigned to the control
-+ The control identifier and title
-+ The number of failed active findings and the total number of active findings\. If applicable, the **Failed checks** column also lists the number of findings with a status of **Unknown**\.
++ The control ID and title
++ The number of failed active findings out of the total number of active findings\. If applicable, the **Failed checks** column also lists the number of findings with a status of **Unknown**\.
 
-In addition to the built\-in filters on each tab, you can filter the lists using values from the following fields:
-+ **Status**
+In addition to the search filter on each tab, you can sort the lists based on the following fields:
++ **Compliance Status**
 + **Severity**
 + **ID**
 + **Title**
++ **Failed checks**
 
 You can sort each list using any of the columns\. By default, the **All enabled** tab is sorted so that failed controls are at the top of the list\. This helps you to immediately focus on issues that require remediation\.
 
-Within each status, and on the remaining tabs, the controls are sorted by default in descending order by severity\. In other words, critical controls are first, followed by high, then medium, then low severity controls\.
+On the remaining tabs, the controls are sorted by default in descending order by severity\. In other words, critical controls are first, followed by high, then medium, then low severity controls\.
 
-## Additional tabs for administrator accounts<a name="standard-details-admin-additional-tabs"></a>
+Choose your preferred access method, and follow the steps to display the available controls for an enabled standard\. In lieu of these instructions, you can also use the [DescribeStandardsControl](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeStandardsControl.html) API operation\.
 
-For an administrator account, the lists on the first six tabs contain aggregated information across both the administrator account and their member accounts\. For example, a control is listed on the **All enabled** tab if at least one of the accounts has the control enabled\. A control is listed on the **Disabled** tab only if none of the accounts has the control enabled\.
+------
+#### [ Security Hub console ]
 
-All of the information on these tabs is updated every 24 hours\.
+1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
-Administrator accounts also see the following additional tabs:
-+ **Enabled controls for this account** lists the controls that are enabled for the administrator account\.
-+ **Disabled controls for this account** lists the controls that are disabled for the administrator account\.
+1. Choose **Security standards** in the navigation pane\.
 
-These lists are updated in real time to reflect the controls that the administrator account has enabled or disabled\.
+1. Choose **View results** for a standard\. The bottom of the page lists the controls \(divided by tabs\) that apply to the standard\.
 
-## Downloading the control list<a name="standard-details-download-controls"></a>
+------
+#### [ Security Hub API ]
 
-You can download the current page of the control list to a `.csv` file\.
+1. Run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListSecurityControlDefinitions.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListSecurityControlDefinitions.html) and provide a standard Amazon Resource Name \(ARN\) to get a list of control IDs for that standard\. To obtain standard ARNs, run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html)\. If you don't provide a standard ARN, this API returns all Security Hub control IDs\. This API returns standard\-agnostic security control IDs, not standard\-specific control IDs\.
 
-If you filtered the control list, then the downloaded file only includes the controls that match the filter\.
+   **Example request:**
 
-If you chose a specific control from the list, then the downloaded file only includes that control\.
+   ```
+   {
+       "StandardsArn": "arn:aws:securityhub:::standards/aws-foundational-security-best-practices/v/1.0.0"
+   }
+   ```
 
-To download the current page of the control list or the currently selected control, choose **Download**\.
+1. Run `[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListStandardsControlAssociations.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListStandardsControlAssociations.html)` to find out whether a control is enabled in each standard that you've enabled in your account\.
 
-## Viewing the controls for an enabled standard \(Security Hub API, AWS CLI\)<a name="standards-view-controls-api"></a>
+1. Identify the control by providing `SecurityControlId` or `SecurityControlArn`\. Pagination parameters are optional\.
 
-To display information about the controls for an enabled standard, you can use an API call or the AWS Command Line Interface\.
+   **Example request:**
 
-**To display the controls for an enabled standard \(Security Hub API, AWS CLI\)**
-+ **Security Hub API** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandardsControls.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandardsControls.html) operation\. To identify the standard to display the controls for, you provide the ARN of your subscription to the control\. To get the subscription ARNs for your enabled standards, use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) operation\.
-+ **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/describe-standards-controls.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/describe-standards-controls.html) command\.
+   ```
+   {
+       SecurityControlId: Config.1
+       NextToken: lkeyusdlk-sdlflsnd-ladfterb
+       MaxResults: 5
+   }
+   ```
 
-  ```
-  aws securityhub describe-standards-controls --standards-subscription-arn <subscription ARN>
-  ```
+------
+#### [ AWS CLI ]
 
-  **Example**
+1. Run the `[https://docs.aws.amazon.com/cli/latest/reference/securityhub/list-security-control-definitions.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/list-security-control-definitions.html)` command, and provide one or more standard ARNs to get a list of control IDs\. To obtain standard ARNs, run the `describe-standards` command\. If you don't provide a standard ARN, this command returns all Security Hub control IDs\. This command returns standard\-agnostic security control IDs, not standard\-specific control IDs\.
 
-  ```
-  aws securityhub describe-standards-controls --standards-subscription-arn "arn:aws:securityhub:us-east-1:123456789012:subscription/aws-foundational-security-best-practices/v/1.0.0"
-  ```
+   ```
+   aws securityhub --region us-east-1 [https://docs.aws.amazon.com/cli/latest/reference/securityhub/list-security-control-definitions.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/list-security-control-definitions.html) --standards-arn "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0"
+   ```
+
+1. Run the `[https://docs.aws.amazon.com/cli/latest/reference/securityhub/list-standards-control-associations.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/list-standards-control-associations.html)` command to find out whether a control is enabled in each standard that you've enabled in your account\.
+
+1. Identify the control by providing `security-control-id` or `security-control-arn`\.
+
+   **Example command:**
+
+   ```
+   aws securityhub --region us-east-1 [https://docs.aws.amazon.com/cli/latest/reference/securityhub/list-standards-control-associations.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/list-standards-control-associations.html) --security-control-id Config.1
+   ```
+
+------
+
+## Downloading the controls list<a name="standard-details-download-controls"></a>
+
+You can download the current page of the controls list to a `.csv` file\.
+
+If you filtered the controls list, then the downloaded file includes only the controls that match the filter settings\.
+
+If you chose a specific control from the list, then the downloaded file includes only that control\.
+
+To download the current page of the controls list or the currently selected control, choose **Download**\.

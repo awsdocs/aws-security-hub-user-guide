@@ -118,7 +118,11 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     	"AwsAccountId": "string",
     	"CompanyName": "string",
     	"Compliance": {
+    		"AssociatedStandards": [{
+    			"StandardsId": "string"
+    		}],
     		"RelatedRequirements": ["string"],
+    		"SecurityControlId": "string",
     		"Status": "string",
     		"StatusReasons": [{
     			"Description": "string",
@@ -138,6 +142,7 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     		}],
     		"Severity": {
     			"Label": "string",
+    			"Normalized": "number",
     			"Original": "string"
     		},
     		"Types": ["string"]
@@ -3017,7 +3022,6 @@ To view descriptions of the other top\-level ASFF attributes, see [Optional top\
     		"Label": "string",
     		"Normalized": "number",
     		"Original": "string",
-    		"Product": "number"
     	},
     	"Sample": "boolean",
     	"SourceUrl": "string",

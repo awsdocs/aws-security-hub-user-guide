@@ -8,3 +8,4 @@ Security Hub collects security data from across AWS accounts, services, and supp
 + [Benefits of AWS Security Hub](securityhub-benefits.md)
 + [How Security Hub works](securityhub-get-started.md)
 + [AWS Security Hub free trial, usage, and pricing](securityhub-free-trial.md)
++ [Using Security Hub with an AWS SDK](sdk-general-information-section.md)

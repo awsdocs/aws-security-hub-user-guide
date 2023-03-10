@@ -10,7 +10,7 @@ To access Security Hub programmatically, use the Security Hub API, which allows 
 
 When you enable Security Hub, it begins to consume, aggregate, organize, and prioritize findings from AWS services that you have enabled, such as [Amazon GuardDuty](https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html), [Amazon Inspector](https://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html), and [Amazon Macie](https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html)\. You can also enable integrations with AWS partner security products\. Those partner products can then also send findings to Security Hub\. See [Product integrations in AWS Security Hub](securityhub-findings-providers.md)\.
 
-Security Hub also generates its own findings by running continuous, automated security checks based on AWS best practices and supported industry standards\. See [Security standards and controls in AWS Security Hub](securityhub-standards.md)\.
+Security Hub also generates its own findings by running continuous, automated security checks based on AWS best practices and supported industry standards\. See [Security controls and standards in AWS Security Hub](securityhub-standards.md)\.
 
 Security Hub then correlates and consolidates findings across providers to help you to prioritize the most significant findings\. See [Viewing finding lists and details in AWS Security Hub](securityhub-findings-viewing.md) and [Taking action on findings in AWS Security Hub](securityhub-findings-taking-action.md)\.
 

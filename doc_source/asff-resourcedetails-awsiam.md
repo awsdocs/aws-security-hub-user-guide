@@ -152,7 +152,7 @@ The following example shows the AWS Security Finding Format \(ASFF\) for the `Aw
 
 ## AwsIamUser<a name="asff-resourcedetails-awsiamuser"></a>
 
-The `AwsIamUser` object provides information about an IAM user\.
+The `AwsIamUser` object provides information about a user\.
 
 The following example shows the AWS Security Finding Format \(ASFF\) for the `AwsIamUser` object\. To view descriptions of `AwsIamUser` attributes, see [AwsIamUserDetails](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsIamUserDetails.html) in the *AWS Security Hub API Reference*\.
 

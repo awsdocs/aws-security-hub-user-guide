@@ -29,30 +29,40 @@ Security Hub deletes findings 90 days after the most recent update or 90 days af
 
 A finding's description\. This field can be nonspecific boilerplate text or details that are specific to the instance of the finding\.
 
+For control findings that Security Hub generates, this field provides a description of the control\.
+
+This field doesn't reference a standard if you turn on [consolidated control findings](controls-findings-create-update.md#consolidated-control-findings)\.
+
 **Example**
 
 ```
-"Description": "The version of openssl found on instance i-abcd1234 is known to contain a vulnerability."
+"Description": "This AWS control checks whether AWS Config is enabled in the current account and Region."
 ```
 
 ## GeneratorId<a name="GeneratorId"></a>
 
 The identifier for the solution\-specific component \(a discrete unit of logic\) that generated a finding\.
 
+For control findings that Security Hub generates, this field doesn't reference a standard if you turn on [consolidated control findings](controls-findings-create-update.md#consolidated-control-findings)\.
+
 **Example**
 
 ```
-"GeneratorId": "acme-vuln-9ab348"
+"GeneratorId": "security-control/Config.1"
 ```
 
 ## Id<a name="Id"></a>
 
-The product\-specific identifier for a finding\.
+The product\-specific identifier for a finding\. For control findings that Security Hub generates, this field provides the Amazon Resource Name \(ARN\) of the finding\.
+
+This field doesn't reference a standard if you turn on [consolidated control findings](controls-findings-create-update.md#consolidated-control-findings)\.
 
 **Example**
 
 ```
-"Id": "us-west-2/111111111111/98aebb2207407c87f51e89943f12b1ef"
+"Id": "arn:aws:securityhub:eu-central-1:123456789012:security-control/iam.9/finding/ab6d6a26-a156-48f0-9403-115983e5a956
+
+"
 ```
 
 ## ProductArn<a name="ProductArn"></a>
@@ -156,18 +166,23 @@ We recommend using the following guidance when translating findings' native seve
 ```
 "Severity": {
     "Label": "CRITICAL",
-    "Original": "8.3"
-				}
+    "Normalized": 90,
+    "Original": "CRITICAL"
+}
 ```
 
 ## Title<a name="Title"></a>
 
 A finding's title\. This field can contain nonspecific boilerplate text or details that are specific to this instance of the finding\.
 
+For control findings, this field provides the title of the control\.
+
+This field doesn't reference a standard if you turn on [consolidated control findings](controls-findings-create-update.md#consolidated-control-findings)\.
+
 **Example**
 
 ```
-"Title": "S3.13 S3 buckets should have lifecycle policies configured"
+"Title": "AWS Config should be enabled"
 ```
 
 ## Types<a name="Types"></a>
@@ -177,6 +192,8 @@ One or more finding types in the format of `namespace/category/classifier` that 
 `Types` should only be updated using [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)\.
 
 Finding providers who want to provide a value for `Types` should use the `Types` attribute under [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingProviderFields.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingProviderFields.html)\.
+
+This field doesn't reference a standard if you turn on [consolidated control findings](controls-findings-create-update.md#consolidated-control-findings)\.
 
 **Example**
 

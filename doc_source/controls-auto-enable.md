@@ -1,39 +1,48 @@
-# Enabling new controls automatically<a name="controls-auto-enable"></a>
+# Enabling new controls in enabled standards automatically<a name="controls-auto-enable"></a>
 
-AWS Security Hub regularly adds new controls to standards\. When you first enable Security Hub, it automatically enables new controls as they are added\. This only applies to enabled standards\. Security Hub does not enable new controls when they are added to a standard that you disabled\.
+AWS Security Hub regularly adds new controls to standards\. You can choose whether to automatically enable new controls in your enabled standards\. If you do not automatically enable new controls, then you must enable them manually\. See [Enabling and disabling controls in all standards](securityhub-standards-enable-disable-controls.md)\.
 
-You can choose whether to automatically enable new controls\. If you do not automatically enable new controls, then you must enable them manually\. See [Disabling and enabling individual controls](securityhub-standards-enable-disable-controls.md)\.
+Security Hub doesn't enable new controls when they are added to a standard that you disabled\.
 
-## Choosing whether to automatically enable new controls \(console\)<a name="controls-auto-enable-console"></a>
+Choose your preferred access method, and follow the steps to automatically enable new controls in enabled standards\.
 
-The **General** tab of the **Settings** page includes a setting to control whether to automatically enable new controls\.
+------
+#### [ Security Hub console ]
 
-**To choose whether to enable new controls for enabled standards**
+1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
 1. Open the AWS Security Hub console at [https://console\.aws\.amazon\.com/securityhub/](https://console.aws.amazon.com/securityhub/)\.
 
 1. In the navigation pane, choose **Settings**, and then choose the **General** tab\.
 
-1. Under **Auto\-enable new controls**, choose **Edit**\.
+1. Under **Controls**, choose **Edit**\.
 
-1. Toggle **Auto\-enable new controls in standards I have enabled**\.
+1. Turn on **Auto\-enable new controls in enabled standards**\.
 
 1. Choose **Save**\.
 
-## Choosing whether to automatically enable new controls \(Security Hub API, AWS CLI\)<a name="controls-auto-enable-api-cli"></a>
+------
+#### [ Security Hub API ]
 
-To configure whether to automatically enable new controls, you can use an API call or the AWS Command Line Interface\.
+1. Run [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateSecurityHubConfiguration.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateSecurityHubConfiguration.html)\.
 
-**To configure whether to automatically enable new controls \(Security Hub API, AWS CLI\)**
-+ **Security Hub** – Use the [https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateSecurityHubConfiguration.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateSecurityHubConfiguration.html) operation\. To automatically enable controls, set `AutoEnableControls` to `true`\. To not automatically enable controls, set `AutoEnableControls` to false\.
-+ **AWS CLI** – At the command line, run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-security-hub-configuration.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-security-hub-configuration.html) command\. To automatically enable new controls, specify `--auto-enable-controls`\. To not enable new controls, specify `--no-auto-enable-controls`\.
+1. To automatically enable new controls for enabled standards, set `AutoEnableControls` to `true`\. If you don't want to automatically enable new controls, set `AutoEnableControls` to false\.
 
-  ```
-  aws securityhub update-security-hub-configuration --auto-enable-controls | --no-auto-enable-controls
-  ```
+------
+#### [ AWS CLI ]
 
-  **Example**
+1. Run the [https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-security-hub-configuration.html](https://docs.aws.amazon.com/cli/latest/reference/securityhub/update-security-hub-configuration.html) command\.
 
-  ```
-  aws securityhub update-security-hub-configuration --auto-enable-controls
-  ```
+1. To automatically enable new controls for enabled standards, specify `--auto-enable-controls`\. If you don't want to automatically enable new controls, specify `--no-auto-enable-controls`\.
+
+   ```
+   aws securityhub update-security-hub-configuration --auto-enable-controls | --no-auto-enable-controls
+   ```
+
+   **Example command**
+
+   ```
+   aws securityhub update-security-hub-configuration --auto-enable-controls
+   ```
+
+------

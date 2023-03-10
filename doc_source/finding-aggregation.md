@@ -13,12 +13,10 @@ Your security scores in the aggregation Region are calculated by comparing the n
 
 The enablement status of a control must be modified in each Region\. If a control is enabled in a linked Region but disabled in the aggregation Region, you can see the compliance status of the control from the aggregation Region, but you cannot enable or disable that control from the aggregation Region\.
 
-To view cross\-Region security scores and compliance statuses, add the following permissions to your IAM policies:
-+ `ListSecurityControlDefinitions`
-+ `BatchGetStandardsControlAssociations`
-+ `BatchUpdateStandardsControlAssociations`
-
-Note that these IAM permission names do not directly correspond to current Security Hub APIs \.
+To view cross\-Region security scores and compliance statuses, add the following permissions to your IAM role that uses Security Hub:
++ `[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListSecurityControlDefinitions.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_ListSecurityControlDefinitions.html)`
++ `[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchGetStandardsControlAssociations.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchGetStandardsControlAssociations.html)`
++ `[https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html)`
 
 **Topics**
 + [How cross\-Region aggregation works](finding-aggregation-overview.md)
