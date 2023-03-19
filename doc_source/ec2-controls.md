@@ -982,7 +982,7 @@ For information about how to update an EC2 instance to a new instance type, see 
 
 **Resource type:**`AWS::EC2::LaunchTemplate`
 
-**AWS Config rule:** `ec2-launch-template-public-ip-disabled`
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/ec2-launch-template-public-ip-disabled.html](https://docs.aws.amazon.com/config/latest/developerguide/ec2-launch-template-public-ip-disabled.html)``
 
 **Schedule type:** Change triggered
 
