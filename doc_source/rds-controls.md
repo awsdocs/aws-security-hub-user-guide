@@ -1192,7 +1192,7 @@ To change the administrative username associated with an RDS database instance, 
 
 **Resource type:** `AWS::RDS::DBInstance`
 
-**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/rds-resources-protected-by-backup-plan.html](https://docs.aws.amazon.com/config/latest/developerguide/rds-resources-protected-by-backup-plan.html) ``
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/\.html](rds-resources-protected-by-backup-plan) ``
 
 **Schedule type:** Periodic
 
