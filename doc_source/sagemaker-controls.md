@@ -67,7 +67,7 @@ For more information, see [Connect a notebook instance to resources in a VPC](ht
 
 **Resource type:** `AWS::SageMaker::NotebookInstance`
 
-**AWS Config rule:** `sagemaker-notebook-instance-inside-vpc`
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-instance-inside-vpc.html](sagemaker-notebook-instance-inside-vpc)
 
 **Schedule type:** Change triggered
 
@@ -100,7 +100,7 @@ You can't change the VPC setting after creating a notebook instance\. Instead, y
 
 **Resource type:** `AWS::SageMaker::NotebookInstance`
 
-**AWS Config rule:** `sagemaker-notebook-instance-root-access-check`
+**AWS Config rule:** [https://docs.aws.amazon.com/config/latest/developerguide/sagemaker-notebook-instance-root-access-check.html](sagemaker-notebook-instance-root-access-check)
 
 **Schedule type:** Change triggered
 
