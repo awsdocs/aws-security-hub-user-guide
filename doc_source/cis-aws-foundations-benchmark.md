@@ -269,7 +269,7 @@ The following controls exist in both CIS AWS Foundations Benchmark v1\.2\.0 and 
 ## Finding fields format for CIS AWS Foundations Benchmark v1\.4\.0<a name="cisv1.4.0-finding-fields"></a>
 
 When you enable CIS AWS Foundations Benchmark v1\.4\.0, you'll begin receiving findings in the AWS Security Finding Format \(ASFF\)\. For these findings, standard\-specific fields will reference v1\.4\.0\. For CIS AWS Foundations Benchmark v1\.4\.0, note the following format for [`GeneratorID`](asff-required-attributes.md#GeneratorId) and any ASFF fields that reference the standard Amazon Resource Name \(ARN\)\.
-+ **Standard ARN** – `arn:aws::securityhub:region::standards/cis-aws-foundations-benchmark/v/1.4.0`
++ **Standard ARN** – `arn:aws:securityhub:region::standards/cis-aws-foundations-benchmark/v/1.4.0`
 + **`GeneratorID`** – `cis-aws-foundations-benchmark/v/1.4.0/control ID`
 
 You can call the [GetEnabledStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetEnabledStandards.html) API operation to find out the ARN of a standard\.
