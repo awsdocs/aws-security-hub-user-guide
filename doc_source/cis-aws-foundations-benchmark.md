@@ -56,15 +56,29 @@ Security Hub has satisfied the requirements of CIS Security Software Certificati
 
  [\[Config\.1\] AWS Config should be enabled](config-controls.md#config-1) 
 
- [\[EC2\.13\] Security groups should not allow ingress from 0\.0\.0\.0/0 to port 22](ec2-controls.md#ec2-13) 
-
- [\[EC2\.14\] Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389](ec2-controls.md#ec2-14) 
-
  [\[EC2\.2\] The VPC default security group should not allow inbound and outbound traffic](ec2-controls.md#ec2-2) 
 
  [\[EC2\.6\] VPC flow logging should be enabled in all VPCs](ec2-controls.md#ec2-6) 
 
+ [\[EC2\.13\] Security groups should not allow ingress from 0\.0\.0\.0/0 to port 22](ec2-controls.md#ec2-13) 
+
+ [\[EC2\.14\] Ensure no security groups allow ingress from 0\.0\.0\.0/0 to port 3389](ec2-controls.md#ec2-14) 
+
  [\[IAM\.1\] IAM policies should not allow full "\*" administrative privileges](iam-controls.md#iam-1) 
+
+ [\[IAM\.2\] IAM users should not have IAM policies attached](iam-controls.md#iam-2) 
+
+ [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](iam-controls.md#iam-3) 
+
+ [\[IAM\.4\] IAM root user access key should not exist](iam-controls.md#iam-4) 
+
+ [\[IAM\.5\] MFA should be enabled for all IAM users that have a console password](iam-controls.md#iam-5) 
+
+ [\[IAM\.6\] Hardware MFA should be enabled for the root user](iam-controls.md#iam-6) 
+
+ [\[IAM\.8\] Unused IAM user credentials should be removed](iam-controls.md#iam-8) 
+
+ [\[IAM\.9\] Virtual MFA should be enabled for the root user](iam-controls.md#iam-9) 
 
  [\[IAM\.11\] Ensure IAM password policy requires at least one uppercase letter](iam-controls.md#iam-11) 
 
@@ -82,21 +96,7 @@ Security Hub has satisfied the requirements of CIS Security Software Certificati
 
  [\[IAM\.18\] Ensure a support role has been created to manage incidents with AWS Support](iam-controls.md#iam-18) 
 
- [\[IAM\.2\] IAM users should not have IAM policies attached](iam-controls.md#iam-2) 
-
  [\[IAM\.20\] Avoid the use of the root user](iam-controls.md#iam-20) 
-
- [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](iam-controls.md#iam-3) 
-
- [\[IAM\.4\] IAM root user access key should not exist](iam-controls.md#iam-4) 
-
- [\[IAM\.5\] MFA should be enabled for all IAM users that have a console password](iam-controls.md#iam-5) 
-
- [\[IAM\.6\] Hardware MFA should be enabled for the root user](iam-controls.md#iam-6) 
-
- [\[IAM\.8\] Unused IAM user credentials should be removed](iam-controls.md#iam-8) 
-
- [\[IAM\.9\] Virtual MFA should be enabled for the root user](iam-controls.md#iam-9) 
 
  [\[KMS\.4\] AWS KMS key rotation should be enabled](kms-controls.md#kms-4) 
 
@@ -146,21 +146,13 @@ Security Hub supports v1\.4\.0 of the CIS AWS Foundations Benchmark\.
 
  [\[EC2\.2\] The VPC default security group should not allow inbound and outbound traffic](ec2-controls.md#ec2-2) 
 
- [\[EC2\.21\] Network ACLs should not allow ingress from 0\.0\.0\.0/0 to port 22 or port 3389](ec2-controls.md#ec2-21) 
-
  [\[EC2\.6\] VPC flow logging should be enabled in all VPCs](ec2-controls.md#ec2-6) 
 
  [\[EC2\.7\] Amazon EBS default encryption should be enabled](ec2-controls.md#ec2-7) 
 
+ [\[EC2\.21\] Network ACLs should not allow ingress from 0\.0\.0\.0/0 to port 22 or port 3389](ec2-controls.md#ec2-21) 
+
  [\[IAM\.1\] IAM policies should not allow full "\*" administrative privileges](iam-controls.md#iam-1) 
-
- [\[IAM\.15\] Ensure IAM password policy requires minimum password length of 14 or greater](iam-controls.md#iam-15) 
-
- [\[IAM\.16\] Ensure IAM password policy prevents password reuse](iam-controls.md#iam-16) 
-
- [\[IAM\.18\] Ensure a support role has been created to manage incidents with AWS Support](iam-controls.md#iam-18) 
-
- [\[IAM\.22\] IAM user credentials unused for 45 days should be removed](iam-controls.md#iam-22) 
 
  [\[IAM\.3\] IAM users' access keys should be rotated every 90 days or less](iam-controls.md#iam-3) 
 
@@ -171,6 +163,14 @@ Security Hub supports v1\.4\.0 of the CIS AWS Foundations Benchmark\.
  [\[IAM\.6\] Hardware MFA should be enabled for the root user](iam-controls.md#iam-6) 
 
  [\[IAM\.9\] Virtual MFA should be enabled for the root user](iam-controls.md#iam-9) 
+
+ [\[IAM\.15\] Ensure IAM password policy requires minimum password length of 14 or greater](iam-controls.md#iam-15) 
+
+ [\[IAM\.16\] Ensure IAM password policy prevents password reuse](iam-controls.md#iam-16) 
+
+ [\[IAM\.18\] Ensure a support role has been created to manage incidents with AWS Support](iam-controls.md#iam-18) 
+
+ [\[IAM\.22\] IAM user credentials unused for 45 days should be removed](iam-controls.md#iam-22) 
 
  [\[KMS\.4\] AWS KMS key rotation should be enabled](kms-controls.md#kms-4) 
 
